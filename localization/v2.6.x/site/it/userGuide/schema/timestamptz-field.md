@@ -42,7 +42,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p>Un campo <code translate="no">TIMESTAMPTZ</code> è un tipo di dati definito dallo schema (<code translate="no">DataType.TIMESTAMPTZ</code>) di Milvus che elabora l'input consapevole del fuso orario e memorizza internamente tutti i punti temporali come ora assoluta UTC:</p>
 <ul>
-<li><p><strong>Formato di input accettato</strong>: Stringhe <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> con un offset di fuso orario (ad esempio, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> rappresenta le 11:59:59 PM in UTC+08:00).</p></li>
+<li><p><strong>Formato di input accettato</strong>: Stringhe <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> con un offset di fuso orario (ad esempio, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> indica le 23:59:59 del 1° maggio 2025 (UTC+08:00)).</p></li>
 <li><p><strong>Memorizzazione interna</strong>: Tutti i valori di <code translate="no">TIMESTAMPTZ</code> sono normalizzati e memorizzati in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">tempo universale coordinato</a> (UTC).</p></li>
 <li><p><strong>Confronto e filtraggio</strong>: Tutte le operazioni di filtraggio e ordinamento vengono eseguite in UTC, garantendo risultati coerenti e prevedibili in diversi fusi orari.</p></li>
 </ul>
@@ -229,15 +229,15 @@ client.load_collection(collection_name)
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Query con filtraggio del timestamp</h4><p>Utilizzare operatori aritmetici come <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Per un elenco completo degli operatori aritmetici disponibili in Milvus, consultare <a href="/docs/it/basic-operators.md#Arithmetic-Operators">Operatori aritmetici</a>.</p>
 <p>L'esempio seguente filtra le entità con timestamp (<code translate="no">tsz</code>) che non sono uguali a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -259,7 +259,7 @@ results = client.query(
 <li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> è un letterale di timestamp nel formato <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>, compreso l'offset del fuso orario.</p></li>
 <li><p><code translate="no">!=</code> confronta il valore del campo con tale letterale. Altri operatori supportati sono <code translate="no">==</code>, <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code> e <code translate="no">&gt;=</code>.</p></li>
 </ul>
-<h4 id="Interval-operations" class="common-anchor-header">Operazioni sugli intervalli</h4><p>È possibile eseguire operazioni aritmetiche sui campi <code translate="no">TIMESTAMPTZ</code> utilizzando i valori <strong>INTERVALLO</strong> nel <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">formato di durata ISO 8601</a>. Ciò consente di aggiungere o sottrarre durate, come giorni, ore o minuti, da un timestamp quando si filtrano i dati.</p>
+<h4 id="Interval-operations" class="common-anchor-header">Operazioni sugli intervalli</h4><p>È possibile eseguire operazioni aritmetiche sui campi di <code translate="no">TIMESTAMPTZ</code> utilizzando i valori <strong>INTERVALLO</strong> nel <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">formato di durata ISO 8601</a>. Ciò consente di aggiungere o sottrarre durate, come giorni, ore o minuti, da un timestamp quando si filtrano i dati.</p>
 <p>Ad esempio, la query seguente filtra le entità in cui il timestamp (<code translate="no">tsz</code>) più zero giorni <strong>non è uguale</strong> a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

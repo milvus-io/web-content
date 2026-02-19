@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Elasticsearch では、クエリコンテキストでの操作は関連性スコアを生成するが、フィルタコンテキストでの操作は関連性スコアを生成しない。同様に、Milvusの検索は類似度スコアを生成しますが、フィルタのようなクエリは生成しません。ElasticsearchからMilvusにコードベースを移行する場合、Elasticsearchのクエリコンテキストで使用されているフィールドをベクターフィールドに変換し、類似度スコアを生成できるようにすることが重要です。</p>
+    </button></h2><p>Elasticsearch では、クエリコンテキストでの操作は関連性スコアを生成するが、フィルタコンテキストでの操作は関連性スコアを生成しない。同様に、Milvusの検索は類似度スコアを生成しますが、フィルタのようなクエリは生成しません。ElasticsearchからMilvusにコードベースを移行する場合、Elasticsearchのクエリコンテキストで使用されているフィールドをベクトルフィールドに変換し、類似度スコアを生成できるようにすることが重要です。</p>
 <p>以下の表はElasticsearchのクエリパターンとMilvusでの対応するクエリパターンの概要です。</p>
 <table>
    <tr>
@@ -59,7 +59,7 @@ summary: >-
    <tr>
      <td><p><a href="/docs/ja/elasticsearch-queries-to-milvus.md#IDs">ID</a></p></td>
      <td><p><code translate="no">in</code> 演算子</p></td>
-     <td rowspan="6"><p>これらの Elasticsearch クエリがフィルタコンテキストで使用される場合、どちらも同じか同様の機能を提供します。</p></td>
+     <td rowspan="6"><p>これらの Elasticsearch クエリがフィルタコンテキストで使用される場合、どちらも同じか類似の機能セットを提供します。</p></td>
    </tr>
    <tr>
      <td><p><a href="/docs/ja/elasticsearch-queries-to-milvus.md#Prefix-query">プレフィックスクエリ</a></p></td>
@@ -116,7 +116,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Elasticsearch では、フルテキストクエリによってメール本文のような分析されたテキストフィールドを検索することができます。クエリ文字列はインデックス作成時にフィールドに適用されたものと同じアナライザーを使って処理されます。</p>
-<h3 id="Match-query" class="common-anchor-header">マッチクエリ</h3><p>Elasticsearch では、マッチクエリは指定されたテキスト、数値、日付、ブール値にマッチするドキュメントを返します。指定されたテキストはマッチする前に分析されます。</p>
+<h3 id="Match-query" class="common-anchor-header">マッチクエリ<button data-href="#Match-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch では、マッチクエリは指定されたテキスト、数値、日付、ブール値にマッチするドキュメントを返します。指定されたテキストはマッチする前に分析されます。</p>
 <p>以下はマッチクエリを使った Elasticsearch 検索リクエストの例です。</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
@@ -155,7 +170,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Elasticsearch では、日付範囲、IP アドレス、価格、商品 ID などの構造化データの正確な値に基づいてドキュメントを検索するために、用語レベルクエリが使用されます。このセクションでは、Elasticsearch のタームレベルクエリに相当する Milvus のクエリを紹介します。このセクションの全ての例は、Milvusの機能に合わせてフィルタコンテキスト内で動作するように調整されています。</p>
-<h3 id="IDs" class="common-anchor-header">ID</h3><p>Elasticsearchでは、以下のようにフィルタコンテキスト内でIDに基づいて文書を検索することができる：</p>
+<h3 id="IDs" class="common-anchor-header">ID<button data-href="#IDs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearchでは、以下のようにフィルタコンテキスト内でIDに基づいて文書を検索することができる：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -188,7 +218,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Elasticsearch のサンプルは<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">こちらの</a>ページにあります。Milvusにおけるqueryとgetリクエスト、およびフィルタ式の詳細については、<a href="/docs/ja/get-and-scalar-query.md">クエリと</a> <a href="/docs/ja/filtering">フィルタリングを</a>参照してください。</p>
-<h3 id="Prefix-query" class="common-anchor-header">プレフィックスクエリ</h3><p>Elasticsearch では、以下のようにフィルタコンテキストで指定したフィールドに特定の接頭辞を含む文書を検索することができます：</p>
+<h3 id="Prefix-query" class="common-anchor-header">プレフィックスクエリ<button data-href="#Prefix-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch では、以下のようにフィルタコンテキストで指定したフィールドに特定の接頭辞を含む文書を検索することができます：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -212,7 +257,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Elasticsearch の例は<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">この</a>ページにあります。Milvus の<code translate="no">like</code> 演算子の詳細については、<a href="/docs/ja/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> パターンマッチングのための</a><code translate="no">LIKE</code><a href="/docs/ja/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> の</a> <a href="/docs/ja/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">使用 </a>を参照してください。</p>
-<h3 id="Range-query" class="common-anchor-header">範囲指定クエリ</h3><p>Elasticsearchでは、以下のように指定した範囲内の用語を含む文書を検索することができます：</p>
+<h3 id="Range-query" class="common-anchor-header">範囲指定クエリ<button data-href="#Range-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearchでは、以下のように指定した範囲内の用語を含む文書を検索することができます：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -237,7 +297,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Elasticsearchの例は<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">こちらの</a>ページにあります。Milvusの比較演算子については、<a href="/docs/ja/basic-operators.md#Comparison-operators">比較演算子を</a>参照してください。</p>
-<h3 id="Term-query" class="common-anchor-header">条件クエリ</h3><p>Elasticsearch では、以下のように指定したフィールドに<strong>正確な</strong>用語を含む文書を検索することができます：</p>
+<h3 id="Term-query" class="common-anchor-header">条件クエリ<button data-href="#Term-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch では、以下のように指定したフィールドに<strong>正確な</strong>用語を含む文書を検索することができます：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -269,7 +344,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Elasticsearchのサンプルは<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">こちらの</a>ページにあります。Milvusにおける比較演算子の詳細については、<a href="/docs/ja/basic-operators.md#Comparison-operators">比較演算子を</a>参照してください。</p>
-<h3 id="Terms-query" class="common-anchor-header">用語クエリ</h3><p>Elasticsearchでは、以下のように指定したフィールドに1つ以上の<strong>正確な</strong>用語を含むドキュメントを検索することができます：</p>
+<h3 id="Terms-query" class="common-anchor-header">用語クエリ<button data-href="#Terms-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearchでは、以下のように指定したフィールドに1つ以上の<strong>正確な</strong>用語を含むドキュメントを検索することができます：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -302,7 +392,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Elasticsearchの例は<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">こちらの</a>ページにあります。Milvusの範囲演算子については<a href="/docs/ja/basic-operators.md#Range-operators">範囲演算</a>子を参照してください。</p>
-<h3 id="Wildcard-query" class="common-anchor-header">ワイルドカードクエリ</h3><p>Elasticsearchでは、以下のようにワイルドカードパターンにマッチする用語を含む文書を検索することができます：</p>
+<h3 id="Wildcard-query" class="common-anchor-header">ワイルドカードクエリ<button data-href="#Wildcard-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearchでは、以下のようにワイルドカードパターンにマッチする用語を含む文書を検索することができます：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -387,7 +492,22 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Elasticsearch では、ベクタークエリとはベクターフィールドに特化したクエリで、セマンティック検索を効率的に行うことができます。</p>
-<h3 id="Knn-query" class="common-anchor-header">Knn クエリ</h3><p>Elasticsearch は近似 kNN クエリと厳密なブルートフォース kNN クエリの両方をサポートしています。どちらの方法でも、クエリベクトルに最も近い<em>k 個の</em>ベクトルを、類似度メトリックによって以下のように求めることができます：</p>
+<h3 id="Knn-query" class="common-anchor-header">Knn クエリ<button data-href="#Knn-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch は近似 kNN クエリと厳密なブルートフォース kNN クエリの両方をサポートしています。どちらの方法でも、クエリベクトルに最も近い<em>k 個の</em>ベクトルを、類似度メトリックによって以下のように求めることができます：</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     index=<span class="hljs-string">&quot;my-image-index&quot;</span>,
     size=<span class="hljs-number">3</span>,
@@ -415,7 +535,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Elasticsearch の例は<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">こちらの</a>ページにあります。MilvusにおけるANN検索の詳細については、<a href="/docs/ja/single-vector-search.md">Basic ANN Searchを</a>参照してください。</p>
-<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">相互ランクフュージョン</h3><p>Elasticsearch は異なる関連性指標を持つ複数の検索結果セットを1つのランク付けされた検索結果セットに統合する Reciprocal Rank Fusion (RRF) を提供しています。</p>
+<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">相互ランクフュージョン<button data-href="#Reciprocal-Rank-Fusion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch は異なる関連性指標を持つ複数の検索結果セットを1つのランク付けされた検索結果セットに統合する Reciprocal Rank Fusion (RRF) を提供しています。</p>
 <p>以下の例では、従来の用語ベースの検索とk-nearest neighbors (kNN) ベクトル検索を組み合わせることで、検索の関連性を向上させています：</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
@@ -462,7 +597,7 @@ res = client.query(
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}, 
+        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">100</span>
 }
@@ -474,7 +609,6 @@ search_params_sparse = {
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
     }
 }
 
@@ -490,9 +624,9 @@ res = client.hybrid_search(
 <p>この例では、Milvusにおけるハイブリッド検索を示します：</p>
 <ol>
 <li><p><strong>密なベクトル検索</strong>：<code translate="no">vector</code> のフィールドで近似最近傍（ANN）検索を行うために<code translate="no">nprobe</code> を 10 に設定した内積（IP）メトリックを使用する。</p></li>
-<li><p><strong>疎ベクトル検索</strong>：<code translate="no">text_sparse</code> BM25類似度メトリックを使用し、<code translate="no">drop_ratio_search</code> パラメータを0.2に設定。</p></li>
+<li><p><strong>疎ベクトル検索</strong>：<code translate="no">text_sparse</code> 、BM25類似度メトリックを用いる。</p></li>
 </ol>
-<p>これらの検索結果は別々に実行され、組み合わされ、RRF（Reciprocal Rank Fusion）ランカーを使用して再ランク付けされる。ハイブリッド検索は再ランク付けされたリストの上位10エンティティを返します。</p>
+<p>これらの検索結果は別々に実行され、組み合わされ、RRF（Reciprocal Rank Fusion）ランカーを使用して再ランク付けされる。ハイブリッド検索は再ランク付けされたリストから上位10エンティティを返します。</p>
 <p>Elasticsearch の RRF ランキングが標準的なテキストベースのクエリと kNN 検索の結果を結合するのとは異なり、Milvus はスパース検索とデンスベクトル検索の結果を結合し、マルチモーダルデータに最適化された独自のハイブリッド検索機能を提供します。</p>
 <h2 id="Recap" class="common-anchor-header">まとめ<button data-href="#Recap" class="anchor-icon" translate="no">
       <svg translate="no"

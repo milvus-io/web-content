@@ -93,7 +93,7 @@ client.create_collection(
 <ul>
 <li>기본 키와 벡터 필드는 기본 이름("id" 및 "vector")을 사용합니다.</li>
 <li>메트릭 유형(벡터 거리 정의)은 기본값<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>)으로 설정됩니다.</li>
-<li>기본 키 필드는 정수를 허용하며 자동으로 증가하지 않습니다(즉, <a href="https://milvus.io/docs/schema.md">자동 ID 기능을</a> 사용하지 않음). 또는 이 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">지침에</a> 따라 컬렉션의 스키마를 공식적으로 정의할 수 있습니다.</li>
+<li>기본 키 필드는 정수를 허용하고 자동으로 증가하지 않습니다(즉, <a href="https://milvus.io/docs/schema.md">자동 ID 기능을</a> 사용하지 않음). 또는 이 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">지침에</a> 따라 컬렉션의 스키마를 공식적으로 정의할 수 있습니다.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>이제 검색 쿼리 텍스트를 벡터로 표현하여 의미론적 검색을 수행하고 Milvus에서 벡터 유사도 검색을 수행할 수 있습니다.</p>
-<h3 id="Vector-search" class="common-anchor-header">벡터 검색</h3><p>Milvus는 동시에 하나 또는 여러 개의 벡터 검색 요청을 받아들입니다. 쿼리_벡터 변수의 값은 벡터의 목록이며, 각 벡터는 실수 배열입니다.</p>
+<h3 id="Vector-search" class="common-anchor-header">벡터 검색<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 동시에 하나 또는 여러 개의 벡터 검색 요청을 받아들입니다. 쿼리_벡터 변수의 값은 벡터의 목록이며, 각 벡터는 실수 배열입니다.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -255,7 +270,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 각각 벡터 검색 쿼리에 매핑되는 결과 목록입니다. 각 쿼리에는 결과 목록이 포함되며, 각 결과에는 엔티티 기본 키, 쿼리 벡터까지의 거리 및 지정된 <code translate="no">output_fields</code> 으로 엔티티 세부 정보가 포함됩니다.</p>
+<p>출력은 각각 벡터 검색 쿼리에 매핑되는 결과 목록입니다. 각 쿼리에는 결과 목록이 포함되며, 각 결과에는 엔티티 기본 키, 쿼리 벡터까지의 거리, 지정된 <code translate="no">output_fields</code> 으로 엔티티 세부 정보가 포함됩니다.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">메타데이터 필터링을 사용한 벡터 검색<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -301,7 +316,22 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>기본적으로 스칼라 필드는 인덱싱되지 않습니다. 대규모 데이터 세트에서 메타데이터 필터링 검색을 수행해야 하는 경우 고정 스키마를 사용하고 <a href="https://milvus.io/docs/scalar_index.md">인덱스를</a> 켜서 검색 성능을 개선하는 것도 고려해 볼 수 있습니다.</p>
 <p>벡터 검색 외에도 다른 유형의 검색을 수행할 수도 있습니다:</p>
-<h3 id="Query" class="common-anchor-header">쿼리</h3><p>쿼리()는 <a href="https://milvus.io/docs/boolean.md">필터 표현식이나</a> 일부 ID와 일치하는 등 조건에 일치하는 모든 엔터티를 검색하는 작업입니다.</p>
+<h3 id="Query" class="common-anchor-header">쿼리<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>쿼리()는 <a href="https://milvus.io/docs/boolean.md">필터 표현식이나</a> 일부 ID와 일치하는 등 조건에 일치하는 모든 엔터티를 검색하는 작업입니다.</p>
 <p>예를 들어, 스칼라 필드에 특정 값이 있는 모든 엔터티를 검색합니다:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -407,3 +437,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus Lite에서 Docker 또는 Kubernetes에 배포된 Milvus로 데이터를 마이그레이션하려면 Milvus <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Lite에서 데이터 마이그레이션을</a> 참조하세요.</p>
 <p>Milvus는 <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C#, <a href="https://milvus.io/docs/install-node.md">Node.js</a> 등의 언어로 된 클라이언트 라이브러리와 함께 REST 및 gRPC API를 제공합니다.</p>
+<p>스키마 설계의 경우, Milvus는 유연한 스키마 설계를 지원하여 벡터 필드를 포함한 필드와 해당 데이터 유형을 정의할 수 있습니다. 또한 각 필드에 대한 인덱스 유형과 매개변수를 정의할 수도 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/schema-hands-on.md">검색을 위한 데이터 모델 설계를</a> 참조하세요.</p>

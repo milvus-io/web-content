@@ -1,15 +1,14 @@
 ---
 id: ngram.md
-title: NGRAMCompatible with Milvus v2.6.2+
+title: NGRAM
 summary: >-
   Milvus의 NGRAM 인덱스는 VARCHAR 필드 또는 JSON 필드 내의 특정 JSON 경로에 대한 LIKE 쿼리를 가속화하기 위해
   구축되었습니다. 인덱스를 구축하기 전에 Milvus는 텍스트를 n-gram이라고 하는 고정된 길이 n의 짧고 겹치는 하위 문자열로
   분할합니다. 예를 들어, n = 3인 경우 "Milvus"라는 단어는 3그램으로 분할됩니다: "Mil", "ilv", "lvu",
   "vus". 그런 다음 이러한 n-그램은 각 그램을 해당 그램이 나타나는 문서 ID에 매핑하는 반전 인덱스에 저장됩니다. 쿼리 시 이
   인덱스를 통해 Milvus는 검색 범위를 작은 후보 집합으로 빠르게 좁힐 수 있으므로 쿼리 실행 속도가 훨씬 빨라집니다.
-beta: Milvus v2.6.2+
 ---
-<h1 id="NGRAM" class="common-anchor-header">NGRAM<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#NGRAM" class="anchor-icon" translate="no">
+<h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,40 +75,48 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>: 생성할 최단 n-그램입니다. 또한 인덱스를 활용할 수 있는 최소 쿼리 하위 문자열 길이를 정의합니다.</p></li>
 <li><p><code translate="no">max_gram</code>: 생성할 가장 긴 n-그램. 쿼리 시에는 긴 쿼리 문자열을 분할할 때 최대 창 크기로도 사용됩니다.</p></li>
 </ul>
-<p>예를 들어 <code translate="no">min_gram=2</code> 와 <code translate="no">max_gram=3</code> 의 경우 <code translate="no">&quot;AI database&quot;</code> 문자열은 다음과 같이 분할됩니다:</p>
-<ul>
-<li><strong>2그램</strong> <code translate="no">AI</code>, <code translate="no">I_</code>, <code translate="no">_d</code>, <code translate="no">da</code>, <code translate="no">at</code>, ...</li>
-<li><strong>3-grams:</strong> <code translate="no">AI_</code>, <code translate="no">I_d</code>, <code translate="no">_da</code>, <code translate="no">dat</code>, <code translate="no">ata</code>, ...</li>
-</ul>
+<p>예를 들어 <code translate="no">min_gram=2</code> 와 <code translate="no">max_gram=3</code> 의 경우 <code translate="no">&quot;AI database&quot;</code> 문자열은 다음과 같이 분할됩니다:</p></li>
+</ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
-   </span> <span class="img-wrapper"> <span>N그램 인덱스 구축</span> </span></p>
-<blockquote>
-<p><strong>참고</strong></p>
-<ul>
-<li><p><code translate="no">[min_gram, max_gram]</code> 범위의 경우 Milvus는 두 값 사이의 모든 길이(포함)에 대해 모든 n-그램을 생성합니다.<br>
-예: <code translate="no">[2,4]</code> 와 단어 <code translate="no">&quot;text&quot;</code> 의 경우 Milvus가 생성합니다:</p>
-<ul>
-<li><strong>2그램</strong> <code translate="no">te</code>, <code translate="no">ex</code>, <code translate="no">xt</code></li>
-<li><strong>3그램</strong> <code translate="no">tex</code>, <code translate="no">ext</code></li>
-<li><strong>4-grams</strong>: <code translate="no">text</code></li>
-</ul></li>
-<li><p>N-그램 분해는 문자 기반이며 언어에 구애받지 않습니다. 예를 들어 중국어에서 <code translate="no">&quot;向量数据库&quot;</code> 와 <code translate="no">min_gram = 2</code> 는 다음과 같이 분해됩니다: <code translate="no">&quot;向量&quot;</code>, <code translate="no">&quot;量数&quot;</code>, <code translate="no">&quot;数据&quot;</code>, <code translate="no">&quot;据库&quot;</code> 로 분해됩니다.</p></li>
-<li><p>공백과 구두점은 분해 시 문자로 취급됩니다.</p></li>
-<li><p>분해는 원래의 대소문자를 유지하며 일치 여부는 대소문자를 구분합니다. 예를 들어 <code translate="no">&quot;Database&quot;</code> 와 <code translate="no">&quot;database&quot;</code> 은 서로 다른 n-그램을 생성하며 쿼리 중에 정확한 대소문자 일치가 필요합니다.</p></li>
-</ul>
-</blockquote></li>
-<li><p><strong>반전 인덱스를 구축합니다</strong>: 생성된 각 n-그램을 이를 포함하는 문서 ID 목록에 매핑하는 <strong>반전 인덱스가</strong> 생성됩니다.</p>
+   </span> <span class="img-wrapper"> <span>Ngram 인덱스 구축</span> </span></p>
+<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
+
+- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
+
+&lt;div class=&quot;alert note&quot;&gt;
+
+- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
+
+- **2-grams:** `te`, `ex`, `xt`
+
+- **3-grams:** `tex`, `ext`
+
+- **4-grams:** `text`
+
+- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
+
+- Spaces and punctuation are treated as characters during decomposition.
+
+- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
+
+&lt;/div&gt;
+</code></pre>
+<ol>
+<li><p><strong>역 인덱스를 구축</strong>합니다: 생성된 각 n-그램을 이를 포함하는 문서 ID 목록에 매핑하는 <strong>반전 인덱스가</strong> 생성됩니다.</p>
 <p>예를 들어 2그램 <code translate="no">&quot;AI&quot;</code> 이 ID가 1, 5, 6, 8, 9인 문서에 나타나면 인덱스는 <code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code> 을 기록합니다. 그런 다음 쿼리 시 이 인덱스를 사용하여 검색 범위를 빠르게 좁힙니다.</p></li>
 </ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
    </span> <span class="img-wrapper"> <span>Ngram 색인 2 구축</span> </span></p>
-<div class="alert note">
-<p><code translate="no">[min_gram, max_gram]</code> 범위가 넓을수록 더 많은 그램과 더 큰 매핑 목록이 생성됩니다. 메모리가 부족하다면 매우 큰 글 목록에 대해 mmap 모드를 고려하세요. 자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p>
-</div>
+<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
+
+A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+
+&lt;/div&gt;
+</code></pre>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">2단계: 쿼리 가속화<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -139,7 +146,7 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">L &gt; max_gram</code> 인 경우 쿼리 용어는 <code translate="no">max_gram</code> 과 같은 창 크기를 사용하여 겹치는 그램으로 분해됩니다.</p></li>
 </ul>
 <p>예를 들어 <code translate="no">max_gram</code> 이 <code translate="no">3</code> 으로 설정되어 있고 쿼리 용어의 길이가 <strong>8</strong> 인 <code translate="no">&quot;database&quot;</code> 인 경우 <code translate="no">&quot;dat&quot;</code>, <code translate="no">&quot;ata&quot;</code>, <code translate="no">&quot;tab&quot;</code> 등과 같은 3 그램 하위 문자열로 분해됩니다.</p></li>
-<li><p><strong>각 그램 찾기 및 교차</strong>: Milvus는 역 인덱스에서 각 쿼리 그램을 찾은 다음 결과 문서 ID 목록과 교차하여 작은 후보 문서 집합을 찾습니다. 이러한 후보 문서에는 쿼리의 모든 문형이 포함됩니다.</p></li>
+<li><p><strong>각 그램 찾기 및 교차</strong>: Milvus는 역 인덱스에서 각 쿼리 그램을 찾은 다음 결과 문서 ID 목록과 교차하여 작은 후보 문서 세트를 찾습니다. 이러한 후보 문서에는 쿼리의 모든 문형이 포함됩니다.</p></li>
 <li><p><strong>결과를 확인하고 반환합니다:</strong> 그런 다음 원본 <code translate="no">LIKE</code> 필터를 작은 후보 집합에만 최종 검사로 적용하여 정확히 일치하는 것을 찾습니다.</p></li>
 </ol>
 <h2 id="Create-an-NGRAM-index" class="common-anchor-header">NGRAM 색인 만들기<button data-href="#Create-an-NGRAM-index" class="anchor-icon" translate="no">
@@ -217,7 +224,7 @@ client.create_index(
     </button></h3><p><code translate="no">JSON</code> 필드의 경우 그램 설정 외에도 해당 필드를 가리키는</p>
 <ul>
 <li><p><code translate="no">params.json_path</code> - 색인하려는 값을 가리키는 JSON 경로.</p></li>
-<li><p><code translate="no">params.json_cast_type</code> - NGRAM 인덱싱은 문자열에서 작동하므로 <code translate="no">&quot;varchar&quot;</code> (대소문자 구분 없음)이어야 합니다.</p></li>
+<li><p><code translate="no">params.json_cast_type</code> - NGRAM 인덱싱은 문자열에서 작동하므로 <code translate="no">&quot;varchar&quot;</code> (대소문자를 구분하지 않음)이어야 합니다.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Assume you have defined a JSON field named &quot;json_field&quot; in your collection schema, with a JSON path named &quot;body&quot;</span>
 
@@ -311,10 +318,6 @@ client.create_index(
       </svg>
     </button></h2><p>컬렉션에서 기존 인덱스를 제거하려면 <code translate="no">drop_index()</code> 메서드를 사용합니다.</p>
 <div class="alert note">
-<ul>
-<li><p><strong>v2.6.3</strong> 이전 버전에서는 스칼라 인덱스를 삭제하기 전에 컬렉션을 해제해야 합니다.</p></li>
-<li><p><strong>v2.6.4</strong> 이상에서는 더 이상 필요하지 않은 경우 컬렉션을 먼저 해제할 필요 없이 바로 스칼라 인덱스를 삭제할 수 있습니다.</p></li>
-</ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
     collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
@@ -337,9 +340,9 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>필드 유형</strong>: <code translate="no">VARCHAR</code> 및 <code translate="no">JSON</code> 필드에서 지원됩니다. JSON의 경우 <code translate="no">params.json_path</code> 및 <code translate="no">params.json_cast_type=&quot;varchar&quot;</code> 을 모두 제공하세요.</p></li>
+<li><p><strong>필드 유형</strong>: <code translate="no">VARCHAR</code> 및 <code translate="no">JSON</code> 필드에서 지원됩니다. JSON의 경우 <code translate="no">params.json_path</code> 와 <code translate="no">params.json_cast_type=&quot;varchar&quot;</code> 을 모두 제공하세요.</p></li>
 <li><p><strong>유니코드</strong>: NGRAM 분해는 문자 기반이며 언어에 구애받지 않고 공백과 구두점을 포함합니다.</p></li>
-<li><p><strong>시공간 균형</strong>: 더 넓은 그램 범위( <code translate="no">[min_gram, max_gram]</code> )는 더 많은 그램과 더 큰 인덱스를 생성합니다. 메모리가 부족하다면 큰 글 목록에 대해 <code translate="no">mmap</code> 모드를 고려하세요. 자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p></li>
+<li><p><strong>시공간 균형</strong>: 더 넓은 그램 범위( <code translate="no">[min_gram, max_gram]</code> )는 더 많은 그램과 더 큰 인덱스를 생성합니다. 메모리가 부족하다면 큰 글 목록에 대해 <code translate="no">mmap</code> 모드를 고려하세요. 자세한 내용은 <a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">mmap 사용을</a> 참조하세요.</p></li>
 <li><p><strong>불변성</strong>: <code translate="no">min_gram</code> 및 <code translate="no">max_gram</code> 은 제자리에서 변경할 수 없으며 인덱스를 다시 작성하여 조정해야 합니다.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">모범 사례<button data-href="#Best-practices" class="anchor-icon" translate="no">
@@ -362,7 +365,7 @@ client.create_index(
 <ul>
 <li><p><code translate="no">min_gram=2</code>, <code translate="no">max_gram=3</code> 로 시작합니다.</p></li>
 <li><p><code translate="no">min_gram</code> 을 사용자가 입력할 것으로 예상되는 가장 짧은 리터럴로 설정합니다.</p></li>
-<li><p>의미 있는 하위 문자열의 일반적인 길이에 가까운 <code translate="no">max_gram</code> 을 설정하고, <code translate="no">max_gram</code> 보다 크면 필터링이 향상되지만 공간이 늘어납니다.</p></li>
+<li><p>의미 있는 하위 문자열의 일반적인 길이에 가까운 <code translate="no">max_gram</code> 을 설정하고, <code translate="no">max_gram</code> 을 크게 설정하면 필터링이 향상되지만 공간이 늘어납니다.</p></li>
 </ul></li>
 <li><p><strong>선택성이 낮은 그램 피하기</strong></p>
 <p>매우 반복적인 패턴(예: <code translate="no">&quot;aaaaaa&quot;</code>)은 필터링이 약하고 이득이 제한적일 수 있습니다.</p></li>

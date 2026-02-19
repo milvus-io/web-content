@@ -60,7 +60,7 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 </ul></li>
 <li>Milvus 시스템이 실행되는 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
-<li><strong>업그레이드 제한</strong>: <strong>메시지 큐 제한</strong>: Milvus v2.6.6으로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</li>
+<li><strong>업그레이드 제한</strong>: <strong>메시지 큐 제한</strong>: Milvus v2.6.11로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성하기<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

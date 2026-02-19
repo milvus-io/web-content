@@ -37,11 +37,56 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PQは2つのインデックス作成技術を組み合わせたものである：<strong>HNSWは</strong>グラフベースの高速ナビゲーションを、<strong>PQは</strong>効率的なベクトル圧縮を実現する。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSWは、各ノードがデータセット中のベクトルに対応する多層グラフを構築する。このグラフでは、ノードは類似性に基づいて接続され、データ空間を高速にトラバースできる。階層構造により、検索アルゴリズムは近傍候補を絞り込むことができ、高次元空間での検索プロセスが大幅に高速化される。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSWは、各ノードがデータセット中のベクトルに対応する多層グラフを構築する。このグラフでは、ノードは類似性に基づいて接続され、データ空間を高速にトラバースできる。階層構造により、検索アルゴリズムは近傍候補を絞り込むことができ、高次元空間での検索プロセスが大幅に高速化される。</p>
 <p>詳細は<a href="/docs/ja/hnsw.md">HNSWを</a>参照。</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQはベクトル圧縮技術で、高次元ベクトルをより小さなサブベクトルに分解し、それを量子化して圧縮します。この圧縮により、メモリ要件が劇的に削減され、距離計算が高速化される。</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PQはベクトル圧縮技術で、高次元ベクトルをより小さなサブベクトルに分解し、それを量子化して圧縮します。この圧縮により、メモリ要件が劇的に削減され、距離計算が高速化される。</p>
 <p>詳細は<a href="/docs/ja/ivf-pq.md#PQ">IVF_PQを</a>参照。</p>
-<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>HNSW_PQはHNSWとPQの長所を組み合わせ，効率的な近似最近傍探索を可能にする．PQを用いてデータを圧縮し（これによりメモリ使用量を削減する）、圧縮されたベクトル上にHNSWグラフを構築することで、候補の迅速な検索を可能にする。検索中、アルゴリズムは精度を向上させるために、オプションでより精度の高いデータを使用して候補結果を絞り込むことができます。以下はそのプロセスです：</p>
+<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ<button data-href="#HNSW-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW_PQはHNSWとPQの長所を組み合わせ，効率的な近似最近傍探索を可能にする．PQを用いてデータを圧縮し（これによりメモリ使用量を削減する）、圧縮されたベクトル上にHNSWグラフを構築することで、候補の迅速な検索を可能にする。検索中、アルゴリズムは精度を向上させるために、オプションでより精度の高いデータを使用して候補結果を絞り込むことができます。以下はそのプロセスです：</p>
 <ol>
 <li><p><strong>データ圧縮</strong>：PQは各ベクトルを複数のサブ・ベクトルに分割し、<code translate="no">m</code> （サブ・ベクトル数）や<code translate="no">nbits</code> （サブ・ベクトルあたりのビット数）などのパラメータで制御されたセントロイドのコードブックを使用して量子化する。</p></li>
 <li><p><strong>グラフの構築</strong>：圧縮されたベクトルは、HNSWグラフの構築に使用される。ベクターは圧縮された形で保存されるため、結果として得られるグラフは一般的に小さくなり、必要なメモリ量も少なく、より高速に走査できるようになる。</p></li>
@@ -112,7 +157,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -148,7 +193,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表に、<code translate="no">params</code> で<a href="/docs/ja/hnsw-pq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータを列挙します。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表に、<code translate="no">params</code> で<a href="/docs/ja/hnsw-pq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータを列挙します。</p>
 <table>
    <tr>
      <th></th>
@@ -189,8 +249,8 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは $2^{textit{nbits}}$ 個のセントロイドを含む。例えば、<code translate="no">nbits</code> を8に設定すると、各サブベクトルは8ビットのセントロイドのインデックスで表現される。これにより、そのサブベクトルのコードブックには$2^8$ (256)個のセントロイドが存在することになる。</p></td>
-     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 64]</p>
+     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは2<sup>n</sup>ビットのセントロイドを含む。例えば、<code translate="no">nbits</code> が 8 に設定された場合、各サブベクトルは 8 ビットのセントロイドのインデックスで表現される。これにより、そのサブベクタのコードブックには<sup>28個</sup>(256個)のセントロイドの可能性がある。</p></td>
+     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 24]</p>
 <p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> の値を大きくすると、コードブックが大きくなり、元のベクトルをより正確に表現できる可能性がある。ほとんどの場合、この範囲内の値を設定することを推奨します：[1, 16].</p></td>
    </tr>
@@ -200,18 +260,33 @@ res = MilvusClient.search(
      <td><p>検索時に絞り込みステップを適用するかどうかを制御するブーリアン・フラグ。refinementは、クエリベクタと候補の間の正確な距離を計算することにより、最初の結果を再ランク付けすることを含む。</p></td>
      <td><p><strong>タイプ</strong>：ブール値の<strong>範囲</strong>：[<code translate="no">true</code>,<code translate="no">false</code>]。</p>
 <p><strong>デフォルト値</strong>：<code translate="no">false</code></p></td>
-     <td><p>高い精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用する。</p></td>
+     <td><p>高精度が必須で、検索時間が多少遅くても許容できる場合は、<code translate="no">true</code> に設定する。スピードを優先し、精度の多少の妥協が許容できる場合は<code translate="no">false</code> を使用します。</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine_type</code></p></td>
-     <td><p>この精度は，圧縮ベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければならない。</p></td>
+     <td><p>精緻化処理で使用するデータの精度を決定します。 この精度は、圧縮されたベクトル（<code translate="no">m</code> と<code translate="no">nbits</code> パラメータで設定）の精度よりも高くなければなりません。</p></td>
      <td><p><strong>型</strong>：String<strong>Range:[</strong> <code translate="no">SQ6</code><strong>,</strong> <code translate="no">SQ8</code><strong>,</strong> <code translate="no">BF16</code><strong>,</strong> <code translate="no">FP16</code><strong>,</strong> <code translate="no">FP32</code> <strong>]。</strong></p>
 <p><strong>デフォルト値</strong>：なし</p></td>
      <td><p>より高いメモリコストで最大の精度を得るには<code translate="no">FP32</code> を使用し、より良い圧縮を得るには<code translate="no">SQ6</code>/<code translate="no">SQ8</code> を使用する。<code translate="no">BF16</code> と<code translate="no">FP16</code> は、バランスの取れた代替案を提供する。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/hnsw-pq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定可能なパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<a href="/docs/ja/hnsw-pq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定可能なパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>

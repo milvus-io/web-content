@@ -55,14 +55,14 @@ summary: >-
 </table>
 <p>Es gibt noch weitere Einschränkungen bei der Angabe des Nachrichtenspeichers:</p>
 <ul>
-<li>Es wird nur ein Nachrichtenspeicher für eine Milvus-Instanz unterstützt. Es besteht jedoch Abwärtskompatibilität mit mehreren Nachrichtenspeichern für eine Instanz. Die Priorität ist wie folgt:<ul>
+<li>Es wird nur ein Nachrichtenspeicher für eine Milvus-Instanz unterstützt. Wir haben jedoch immer noch Abwärtskompatibilität mit mehreren Nachrichtenspeichern für eine Instanz. Die Priorität ist wie folgt:<ul>
 <li>Standalone-Modus:  RocksMQ (Standard) &gt; Pulsar &gt; Kafka</li>
 <li>Clustermodus: Pulsar (Voreinstellung) &gt; Kafka</li>
 <li>Nats, die in 2.3 eingeführt wurden, nehmen aus Gründen der Abwärtskompatibilität nicht an diesen Prioritätsregeln teil.</li>
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es wird nur die Kafka-Version 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Beschränkungen für Nachrichtenwarteschlangen</strong>: Bei einem Upgrade auf Milvus v2.6.6 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Der Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
+<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Beschränkungen für Nachrichtenwarteschlangen</strong>: Bei einem Upgrade auf Milvus v2.6.11 müssen Sie Ihre aktuelle Auswahl an Nachrichtenwarteschlangen beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Konfigurieren von RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

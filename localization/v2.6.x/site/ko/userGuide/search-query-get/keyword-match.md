@@ -64,8 +64,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>텍스트 검색은 기본적으로 Milvus의 문자열 데이터 유형인 <code translate="no">VARCHAR</code> 필드 유형에서 작동합니다. 텍스트 일치를 사용하려면 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 을 모두 <code translate="no">True</code> 로 설정한 다음 컬렉션 스키마를 정의할 때 텍스트 분석을 위한 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 선택적으로 구성하세요.</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code></h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 텍스트 일치를 사용하려면 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개 변수를 모두 <code translate="no">True</code> 으로 설정합니다. 이렇게 하면 Milvus가 텍스트를 토큰화하고 지정된 필드에 대해 반전된 인덱스를 생성하도록 지시하여 빠르고 효율적인 텍스트 일치를 가능하게 합니다.</p>
+    </button></h2><p>텍스트 검색은 기본적으로 <a href="/docs/ko/string.md"><code translate="no">VARCHAR</code></a> 필드 유형에서 작동하며, 이는 기본적으로 Milvus의 문자열 데이터 유형입니다. 텍스트 일치를 활성화하려면 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 을 모두 <code translate="no">True</code> 로 설정한 다음 컬렉션 스키마를 정의할 때 텍스트 분석을 위한 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 선택적으로 구성하세요.</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header"><code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 텍스트 일치를 사용하려면 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개 변수를 모두 <code translate="no">True</code> 으로 설정합니다. 이렇게 하면 Milvus가 텍스트를 토큰화하고 지정된 필드에 대해 반전된 인덱스를 생성하도록 지시하여 빠르고 효율적인 텍스트 일치를 가능하게 합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -184,7 +199,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">선택 사항입니다: 분석기 구성</h3><p>키워드 매칭의 성능과 정확도는 선택한 분석기에 따라 달라집니다. 다양한 분석기는 다양한 언어와 텍스트 구조에 맞춰져 있으므로 올바른 분석기를 선택하면 특정 사용 사례에 대한 검색 결과에 큰 영향을 미칠 수 있습니다.</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">선택 사항입니다: 분석기 구성<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>키워드 매칭의 성능과 정확도는 선택한 분석기에 따라 달라집니다. 다양한 분석기는 다양한 언어와 텍스트 구조에 맞춰져 있으므로 올바른 분석기를 선택하면 특정 사용 사례에 대한 검색 결과에 큰 영향을 미칠 수 있습니다.</p>
 <p>기본적으로 Milvus는 공백과 구두점을 기준으로 텍스트를 토큰화하고, 40자 이상의 토큰을 제거하며, 텍스트를 소문자로 변환하는 <code translate="no">standard</code> 분석기를 사용합니다. 이 기본 설정을 적용하는 데는 추가 매개변수가 필요하지 않습니다. 자세한 내용은 <a href="/docs/ko/standard-analyzer.md">표준을</a> 참조하세요.</p>
 <p>다른 분석기가 필요한 경우에는 <code translate="no">analyzer_params</code> 매개변수를 사용하여 분석기를 구성할 수 있습니다. 예를 들어 영어 텍스트 처리를 위해 <code translate="no">english</code> 분석기를 적용합니다:</p>
 <div class="multipleCode">
@@ -289,7 +319,22 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>컬렉션 스키마에서 VARCHAR 필드에 대해 텍스트 일치를 사용하도록 설정한 후에는 <code translate="no">TEXT_MATCH</code> 표현식을 사용하여 텍스트 일치를 수행할 수 있습니다.</p>
-<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">TEXT_MATCH 표현식 구문</h3><p><code translate="no">TEXT_MATCH</code> 표현식은 검색할 필드와 용어를 지정하는 데 사용됩니다. 구문은 다음과 같습니다:</p>
+<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">TEXT_MATCH 표현식 구문<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">TEXT_MATCH</code> 표현식은 검색할 필드와 용어를 지정하는 데 사용됩니다. 구문은 다음과 같습니다:</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -338,8 +383,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Search-with-text-match" class="common-anchor-header">텍스트 일치로 검색</h3><p>텍스트 일치를 벡터 유사도 검색과 함께 사용하면 검색 범위를 좁히고 검색 성능을 향상시킬 수 있습니다. 벡터 유사도 검색 전에 텍스트 일치를 사용하여 컬렉션을 필터링하면 검색해야 하는 문서 수를 줄여 쿼리 시간을 단축할 수 있습니다.</p>
+<h3 id="Search-with-text-match" class="common-anchor-header">텍스트 일치로 검색<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>텍스트 일치를 벡터 유사도 검색과 함께 사용하면 검색 범위를 좁히고 검색 성능을 향상시킬 수 있습니다. 벡터 유사도 검색 전에 텍스트 일치를 사용하여 컬렉션을 필터링하면 검색해야 하는 문서 수를 줄여 쿼리 시간을 단축할 수 있습니다.</p>
 <p>이 예에서 <code translate="no">filter</code> 표현식은 지정된 용어 <code translate="no">keyword1</code> 또는 <code translate="no">keyword2</code> 와 일치하는 문서만 포함하도록 검색 결과를 필터링합니다. 그런 다음 이 필터링된 문서 하위 집합에서 벡터 유사성 검색이 수행됩니다.</p>
+<div class="alert note">
+<p>텍스트 하이라이터를 구성하여 검색 결과에서 일치하는 용어를 강조 표시할 수 있습니다. 자세한 내용은 <a href="/docs/ko/text-highlighter.md">텍스트 하이라이터를</a> 참조하세요.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
@@ -350,7 +413,7 @@ result = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
     anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
     limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
@@ -362,7 +425,7 @@ result = client.search(
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embeddings&quot;</span>)
         .data(Collections.singletonList(queryVector)))
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .topK(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build());
@@ -389,7 +452,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// Your collection name</span>
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment">// Vector field name</span>
     <span class="hljs-attr">data</span>: [query_vector], <span class="hljs-comment">// Query vector</span>
-    <span class="hljs-attr">filter</span>: filter,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter,</span>
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Max. number of results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment">//Fields to return</span>
@@ -418,7 +481,22 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-text-match" class="common-anchor-header">텍스트 일치를 사용한 쿼리</h3><p>텍스트 일치는 쿼리 작업에서 스칼라 필터링에도 사용할 수 있습니다. <code translate="no">query()</code> 메서드의 <code translate="no">expr</code> 파라미터에 <code translate="no">TEXT_MATCH</code> 표현식을 지정하면 주어진 용어와 일치하는 문서를 검색할 수 있습니다.</p>
+<h3 id="Query-with-text-match" class="common-anchor-header">텍스트 일치를 사용한 쿼리<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>텍스트 일치는 쿼리 작업에서 스칼라 필터링에도 사용할 수 있습니다. <code translate="no">query()</code> 메서드의 <code translate="no">expr</code> 파라미터에 <code translate="no">TEXT_MATCH</code> 표현식을 지정하면 주어진 용어와 일치하는 문서를 검색할 수 있습니다.</p>
 <p>아래 예는 <code translate="no">text</code> 필드에 <code translate="no">keyword1</code> 과 <code translate="no">keyword2</code> 라는 용어가 모두 포함된 문서를 검색합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -427,7 +505,7 @@ curl --request POST \
 
 result = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, </span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -435,7 +513,7 @@ result = client.query(
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build()
 );
@@ -455,7 +533,7 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: filter, 
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter, </span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>

@@ -122,7 +122,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>في Elasticsearch، تمكّنك استعلامات النص الكامل من البحث في حقول نصية محللة مثل نص رسالة بريد إلكتروني. تتم معالجة سلسلة الاستعلام باستخدام نفس المحلل الذي تم تطبيقه على الحقل أثناء الفهرسة.</p>
-<h3 id="Match-query" class="common-anchor-header">استعلام المطابقة</h3><p>في Elasticsearch، يقوم استعلام المطابقة بإرجاع المستندات التي تطابق نصًا أو رقمًا أو تاريخًا أو قيمة منطقية. يتم تحليل النص المُقدَّم قبل المطابقة.</p>
+<h3 id="Match-query" class="common-anchor-header">استعلام المطابقة<button data-href="#Match-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsearch، يقوم استعلام المطابقة بإرجاع المستندات التي تطابق نصًا أو رقمًا أو تاريخًا أو قيمة منطقية. يتم تحليل النص المُقدَّم قبل المطابقة.</p>
 <p>فيما يلي مثال لطلب بحث في Elasticsearch مع استعلام مطابقة.</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
@@ -143,7 +158,7 @@ summary: >-
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;message&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>في المثال أعلاه، <code translate="no">message_sparse</code> هو حقل متجه متناثر مشتق من حقل VarChar اسمه <code translate="no">message</code>. يستخدم ميلفوس نموذج التضمين BM25 لتحويل القيم الموجودة في الحقل <code translate="no">message</code> إلى تضمينات متجهات متناثرة ويخزنها في الحقل <code translate="no">message_sparse</code>. عند تلقي طلب البحث، يقوم Milvus بتضمين حمولة الاستعلام النصي العادي باستخدام نفس نموذج BM25 ويقوم بإجراء بحث متجهي متناثر وإرجاع الحقلين <code translate="no">id</code> و <code translate="no">message</code> المحددين في المعلمة <code translate="no">output_fields</code> مع درجات التشابه المقابلة.</p>
+<p>في المثال أعلاه، <code translate="no">message_sparse</code> هو حقل متجه متناثر مشتق من حقل VarChar اسمه <code translate="no">message</code>. يستخدم Milvus نموذج التضمين BM25 لتحويل القيم الموجودة في الحقل <code translate="no">message</code> إلى تضمينات متجهات متناثرة ويخزنها في الحقل <code translate="no">message_sparse</code>. عند تلقي طلب البحث، يقوم Milvus بتضمين حمولة الاستعلام النصية العادية باستخدام نفس نموذج BM25 ويقوم بإجراء بحث متجهي متناثر وإرجاع الحقلين <code translate="no">id</code> و <code translate="no">message</code> المحددين في المعلمة <code translate="no">output_fields</code> مع درجات التشابه المقابلة.</p>
 <p>لاستخدام هذه الوظيفة، يجب تمكين المحلل على الحقل <code translate="no">message</code> وتحديد دالة لاشتقاق الحقل <code translate="no">message_sparse</code> منه. للحصول على إرشادات مفصلة حول تمكين المحلل وإنشاء الدالة المشتقة في ميلفوس، راجع <a href="/docs/ar/full-text-search.md">البحث في النص الكامل</a>.</p>
 <h2 id="Term-level-queries" class="common-anchor-header">الاستعلامات على مستوى المصطلح<button data-href="#Term-level-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -161,7 +176,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>في Elasticsearch، تُستخدم الاستعلامات على مستوى المصطلح للعثور على المستندات بناءً على القيم الدقيقة في البيانات المهيكلة، مثل نطاقات التواريخ أو عناوين IP أو الأسعار أو معرّفات المنتجات. يوضح هذا القسم المعادلات الممكنة لبعض استعلامات مستوى المصطلح في Elasticsearch في ميلفوس. تم تكييف جميع الأمثلة في هذا القسم لتعمل ضمن سياق التصفية لتتماشى مع إمكانيات ملفوس.</p>
-<h3 id="IDs" class="common-anchor-header">المعرفات</h3><p>في Elasticsearch، يمكنك العثور على المستندات بناءً على معرّفاتها في سياق التصفية على النحو التالي:</p>
+<h3 id="IDs" class="common-anchor-header">المعرفات<button data-href="#IDs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsearch، يمكنك العثور على المستندات بناءً على معرّفاتها في سياق التصفية على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -194,7 +224,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على مثال Elasticsearch في <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">هذه الصفحة</a>. للحصول على تفاصيل حول طلبات الاستعلام والحصول على الطلبات بالإضافة إلى تعبيرات التصفية في Milvus، راجع <a href="/docs/ar/get-and-scalar-query.md">الاستعلام</a> <a href="/docs/ar/filtering">والتصفية</a>.</p>
-<h3 id="Prefix-query" class="common-anchor-header">استعلام البادئة</h3><p>في Elasticsesearch، يمكنك العثور على المستندات التي تحتوي على بادئة محددة في حقل متوفر في سياق التصفية على النحو التالي:</p>
+<h3 id="Prefix-query" class="common-anchor-header">استعلام البادئة<button data-href="#Prefix-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsesearch، يمكنك العثور على المستندات التي تحتوي على بادئة محددة في حقل متوفر في سياق التصفية على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -218,7 +263,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على مثال Elasticsearch في <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">هذه الصفحة</a>. للحصول على تفاصيل حول مشغل <code translate="no">like</code> في ميلفوس، راجع <a href="/docs/ar/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">استخدام </a><code translate="no">LIKE</code><a href="/docs/ar/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> لمطابقة الأنماط</a>.</p>
-<h3 id="Range-query" class="common-anchor-header">استعلام النطاق</h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلحات ضمن نطاق محدد على النحو التالي:</p>
+<h3 id="Range-query" class="common-anchor-header">استعلام النطاق<button data-href="#Range-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلحات ضمن نطاق محدد على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -243,7 +303,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على مثال Elasticsearch في <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">هذه الصفحة</a>. للحصول على تفاصيل حول عوامل المقارنة في ملفوس، راجع <a href="/docs/ar/basic-operators.md#Comparison-operators">عوامل المقارنة</a>.</p>
-<h3 id="Term-query" class="common-anchor-header">استعلام المدى</h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلح <strong>محدد</strong> في حقل معين على النحو التالي:</p>
+<h3 id="Term-query" class="common-anchor-header">استعلام المدى<button data-href="#Term-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلح <strong>محدد</strong> في حقل معين على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -275,7 +350,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على مثال Elasticsearch في <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">هذه الصفحة</a>. للحصول على تفاصيل حول عوامل المقارنة في ميلفوس، راجع <a href="/docs/ar/basic-operators.md#Comparison-operators">عوامل المقارنة</a>.</p>
-<h3 id="Terms-query" class="common-anchor-header">استعلام المصطلحات</h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلح واحد أو أكثر من المصطلحات <strong>الدقيقة</strong> في حقل محدد على النحو التالي:</p>
+<h3 id="Terms-query" class="common-anchor-header">استعلام المصطلحات<button data-href="#Terms-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلح واحد أو أكثر من المصطلحات <strong>الدقيقة</strong> في حقل محدد على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -308,7 +398,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على مثال Elasticsearch في <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">هذه الصفحة</a>. للحصول على تفاصيل حول مشغلي النطاق في ميلفوس، راجع <a href="/docs/ar/basic-operators.md#Range-operators">مشغلي النطاق</a>.</p>
-<h3 id="Wildcard-query" class="common-anchor-header">استعلام أحرف البدل</h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلحات مطابقة لنمط حرف بدل على النحو التالي:</p>
+<h3 id="Wildcard-query" class="common-anchor-header">استعلام أحرف البدل<button data-href="#Wildcard-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>في Elasticsearch، يمكنك العثور على المستندات التي تحتوي على مصطلحات مطابقة لنمط حرف بدل على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -393,7 +498,22 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>في Elasticsearch، الاستعلامات المتجهة هي استعلامات متخصصة تعمل على الحقول المتجهة لإجراء بحث دلالي بكفاءة.</p>
-<h3 id="Knn-query" class="common-anchor-header">استعلام كن</h3><p>يدعم Elasticsearch كلاً من استعلامات kNN التقريبية واستعلامات kNN الدقيقة والغاشمة. يمكنك العثور على أقرب متجهات <em>k</em> إلى متجه استعلام بأي من الطريقتين، كما تقاس بمقياس تشابه، على النحو التالي:</p>
+<h3 id="Knn-query" class="common-anchor-header">استعلام كن<button data-href="#Knn-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يدعم Elasticsearch كلاً من استعلامات kNN التقريبية واستعلامات kNN الدقيقة والغاشمة. يمكنك العثور على أقرب متجهات <em>k</em> إلى متجه استعلام بأي من الطريقتين، كما تقاس بمقياس تشابه، على النحو التالي:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     index=<span class="hljs-string">&quot;my-image-index&quot;</span>,
     size=<span class="hljs-number">3</span>,
@@ -421,7 +541,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>يمكنك العثور على مثال Elasticsearch في <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">هذه الصفحة</a>. للحصول على تفاصيل حول عمليات بحث الشبكة العصبية الاصطناعية في ميليفوس، اقرأ <a href="/docs/ar/single-vector-search.md">بحث الشبكة العصبية الاصطناعية الأساسي</a>.</p>
-<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">دمج الرتب المتبادلة</h3><p>يوفّر Elasticsearch خاصية دمج الرتب المتبادلة (RRF) لدمج مجموعات نتائج متعددة بمؤشرات صلة مختلفة في مجموعة نتائج واحدة مرتبة.</p>
+<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">دمج الرتب المتبادلة<button data-href="#Reciprocal-Rank-Fusion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوفّر Elasticsearch خاصية دمج الرتب المتبادلة (RRF) لدمج مجموعات نتائج متعددة بمؤشرات صلة مختلفة في مجموعة نتائج واحدة مرتبة.</p>
 <p>يوضح المثال التالي الجمع بين بحث تقليدي قائم على المصطلح مع بحث متجه على أساس k-أقرب الجيران (kNN) لتحسين ملاءمة البحث:</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
@@ -468,7 +603,7 @@ res = client.query(
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}, 
+        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">100</span>
 }
@@ -480,7 +615,6 @@ search_params_sparse = {
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
     }
 }
 
@@ -496,7 +630,7 @@ res = client.hybrid_search(
 <p>يوضح هذا المثال بحثًا هجينًا في ميلفوس يجمع بين:</p>
 <ol>
 <li><p><strong>بحث متجه كثيف</strong>: استخدام مقياس الضرب الداخلي (IP) مع ضبط <code translate="no">nprobe</code> على 10 للبحث التقريبي لأقرب جار (ANN) على الحقل <code translate="no">vector</code>.</p></li>
-<li><p><strong>بحث متجه متناثر</strong>: استخدام مقياس التشابه BM25 مع معلمة <code translate="no">drop_ratio_search</code> تبلغ 0.2 على الحقل <code translate="no">text_sparse</code>.</p></li>
+<li><p><strong>بحث متجه متناثر</strong>: استخدام مقياس التشابه BM25 على الحقل <code translate="no">text_sparse</code>.</p></li>
 </ol>
 <p>يتم تنفيذ النتائج من عمليات البحث هذه بشكل منفصل ودمجها وإعادة ترتيبها باستخدام مصنف دمج الرتب المتبادل (RRF). يُرجع البحث المختلط أفضل 10 كيانات من القائمة المعاد ترتيبها.</p>
 <p>على عكس تصنيف RRRF الخاص بـ Elasticsearch، الذي يدمج النتائج من الاستعلامات القياسية المستندة إلى النص وعمليات البحث kNN، يجمع Milvus بين النتائج من عمليات البحث المتفرقة والكثيفة المتجهة، مما يوفر إمكانية بحث هجين فريدة من نوعها ومُحسّنة للبيانات متعددة الوسائط.</p>

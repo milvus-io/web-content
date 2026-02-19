@@ -726,7 +726,6 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -766,7 +765,6 @@ searchRequests.add(AnnSearchReq.builder()
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .vectors(queryTexts)
-        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_search\&quot;: 0.2}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -805,7 +803,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_text, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -826,7 +823,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     {
         &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
         &quot;annsField&quot;: &quot;text_sparse&quot;,
-        &quot;params&quot;: {&quot;drop_ratio_search&quot;: 0.2},
         &quot;limit&quot;: 2
     },
     {
@@ -929,7 +925,7 @@ ranker := entity.NewFunction().
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Прежде чем приступить к гибридному поиску, убедитесь, что коллекция загружена. Если у векторных полей в коллекции нет индекса или они не загружены в память, при выполнении метода Hybrid Search возникнет ошибка.</p>
+    </button></h3><p>Прежде чем приступить к гибридному поиску, убедитесь, что коллекция загружена. Если у векторных полей коллекции отсутствует индекс или они не загружены в память, при выполнении метода Hybrid Search возникнет ошибка.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.hybrid_search(

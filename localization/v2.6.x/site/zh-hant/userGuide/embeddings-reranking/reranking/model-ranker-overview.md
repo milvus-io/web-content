@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h1><p>傳統的向量搜尋純粹是透過數學相似性來排列結果，也就是向量在高維空間中的匹配程度。這種方法雖然有效率，但往往會忽略真正的語意相關性。考慮搜尋<strong>「資料庫最佳優化實務」：</strong>您可能會收到高向量相似度的文件，這些文件會經常提到這些詞彙，但實際上卻沒有提供可行的優化策略。</p>
-<p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容的意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
+<p>Model Ranker 整合了先進的語言模型，能夠理解查詢與文件之間的語義關係，從而改變 Milvus 的搜尋方式。它不只依賴向量相似度，還會評估內容意義和上下文，以提供更智慧、更相關的搜尋結果。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -114,7 +114,7 @@ beta: Milvus 2.6.x
    <tr>
      <td><p>一致性</p></td>
      <td><p>以可靠性和易整合性為優先考量的企業應用程式</p></td>
-     <td><ul><li><p>企業級的可靠性與擴充性</p></li><li><p>無需基礎架構維護的管理式服務</p></li><li><p>多語言重排功能</p></li><li><p>內建速率限制與錯誤處理功能</p></li></ul></td>
+     <td><ul><li><p>企業級的可靠性與擴充性</p></li><li><p>無需基礎架構維護的管理式服務</p></li><li><p>多語言重排功能</p></li><li><p>內建速率限制與錯誤處理</p></li></ul></td>
      <td><p>需要高可用性搜尋與一致 API 效能和多語言產品目錄的電子商務平台</p></td>
    </tr>
    <tr>
@@ -329,82 +329,6 @@ results = client.search(
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">應用於混合搜尋<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>模型排序器也可以應用於結合多向量領域的混合搜尋作業：</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
-
-<span class="hljs-comment"># Define search requests for different vector fields</span>
-dense_request = AnnSearchRequest(
-    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">20</span>
-)
-
-sparse_request = AnnSearchRequest(
-    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">20</span>
-)
-
-<span class="hljs-comment"># Apply model ranker to hybrid search</span>
-hybrid_results = client.hybrid_search(
-    collection_name,
-    [dense_request, sparse_request],
-<span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Same model ranker works with hybrid search</span></span>
-    limit=<span class="hljs-number">10</span>,
-    output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-        
-List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
-        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
-        .limit(<span class="hljs-number">10</span>)
-        .build());
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
-        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
-        .limit(<span class="hljs-number">10</span>)
-        .build());
-
-<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
-                .collectionName(COLLECTION_NAME)
-                .searchRequests(searchRequests)
-                .ranker(ranker)
-                .limit(<span class="hljs-number">10</span>)
-                .outputFields(Arrays.asList(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>))
-                .build();
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>

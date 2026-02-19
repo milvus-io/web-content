@@ -5,8 +5,7 @@ summary: >-
   Indeks SPARSE_INVERTED_INDEX adalah jenis indeks yang digunakan oleh Milvus
   untuk menyimpan dan mencari vektor yang jarang secara efisien. Jenis indeks
   ini memanfaatkan prinsip-prinsip pengindeksan terbalik untuk membuat struktur
-  pencarian yang sangat efisien untuk data yang jarang. Untuk informasi lebih
-  lanjut, lihat INVERTED.
+  pencarian yang sangat efisien untuk data yang jarang.
 ---
 <h1 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -87,12 +86,7 @@ index_params.add_index(
         ></path>
       </svg>
     </button></h2><p>Setelah indeks dibuat dan entitas dimasukkan, Anda dapat melakukan pencarian kemiripan pada indeks.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters</span>
-search_params = {
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters</span>
-}
-
-<span class="hljs-comment"># Prepare the query vector</span>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare the query vector</span>
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 
 res = MilvusClient.search(
@@ -100,17 +94,9 @@ res = MilvusClient.search(
     anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>,  <span class="hljs-comment"># Vector field name</span>
     data=query_vector,  <span class="hljs-comment"># Query vector</span>
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
-    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Dalam konfigurasi ini:</p>
-<ul>
-<li><p><code translate="no">params</code>: Opsi konfigurasi tambahan untuk pencarian pada indeks.</p>
-<ul>
-<li><code translate="no">drop_ratio_search</code>: Menyempurnakan kinerja pencarian dengan menentukan proporsi nilai vektor kecil yang akan diabaikan selama proses pencarian. Misalnya, dengan <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, 20% nilai terkecil dalam vektor kueri akan diabaikan selama pencarian.</li>
-</ul>
-<p>Untuk mempelajari lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">SPARSE_INVERTED_INDEX</code>, lihat Parameter <a href="/docs/id/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">pencarian khusus indeks</a>.</p></li>
-</ul>
+<p>Untuk mengetahui lebih lanjut parameter pencarian yang tersedia untuk indeks <code translate="no">SPARSE_INVERTED_INDEX</code>, lihat Parameter <a href="/docs/id/ivf-flat.md#share-KDWodFEx6oCm2yxgEUAcXaUDnwg">pencarian khusus indeks</a>.</p>
 <h2 id="Index-params" class="common-anchor-header">Parameter indeks<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,7 +113,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/sparse-inverted-index.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangunan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/sparse-inverted-index.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -139,12 +140,25 @@ res = MilvusClient.search(
      <td><p><code translate="no">inverted_index_algo</code></p></td>
      <td><p>Algoritme yang digunakan untuk membangun dan melakukan kueri indeks. Ini menentukan bagaimana indeks memproses kueri.</p></td>
      <td><p><code translate="no">"DAAT_MAXSCORE"</code> (default), <code translate="no">"DAAT_WAND"</code>, <code translate="no">"TAAT_NAIVE"</code></p></td>
-     <td><p>Gunakan <code translate="no">"DAAT_MAXSCORE"</code> untuk skenario dengan nilai k yang tinggi atau kueri dengan banyak istilah, yang dapat mengambil manfaat dari melewatkan dokumen yang tidak kompetitif. 
- Pilih <code translate="no">"DAAT_WAND"</code> untuk kueri dengan nilai k kecil atau kueri pendek untuk memanfaatkan pelompatan yang lebih efisien.</p>
-<p>Gunakan <code translate="no">"TAAT_NAIVE"</code> jika penyesuaian dinamis terhadap perubahan koleksi (misalnya, avgdl) diperlukan.</p></td>
+     <td><p>Gunakan <code translate="no">"DAAT_MAXSCORE"</code> untuk skenario dengan nilai k yang tinggi atau kueri dengan banyak istilah, yang dapat mengambil manfaat dari melewatkan dokumen yang tidak kompetitif. </p><p>Pilih <code translate="no">"DAAT_WAND"</code> untuk kueri dengan nilai k kecil atau kueri pendek untuk memanfaatkan pelompatan yang lebih efisien.</p><p>Gunakan <code translate="no">"TAAT_NAIVE"</code> jika penyesuaian dinamis terhadap perubahan koleksi (misalnya, avgdl) diperlukan.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> ketika melakukan <a href="/docs/id/sparse-inverted-index.md#Search-on-index">pencarian di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> ketika melakukan <a href="/docs/id/sparse-inverted-index.md#Search-on-index">pencarian di indeks</a>.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -156,6 +170,6 @@ res = MilvusClient.search(
      <td><p><code translate="no">drop_ratio_search</code></p></td>
      <td><p>Proporsi nilai terkecil yang akan diabaikan selama pencarian, untuk membantu mengurangi noise.</p></td>
      <td><p>Fraksi antara 0,0 dan 1,0 (misalnya, 0,2 mengabaikan 20% nilai terkecil)</p></td>
-     <td><p>Setel parameter ini berdasarkan tingkat sparsitas dan derau vektor kueri Anda. Misalnya, mengaturnya ke 0,2 dapat membantu fokus pada nilai yang lebih signifikan selama pencarian, yang berpotensi meningkatkan akurasi.</p></td>
+     <td><p>Setel parameter ini berdasarkan tingkat sparsitas dan derau vektor kueri Anda.</p><p>Parameter ini mengontrol proporsi nilai dengan magnitudo rendah yang dibuang selama pencarian. Meningkatkan nilai ini (misalnya, menjadi <code translate="no">0.2</code>) dapat mengurangi noise dan memfokuskan pencarian pada komponen yang lebih signifikan, yang dapat meningkatkan presisi dan efisiensi. Namun, menurunkan lebih banyak nilai juga dapat mengurangi recall dengan mengecualikan sinyal yang mungkin relevan. Pilihlah nilai yang menyeimbangkan antara recall dan akurasi untuk beban kerja Anda.</p></td>
    </tr>
 </table>

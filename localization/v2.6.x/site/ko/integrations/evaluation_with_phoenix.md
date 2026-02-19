@@ -3,9 +3,9 @@ id: evaluation_with_phoenix.md
 summary: >-
   이 가이드에서는 Milvus를 기반으로 구축된 검색 증강 생성(RAG) 파이프라인을 평가하기 위해 아리제 피오닉스를 사용하는 방법을
   설명합니다.
-title: 아리제 피닉스를 사용한 평가
+title: 아리제 파이오닉스를 사용한 평가
 ---
-<h1 id="Evaluation-with-Arize-Pheonix" class="common-anchor-header">아리제 피닉스를 사용한 평가<button data-href="#Evaluation-with-Arize-Pheonix" class="anchor-icon" translate="no">
+<h1 id="Evaluation-with-Arize-Pheonix" class="common-anchor-header">아리제 파이오닉스를 사용한 평가<button data-href="#Evaluation-with-Arize-Pheonix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,7 +51,7 @@ title: 아리제 피닉스를 사용한 평가
 
 <span class="hljs-comment"># os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의하기<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">RAG 파이프라인 정의<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -461,7 +461,7 @@ results_df.head()
     <tr>
       <th>1</th>
       <td>이 프로그램을 작성하는 데 사용되는 프로그래밍 언어는 무엇인가요?</td>
-      <td>[CMake &amp; Conan\n\n밀레니엄의 알고리즘 라이브러리는...</td>
+      <td>[CMake &amp; Conan\n\n밀레의 알고리즘 라이브러리는 ...</td>
       <td>Knowher를 작성하는 데 사용되는 프로그래밍 언어는 무엇입니까?</td>
       <td>Knowher...를 작성하는 데 사용된 프로그래밍 언어입니다.</td>
       <td>[CMake &amp; Conan\n\n밀의 알고리즘 라이브러리입니다.</td>

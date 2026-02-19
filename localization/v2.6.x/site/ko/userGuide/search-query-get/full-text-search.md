@@ -27,7 +27,7 @@ summary: >-
 <div class="alert note">
 <p>전체 텍스트 검색과 시맨틱 기반의 고밀도 벡터 검색을 통합하면 검색 결과의 정확도와 관련성을 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="BM25-implementation" class="common-anchor-header">BM25 구현<button data-href="#BM25-implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,13 +42,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>전체 텍스트 검색은 수동 임베딩의 필요성을 제거하여 텍스트 기반 검색 프로세스를 간소화합니다. 이 기능은 다음 워크플로우를 통해 작동합니다:</p>
+    </button></h2><p>Milvus는 정보 검색 시스템에서 널리 채택된 채점 기능인 BM25 관련성 알고리즘으로 구동되는 전체 텍스트 검색을 제공하며, 이를 검색 워크플로우에 통합하여 정확하고 관련성 순위가 높은 텍스트 결과를 제공합니다.</p>
+<p>Milvus의 전체 텍스트 검색은 아래의 워크플로우를 따릅니다:</p>
 <ol>
-<li><p><strong>텍스트 입력</strong>: 원시 텍스트 문서를 삽입하거나 수동으로 임베드할 필요 없이 쿼리 텍스트를 제공합니다.</p></li>
-<li><p><strong>텍스트 분석</strong>: Milvus는 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 사용하여 입력 텍스트를 검색 가능한 개별 용어로 토큰화합니다.</p></li>
-<li><p><strong>함수 처리</strong>: 내장된 함수는 토큰화된 용어를 수신하여 희소 벡터 표현으로 변환합니다.</p></li>
-<li><p><strong>컬렉션 저장소</strong>: Milvus는 효율적인 검색을 위해 이러한 희소 임베딩을 컬렉션에 저장합니다.</p></li>
-<li><p><strong>BM25 점수</strong>: 검색 중에 Milvus는 BM25 알고리즘을 적용하여 저장된 문서에 대한 점수를 계산하고 쿼리 텍스트와의 관련성에 따라 일치하는 결과의 순위를 매깁니다.</p></li>
+<li><p><strong>원시 텍스트 입력</strong>: 임베딩 모델 없이 텍스트 문서를 삽입하거나 일반 텍스트를 사용하여 쿼리를 입력합니다.</p></li>
+<li><p><strong>텍스트 분석</strong>: Milvus는 <a href="/docs/ko/analyzer-overview.md">분석기를</a> 사용하여 텍스트를 색인 및 검색이 가능한 의미 있는 용어로 처리합니다.</p></li>
+<li><p><strong>BM25 함수 처리</strong>: 내장된 함수가 이러한 용어를 BM25 채점에 최적화된 희소 벡터 표현으로 변환합니다.</p></li>
+<li><p><strong>컬렉션 저장소</strong>: Milvus는 빠른 검색과 순위를 매길 수 있도록 결과 스파스 임베딩을 컬렉션에 저장합니다.</p></li>
+<li><p><strong>BM25 관련성 점수</strong>: 검색 시 Milvus는 BM25 스코어링 기능을 적용하여 문서 관련성을 계산하고 쿼리 용어와 가장 일치하는 순위를 매긴 결과를 반환합니다.</p></li>
 </ol>
 <p>
   
@@ -56,11 +57,11 @@ summary: >-
    </span> <span class="img-wrapper"> <span>전체 텍스트 검색</span> </span></p>
 <p>전체 텍스트 검색을 사용하려면 다음 주요 단계를 따르세요:</p>
 <ol>
-<li><p><a href="/docs/ko/full-text-search.md#Create-a-collection-for-full-text-search">컬렉션을 만듭니다</a>: 필요한 필드로 컬렉션을 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 함수를 정의합니다.</p></li>
+<li><p><a href="/docs/ko/full-text-search.md#Create-a-collection-for-BM25-full-text-search">컬렉션을 만듭니다</a>: 필수 필드를 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 BM25 함수를 정의합니다.</p></li>
 <li><p><a href="/docs/ko/full-text-search.md#Insert-text-data">데이터 삽입</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
-<li><p><a href="/docs/ko/full-text-search.md#Perform-full-text-search">검색 수행하기</a>: 쿼리 텍스트를 사용하여 컬렉션을 검색하고 관련 결과를 검색합니다.</p></li>
+<li><p><a href="/docs/ko/full-text-search.md#Perform-full-text-search">검색 수행</a>: 자연어 쿼리 텍스트를 사용하여 BM25 관련성에 따라 순위가 매겨진 결과를 검색합니다.</p></li>
 </ol>
-<h2 id="Create-a-collection-for-full-text-search" class="common-anchor-header">전체 텍스트 검색을 위한 컬렉션 만들기<button data-href="#Create-a-collection-for-full-text-search" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-for-BM25-full-text-search" class="common-anchor-header">BM25 전체 텍스트 검색을 위한 컬렉션 만들기<button data-href="#Create-a-collection-for-BM25-full-text-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -75,28 +76,28 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>전체 텍스트 검색을 사용하려면 특정 스키마로 컬렉션을 만드세요. 이 스키마에는 세 가지 필수 필드가 포함되어야 합니다:</p>
+    </button></h2><p>BM25 기반 전체 텍스트 검색을 사용하려면 필수 필드가 포함된 컬렉션을 준비하고, 스파스 벡터를 생성하는 BM25 함수를 정의하고, 인덱스를 구성한 다음 컬렉션을 만들어야 합니다.</p>
+<h3 id="Define-schema-fields" class="common-anchor-header">스키마 필드 정의<button data-href="#Define-schema-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>컬렉션 스키마에는 최소 3개의 필수 필드가 포함되어야 합니다:</p>
 <ul>
-<li><p>컬렉션의 각 엔터티를 고유하게 식별하는 기본 필드.</p></li>
-<li><p><code translate="no">enable_analyzer</code> 속성이 <code translate="no">True</code> 로 설정된 원시 텍스트 문서를 저장하는 <code translate="no">VARCHAR</code> 필드. 이를 통해 Milvus는 함수 처리를 위해 텍스트를 특정 용어로 토큰화할 수 있습니다.</p></li>
-<li><p><code translate="no">VARCHAR</code> 필드에 대해 Milvus가 자동으로 생성하는 스파스 임베딩을 저장하기 위해 예약된 <code translate="no">SPARSE_FLOAT_VECTOR</code> 필드.</p></li>
+<li><p><strong>기본 필드</strong>: 컬렉션의 각 엔티티를 고유하게 식별합니다.</p></li>
+<li><p><strong>텍스트 필드</strong> (<code translate="no">VARCHAR</code>): 원시 텍스트 문서를 저장합니다. Milvus가 BM25 관련성 순위를 위해 텍스트를 처리할 수 있도록 <code translate="no">enable_analyzer=True</code> 을 설정해야 합니다. 기본적으로 Milvus는 텍스트 분석을 위해 <a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ko/standard-analyzer.md"> 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p></li>
+<li><p><strong>스파스 벡터 필드</strong> (<code translate="no">SPARSE_FLOAT_VECTOR</code>): BM25 함수에 의해 자동으로 생성된 스파스 임베딩을 저장합니다.</p></li>
 </ul>
-<h3 id="Define-the-collection-schema" class="common-anchor-header">컬렉션 스키마 정의하기<button data-href="#Define-the-collection-schema" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>먼저 스키마를 생성하고 필요한 필드를 추가합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType
@@ -108,9 +109,9 @@ client = MilvusClient(
 
 schema = client.create_schema()
 
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
+schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Primary field</span>
+<span class="highlighted-comment-line">schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>) <span class="hljs-comment"># Text field</span></span>
+<span class="highlighted-comment-line">schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR) <span class="hljs-comment"># Sparse vector field; no dim required for sparse vectors</span></span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
@@ -224,20 +225,36 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>이 구성에서는</p>
+<p>앞의 config,</p>
 <ul>
-<li><p><code translate="no">id</code>은 기본 키로 사용되며 <code translate="no">auto_id=True</code> 으로 자동 생성됩니다.</p></li>
-<li><p><code translate="no">text</code>는 전체 텍스트 검색 작업을 위한 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이 텍스트 저장을 위한 Milvus 문자열 데이터 유형이므로 <code translate="no">VARCHAR</code> 여야 합니다. <code translate="no">enable_analyzer=True</code> 을 설정하면 Milvus가 텍스트를 토큰화할 수 있습니다. 기본적으로 Milvus는 텍스트 분석을 위해 <a href="/docs/ko/standard-analyzer.md"><code translate="no">standard</code></a><a href="/docs/ko/standard-analyzer.md"> 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">분석기 개요를</a> 참조하세요.</p></li>
+<li><p><code translate="no">id</code>는 기본 키 역할을 하며 <code translate="no">auto_id=True</code> 로 자동 생성됩니다.</p></li>
+<li><p><code translate="no">text</code>는 전체 텍스트 검색 작업을 위한 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이 텍스트 저장을 위한 Milvus 문자열 데이터 유형이므로 <code translate="no">VARCHAR</code> 여야 합니다.</p></li>
 <li><p><code translate="no">sparse</code>전체 텍스트 검색 작업을 위해 내부적으로 생성된 스파스 임베딩을 저장하기 위해 예약된 벡터 필드입니다. 데이터 유형은 <code translate="no">SPARSE_FLOAT_VECTOR</code> 여야 합니다.</p></li>
 </ul>
-<p>이제 텍스트를 스파스 벡터 표현으로 변환하는 함수를 정의한 다음 스키마에 추가합니다:</p>
+<h3 id="Define-the-BM25-function" class="common-anchor-header">BM25 함수 정의<button data-href="#Define-the-BM25-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>BM25 함수는 토큰화된 텍스트를 BM25 채점을 지원하는 스파스 벡터로 변환합니다.</p>
+<p>함수를 정의하고 스키마에 추가합니다:</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">bm25_function = Function(
     name=<span class="hljs-string">&quot;text_bm25_emb&quot;</span>, <span class="hljs-comment"># Function name</span>
     input_field_names=[<span class="hljs-string">&quot;text&quot;</span>], <span class="hljs-comment"># Name of the VARCHAR field containing raw text data</span>
     output_field_names=[<span class="hljs-string">&quot;sparse&quot;</span>], <span class="hljs-comment"># Name of the SPARSE_FLOAT_VECTOR field reserved to store generated embeddings</span>
-    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span>
+<span class="highlighted-wrapper-line">    function_type=FunctionType.BM25, <span class="hljs-comment"># Set to `BM25`</span></span>
 )
 
 schema.add_function(bm25_function)
@@ -312,11 +329,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">name</code></p></td>
-     <td><p>함수의 이름입니다. 이 함수는 <code translate="no">text</code> 필드의 원시 텍스트를 검색 가능한 벡터로 변환하여 <code translate="no">sparse</code> 필드에 저장합니다.</p></td>
+     <td><p>함수의 이름입니다. 이 함수는 <code translate="no">text</code> 필드의 원시 텍스트를 <code translate="no">sparse</code> 필드에 저장될 BM25 호환 스파스 벡터로 변환합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">input_field_names</code></p></td>
-     <td><p>텍스트를 스파스-벡터로 변환해야 하는 <code translate="no">VARCHAR</code> 필드의 이름입니다. <code translate="no">FunctionType.BM25</code> 의 경우 이 매개변수는 하나의 필드 이름만 허용합니다.</p></td>
+     <td><p>텍스트를 스파스 벡터로 변환해야 하는 <code translate="no">VARCHAR</code> 필드의 이름입니다. <code translate="no">FunctionType.BM25</code> 의 경우 이 매개변수는 하나의 필드 이름만 허용합니다.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">output_field_names</code></p></td>
@@ -324,11 +341,11 @@ schema.WithFunction(function)
    </tr>
    <tr>
      <td><p><code translate="no">function_type</code></p></td>
-     <td><p>사용할 함수의 유형입니다. 값을 <code translate="no">FunctionType.BM25</code> 으로 설정합니다.</p></td>
+     <td><p>사용할 함수의 유형입니다. <code translate="no">FunctionType.BM25</code> 여야 합니다.</p></td>
    </tr>
 </table>
 <div class="alert note">
-<p>텍스트에서 스파스 벡터로 변환해야 하는 <code translate="no">VARCHAR</code> 필드가 여러 개 있는 컬렉션의 경우 컬렉션 스키마에 별도의 함수를 추가하여 각 함수에 고유한 이름과 <code translate="no">output_field_names</code> 값을 갖도록 합니다.</p>
+<p>여러 개의 <code translate="no">VARCHAR</code> 필드에 BM25 처리가 필요한 경우, 각 필드마다 고유한 이름과 출력 필드를 가진 <strong>하나의 BM25 함수를</strong> 정의합니다.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">인덱스 구성<button data-href="#Configure-the-index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -345,7 +362,7 @@ schema.WithFunction(function)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후에는 컬렉션의 색인을 설정하세요. 이 과정을 간소화하기 위해 <code translate="no">AUTOINDEX</code> 을 <code translate="no">index_type</code> 으로 사용하면 Milvus가 데이터 구조에 따라 가장 적합한 인덱스 유형을 선택하고 구성할 수 있습니다.</p>
+    </button></h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후 컬렉션의 인덱스를 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -586,27 +603,27 @@ client.insert(InsertReq.builder()
         ></path>
       </svg>
     </button></h2><p>컬렉션에 데이터를 삽입한 후에는 원시 텍스트 쿼리를 사용하여 전체 텍스트 검색을 수행할 수 있습니다. Milvus는 자동으로 쿼리를 스파스 벡터로 변환하고 BM25 알고리즘을 사용하여 일치하는 검색 결과의 순위를 매긴 다음 상위 K (<code translate="no">limit</code>) 결과를 반환합니다.</p>
+<div class="alert note">
+<p>텍스트 형광펜을 구성하여 검색 결과에서 일치하는 용어를 강조 표시할 수 있습니다. 자세한 내용은 <a href="/docs/ko/text-highlighter.md">텍스트 하이라이터를</a> 참조하세요.</p>
+</div>
 <div class="multipleCode">
    <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python">search_params = {
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
-}
-
-client.search(
+<pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&#x27;my_collection&#x27;</span>, 
 <span class="highlighted-comment-line">    data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],</span>
 <span class="highlighted-comment-line">    anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,</span>
 <span class="highlighted-comment-line">    output_fields=[<span class="hljs-string">&#x27;text&#x27;</span>], <span class="hljs-comment"># Fields to return in search results; sparse field cannot be output</span></span>
     limit=<span class="hljs-number">3</span>,
-    search_params=search_params
 )
+
+<span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 
 Map&lt;String,Object&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
+
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(SearchReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .data(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
@@ -617,7 +634,6 @@ searchParams.put(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>,
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go">annSearchParams := index.NewCustomAnnParam()
-annSearchParams.WithExtraParam(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>)
 resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
     <span class="hljs-number">3</span>,               <span class="hljs-comment">// limit</span>
@@ -643,7 +659,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&#x27;text&#x27;</span>],
     <span class="hljs-attr">limit</span>: <span class="hljs-number">3</span>,
-    <span class="hljs-attr">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash">curl --request POST \
@@ -661,9 +676,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
         &quot;text&quot;
     ],
     &quot;searchParams&quot;:{
-        &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.2
-        }
+        &quot;params&quot;:{}
     }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -678,7 +691,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
    </tr>
    <tr>
      <td><p><code translate="no">params.drop_ratio_search</code></p></td>
-     <td><p>검색 시 무시할 중요도가 낮은 용어의 비율입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p></td>
+     <td><p>검색 중에 무시할 중요도가 낮은 용어의 비율입니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p></td>
    </tr>
    <tr>
      <td></td>

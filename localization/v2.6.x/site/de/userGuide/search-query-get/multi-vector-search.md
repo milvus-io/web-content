@@ -38,7 +38,7 @@ summary: >-
 <p>Die Multi-Vektor-Hybridsuche integriert verschiedene Suchmethoden oder überspannt Einbettungen aus verschiedenen Modalitäten:</p>
 <ul>
 <li><p><strong>Sparse-Dense Vector Search</strong>: <a href="/docs/de/dense-vector.md">Dense Vectors</a> eignen sich hervorragend für die Erfassung semantischer Beziehungen, während <a href="/docs/de/sparse_vector.md">Sparse Vectors</a> sehr effektiv für den präzisen Abgleich von Schlüsselwörtern sind. Die hybride Suche kombiniert diese Ansätze, um sowohl ein umfassendes konzeptionelles Verständnis als auch eine exakte Begriffsrelevanz zu gewährleisten und so die Suchergebnisse zu verbessern. Durch die Nutzung der Stärken der einzelnen Methoden überwindet die hybride Suche die Einschränkungen der einzelnen Ansätze und bietet eine bessere Leistung bei komplexen Suchanfragen. Hier finden Sie einen detaillierten <a href="/docs/de/full_text_search_with_milvus.md">Leitfaden</a> zur hybriden Suche, die die semantische Suche mit der Volltextsuche kombiniert.</p></li>
-<li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einer nahtlosen und kohärenten Sucherfahrung zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
+<li><p><strong>Multimodale Vektorsuche</strong>: Die multimodale Vektorsuche ist eine leistungsstarke Technik, mit der Sie verschiedene Datentypen durchsuchen können, darunter Text, Bilder, Audio und andere. Der Hauptvorteil dieses Ansatzes ist die Fähigkeit, verschiedene Modalitäten zu einer nahtlosen und zusammenhängenden Sucherfahrung zu vereinen. Bei der Produktsuche kann ein Benutzer beispielsweise eine Textabfrage eingeben, um Produkte zu finden, die sowohl mit Text als auch mit Bildern beschrieben sind. Durch die Kombination dieser Modalitäten mittels einer hybriden Suchmethode können Sie die Suchgenauigkeit verbessern oder die Suchergebnisse anreichern.</p></li>
 </ul>
 <h2 id="Example" class="common-anchor-header">Beispiel<button data-href="#Example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -727,7 +727,6 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -767,7 +766,6 @@ searchRequests.add(AnnSearchReq.builder()
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .vectors(queryTexts)
-        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_search\&quot;: 0.2}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -806,7 +804,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_text, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -827,7 +824,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     {
         &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
         &quot;annsField&quot;: &quot;text_sparse&quot;,
-        &quot;params&quot;: {&quot;drop_ratio_search&quot;: 0.2},
         &quot;limit&quot;: 2
     },
     {
@@ -1006,7 +1002,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Die Ausgabe sieht folgendermaßen aus:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 1, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 2, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die Hybrid Search angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
+<p>Mit dem Parameter <code translate="no">limit=2</code>, der für die hybride Suche angegeben wurde, ordnet Milvus die sechs Ergebnisse aus den drei Suchvorgängen neu an. Letztendlich werden nur die beiden ähnlichsten Ergebnisse zurückgegeben.</p>
 <h2 id="Advanced-usage" class="common-anchor-header">Erweiterte Verwendung<button data-href="#Advanced-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -21,13 +21,35 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Создание индекса с поддержкой GPU в Milvus может значительно повысить производительность поиска в сценариях с высокой пропускной способностью и большим количеством запросов.</p>
-<p>На следующем рисунке сравнивается пропускная способность (запросы в секунду) различных конфигураций индексов для разных аппаратных установок, векторных наборов данных (Cohere и OpenAI) и размеров поисковых партий, и показано, что <code translate="no">GPU_CAGRA</code> постоянно превосходит другие методы.</p>
+    </button></h1><p>Создание индекса с поддержкой GPU в Milvus может значительно повысить производительность поиска в сценариях с высокой пропускной способностью и большим количеством обращений.</p>
+<p>На следующем рисунке сравнивается производительность запросов (запросы в секунду) в различных конфигурациях индекса, аппаратных установках, векторных наборах данных (Cohere и OpenAI) и размерах поисковых партий, и показано, что <code translate="no">GPU_CAGRA</code> неизменно превосходит другие методы.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
-   </span> <span class="img-wrapper"> <span>Производительность индекса на ГПУ</span> </span></p>
-<h2 id="Limits" class="common-anchor-header">Пределы<button data-href="#Limits" class="anchor-icon" translate="no">
+   </span> <span class="img-wrapper"> <span>Производительность индексов на GPU</span> </span></p>
+<h2 id="Configure-GPU-memory-pool-for-Milvus" class="common-anchor-header">Настройка пула памяти GPU для Milvus<button data-href="#Configure-GPU-memory-pool-for-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus поддерживает глобальный пул памяти GPU и предоставляет два параметра конфигурации, <code translate="no">initMemSize</code> и <code translate="no">maxMemSize</code>, в <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">файле конфигурации Milvus</a>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>По умолчанию <code translate="no">initMemSize</code> обычно занимает половину памяти GPU при запуске Milvus, а <code translate="no">maxMemSize</code> по умолчанию занимает всю память GPU. Размер пула памяти GPU изначально установлен на <code translate="no">initMemSize</code> и будет автоматически расширяться до <code translate="no">maxMemSize</code> по мере необходимости.</p>
+<p>Если указан индекс с поддержкой GPU, Milvus загружает данные целевой коллекции в память GPU перед поиском, поэтому <code translate="no">maxMemSize</code> должен быть не меньше размера данных.</p>
+<h2 id="Limits" class="common-anchor-header">Ограничения<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

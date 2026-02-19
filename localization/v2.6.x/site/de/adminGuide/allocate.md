@@ -62,18 +62,48 @@ Die Verwendung von Helm zur Aktualisierung von Ressourcen führt dazu, dass die 
 <li><a href="/docs/de/allocate.md#Allocate-resources-with-commands">Verwenden Sie die Befehle</a></li>
 <li><a href="/docs/de/allocate.md#Allocate-resources-by-setting-configuration-file">Setzen Sie die Parameter in der Datei <code translate="no">YAML</code> </a></li>
 </ul>
-<h3 id="Allocate-resources-with-commands" class="common-anchor-header">Zuweisung von Ressourcen mit Befehlen</h3><p>Sie müssen die Ressourcenvariablen für jede Milvus-Komponente festlegen, wenn Sie <code translate="no">--set</code> zur Aktualisierung der Ressourcenkonfigurationen verwenden.</p>
+<h3 id="Allocate-resources-with-commands" class="common-anchor-header">Zuweisung von Ressourcen mit Befehlen<button data-href="#Allocate-resources-with-commands" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie müssen die Ressourcenvariablen für jede Milvus-Komponente festlegen, wenn Sie <code translate="no">--set</code> zur Aktualisierung der Ressourcenkonfigurationen verwenden.</p>
 <div class="filter">
 <a href="#standalone">Eigenständiger Milvus</a> <a href="#cluster">Milvus-Cluster</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">Ressourcenzuteilung durch Setzen der Konfigurationsdatei</h3><p>Sie können CPU- und Speicherressourcen auch zuweisen, indem Sie die Parameter <code translate="no">resources.requests</code> und <code translate="no">resources.limits</code> in der Datei <code translate="no">resources.yaml</code> angeben.</p>
+<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">Ressourcenzuteilung durch Setzen der Konfigurationsdatei<button data-href="#Allocate-resources-by-setting-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Sie können CPU- und Speicherressourcen auch zuweisen, indem Sie die Parameter <code translate="no">resources.requests</code> und <code translate="no">resources.limits</code> in der Datei <code translate="no">resources.yaml</code> angeben.</p>
 <pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
   <span class="hljs-attr">resources:</span>
     <span class="hljs-attr">limits:</span>

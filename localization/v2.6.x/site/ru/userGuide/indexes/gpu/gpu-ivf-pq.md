@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Чтобы построить индекс <code translate="no">GPU_IVF_PQ</code> для векторного поля в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры для индекса.</p>
+    </button></h2><p>Чтобы построить индекс <code translate="no">GPU_IVF_PQ</code> по векторному полю в Milvus, используйте метод <code translate="no">add_index()</code>, указав <code translate="no">index_type</code>, <code translate="no">metric_type</code> и дополнительные параметры для индекса.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Prepare index building params</span>
@@ -122,7 +122,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>В этом разделе представлен обзор параметров, используемых для построения индекса и выполнения поиска по нему.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/gpu-ivf-pq.md#Build-index">построении индекса</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Параметры построения индекса<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">params</code> при <a href="/docs/ru/gpu-ivf-pq.md#Build-index">построении индекса</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -150,8 +165,8 @@ res = MilvusClient.search(
    </tr>
    <tr>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Количество битов, используемых для представления индекса центроида каждого субвектора в сжатом виде. Оно напрямую определяет размер каждой кодовой книги. Каждая кодовая книга будет содержать $2^{\textit{nbits}}$ центроидов. Например, если <code translate="no">nbits</code> имеет значение 8, то каждый субвектор будет представлен 8-битным индексом центроида. Это позволяет иметь $2^8$ (256) возможных центроидов в кодовой книге для данного субвектора.</p></td>
-     <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, 64]</p>
+     <td><p>Количество битов, используемых для представления индекса центроида каждого субвектора в сжатом виде. Оно напрямую определяет размер каждой кодовой книги. Каждая кодовая книга будет содержать <sup>2nbits</sup> центроидов. Например, если значение <code translate="no">nbits</code> равно 8, то каждый субвектор будет представлен 8-битным индексом центроида. Это позволяет использовать<sup>28</sup> (256) возможных центроидов в кодовой книге для данного субвектора.</p></td>
+     <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, 24]</p>
 <p><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
      <td><p>Большее значение <code translate="no">nbits</code> позволяет использовать большие кодовые книги, что потенциально приводит к более точному представлению исходных векторов. Однако это также означает использование большего количества битов для хранения каждого индекса, что приводит к меньшему сжатию. В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, 16].</p></td>
    </tr>
@@ -165,10 +180,25 @@ res = MilvusClient.search(
 </ul></td>
      <td><p><strong>Тип</strong>: Строка <strong>Диапазон</strong>: [<code translate="no">"true"</code>, <code translate="no">"false"</code>].</p>
 <p><strong>Значение по умолчанию</strong>: <code translate="no">"false"</code></p></td>
-     <td><p>Установка значения <code translate="no">"true"</code> улучшает отзыв за счет уточнения результатов поиска, но использует больше памяти GPU. Установка значения <code translate="no">"false"</code> экономит память GPU.</p></td>
+     <td><p>Установка значения <code translate="no">"true"</code> улучшает запоминание за счет уточнения результатов поиска, но использует больше памяти GPU. Установка значения <code translate="no">"false"</code> экономит память GPU.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса</h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/gpu-ivf-pq.md#Search-on-index">поиске по индексу</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Параметры поиска, специфичные для индекса<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующей таблице перечислены параметры, которые могут быть настроены в <code translate="no">search_params.params</code> при <a href="/docs/ru/gpu-ivf-pq.md#Search-on-index">поиске по индексу</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -183,7 +213,7 @@ res = MilvusClient.search(
      <td><p>Количество кластеров для поиска кандидатов.</p></td>
      <td><p><strong>Тип</strong>: Целое число <strong>Диапазон</strong>: [1, <em>nlist</em>].</p>
 <p><strong>Значение по умолчанию</strong>: <code translate="no">8</code></p></td>
-     <td><p>Более высокие значения позволяют искать больше кластеров, что улучшает запоминание за счет расширения области поиска, но ценой увеличения задержки запроса. Установите значение <code translate="no">nprobe</code> пропорционально <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность.</p>
+     <td><p>Более высокие значения позволяют искать больше кластеров, что улучшает запоминание за счет расширения области поиска, но ценой увеличения задержки запроса. Установите <code translate="no">nprobe</code> пропорционально <code translate="no">nlist</code>, чтобы сбалансировать скорость и точность.</p>
 <p>В большинстве случаев мы рекомендуем устанавливать значение в этом диапазоне: [1, nlist].</p></td>
    </tr>
 </table>

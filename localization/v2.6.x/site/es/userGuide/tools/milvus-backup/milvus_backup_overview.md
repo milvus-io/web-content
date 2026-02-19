@@ -81,13 +81,14 @@ title: Copia de seguridad de Milvus
     </button></h2><p>La siguiente tabla enumera las compatibilidades de copia de seguridad y restauración entre diferentes versiones de Milvus desde Milvus Backup v0.5.7.</p>
 <table>
 <thead>
-<tr><th>Copia de seguridad ↓ / Restauración → Copia de seguridad.</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th></tr>
+<tr><th>Copia de seguridad de ↓ / Restaurar a →.</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
 </thead>
 <tbody>
-<tr><td>Milvus v2.2.x</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
-<tr><td>Milvus v2.3.x</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
-<tr><td>Milvus v2.4.x</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
-<tr><td>Milvus v2.5.x</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
+<tr><td>Milvus v2.2.x</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+<tr><td>Milvus v2.3.x</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+<tr><td>Milvus v2.4.x</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td><td>Sí</td></tr>
+<tr><td>Milvus v2.5.x</td><td>No</td><td>No</td><td>No</td><td>Sí</td><td>Sí</td></tr>
+<tr><td>Milvus v2.6.x</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sí</td></tr>
 </tbody>
 </table>
 <h2 id="Latest-release" class="common-anchor-header">Última versión<button data-href="#Latest-release" class="anchor-icon" translate="no">
@@ -106,5 +107,5 @@ title: Copia de seguridad de Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10">v0.5.10</a></li>
 </ul>

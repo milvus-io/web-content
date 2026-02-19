@@ -7,11 +7,22 @@ const fetch = require('node-fetch')
 const node_path = require('node:path')
 const cheerio = require('cheerio')
 const showdown = require('showdown')
-const Jimp = require("jimp");
 const _ = require('lodash')
+// MDX compilation will be loaded dynamically as it's an ES module
+
+const IMAGE_BED_URL = process.env.IMAGE_BED_URL || 'https://zdoc-images.s3.us-west-2.amazonaws.com'
 
 class larkDocWriter {
-    constructor(root_token, base_token, displayedSidebar, docSourceDir='plugins/lark-docs/meta/sources', imageDir='static/img', targets='zilliz.saas', skip_image_download=false) {
+    constructor(
+        root_token, 
+        base_token, 
+        displayedSidebar, 
+        docSourceDir='plugins/lark-docs/meta/sources', 
+        imageDir='static/img', 
+        targets='zilliz.saas', 
+        skip_image_download=false,
+        upload_to_s3=false
+    ) {
         this.root_token = root_token
         this.base_token = base_token
         this.displayedSidebar = displayedSidebar
@@ -26,6 +37,7 @@ class larkDocWriter {
         this.code_langs = this.__code_langs()
         this.tokenFetcher = new larkTokenFetcher()
         this.downloader = new Downloader({}, imageDir)
+        this.upload_to_s3 = upload_to_s3
     }
 
     __fetch_doc_source (type, value, slug="") {
@@ -75,6 +87,9 @@ class larkDocWriter {
                         const slug = child.slug
                         const beta = meta['beta']
                         const notebook = meta['notebook']
+                        const addedSince = meta['addSince']
+                        const lastModified = meta['lastModified']
+                        const deprecateSince = meta['deprecateSince']
                         const labels = meta['labels']
                         const keywords = meta['keywords']
                         console.log(`${current_path}/${slug}/${slug}.md`)
@@ -89,6 +104,9 @@ class larkDocWriter {
                             page_slug: slug,
                             page_beta: beta,
                             notebook: notebook,
+                            addedSince: addedSince,
+                            lastModified: lastModified,
+                            deprecateSince: deprecateSince,
                             page_type: type,
                             page_token: child.node_token,
                             sidebar_position: index+1,
@@ -118,6 +136,9 @@ class larkDocWriter {
                                 const slug = child.slug
                                 const beta = meta['beta']
                                 const notebook = meta['notebook']
+                                const addedSince = meta['addSince']
+                                const lastModified = meta['lastModified']
+                                const deprecateSince = meta['deprecateSince']
                                 const labels = meta['labels']
                                 const keywords = meta['keywords']
                                 console.log(`${current_path}/${slug}.md`)
@@ -127,6 +148,9 @@ class larkDocWriter {
                                     page_slug: child.slug,
                                     page_beta: beta,
                                     notebook: notebook,
+                                    addedSince: addedSince,
+                                    lastModified: lastModified,
+                                    deprecateSince: deprecateSince,
                                     page_type: type,
                                     page_token: token,
                                     sidebar_position: index+1,
@@ -148,6 +172,9 @@ class larkDocWriter {
         page_slug,
         page_beta,
         notebook,
+        addedSince,
+        lastModified,
+        deprecateSince,
         page_type,
         page_token,
         sidebar_position,
@@ -185,6 +212,9 @@ class larkDocWriter {
                 slug: page_slug,
                 beta: page_beta,
                 notebook: notebook,
+                addedSince: addedSince,
+                lastModified: lastModified,
+                deprecateSince: deprecateSince,
                 path: path, 
                 type: page_type,
                 token: page_token,
@@ -453,14 +483,14 @@ class larkDocWriter {
         return description
     }
 
-    async __write_page({title, suffix, slug, beta, notebook, path, type, token, sidebar_position, sidebar_label, keywords, doc_card_list}) {
+    async __write_page({title, suffix, slug, beta, notebook, addedSince, lastModified, deprecateSince, path, type, token, sidebar_position, sidebar_label, keywords, doc_card_list}) {
         let markdown = await this.__markdown()
         markdown = this.__filter_content(markdown, this.targets)
         markdown = markdown.replace(/(\s*\n){3,}/g, '\n\n').replace(/(<br\/>){2,}/, "<br/>").replace(/<br>/g, '<br/>');
         markdown = markdown.replace(/^[\||\s][\s|\||<br\/>]*\|\n/gm, '')
         markdown = markdown.replace(/\s*<tr>\n(\s*<td>(<br\/>)*<\/td>\n)*\s*<\/tr>/g, '')
         markdown = this.__example_http_urls(markdown)
-        markdown = this.__mdx_patches(markdown)
+        markdown = await this.__mdx_patches(markdown)  
 
         const description = this.__extract_description(markdown)
 
@@ -519,6 +549,12 @@ class larkDocWriter {
         }
 
         if (path) {
+            front_matter = front_matter.split('\n')
+            front_matter.splice(5, 0, `added_since: ${addedSince ? addedSince : 'FALSE'}`)
+            front_matter.splice(6, 0, `last_modified: ${lastModified ? lastModified : 'FALSE'}`)
+            front_matter.splice(7, 0, `deprecate_since: ${deprecateSince ? deprecateSince : 'FALSE'}`)
+            front_matter = front_matter.join('\n')
+
             fs.writeFileSync(file_path, front_matter + '\n\n' + imports + '\n\n' + markdown)
         } else {
             return {
@@ -716,155 +752,129 @@ class larkDocWriter {
         return result;
     }
 
-    __mdx_patches(content) {
-        const ranges = [];
-        let match;
-    
-        // Get ranges for code blocks
-        const code_marks = [...content.matchAll(/`+/g)];
-        if (code_marks.length % 2 === 0) {
-            for (let i = 0; i < code_marks.length; i += 2) {
-                ranges.push({ start: code_marks[i].index, end: code_marks[i+1].index + code_marks[i+1][0].length });
-            }
-        } else {
-            return content;
-        }
+    async __mdx_patches(content) {
+        try {
+            // Import MDX compiler dynamically as it's an ES module
+            const { compile } = await import('@mdx-js/mdx');
 
-        const KNOWN_HTML_TAGS = new Set(['p', 'strong', 'ul', 'li', 'table', 'tr', 'td', 'th', 'a', 'div', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'em', 'i', 'b', 'br', 'hr', 'code']);
+            let patchedContent = content;
+            let maxIterations = 50; // Prevent infinite loops
+            let iteration = 0;
 
-        // Find all tag-like elements and pair them, escape unpaired ones
-        // Modified regex to also match self-closing tags
-        const tag_like_regex = /<\/?([a-zA-Z0-9\-:]+)(?:\s+[^>]*)?\s*\/?>/g;
-        let tag_matches = [];
-        let tag_stack = [];
-        let unpaired_tags = new Set();
+            while (iteration < maxIterations) {
+                try {
+                    // Try to compile the current content
+                    await compile(patchedContent, { development: false });
+                    console.log(`MDX compilation succeeded after ${iteration} fixes`);
+                    return patchedContent; // If compilation succeeds, return the fixed content
+                } catch (error) {
+                    console.log(`MDX compilation error detected (iteration ${iteration + 1}): ${error.message}`);
+                    // console.log(error)
 
-        while ((match = tag_like_regex.exec(content)) !== null) {
-            // Check if self-closing tag
-            const isSelfClosing = match[0].endsWith('/>');
-            tag_matches.push({ index: match.index, tag: match[1], isClosing: match[0][1] === '/', isSelfClosing, length: match[0].length });
-        }
+                    // Identify problematic characters based on the error
+                    let madeChanges = false;
+                    let line, column, offset;
+                    switch (error.ruleId) {
+                        case 'acorn':
+                            line = error.place.line;
+                            column = error.place.column;
+                            offset = error.place.offset;
+                            // console.log(patchedContent.split('\n')[line-1]);
 
-        // Pair tags using a stack
-        for (let i = 0; i < tag_matches.length; i++) {
-            const { tag, isClosing, isSelfClosing, index } = tag_matches[i];
-            if (isSelfClosing) {
-                // Self-closing tags are always paired
-                continue;
-            }
-            if (!isClosing) {
-                tag_stack.push({ tag, index, i });
-            } else {
-                // Find last matching opening tag
-                let found = false;
-                for (let j = tag_stack.length - 1; j >= 0; j--) {
-                    if (tag_stack[j].tag === tag) {
-                        tag_stack.splice(j, 1);
-                        found = true;
+                            if (offset !== undefined && offset > 0 && offset < patchedContent.length) {
+                                for (let i = offset - 1; i >= 0; i--) {
+                                    if (patchedContent[i] === '{') {
+                                        patchedContent = patchedContent.slice(0, i) + '\\' + patchedContent.slice(i);
+                                        madeChanges = true;
+
+                                        break;
+                                    }
+                                }
+                            }
+                            break;
+                        case 'end-tag-mismatch':
+                            let tag = error.message.match(/<(?!\/)([A-Za-z][A-Za-z0-9:_-]*)\b[^>]*>/g)?.[0];
+                            let pos = error.message.match(/(\d+):(\d+)-(\d+):(\d+)/);
+                            if (tag && pos) {
+                                const start = { line: parseInt(pos[1]), column: parseInt(pos[2]) }
+
+                                patchedContent = patchedContent.split('\n').map((line, index) => {
+                                    if (index === start.line - 1) {
+                                        line = line.slice(0, start.column - 1) + '\\' + line.slice(start.column - 1)
+                                        madeChanges = true;
+                                    }
+
+                                    return line
+                                }).join('\n')
+                            }
+                            
+                            break;
+                        case 'unexpected-closing-slash':
+                            // For this specific error "Unexpected closing slash `/` in tag, expected an open tag first"
+                            // it typically means there's a stray `</content>` tag or similar erroneous closing tag
+                            // Remove erroneous closing tags at the end of document
+                            const originalContent = patchedContent;
+                            patchedContent = patchedContent.replace(/<\/(?:content|[\w\d]+)>\s*$/, '');
+                            if (originalContent !== patchedContent) {
+                                madeChanges = true;
+                            } else {
+                                // If no match at end, look for the erroneous tag anywhere in the content
+                                // that might be causing the slash error
+                                patchedContent = patchedContent.replace(/<[/](\w+)>/g, (match, tagName) => {
+                                    // If this tag doesn't have a matching opening tag, remove it
+                                    const openingTagCount = (patchedContent.match(new RegExp(`<${tagName}(?:\\s|>|/>)`, 'g')) || []).length;
+                                    const closingTagCount = (patchedContent.match(new RegExp(`<\\/${tagName}>`, 'g')) || []).length;
+                                    
+                                    // If there are more closing tags than opening tags, this closing tag is erroneous
+                                    if (closingTagCount > openingTagCount) {
+                                        return ''; // Remove the erroneous closing tag
+                                    }
+                                    return match;
+                                });
+                                
+                                if (originalContent !== patchedContent) {
+                                    madeChanges = true;
+                                }
+                            }
+                            break;
+                        case 'unexpected-character':
+                            if (error.message.includes('U+002C') || error.message.includes('U+002A')) {
+                                offset = error.place.offset;
+                                if (offset !== undefined && offset > 0 && offset < patchedContent.length) {
+                                    for (let i = offset-1; i >= 0; i--) {
+                                        if (patchedContent[i] === '<') {
+                                            patchedContent = patchedContent.slice(0, i) + '\\' + patchedContent.slice(i);
+                                            madeChanges = true;
+
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        default: 
+                            madeChanges = false;
+                            break;
+                    }
+
+                    if (!madeChanges) {
+                        console.warn('No changes made to content, breaking loop to prevent infinite iteration');
                         break;
                     }
                 }
-                if (!found) {
-                    unpaired_tags.add(i); // closing tag without opening
-                }
+
+                iteration++;
             }
-        }
 
-        // Any tags left in stack are unpaired opening tags
-        tag_stack.forEach(openTag => unpaired_tags.add(openTag.i));
-
-        // Get ranges for valid html/mdx tags (paired or self-closing only)
-        for (let i = 0; i < tag_matches.length; i++) {
-            const { tag, index, length, isSelfClosing } = tag_matches[i];
-            if (
-                (isSelfClosing ||
-                !unpaired_tags.has(i)) &&
-                (KNOWN_HTML_TAGS.has(tag.toLowerCase()) ||
-                (tag.match(/^[A-Z]/) && /[a-z]/.test(tag)) ||
-                tag.includes('-'))
-            ) {
-                ranges.push({ start: index, end: index + length });
+            if (iteration >= maxIterations) {
+                console.warn(`Maximum MDX patch iterations (${maxIterations}) reached, returning last attempt`);
             }
+
+            return patchedContent;
+        } catch (error) {
+            console.error('Failed to import MDX compiler:', error.message);
+            return content; // Return original content if compiler import fails
         }
-
-        // Get ranges for MDX expressions
-        const mdx_expr_regex = /\{[^}]+\}/g;
-        while (match = mdx_expr_regex.exec(content)) {
-            ranges.push({ start: match.index, end: match.index + match[0].length });
-        }
-
-        // Get ranges for markdown links and images
-        const markdown_link_image_regex = /!?\[[^\]]*\]\([^)]+\)/g;
-        while (match = markdown_link_image_regex.exec(content)) {
-            ranges.push({ start: match.index, end: match.index + match[0].length });
-        }
-
-        // Escape curly braces inside <code>...</code> tags
-        // Find all <code>...</code> blocks and escape { and } inside them
-        const code_tag_regex = /<code>([\s\S]*?)<\/code>/g;
-        let code_tag_matches = [];
-        while ((match = code_tag_regex.exec(content)) !== null) {
-            code_tag_matches.push({ start: match.index, end: match.index + match[0].length });
-        }
-        // Add code tag ranges to ranges so they are not double-escaped
-        code_tag_matches.forEach(r => ranges.push(r));
-
-        // Now, build the result string
-        let result = "";
-        for (let i = 0; i < content.length; i++) {
-            // Check if inside a <code>...</code> block
-            const in_code_tag = code_tag_matches.some(r => i >= r.start && i < r.end);
-            const in_range = ranges.some(r => i >= r.start && i < r.end);
-
-            if (in_code_tag) {
-                // Escape curly braces and sqaure brackets only inside <code>...</code>
-                switch (content[i]) {
-                    case '{':
-                        result += '&#123;';
-                        break;
-                    case '}':
-                        result += '&#125;';
-                        break;
-                    case '[':
-                        result += '&#91;';
-                        break;
-                    case ']':
-                        result += '&#93;';
-                        break;
-                    default:
-                        result += content[i];
-                        break;
-                }
-            } else if (in_range) {
-                result += content[i];
-            } else {
-                switch (content[i]) {
-                    case '<':
-                        result += '&lt;';
-                        break;
-                    case '>':
-                        result += '&gt;';
-                        break;
-                    case '{':
-                        result += '&#123;';
-                        break;
-                    case '}':
-                        result += '&#125;';
-                        break;
-                    case ']':
-                        result += '&#93;';
-                        break;
-                    case '[':
-                        result += '&#91;';
-                        break;
-                    default:
-                        result += content[i];
-                        break;
-                }
-            }
-        }
-
-        return result;
     }
 
     async __page(page) {
@@ -974,6 +984,8 @@ class larkDocWriter {
             return content
         }))).join('') 
 
+        if (lang === 'C++') return; // to be removed once c++ is supported
+
         if (valid_langs.includes(lang)) {
             const prev_type = prev ? this.block_types[prev['block_type']-1] : null;
             const next_type = next ? this.block_types[next['block_type']-1] : null;
@@ -986,7 +998,9 @@ class larkDocWriter {
                 (next && next_type === 'code' && valid_langs.includes(next_lang) && next_lang !== lang)
             ) {
                 console.log('first block')
-                const values = this.__code_tabs(code, prev, next, blocks);
+                const values = this.__code_tabs(code, prev, next, blocks)
+                    .filter(tab => tab.value !== 'c++'); // to be removed once c++ is supported
+
                 return this.__code_block_split(elements, indent, lang, 'first', values);
             }
             
@@ -1147,15 +1161,22 @@ class larkDocWriter {
     }  
     
     async __image(image) {
-        const root = this.imageDir.replace(/^static\//g, '')
+        const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${this.imageDir.replace(/^static\//g, '')}`
+        const caption = image.caption?.content ? image.caption.content.trim() : image.token;
+        const slug = slugify(caption, {lower: true, strict: true})
 
         if (this.skip_image_download) {
-            return `![${image.token}](/${root}/${image["token"]}.png)`;
+            return `![${caption}](${root}/${slug}.png "${caption}")`;
         }
 
         try {
             const result = await this.downloader.__downloadImage(image.token)
-            result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${image["token"]}.png`));
+            const buffer = await result.buffer();
+            if (this.upload_to_s3) {
+                await this.downloader.__uploadToS3(buffer, `${slug}.png`);
+            } else {
+                result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${slug}.png`));
+            }
         } catch (error) {
             console.log(error)
             console.log("-------------- A retry is needed -----------------");
@@ -1164,87 +1185,69 @@ class larkDocWriter {
             this.__image(image)
         }
 
-        return `![${image.token}](/${root}/${image["token"]}.png)`;
+        return `![${caption}](${root}/${slug}.png "${caption}")`;
     }
 
     async __board(board, indent) {
-        const root = this.imageDir.replace(/^static\//g, '')
+        const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${ this.imageDir.replace(/^static\//g, '')}`
 
         if (this.skip_image_download) {
-            return `![${board.token}](/${root}/${board["token"]}.png)`;
+            return `![${board.token}](${root}/${board["token"]}.png)`;
         }
 
         const result = await this.downloader.__downloadBoardPreview(board.token)
-        const writeStream = fs.createWriteStream(`${this.downloader.target_path}/${board["token"]}.png`);
-        result.body.pipe(writeStream);
-
-        writeStream.on('finish', async () => {
-            try {
-                const image = await Jimp.read(`${this.downloader.target_path}/${board["token"]}.png`);
-                this.__crop_image_border(image)
-                image.write(`${this.downloader.target_path}/${board["token"]}.png`);
-            } catch (error) {
-                console.log(error)
-                console.log("-------------- A retry is needed -----------------");
-                console.log("Sleeping for 5 seconds")
-                await new Promise(resolve => setTimeout(resolve, 5000));
-                this.__board(board, indent)                             
+        var buffers = [];
+        result.body.on('data', (chunk) => {
+            buffers.push(chunk);
+        });
+        result.body.on('end', async () => {
+            const buffer = Buffer.concat(buffers);
+            const trimmedBuffer = await this.__trim_white_borders(buffer);
+            if (this.upload_to_s3) {
+                await this.downloader.__uploadToS3(trimmedBuffer, `${board["token"]}.png`);
+            } else {
+                fs.writeFileSync(`${this.downloader.target_path}/${board["token"]}.png`, trimmedBuffer);
             }
-        });                
+        });           
 
-        return `![${board.token}](/${root}/${board["token"]}.png)`;
+        return `![${board.token}](${root}/${board["token"]}.png)`;
     }
 
-    __crop_image_border(image) {
-        const width = image.bitmap.width;
-        const height = image.bitmap.height;
+    async __trim_white_borders(image) {
+        const sharp = require('sharp');
 
-        const full_white_cols = [];
+        try {
+            // Let Sharp auto-detect background from top-left pixel (likely white)
+            const trimmedImage = await sharp(image)
+                .trim({
+                  background: { r: 255, g: 255, b: 255 },
+                  threshold: 10                    
+                }).png()
 
-        for (let i = 0; i < width; i++) {
-            const col = []
-            for (let j = 0; j < height; j++) {
-                const pixel = image.getPixelColor(i, j);
-                col.push(pixel)
-            }
+            // Add a 10-pixel white border around the trimmed image
+            const borderedImage = trimmedImage.extend({
+                top: 20,
+                bottom: 20,
+                left: 20,
+                right: 20,
+                background: { r: 255, g: 255, b: 255 }
+            });
 
-            if ([... new Set(col)].length === 1 && col[0] === 4294967295) {
-                full_white_cols.push(i)
-            }
-        }
+            const buffer = await borderedImage.toBuffer();
+            return buffer;
 
-        const full_white_rows = [];
-
-        for (let j = 0; j < height; j++) {
-            const row = []
-            for (let i = 0; i < width; i++) {
-                const pixel = image.getPixelColor(i, j);
-                row.push(pixel)
-            }
-
-            if ([... new Set(row)].length === 1 && row[0] === 4294967295) {
-                full_white_rows.push(j)
-            }
-        }
-
-        
-        const reverse = full_white_rows.reverse()
-
-        for (let i=0; i<height; i++) {
-            if (reverse[i] !== height - 1 - i) {
-                image.crop(0, 0, width, reverse[i-1])
-                break;
-            }
+        } catch (error) {
+            throw new Error(`Failed to trim image borders: ${error.message}`);
         }
     }
 
     async __iframe(block) {
-        const root = this.imageDir.replace(/^static\//g, '');
+        const root = this.upload_to_s3 ? IMAGE_BED_URL : `/${ this.imageDir.replace(/^static\//g, '')}`
         const block_id = block['block_id'];
         const iframe = block['iframe'];
         const existing_iframe = this.iframes.find(x => x.block_id === block_id)
         if (existing_iframe) {
-            return `![${existing_iframe.caption}](/${root}/${existing_iframe.caption}.png)`;
+            return `![${existing_iframe.caption}](${root}/${existing_iframe.caption}.png "${existing_iframe.caption}")`;
         }
 
         if (iframe['component']['iframe_type'] !== 8) {
@@ -1258,24 +1261,27 @@ class larkDocWriter {
                 block_id,
                 caption
             })
-            return `![${caption}](/${root}/${caption}.png)`;
+            return `![${caption}](${root}/${caption}.png "${existing_iframe.caption}")`;
         } else {
             try {
                 const url = new URL(decodeURIComponent(iframe.component.url))
                 const key = url.pathname.split('/')[2]
                 const node = url.searchParams.get('node-id').split('-').join(":") 
                 const caption = (await this.downloader.__fetchCaption(key, node)).nodes[node].document.name;
-
-                if (!fs.existsSync(`${this.downloader.target_path}/${caption}.png`)) {
-                    const result = await this.downloader.__downloadIframe(key, node);
+                const result = await this.downloader.__downloadIframe(key, node);
+                const buffer = await result.buffer();
+                if (this.upload_to_s3) {
+                    await this.downloader.__uploadToS3(buffer, `${caption}.png`);
+                } else if (!fs.existsSync(`${this.downloader.target_path}/${caption}.png`)) {
                     result.body.pipe(fs.createWriteStream(`${this.downloader.target_path}/${caption}.png`));
+
                     this.iframes.push({
                         block_id,
                         caption
                     })
                 }
 
-                return `![${caption}](/${root}/${caption}.png)`;
+                return `![${caption}](${root}/${caption}.png "${caption}")`;
             } catch (error) {
                 console.log(error)
                 console.log("-------------- A retry is needed -----------------");
@@ -1328,7 +1334,11 @@ class larkDocWriter {
                         .replace(/^\n/, '')
                         .replace(/<br\/>/g, '\n\n');
 
-                    cell_text = converter.makeHtml(cell_text).replace(/\n/g, '');
+                    cell_text = converter.makeHtml(cell_text)
+                        .replace(/\n/g, '')
+                        .replace(/&amp;/g, '&')
+                        .replace(/\*/g, '&ast;');
+
                     if (i === 0) {
                         html += ` ${' '.repeat(indent)}    <th${colspan}${rowspan}>${cell_text}</th>\n`;
                     } else {
@@ -1479,14 +1489,15 @@ class larkDocWriter {
         let style = element['text_run']['text_element_style'];
 
         if (!content.match(/^\s+$/) && !asis) {
-            element['text_run']['content'] = element['text_run']['content'].replace(/\$/g, '&#36;')
-            content = element['text_run']['content'] // escape $ for markdown
-
+            element['text_run']['content'] = content.replace(/\$/g, '&#36;') // escape $ for markdown
+                                                .replace(/\*/g, '&ast;') // escape * for markdown
+            
             if (style['inline_code']) {
                 content = this.__style_markdown(element, elements, 'inline_code', '`');
-                content = content.replaceAll('&#36;', '#')
+                content = content.replaceAll('&#36;', '$')
+                content = content.replaceAll('&ast;', '*')
             }
-                           
+                         
             if (style['bold']) {
                 content = this.__style_markdown(element, elements, 'bold', '**');
             }

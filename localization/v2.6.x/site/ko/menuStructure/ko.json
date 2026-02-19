@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "기본 키 검색",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "하이브리드 검색",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "쿼리",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "필터링",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "필터링 설명",
@@ -1007,37 +1013,49 @@
           {
             "label": "전체 텍스트 검색",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "텍스트 일치",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "텍스트 형광펜",
+            "id": "text-highlighter.md",
+            "order": 10,
             "children": []
           },
           {
             "label": "구문 검색",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "임베딩 목록으로 검색",
+            "id": "search-with-embedding-lists.md",
+            "order": 12,
             "children": []
           },
           {
             "label": "Milvus에 대한 Elasticsearch 쿼리",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "검색 이터레이터",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 14,
             "children": []
           },
           {
             "label": "파티션 키 사용",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 15,
             "children": []
           }
         ]
@@ -1781,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "MQ 유형 전환",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "밀버스 클러스터 스위치 MQ 타입",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "밀버스 독립형 스위치 MQ 타입",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -2707,9 +2744,10 @@
         "children": []
       },
       {
-        "label": "다중 모달 검색에 ColPali 사용",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "밀버스와 함께 콜버트 및 콜팔리 사용",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

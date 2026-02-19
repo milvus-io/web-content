@@ -63,7 +63,7 @@ title: Run Milvus in Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>What’s new in v2.6.7:</strong></p>
+<p><strong>What’s new in v2.6.11:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Enhanced data processing capabilities</li>
 <li><strong>Woodpecker MQ</strong>: Improved message queue with reduced maintenance overhead, see <a href="/docs/use-woodpecker.md">Use Woodpecker</a> for detail</li>

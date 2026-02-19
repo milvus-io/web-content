@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "Búsqueda por clave principal",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Búsqueda híbrida",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Consulta",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Filtrado",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "Explicación del filtrado",
@@ -1007,37 +1013,49 @@
           {
             "label": "Búsqueda de texto completo",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Coincidencia de texto",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Resaltador de texto",
+            "id": "text-highlighter.md",
+            "order": 10,
             "children": []
           },
           {
             "label": "Coincidencia de frases",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Búsqueda con listas incrustadas",
+            "id": "search-with-embedding-lists.md",
+            "order": 12,
             "children": []
           },
           {
             "label": "Consultas de Elasticsearch a Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "Iteradores de búsqueda",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 14,
             "children": []
           },
           {
             "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 15,
             "children": []
           }
         ]
@@ -1678,7 +1696,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1781,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "Conmutador Tipo MQ",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Conmutador Milvus Cluster Tipo MQ",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus Conmutador independiente Tipo MQ",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -2707,9 +2744,10 @@
         "children": []
       },
       {
-        "label": "Utilice ColPali para la recuperación multimodal",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "Utilizar ColBERT y ColPali con Milvus",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

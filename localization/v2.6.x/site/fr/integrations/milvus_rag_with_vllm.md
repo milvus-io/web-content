@@ -41,8 +41,38 @@ title: 'Construire RAG avec Milvus, vLLM, et Llama 3.1'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-vector-database" class="common-anchor-header">Base de données vectorielles Milvus</h3><p><a href="https://zilliz.com/what-is-milvus"><strong>Milvus</strong></a> est une base de données vectorielles distribuée à code source ouvert, <a href="https://zilliz.com/blog/what-is-a-real-vector-database">conçue spécialement pour</a> le stockage, l'indexation et la recherche de vecteurs pour les charges de travail de l <a href="https://zilliz.com/learn/generative-ai">'IA générative</a> (GenAI). Sa capacité à effectuer une <a href="https://zilliz.com/blog/a-review-of-hybrid-search-in-milvus">recherche hybride, un</a> <a href="https://zilliz.com/blog/what-is-new-with-metadata-filtering-in-milvus">filtrage des métadonnées</a>, un reclassement et à gérer efficacement des trillions de vecteurs fait de Milvus un choix de premier ordre pour les charges de travail d'IA et d'apprentissage automatique. <a href="https://github.com/milvus-io/">Milvus</a> peut être exécuté localement, sur un cluster ou hébergé dans le <a href="https://zilliz.com/cloud">Zilliz Cloud</a> entièrement géré.</p>
-<h3 id="vLLM" class="common-anchor-header">vLLM</h3><p><a href="https://vllm.readthedocs.io/en/latest/index.html"><strong>vLLM</strong></a> est un projet open-source lancé au SkyLab de l'Université de Berkeley et axé sur l'optimisation des performances de service LLM. Il utilise une gestion efficace de la mémoire avec PagedAttention, une mise en lot continue et des noyaux CUDA optimisés. Par rapport aux méthodes traditionnelles, vLLM améliore les performances de service jusqu'à 24 fois tout en réduisant de moitié l'utilisation de la mémoire du GPU.</p>
+    </button></h2><h3 id="Milvus-vector-database" class="common-anchor-header">Base de données vectorielles Milvus<button data-href="#Milvus-vector-database" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://zilliz.com/what-is-milvus"><strong>Milvus</strong></a> est une base de données vectorielles distribuée à code source ouvert, <a href="https://zilliz.com/blog/what-is-a-real-vector-database">conçue spécialement pour</a> le stockage, l'indexation et la recherche de vecteurs pour les charges de travail de l <a href="https://zilliz.com/learn/generative-ai">'IA générative</a> (GenAI). Sa capacité à effectuer une <a href="https://zilliz.com/blog/a-review-of-hybrid-search-in-milvus">recherche hybride, un</a> <a href="https://zilliz.com/blog/what-is-new-with-metadata-filtering-in-milvus">filtrage des métadonnées</a>, un reclassement et à gérer efficacement des trillions de vecteurs fait de Milvus un choix de premier ordre pour les charges de travail d'IA et d'apprentissage automatique. <a href="https://github.com/milvus-io/">Milvus</a> peut être exécuté localement, sur un cluster ou hébergé dans le <a href="https://zilliz.com/cloud">Zilliz Cloud</a> entièrement géré.</p>
+<h3 id="vLLM" class="common-anchor-header">vLLM<button data-href="#vLLM" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://vllm.readthedocs.io/en/latest/index.html"><strong>vLLM</strong></a> est un projet open-source lancé au SkyLab de l'Université de Berkeley et axé sur l'optimisation des performances de service LLM. Il utilise une gestion efficace de la mémoire avec PagedAttention, une mise en lot continue et des noyaux CUDA optimisés. Par rapport aux méthodes traditionnelles, vLLM améliore les performances de service jusqu'à 24 fois tout en réduisant de moitié l'utilisation de la mémoire du GPU.</p>
 <p>Selon l'article<a href="https://arxiv.org/abs/2309.06180">"Efficient Memory Management for Large Language Model Serving with PagedAttention</a>", le cache KV utilise environ 30 % de la mémoire du GPU, ce qui peut entraîner des problèmes de mémoire. Le cache KV est stocké dans une mémoire contiguë, mais une modification de sa taille peut entraîner une fragmentation de la mémoire, ce qui est inefficace pour les calculs.</p>
 <p>
   <span class="img-wrapper">
@@ -59,7 +89,22 @@ title: 'Construire RAG avec Milvus, vLLM, et Llama 3.1'
   </span>
 </p>
 <p><em>Image 2. Débit de service lorsque chaque requête demande trois sorties parallèles. vLLM atteint un débit 8,5x-15x plus élevé que HF et 3,3x-3,5x plus élevé que TGI (2023 <a href="https://blog.vllm.ai/2023/06/20/vllm.html">vLLM blog</a>).</em></p>
-<h3 id="Meta’s-Llama-31" class="common-anchor-header">Le lama de Meta 3.1</h3><p><a href="https://ai.meta.com/research/publications/the-llama-3-herd-of-models"><strong>Meta's Llama 3.1</strong></a> a été annoncé le 23 juillet 2024. Le modèle 405B offre des performances de pointe sur plusieurs benchmarks publics et dispose d'une fenêtre contextuelle de 128 000 jetons d'entrée avec diverses utilisations commerciales autorisées. Parallèlement au modèle à 405 milliards de paramètres, Meta a publié une version mise à jour du Llama3 70B (70 milliards de paramètres) et 8B (8 milliards de paramètres). Les poids des modèles peuvent être téléchargés <a href="https://info.deeplearning.ai/e3t/Ctc/LX+113/cJhC404/VWbMJv2vnLfjW3Rh6L96gqS5YW7MhRLh5j9tjNN8BHR5W3qgyTW6N1vHY6lZ3l8N8htfRfqP8DzW72mhHB6vwYd2W77hFt886l4_PV22X226RPmZbW67mSH08gVp9MW2jcZvf24w97BW207Jmf8gPH0yW20YPQv261xxjW8nc6VW3jj-nNW6XdRhg5HhZk_W1QS0yL9dJZb0W818zFK1w62kdW8y-_4m1gfjfNW2jswrd3xbv-yW5mrvdk3n-KqyW45sLMF21qDrwW5TR3vr2MYxZ9W2hWhq23q-nQdW4blHqh3JlZWfW937hlZ58-KJCW82Pgv9384MbYW7yp56M6pvzd6f77wnH004">sur le site web de Meta</a>.</p>
+<h3 id="Meta’s-Llama-31" class="common-anchor-header">Le lama de Meta 3.1<button data-href="#Meta’s-Llama-31" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://ai.meta.com/research/publications/the-llama-3-herd-of-models"><strong>Meta's Llama 3.1</strong></a> a été annoncé le 23 juillet 2024. Le modèle 405B offre des performances de pointe sur plusieurs benchmarks publics et dispose d'une fenêtre contextuelle de 128 000 jetons d'entrée avec diverses utilisations commerciales autorisées. Parallèlement au modèle à 405 milliards de paramètres, Meta a publié une version mise à jour du Llama3 70B (70 milliards de paramètres) et 8B (8 milliards de paramètres). Les poids des modèles peuvent être téléchargés <a href="https://info.deeplearning.ai/e3t/Ctc/LX+113/cJhC404/VWbMJv2vnLfjW3Rh6L96gqS5YW7MhRLh5j9tjNN8BHR5W3qgyTW6N1vHY6lZ3l8N8htfRfqP8DzW72mhHB6vwYd2W77hFt886l4_PV22X226RPmZbW67mSH08gVp9MW2jcZvf24w97BW207Jmf8gPH0yW20YPQv261xxjW8nc6VW3jj-nNW6XdRhg5HhZk_W1QS0yL9dJZb0W818zFK1w62kdW8y-_4m1gfjfNW2jswrd3xbv-yW5mrvdk3n-KqyW45sLMF21qDrwW5TR3vr2MYxZ9W2hWhq23q-nQdW4blHqh3JlZWfW937hlZ58-KJCW82Pgv9384MbYW7yp56M6pvzd6f77wnH004">sur le site web de Meta</a>.</p>
 <p>L'une des principales conclusions est qu'un réglage fin des données générées peut améliorer les performances, mais que des exemples de mauvaise qualité peuvent les dégrader. L'équipe Llama a beaucoup travaillé pour identifier et supprimer ces mauvais exemples en utilisant le modèle lui-même, des modèles auxiliaires et d'autres outils.</p>
 <h2 id="Build-and-Perform-the-RAG-Retrieval-with-Milvus" class="common-anchor-header">Construire et exécuter le RAG-Retrieval avec Milvus<button data-href="#Build-and-Perform-the-RAG-Retrieval-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,7 +121,22 @@ title: 'Construire RAG avec Milvus, vLLM, et Llama 3.1'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prepare-your-dataset" class="common-anchor-header">Préparez votre ensemble de données.</h3><p>Pour cette démonstration, j'ai utilisé la <a href="https://milvus.io/docs/">documentation</a> officielle <a href="https://milvus.io/docs/">de Milvus</a>, que j'ai téléchargée et sauvegardée localement.</p>
+    </button></h2><h3 id="Prepare-your-dataset" class="common-anchor-header">Préparez votre ensemble de données.<button data-href="#Prepare-your-dataset" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour cette démonstration, j'ai utilisé la <a href="https://milvus.io/docs/">documentation</a> officielle <a href="https://milvus.io/docs/">de Milvus</a>, que j'ai téléchargée et sauvegardée localement.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain.document_loaders <span class="hljs-keyword">import</span> DirectoryLoader
 <span class="hljs-comment"># Load HTML files already saved in a local directory</span>
 path = <span class="hljs-string">&quot;../../RAG/rtdocs_new/&quot;</span>
@@ -94,7 +154,22 @@ pprint.pprint(docs[<span class="hljs-number">0</span>].metadata)
 Why Milvus Docs Tutorials Tools Blog Community Stars0 Try Managed Milvus FREE Search Home v2.4.x About ...
 {&#x27;source&#x27;: &#x27;https://milvus.io/docs/quickstart.md&#x27;}
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Download-an-embedding-model" class="common-anchor-header">Téléchargez un modèle d'intégration.</h3><p>Ensuite, téléchargez un <a href="https://zilliz.com/ai-models">modèle d'intégration</a> gratuit et open-source à partir de HuggingFace.</p>
+<h3 id="Download-an-embedding-model" class="common-anchor-header">Téléchargez un modèle d'intégration.<button data-href="#Download-an-embedding-model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ensuite, téléchargez un <a href="https://zilliz.com/ai-models">modèle d'intégration</a> gratuit et open-source à partir de HuggingFace.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
 
@@ -123,7 +198,22 @@ MAX_SEQ_LENGTH_IN_TOKENS = encoder.get_max_seq_length()
 EMBEDDING_DIM: 1024
 MAX_SEQ_LENGTH: 512
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Chunk-and-encode-your-custom-data-as-vectors" class="common-anchor-header">Décomposez et encodez vos données personnalisées sous forme de vecteurs.</h3><p>J'utiliserai une longueur fixe de 512 caractères avec un chevauchement de 10 %.</p>
+<h3 id="Chunk-and-encode-your-custom-data-as-vectors" class="common-anchor-header">Décomposez et encodez vos données personnalisées sous forme de vecteurs.<button data-href="#Chunk-and-encode-your-custom-data-as-vectors" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>J'utiliserai une longueur fixe de 512 caractères avec un chevauchement de 10 %.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain.text_splitter <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
 
 
@@ -173,7 +263,22 @@ dict_list = []
 <pre><code translate="no" class="language-text">chunk_size: 512, chunk_overlap: 51.0
 22 docs split into 355 child documents.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Save-the-vectors-in-Milvus" class="common-anchor-header">Enregistrez les vecteurs dans Milvus.</h3><p>Intégrez les vecteurs encodés dans la base de données vectorielle de Milvus.</p>
+<h3 id="Save-the-vectors-in-Milvus" class="common-anchor-header">Enregistrez les vecteurs dans Milvus.<button data-href="#Save-the-vectors-in-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Intégrez les vecteurs encodés dans la base de données vectorielle de Milvus.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect a client to the Milvus Lite server.</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 mc = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -204,7 +309,22 @@ end_time = time.time()
 <pre><code translate="no" class="language-text">Start inserting entities
 Milvus insert time for 355 vectors: 0.2 seconds
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-a-vector-search" class="common-anchor-header">Effectuer une recherche de vecteurs.</h3><p>Posez une question et recherchez les morceaux les plus proches de votre base de connaissances dans Milvus.</p>
+<h3 id="Perform-a-vector-search" class="common-anchor-header">Effectuer une recherche de vecteurs.<button data-href="#Perform-a-vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Posez une question et recherchez les morceaux les plus proches de votre base de connaissances dans Milvus.</p>
 <pre><code translate="no" class="language-python">SAMPLE_QUESTION = <span class="hljs-string">&quot;What do the parameters for HNSW mean?&quot;</span>
 
 
@@ -263,7 +383,22 @@ source: https://milvus.io/docs/index.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-vLLM-and-models-from-HuggingFace" class="common-anchor-header">Installer vLLM et les modèles de HuggingFace</h3><p>Par défaut, vLLM télécharge de grands modèles linguistiques à partir de HuggingFace. En général, chaque fois que vous voulez utiliser un nouveau modèle sur HuggingFace, vous devriez faire un pip install --upgrade ou -U. De plus, vous aurez besoin d'un GPU pour exécuter l'inférence des modèles Llama 3.1 de Meta avec vLLM.</p>
+    </button></h2><h3 id="Install-vLLM-and-models-from-HuggingFace" class="common-anchor-header">Installer vLLM et les modèles de HuggingFace<button data-href="#Install-vLLM-and-models-from-HuggingFace" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Par défaut, vLLM télécharge de grands modèles linguistiques à partir de HuggingFace. En général, chaque fois que vous voulez utiliser un nouveau modèle sur HuggingFace, vous devriez faire un pip install --upgrade ou -U. De plus, vous aurez besoin d'un GPU pour exécuter l'inférence des modèles Llama 3.1 de Meta avec vLLM.</p>
 <p>Pour une liste complète de tous les modèles supportés par vLLM, voir cette <a href="https://docs.vllm.ai/en/latest/models/supported_models.html#supported-models">page de documentation</a>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">(Recommended) Create a new conda environment.</span>
 conda create -n myenv python=3.11 -y
@@ -286,7 +421,22 @@ torch.cuda.empty_cache()
 !nvidia-smi
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour en savoir plus sur l'installation de vLLM, voir sa page d'<a href="https://docs.vllm.ai/en/latest/getting_started/installation.html">installation</a>.</p>
-<h3 id="Get-a-HuggingFace-token" class="common-anchor-header">Obtenir un jeton HuggingFace.</h3><p>Certains modèles sur HuggingFace, comme Meta Llama 3.1, requièrent que l'utilisateur accepte leur licence avant de pouvoir télécharger les poids. Par conséquent, vous devez créer un compte HuggingFace, accepter la licence du modèle et générer un jeton.</p>
+<h3 id="Get-a-HuggingFace-token" class="common-anchor-header">Obtenir un jeton HuggingFace.<button data-href="#Get-a-HuggingFace-token" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Certains modèles sur HuggingFace, comme Meta Llama 3.1, requièrent que l'utilisateur accepte leur licence avant de pouvoir télécharger les poids. Par conséquent, vous devez créer un compte HuggingFace, accepter la licence du modèle et générer un jeton.</p>
 <p>En visitant cette <a href="https://huggingface.co/meta-llama/Meta-Llama-3.1-70B">page Llama3.1</a> sur HuggingFace, vous recevrez un message vous demandant d'accepter les termes. Cliquez sur "<strong>Accepter la licence</strong>" pour accepter les termes de Meta avant de télécharger les poids du modèle. L'approbation prend généralement moins d'une journée.</p>
 <p><strong>Après avoir reçu l'approbation, vous devez générer un nouveau jeton HuggingFace. Vos anciens jetons ne fonctionneront pas avec les nouvelles autorisations.</strong></p>
 <p>Avant d'installer vLLM, connectez-vous à HuggingFace avec votre nouveau jeton. Ci-dessous, j'ai utilisé Colab secrets pour stocker le jeton.</p>
@@ -296,7 +446,22 @@ from google.colab import userdata
 hf_token = userdata.get(&#x27;HF_TOKEN&#x27;)
 login(token = hf_token, add_to_git_credential=True)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Run-the-RAG-Generation" class="common-anchor-header">Exécuter la génération RAG</h3><p>Dans la démo, nous exécutons le modèle <code translate="no">Llama-3.1-8B</code>, qui nécessite un GPU et une mémoire importante pour tourner. L'exemple suivant a été exécuté sur Google Colab Pro (10 $/mois) avec un GPU A100. Pour en savoir plus sur l'exécution de vLLM, vous pouvez consulter la <a href="https://docs.vllm.ai/en/latest/getting_started/quickstart.html">documentation Quickstart</a>.</p>
+<h3 id="Run-the-RAG-Generation" class="common-anchor-header">Exécuter la génération RAG<button data-href="#Run-the-RAG-Generation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans la démo, nous exécutons le modèle <code translate="no">Llama-3.1-8B</code>, qui nécessite un GPU et une mémoire importante pour tourner. L'exemple suivant a été exécuté sur Google Colab Pro (10 $/mois) avec un GPU A100. Pour en savoir plus sur l'exécution de vLLM, vous pouvez consulter la <a href="https://docs.vllm.ai/en/latest/getting_started/quickstart.html">documentation Quickstart</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Choose a model</span>
 MODELTORUN = <span class="hljs-string">&quot;meta-llama/Meta-Llama-3.1-8B-Instruct&quot;</span>
 

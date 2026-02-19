@@ -70,7 +70,7 @@ title: リソースグループの管理
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>ただし、以下の場合を除く：</p>
 <ul>
-<li>Milvusクラスタ内のQueryNode数が不足している場合（<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ）、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
+<li>Milvusクラスタ内のQueryNode数が不足している場合(<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>)、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
 <li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
@@ -90,7 +90,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.5.17 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.5.18 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
@@ -232,7 +232,7 @@ except Exception:
     </button></h2><p>現在のところ、Milvusはクラウドネイティブ環境において独立してスケールイン/スケールアウトすることができません。しかし、<strong>Declarative Resource Group APIと</strong>コンテナオーケストレーションを併用することで、Milvusはリソースの分離とQueryNodeの管理を容易に実現することができます。 ここでは、クラウド環境でQueryNodeを管理するためのグッドプラクティスを紹介します：</p>
 <ol>
 <li><p>Milvusはデフォルトで<strong>__default_resource_groupを</strong>作成します。このリソースグループは削除できず、すべてのコレクションのデフォルトのロードリソースグループとしても機能し、冗長なQueryNodeは常に割り当てられます。したがって、使用中のQueryNodeリソースを保持する保留リソースグループを作成し、QueryNodeリソースが<strong>__default_resource_groupによって</strong>占有されるのを防ぐことができます。</p>
-<p>さらに、制約<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> を厳密に適用すれば、クラスタ内のQueryNodeの割り当てを正確に制御することができます。現在クラスタにQueryNodeが1つしかないと仮定してクラスタを初期化してみましょう。 セットアップの例を示します：</p>
+<p>さらに、制約<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> を厳密に適用すれば、クラスタ内のQueryNodeの割り当てを正確に制御することができます。現在クラスタ内にQueryNodeが1つしかないと仮定してクラスタを初期化してみましょう。 セットアップの例を示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>

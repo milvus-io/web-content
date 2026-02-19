@@ -45,9 +45,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PRQ combine deux techniques d'indexation : <strong>HSNW</strong> pour une navigation rapide basée sur les graphes et <strong>PRQ</strong> pour une compression vectorielle efficace.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW construit un graphe multicouche où chaque nœud correspond à un vecteur de l'ensemble de données. Dans ce graphe, les nœuds sont connectés en fonction de leur similarité, ce qui permet de parcourir rapidement l'espace de données. La structure hiérarchique permet à l'algorithme de recherche de réduire le nombre de voisins candidats, ce qui accélère considérablement le processus de recherche dans les espaces à haute dimension.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW construit un graphe multicouche où chaque nœud correspond à un vecteur de l'ensemble de données. Dans ce graphe, les nœuds sont connectés en fonction de leur similarité, ce qui permet de parcourir rapidement l'espace de données. La structure hiérarchique permet à l'algorithme de recherche de réduire le nombre de voisins candidats, ce qui accélère considérablement le processus de recherche dans les espaces à haute dimension.</p>
 <p>Pour plus d'informations, voir <a href="/docs/fr/hnsw.md">HNSW</a>.</p>
-<h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQ est une approche de compression vectorielle en plusieurs étapes qui combine deux techniques complémentaires : PQ et RQ. En divisant d'abord un vecteur de haute dimension en sous-vecteurs plus petits (via PQ) et en quantifiant ensuite toute différence restante (via RQ), PRQ permet d'obtenir une représentation compacte mais précise des données d'origine.</p>
+<h3 id="PRQ" class="common-anchor-header">PRQ<button data-href="#PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ est une approche de compression vectorielle en plusieurs étapes qui combine deux techniques complémentaires : PQ et RQ. En divisant d'abord un vecteur de haute dimension en sous-vecteurs plus petits (via PQ) et en quantifiant ensuite toute différence restante (via RQ), PRQ permet d'obtenir une représentation compacte mais précise des données d'origine.</p>
 <p>La figure suivante illustre son fonctionnement.</p>
 <p>
   
@@ -55,14 +85,29 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Hnsw Prq</span> </span></p>
 <ol>
 <li><p><strong>Quantification du produit (PQ)</strong></p>
-<p>Dans cette phase, le vecteur original est divisé en sous-vecteurs plus petits, et chaque sous-vecteur est mis en correspondance avec son centroïde le plus proche dans un livre de codes appris. Ce mappage réduit considérablement la taille des données, mais introduit une erreur d'arrondi puisque chaque sous-vecteur est approximé par un seul centroïde. Pour plus de détails, voir <a href="/docs/fr/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
+<p>Dans cette phase, le vecteur original est divisé en sous-vecteurs plus petits, et chaque sous-vecteur est mis en correspondance avec son centroïde le plus proche dans un livre de codes appris. Ce mappage réduit considérablement la taille des données mais introduit une certaine erreur d'arrondi puisque chaque sous-vecteur est approximé par un seul centroïde. Pour plus de détails, voir <a href="/docs/fr/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Quantification résiduelle (RQ)</strong></p>
 <p>Après l'étape PQ, RQ quantifie le résidu - la différence entre le vecteur original et son approximation basée sur PQ - en utilisant des livres de codes supplémentaires. Comme ce résidu est généralement beaucoup plus petit, il peut être codé plus précisément sans que cela n'entraîne une augmentation importante de l'espace de stockage.</p>
 <p>Le paramètre <code translate="no">nrq</code> détermine le nombre de fois que ce résidu est quantifié de manière itérative, ce qui vous permet d'affiner l'équilibre entre l'efficacité et la précision de la compression.</p></li>
 <li><p><strong>Représentation finale de la compression</strong></p>
 <p>Une fois que RQ a fini de quantifier le résidu, les codes entiers de PQ et de RQ sont combinés en un seul index compressé. En capturant des détails raffinés que PQ seul pourrait manquer, RQ améliore la précision sans entraîner une augmentation significative de l'espace de stockage. C'est cette synergie entre PQ et RQ qui définit le PRQ.</p></li>
 </ol>
-<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ</h3><p>En combinant HNSW et PRQ, <strong>HNSW_PRQ</strong> conserve la recherche rapide basée sur les graphes de HNSW tout en tirant parti de la compression en plusieurs étapes de PRQ. Le flux de travail se présente comme suit :</p>
+<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ<button data-href="#HNSW-+-PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En combinant HNSW et PRQ, <strong>HNSW_PRQ</strong> conserve la recherche rapide basée sur les graphes de HNSW tout en tirant parti de la compression en plusieurs étapes de PRQ. Le flux de travail se présente comme suit :</p>
 <ol>
 <li><p><strong>Compression des données :</strong> Chaque vecteur est d'abord transformé par PQ en une représentation grossière, puis les résidus sont quantifiés par RQ pour être affinés. Le résultat est un ensemble de codes compacts représentant chaque vecteur.</p></li>
 <li><p><strong>Construction du graphique :</strong> Les vecteurs compressés (y compris les codes PQ et RQ) constituent la base de la construction du graphe HNSW. Les données étant stockées sous une forme compacte, le graphe nécessite moins de mémoire et la navigation est accélérée.</p></li>
@@ -170,7 +215,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Cette section présente une vue d'ensemble des paramètres utilisés pour construire un index et effectuer des recherches dans l'index.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/hnsw-prq.md#Build-index">création d'un index</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Paramètres de construction d'index<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés sur <code translate="no">params</code> lors de la <a href="/docs/fr/hnsw-prq.md#Build-index">création d'un index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -185,7 +245,7 @@ res = MilvusClient.search(
      <td><p>Nombre maximal de connexions （ou d'arêtes) que chaque nœud peut avoir dans le graphe, y compris les arêtes sortantes et entrantes. Ce paramètre affecte directement la construction de l'index et la recherche.</p></td>
      <td><p><strong>Type</strong>: Integer (nombre entier) <strong>Plage</strong>: [2, 2048]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">30</code> (jusqu'à 30 arêtes sortantes et 30 arêtes entrantes par nœud)</p></td>
-     <td><p>Une valeur plus élevée de <code translate="no">M</code> conduit généralement à une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données à haute dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
+     <td><p>Une valeur plus élevée de <code translate="no">M</code> entraîne généralement une <strong>plus grande précision</strong>, mais <strong>augmente la charge de mémoire</strong> et <strong>ralentit à la fois la construction de l'index et la recherche</strong>. Envisagez d'augmenter <code translate="no">M</code> pour les ensembles de données de grande dimensionnalité ou lorsqu'un rappel élevé est crucial.</p>
 <p>Pensez à diminuer <code translate="no">M</code> lorsque l'utilisation de la mémoire et la vitesse de recherche sont des préoccupations majeures.</p>
 <p>Dans la plupart des cas, nous vous recommandons de définir une valeur comprise dans cette fourchette : [5, 100].</p></td>
    </tr>
@@ -211,8 +271,8 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Le nombre de bits utilisés pour représenter l'indice du centroïde de chaque sous-vecteur sous forme comprimée. Il détermine directement la taille de chaque livre de codes, qui contiendra $2^{\textit{nbits}}$ centroïdes. Par exemple, si <code translate="no">nbits</code> est fixé à 8, chaque sous-vecteur sera représenté par un indice de centroïde de 8 bits. Cela permet d'avoir $2^8$ (256) centroïdes possibles dans le livre de codes pour ce sous-vecteur.</p></td>
-     <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 64]</p>
+     <td><p>Le nombre de bits utilisés pour représenter l'indice du centroïde de chaque sous-vecteur sous forme comprimée. Il détermine directement la taille de chaque livre de codes. Chaque livre de codes contiendra des centroïdes de <sup>2nbits</sup>. Par exemple, si <code translate="no">nbits</code> est fixé à 8, chaque sous-vecteur sera représenté par un indice de centroïde de 8 bits. Cela permet d'avoir<sup>28</sup> (256) centroïdes possibles dans le livre de codes pour ce sous-vecteur.</p></td>
+     <td><p><strong>Type</strong>: Entier <strong>Plage</strong>: [1, 24]</p>
 <p><strong>Valeur par défaut</strong>: <code translate="no">8</code></p></td>
      <td><p>Une valeur plus élevée de <code translate="no">nbits</code> permet d'obtenir des livres de codes plus importants, ce qui peut conduire à des représentations plus précises des vecteurs d'origine. Dans la plupart des cas, nous vous recommandons de choisir une valeur comprise dans cette fourchette : [1, 16].</p></td>
    </tr>
@@ -241,7 +301,22 @@ res = MilvusClient.search(
      <td><p>Utilisez <code translate="no">FP32</code> pour une précision maximale avec un coût de mémoire plus élevé, ou <code translate="no">SQ6</code>/<code translate="no">SQ8</code> pour une meilleure compression. <code translate="no">BF16</code> et <code translate="no">FP16</code> offrent une alternative équilibrée.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index</h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/hnsw-prq.md#Search-on-index">recherche dans l'index</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Paramètres de recherche spécifiques à l'index<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Le tableau suivant répertorie les paramètres qui peuvent être configurés dans <code translate="no">search_params.params</code> lors d'une <a href="/docs/fr/hnsw-prq.md#Search-on-index">recherche dans l'index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -264,9 +339,9 @@ res = MilvusClient.search(
    <tr>
      <td><p>PRQ</p></td>
      <td><p><code translate="no">refine_k</code></p></td>
-     <td><p>Facteur d'agrandissement qui contrôle le nombre de candidats supplémentaires examinés au cours de l'étape d'affinement (reranking), par rapport aux K premiers résultats demandés.</p></td>
+     <td><p>Facteur d'agrandissement qui contrôle le nombre de candidats supplémentaires examinés au cours de l'étape d'affinage (reranking), par rapport aux K premiers résultats demandés.</p></td>
      <td><p><strong>Type</strong>: Flottant <strong>Plage</strong>: [1, <em>float_max</em>)</p>
 <p><strong>Valeur par défaut</strong>: 1</p></td>
-     <td><p>Des valeurs élevées de <code translate="no">refine_k</code> peuvent améliorer le rappel et la précision, mais augmentent également le temps de recherche et l'utilisation des ressources. Une valeur de 1 signifie que le processus d'affinage ne prend en compte que les K premiers résultats.</p></td>
+     <td><p>Des valeurs élevées de <code translate="no">refine_k</code> peuvent améliorer le rappel et la précision, mais augmentent également le temps de recherche et l'utilisation des ressources. Une valeur de 1 signifie que le processus d'affinement ne prend en compte que les K premiers résultats.</p></td>
    </tr>
 </table>

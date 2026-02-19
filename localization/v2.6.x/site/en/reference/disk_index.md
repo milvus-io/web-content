@@ -117,7 +117,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -129,7 +129,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Maximum degree of the Vamana graph. <br/> A larger value offers a higher recall rate but increases the size of and time to build the index.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Size of the candidate list. <br/> A larger value increases the time spent on building the index but offers a higher recall rate. <br/> Set it to a value smaller than <code translate="no">MaxDegree</code> unless you need to reduce the index-building time.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Size limit on the PQ code. <br/> A larger value offers a higher recall rate but increases memory usage.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Size limit on the PQ code. <br/> A larger value offers a higher recall rate but increases memory usage.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Ratio of cached node numbers to raw data. <br/> A larger value improves index-building performance with increased memory usage.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Ratio between the maximum number of IO requests per search iteration and CPU number.</td><td>[1, max(128 / CPU number, 16)]</td><td>4.0</td></tr>
 </tbody>

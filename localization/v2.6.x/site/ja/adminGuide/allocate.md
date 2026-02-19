@@ -62,18 +62,48 @@ Helmを使用してリソースをアップグレードすると、実行中の�
 <li><a href="/docs/ja/allocate.md#Allocate-resources-with-commands">コマンドを使用する</a></li>
 <li><a href="/docs/ja/allocate.md#Allocate-resources-by-setting-configuration-file"> <code translate="no">YAML</code> ファイルでパラメータを設定する</a></li>
 </ul>
-<h3 id="Allocate-resources-with-commands" class="common-anchor-header">コマンドでリソースを割り当てる</h3><p><code translate="no">--set</code> を使用してリソース設定を更新する場合は、Milvus コンポーネントごとにリソース変数を設定する必要があります。</p>
+<h3 id="Allocate-resources-with-commands" class="common-anchor-header">コマンドでリソースを割り当てる<button data-href="#Allocate-resources-with-commands" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">--set</code> を使用してリソース設定を更新する場合は、Milvus コンポーネントごとにリソース変数を設定する必要があります。</p>
 <div class="filter">
 <a href="#standalone">Milvus スタンドアロン</a> <a href="#cluster">Milvus クラスタ</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">設定ファイルによるリソース割り当て</h3><p><code translate="no">resources.yaml</code> ファイルのパラメータ<code translate="no">resources.requests</code> および<code translate="no">resources.limits</code> を指定して、CPU およびメモリリソースを割り当てることもできます。</p>
+<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">設定ファイルによるリソース割り当て<button data-href="#Allocate-resources-by-setting-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">resources.yaml</code> ファイルのパラメータ<code translate="no">resources.requests</code> および<code translate="no">resources.limits</code> を指定して、CPU およびメモリリソースを割り当てることもできます。</p>
 <pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
   <span class="hljs-attr">resources:</span>
     <span class="hljs-attr">limits:</span>

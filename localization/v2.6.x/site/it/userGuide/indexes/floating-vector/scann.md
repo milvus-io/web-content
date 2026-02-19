@@ -2,7 +2,7 @@
 id: scann.md
 title: SCANN
 summary: >-
-  Alimentato dalla libreria ScaNN di Google, l'indice SCANN di Milvus è
+  Alimentato dalla libreria ScaNN di Google, l'indice SCANN di Milvus è stato
   progettato per affrontare le sfide della ricerca di similarità vettoriale in
   scala, trovando un equilibrio tra velocità e precisione, anche su grandi
   insiemi di dati che tradizionalmente porrebbero problemi alla maggior parte
@@ -45,7 +45,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/scann.png" alt="Scann" class="doc-image" id="scann" />
    </span> <span class="img-wrapper"> <span>Scannerizzazione</span> </span></p>
 <ol>
-<li><p><strong>Partizione</strong>: Divide il set di dati in cluster. Questo metodo restringe lo spazio di ricerca concentrandosi solo su sottoinsiemi di dati rilevanti invece di scansionare l'intero set di dati, risparmiando tempo e risorse di elaborazione. ScaNN utilizza spesso algoritmi di clustering, come <a href="https://zilliz.com/blog/k-means-clustering">k-means</a>, per identificare i cluster, il che consente di eseguire ricerche di similarità in modo più efficiente.</p></li>
+<li><p><strong>Partizione</strong>: Suddivide il set di dati in cluster. Questo metodo restringe lo spazio di ricerca concentrandosi solo su sottoinsiemi di dati rilevanti invece di scansionare l'intero set di dati, risparmiando tempo e risorse di elaborazione. ScaNN utilizza spesso algoritmi di clustering, come <a href="https://zilliz.com/blog/k-means-clustering">k-means</a>, per identificare i cluster, il che consente di eseguire ricerche di similarità in modo più efficiente.</p></li>
 <li><p><strong>Quantizzazione</strong>: ScaNN applica un processo di quantizzazione noto come <a href="https://arxiv.org/abs/1908.10396">quantizzazione vettoriale anisotropica</a> dopo il partizionamento. La quantizzazione tradizionale si concentra sulla minimizzazione della distanza complessiva tra i vettori originali e quelli compressi, il che non è ideale per compiti come la <a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">ricerca del prodotto interno massimo (MIPS)</a>, in cui la somiglianza è determinata dal prodotto interno dei vettori piuttosto che dalla distanza diretta. La quantizzazione anisotropa dà invece priorità alla conservazione delle componenti parallele tra i vettori, ovvero le parti più importanti per il calcolo di prodotti interni accurati. Questo approccio consente a ScaNN di mantenere un'elevata precisione MIPS allineando accuratamente i vettori compressi con la query, consentendo ricerche di similarità più rapide e precise.</p></li>
 <li><p><strong>Ri-classificazione</strong>: La fase di re-ranking è la fase finale, in cui ScaNN mette a punto i risultati della ricerca ottenuti dalle fasi di partizione e quantizzazione. Il re-ranking applica precisi calcoli del prodotto interno ai vettori candidati migliori, assicurando che i risultati finali siano altamente accurati. Il re-ranking è fondamentale nei motori di raccomandazione ad alta velocità o nelle applicazioni di ricerca di immagini, dove il filtraggio e il raggruppamento iniziali servono come strato grossolano e la fase finale assicura che all'utente vengano restituiti solo i risultati più rilevanti.</p></li>
 </ol>
@@ -116,6 +116,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -132,8 +133,9 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>: Opzioni di configurazione aggiuntive per la ricerca sull'indice.</p>
 <ul>
 <li><code translate="no">reorder_k</code>: Numero di candidati da affinare durante la fase di ri-classificazione.</li>
+<li><code translate="no">nprobe</code>: Numero di cluster da ricercare.</li>
 </ul>
-<p>Per conoscere gli altri parametri di ricerca disponibili per l'indice <code translate="no">SCANN</code>, consultare i <a href="/docs/it/scann.md#Index-specific-search-params">parametri di ricerca specifici dell'indice</a>.</p></li>
+<p>Per conoscere altri parametri di ricerca disponibili per l'indice <code translate="no">SCANN</code>, fare riferimento a <a href="/docs/it/scann.md#Index-specific-search-params">Parametri di ricerca specifici per l'indice</a>.</p></li>
 </ul>
 <h2 id="Index-params" class="common-anchor-header">Parametri dell'indice<button data-href="#Index-params" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -150,7 +152,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la creazione di un indice e per l'esecuzione di ricerche sull'indice.</p>
+    </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la costruzione di un indice e per l'esecuzione di ricerche sull'indice.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -166,7 +168,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> durante la <a href="/docs/it/scann.md#Build-index">creazione di un indice</a>.</p>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> quando si <a href="/docs/it/scann.md#Build-index">costruisce un indice</a>.</p>
 <table>
    <tr>
      <th><p>Parametro</p></th>
@@ -215,5 +217,11 @@ res = MilvusClient.search(
      <td><p>Controlla il numero di vettori candidati che vengono raffinati durante la fase di ri-classificazione. Questo parametro determina il numero di candidati migliori delle fasi iniziali di partizione e quantizzazione che vengono rivalutati utilizzando calcoli di somiglianza più precisi.</p></td>
      <td><p><strong>Tipo</strong>: Intero</p><p><strong>Intervallo</strong>: [1, <em>int_max</em>]</p><p><strong>Valore predefinito</strong>: Nessuno</p></td>
      <td><p>Un valore maggiore di <code translate="no">reorder_k</code> porta in genere a una <strong>maggiore accuratezza della ricerca</strong>, poiché vengono considerati più candidati durante la fase di affinamento finale. Tuttavia, questo <strong>aumenta</strong> anche <strong>il tempo di ricerca</strong> a causa dei calcoli aggiuntivi.</p><p>Si consiglia di aumentare <code translate="no">reorder_k</code> quando è fondamentale ottenere un richiamo elevato e la velocità di ricerca è meno importante. Un buon punto di partenza è 2-5 volte il valore desiderato di <code translate="no">limit</code> (TopK risultati da restituire).</p><p>Considerare di diminuire <code translate="no">reorder_k</code> per dare priorità a ricerche più veloci, soprattutto in scenari in cui una leggera riduzione dell'accuratezza è accettabile.</p><p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo:<em>[limite</em>, <em>limite</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>Numero di cluster in cui cercare i candidati.</p></td>
+     <td><p><strong>Tipo</strong>: Intero</p><p><strong>Intervallo</strong>: [1, <em>nlist</em>]</p><p><strong>Valore predefinito</strong>: <code translate="no">8</code></p></td>
+     <td><p>Valori più alti consentono di cercare più cluster, migliorando il richiamo grazie all'espansione dell'ambito di ricerca, ma al costo di una maggiore latenza della query.</p><p>Impostare <code translate="no">nprobe</code> in modo proporzionale a <code translate="no">nlist</code> per bilanciare velocità e precisione.</p><p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [1, nlist].</p></td>
    </tr>
 </table>

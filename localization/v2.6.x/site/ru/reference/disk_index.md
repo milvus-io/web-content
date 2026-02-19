@@ -117,7 +117,7 @@ title: Индекс на диске
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -129,7 +129,7 @@ title: Индекс на диске
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Максимальная степень графа Vamana. <br/> Большее значение обеспечивает более высокую скорость отзыва, но увеличивает размер и время построения индекса.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Размер списка кандидатов. <br/> Большее значение увеличивает время, затрачиваемое на построение индекса, но обеспечивает более высокий процент отзыва. <br/> Установите значение меньше, чем <code translate="no">MaxDegree</code>, если вам не нужно сокращать время построения индекса.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Ограничение на размер кода PQ. <br/> Большее значение обеспечивает более высокую скорость запоминания, но увеличивает потребление памяти.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Ограничение на размер кода PQ. <br/> Большее значение обеспечивает более высокую скорость запоминания, но увеличивает потребление памяти.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Отношение кэшированных номеров узлов к исходным данным. <br/> Большее значение повышает производительность построения индексов, но увеличивает расход памяти.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Соотношение между максимальным количеством запросов ввода-вывода за итерацию поиска и количеством CPU.</td><td>[1, max(128 / количество CPU, 16)]</td><td>4.0</td></tr>
 </tbody>

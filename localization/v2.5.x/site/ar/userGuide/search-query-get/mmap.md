@@ -9,7 +9,6 @@ summary: >-
   هذه الصفحة على فهم كيفية استخدام Milvus لـ mmap لتمكين تخزين البيانات
   واسترجاعها بسرعة وكفاءة.
 ---
-
 <h1 id="Use-mmap" class="common-anchor-header">استخدام mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +65,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>يوفر Milvus إعدادات mmap هرمية على المستويات العامة والحقل والفهرس والتجميع، حيث تكون الأولوية لمستوى الفهرس والحقل على مستوى التجميع، ومستوى التجميع على المستوى العام.</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">إعدادات mmap العامة</h3><p>الإعداد على مستوى المجموعة هو الإعداد العام وله الأسبقية الأدنى. يوفر Milvus العديد من الإعدادات المتعلقة ب mmap في <code translate="no">milvus.yaml</code>. سيتم تطبيق هذه الإعدادات على جميع المجموعات في المجموعة.</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">إعدادات mmap العامة<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الإعداد على مستوى المجموعة هو الإعداد العام وله الأسبقية الأدنى. يوفر Milvus العديد من الإعدادات المتعلقة ب mmap في <code translate="no">milvus.yaml</code>. سيتم تطبيق هذه الإعدادات على جميع المجموعات في المجموعة.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -86,7 +100,7 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.scalarField</code></p></td>
-     <td><p>تحديد ما إذا كان سيتم تعيين تعيين البيانات الأولية لجميع الحقول القياسية في الذاكرة. يؤدي تعيين هذا إلى <code translate="no">true</code> إلى جعل Milvus يقوم بتعيين البيانات الأولية لبيانات الحقول القياسية للمجموعة في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل مقابل هذه المجموعة.</p></td>
+     <td><p>تحديد ما إذا كان سيتم تعيين تعيين البيانات الأولية لجميع الحقول القياسية في الذاكرة. يؤدي تعيين هذا إلى <code translate="no">true</code> إلى جعل Milvus يقوم بتعيين البيانات الأولية لبيانات الحقول العددية للمجموعة في الذاكرة بدلاً من تحميلها بالكامل عند تلقي طلب تحميل مقابل هذه المجموعة.</p></td>
      <td><p><code translate="no">false</code></p></td>
    </tr>
    <tr>
@@ -106,13 +120,28 @@ summary: >-
    </tr>
    <tr>
      <td><p><code translate="no">queryNode.mmap.mmapDirPath</code></p></td>
-     <td><p>يحدد المسار إلى الملفات المعينة بالذاكرة. تطبق القيمة الافتراضية إذا تُركت غير محددة. </p><p>يشير العنصر النائب <code translate="no">localStorage.path</code> في القيمة الافتراضية إلى محرك الأقراص الثابتة لـ Milvus QueryNodes. تأكد من احتواء QueryNodes الخاصة بك على محرك أقراص ثابتة عالية الأداء للحصول على مزايا mmap المثلى.</p></td>
+     <td><p>يحدد المسار إلى الملفات المعينة بالذاكرة. تطبق القيمة الافتراضية إذا تُركت غير محددة. </p><p>يشير العنصر النائب <code translate="no">localStorage.path</code> في القيمة الافتراضية إلى محرك الأقراص الثابتة لـ Milvus QueryNodes. تأكد من احتواء QueryNodes على محرك أقراص ثابتة عالية الأداء للحصول على مزايا mmap المثلى.</p></td>
      <td><p><code translate="no">{localStorage.path}/mmap</code></p></td>
    </tr>
 </table>
 <p>لتطبيق الإعدادات المذكورة أعلاه على مجموعة Milvus العنقودية الخاصة بك، يرجى اتباع الخطوات الواردة في <a href="/docs/ar/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">تكوين Milvus مع Helm</a> <a href="/docs/ar/v2.5.x/configure_operator.md">وتكوين Milvus مع مشغلي Milvus</a>.</p>
 <p>في بعض الأحيان، تكون إعدادات mmap العامة غير مرنة عند مواجهة حالات استخدام معينة. ولتطبيق إعدادات بديلة على مجموعة معينة أو فهارسها، فكر في تكوين mmap خاص بمجموعة أو حقل أو فهرس معين. تحتاج إلى تحرير مجموعة وتحميلها قبل أن تدخل التغييرات على إعدادات mmap حيز التنفيذ.</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالحقل</h3><p>لتكوين mmap الخاص بالحقل، تحتاج إلى تضمين المعلمة <code translate="no">mmap_enabled</code> عند إضافة حقل. يمكنك تمكين mmap mmap على هذا الحقل المحدد عن طريق تعيين هذه المعلمة إلى <code translate="no">True</code>.</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالحقل<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتكوين mmap الخاص بالحقل، تحتاج إلى تضمين المعلمة <code translate="no">mmap_enabled</code> عند إضافة حقل. يمكنك تمكين mmap mmap على هذا الحقل المحدد عن طريق تعيين هذه المعلمة إلى <code translate="no">True</code>.</p>
 <p>يوضح المثال التالي كيفية تكوين mmap الخاص بالحقل عند إضافة حقل.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -122,8 +151,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -134,21 +163,20 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>,
-mmap_enabled=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>,
+    mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -303,7 +331,22 @@ curl --request POST \
 <p>ضع في اعتبارك تمكين mmap للحقول التي تخزن بيانات كبيرة الحجم. كل من الحقول القياسية والحقول المتجهة مدعومة.</p>
 </div>
 <p>بعد ذلك، يمكنك إنشاء مجموعة باستخدام المخطط الذي تم إنشاؤه أعلاه. عند تلقي طلب لتحميل المجموعة، يستخدم Milvus خرائط الذاكرة البيانات الأولية لحقل <strong>doc_chunk</strong> في الذاكرة.</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالفهرس</h3><p>لتكوين mmap الخاص بالفهرس، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enable</code> في معلمات الفهرس عند إضافة الفهرس. يمكنك تمكين mmap على هذا الفهرس المحدد عن طريق تعيين الخاصية إلى <code translate="no">true</code>.</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالفهرس<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتكوين mmap الخاص بالفهرس، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enabled</code> في معلمات الفهرس عند إضافة الفهرس. يمكنك تمكين mmap على هذا الفهرس المحدد عن طريق تعيين الخاصية إلى <code translate="no">true</code>.</p>
 <p>يوضح المثال التالي كيفية تكوين mmap الخاص بالفهرس عند إضافة فهرس.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -318,21 +361,19 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;title&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="highlighted-wrapper-line">    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }</span>
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-index_name=<span class="hljs-string">&quot;title&quot;</span>,
-properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_name=<span class="hljs-string">&quot;title&quot;</span>,
+    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -408,7 +449,22 @@ curl --request POST \
 <p>ينطبق هذا على فهارس كل من الحقول المتجهة والقياسية.</p>
 </div>
 <p>ثم يمكنك الرجوع إلى معلمات الفهرس في مجموعة. عند تلقي طلب لتحميل المجموعة، يقوم ميلفوس بتعيين ذاكرة فهرس حقل <strong>العنوان</strong> في الذاكرة.</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالمجموعة</h3><p>لتكوين إستراتيجية mmap على مستوى المجموعة، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enabled</code> في طلب إنشاء مجموعة. يمكنك تمكين mmap لمجموعة من خلال تعيين هذه الخاصية إلى <code translate="no">true</code>.</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">إعدادات mmap الخاصة بالمجموعة<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لتكوين إستراتيجية mmap على مستوى المجموعة، تحتاج إلى تضمين الخاصية <code translate="no">mmap.enabled</code> في طلب إنشاء مجموعة. يمكنك تمكين mmap لمجموعة من خلال تعيين هذه الخاصية إلى <code translate="no">true</code>.</p>
 <p>يوضح المثال التالي كيفية تمكين mmap في مجموعة تسمى <strong>my_collection</strong> عند إنشائها. عند تلقي طلب لتحميل المجموعة، يقوم Milvus بتعيين ذاكرة Milvus للبيانات الأولية لجميع الحقول في الذاكرة.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">الذهاب</a> <a href="#bash">cURL</a></div>
@@ -455,16 +511,15 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-properties={
-<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+    }
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

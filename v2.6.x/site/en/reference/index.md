@@ -7,6 +7,12 @@ title: In-memory Index
 
 # In-memory Index
 
+<div class="alert warning">
+
+This page is deprecated. For the latest content, please refer to [Index Explained](index-explained.md).
+
+</div>
+
 This topic lists various types of in-memory indexes Milvus supports, scenarios each of them best suits, and parameters users can configure to achieve better search performance. For on-disk indexes, see **[On-disk Index](disk_index.md)**.
 
 Indexing is the process of efficiently organizing data, and it plays a major role in making similarity search useful by dramatically accelerating time-consuming queries on large datasets.
@@ -327,7 +333,7 @@ Index building parameters and search parameters vary with Milvus distribution. S
   | --------- | ----------------------------------------- | ------------------- |
   | `nlist`   | Number of cluster units                   | [1, 65536]          |
   | `m`       | Number of factors of product quantization | `dim mod m == 0` |
-  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 64] (8 by default) |
+  | `nbits`   | [Optional] Number of bits in which each low-dimensional vector is stored. | [1, 24] (8 by default) |
 
 - Search parameters
 

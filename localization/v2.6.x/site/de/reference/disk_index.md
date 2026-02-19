@@ -115,7 +115,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -127,7 +127,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Auffindungsrate, erhöht jedoch die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Größe der Kandidatenliste. <br/> Ein größerer Wert erhöht den Zeitaufwand für den Aufbau des Indexes, bietet aber eine höhere Wiederfindungsrate. <br/> Setzen Sie ihn auf einen Wert kleiner als <code translate="no">MaxDegree</code>, es sei denn, Sie müssen die Zeit für den Indexaufbau reduzieren.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Größenbeschränkung für den PQ-Code. <br/> Ein größerer Wert bietet eine höhere Abrufrate, erhöht aber den Speicherverbrauch.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>Größenbeschränkung für den PQ-Code. <br/> Ein größerer Wert bietet eine höhere Abrufrate, erhöht aber den Speicherverbrauch.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Verhältnis von zwischengespeicherten Knotennummern zu Rohdaten. <br/> Ein größerer Wert verbessert die Indexerstellungsleistung bei erhöhtem Speicherbedarf.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Verhältnis zwischen der maximalen Anzahl von IO-Anfragen pro Suchiteration und der CPU-Anzahl.</td><td>[1, max(128 / CPU-Anzahl, 16)]</td><td>4.0</td></tr>
 </tbody>

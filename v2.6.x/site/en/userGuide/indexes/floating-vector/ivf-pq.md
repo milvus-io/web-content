@@ -38,7 +38,7 @@ The PQ process involves these key stages:
 
 1. **Dimension decomposition**: The algorithm begins by decomposing each high-dimensional vector into `m` equal-sized sub-vectors. This decomposition transforms the original D-dimensional space into `m` disjoint subspaces, where each subspace contains *D/m* dimensions. The parameter `m` controls the granularity of the decomposition and directly influences the compression ratio.
 
-1. **Subspace codebook generation**: Within each subspace, the algorithm applies [k-means clustering](https://en.wikipedia.org/wiki/K-means_clustering) to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter `nbits`, where each codebook contains $2^{\textit{nbits}}$ centroids. For example, if `nbits = 8`, each codebook will contain 256 centroids. Each centroid is assigned a unique index with `nbits` bits.
+1. **Subspace codebook generation**: Within each subspace, the algorithm applies [k-means clustering](https://en.wikipedia.org/wiki/K-means_clustering) to learn a set of representative vectors (centroids). These centroids collectively form a codebook for that subspace. The number of centroids in each codebook is determined by the parameter `nbits`, where each codebook contains 2<sup>nbits</sup> centroids. For example, if `nbits = 8`, each codebook will contain 256 centroids. Each centroid is assigned a unique index with `nbits` bits.
 
 1. **Vector** **quantization**: For each sub-vector in the original vector, PQ identifies its nearest centroid within the corresponding subspace using a specific metric type. This process effectively maps each sub-vector to its closest representative vector in the codebook. Instead of storing the full sub-vector coordinates, only the index of the matched centroid is retained.
 
@@ -48,7 +48,7 @@ For more details on parameter tuning and optimization, refer to [Index params](i
 
 <div class="alert note">
 
-Consider a vector with *D = 128* dimensions using 32-bit floating-point numbers. With PQ parameters *m = 64* (sub-vectors) and *nbits = 8* (thus *k =* $2^8$ *= 256* centroids per subspace), we can compare the storage requirements:
+Consider a vector with *D = 128* dimensions using 32-bit floating-point numbers. With PQ parameters *m = 64* (sub-vectors) and *nbits = 8* (thus *k =* 2<sup>8</sup> *= 256* centroids per subspace), we can compare the storage requirements:
 
 - Original vector: 128 dimensions × 32 bits = 4,096 bits
 
@@ -66,9 +66,9 @@ When performing similarity search with a query vector, PQ enables efficient dist
 
     - The query vector is decomposed into `m` sub-vectors, matching the original PQ decomposition structure.
 
-    - For each query sub-vector and its corresponding codebook (containing $2^{\textit{nbits}}$ centroids), compute and store distances to all centroids.
+    - For each query sub-vector and its corresponding codebook (containing 2<sup>nbits</sup> centroids), compute and store distances to all centroids.
 
-    - This generates `m` lookup tables, where each table contains $2^{\textit{nbits}}$ distances.
+    - This generates `m` lookup tables, where each table contains 2<sup>nbits</sup> distances.
 
 1. **Distance approximation**
 
@@ -185,8 +185,8 @@ The following table lists the parameters that can be configured in `params` when
    </tr>
    <tr>
      <td><p><code>nbits</code></p></td>
-     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain $2^{\textit{nbits}}$ centroids. For example, if <code>nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for $2^8$ (256) possible centroids in the codebook for that sub-vector.</p></td>
-     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 64]</p><p><strong>Default value</strong>: <code>8</code></p></td>
+     <td><p>The number of bits used to represent each sub-vector's centroid index in the compressed form. It directly determines the size of each codebook. Each codebook will contain 2<sup>nbits</sup> centroids. For example, if <code>nbits</code> is set to 8, each sub-vector will be represented by an 8-bit centroid's index. This allows for 2<sup>8</sup> (256) possible centroids in the codebook for that sub-vector.</p></td>
+     <td><p><strong>Type</strong>: Integer <strong>Range</strong>: [1, 24]</p><p><strong>Default value</strong>: <code>8</code></p></td>
      <td><p>A higher <code>nbits</code> value allows for larger codebooks, potentially leading to more accurate representations of the original vectors. However, it also means using more bits to store each index, resulting in less compression. In most cases, we recommend you set a value within this range: [1, 16].</p></td>
    </tr>
 </table>

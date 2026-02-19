@@ -64,7 +64,7 @@ title: Аутентификация доступа пользователей
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>Чтобы включить аутентификацию, установите <code translate="no">spec.common.security.authorizationEnabled</code> на <code translate="no">true</code> в <code translate="no">Milvus</code> CRD. Дополнительные сведения о Milvus CRD см. в разделе <a href="https://milvus.io/docs/configure_operator.md?tab=component">Настройка Milvus с помощью Milvus Operator</a>.</p>
+<p>Чтобы включить аутентификацию, установите <code translate="no">spec.config.common.security.authorizationEnabled</code> на <code translate="no">true</code> в <code translate="no">Milvus</code> CRD. Дополнительные сведения о Milvus CRD см. в разделе <a href="https://milvus.io/docs/configure_operator.md?tab=component">Настройка Milvus с помощью Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -266,12 +266,12 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><ul>
-<li>Вам также может быть интересно узнать, как:<ul>
+<li>Возможно, вам также будет интересно узнать, как:<ul>
 <li><a href="/docs/ru/scaleout.md">Масштабировать кластер Milvus</a></li>
 </ul></li>
 <li>Если вы готовы развернуть свой кластер в облаках:<ul>
 <li>Узнайте, как <a href="/docs/ru/eks.md">развернуть Milvus на Amazon EKS с помощью Terraform</a>.</li>
 <li>Узнайте, как <a href="/docs/ru/gcp.md">развернуть кластер Milvus на GCP с помощью Kubernetes</a></li>
-<li>Узнайте, как <a href="/docs/ru/azure.md">развернуть Milvus на Microsoft Azure с помощью Kubernetes</a>.</li>
+<li>Узнайте, как <a href="/docs/ru/azure.md">развернуть Milvus в Microsoft Azure с помощью Kubernetes</a>.</li>
 </ul></li>
 </ul>

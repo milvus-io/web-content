@@ -41,10 +41,10 @@ summary: >-
       </svg>
     </button></h2><p>The ARRAY operators allow for fine-grained querying of array fields in Milvus. These operators are:</p>
 <ul>
-<li><p><code translate="no">ARRAY_CONTAINS(identifier, expr)</code>: checks if a specific element exists in an array field.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code>: ensures that all elements of the specified list are present in the array field.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code>: checks if any of the elements from the specified list are present in the array field.</p></li>
-<li><p><code translate="no">ARRAY_LENGTH(identifier, expr)</code>: allows you to filter entities based on the number of elements in an array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYCONTAINS"><code translate="no">ARRAY_CONTAINS(identifier, expr)</code></a>: checks if a specific element exists in an array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYCONTAINSALL"><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code></a>: ensures that all elements of the specified list are present in the array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYCONTAINSANY"><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code></a>: checks if any of the elements from the specified list are present in the array field.</p></li>
+<li><p><a href="/docs/array-operators.md#ARRAYLENGTH"><code translate="no">ARRAY_LENGTH(identifier)</code></a>: returns the number of elements in an array field and can be combined with comparison operators for filtering.</p></li>
 </ul>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,9 +124,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">ARRAY_LENGTH</code> operator allows you to filter entities based on the number of elements in an array field. This is useful when you need to find entities with arrays of a certain length.</p>
+    </button></h2><p>The <code translate="no">ARRAY_LENGTH</code> returns the length (number of elements) of an array field. It accepts exactly one parameter: the array field identifier.</p>
 <p><strong>Example</strong></p>
-<p>If you want to find all entities where the <code translate="no">history_temperatures</code> array has fewer than 10 elements, you can use:</p>
+<p>To find all entities where the <code translate="no">history_temperatures</code> array has fewer than 10 elements:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>This will return all entities where the <code translate="no">history_temperatures</code> array has fewer than 10 elements.</p>

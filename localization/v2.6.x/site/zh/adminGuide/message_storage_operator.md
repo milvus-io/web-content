@@ -60,7 +60,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 </ul></li>
 <li>Milvus 系统运行时不能更改消息存储。</li>
 <li>仅支持 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级到 Milvus v2.6.6 时，必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</li>
+<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级到 Milvus v2.6.11 时，必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">配置 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

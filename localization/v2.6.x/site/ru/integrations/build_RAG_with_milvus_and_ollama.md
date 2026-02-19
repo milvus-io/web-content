@@ -79,7 +79,7 @@ title: Создайте RAG с помощью Milvus и Ollama
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Мы используем страницы FAQ из <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> в качестве частных знаний в нашем RAG, который является хорошим источником данных для простого RAG-конвейера.</p>
+    </button></h3><p>Мы используем страницы FAQ из <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> в качестве частных знаний в нашем RAG, что является хорошим источником данных для простого RAG-конвейера.</p>
 <p>Скачайте zip-файл и распакуйте документы в папку <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
@@ -246,7 +246,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
         ></path>
       </svg>
     </button></h3><p>Пройдитесь по текстовым строкам, создайте вкрапления, а затем вставьте данные в Milvus.</p>
-<p>Вот новое поле <code translate="no">text</code>, которое является неопределенным полем в схеме коллекции. Оно будет автоматически добавлено в зарезервированное динамическое поле JSON, с которым можно обращаться как с обычным полем на высоком уровне.</p>
+<p>Вот новое поле <code translate="no">text</code>, которое является неопределенным полем в схеме коллекции. Оно будет автоматически добавлено в зарезервированное динамическое поле JSON, которое на высоком уровне может рассматриваться как обычное поле.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []

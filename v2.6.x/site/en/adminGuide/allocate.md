@@ -42,7 +42,7 @@ You need to set the resource variables for each Milvus component if you use `--s
 <a href="#standalone">Milvus standalone</a> <a href="#cluster">Milvus cluster</a>
 </div>
 
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 
 ```Shell
 helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
@@ -50,7 +50,7 @@ helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.
 
 </div>
 
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 
 ```Shell
 helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi

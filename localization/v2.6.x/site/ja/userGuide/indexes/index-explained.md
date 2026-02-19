@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>インデックスはデータの上に構築される付加的な構造である。その内部構造は、使用する近似最近傍探索アルゴリズムに依存する。インデックスは検索を高速化しますが、検索中の前処理時間、スペース、RAMが追加されます。さらに、インデックスを使用すると一般的に想起率が低下する（その影響は無視できるほど小さいが、それでも重要である）。そこでこの記事では、インデックスを使用するコストを最小化しつつ、メリットを最大化する方法を説明する。</p>
+    </button></h1><p>インデックスはデータの上に構築される付加的な構造である。その内部構造は、使用する近似最近傍探索アルゴリズムに依存する。インデックスは検索を高速化しますが、検索中の前処理時間、スペース、RAMが追加されます。さらに、インデックスを使用すると一般的に想起率が低下する（その影響は無視できるほど小さいが、それでも重要である）。そこで、この記事では、インデックスを使用するコストを最小化しつつ、メリットを最大化する方法について説明する。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,31 +43,12 @@ summary: >-
      <th><p>適用可能なインデックス・タイプ</p></th>
    </tr>
    <tr>
-     <td><ul>
-<li><p>FLOAT_VECTOR</p></li>
-<li><p>FLOAT16_VECTOR</p></li>
-<li><p>BLOAT16_VECTOR</p></li>
-<li><p>INT8_VECTOR</p></li>
-</ul></td>
-     <td><ul>
-<li><p>フラット</p></li>
-<li><p>IVF_FLAT</p></li>
-<li><p>IVF_SQ8</p></li>
-<li><p>IVF_PQ</p></li>
-<li><p>IVF_RABITQ</p></li>
-<li><p>GPU_IVF_FLAT</p></li>
-<li><p>GPU_IVF_PQ</p></li>
-<li><p>HNSW</p></li>
-<li><p>DISKANN</p></li>
-</ul></td>
+     <td><ul><li><p>FLOAT_VECTOR</p></li><li><p>FLOAT16_VECTOR</p></li><li><p>BLOAT16_VECTOR</p></li><li><p>INT8_VECTOR</p></li></ul></td>
+     <td><ul><li><p>フラット</p></li><li><p>IVF_FLAT</p></li><li><p>IVF_SQ8</p></li><li><p>IVF_PQ</p></li><li><p>IVF_RABITQ</p></li><li><p>HNSW</p></li><li><p>HNSW_SQ</p></li><li><p>HNSW_PQ</p></li><li><p>HNSW_PRQ</p></li><li><p>DISKANN</p></li><li><p>SCANN</p></li><li><p>AISAQ</p></li><li><p>GPU_CAGRA</p></li><li><p>GPU_IVF_FLAT</p></li><li><p>GPU_IVF_PQ</p></li><li><p>GPU_ブルートフォース</p></li></ul></td>
    </tr>
    <tr>
      <td><p>バイナリベクトル</p></td>
-     <td><ul>
-<li><p>BIN_FLAT</p></li>
-<li><p>BIN_IVF_FLAT</p></li>
-<li><p>MINHASH_LSH</p></li>
-</ul></td>
+     <td><ul><li><p>BIN_FLAT</p></li><li><p>BIN_IVF_FLAT</p></li><li><p>MINHASH_LSH</p></li></ul></td>
    </tr>
    <tr>
      <td><p>スパースフロートベクトル</p></td>
@@ -75,36 +56,18 @@ summary: >-
    </tr>
    <tr>
      <td><p>VARCHAR</p></td>
-     <td><ul>
-<li><p>INVERTED（再推奨）</p></li>
-<li><p>ビットマップ</p></li>
-<li><p>トライ</p></li>
-</ul></td>
+     <td><ul><li><p>INVERTED（推奨）</p></li><li><p>ビットマップ</p></li><li><p>トライ</p></li></ul></td>
    </tr>
    <tr>
      <td><p>論理</p></td>
-     <td><ul>
-<li>BITMAP（推奨）</li>
-<li>INVERTED</li>
-</ul></td>
+     <td><ul><li><p>BITMAP（推奨）</p></li><li><p>INVERTED</p></li></ul></td>
    </tr>
    <tr>
-     <td><ul>
-<li><p>INT8</p></li>
-<li><p>INT16</p></li>
-<li><p>INT32</p></li>
-<li><p>INT64</p></li>
-</ul></td>
-     <td><ul>
-<li>INVERTED</li>
-<li>STL_SORT</li>
-</ul></td>
+     <td><ul><li><p>INT8</p></li><li><p>INT16</p></li><li><p>INT32</p></li><li><p>INT64</p></li></ul></td>
+     <td><ul><li><p>INVERTED</p></li><li><p>STL_SORT</p></li></ul></td>
    </tr>
    <tr>
-     <td><ul>
-<li>FLOAT</li>
-<li>DOUBLE</li>
-</ul></td>
+     <td><ul><li><p>FLOAT</p></li><li><p>DOUBLE</p></li></ul></td>
      <td><p>INVERTED</p></td>
    </tr>
    <tr>
@@ -143,7 +106,22 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/vector-index-anatomy.png" alt="Vector Index Anatomy" class="doc-image" id="vector-index-anatomy" />
    </span> <span class="img-wrapper"> <span>ベクトルインデックスの解剖</span> </span></p>
 <p>インデックス作成時、milvusは選択されたデータ構造と量子化方法を組み合わせ、最適な<strong>展開率を</strong>決定する。クエリ時には、<code translate="no">topK × expansion rate</code> 候補ベクトルを検索し、リファイナーを適用してより高い精度で距離を再計算し、最終的に最も正確な<code translate="no">topK</code> 結果を返す。このハイブリッド・アプローチは、リソースを大量に消費する精密化を、フィルタリングされた候補のサブセットに制限することで、速度と精度のバランスをとっている。</p>
-<h3 id="Data-structure" class="common-anchor-header">データ構造</h3><p>データ構造はインデックスの基礎となるレイヤーを形成する。一般的なタイプは以下の通り：</p>
+<h3 id="Data-structure" class="common-anchor-header">データ構造<button data-href="#Data-structure" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>データ構造はインデックスの基礎となるレイヤーを形成する。一般的なタイプは以下の通り：</p>
 <ul>
 <li><p><strong>転置ファイル（IVF）</strong></p>
 <p>IVFシリーズのインデックスタイプは、Milvusがセントロイドベースのパーティショニングによってベクトルをバケットにクラスタリングすることを可能にします。一般に、バケットの重心がクエリベクトルに近ければ、バケット内のすべてのベクトルはクエリベクトルに近いと仮定しても安全です。この前提に基づき、milvusはデータセット全体を調べるのではなく、重心がクエリベクトルに近いバケット内のベクトルの埋め込みのみをスキャンする。この戦略により、許容できる精度を維持しながら計算コストを削減することができる。</p>
@@ -152,15 +130,60 @@ summary: >-
 <p><a href="https://arxiv.org/abs/1603.09320">HNSW（Hierarchical</a> Navigable Small World）のような、ベクトル検索用のグラフベースのデータ構造は、各ベクトルが最近傍のベクトルに接続する階層グラフを構築する。クエリーはこの階層をナビゲートし、粗い上層から始めて下層を切り替えることで、効率的な対数時間の検索複雑性を実現する。</p>
 <p>このタイプのインデックス・データ構造は、高次元空間や低レイテンシーのクエリを必要とするシナリオに優れている。</p></li>
 </ul>
-<h3 id="Quantization" class="common-anchor-header">量子化</h3><p>量子化は、より粗い表現によってメモリフットプリントと計算コストを削減します：</p>
+<h3 id="Quantization" class="common-anchor-header">量子化<button data-href="#Quantization" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>量子化は、より粗い表現によってメモリフットプリントと計算コストを削減します：</p>
 <ul>
 <li><p><strong>スカラー量子化</strong>（<strong>SQ8など</strong>）により、milvusは各ベクトル次元を1バイト（8ビット）に圧縮し、32ビット浮動小数点数と比較してメモリ使用量を75%削減することができます。</p></li>
 <li><p><strong>積量子化</strong><strong>(PQ</strong>)は、Milvusがベクトルをサブベクトルに分割し、コードブックベースのクラスタリングを用いて符号化することを可能にします。これにより、高い圧縮率（例：4～32倍）が達成され、その代償として再現性がわずかに低下するため、メモリに制約のある環境に適しています。</p></li>
 </ul>
-<h3 id="Refiner" class="common-anchor-header">リファイナー</h3><p>量子化は本質的に損失が大きい。リコール率を維持するために、量子化は一貫して必要以上のトップK候補を生成するため、リファイナーはより高い精度を使用してこれらの候補からトップK結果をさらに選択し、リコール率を向上させることができます。</p>
+<h3 id="Refiner" class="common-anchor-header">リファイナー<button data-href="#Refiner" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>量子化は本質的に損失が大きい。リコール率を維持するために、量子化は一貫して必要以上のトップK候補を生成するため、リファイナーはより高い精度を使用してこれらの候補からトップK結果をさらに選択し、リコール率を向上させることができます。</p>
 <p>例えば、FP32リファイナーは、量子化によって返された検索結果候補に対して、量子化された値ではなくFP32の精度を用いて距離を再計算する操作を行います。</p>
 <p>これは、セマンティック検索や推薦システムなど、検索効率と精度のトレードオフを必要とするアプリケーションにおいて重要であり、わずかな距離の変動が結果の品質に大きく影響する。</p>
-<h3 id="Summary" class="common-anchor-header">まとめ</h3><p>データ構造による粗いフィルタリング、量子化による効率的な計算、そして洗練による精度チューニングという階層化されたアーキテクチャにより、Milvusは精度と性能のトレードオフを適応的に最適化することができる。</p>
+<h3 id="Summary" class="common-anchor-header">まとめ<button data-href="#Summary" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>データ構造による粗いフィルタリング、量子化による効率的な計算、そして洗練による精度チューニングという階層化されたアーキテクチャにより、Milvusは精度と性能のトレードオフを適応的に最適化することができる。</p>
 <h2 id="Performance-trade-offs" class="common-anchor-header">性能のトレードオフ<button data-href="#Performance-trade-offs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -183,16 +206,46 @@ summary: >-
 <li><p><strong>PQは</strong>通常、<strong>SQと</strong>比較して、同程度の圧縮率でより優れた想起率を提供するが、後者の方がより高速なパフォーマンスを提供する。</p></li>
 <li><p><strong>DiskANNの</strong>ように）インデックスの一部にハードディスクを使用することは、大きなデータセットの管理に役立つが、IOPSのボトルネックになる可能性もある。</p></li>
 </ul>
-<h3 id="Capacity" class="common-anchor-header">容量</h3><p>容量は通常、データサイズと利用可能なRAMの関係を含む。容量を扱う場合、次のように考える：</p>
+<h3 id="Capacity" class="common-anchor-header">容量<button data-href="#Capacity" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>容量は通常、データサイズと利用可能なRAMの関係を含む。容量を扱う場合、次のように考える：</p>
 <ul>
 <li><p>生データの4分の1がメモリに収まるなら、安定したレイテンシーを持つDiskANNを検討する。</p></li>
-<li><p>生データの4分の1がメモリに収まるなら、安定したレイテンシを持つDiskANNを検討する。生データがすべてメモリに収まるなら、メモリベースのインデックスタイプとmmapを検討する。</p></li>
+<li><p>生データの4分の1がメモリに収まるなら、安定したレイテンシーを持つDiskANNを検討する。生データがすべてメモリに収まるなら、メモリベースのインデックスタイプとmmapを検討する。</p></li>
 <li><p>量子化を適用したインデックスタイプとmmapを使用することで、精度と最大容量を交換することができます。</p></li>
 </ul>
 <div class="alert note">
 <p>mmapが常に解決策とは限らない。ほとんどのデータがディスク上にある場合、DiskANNの方がレイテンシが優れています。</p>
 </div>
-<h3 id="Recall" class="common-anchor-header">リコール</h3><p>リコールは通常フィルター比率に関係し、検索前にフィルターで除外されるデータを指す。リコールを扱う場合、以下を考慮してください：</p>
+<h3 id="Recall" class="common-anchor-header">リコール<button data-href="#Recall" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>リコールは通常フィルター比率に関係し、検索前にフィルターで除外されるデータを指す。リコールを扱う場合、以下を考慮してください：</p>
 <ul>
 <li><p>フィルター比率が85%未満の場合、グラフベースのインデックスタイプはIVFの亜種を凌駕する。</p></li>
 <li><p>フィルタ比率が 85% から 95% の場合は、IVF variant を使う。</p></li>
@@ -201,13 +254,43 @@ summary: >-
 <div class="alert note">
 <p>上記の項目が常に正しいとは限りません。どのインデックスタイプが有効かを判断するために、異なるインデックスタイプでリコールをチューニングすることをお勧めします。</p>
 </div>
-<h3 id="Performance" class="common-anchor-header">パフォーマンス</h3><p>検索のパフォーマンスには通常、検索が返すレコード数を意味する top-K が含まれます。パフォーマンスを扱う場合、以下のことを考慮してください：</p>
+<h3 id="Performance" class="common-anchor-header">パフォーマンス<button data-href="#Performance" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>検索のパフォーマンスには通常、検索が返すレコード数を意味する top-K が含まれます。パフォーマンスを扱う場合、以下のことを考慮してください：</p>
 <ul>
 <li><p>高い想起率を必要とする小さなトップK（例えば2,000）の検索では、グラフベースのインデックスタイプはIVFバリアントよりも優れている。</p></li>
 <li><p>ベクトル埋め込み総数と比較して）大きなトップKを持つ検索では、グラフベースのインデックスタイプよりもIVFバリアントが良い選択となる。</p></li>
 <li><p>top-Kが中程度でフィルタ比率が高い検索では、IVF変種がより良い選択となる。</p></li>
 </ul>
-<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決定マトリクス最適なインデックスタイプの選択</h3><p>以下の表は、適切なインデックスタイプを選択する際に参照する決定マトリクスです。</p>
+<h3 id="Decision-Matrix-Choosing-the-most-appropriate-index-type" class="common-anchor-header">決定マトリクス最適なインデックスタイプの選択<button data-href="#Decision-Matrix-Choosing-the-most-appropriate-index-type" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表は、適切なインデックスタイプを選択する際に参照する決定マトリクスです。</p>
 <table>
    <tr>
      <th><p>シナリオ</p></th>
@@ -265,7 +348,22 @@ summary: >-
 </div>
 <p>インデックスのメモリ消費量は、そのデータ構造、量子化による圧縮率、使用するリファイナーに影響される。一般的に言って、グラフベースのインデックスは、グラフの構造（<strong>HNSW</strong> など）によりメモリフットプリントが大きくなる。対照的に、IVFとその亜種は、ベクトル毎の空間オーバヘッドが少ないため、メモリ効率が高い。しかし、<strong>DiskANNの</strong>ような高度な技術では、グラフやリファイナーといったインデックスの一部をディスクに常駐させることができるため、性能を維持しながらメモリ負荷を軽減することができる。</p>
 <p>具体的には、インデックスのメモリ使用量は以下のように計算できる：</p>
-<h3 id="IVF-index-memory-usage" class="common-anchor-header">IVFインデックスのメモリ使用量</h3><p>IVFインデックスは、データをクラスタに分割することで、メモリ効率と検索性能のバランスをとっています。以下は、IVF バリアントを使用してインデックスを作成した 128 次元ベクトル 100 万個が使用するメモリの内訳です。</p>
+<h3 id="IVF-index-memory-usage" class="common-anchor-header">IVFインデックスのメモリ使用量<button data-href="#IVF-index-memory-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVFインデックスは、データをクラスタに分割することで、メモリ効率と検索性能のバランスをとっています。以下は、IVF バリアントを使用してインデックスを作成した 128 次元ベクトル 100 万個が使用するメモリの内訳です。</p>
 <ol>
 <li><p><strong>セントロイドが使用するメモリを計算します。</strong></p>
 <p>IVFシリーズのインデックスタイプにより、Milvusはセントロイドベースのパーティショニングを使用して、ベクトルをバケットにクラスタ化することができます。各セントロイドは生のベクトル埋め込みにおけるインデックスに含まれます。ベクトルを2,000のクラスタに分割すると、メモリ使用量は以下のように計算できます：</p>
@@ -319,7 +417,22 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">グラフベースインデックスのメモリ使用量</h3><p>HNSWのようなグラフベースのインデックス・タイプは、グラフ構造と生のベクトル埋め込みを保存するために大きなメモリを必要とします。以下は、HNSWインデックスタイプを使用してインデックス付けされた128次元ベクトル100万個が消費するメモリの詳細な内訳です。</p>
+<h3 id="Graph-based-index-memory-usage" class="common-anchor-header">グラフベースのインデックスのメモリ使用量<button data-href="#Graph-based-index-memory-usage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSWのようなグラフベースのインデックス・タイプは、グラフ構造と生のベクトル埋め込みを保存するために大きなメモリを必要とします。以下は、HNSWインデックスタイプを使用してインデックス付けされた128次元ベクトル100万個が消費するメモリの詳細な内訳です。</p>
 <ol>
 <li><p><strong>グラフ構造が使用するメモリを計算する。</strong></p>
 <p>HNSWの各ベクトルは近傍との接続を維持する。グラフ次数（ノードあたりの辺）を32とすると、消費されるメモリは以下のように計算できる：</p>
@@ -341,8 +454,23 @@ summary: >-
 50 candidates x 128 dimensions x 4 bytes = 25.6 KB
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Other-considerations" class="common-anchor-header">その他の考慮点</h3><p>IVFとグラフベースのインデックスが量子化によってメモリ使用量を最適化するのに対して、メモリマップファイル（mmap）とDiskANNは、データセットが利用可能なランダムアクセスメモリ（RAM）を超えるシナリオに対応します。</p>
+<h3 id="Other-considerations" class="common-anchor-header">その他の考慮点<button data-href="#Other-considerations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVFとグラフベースのインデックスが量子化によってメモリ使用量を最適化するのに対して、メモリマップファイル（mmap）とDiskANNは、データセットが利用可能なランダムアクセスメモリ（RAM）を超えるシナリオに対応します。</p>
 <h4 id="DiskANN" class="common-anchor-header">DiskANN</h4><p>DiskANN は Vamana グラフ ベースのインデックスで、検索中にデータ ポイントを効率的にナビゲートできるように接続する一方、PQ を適用してベクトル サイズを縮小し、ベクトル間の近似距離計算を迅速に行うことができます。</p>
 <p>Vamana グラフはディスク上に保存されるため、DiskANN はメモリに収まらないような大きなデータセットも扱うことができます。これは特に10億ポイントのデータセットに有効です。</p>
-<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">メモリ マップ ファイル (mmap)</h4><p>メモリマッピング(Mmap)は、ディスク上の大きなファイルへの直接メモリアクセスを可能にし、Milvusがメモリとハードディスクの両方にインデックスとデータを格納することを可能にします。このアプローチは、アクセス頻度に基づくI/Oコールのオーバーヘッドを削減することでI/Oオペレーションを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張します。</p>
+<h4 id="Memory-mapped-files-mmap" class="common-anchor-header">メモリ マップ ファイル (mmap)</h4><p>メモリマッピング(Mmap)により、ディスク上の大容量ファイルへの直接メモリアクセスが可能になり、Milvusはインデックスとデータをメモリとハードディスクの両方に格納することができます。このアプローチは、アクセス頻度に基づくI/Oコールのオーバーヘッドを削減することでI/Oオペレーションを最適化し、検索パフォーマンスに大きな影響を与えることなくコレクションのストレージ容量を拡張します。</p>
 <p>具体的には、Milvusは特定のフィールドの生データを完全にメモリにロードするのではなく、メモリマップするように設定することができます。こうすることで、メモリの問題を心配することなくフィールドに直接メモリアクセスすることができ、コレクション容量を拡張することができます。</p>

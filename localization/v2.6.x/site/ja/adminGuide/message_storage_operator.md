@@ -60,7 +60,7 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
 </ul></li>
 <li>Milvusシステムの実行中にメッセージストレージを変更することはできません。</li>
 <li>Kafka 2.x または 3.x バージョンのみがサポートされます。</li>
-<li><strong>アップグレードの制限</strong> <strong>メッセージキューの制限</strong>Milvus v2.6.6にアップグレードする場合、現在のメッセージキューを維持する必要があります。アップグレード中に異なるメッセージキューシステムを切り替えることはサポートされていません。メッセージキューシステムの変更は将来のバージョンでサポートされる予定です。</li>
+<li><strong>アップグレードの制限</strong> <strong>メッセージキューの制限</strong>Milvus v2.6.11にアップグレードする場合、現在選択しているメッセージキューを維持する必要があります。アップグレード中に異なるメッセージキューシステムを切り替えることはサポートされていません。メッセージキューシステムの変更は将来のバージョンでサポートされる予定です。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ の設定<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -260,7 +260,7 @@ summary: Milvus Operatorでメッセージストレージを設定する方法�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">inCluster</code> は、Milvusクラスタが起動すると、クラスタ内で自動的にPulsarサービスが起動することを示します。</p>
+    </button></h3><p><code translate="no">inCluster</code> はMilvusクラスタが起動すると、クラスタ内で自動的にPulsarサービスが起動することを示します。</p>
 <h4 id="Example" class="common-anchor-header">例</h4><p>以下の例では、内部Pulsarサービスを構成します。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

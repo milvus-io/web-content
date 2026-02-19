@@ -22,6 +22,9 @@ title: Index avec GPU
         ></path>
       </svg>
     </button></h1><p>Ce guide décrit les étapes pour construire un index avec la prise en charge du GPU dans Milvus, ce qui peut améliorer de manière significative les performances de recherche dans les scénarios à haut débit et à fort rappel. Pour plus de détails sur les types d'index GPU pris en charge par Milvus, voir <a href="/docs/fr/gpu_index.md">Index GPU</a>.</p>
+<div class="alert warning">
+<p>Cette page est obsolète. Pour la dernière mise en œuvre, voir <a href="/docs/fr/gpu-index-overview.md">Aperçu de l'index GPU</a>.</p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurer les paramètres Milvus pour le contrôle de la mémoire GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +69,22 @@ title: Index avec GPU
         ></path>
       </svg>
     </button></h2><p>Les exemples suivants montrent comment construire des index GPU de différents types.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">Préparer les paramètres de l'index</h3><p>Lors de la configuration des paramètres de l'index GPU, définissez <strong>index_type</strong>, <strong>metric_type</strong> et <strong>params</strong>:</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">Préparer les paramètres de l'index<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Lors de la configuration des paramètres de l'index GPU, définissez <strong>index_type</strong>, <strong>metric_type</strong> et <strong>params</strong>:</p>
 <ul>
 <li><p><strong>index_type</strong><em>(chaîne</em>) : Le type d'index utilisé pour accélérer la recherche vectorielle. Les options valides sont <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> et <strong>GPU_BRUTE_FORCE</strong>.</p></li>
 <li><p><strong>metric_type</strong><em>(chaîne</em>) : Le type de métrique utilisé pour mesurer la similarité des vecteurs. Les options valides sont <strong>IP</strong> et <strong>L2</strong>.</p></li>
@@ -87,7 +105,7 @@ title: Index avec GPU
 <p>Les options possibles pour <strong>params</strong> sont les suivantes</p>
 <ul>
 <li><p><strong>intermediate_graph_degree</strong><em>(int</em>) : Affecte le rappel et le temps de construction en déterminant le degré du graphe avant l'élagage. Les valeurs recommandées sont <strong>32</strong> ou <strong>64</strong>.</p></li>
-<li><p><strong>graph_degree</strong><em>(int</em>) : Affecte les performances de recherche et le rappel en déterminant le degré du graphe après l'élagage. En règle générale, il est égal à la moitié du <strong>degré intermédiaire du graphe</strong>. Une plus grande différence entre ces deux degrés se traduit par un temps de construction plus long. Sa valeur doit être inférieure à la valeur de <strong>intermediate_graph_degree</strong>.</p></li>
+<li><p><strong>graph_degree</strong><em>(int)</em>: Affecte les performances de recherche et le rappel en déterminant le degré du graphe après l'élagage. En règle générale, il est égal à la moitié du <strong>degré intermédiaire du graphe</strong>. Une plus grande différence entre ces deux degrés se traduit par un temps de construction plus long. Sa valeur doit être inférieure à la valeur de <strong>intermediate_graph_degree</strong>.</p></li>
 <li><p><strong>build_algo</strong><em>(chaîne</em>) : Sélectionne l'algorithme de génération de graphe avant l'élagage. Options possibles :</p>
 <ul>
 <li><p><strong>IVF_PQ</strong>: offre une meilleure qualité mais un temps de construction plus lent.</p></li>
@@ -114,7 +132,22 @@ title: Index avec GPU
 <button class="copy-code-btn"></button></code></pre>
 <p>Aucune configuration <strong>paramétrique</strong> supplémentaire n'est requise.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">Construction de l'index</h3><p>Après avoir configuré les paramètres de l'index dans <strong>index_params</strong>, appelez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> pour construire l'index.</p>
+<h3 id="Build-index" class="common-anchor-header">Construction de l'index<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Après avoir configuré les paramètres de l'index dans <strong>index_params</strong>, appelez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> pour construire l'index.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -139,7 +172,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>Une fois que vous avez construit votre index GPU, l'étape suivante consiste à préparer les paramètres de recherche avant d'effectuer une recherche.</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">Préparer les paramètres de recherche</h3><p>Vous trouverez ci-dessous des exemples de configurations pour différents types d'index :</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">Préparer les paramètres de recherche<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vous trouverez ci-dessous des exemples de configurations pour différents types d'index :</p>
 <ul>
 <li><p>Index<strong>GPU_BRUTE_FORCE</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -175,7 +223,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Les paramètres de recherche pour ces deux types d'index sont similaires à ceux utilisés pour <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> et <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Pour plus d'informations, reportez-vous à la section <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Effectuer une recherche de similarité vectorielle</a>.</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">Effectuer une recherche</h3><p>Utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> pour effectuer une recherche de similarité vectorielle sur l'index GPU.</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">Effectuer une recherche<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> pour effectuer une recherche de similarité vectorielle sur l'index GPU.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 

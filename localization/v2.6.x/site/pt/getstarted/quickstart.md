@@ -43,7 +43,7 @@ title: Início rápido
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurar a base de dados vetorial<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar os vectores e os metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar as especificações do vetor, como a dimensionalidade, os tipos de índice e as métricas distantes. Existem também conceitos complexos para otimizar o índice para o desempenho da pesquisa vetorial. Por enquanto, vamos nos concentrar apenas no básico e usar o padrão para tudo o que for possível. No mínimo, você só precisa definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
+    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar os vectores e os metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar as especificações do vetor, como a dimensionalidade, os tipos de índice e as métricas distantes. Existem também conceitos complexos para otimizar o índice para o desempenho da pesquisa vetorial. Por enquanto, vamos nos concentrar apenas no básico e usar o padrão para tudo o que for possível. No mínimo, só é necessário definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -179,7 +179,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se não conseguiu descarregar o modelo devido a problemas de rede, como alternativa, pode utilizar vectores aleatórios para representar o texto e ainda assim terminar o exemplo. Tenha apenas em atenção que o resultado da pesquisa não reflectirá a semelhança semântica, uma vez que os vectores são falsos.</p>
+    </button></h2><p>Se não foi possível descarregar o modelo devido a problemas de rede, como alternativa, pode utilizar vectores aleatórios para representar o texto e ainda assim terminar o exemplo. Tenha apenas em atenção que o resultado da pesquisa não reflectirá a semelhança semântica, uma vez que os vectores são falsos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Text strings to search from.</span>
@@ -238,8 +238,23 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Agora podemos fazer pesquisas semânticas representando o texto da consulta de pesquisa como um vetor e efetuar pesquisas de semelhança de vectores no Milvus.</p>
-<h3 id="Vector-search" class="common-anchor-header">Pesquisa vetorial</h3><p>O Milvus aceita um ou vários pedidos de pesquisa vetorial ao mesmo tempo. O valor da variável query_vectors é uma lista de vectores, em que cada vetor é uma matriz de números float.</p>
+    </button></h2><p>Agora podemos fazer pesquisas semânticas representando o texto da consulta de pesquisa como um vetor e realizar pesquisas de semelhança de vectores no Milvus.</p>
+<h3 id="Vector-search" class="common-anchor-header">Pesquisa vetorial<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O Milvus aceita um ou vários pedidos de pesquisa vetorial ao mesmo tempo. O valor da variável query_vectors é uma lista de vectores, em que cada vetor é uma matriz de números float.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -301,8 +316,23 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Por defeito, os campos escalares não são indexados. Se precisar de efetuar uma pesquisa filtrada de metadados num grande conjunto de dados, pode considerar a utilização de um esquema fixo e também ativar o <a href="https://milvus.io/docs/scalar_index.md">índice</a> para melhorar o desempenho da pesquisa.</p>
 <p>Para além da pesquisa vetorial, também pode efetuar outros tipos de pesquisa:</p>
-<h3 id="Query" class="common-anchor-header">Consulta</h3><p>Uma query() é uma operação que recupera todas as entidades que correspondem a um critério, tal como uma <a href="https://milvus.io/docs/boolean.md">expressão de filtro</a> ou a correspondência de alguns ids.</p>
-<p>Por exemplo, a recuperação de todas as entidades cujo campo escalar tem um valor específico:</p>
+<h3 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Uma query() é uma operação que recupera todas as entidades que correspondem a um critério, tal como uma <a href="https://milvus.io/docs/boolean.md">expressão de filtro</a> ou a correspondência de alguns ids.</p>
+<p>Por exemplo, recuperar todas as entidades cujo campo escalar tem um determinado valor:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
@@ -363,7 +393,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma vez que todos os dados do Milvus Lite são armazenados num ficheiro local, pode carregar todos os dados para a memória mesmo após o programa terminar, criando um <code translate="no">MilvusClient</code> com o ficheiro existente. Por exemplo, isto irá recuperar as colecções do ficheiro "milvus_demo.db" e continuar a escrever dados no mesmo.</p>
+    </button></h2><p>Uma vez que todos os dados do Milvus Lite são armazenados num ficheiro local, pode carregar todos os dados para a memória mesmo depois do programa terminar, criando um <code translate="no">MilvusClient</code> com o ficheiro existente. Por exemplo, isto irá recuperar as colecções do ficheiro "milvus_demo.db" e continuar a escrever dados no mesmo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -407,3 +437,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>Para migrar dados do Milvus Lite para o Milvus implantado no Docker ou Kubernetes, consulte <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migrando dados do Milvus Lite</a>.</p>
 <p>O Milvus fornece API REST e gRPC, com bibliotecas de clientes em linguagens como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# e <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Para a conceção de esquemas, Milvus suporta a conceção de esquemas flexíveis, onde pode definir os campos e os seus tipos de dados, incluindo campos vectoriais. Também é possível definir o tipo de índice e os parâmetros para cada campo. Para obter mais informações, consulte <a href="https://milvus.io/docs/schema-hands-on.md">Design do modelo de dados para pesquisa</a>.</p>

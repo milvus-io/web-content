@@ -59,7 +59,7 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <tbody>
     <tr>
       <td>        `true` to enable quota and limits, `false` to disable.      </td>
-      <td>true</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>

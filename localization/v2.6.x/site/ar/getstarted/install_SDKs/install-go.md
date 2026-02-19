@@ -54,7 +54,7 @@ title: تثبيت Milvus Go SDK
         ></path>
       </svg>
     </button></h2><p>قم بتثبيت Milvus GO SDK والتبعيات عبر <code translate="no">go get</code>.</p>
-<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus-sdk-go/v2
+<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus/client/v2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">الخطوة التالية<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

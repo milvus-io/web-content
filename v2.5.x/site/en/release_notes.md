@@ -8,6 +8,84 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.26
+
+Release date: January 27, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.5.26         | 2.5.18             | 2.5.13              | 2.5.14           | 2.5.14         |
+
+We are pleased to announce the release of Milvus 2.5.26! This release includes critical security enhancements and important stability fixes. A key highlight is the addition of security controls for the internal `/expr` endpoint to prevent potential remote expression execution vulnerabilities. We have also upgraded the Pulsar client library to fix race conditions, resolved L0 segment data forwarding issues, and fixed Azure storage precheck configuration problems. We strongly recommend all users on the 2.5 branch upgrade to this version.
+
+### Security
+
+- Added security controls for the `/expr` endpoint to prevent remote expression execution vulnerabilities ([#47130](https://github.com/milvus-io/milvus/pull/47130))
+
+### Improvements
+
+- Upgraded pulsar-client-go to v0.17.0 to fix send buffer race conditions ([#47184](https://github.com/milvus-io/milvus/pull/47184))
+- Added gRPC metadata header for client request time tracking ([#46946](https://github.com/milvus-io/milvus/pull/46946))
+
+### Bug fixes
+
+- Fixed L0 growing segment data forwarding to use the correct bulk delta-load API ([#47231](https://github.com/milvus-io/milvus/pull/47231))
+- Fixed Azure blob storage precheck using incorrect bucket configuration ([#47204](https://github.com/milvus-io/milvus/pull/47204))
+- Fixed geometry data conversion inconsistencies in WKT/WKB options ([#46872](https://github.com/milvus-io/milvus/pull/46872))
+
+## v2.5.25
+
+Release date: January 12, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.5.25         | 2.5.18             | 2.5.13              | 2.5.14           | 2.5.14         |
+
+We are pleased to announce the release of Milvus 2.5.25! This update focuses on enhancing the reliability of storage operations and optimizing background task scheduling. Key improvements include a more robust retry mechanism for object storage under rate-limiting conditions and more accurate resource estimation for indexing tasks. This release also resolves several critical issues, including ETCD RPC limits during collection drops and consistency in geometry data conversions. We recommend all users on the 2.5 branch upgrade to this version for improved system stability.
+
+### Improvements
+
+- Prevented message loss in Pulsar consumers after client library upgrades ([#46591](https://github.com/milvus-io/milvus/pull/46591))
+- Made metadata batch processing configurable to prevent transaction errors ([#46514](https://github.com/milvus-io/milvus/pull/46514))
+- Improved reliability of object storage operations under high load with automatic retry on rate limit errors ([#46463](https://github.com/milvus-io/milvus/pull/46463))
+- Added configuration option for variable-length field size estimation ([#46301](https://github.com/milvus-io/milvus/pull/46301))
+- Improved slot allocation accuracy for indexing tasks ([#46260](https://github.com/milvus-io/milvus/pull/46260))
+
+### Bug fixes
+
+- Fixed geometry data conversion inconsistencies ([#46872](https://github.com/milvus-io/milvus/pull/46872))
+- Fixed inverted index compaction issue that could cause segment load failures ([#46868](https://github.com/milvus-io/milvus/pull/46868))
+- Fixed text log loading failure ([#46704](https://github.com/milvus-io/milvus/pull/46704))
+- Fixed ETCD error when dropping large collections ([#46580](https://github.com/milvus-io/milvus/pull/46580))
+- Fixed resource leak issue with proxy clients ([#46491](https://github.com/milvus-io/milvus/pull/46491))
+
+## v2.5.24
+
+Release date: December 23, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.24          | 2.5.18            | 2.5.13              | 2.5.14           |
+
+We are excited to announce Milvus 2.5.24. This release prioritizes system security and stability, featuring critical updates to dependencies to address high-severity vulnerabilities. Additionally, it resolves significant correctness issues in Hybrid Search and JSON query processing, ensuring reliable performance under complex workloads. We strongly recommend all users upgrade to this version.
+
+### Improvements
+
+- Upgraded Go version to 1.24.11 to address security vulnerabilities ([#46114](https://github.com/milvus-io/milvus/pull/46114)).
+- Upgraded [golang.org/x/crypto](https://pkg.go.dev/golang.org/x/crypto) dependency to fix CVE vulnerabilities ([#46112](https://github.com/milvus-io/milvus/pull/46112)).
+- Optimized the loading performance of BM25 statistics for sparse vector search ([#45780](https://github.com/milvus-io/milvus/pull/45780)).
+- Refined logic to exclude stopping nodes from resource groups, improving cluster load balancing stability ([#45982](https://github.com/milvus-io/milvus/pull/45982)).
+
+### Bug fixes
+
+- Improved startup logic to fail fast if critical components are not ready, aiding in troubleshooting ([#46115](https://github.com/milvus-io/milvus/pull/46115)).
+- Fixed a data scanning issue where the cursor was not correctly updated after skipping data chunks ([#46078](https://github.com/milvus-io/milvus/pull/46078)).
+- Fixed undefined behavior that could occur when dumping database snapshots ([#45613](https://github.com/milvus-io/milvus/pull/45613)).
+- Fixed an issue where default values for geometry fields were not correctly set via the RESTful API ([#46065](https://github.com/milvus-io/milvus/pull/46065)).
+- Fixed an issue where the total search count was incorrectly returned as zero during hybrid searches ([#45843](https://github.com/milvus-io/milvus/pull/45843)).
+- Fixed a logic error where QueryCoord ignored stopping nodes during watcher events ([#45964](https://github.com/milvus-io/milvus/pull/45964)).
+- Fixed a potential QueryNode crash caused by memory handling in JSON contains expressions ([#45785](https://github.com/milvus-io/milvus/pull/45785)).
+
 ## v2.5.23
 
 Release date: November 20, 2025

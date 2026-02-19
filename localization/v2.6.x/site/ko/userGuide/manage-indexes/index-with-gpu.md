@@ -19,7 +19,10 @@ title: GPU를 사용한 색인
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 처리량이 많고 호출 횟수가 많은 시나리오에서 검색 성능을 크게 향상시킬 수 있는 Milvus에서 GPU를 지원하는 인덱스를 구축하는 단계를 간략하게 설명합니다. Milvus에서 지원하는 GPU 인덱스 유형에 대한 자세한 내용은 <a href="/docs/ko/gpu_index.md">GPU 인덱스를</a> 참조하세요.</p>
+    </button></h1><p>이 가이드에서는 처리량이 많고 호출 빈도가 높은 시나리오에서 검색 성능을 크게 향상시킬 수 있는 Milvus에서 GPU를 지원하는 인덱스를 구축하는 단계를 간략하게 설명합니다. Milvus에서 지원하는 GPU 인덱스의 유형에 대한 자세한 내용은 <a href="/docs/ko/gpu_index.md">GPU 인덱스를</a> 참조하세요.</p>
+<div class="alert warning">
+<p>이 페이지는 더 이상 사용되지 않습니다. 최신 구현에 대해서는 <a href="/docs/ko/gpu-index-overview.md">GPU 인덱스 개요를</a> 참조하세요.</p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">GPU 메모리 제어를 위한 Milvus 설정 구성하기<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +67,22 @@ title: GPU를 사용한 색인
         ></path>
       </svg>
     </button></h2><p>다음 예제는 다양한 유형의 GPU 인덱스를 구축하는 방법을 보여줍니다.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">인덱스 매개변수 준비하기</h3><p>GPU 인덱스 파라미터를 설정할 때 <strong>index_type</strong>, <strong>metric_type</strong>, <strong>params를</strong> 정의합니다:</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">인덱스 매개변수 준비하기<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>GPU 인덱스 파라미터를 설정할 때 <strong>index_type</strong>, <strong>metric_type</strong>, <strong>params를</strong> 정의합니다:</p>
 <ul>
 <li><p><strong>index_type</strong><em>(문자열</em>): 벡터 검색을 가속화하는 데 사용되는 인덱스 유형입니다. 유효한 옵션으로는 <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong>, <strong>GPU_BRUTE_FORCE가</strong> 있습니다.</p></li>
 <li><p><strong>metric_type</strong><em>(문자열</em>): 벡터의 유사성을 측정하는 데 사용되는 메트릭 유형입니다. 유효한 옵션은 <strong>IP와</strong> <strong>L2입니다</strong>.</p></li>
@@ -112,7 +130,22 @@ title: GPU를 사용한 색인
 <button class="copy-code-btn"></button></code></pre>
 <p>추가 <strong>파라미터</strong> 구성이 필요하지 않습니다.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">인덱스 빌드</h3><p><strong>index_params에서</strong> 인덱스 파라미터를 구성한 후, 인덱스를 빌드하기 위해 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> 메서드를 호출하여 인덱스를 빌드합니다.</p>
+<h3 id="Build-index" class="common-anchor-header">인덱스 빌드<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>index_params에서</strong> 인덱스 파라미터를 구성한 후, 인덱스를 빌드하기 위해 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> 메서드를 호출하여 인덱스를 빌드합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -137,7 +170,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>GPU 인덱스를 구축했으면 다음 단계는 검색을 수행하기 전에 검색 매개변수를 준비하는 것입니다.</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">검색 매개변수 준비하기</h3><p>다음은 다양한 인덱스 유형에 대한 구성 예시입니다:</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">검색 매개변수 준비하기<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음은 다양한 인덱스 유형에 대한 구성 예시입니다:</p>
 <ul>
 <li><p><strong>GPU_BRUTE_FORCE</strong> 인덱스</p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -161,7 +209,7 @@ collection.create_index(
 <p>주요 검색 매개변수는 다음과 같습니다:</p>
 <ul>
 <li><p><strong>itopk_size</strong>: 검색 중에 보관되는 중간 결과의 크기를 결정합니다. 값이 클수록 검색 성능이 저하되는 대신 회상률이 향상될 수 있습니다. 이 값은 최소한 최종 상위 k<strong>(한계</strong>) 값과 같아야 하며 일반적으로 2의 거듭제곱입니다(예: 16, 32, 64, 128).</p></li>
-<li><p><strong>search_width</strong>: 검색 중 CAGRA 그래프에 들어가는 진입점 수를 지정합니다. 이 값을 높이면 검색 회수율은 향상될 수 있지만 검색 성능에 영향을 줄 수 있습니다.</p></li>
+<li><p><strong>search_width</strong>: 검색 중 CAGRA 그래프에 들어가는 진입점 수를 지정합니다. 이 값을 높이면 검색 회수율은 향상될 수 있지만 검색 성능에 영향을 미칠 수 있습니다.</p></li>
 <li><p><strong>MIN_ITERATIONS</strong> / <strong>MAX_ITERATIONS</strong>: 이 매개변수는 검색 반복 프로세스를 제어합니다. 기본적으로 이 값은 <strong>0으로</strong> 설정되어 있으며, CAGRA는 <strong>itopk_size</strong> 및 <strong>search_width에</strong> 따라 반복 횟수를 자동으로 결정합니다. 이 값을 수동으로 조정하면 성능과 정확도의 균형을 맞추는 데 도움이 될 수 있습니다.</p></li>
 <li><p><strong>team_size</strong>: GPU에서 메트릭 거리를 계산하는 데 사용되는 CUDA 스레드 수를 지정합니다. 일반적인 값은 2의 거듭제곱에서 최대 32입니다(예: 2, 4, 8, 16, 32). 검색 성능에 약간의 영향을 미칩니다. 기본값은 <strong>0이며</strong>, Milvus는 벡터 차원에 따라 자동으로 <strong>team_size를</strong> 선택합니다.</p></li>
 </ul></li>
@@ -173,7 +221,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>이 두 인덱스 유형에 대한 검색 매개변수는 <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> 및 <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ에</a></strong> 사용되는 것과 유사합니다. 자세한 내용은 <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">벡터 유사도 검색 수행을</a> 참조하세요.</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">검색 수행</h3><p>벡터 유사도 검색을 수행하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> 메서드를 사용하여 GPU 인덱스에서 벡터 유사도 검색을 수행합니다.</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">검색 수행<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>벡터 유사도 검색을 수행하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> 메서드를 사용하여 GPU 인덱스에서 벡터 유사도 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 

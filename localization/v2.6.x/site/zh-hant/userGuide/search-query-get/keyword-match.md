@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>Milvus 中的文字匹配可根據特定術語進行精確的文件檢索。此功能主要用於滿足特定條件的篩選搜尋，並可結合標量篩選來精細查詢結果，允許在符合標量條件的向量內進行相似性搜尋。</p>
 <div class="alert note">
-<p>文字匹配著重於尋找查詢字詞的精確出現，而不會對匹配文件的相關性進行評分。如果您想根據查詢字詞的語意和重要性擷取最相關的文件，我們建議您使用<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
+<p>文字匹配著重於尋找查詢字詞的精確出現，而不會對匹配文件的相關性進行評分。如果您想要根據查詢字詞的語意和重要性擷取最相關的文件，我們建議您使用<a href="/docs/zh-hant/full-text-search.md">全文</a>檢索。</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,8 +64,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>文字匹配作用於<code translate="no">VARCHAR</code> 欄位類型，它基本上是 Milvus 中的字串資料類型。要啟用文字匹配，請將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 都設定為<code translate="no">True</code> ，然後在定義收集模式時，選擇性地設定文字分析<a href="/docs/zh-hant/analyzer-overview.md">的分析器</a>。</p>
-<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">設定<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code></h3><p>要啟用特定<code translate="no">VARCHAR</code> 欄位的文字匹配，在定義欄位模式時，將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 參數都設定為<code translate="no">True</code> 。這會指示 Milvus 對文字進行標記化，並為指定欄位建立反向索引，以進行快速且有效率的文字匹配。</p>
+    </button></h2><p>文字匹配作用於 <a href="/docs/zh-hant/string.md"><code translate="no">VARCHAR</code></a>欄位類型，基本上是 Milvus 中的字串資料類型。若要啟用文字匹配，請將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 都設定為<code translate="no">True</code> ，然後在定義收集模式時，選擇性地設定文字分析<a href="/docs/zh-hant/analyzer-overview.md">的分析器</a>。</p>
+<h3 id="Set-enableanalyzer-and-enablematch" class="common-anchor-header">設定<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code><button data-href="#Set-enableanalyzer-and-enablematch" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要啟用特定<code translate="no">VARCHAR</code> 欄位的文字匹配，在定義欄位模式時，請將<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 參數都設定為<code translate="no">True</code> 。這會指示 Milvus 對文字進行標記化，並為指定欄位建立反向索引，以進行快速且有效率的文字匹配。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
@@ -184,7 +199,22 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">可選：設定分析器</h3><p>關鍵字比對的效能與準確度取決於所選擇的分析器。不同的分析器是針對各種語言和文字結構量身打造的，因此選擇正確的分析器可以顯著影響您特定使用情況的搜尋結果。</p>
+<h3 id="Optional-Configure-an-analyzer" class="common-anchor-header">可選：設定分析器<button data-href="#Optional-Configure-an-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>關鍵字比對的效能與準確度取決於所選擇的分析器。不同的分析器是針對各種語言和文字結構量身打造的，因此選擇正確的分析器可以顯著影響您特定使用情況的搜尋結果。</p>
 <p>預設情況下，Milvus 使用<code translate="no">standard</code> 分析器，它會根據空白和標點符號來標記文字，移除長於 40 個字元的標記，並將文字轉換為小寫。應用此預設設定不需要額外參數。如需詳細資訊，請參閱<a href="/docs/zh-hant/standard-analyzer.md">標準</a>。</p>
 <p>在需要不同分析器的情況下，您可以使用<code translate="no">analyzer_params</code> 參數設定一個分析器。例如，應用<code translate="no">english</code> 分析器來處理英文文字：</p>
 <div class="multipleCode">
@@ -289,7 +319,22 @@ schema.WithField(entity.NewField().
         ></path>
       </svg>
     </button></h2><p>一旦您在收集模式中啟用了 VARCHAR 欄位的文字匹配，您可以使用<code translate="no">TEXT_MATCH</code> 表達式執行文字匹配。</p>
-<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">TEXT_MATCH 表達式語法</h3><p><code translate="no">TEXT_MATCH</code> 表達式用來指定欄位和要搜尋的詞彙。其語法如下：</p>
+<h3 id="TEXTMATCH-expression-syntax" class="common-anchor-header">TEXT_MATCH 表達式語法<button data-href="#TEXTMATCH-expression-syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">TEXT_MATCH</code> 表達式用來指定欄位和要搜尋的詞彙。其語法如下：</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)
 <button class="copy-code-btn"></button></code></pre>
 <ul>
@@ -338,8 +383,26 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Search-with-text-match" class="common-anchor-header">使用文字匹配進行搜尋</h3><p>文字匹配可與向量相似性搜尋結合使用，以縮窄搜尋範圍並提昇搜尋效能。在向量相似性搜尋之前使用文字匹配過濾集合，可以減少需要搜尋的文件數量，從而加快查詢時間。</p>
-<p>在本範例中，<code translate="no">filter</code> 表達式會過濾搜尋結果，使其只包含符合指定詞彙<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 的文件。然後，向量類似性搜尋會在這個經過過濾的文件子集中執行。</p>
+<h3 id="Search-with-text-match" class="common-anchor-header">使用文字匹配進行搜尋<button data-href="#Search-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>文字匹配可與向量相似性搜尋結合使用，以縮窄搜尋範圍並提昇搜尋效能。在向量相似性搜尋之前使用文字匹配過濾集合，可以減少需要搜尋的文件數量，從而加快查詢時間。</p>
+<p>在這個範例中，<code translate="no">filter</code> 表達式會過濾搜尋結果，使其只包含符合指定詞彙<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 的文件。然後，向量類似性搜尋會在這個經過過濾的文件子集中執行。</p>
+<div class="alert note">
+<p>您可以透過設定文字高亮器來高亮搜尋結果中的符合詞彙。詳情請參閱<a href="/docs/zh-hant/text-highlighter.md">文字高亮程式</a>。</p>
+</div>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`</span>
@@ -350,7 +413,7 @@ result = client.search(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment"># Your collection name</span>
     anns_field=<span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment"># Vector field name</span>
     data=[query_vector], <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>,</span>
     search_params={<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
     limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of results to return</span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment"># Fields to return</span>
@@ -362,7 +425,7 @@ result = client.search(
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .annsField(<span class="hljs-string">&quot;embeddings&quot;</span>)
         .data(Collections.singletonList(queryVector)))
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .topK(<span class="hljs-number">10</span>)
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build());
@@ -389,7 +452,7 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// Your collection name</span>
     <span class="hljs-attr">anns_field</span>: <span class="hljs-string">&quot;embeddings&quot;</span>, <span class="hljs-comment">// Vector field name</span>
     <span class="hljs-attr">data</span>: [query_vector], <span class="hljs-comment">// Query vector</span>
-    <span class="hljs-attr">filter</span>: filter,
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter,</span>
     <span class="hljs-attr">params</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     <span class="hljs-attr">limit</span>: <span class="hljs-number">10</span>, <span class="hljs-comment">// Max. number of results to return</span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>] <span class="hljs-comment">//Fields to return</span>
@@ -418,7 +481,22 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-text-match" class="common-anchor-header">使用文字匹配進行查詢</h3><p>文字匹配也可以用於查詢操作中的標量篩選。只要在<code translate="no">query()</code> 方法的<code translate="no">expr</code> 參數中指定<code translate="no">TEXT_MATCH</code> 表達式，就可以擷取與指定詞彙相符的文件。</p>
+<h3 id="Query-with-text-match" class="common-anchor-header">使用文字匹配進行查詢<button data-href="#Query-with-text-match" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>文字匹配也可以用於查詢操作中的標量篩選。只要在<code translate="no">query()</code> 方法的<code translate="no">expr</code> 參數中指定<code translate="no">TEXT_MATCH</code> 表達式，就可以擷取符合給定詞彙的文件。</p>
 <p>下面的範例擷取<code translate="no">text</code> 欄位包含<code translate="no">keyword1</code> 和<code translate="no">keyword2</code> 兩個詞彙的文件。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
@@ -427,7 +505,7 @@ curl --request POST \
 
 result = client.query(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, 
+<span class="highlighted-wrapper-line">    <span class="hljs-built_in">filter</span>=<span class="hljs-built_in">filter</span>, </span>
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -435,7 +513,7 @@ result = client.query(
 
 <span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(QueryReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-        .filter(filter)
+<span class="highlighted-wrapper-line">        .filter(filter)</span>
         .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>))
         .build()
 );
@@ -455,7 +533,7 @@ resultSet, err := client.Query(ctx, milvusclient.NewQueryOption(<span class="hlj
 
 <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">query</span>(
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;my_collection&quot;</span>,
-    <span class="hljs-attr">filter</span>: filter, 
+<span class="highlighted-wrapper-line">    <span class="hljs-attr">filter</span>: filter, </span>
     <span class="hljs-attr">output_fields</span>: [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -491,7 +569,7 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>為欄位啟用詞彙匹配會觸發建立反向索引，這會消耗儲存資源。在決定啟用此功能時，請考慮對儲存的影響，因為它會因文字大小、獨特標記和使用的分析器而異。</p></li>
-<li><p>一旦您在模式中定義了分析器，其設定就會永久適用於該集合。如果您認為不同的分析器更符合您的需求，您可以考慮刪除現有的集合，然後以所需的分析器設定建立新的集合。</p></li>
+<li><p>一旦您在模式中定義了分析器，其設定就會永久適用於該集合。如果您認為不同的分析器更符合您的需求，您可以考慮刪除現有的集合，並使用所需的分析器設定建立新的集合。</p></li>
 <li><p><code translate="no">filter</code> 表達式中的 Escape 規則：</p>
 <ul>
 <li><p>在表達式中以雙引號或單引號括住的字元會被解釋為字串常數。如果字串常數包含轉換字元，則必須使用轉換順序來表示轉換字元。例如，使用<code translate="no">\\</code> 表示<code translate="no">\</code> ，使用<code translate="no">\\t</code> 表示制表符<code translate="no">\t</code> ，使用<code translate="no">\\n</code> 表示換行符。</p></li>

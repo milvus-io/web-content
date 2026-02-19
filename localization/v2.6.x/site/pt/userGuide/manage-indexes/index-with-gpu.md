@@ -22,7 +22,10 @@ title: Índice com GPU
         ></path>
       </svg>
     </button></h1><p>Este guia descreve as etapas para criar um índice com suporte de GPU no Milvus, o que pode melhorar significativamente o desempenho da pesquisa em cenários de alto rendimento e alta recuperação. Para obter detalhes sobre os tipos de índices de GPU suportados pelo Milvus, consulte <a href="/docs/pt/gpu_index.md">Índice de GPU</a>.</p>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurar as definições do Milvus para controlo da memória da GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+<div class="alert warning">
+<p>Esta página foi descontinuada. Para obter a implementação mais recente, consulte <a href="/docs/pt/gpu-index-overview.md">Visão geral do índice de GPU</a></p>
+</div>
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Definir as configurações do Milvus para o controle de memória da GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +41,7 @@ title: Índice com GPU
         ></path>
       </svg>
     </button></h2><p>O Milvus usa um pool de memória gráfica global para alocar a memória da GPU.</p>
-<p>Ele suporta dois parâmetros <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">arquivo de configuração do Milvus</a>. O tamanho do pool é inicialmente definido como <code translate="no">initMemSize</code>, e será automaticamente expandido para <code translate="no">maxMemSize</code> após exceder este limite.</p>
+<p>Ele suporta dois parâmetros <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> no <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">arquivo de configuração do Milvus</a>. O tamanho do pool é inicialmente definido como <code translate="no">initMemSize</code>, e será automaticamente expandido para <code translate="no">maxMemSize</code> depois de exceder esse limite.</p>
 <p>O padrão <code translate="no">initMemSize</code> é 1/2 da memória da GPU disponível quando o Milvus inicia, e o padrão <code translate="no">maxMemSize</code> é igual a toda a memória da GPU disponível.</p>
 <p>Até o Milvus 2.4.1 (incluindo a versão 2.4.1), o Milvus usava um pool de memória GPU unificado. Para versões anteriores à 2.4.1 (incluindo a versão 2.4.1), era recomendado definir ambos os valores como 0.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
@@ -66,7 +69,22 @@ title: Índice com GPU
         ></path>
       </svg>
     </button></h2><p>Os exemplos a seguir demonstram como criar índices de GPU de diferentes tipos.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">Preparar parâmetros de índice</h3><p>Ao configurar os parâmetros de índice da GPU, defina <strong>index_type</strong>, <strong>metric_type</strong> e <strong>params</strong>:</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">Preparar parâmetros de índice<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ao configurar os parâmetros de índice da GPU, defina <strong>index_type</strong>, <strong>metric_type</strong> e <strong>params</strong>:</p>
 <ul>
 <li><p><strong>index_type</strong><em>(string</em>): O tipo de índice usado para acelerar a pesquisa de vetor. As opções válidas incluem <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> e <strong>GPU_BRUTE_FORCE</strong>.</p></li>
 <li><p><strong>metric_type</strong><em>(string</em>): O tipo de métrica usado para medir a similaridade de vetores. As opções válidas são <strong>IP</strong> e <strong>L2</strong>.</p></li>
@@ -114,7 +132,22 @@ title: Índice com GPU
 <button class="copy-code-btn"></button></code></pre>
 <p>Não são necessárias configurações de <strong>parâmetros</strong> adicionais.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">Construir índice</h3><p>Depois de configurar os parâmetros de índice em <strong>index_params</strong>, chame o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> para criar o índice.</p>
+<h3 id="Build-index" class="common-anchor-header">Construir índice<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Depois de configurar os parâmetros de índice em <strong>index_params</strong>, chame o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> para criar o índice.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -139,7 +172,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>Depois de criar seu índice GPU, a próxima etapa é preparar os parâmetros de pesquisa antes de realizar uma pesquisa.</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">Preparar parâmetros de pesquisa</h3><p>Abaixo estão exemplos de configurações para diferentes tipos de índice:</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">Preparar parâmetros de pesquisa<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Abaixo estão exemplos de configurações para diferentes tipos de índice:</p>
 <ul>
 <li><p>Índice<strong>GPU_BRUTE_FORCE</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -175,7 +223,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Os parâmetros de pesquisa para esses dois tipos de índice são semelhantes aos usados em <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> e <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Para obter mais informações, consulte <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Realizar uma pesquisa de similaridade de vetor</a>.</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">Realizar uma pesquisa</h3><p>Utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> para executar uma pesquisa de similaridade de vetor no índice GPU.</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">Realizar uma pesquisa<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> para executar uma pesquisa de similaridade de vetor no índice GPU.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 

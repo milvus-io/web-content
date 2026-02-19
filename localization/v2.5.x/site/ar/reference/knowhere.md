@@ -1,10 +1,9 @@
 ---
 id: knowhere.md
 summary: تعرّف على "نولوجي" في ميلفوس.
-title: نوير
+title: مكان المعرفة
 ---
-
-<h1 id="Knowhere" class="common-anchor-header">نوير<button data-href="#Knowhere" class="anchor-icon" translate="no">
+<h1 id="Knowhere" class="common-anchor-header">مكان المعرفة<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +18,7 @@ title: نوير
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يقدم هذا الموضوع "نوير"، المحرك الأساسي لتنفيذ المتجهات في ميلفوس.</p>
+    </button></h1><p>يقدم هذا الموضوع "نوير"، محرك البحث المتجه الأساسي في ميلفوس.</p>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +34,7 @@ title: نوير
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>نوير هو محرك التنفيذ المتجه الأساسي لميلفوس، والذي يتضمن العديد من مكتبات البحث عن التشابه المتجه بما في ذلك <a href="https://github.com/facebookresearch/faiss">Faiss</a> و <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> و <a href="https://github.com/spotify/annoy">Annoy</a>. تم تصميم Knowhere أيضًا لدعم الحوسبة غير المتجانسة. فهو يتحكم في الأجهزة (وحدة المعالجة المركزية أو وحدة معالجة الرسومات) لتنفيذ طلبات بناء الفهرس والبحث. هكذا حصل Knowhere على اسمه - معرفة مكان تنفيذ العمليات. سيتم دعم المزيد من أنواع الأجهزة بما في ذلك DPU و TPU في الإصدارات المستقبلية.</p>
+    </button></h2><p>نوير هو محرك بحث متجهي مفتوح المصدر يتضمن العديد من مكتبات البحث عن التشابه المتجهي بما في ذلك <a href="https://github.com/facebookresearch/faiss">Faiss</a> و <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> و <a href="https://github.com/spotify/annoy">Annoy</a>. تم تصميم Knowhere أيضًا لدعم الحوسبة غير المتجانسة. فهو يتحكم في الأجهزة (وحدة المعالجة المركزية أو وحدة معالجة الرسومات) لتنفيذ طلبات بناء الفهرس والبحث. هكذا حصل Knowhere على اسمه - معرفة مكان تنفيذ العمليات. سيتم دعم المزيد من أنواع الأجهزة بما في ذلك DPU و TPU في الإصدارات المستقبلية.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">نوير في بنية ميلفوس<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +72,7 @@ title: نوير
         ></path>
       </svg>
     </button></h2><p>فيما يلي مزايا نوير على فايس.</p>
-<h4 id="Support-for-BitsetView" class="common-anchor-header">دعم BitsetView</h4><p>يقدم ميلفوس آلية مجموعة البتات لتحقيق &quot;الحذف الناعم&quot;. لا يزال المتجه المحذوف حذفًا ناعمًا موجودًا في قاعدة البيانات ولكن لن يتم حسابه أثناء البحث أو الاستعلام عن تشابه المتجهات.</p>
+<h4 id="Support-for-BitsetView" class="common-anchor-header">دعم BitsetView</h4><p>يقدم ميلفوس آلية مجموعة البتات لتحقيق "الحذف الناعم". لا يزال المتجه المحذوف حذفًا ناعمًا موجودًا في قاعدة البيانات ولكن لن يتم حسابه أثناء البحث أو الاستعلام عن تشابه المتجهات.</p>
 <p>يتوافق كل بت في مجموعة البتات مع متجه مفهرس. إذا تم وضع علامة "1" على أحد المتجهات في مجموعة البتات، فهذا يعني أن هذا المتجه محذوف بشكل ناعم ولن يتم تضمينه أثناء البحث عن المتجهات. يتم تطبيق معلمة مجموعة البتات على جميع واجهات برمجة تطبيقات استعلام فهرس فايس المكشوفة في نوير، بما في ذلك فهارس وحدة المعالجة المركزية ووحدة معالجة الرسومات.</p>
 <p>لمزيد من المعلومات حول آلية مجموعة البتات، راجع <a href="/docs/ar/v2.5.x/bitset.md">مجموعة البتات</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">دعم مقاييس تشابه متعددة لفهرسة المتجهات الثنائية</h4><p>يدعم Knowhere مقاييس <a href="/docs/ar/v2.5.x/metric.md#Hamming-distance">هامينج</a> <a href="/docs/ar/v2.5.x/metric.md#Jaccard-distance">وجاكارد</a> <a href="/docs/ar/v2.5.x/metric.md#Tanimoto-distance">وتانيموتو</a> <a href="/docs/ar/v2.5.x/metric.md#Superstructure">والبنية الفوقية</a> <a href="/docs/ar/v2.5.x/metric.md#Substructure">والبنية الفرعية</a>. يمكن استخدام Jaccard وTanimoto لقياس التشابه بين مجموعتي عينات بينما يمكن استخدام البنية الفائقة والبنية الفرعية لقياس تشابه البنى الكيميائية.</p>
@@ -99,7 +98,7 @@ title: نوير
     </button></h2><p>تتضمن العمليات الحسابية في Milvus بشكل أساسي العمليات المتجهة والقياسية. يتعامل Knowhere مع العمليات على فهرسة المتجهات فقط.</p>
 <p>الفهرس هو بنية بيانات مستقلة عن البيانات المتجهة الأصلية. وعمومًا، تتطلب الفهرسة أربع خطوات: إنشاء فهرس، وتدريب البيانات، وإدراج البيانات، وبناء فهرس. في بعض تطبيقات الذكاء الاصطناعي، يتم فصل تدريب مجموعة البيانات عن البحث عن المتجهات. يتم تدريب البيانات من مجموعات البيانات أولاً ثم إدراجها في قاعدة بيانات متجهة مثل Milvus للبحث عن التشابه. على سبيل المثال، تفرق مجموعات البيانات المفتوحة sift1M و sift1B بين البيانات للتدريب والبيانات للاختبار.</p>
 <p>ومع ذلك، في نوير، البيانات للتدريب والبحث هي نفسها في نوير. يقوم برنامج Knowhere بتدريب جميع البيانات في <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Segments">مقطع</a> ما ثم يقوم بإدراج جميع البيانات المدربة وإنشاء فهرس لها.</p>
-<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: الفئة الأساسية</h4><p><code translate="no">DataObj</code> هي الفئة الأساسية لجميع هياكل البيانات في نوير. <code translate="no">Size()</code> هي الطريقة الافتراضية الوحيدة في <code translate="no">DataObj</code>. ترث فئة الفهرس من <code translate="no">DataObj</code> مع حقل يسمى &quot;size_&quot;. تحتوي فئة الفهرس أيضًا على طريقتين افتراضيتين - <code translate="no">Serialize()</code> و <code translate="no">Load()</code>. فئة <code translate="no">VecIndex</code> المشتقة من <code translate="no">Index</code> هي الفئة الأساسية الافتراضية لجميع الفهارس المتجهة. <code translate="no">VecIndex</code> توفر طرقًا تتضمن <code translate="no">Train()</code> و <code translate="no">Query()</code> و <code translate="no">GetStatistics()</code> و <code translate="no">ClearStatistics()</code>.</p>
+<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: الفئة الأساسية</h4><p><code translate="no">DataObj</code> هي الفئة الأساسية لجميع هياكل البيانات في نوير. <code translate="no">Size()</code> هي الطريقة الافتراضية الوحيدة في <code translate="no">DataObj</code>. ترث فئة الفهرس من <code translate="no">DataObj</code> مع حقل يسمى "size_". تحتوي فئة الفهرس أيضًا على طريقتين افتراضيتين - <code translate="no">Serialize()</code> و <code translate="no">Load()</code>. فئة <code translate="no">VecIndex</code> المشتقة من <code translate="no">Index</code> هي الفئة الأساسية الافتراضية لجميع الفهارس المتجهة. <code translate="no">VecIndex</code> توفر طرقًا تتضمن <code translate="no">Train()</code> و <code translate="no">Query()</code> و <code translate="no">GetStatistics()</code> و <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
@@ -143,7 +142,7 @@ title: نوير
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إذا كنت ترغب في إضافة مؤشرات جديدة إلى نوير، يمكنك أولاً الرجوع إلى المؤشرات الموجودة:</p>
+    </button></h2><p>إذا كنت تريد إضافة مؤشرات جديدة إلى نوير، يمكنك أولاً الرجوع إلى المؤشرات الموجودة:</p>
 <ul>
 <li><p>لإضافة مؤشرات قائمة على الكمية، ارجع إلى <code translate="no">IVF_FLAT</code>.</p></li>
 <li><p>لإضافة مؤشرات قائمة على الرسم البياني، راجع <code translate="no">HNSW</code>.</p></li>

@@ -43,7 +43,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>掃描</span> </span></p>
 <ol>
 <li><p><strong>分割</strong>：將資料集分割成群組。這種方法只會集中在相關的資料子集，而不會掃描整個資料集，因此可以縮小搜尋空間，節省時間和處理資源。ScaNN 通常使用聚類演算法 (例如<a href="https://zilliz.com/blog/k-means-clustering">k-means</a>) 來識別叢集，這可讓它更有效率地執行相似性搜尋。</p></li>
-<li><p><strong>量化</strong>：ScaNN 在分割後會應用一種稱為<a href="https://arxiv.org/abs/1908.10396">異向向量量化</a>的量化程序。傳統的量化著重於最小化原始向量與壓縮向量之間的整體距離，這對於<a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">最大內乘積搜尋 (Maximum Inner Product Search, MIPS)</a> 等任務並不理想，因為在這些任務中，相似性是由向量的內乘積而非直接距離決定。各向異性量化會優先保留向量之間的平行分量，或對計算精確內乘最重要的部分。此方法可讓 ScaNN 謹慎地將壓縮向量與查詢對齊，以維持高 MIPS 精確度，從而實現更快速、更精確的類似性搜尋。</p></li>
+<li><p><strong>量化</strong>：ScaNN 在分割後會應用一種稱為<a href="https://arxiv.org/abs/1908.10396">異向向量量化</a>的量化程序。傳統的量化著重於最小化原始向量與壓縮向量之間的整體距離，這對於<a href="https://papers.nips.cc/paper/5329-asymmetric-lsh-alsh-for-sublinear-time-maximum-inner-product-search-mips.pdf">最大內乘積搜尋 (Maximum Inner Product Search, MIPS)</a> 等任務並不理想，因為在這些任務中，相似性是由向量的內乘積而非直接距離決定的。各向異性量化會優先保留向量之間的平行分量，或對計算精確內乘最重要的部分。此方法可讓 ScaNN 謹慎地將壓縮向量與查詢對齊，以維持高 MIPS 精確度，從而實現更快速、更精確的類似性搜尋。</p></li>
 <li><p><strong>重新排序</strong>：重新排序階段是最後一步，ScaNN 在此階段會微調分割與量化階段的搜尋結果。重新排序會將精確的內積計算應用於頂部的候選向量，確保最終結果高度精確。重新排序在高速推薦引擎或圖片搜尋應用中至關重要，在這些應用中，最初的篩選和聚類可作為粗略的層次，而最後的階段則可確保只向使用者傳回最相關的結果。</p></li>
 </ol>
 <p><code translate="no">SCANN</code> 的效能由兩個關鍵參數控制，讓您可以微調速度與精確度之間的平衡：</p>
@@ -113,6 +113,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -129,6 +130,7 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>:在索引上搜尋的其他設定選項。</p>
 <ul>
 <li><code translate="no">reorder_k</code>:在重新排序階段要精煉的候選數。</li>
+<li><code translate="no">nprobe</code>:要搜尋的叢集數。</li>
 </ul>
 <p>要瞭解<code translate="no">SCANN</code> 索引可用的更多搜尋參數，請參閱<a href="/docs/zh-hant/scann.md#Index-specific-search-params">特定</a>於索引的搜尋參數。</p></li>
 </ul>
@@ -181,7 +183,7 @@ res = MilvusClient.search(
      <td><p><code translate="no">with_raw_data</code></p></td>
      <td><p>是否將原始向量資料與量化表示同時儲存。啟用時，可在重新排序階段使用原始向量而非量化近似值來進行更精確的相似度計算。</p></td>
      <td><p><strong>類型</strong>：布林</p><p><strong>範圍：</strong> <code translate="no">true</code>,<code translate="no">false</code></p><p><strong>預設值</strong>：<code translate="no">true</code></p></td>
-     <td><p>設定為<code translate="no">true</code> ，以獲得<strong>更高的搜尋準確度</strong>，且不以儲存空間為主要考量。原始向量資料可在重新排序時進行更精確的相似度計算。</p><p>設定為<code translate="no">false</code> 可<strong>減少儲存開銷</strong>和記憶體使用量，尤其是大型資料集。不過，這可能會導致搜尋準確度稍微降低，因為重新排序階段會使用量化向量。</p><p><strong>建議</strong>使用：對於精確度要求極高的生產應用程式，請使用<code translate="no">true</code> 。</p></td>
+     <td><p>設定為<code translate="no">true</code> ，以獲得<strong>更高的搜尋準確度</strong>，且儲存空間並非主要考量。原始向量資料可在重新排序時進行更精確的相似度計算。</p><p>設定為<code translate="no">false</code> 可<strong>減少儲存開銷</strong>和記憶體使用量，尤其是大型資料集。不過，這可能會導致搜尋準確度稍微降低，因為重新排序階段會使用量化向量。</p><p><strong>建議</strong>使用：對於精確度要求極高的生產應用程式，請使用<code translate="no">true</code> 。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">特定於索引的搜尋參數<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -211,6 +213,12 @@ res = MilvusClient.search(
      <td><p><code translate="no">reorder_k</code></p></td>
      <td><p>控制在重新排序階段精煉的候選向量數量。此參數決定使用更精確的相似度計算，重新評估初始分割和量化階段的頂尖候選向量數量。</p></td>
      <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[1、<em>int_max］</em></p><p><strong>預設值</strong>：無</p></td>
-     <td><p>較大的<code translate="no">reorder_k</code> 通常會帶來<strong>較高的搜尋準確度</strong>，因為在最後的精煉階段會考慮更多的候選人。不過，這也會因為額外的計算而<strong>增加搜尋時間</strong>。</p><p>當達到高召回率是關鍵，而搜尋速度較不重要時，請考慮增加<code translate="no">reorder_k</code> 。一個好的起點是 2-5 倍您所期望的<code translate="no">limit</code> (返回的 TopK 結果)。</p><p>考慮降低<code translate="no">reorder_k</code> 以優先加快搜尋速度，尤其是在可以接受精確度稍微降低的情況下。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
+     <td><p>較大的<code translate="no">reorder_k</code> 通常會帶來<strong>較高的搜尋準確度</strong>，因為在最後的精煉階段會考慮更多的候選人。不過，這也會因為額外的計算而<strong>增加搜尋時間</strong>。</p><p>當達到高召回率是關鍵，而搜尋速度較不重要時，請考慮增加<code translate="no">reorder_k</code> 。一個好的起點是 2-5 倍您所期望的<code translate="no">limit</code> (返回的 TopK 結果)。</p><p>考慮降低<code translate="no">reorder_k</code> 以優先加快搜尋速度，尤其是在可以接受精確度稍微降低的情況下。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[<em>limit</em>,<em>limit</em>* 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>搜尋候選人的叢集數。</p></td>
+     <td><p><strong>類型</strong>：整數</p><p><strong>範圍：</strong>[1、<em>nlist］</em></p><p><strong>預設值</strong>：<code translate="no">8</code></p></td>
+     <td><p>較高的值允許搜尋更多的叢集，藉由擴大搜尋範圍來改善召回率，但代價是增加查詢延遲。</p><p>請依<code translate="no">nlist</code> 的比例設定<code translate="no">nprobe</code> ，以平衡速度與精確度。</p><p>在大多數情況下，我們建議您設定此範圍內的值：[1, nlist]。</p></td>
    </tr>
 </table>

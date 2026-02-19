@@ -153,7 +153,7 @@ verifying sha256 digest
 writing manifest 
 success [?25h
 </code></pre>
-<p>准备好这些模型后，我们就可以着手实施 LLM 驱动的生成和基于嵌入的检索工作流程了。</p>
+<p>准备好这些模型后，我们就可以开始实施 LLM 驱动的生成和基于嵌入的检索工作流程了。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> ollama
 
 
@@ -214,7 +214,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>检查 Collections 是否已存在，如果存在则删除。</p>
+<p>检查 Collections 是否已存在，如果已存在，则删除它。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
@@ -294,7 +294,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
     </button></h3><p>让我们指定一个关于 Milvus 的常见问题。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在 Collections 中搜索该问题并检索语义前 3 个匹配项。</p>
+<p>在 Collections 中搜索该问题，并检索语义前 3 个匹配项。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[

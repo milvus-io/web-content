@@ -39,9 +39,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PRQ는 두 가지 색인 기술을 결합합니다: 빠른 그래프 기반 탐색을 위한 <strong>HSNW와</strong> 효율적인 벡터 압축을 위한 <strong>PRQ입니다</strong>.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW는 각 노드가 데이터 세트의 벡터에 해당하는 다층 그래프를 구성합니다. 이 그래프에서 노드는 유사성에 따라 연결되므로 데이터 공간을 빠르게 탐색할 수 있습니다. 계층적 구조를 통해 검색 알고리즘이 후보 이웃을 좁힐 수 있으므로 고차원 공간에서 검색 프로세스를 크게 가속화할 수 있습니다.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW는 각 노드가 데이터 세트의 벡터에 해당하는 다층 그래프를 구성합니다. 이 그래프에서 노드는 유사성에 따라 연결되므로 데이터 공간을 빠르게 탐색할 수 있습니다. 계층적 구조를 통해 검색 알고리즘이 후보 이웃을 좁힐 수 있으므로 고차원 공간에서 검색 프로세스를 크게 가속화할 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/hnsw.md">HNSW를</a> 참조하세요.</p>
-<h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQ는 두 가지 상호 보완적인 기술을 결합한 다단계 벡터 압축 방식입니다: PQ와 RQ입니다. 먼저 고차원 벡터를 더 작은 하위 벡터로 분할한 다음(PQ를 통해) 나머지 차이를 정량화(RQ를 통해)함으로써 PRQ는 원본 데이터를 간결하면서도 정확하게 표현합니다.</p>
+<h3 id="PRQ" class="common-anchor-header">PRQ<button data-href="#PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ는 두 가지 상호 보완적인 기술을 결합한 다단계 벡터 압축 방식입니다: PQ와 RQ입니다. 먼저 고차원 벡터를 더 작은 하위 벡터로 분할한 다음(PQ를 통해) 나머지 차이를 정량화(RQ를 통해)함으로써 PRQ는 원본 데이터를 간결하면서도 정확하게 표현합니다.</p>
 <p>다음 그림은 그 작동 방식을 보여줍니다.</p>
 <p>
   
@@ -56,7 +86,22 @@ summary: >-
 <li><p><strong>최종 압축 표현</strong></p>
 <p>RQ가 잔차의 정량화를 완료하면 PQ와 RQ의 정수 코드가 하나의 압축된 인덱스로 결합됩니다. RQ는 PQ만으로는 놓칠 수 있는 세밀한 디테일을 캡처함으로써 저장 공간을 크게 늘리지 않고도 정확도를 향상시킵니다. PQ와 RQ 간의 이러한 시너지가 바로 PRQ를 정의합니다.</p></li>
 </ol>
-<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ</h3><p>HNSW와 PRQ를 결합한 <strong>HNSW_PRQ는</strong> HNSW의 빠른 그래프 기반 검색을 유지하면서 PRQ의 다단계 압축을 활용합니다. 워크플로는 다음과 같습니다:</p>
+<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ<button data-href="#HNSW-+-PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW와 PRQ를 결합한 <strong>HNSW_PRQ는</strong> HNSW의 빠른 그래프 기반 검색을 유지하면서 PRQ의 다단계 압축을 활용합니다. 워크플로는 다음과 같습니다:</p>
 <ol>
 <li><p><strong>데이터 압축:</strong> 각 벡터는 먼저 PQ를 통해 거친 표현으로 변환된 다음, 추가 세분화를 위해 RQ를 통해 잔여값을 정량화합니다. 그 결과 각 벡터를 나타내는 간결한 코드 세트가 생성됩니다.</p></li>
 <li><p><strong>그래프 구성:</strong> 압축된 벡터(PQ 및 RQ 코드 모두 포함)는 HNSW 그래프를 구축하기 위한 기초를 형성합니다. 데이터가 압축된 형태로 저장되기 때문에 그래프에 필요한 메모리가 줄어들고 그래프 탐색 속도가 빨라집니다.</p></li>
@@ -164,7 +209,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 만들고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">색인 작성 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw-prq.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">색인 작성 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw-prq.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -205,10 +265,10 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>각 하위 벡터의 중심 인덱스를 압축된 형태로 표현하는 데 사용되는 비트 수입니다. 이는 각 코드북의 크기를 직접 결정합니다. 각 코드북에는 $2^{\textit{nbits}}$의 중심이 포함됩니다. 예를 들어 <code translate="no">nbits</code> 을 8로 설정하면 각 하위 벡터는 8비트 중심 인덱스로 표현됩니다. 따라서 해당 하위 벡터의 코드북에는 $2^8$(256)개의 가능한 중심이 있습니다.</p></td>
-     <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 64]</p>
+     <td><p>각 하위 벡터의 중심 인덱스를 압축된 형태로 표현하는 데 사용되는 비트 수입니다. 각 코드북의 크기를 직접 결정합니다. 각 코드북에는 <sup>2n비트의</sup> 중심이 포함됩니다. 예를 들어 <code translate="no">nbits</code> 을 8로 설정하면 각 하위 벡터는 8비트 중심 인덱스로 표시됩니다. 따라서 해당 하위 벡터에 대해 코드북에<sup>28개</sup> (256개)의 가능한 중심이 허용됩니다.</p></td>
+     <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 24]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">8</code></p></td>
-     <td><p><code translate="no">nbits</code> 값이 클수록 코드북이 커져 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
+     <td><p><code translate="no">nbits</code> 값이 클수록 코드북의 크기가 커져 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
@@ -216,12 +276,12 @@ res = MilvusClient.search(
      <td><p>RQ 단계에서 사용되는 잔여 서브퀀티저의 수를 제어합니다. 서브퀀타이저가 많을수록 압축률이 높아지지만 정보 손실이 더 많이 발생할 수 있습니다.</p></td>
      <td><p><strong>유형</strong>: 정수 <strong>범위</strong>: [1, 16]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">2</code></p></td>
-     <td><p><code translate="no">nrq</code> 값이 클수록 잔여 하위 양자화 단계가 추가되어 원본 벡터를 더 정밀하게 재구성할 수 있습니다. 하지만 더 많은 서브퀀타이저를 저장하고 계산해야 하므로 인덱스 크기가 커지고 계산 오버헤드가 증가합니다.</p></td>
+     <td><p><code translate="no">nrq</code> 값이 클수록 잔여 하위 양자화 단계가 추가되어 원본 벡터를 더 정밀하게 재구성할 수 있습니다. 하지만 더 많은 서브퀀타이저를 저장하고 계산해야 하므로 인덱스 크기가 커지고 계산 오버헤드가 커집니다.</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">refine</code></p></td>
-     <td><p>검색 중에 세분화 단계를 적용할지 여부를 제어하는 부울 플래그입니다. 구체화에는 쿼리 벡터와 후보 사이의 정확한 거리를 계산하여 초기 결과의 순위를 다시 매기는 작업이 포함됩니다.</p></td>
+     <td><p>검색 중에 세분화 단계를 적용할지 여부를 제어하는 부울 플래그입니다. 세분화에는 쿼리 벡터와 후보 사이의 정확한 거리를 계산하여 초기 결과의 순위를 다시 매기는 작업이 포함됩니다.</p></td>
      <td><p><strong>유형</strong>: 부울 <strong>범위</strong>: [<code translate="no">true</code>, <code translate="no">false</code>]</p>
 <p><strong>기본값입니다</strong>: <code translate="no">false</code></p></td>
      <td><p>높은 정확도가 필수적이며 약간 느린 검색 시간을 용인할 수 있는 경우 <code translate="no">true</code> 로 설정합니다. 속도가 우선이고 약간의 정확도 저하를 감수할 수 있는 경우 <code translate="no">false</code> 을 사용합니다.</p></td>
@@ -232,10 +292,25 @@ res = MilvusClient.search(
      <td><p>세분화 과정에서 사용되는 데이터의 정밀도를 결정합니다. 이 정밀도는 압축 벡터( <code translate="no">m</code> 및 <code translate="no">nbits</code> 매개변수에 의해 설정된 대로)보다 높아야 합니다.</p></td>
      <td><p><strong>Type</strong>: 문자열 <strong>범위</strong>:[ <code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code> ]입니다.</p>
 <p><strong>기본값</strong>: None</p></td>
-     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 를 사용하세요. <code translate="no">BF16</code> 와 <code translate="no">FP16</code> 는 균형 잡힌 대안을 제공합니다.</p></td>
+     <td><p>더 높은 메모리 비용으로 정밀도를 최대화하려면 <code translate="no">FP32</code>, 더 나은 압축을 위해서는 <code translate="no">SQ6</code>/<code translate="no">SQ8</code> 을 사용하세요. <code translate="no">BF16</code> 과 <code translate="no">FP16</code> 은 균형 잡힌 대안을 제공합니다.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/hnsw-prq.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/hnsw-prq.md#Search-on-index">색인에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>

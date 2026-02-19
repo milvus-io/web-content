@@ -60,7 +60,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
 </ul></li>
 <li>Penyimpanan pesan tidak dapat diubah ketika sistem Milvus sedang berjalan.</li>
 <li>Hanya versi Kafka 2.x atau 3.x yang didukung.</li>
-<li><strong>Batasan peningkatan</strong>: <strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.6, anda harus mempertahankan pilihan antrian pesan anda saat ini. Peralihan antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrean pesan akan tersedia di versi mendatang.</li>
+<li><strong>Batasan peningkatan</strong>: <strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.11, anda harus mempertahankan pilihan antrian pesan anda saat ini. Beralih antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Mengkonfigurasi RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +205,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
         ></path>
       </svg>
     </button></h2><p>Pulsar mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Mengkonfigurasi Pulsar untuk penyimpanan pesan didukung pada Milvus mandiri dan Milvus cluster. Namun, dengan Milvus Operator, Anda hanya dapat mengonfigurasi Pulsar sebagai penyimpanan pesan untuk Milvus cluster. Tambahkan bidang yang diperlukan di bawah <code translate="no">spec.dependencies.pulsar</code> untuk mengkonfigurasi Pulsar.</p>
-<p><code translate="no">pulsar</code> Milvus mendukung <code translate="no">external</code> dan <code translate="no">inCluster</code>.</p>
+<p><code translate="no">pulsar</code> Milvus Operator mendukung <code translate="no">external</code> dan <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar eksternal<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -427,5 +427,5 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Milvus Operator:</p>
 <ul>
 <li><a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
-<li><a href="/docs/id/meta_storage_operator.md">Mengonfigurasi Meta Storage dengan Milvus Operator</a></li>
+<li><a href="/docs/id/meta_storage_operator.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a></li>
 </ul>

@@ -13,7 +13,7 @@ Applications that track time across regions, such as e-commerce systems, collabo
 
 A `TIMESTAMPTZ` field is a schema-defined data type (`DataType.TIMESTAMPTZ`) in Milvus that processes time zone-aware input and stores all time points internally as UTC absolute time:
 
-- **Accepted input format**: [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) strings with a time-zone offset (for example, `"2025-05-01T23:59:59+08:00"` represents 11:59:59 PM in UTC+08:00).
+- **Accepted input format**: [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) strings with a time-zone offset (for example, `"2025-05-01T23:59:59+08:00"` denotes 11:59:59 PM on May 1, 2025 (UTC+08:00)).
 
 - **Internal storage**: All `TIMESTAMPTZ` values are normalized and stored in [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) (UTC).
 
@@ -216,14 +216,14 @@ Use arithmetic operators like `==`, `!=`, `<`, `>`, `<=`, `>=`. For a full list 
 The example below filters entities with timestamps (`tsz`) that are not equal to **2025-01-03T00:00:00+08:00**:
 
 <div class="multipleCode">
-    <a href="#bash">cURL</a>
+    <a href="#python">Python</a>
     <a href="#java">Java</a>
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
 </div>
 
-```bash
+```python
 # Query for entities where tsz is not equal to '2025-01-03T00:00:00+08:00'
 # highlight-next-line
 expr = "tsz != ISO '2025-01-03T00:00:00+08:00'"

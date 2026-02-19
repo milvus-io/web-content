@@ -115,7 +115,7 @@ title: 磁碟上索引
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -125,9 +125,9 @@ title: 磁碟上索引
 <tr><th>參數</th><th>說明</th><th>值範圍</th><th>預設值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Vamana 圖形的最大度數。 <br/> 值越大，召回率越高，但會增加索引的大小和建立索引的時間。</td><td>[1, 512]</td><td>56</td></tr>
-<tr><td><code translate="no">SearchListSize</code></td><td>候選名單的大小。 <br/> 較大值會增加建立索引所花費的時間，但可提供較高的召回率。 <br/> 除非您需要減少建立索引的時間，否則請將它設定為小於<code translate="no">MaxDegree</code> 的值。</td><td>[1, int32_max］</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQ 代碼的大小限制。 <br/> 較大值可提供較高的召回率，但會增加記憶體使用量。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Vamana 圖形的最大度數。 <br/> 較大值可提供較高的召回率，但會增加索引的大小和建立索引的時間。</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">SearchListSize</code></td><td>候選清單的大小。 <br/> 較大值會增加建立索引所花費的時間，但可提供較高的召回率。 <br/> 除非您需要減少建立索引的時間，否則請將它設定為小於<code translate="no">MaxDegree</code> 的值。</td><td>[1, int32_max］</td><td>100</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>PQ 代碼的大小限制。 <br/> 較大值可提供較高的召回率，但會增加記憶體使用量。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>快取節點數與原始資料的比率。 <br/> 較大值可改善索引建立效能，但會增加記憶體使用量。</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>每次搜索迭代的最大 IO 請求數目與 CPU 數目之間的比率。</td><td>[1，max(128 / CPU 數目，16)] 4.0</td><td>4.0</td></tr>
 </tbody>
@@ -149,7 +149,7 @@ title: 磁碟上索引
       </svg>
     </button></h2><ul>
 <li><p>如何處理<code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> 錯誤？</p>
-<p>Linux 核心提供異步非阻塞 I/O (Asynchronous non-blocking I/O, AIO) 功能，允許一個進程同時啟動多個 I/O 作業，而不必等待任何一個完成。這有助於提升可能重疊處理和 I/O 的應用程式的效能。</p>
+<p>Linux 核心提供異步非阻塞 I/O (Asynchronous non-blocking I/O, AIO) 功能，允許一個進程同時啟動多個 I/O 作業，而不必等待任何一個完成。這有助於提升可重複處理和 I/O 的應用程式的效能。</p>
 <p>可以使用 proc 檔案系統中的<code translate="no">/proc/sys/fs/aio-max-nr</code> 虛擬檔案調整效能。<code translate="no">aio-max-nr</code> 參數決定允許的最大並發要求數目。</p>
 <p><code translate="no">aio-max-nr</code> 預設為<code translate="no">65535</code> ，您可以將其設定為<code translate="no">10485760</code> 。</p></li>
 </ul>

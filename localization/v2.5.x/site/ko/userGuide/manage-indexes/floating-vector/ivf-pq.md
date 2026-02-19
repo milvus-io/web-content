@@ -5,7 +5,6 @@ summary: >-
   IVF_PQ 인덱스는 고차원 공간에서 대략적인 최접근 이웃 검색을 위한 양자화 기반 인덱싱 알고리즘입니다. 일부 그래프 기반 방법만큼
   빠르지는 않지만 IVF_PQ는 메모리를 훨씬 적게 필요로 하므로 대규모 데이터 세트에 실용적인 선택입니다.
 ---
-
 <h1 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>IVF_PQ</strong> 인덱스는 고차원 공간에서 대략적인 최접근 이웃 검색을 위한 <strong>양자화 기반</strong> 인덱싱 알고리즘입니다. 일부 그래프 기반 방법만큼 빠르지는 않지만 <strong>IVF_PQ는</strong> 메모리를 훨씬 적게 필요로 하므로 대규모 데이터 세트에 실용적인 선택입니다.</p>
+    </button></h1><p><strong>IVF_PQ</strong> 인덱스는 고차원 공간에서 대략적인 최접근 이웃 검색을 위한 <strong>양자화 기반</strong> 인덱싱 알고리즘입니다. 일부 그래프 기반 방법만큼 빠르지는 않지만 <strong>IVF_PQ는</strong> 훨씬 적은 메모리를 필요로 하므로 대규모 데이터 세트에 실용적인 선택입니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,23 +37,53 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p><strong>IVF_PQ는</strong> 효율적인 벡터 검색과 검색을 위해 인덱싱과 압축을 결합한 하이브리드 접근 방식인 <strong>역파일과 제품 정량화의</strong> 약자입니다. 이 방식은 두 가지 핵심 구성 요소를 활용합니다: <strong>반전 파일(IVF)</strong> 과 <strong>제품 정량화(PQ)</strong>입니다.</p>
-<h3 id="IVF" class="common-anchor-header">IVF</h3><p>IVF는 책에서 색인을 만드는 것과 같습니다. 모든 페이지(이 경우에는 모든 벡터)를 스캔하는 대신 색인에서 특정 키워드(클러스터)를 조회하여 관련 페이지(벡터)를 빠르게 찾습니다. 이 시나리오에서는 벡터가 클러스터로 그룹화되고 알고리즘이 쿼리 벡터에 가까운 몇 개의 클러스터 내에서 검색합니다.</p>
+<h3 id="IVF" class="common-anchor-header">IVF<button data-href="#IVF" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF는 책에서 색인을 만드는 것과 같습니다. 모든 페이지(이 경우에는 모든 벡터)를 스캔하는 대신 색인에서 특정 키워드(클러스터)를 조회하여 관련 페이지(벡터)를 빠르게 찾습니다. 이 시나리오에서는 벡터가 클러스터로 그룹화되고 알고리즘이 쿼리 벡터에 가까운 몇 개의 클러스터 내에서 검색합니다.</p>
 <p>작동 방식은 다음과 같습니다:</p>
 <ol>
 <li><p><strong>클러스터링:</strong> 벡터 데이터 세트는 k-평균과 같은 클러스터링 알고리즘을 사용하여 지정된 수의 클러스터로 나뉩니다. 각 클러스터에는 중심(클러스터의 대표 벡터)이 있습니다.</p></li>
 <li><p><strong>할당:</strong> 각 벡터는 중심이 가장 가까운 클러스터에 할당됩니다.</p></li>
 <li><p><strong>반전 인덱스:</strong> 각 클러스터 중심을 해당 클러스터에 할당된 벡터 목록에 매핑하는 인덱스가 생성됩니다.</p></li>
-<li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘은 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
+<li><p><strong>검색:</strong> 가장 가까운 이웃을 검색할 때 검색 알고리즘이 쿼리 벡터와 클러스터 중심을 비교하여 가장 가능성이 높은 클러스터를 선택합니다. 그런 다음 선택한 클러스터 내의 벡터로 검색 범위가 좁혀집니다.</p></li>
 </ol>
 <p>기술적 세부 사항에 대해 자세히 알아보려면 <a href="/docs/ko/v2.5.x/ivf-flat.md">IVF_FLAT을</a> 참조하세요.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p><strong>제품 정량화(PQ)</strong> 는 고차원 벡터를 위한 압축 방법으로, 유사도 검색 작업을 빠르게 수행하면서 스토리지 요구 사항을 크게 줄여줍니다.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>제품 정량화(PQ)</strong> 는 고차원 벡터를 위한 압축 방법으로, 유사도 검색 작업을 빠르게 수행하면서 스토리지 요구 사항을 크게 줄여줍니다.</p>
 <p>PQ 프로세스에는 다음과 같은 주요 단계가 포함됩니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-1.png" alt="Ivf Pq 1" class="doc-image" id="ivf-pq-1" />
    </span> <span class="img-wrapper"> <span>Ivf Pq 1</span> </span></p>
 <ol>
-<li><p><strong>차원 분해</strong>: 이 알고리즘은 각 고차원 벡터를 <code translate="no">m</code> 동일한 크기의 하위 벡터로 분해하는 것으로 시작됩니다. 이 분해는 원래의 D 차원 공간을 <code translate="no">m</code> 분리된 하위 공간으로 변환하며, 각 하위 공간은 <em>D/m</em> 차원을 포함합니다. <code translate="no">m</code> 매개변수는 분해의 세분성을 제어하며 압축률에 직접적인 영향을 미칩니다.</p></li>
+<li><p><strong>차원 분해</strong>: 이 알고리즘은 각 고차원 벡터를 <code translate="no">m</code> 동일한 크기의 하위 벡터로 분해하는 것으로 시작됩니다. 이 분해는 원래의 D 차원 공간을 <code translate="no">m</code> 분리된 하위 공간으로 변환하며, 각 하위 공간은 <em>D/m</em> 차원을 포함합니다. <code translate="no">m</code> 매개변수는 분해의 세분성을 제어하며 압축률에 직접적인 영향을 줍니다.</p></li>
 <li><p><strong>서브스페이스 코드북 생성</strong>: 각 하위 공간 내에서 알고리즘은 <a href="https://en.wikipedia.org/wiki/K-means_clustering">K-평균 클러스터링을</a> 적용하여 대표 벡터(중심) 집합을 학습합니다. 이러한 중심은 집합적으로 해당 하위 공간에 대한 코드북을 형성합니다. 각 코드북의 중심 수는 매개변수 <code translate="no">nbits</code> 에 의해 결정되며, 여기서 각 코드북에는 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><annotation encoding="application/x-tex">2nbits2^{\textit{nbits}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491em;"></span></span></span></span> 2 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="mord"><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span> nbits 중심이 포함됩니다. 예를 들어</span></span></span></span></span></span></span></span></span> <code translate="no">nbits = 8</code> 인 경우 각 코드북에는 256개의 중심이 포함됩니다. 각 중심에는 <code translate="no">nbits</code> 비트의 고유 인덱스가 할당됩니다.</p></li>
 <li><p><strong>벡터</strong> <strong>양자화</strong>: 원본 벡터의 각 하위 벡터에 대해 PQ는 특정 메트릭 유형을 사용하여 해당 하위 공간 내에서 가장 가까운 중심을 식별합니다. 이 프로세스는 각 하위 벡터를 코드북에서 가장 가까운 대표 벡터에 효과적으로 매핑합니다. 전체 하위 벡터 좌표를 저장하는 대신 일치하는 중심점의 인덱스만 유지됩니다.</p></li>
 <li><p><strong>압축 표현</strong>: 최종 압축 표현은 각 하위 공간에서 하나씩, 총칭하여 <strong>PQ 코드라고</strong> 하는 <code translate="no">m</code> 인덱스로 구성됩니다. 이 인코딩은 저장 요구 사항을 <em>D × 32비트</em> (32비트 부동소수점 숫자 가정)에서 <em>m</em> × <em>n비트</em> 비트로 줄여 벡터 거리를 근사화하는 기능을 유지하면서 상당한 압축을 달성합니다.</p></li>
@@ -88,7 +117,22 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ivf-pq-2.png" alt="Ivf Pq 2" class="doc-image" id="ivf-pq-2" />
    </span> <span class="img-wrapper"> <span>IVF Pq 2</span> </span></p>
-<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ</h3><p><strong>IVF_PQ</strong> 인덱스는 <strong>IVF와</strong> <strong>PQ의</strong> 강점을 결합하여 검색 속도를 높입니다. 이 프로세스는 두 단계로 진행됩니다:</p>
+<h3 id="IVF-+-PQ" class="common-anchor-header">IVF + PQ<button data-href="#IVF-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>IVF_PQ</strong> 인덱스는 <strong>IVF와</strong> <strong>PQ의</strong> 강점을 결합하여 검색 속도를 높입니다. 이 프로세스는 두 단계로 진행됩니다:</p>
 <ol>
 <li><p>IVF를<strong>사용한 거친 필터링</strong>: IVF는 벡터 공간을 클러스터로 분할하여 검색 범위를 줄입니다. 이 알고리즘은 전체 데이터 세트를 평가하는 대신 쿼리 벡터에 가장 가까운 클러스터에만 집중합니다.</p></li>
 <li><p><strong>PQ와의 세분화된 비교</strong>: 선택한 클러스터 내에서 PQ는 압축 및 양자화된 벡터 표현을 사용해 대략적인 거리를 빠르게 계산합니다.</p></li>
@@ -116,16 +160,15 @@ summary: >-
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
-index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
-index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
-metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
-params={
-<span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split eahc vector into</span>
-} <span class="hljs-comment"># Index building params</span>
+    field_name=<span class="hljs-string">&quot;your_vector_field_name&quot;</span>, <span class="hljs-comment"># Name of the vector field to be indexed</span>
+    index_type=<span class="hljs-string">&quot;IVF_PQ&quot;</span>, <span class="hljs-comment"># Type of the index to create</span>
+    index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Name of the index to create</span>
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># Metric type used to measure similarity</span>
+    params={
+        <span class="hljs-string">&quot;m&quot;</span>: <span class="hljs-number">4</span>, <span class="hljs-comment"># Number of sub-vectors to split each vector into</span>
+    } <span class="hljs-comment"># Index building params</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">index_type</code>: 빌드할 인덱스 유형입니다. 이 예에서는 값을 <code translate="no">IVF_PQ</code> 로 설정합니다.</p></li>
@@ -160,14 +203,13 @@ params={
 }
 
 res = MilvusClient.search(
-collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
-anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]], <span class="hljs-comment"># Query vector</span>
-limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># TopK results to return</span>
-search_params=search_params
+    collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>, <span class="hljs-comment"># Collection name</span>
+    anns_field=<span class="hljs-string">&quot;vector_field&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+    data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>]],  <span class="hljs-comment"># Query vector</span>
+    limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># TopK results to return</span>
+    search_params=search_params
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">params</code>: 색인에서 검색을 위한 추가 구성 옵션.</p>
@@ -192,7 +234,22 @@ search_params=search_params
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 인덱스를 만들고 인덱스에서 검색을 수행하는 데 사용되는 매개변수에 대한 개요를 제공합니다.</p>
-<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-pq.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
+<h3 id="Index-building-params" class="common-anchor-header">인덱스 구축 매개변수<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-pq.md#Build-index">색인 작성</a> 시 <code translate="no">params</code> 에서 구성할 수 있는 매개변수가 나열되어 있습니다.</p>
 <table>
    <tr>
      <th></th>
@@ -222,7 +279,22 @@ search_params=search_params
      <td><p><code translate="no">nbits</code> 값이 클수록 코드북이 커져 원본 벡터를 더 정확하게 표현할 수 있습니다. 하지만 각 인덱스를 저장하는 데 더 많은 비트를 사용하므로 압축률이 떨어집니다. 대부분의 경우 이 범위 내에서 값을 설정하는 것이 좋습니다: [1, 16].</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수</h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-pq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 파라미터가 나와 있습니다.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">인덱스별 검색 매개변수<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 표에는 <a href="/docs/ko/v2.5.x/ivf-pq.md#Search-on-index">인덱스에서 검색할</a> 때 <code translate="no">search_params.params</code> 에서 구성할 수 있는 파라미터가 나와 있습니다.</p>
 <table>
    <tr>
      <th></th>

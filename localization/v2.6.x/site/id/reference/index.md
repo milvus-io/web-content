@@ -19,7 +19,10 @@ title: Indeks dalam memori
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Topik ini berisi daftar berbagai jenis indeks dalam memori yang didukung Milvus, skenario yang paling sesuai, dan parameter yang dapat dikonfigurasikan oleh pengguna untuk mendapatkan performa pencarian yang lebih baik. Untuk indeks dalam disk, lihat <strong><a href="/docs/id/disk_index.md">Indeks Dalam Disk</a></strong>.</p>
+    </button></h1><div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk konten terbaru, silakan lihat <a href="/docs/id/index-explained.md">Penjelasan Indeks.</a></p>
+</div>
+<p>Topik ini berisi daftar berbagai jenis indeks dalam memori yang didukung Milvus, skenario yang paling sesuai, dan parameter yang dapat dikonfigurasikan oleh pengguna untuk mendapatkan kinerja pencarian yang lebih baik. Untuk indeks dalam disk, lihat <strong><a href="/docs/id/disk_index.md">Indeks Dalam Disk</a></strong>.</p>
 <p>Pengindeksan adalah proses pengorganisasian data secara efisien, dan ini memainkan peran utama dalam membuat pencarian kemiripan menjadi berguna dengan mempercepat kueri yang memakan waktu secara dramatis pada kumpulan data yang besar.</p>
 <p>Untuk meningkatkan kinerja kueri, Anda dapat <a href="/docs/id/index-vector-fields.md">menentukan jenis indeks</a> untuk setiap bidang vektor.</p>
 <div class="alert note">
@@ -60,15 +63,60 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <div class="filter">
  <a href="#floating">Penyematan titik mengambang</a> <a href="#binary">Penyematan biner</a> <a href="#sparse">Penyematan jarang</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indeks untuk penyematan titik mengambang</h3><p>Untuk penyematan floating-point 128 dimensi (vektor), penyimpanan yang digunakan adalah 128 * ukuran float = 512 byte. Dan <a href="/docs/id/metric.md">metrik jarak</a> yang digunakan untuk penyematan float-point adalah jarak Euclidean (<code translate="no">L2</code>) dan Inner product (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indeks untuk penyematan titik mengambang<button data-href="#Indexes-for-floating-point-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk penyematan floating-point 128 dimensi (vektor), penyimpanan yang digunakan adalah 128 * ukuran float = 512 byte. Dan <a href="/docs/id/metric.md">metrik jarak</a> yang digunakan untuk penyematan float-point adalah jarak Euclidean (<code translate="no">L2</code>) dan Inner product (<code translate="no">IP</code>).</p>
 <p>Jenis-jenis indeks ini termasuk <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, dan <code translate="no">SCANN</code> untuk pencarian ANN berbasis CPU.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indeks untuk penyematan biner</h3><p>Untuk sematan biner 128 dimensi, penyimpanan yang dibutuhkan adalah 128 / 8 = 16 byte. Dan metrik jarak yang digunakan untuk sematan biner adalah <code translate="no">JACCARD</code> dan <code translate="no">HAMMING</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indeks untuk penyematan biner<button data-href="#Indexes-for-binary-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk sematan biner 128 dimensi, penyimpanan yang dibutuhkan adalah 128 / 8 = 16 byte. Dan metrik jarak yang digunakan untuk sematan biner adalah <code translate="no">JACCARD</code> dan <code translate="no">HAMMING</code>.</p>
 <p>Jenis indeks ini termasuk <code translate="no">BIN_FLAT</code> dan <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indeks untuk penyematan yang jarang</h3><p>Indeks untuk sematan jarang hanya mendukung metrik <code translate="no">IP</code> dan <code translate="no">BM25</code> (untuk pencarian teks lengkap).</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indeks untuk penyematan yang jarang<button data-href="#Indexes-for-sparse-embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Indeks untuk sematan jarang hanya mendukung metrik <code translate="no">IP</code> dan <code translate="no">BM25</code> (untuk pencarian teks lengkap).</p>
 <p>Jenis indeks yang didukung untuk sematan jarang: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
 <div class="alert note">
 <p>Mulai Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan sambil mempertahankan kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
@@ -238,7 +286,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada set data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT<button data-href="#FLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada set data yang relatif kecil (skala jutaan), indeks FLAT adalah pilihan yang baik. FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
 <p>FLAT akurat karena menggunakan pendekatan yang menyeluruh dalam melakukan pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan setiap kumpulan vektor dalam kumpulan data. Hal ini membuat FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk melakukan kueri data vektor yang sangat besar. Tidak ada parameter yang diperlukan untuk indeks FLAT di Milvus, dan menggunakannya tidak memerlukan pembangunan indeks tambahan.</p>
 <ul>
 <li><p>Parameter pencarian</p>
@@ -252,7 +315,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT membagi data vektor ke dalam unit klaster <code translate="no">nlist</code>, lalu membandingkan jarak antara vektor input target dan pusat setiap klaster. Bergantung pada jumlah klaster yang diatur oleh sistem untuk melakukan kueri (<code translate="no">nprobe</code>), hasil pencarian kemiripan dikembalikan berdasarkan perbandingan antara input target dan vektor dalam klaster yang paling mirip saja - secara drastis mengurangi waktu kueri.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT<button data-href="#IVFFLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_FLAT membagi data vektor ke dalam unit klaster <code translate="no">nlist</code>, lalu membandingkan jarak antara vektor input target dan pusat setiap klaster. Bergantung pada jumlah klaster yang diatur oleh sistem untuk melakukan kueri (<code translate="no">nprobe</code>), hasil pencarian kemiripan dikembalikan berdasarkan perbandingan antara input target dan vektor dalam klaster yang paling mirip saja - secara drastis mengurangi waktu kueri.</p>
 <p>Dengan menyesuaikan <code translate="no">nprobe</code>, keseimbangan ideal antara akurasi dan kecepatan dapat ditemukan untuk skenario tertentu. Hasil dari <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">uji kinerja IVF_FLAT</a> menunjukkan bahwa waktu kueri meningkat tajam seiring dengan bertambahnya jumlah vektor input target (<code translate="no">nq</code>), dan jumlah cluster yang dicari (<code translate="no">nprobe</code>).</p>
 <p>IVF_FLAT adalah indeks IVF yang paling dasar, dan data yang disandikan yang disimpan di setiap unit konsisten dengan data aslinya.</p>
 <ul>
@@ -290,7 +368,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT tidak melakukan kompresi apa pun, sehingga file indeks yang dihasilkannya memiliki ukuran yang kurang lebih sama dengan data vektor mentah yang tidak diindeks. Sebagai contoh, jika set data SIFT 1B asli berukuran 476 GB, file indeks IVF_FLAT akan sedikit lebih kecil (~470 GB). Memuat semua file indeks ke dalam memori akan menghabiskan 470 GB penyimpanan.</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8<button data-href="#IVFSQ8" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>IVF_FLAT tidak melakukan kompresi apa pun, sehingga file indeks yang dihasilkannya memiliki ukuran yang kurang lebih sama dengan data vektor mentah yang tidak diindeks. Sebagai contoh, jika set data SIFT 1B asli berukuran 476 GB, file indeks IVF_FLAT akan sedikit lebih kecil (~470 GB). Memuat semua file indeks ke dalam memori akan menghabiskan 470 GB penyimpanan.</p>
 <p>Ketika sumber daya memori disk, CPU, atau GPU terbatas, IVF_SQ8 adalah pilihan yang lebih baik daripada IVF_FLAT. Jenis indeks ini dapat mengubah setiap FLOAT (4 byte) menjadi UINT8 (1 byte) dengan melakukan Kuantisasi Skalar (SQ). Hal ini mengurangi konsumsi memori disk, CPU, dan GPU sebesar 70-75%. Untuk kumpulan data SIFT 1B, file indeks IVF_SQ8 hanya membutuhkan penyimpanan 140 GB.</p>
 <ul>
 <li><p>Parameter pembuatan indeks</p>
@@ -327,7 +420,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Kuantisasi Produk) secara seragam menguraikan ruang vektor dimensi tinggi asli menjadi produk Cartesian dari ruang vektor dimensi rendah <code translate="no">m</code>, dan kemudian mengkuantisasi ruang vektor dimensi rendah yang terurai. Alih-alih menghitung jarak antara vektor target dan pusat semua unit, kuantisasi produk memungkinkan perhitungan jarak antara vektor target dan pusat pengelompokan setiap ruang dimensi rendah dan sangat mengurangi kompleksitas waktu dan kompleksitas ruang algoritma.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ<button data-href="#IVFPQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">PQ</code> (Kuantisasi Produk) secara seragam menguraikan ruang vektor dimensi tinggi asli menjadi produk Cartesian dari ruang vektor dimensi rendah <code translate="no">m</code>, dan kemudian mengkuantisasi ruang vektor dimensi rendah yang terurai. Alih-alih menghitung jarak antara vektor target dan pusat semua unit, kuantisasi produk memungkinkan perhitungan jarak antara vektor target dan pusat pengelompokan setiap ruang dimensi rendah dan sangat mengurangi kompleksitas waktu dan kompleksitas ruang algoritma.</p>
 <p>IVF_PQ melakukan pengelompokan indeks IVF sebelum mengkuantisasi produk vektor. File indeksnya bahkan lebih kecil daripada IVF_SQ8, tetapi juga menyebabkan hilangnya akurasi selama pencarian vektor.</p>
 <div class="alert note">
 <p>Parameter pembuatan indeks dan parameter pencarian bervariasi dengan distribusi Milvus. Pilih distribusi Milvus Anda terlebih dahulu.</p>
@@ -341,7 +449,7 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 <tbody>
 <tr><td><code translate="no">nlist</code></td><td>Jumlah unit cluster</td><td>[1, 65536]</td></tr>
 <tr><td><code translate="no">m</code></td><td>Jumlah faktor kuantisasi produk</td><td><code translate="no">dim mod m == 0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Opsional] Jumlah bit tempat penyimpanan setiap vektor dimensi rendah.</td><td>[1, 64] (8 secara default)</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Opsional] Jumlah bit tempat penyimpanan setiap vektor dimensi rendah.</td><td>[1, 24] (8 secara default)</td></tr>
 </tbody>
 </table>
 </li>
@@ -369,7 +477,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) mirip dengan IVF_PQ dalam hal pengelompokan vektor dan kuantisasi produk. Apa yang membuat mereka berbeda terletak pada detail implementasi kuantisasi produk dan penggunaan SIMD (Single-Instruction/Multi-data) untuk penghitungan yang efisien.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN<button data-href="#SCANN" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>ScaNN (Scalable Nearest Neighbors) mirip dengan IVF_PQ dalam hal pengelompokan vektor dan kuantisasi produk. Apa yang membuat mereka berbeda terletak pada detail implementasi kuantisasi produk dan penggunaan SIMD (Single-Instruction/Multi-data) untuk penghitungan yang efisien.</p>
 <ul>
 <li><p>Parameter pembangunan indeks</p>
 <table>
@@ -410,7 +533,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) adalah algoritma pengindeksan berbasis grafik. Algoritma ini membangun struktur navigasi multi-lapisan untuk sebuah gambar menurut aturan tertentu. Dalam struktur ini, lapisan atas lebih jarang dan jarak antar node lebih jauh; lapisan bawah lebih padat dan jarak antar node lebih dekat. Pencarian dimulai dari lapisan paling atas, menemukan node yang paling dekat dengan target di lapisan ini, dan kemudian memasuki lapisan berikutnya untuk memulai pencarian lain. Setelah beberapa kali iterasi, ia dapat dengan cepat mendekati posisi target.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW (Hierarchical Navigable Small World Graph) adalah algoritma pengindeksan berbasis grafik. Algoritma ini membangun struktur navigasi multi-lapisan untuk sebuah gambar menurut aturan tertentu. Dalam struktur ini, lapisan atas lebih jarang dan jarak antar node lebih jauh; lapisan bawah lebih padat dan jarak antar node lebih dekat. Pencarian dimulai dari lapisan paling atas, menemukan node yang paling dekat dengan target di lapisan ini, dan kemudian memasuki lapisan berikutnya untuk memulai pencarian lain. Setelah beberapa kali iterasi, ia dapat dengan cepat mendekati posisi target.</p>
 <p>Untuk meningkatkan kinerja, HNSW membatasi tingkat maksimum node pada setiap lapisan grafik ke <code translate="no">M</code>. Selain itu, Anda dapat menggunakan <code translate="no">efConstruction</code> (saat membangun indeks) atau <code translate="no">ef</code> (saat mencari target) untuk menentukan rentang pencarian.</p>
 <ul>
 <li><p>Parameter pembangunan indeks</p>
@@ -435,7 +573,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Kuantisasi Skalar (SQ) adalah teknik yang digunakan untuk mendiskritkan data floating-point menjadi sekumpulan nilai yang terbatas berdasarkan besarnya. Sebagai contoh, <strong>SQ6</strong> merepresentasikan kuantisasi ke dalam (2^6 = 64) nilai diskrit, di mana setiap angka floating-point dikodekan menggunakan 6 bit. Demikian pula, <strong>SQ8</strong> mengkuantisasi data menjadi (2^8 = 256) nilai diskrit, dengan setiap angka floating-point diwakili oleh 8 bit. Kuantisasi ini mengurangi jejak memori sekaligus mempertahankan struktur data yang penting untuk pemrosesan yang efisien.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kuantisasi Skalar (SQ) adalah teknik yang digunakan untuk mendiskritkan data floating-point menjadi sekumpulan nilai yang terbatas berdasarkan besarnya. Sebagai contoh, <strong>SQ6</strong> merepresentasikan kuantisasi ke dalam (2^6 = 64) nilai diskrit, di mana setiap angka floating-point dikodekan menggunakan 6 bit. Demikian pula, <strong>SQ8</strong> mengkuantisasi data menjadi (2^8 = 256) nilai diskrit, dengan setiap angka floating-point diwakili oleh 8 bit. Kuantisasi ini mengurangi jejak memori sekaligus mempertahankan struktur data yang penting untuk pemrosesan yang efisien.</p>
 <p>Dikombinasikan dengan SQ, HNSW_SQ menawarkan pertukaran yang dapat dikontrol antara ukuran indeks dan akurasi, sambil mempertahankan kinerja query-per-detik (QPS) yang tinggi. Dibandingkan dengan HNSW standar, ini menghasilkan peningkatan yang tidak terlalu besar dalam waktu pembangunan indeks.</p>
 <ul>
 <li><p>Parameter pembangunan indeks</p>
@@ -464,7 +617,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Ide dasar dari PQ adalah untuk membagi vektor menjadi sub-vektor <code translate="no">m</code>, yang masing-masing akan menemukan <em>2^{nbits}</em> centroid berdasarkan kmeans, dan setiap sub-vektor akan memilih centroid terdekat sebagai perkiraan sub-vektor. Kemudian kita mencatat semua centroid, sehingga setiap subvektor dapat dikodekan sebagai <code translate="no">nbits</code>, dan vektor mengambang dengan panjang <code translate="no">dim</code> dapat dikodekan sebagai <em>m ⋅ n bit</em>.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Ide dasar dari PQ adalah untuk membagi vektor menjadi sub-vektor <code translate="no">m</code>, yang masing-masing akan menemukan <em>2^{nbits}</em> centroid berdasarkan kmeans, dan setiap sub-vektor akan memilih centroid terdekat sebagai perkiraan sub-vektor. Kemudian kita mencatat semua centroid, sehingga setiap subvektor dapat dikodekan sebagai <code translate="no">nbits</code>, dan vektor mengambang dengan panjang <code translate="no">dim</code> dapat dikodekan sebagai <em>m ⋅ n bit</em>.</p>
 <p>Dikombinasikan dengan PQ, HNSW_PQ menawarkan pertukaran yang dapat dikontrol antara ukuran indeks dan akurasi, tetapi memiliki nilai QPS yang lebih rendah dan tingkat penarikan yang lebih tinggi daripada HNSW_SQ untuk tingkat kompresi yang sama. Dibandingkan dengan HNSW_SQ, dibutuhkan waktu lebih lama untuk membangun indeks.</p>
 <ul>
 <li><p>Parameter pembangunan indeks</p>
@@ -494,7 +662,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ mirip dengan PQ, dan juga membagi vektor ke dalam kelompok-kelompok <code translate="no">m</code>. Setiap sub-vektor akan dikodekan sebagai <code translate="no">nbits</code>. Setelah menyelesaikan kuantisasi pq, ia akan menghitung sisa antara vektor dan vektor terkuantisasi pq, dan menerapkan kuantisasi pq ke vektor sisa. Sebanyak <code translate="no">nrq</code> kuantisasi pq lengkap akan dilakukan, sehingga vektor mengambang dengan panjang <code translate="no">dim</code> akan dikodekan sebagai <em>m ⋅ nbit ⋅ nrq</em> bit.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ<button data-href="#HNSWPRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ mirip dengan PQ, dan juga membagi vektor ke dalam kelompok-kelompok <code translate="no">m</code>. Setiap sub-vektor akan dikodekan sebagai <code translate="no">nbits</code>. Setelah menyelesaikan kuantisasi pq, ia akan menghitung sisa antara vektor dan vektor terkuantisasi pq, dan menerapkan kuantisasi pq ke vektor sisa. Sebanyak <code translate="no">nrq</code> kuantisasi pq lengkap akan dilakukan, sehingga vektor mengambang dengan panjang <code translate="no">dim</code> akan dikodekan sebagai <em>m ⋅ nbit ⋅ nrq</em> bit.</p>
 <p>Dikombinasikan dengan Product Residual Quantizer (PRQ), HNSW_PRQ menawarkan pertukaran yang dapat dikontrol lebih tinggi antara ukuran indeks dan akurasi. Memiliki nilai QPS yang hampir setara dan tingkat recall yang lebih tinggi daripada HNSW_PQ untuk tingkat kompresi yang sama. Dibandingkan dengan HNSW_PQ, waktu untuk membangun indeks dapat meningkat beberapa kali lipat.</p>
 <ul>
 <li><p>Parameter pembangunan indeks</p>
@@ -527,7 +710,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Indeks ini persis sama dengan FLAT kecuali bahwa ini hanya dapat digunakan untuk penyematan biner.</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT<button data-href="#BINFLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Indeks ini persis sama dengan FLAT kecuali bahwa ini hanya dapat digunakan untuk penyematan biner.</p>
 <p>Untuk aplikasi pencarian kemiripan vektor yang membutuhkan akurasi sempurna dan bergantung pada dataset yang relatif kecil (skala jutaan), indeks BIN_FLAT adalah pilihan yang baik. BIN_FLAT tidak memampatkan vektor, dan merupakan satu-satunya indeks yang dapat menjamin hasil pencarian yang tepat. Hasil dari BIN_FLAT juga dapat digunakan sebagai titik perbandingan untuk hasil yang dihasilkan oleh indeks lain yang memiliki recall kurang dari 100%.</p>
 <p>BIN_FLAT akurat karena menggunakan pendekatan menyeluruh untuk pencarian, yang berarti untuk setiap kueri, input target dibandingkan dengan vektor dalam kumpulan data. Hal ini membuat BIN_FLAT menjadi indeks paling lambat dalam daftar kami, dan tidak cocok untuk kueri data vektor yang sangat besar. Tidak ada parameter untuk indeks BIN_FLAT di Milvus, dan menggunakannya tidak memerlukan pelatihan data atau penyimpanan tambahan.</p>
 <ul>
@@ -542,7 +740,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </table>
 </li>
 </ul>
-<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Indeks ini persis sama dengan IVF_FLAT kecuali bahwa indeks ini hanya dapat digunakan untuk penyematan biner.</p>
+<h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT<button data-href="#BINIVFFLAT" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Indeks ini persis sama dengan IVF_FLAT kecuali bahwa indeks ini hanya dapat digunakan untuk penyematan biner.</p>
 <p>BIN_IVF_FLAT membagi data vektor ke dalam unit klaster <code translate="no">nlist</code>, lalu membandingkan jarak antara vektor input target dan pusat setiap klaster. Bergantung pada jumlah klaster yang diatur oleh sistem untuk melakukan kueri (<code translate="no">nprobe</code>), hasil pencarian kemiripan dikembalikan berdasarkan perbandingan antara input target dan vektor dalam klaster yang paling mirip saja - secara drastis mengurangi waktu kueri.</p>
 <p>Dengan menyesuaikan <code translate="no">nprobe</code>, keseimbangan ideal antara akurasi dan kecepatan dapat ditemukan untuk skenario tertentu. Waktu kueri meningkat tajam seiring dengan meningkatnya jumlah vektor input target (<code translate="no">nq</code>), dan jumlah cluster yang dicari (<code translate="no">nprobe</code>).</p>
 <p>BIN_IVF_FLAT adalah indeks BIN_IVF yang paling dasar, dan data yang disandikan yang disimpan di setiap unit konsisten dengan data aslinya.</p>
@@ -583,7 +796,22 @@ Saat ini, bidang vektor hanya mendukung satu jenis indeks. Milvus secara otomati
 </ul>
 </div>
 <div class="filter-sparse">
-<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX</h3><p>Setiap dimensi menyimpan daftar vektor yang memiliki nilai bukan nol pada dimensi tersebut. Selama pencarian, Milvus melakukan iterasi melalui setiap dimensi vektor kueri dan menghitung nilai untuk vektor yang memiliki nilai bukan nol pada dimensi tersebut.</p>
+<h3 id="SPARSEINVERTEDINDEX" class="common-anchor-header">SPARSE_INVERTED_INDEX<button data-href="#SPARSEINVERTEDINDEX" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setiap dimensi menyimpan daftar vektor yang memiliki nilai bukan nol pada dimensi tersebut. Selama pencarian, Milvus melakukan iterasi melalui setiap dimensi vektor kueri dan menghitung nilai untuk vektor yang memiliki nilai bukan nol pada dimensi tersebut.</p>
 <ul>
 <li><p>Parameter pembuatan indeks</p>
 <table>

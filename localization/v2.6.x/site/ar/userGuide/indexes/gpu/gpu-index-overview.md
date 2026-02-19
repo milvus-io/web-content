@@ -21,11 +21,33 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>يمكن أن يؤدي إنشاء فهرس مع دعم GPU في Milvus إلى تحسين أداء البحث بشكل كبير في سيناريوهات الإنتاجية العالية والاستدعاء العالي.</p>
-<p>يقارن الشكل التالي معدل إنتاجية الاستعلام (الاستعلامات في الثانية) لمختلف تكوينات الفهرس عبر إعدادات الأجهزة المختلفة ومجموعات البيانات المتجهة (Cohere وOpenAI) وأحجام دفعات البحث، مما يوضح أن <code translate="no">GPU_CAGRA</code> يتفوق باستمرار على الطرق الأخرى.</p>
+<p>يقارن الشكل التالي إنتاجية الاستعلام (الاستعلامات في الثانية) عبر تكوينات الفهرس وإعدادات الأجهزة ومجموعات البيانات المتجهة (Cohere وOpenAI) وأحجام دفعات البحث، مما يوضح أن <code translate="no">GPU_CAGRA</code> يتفوق باستمرار على الطرق الأخرى.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/gpu-index-performance.png" alt="Gpu Index Performance" class="doc-image" id="gpu-index-performance" />
-   </span> <span class="img-wrapper"> <span>أداء فهرس وحدة المعالجة المركزية</span> </span></p>
+   </span> <span class="img-wrapper"> <span>أداء فهرس وحدة معالجة الرسومات</span> </span></p>
+<h2 id="Configure-GPU-memory-pool-for-Milvus" class="common-anchor-header">تكوين تجمع ذاكرة وحدة معالجة الرسومات لوحدة معالجة الرسومات ل Milvus<button data-href="#Configure-GPU-memory-pool-for-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>يدعم Milvus تجمع ذاكرة GPU عالمي ويوفر معلمتي تكوين، <code translate="no">initMemSize</code> و <code translate="no">maxMemSize</code> ، في <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">ملف تكوين Milvus</a>.</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">gpu:</span>
+  <span class="hljs-attr">initMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># set the initial memory pool size.</span>
+  <span class="hljs-attr">maxMemSize:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># sets the maximum memory usage limit. When the memory usage exceeds initMemSize, Milvus will attempt to expand the memory pool.</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>عادةً ما يكون الإعداد الافتراضي <code translate="no">initMemSize</code> هو نصف ذاكرة وحدة معالجة الرسومات عند بدء تشغيل Milvus، و <code translate="no">maxMemSize</code> الافتراضي إلى ذاكرة وحدة معالجة الرسومات بالكامل. يتم تعيين حجم تجمع ذاكرة وحدة معالجة الرسومات في البداية على <code translate="no">initMemSize</code> وسيتم توسيعه تلقائيًا إلى <code translate="no">maxMemSize</code> حسب الحاجة.</p>
+<p>عندما يتم تحديد فهرس ممكّن لوحدة معالجة الرسومات، يقوم Milvus بتحميل بيانات المجموعة المستهدفة في ذاكرة وحدة معالجة الرسومات قبل عمليات البحث، لذا يجب أن يكون <code translate="no">maxMemSize</code> حجم البيانات على الأقل.</p>
 <h2 id="Limits" class="common-anchor-header">الحدود<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,9 +64,9 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>بالنسبة إلى <code translate="no">GPU_IVF_FLAT</code> ، القيمة القصوى لـ <code translate="no">limit</code> هي 1,024.</p></li>
-<li><p>بالنسبة لـ <code translate="no">GPU_IVF_PQ</code> و <code translate="no">GPU_CAGRA</code> ، القيمة القصوى لـ <code translate="no">limit</code> هي 1,024.</p></li>
-<li><p>في حين أنه لا توجد مجموعة <code translate="no">limit</code> لـ <code translate="no">GPU_BRUTE_FORCE</code> ، يوصى بعدم تجاوز 4,096 لتجنب مشاكل الأداء المحتملة.</p></li>
+<li><p>بالنسبة لـ <code translate="no">GPU_IVF_FLAT</code> ، القيمة القصوى لـ <code translate="no">limit</code> هي 1,024.</p></li>
+<li><p>بالنسبة إلى <code translate="no">GPU_IVF_PQ</code> و <code translate="no">GPU_CAGRA</code> ، القيمة القصوى لـ <code translate="no">limit</code> هي 1,024.</p></li>
+<li><p>بينما لا يوجد حد أقصى محدد <code translate="no">limit</code> لـ <code translate="no">GPU_BRUTE_FORCE</code> ، يوصى بعدم تجاوز 4,096 لتجنب مشاكل الأداء المحتملة.</p></li>
 <li><p>في الوقت الحالي، لا تدعم فهارس GPU المسافة <code translate="no">COSINE</code>. إذا كانت المسافة <code translate="no">COSINE</code> مطلوبة، يجب تطبيع البيانات أولاً، ثم يمكن استخدام مسافة المنتج الداخلي (IP) كبديل.</p></li>
 <li><p>تحميل حماية OOM لفهارس وحدة معالجة الرسومات غير مدعوم بالكامل، قد يؤدي تحميل الكثير من البيانات إلى تعطل QueryNode.</p></li>
 <li><p>لا تدعم فهارس وحدة معالجة الرسومات وظائف البحث مثل <a href="/docs/ar/range-search.md">البحث في النطاق</a> <a href="/docs/ar/grouping-search.md">والبحث في التجميع</a>.</p></li>
@@ -139,5 +161,5 @@ summary: >-
 <li><p><strong>متى يكون من المناسب استخدام فهرس GPU؟</strong></p>
 <p>يكون فهرس GPU مفيدًا بشكل خاص في المواقف التي تتطلب إنتاجية عالية أو استدعاءً عاليًا. على سبيل المثال، عند التعامل مع الدفعات الكبيرة، يمكن أن تتجاوز إنتاجية فهرسة وحدة معالجة الرسومات إنتاجية فهرسة وحدة المعالجة المركزية بما يصل إلى 100 مرة. في السيناريوهات ذات الدُفعات الأصغر، لا تزال فهارس وحدة معالجة الرسومات تتفوق بشكل كبير على فهارس وحدة المعالجة المركزية من حيث الأداء. علاوةً على ذلك، إذا كانت هناك متطلبات لإدخال البيانات بسرعة، فإن دمج وحدة معالجة الرسومات يمكن أن يسرّع عملية إنشاء الفهارس بشكل كبير.</p></li>
 <li><p><strong>في أي السيناريوهات تكون فهارس وحدة معالجة الرسومات مثل GPU_CAGRA و GPU_IVF_PQ و GPU_IVF_PQ و GPU_IVF_FLAT و GPU_BRUT_FORCE الأنسب؟</strong></p>
-<p><code translate="no">GPU_CAGRA</code> تعد الفهارس مثالية للسيناريوهات التي تتطلب أداءً محسنًا، وإن كان ذلك على حساب استهلاك المزيد من الذاكرة. بالنسبة للبيئات التي يكون فيها الحفاظ على الذاكرة أولوية، يمكن أن يساعد الفهرس <code translate="no">GPU_IVF_PQ</code> في تقليل متطلبات التخزين، على الرغم من أن ذلك يأتي مع خسارة أعلى في الدقة. يعمل الفهرس <code translate="no">GPU_IVF_FLAT</code> كخيار متوازن، حيث يقدم حلاً وسطًا بين الأداء واستخدام الذاكرة. أخيرًا، تم تصميم الفهرس <code translate="no">GPU_BRUTE_FORCE</code> لعمليات البحث الشاملة، مما يضمن معدل استدعاء يبلغ 1 من خلال إجراء عمليات بحث اجتياحية.</p></li>
+<p><code translate="no">GPU_CAGRA</code> تعد الفهارس مثالية للسيناريوهات التي تتطلب أداءً محسنًا، وإن كان ذلك على حساب استهلاك المزيد من الذاكرة. بالنسبة للبيئات التي يكون فيها الحفاظ على الذاكرة أولوية، يمكن أن يساعد الفهرس <code translate="no">GPU_IVF_PQ</code> في تقليل متطلبات التخزين، على الرغم من أن ذلك يأتي مع خسارة أعلى في الدقة. يعمل الفهرس <code translate="no">GPU_IVF_FLAT</code> كخيار متوازن، حيث يوفر حلاً وسطًا بين الأداء واستخدام الذاكرة. أخيرًا، تم تصميم الفهرس <code translate="no">GPU_BRUTE_FORCE</code> لعمليات البحث الشامل، مما يضمن معدل استدعاء يبلغ 1 من خلال إجراء عمليات بحث اجتياحية.</p></li>
 </ul>

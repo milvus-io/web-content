@@ -499,6 +499,44 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">기본 키 검색<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>쿼리 벡터를 설정하는 대신 쿼리 벡터가 대상 컬렉션에 이미 존재하는 경우 기본 키를 사용할 수 있습니다.</p>
+<div class="multipleCode">
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+<span class="highlighted-comment-line">    ids=[<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>],</span>
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
+)
+
+<span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
+    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+        <span class="hljs-built_in">print</span>(hit)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="ANN-Search-in-Partition" class="common-anchor-header">파티션에서 ANN 검색<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1008,7 +1046,7 @@ curl --request POST \
 <p>검색 요청에 필터링 조건을 포함하면 Milvus가 ANN 검색을 수행하기 전에 메타데이터 필터링을 수행하여 검색 범위를 전체 컬렉션에서 지정된 필터링 조건과 일치하는 엔티티로만 축소할 수 있습니다.</p>
 <p>메타데이터 필터링 및 필터링 조건에 대한 자세한 내용은 <a href="/docs/ko/filtered-search.md">필터링된 검색</a>, <a href="/docs/ko/boolean.md">필터링 설명</a> 및 관련 항목을 참조하세요.</p></li>
 <li><p>범위 검색</p>
-<p>특정 범위 내에서 반환되는 엔티티의 거리 또는 점수를 제한하여 검색 결과의 관련성을 높일 수 있습니다. Milvus에서 범위 검색은 쿼리 벡터와 가장 유사한 벡터가 포함된 벡터를 중심으로 두 개의 동심원을 그리는 방식으로 이루어집니다. 검색 요청은 두 원의 반지름을 지정하며, Milvus는 바깥쪽 원에 속하지만 안쪽 원에 속하지 않는 모든 벡터 임베딩을 반환합니다.</p>
+<p>특정 범위 내에서 반환되는 엔티티의 거리 또는 점수를 제한하여 검색 결과의 관련성을 높일 수 있습니다. Milvus에서 범위 검색은 쿼리 벡터와 가장 유사한 벡터가 포함된 벡터를 중심으로 두 개의 동심원을 그리는 방식으로 이루어집니다. 검색 요청은 두 원의 반지름을 지정하고 Milvus는 바깥쪽 원에 속하지만 안쪽 원에 속하지 않는 모든 벡터 임베딩을 반환합니다.</p>
 <p>범위 검색에 대한 자세한 내용은 <a href="/docs/ko/range-search.md">범위 검색을</a> 참조하세요.</p></li>
 <li><p>그룹 검색</p>
 <p>반환된 엔티티가 특정 필드에서 동일한 값을 갖는 경우 검색 결과가 벡터 공간에 있는 모든 벡터 임베딩의 분포를 나타내지 않을 수 있습니다. 검색 결과를 다양화하려면 그룹화 검색을 사용해 보세요.</p>

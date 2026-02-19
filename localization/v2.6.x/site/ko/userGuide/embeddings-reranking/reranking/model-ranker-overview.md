@@ -22,7 +22,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>기존의 벡터 검색은 순전히 수학적 유사성, 즉 고차원 공간에서 벡터가 얼마나 일치하는지에 따라 결과의 순위를 매깁니다. 이 접근 방식은 효율적이기는 하지만 진정한 의미적 관련성을 놓치는 경우가 많습니다. <strong>'데이터베이스 최적화를 위한 모범 사례'를</strong> 검색한다고 생각해 보세요. 이러한 용어가 자주 언급되는 벡터 유사도가 높은 문서가 있지만 실제로 실행 가능한 최적화 전략을 제공하지는 않을 수 있습니다.</p>
+    </button></h1><p>기존의 벡터 검색은 순전히 수학적 유사성, 즉 고차원 공간에서 벡터가 얼마나 가깝게 일치하는지에 따라 결과의 순위를 매깁니다. 이 접근 방식은 효율적이기는 하지만 진정한 의미적 관련성을 놓치는 경우가 많습니다. <strong>'데이터베이스 최적화를 위한 모범 사례'를</strong> 검색한다고 생각해 보세요. 이러한 용어가 자주 언급되는 벡터 유사도가 높은 문서가 있지만 실제로 실행 가능한 최적화 전략을 제공하지는 않을 수 있습니다.</p>
 <p>모델 랭커는 쿼리와 문서 간의 의미 관계를 이해하는 고급 언어 모델을 통합하여 Milvus 검색을 혁신합니다. 벡터 유사도에만 의존하는 대신 콘텐츠의 의미와 문맥을 평가하여 보다 지능적이고 관련성 높은 결과를 제공합니다.</p>
 <h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -122,7 +122,7 @@ beta: Milvus 2.6.x
      <td><p>Voyage AI</p></td>
      <td><p>특정 성능 및 컨텍스트 요구 사항이 있는 RAG 애플리케이션</p></td>
      <td><ul><li><p>리랭크 작업을 위해 특별히 훈련된 모델</p></li><li><p>다양한 문서 길이를 위한 세분화된 잘라내기 컨트롤</p></li><li><p>프로덕션 워크로드에 최적화된 추론 기능</p></li><li><p>여러 모델 변형(재랭크-2, 재랭크-라이트 등)</p></li></ul></td>
-     <td><p>미세 조정된 성능 제어와 전문화된 의미 이해가 필요한 다양한 문서 길이의 연구 데이터베이스</p></td>
+     <td><p>미세 조정된 성능 제어와 전문화된 의미론적 이해가 필요한 다양한 문서 길이의 연구 데이터베이스</p></td>
    </tr>
    <tr>
      <td><p>SiliconFlow</p></td>
@@ -301,7 +301,7 @@ model_ranker = Function(
       </svg>
     </button></h3><p>모델 랭킹러를 정의한 후 이를 랭킹러 매개변수에 전달하여 검색 작업 중에 적용할 수 있습니다:</p>
 <div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the model ranker in standard vector search</span>
 results = client.search(
     collection_name,
@@ -330,82 +330,6 @@ results = client.search(
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 <span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.search(searchReq);
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
-<button class="copy-code-btn"></button></code></pre>
-<h3 id="Apply-to-hybrid-search" class="common-anchor-header">하이브리드 검색에 적용<button data-href="#Apply-to-hybrid-search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>여러 벡터 필드를 결합하는 하이브리드 검색 작업에도 모델 랭커를 적용할 수 있습니다:</p>
-<div class="multipleCode">
-   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> AnnSearchRequest
-
-<span class="hljs-comment"># Define search requests for different vector fields</span>
-dense_request = AnnSearchRequest(
-    data=[your_query_vector_1], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">20</span>
-)
-
-sparse_request = AnnSearchRequest(
-    data=[your_query_vector_2], <span class="hljs-comment"># Replace with your query vector</span>
-    anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    param={},
-    limit=<span class="hljs-number">20</span>
-)
-
-<span class="hljs-comment"># Apply model ranker to hybrid search</span>
-hybrid_results = client.hybrid_search(
-    collection_name,
-    [dense_request, sparse_request],
-<span class="highlighted-wrapper-line">    ranker=model_ranker,  <span class="hljs-comment"># Same model ranker works with hybrid search</span></span>
-    limit=<span class="hljs-number">10</span>,
-    output_fields=[<span class="hljs-string">&quot;document&quot;</span>]
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.AnnSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.HybridSearchReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
-        
-List&lt;AnnSearchReq&gt; searchRequests = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;dense_vector&quot;</span>)
-        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(embedding)))
-        .limit(<span class="hljs-number">10</span>)
-        .build());
-searchRequests.add(AnnSearchReq.builder()
-        .vectorFieldName(<span class="hljs-string">&quot;sparse_vector&quot;</span>)
-        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;machine learning for time series&quot;</span>)))
-        .limit(<span class="hljs-number">10</span>)
-        .build());
-
-<span class="hljs-type">HybridSearchReq</span> <span class="hljs-variable">hybridSearchReq</span> <span class="hljs-operator">=</span> HybridSearchReq.builder()
-                .collectionName(COLLECTION_NAME)
-                .searchRequests(searchRequests)
-                .ranker(ranker)
-                .limit(<span class="hljs-number">10</span>)
-                .outputFields(Arrays.asList(<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;venue&quot;</span>, <span class="hljs-string">&quot;event_date&quot;</span>))
-                .build();
-<span class="hljs-type">SearchResp</span> <span class="hljs-variable">searchResp</span> <span class="hljs-operator">=</span> client.hybridSearch(hybridSearchReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// nodejs</span>
 <button class="copy-code-btn"></button></code></pre>

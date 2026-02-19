@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
 ---
-<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بالحصص والحدود<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">تكوينات متعلقة بالحصص والحدود<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,7 +59,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   <tbody>
     <tr>
       <td>        'صواب' لتمكين الحصة والحدود، 'خطأ' لتعطيلها.      </td>
-      <td>صواب</td>
+      <td>خطأ</td>
     </tr>
   </tbody>
 </table>
@@ -1161,7 +1161,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ميغابايت/ثانية، افتراضي بلا حد، غير مدعوم بعد. الهدف: الحد من معدل التحميل المجمع      </td>
+      <td>        ميجابايت/ثانية، افتراضي بلا حد، غير مدعوم بعد. الهدف: الحد من معدل التحميل المجمع      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1338,7 +1338,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        vps (ناقلات في الثانية)، لا يوجد حد افتراضي      </td>
+      <td>        vps (المتجهات في الثانية)، لا يوجد حد افتراضي      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1704,7 +1704,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1]، مستوى الماء المنخفض للذاكرة في عقد الاستعلام      </td>
+      <td>        (0، 1]، مستوى الماء المنخفض للذاكرة في عقد الاستعلام      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1852,7 +1852,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ميغابايت، (0، +inf)، افتراضي بلا حد    </td>
+      <td>        ميغابايت، (0، +inf)، افتراضي بدون حد    </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1881,7 +1881,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        ميغابايت، (0، +inf)، افتراضي بلا حد    </td>
+      <td>        ميغابايت، (0، +inf)، افتراضي بدون حد    </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2084,7 +2084,7 @@ summary: تعرف على كيفية تكوين quotaAndLimits لـ Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        حذف حصة عدد صفوف المخزن المؤقت، ارتفاع مستوى المياه      </td>
+      <td>        حذف حصة عدد صفوف المخزن المؤقت، مستوى الماء المرتفع      </td>
       <td>65536</td>
     </tr>
   </tbody>

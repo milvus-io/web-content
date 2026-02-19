@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "Recherche primaire-clé",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "Recherche hybride",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "Demande de renseignements",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "Filtrage",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "Le filtrage expliqué",
@@ -1007,37 +1013,49 @@
           {
             "label": "Recherche en texte intégral",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Correspondance des textes",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Surligneur de texte",
+            "id": "text-highlighter.md",
+            "order": 10,
             "children": []
           },
           {
             "label": "Correspondance des phrases",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Recherche avec listes intégrées",
+            "id": "search-with-embedding-lists.md",
+            "order": 12,
             "children": []
           },
           {
             "label": "Requêtes Elasticsearch vers Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "Recherche d'itérateurs",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 14,
             "children": []
           },
           {
             "label": "Utiliser la clé de partition",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 15,
             "children": []
           }
         ]
@@ -1781,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "Type de commutateur MQ",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Commutateur Milvus Cluster Type MQ",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus Commutateur autonome Type MQ",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -2707,9 +2744,10 @@
         "children": []
       },
       {
-        "label": "Utiliser ColPali pour la récupération multimodale",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "Utiliser ColBERT et ColPali avec Milvus",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

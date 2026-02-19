@@ -3,7 +3,6 @@ id: knowhere.md
 summary: Infórmese sobre Knowhere en Milvus.
 title: Knowhere
 ---
-
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,8 +18,8 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este tema presenta Knowhere, el motor central de ejecución vectorial de Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Este tema presenta Knowhere, el núcleo del motor de búsqueda vectorial de Milvus.</p>
+<h2 id="Overview" class="common-anchor-header">Visión General<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +34,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere es el motor central de ejecución vectorial de Milvus, que incorpora varias bibliotecas de búsqueda de similitud vectorial, incluyendo <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> y <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere también está diseñado para soportar computación heterogénea. Controla en qué hardware (CPU o GPU) ejecutar la creación de índices y las peticiones de búsqueda. Así es como Knowhere obtiene su nombre - sabiendo dónde ejecutar las operaciones. Más tipos de hardware incluyendo DPU y TPU serán soportados en futuras versiones.</p>
+    </button></h2><p>Knowhere es un motor de búsqueda vectorial de código abierto que incorpora varias bibliotecas de búsqueda de similitud vectorial incluyendo <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> y <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere también está diseñado para soportar computación heterogénea. Controla en qué hardware (CPU o GPU) ejecutar la construcción del índice y las peticiones de búsqueda. Así es como Knowhere obtiene su nombre - sabiendo dónde ejecutar las operaciones. Más tipos de hardware incluyendo DPU y TPU serán soportados en futuras versiones.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Knowhere en la arquitectura Milvus<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +72,7 @@ title: Knowhere
         ></path>
       </svg>
     </button></h2><p>Las siguientes son las ventajas de Knowhere sobre Faiss.</p>
-<h4 id="Support-for-BitsetView" class="common-anchor-header">Soporte para BitsetView</h4><p>Milvus introduce un mecanismo de conjunto de bits para realizar el &quot;borrado suave&quot;. Un vector borrado suavemente aún existe en la base de datos pero no será computado durante una búsqueda o consulta de similitud de vectores.</p>
+<h4 id="Support-for-BitsetView" class="common-anchor-header">Soporte para BitsetView</h4><p>Milvus introduce un mecanismo de conjunto de bits para realizar el "borrado suave". Un vector borrado suavemente aún existe en la base de datos pero no será computado durante una búsqueda o consulta de similitud de vectores.</p>
 <p>Cada bit de un conjunto de bits corresponde a un vector indexado. Si un vector está marcado como "1" en el conjunto de bits, significa que se ha eliminado de forma suave y que no participará en la búsqueda de vectores. El parámetro bitset se aplica a todas las API de consulta de índice Faiss expuestas en Knowhere, incluidos los índices de CPU y GPU.</p>
 <p>Para obtener más información sobre el mecanismo de bitset, consulte <a href="/docs/es/v2.5.x/bitset.md">bitset</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Soporte para múltiples métricas de similitud para indexar vectores binarios</h4><p>Knowhere soporta <a href="/docs/es/v2.5.x/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/es/v2.5.x/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/es/v2.5.x/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/es/v2.5.x/metric.md#Superstructure">Superestructura</a> y <a href="/docs/es/v2.5.x/metric.md#Substructure">Subestructura</a>. Jaccard y Tanimoto pueden utilizarse para medir la similitud entre dos conjuntos de muestras mientras que Superstructure y Substructure pueden utilizarse para medir la similitud de estructuras químicas.</p>
@@ -99,7 +98,7 @@ title: Knowhere
     </button></h2><p>La computación en Milvus involucra principalmente operaciones vectoriales y escalares. Knowhere sólo maneja las operaciones de indexación de vectores.</p>
 <p>Un índice es una estructura de datos independiente de los datos vectoriales originales. Generalmente, la indexación requiere cuatro pasos: crear un índice, entrenar datos, insertar datos y construir un índice. En algunas aplicaciones de IA, el entrenamiento de los conjuntos de datos se separa de la búsqueda de vectores. Los datos de los conjuntos de datos se entrenan primero y luego se insertan en una base de datos vectorial como Milvus para la búsqueda de similitudes. Por ejemplo, los conjuntos de datos abiertos sift1M y sift1B diferencian los datos para entrenamiento y los datos para pruebas.</p>
 <p>Sin embargo, en Knowhere, los datos para el entrenamiento y para la búsqueda son los mismos. Knowhere entrena todos los datos en un <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Segments">segmento</a> y luego inserta todos los datos entrenados y construye un índice para ellos.</p>
-<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>Clase base</h4><p><code translate="no">DataObj</code> es la clase base de todas las estructuras de datos en Knowhere. <code translate="no">Size()</code> es el único método virtual en <code translate="no">DataObj</code>. La clase Index hereda de <code translate="no">DataObj</code> con un campo llamado &quot;size_&quot;. La clase Index también tiene dos métodos virtuales - <code translate="no">Serialize()</code> y <code translate="no">Load()</code>. La clase <code translate="no">VecIndex</code> derivada de <code translate="no">Index</code> es la clase base virtual para todos los índices vectoriales. <code translate="no">VecIndex</code> proporciona métodos que incluyen <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, y <code translate="no">ClearStatistics()</code>.</p>
+<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>Clase base</h4><p><code translate="no">DataObj</code> es la clase base de todas las estructuras de datos en Knowhere. <code translate="no">Size()</code> es el único método virtual en <code translate="no">DataObj</code>. La clase Index hereda de <code translate="no">DataObj</code> con un campo llamado "size_". La clase Index también tiene dos métodos virtuales - <code translate="no">Serialize()</code> y <code translate="no">Load()</code>. La clase <code translate="no">VecIndex</code> derivada de <code translate="no">Index</code> es la clase base virtual para todos los índices vectoriales. <code translate="no">VecIndex</code> proporciona métodos que incluyen <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, y <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />

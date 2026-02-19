@@ -63,7 +63,7 @@ title: Exécuter Milvus dans Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Nouveautés de la version 2.6.6 :</strong></p>
+<p><strong>Nouveautés de la version 2.6.11 :</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Capacités de traitement des données améliorées</li>
 <li><strong>Woodpecker MQ</strong>: File d'attente de messages améliorée avec une réduction des coûts de maintenance, voir <a href="/docs/fr/use-woodpecker.md">Use Woodpecker</a> pour plus de détails.</li>
@@ -158,7 +158,7 @@ EOF
 # </span><span class="language-bash">Delete Milvus data</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh delete</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

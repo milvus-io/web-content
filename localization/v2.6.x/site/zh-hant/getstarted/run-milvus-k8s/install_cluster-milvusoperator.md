@@ -81,7 +81,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator 定義了<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes</a> 自訂資源之上的 Milvus 叢集自訂資源。定義了自訂資源後，您可以宣告式的方式使用 K8s API，並管理 Milvus 部署堆疊，以確保其可擴充性及高可用性。</p>
+    </button></h2><p>Milvus Operator 定義了<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes</a> 自訂資源之上的 Milvus 叢集自訂資源。定義自訂資源後，您就可以宣告式的方式使用 K8s API，並管理 Milvus 部署堆疊，以確保其可擴充性及高可用性。</p>
 <div class="filter">
  <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
 <div class="filter-helm">
@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦 Milvus Operator pod 運行，您就可以按以下方式部署 Milvus 叢集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的指令會部署一個以<strong>Woodpecker</strong>作為訊息佇列（建議使用 v2.6.6）的 Milvus 叢集，以及所有新的架構元件，包括 Streaming Node。</p>
+<p>上面的指令會部署一個 Milvus 叢集，以<strong>Woodpecker</strong>作為訊息佇列 (建議用於 v2.6.11)，以及包括 Streaming Node 在內的所有新架構元件。</p>
 <p><strong>此部署中的架構重點：</strong></p>
 <ul>
 <li><strong>訊息佇列</strong>：<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>(減少基礎架構維護)</li>

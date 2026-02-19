@@ -60,7 +60,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.6時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.11時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -405,7 +405,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="https://artifacthub.io/packages/helm/bitnami/kafka">在這裡</a>找到配置內部 Kafka 服務的完整配置項目。根據需要在<code translate="no">kafka.inCluster.values</code> 下添加配置項。</p>
+<p><a href="https://artifacthub.io/packages/helm/bitnami/kafka">在這裡</a>找到配置內部 Kafka 服務的完整配置項目。根據需要在<code translate="no">kafka.inCluster.values</code> 下添加配置項目。</p>
 <p>假設配置檔名為<code translate="no">milvuscluster.yaml</code> ，執行下列指令套用配置。</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

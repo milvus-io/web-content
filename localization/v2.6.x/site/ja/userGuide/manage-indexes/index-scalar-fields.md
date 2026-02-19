@@ -20,6 +20,9 @@ title: スカラーフィールドのインデックス
         ></path>
       </svg>
     </button></h1><p>Milvusでは、スカラーインデックスは、従来のデータベースインデックスと同様に、特定の非ベクトルフィールド値によるメタフィルタリングを高速化するために使用されます。このガイドでは、整数や文字列などのフィールドに対するスカラーインデックスの作成と設定について説明します。</p>
+<div class="alert warning">
+<p>このページは非推奨です。最新の実装については、<a href="/docs/ja/bitmap.md">BITMAP</a>、<a href="/docs/ja/inverted.md">INVERTED</a>、<a href="/docs/ja/ngram.md">NGRAM</a>、<a href="/docs/ja/rtree.md">RTREE</a> <a href="/docs/ja/stl-sort.md">STL_SORTなどを</a>参照してください。</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">スカラーインデックスの種類<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +61,7 @@ title: スカラーフィールドのインデックス
 <p>オートインデックスを使用するには、<strong>index_type</strong>パラメータを <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>でindex_typeパラメータを省略し、milvusがスカラーフィールドの型に基づいてインデックス型を推測できるようにします。</p>
 </div>
 <div class="language-java">
-<p>で<strong>indexType</strong>パラメータを省略します。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>の indexType パラメータを省略すると、 Milvus はスカラーフィールドの型に基づいてインデックスタイプを推測することができます。</p>
+<p>で<strong>indexType</strong>パラメータを省略します。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>の indexType パラメータを省略し、 Milvus がスカラーフィールドの型に基づいてインデックスタイプを推測できるようにします。</p>
 </div>
 <div class="language-javascript">
 <p>で<strong>index_type</strong>パラメータを省略する。 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>の index_type パラメータを省略すると、Milvus はスカラーフィールドの型に基づいてインデックスタイプを推測することができます。</p>
@@ -238,7 +241,7 @@ client.createIndex(createIndexReq);
 <li><strong>index_type</strong><em>(string</em>) 作成するスカラー・インデックスのタイプ。暗黙的インデックスの場合は、このパラメータを空にするか省略します。 カスタムインデックスの場合は、以下の値が有効です：<ul>
 <li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
 <li><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。ブール値と数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）をサポート。</li>
-<li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポートしています。</li>
+<li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</li>
 </ul></li>
 </ul></li>
 </ul>

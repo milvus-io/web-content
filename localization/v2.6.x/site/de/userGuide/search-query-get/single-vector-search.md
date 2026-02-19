@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten Vektoren ermitteln können, was zeit- und ressourcenaufwändig ist.</p>
+    </button></h2><p>Die ANN- und die k-Nächste-Nachbarn-Suche (kNN) sind die üblichen Methoden bei Vektorähnlichkeitssuchen. Bei der kNN-Suche müssen Sie alle Vektoren in einem Vektorraum mit dem in der Suchanfrage enthaltenen Abfragevektor vergleichen, bevor Sie die ähnlichsten herausfinden, was zeit- und ressourcenaufwändig ist.</p>
 <p>Im Gegensatz zur kNN-Suche wird bei einem ANN-Suchalgorithmus eine <strong>Indexdatei</strong> angefordert, die die sortierte Reihenfolge der Vektoreinbettungen aufzeichnet. Wenn eine Suchanfrage eingeht, können Sie die Indexdatei als Referenz verwenden, um schnell eine Untergruppe zu finden, die wahrscheinlich die Vektoreinbettungen enthält, die dem Abfragevektor am ähnlichsten sind. Dann können Sie den angegebenen <strong>metrischen Typ</strong> verwenden, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Untergruppe zu messen, die Gruppenmitglieder auf der Grundlage der Ähnlichkeit mit dem Abfragevektor zu sortieren und die <strong>Top-K-Gruppenmitglieder</strong> zu ermitteln.</p>
 <p>ANN-Suchen hängen von vorgefertigten Indizes ab, und der Suchdurchsatz, die Speichernutzung und die Korrektheit der Suche können je nach den gewählten Indextypen variieren. Sie müssen ein Gleichgewicht zwischen Suchleistung und Korrektheit finden.</p>
 <p>Um die Lernkurve zu reduzieren, bietet Milvus <strong>AUTOINDEX</strong>. Mit <strong>AUTOINDEX</strong> kann Milvus die Datenverteilung innerhalb Ihrer Sammlung analysieren, während der Index aufgebaut wird, und stellt die optimalsten Indexparameter auf der Grundlage der Analyse ein, um ein Gleichgewicht zwischen Suchleistung und Korrektheit herzustellen.</p>
@@ -503,6 +503,44 @@ curl --request POST \
 <span class="hljs-comment">#     &quot;topks&quot;:[3]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Primary-Key-Search--Milvus-269+" class="common-anchor-header">Primärschlüsselsuche<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.9+</span><button data-href="#Primary-Key-Search--Milvus-269+" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Anstatt Abfragevektoren zu setzen, können Sie Primärschlüssel verwenden, wenn die Abfragevektoren bereits in der Zielsammlung vorhanden sind.</p>
+<div class="multipleCode">
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python">res = client.search(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    anns_field=<span class="hljs-string">&quot;vector&quot;</span>,
+<span class="highlighted-comment-line">    ids=[<span class="hljs-number">551</span>, <span class="hljs-number">296</span>, <span class="hljs-number">43</span>],</span>
+    limit=<span class="hljs-number">3</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
+)
+
+<span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
+    <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
+        <span class="hljs-built_in">print</span>(hit)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-comment">// node.js</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="ANN-Search-in-Partition" class="common-anchor-header">ANN-Suche in Partition<button data-href="#ANN-Search-in-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -836,7 +874,7 @@ curl --request POST \
       </svg>
     </button></h2><p>Sie werden feststellen, dass der Parameter <code translate="no">limit</code>, der in den Suchanfragen enthalten ist, die Anzahl der Entitäten bestimmt, die in die Suchergebnisse aufgenommen werden. Dieser Parameter gibt die maximale Anzahl der Entitäten an, die in einer einzelnen Suche zurückgegeben werden sollen, und wird normalerweise als <strong>Top-K</strong> bezeichnet.</p>
 <p>Wenn Sie paginierte Suchanfragen durchführen möchten, können Sie eine Schleife verwenden, um mehrere Suchanfragen zu senden, wobei die Parameter <strong>Limit</strong> und <strong>Offset</strong> in jeder Suchanfrage enthalten sind. Insbesondere können Sie den Parameter <strong>Limit</strong> auf die Anzahl der Entitäten setzen, die Sie in die aktuellen Abfrageergebnisse aufnehmen möchten, und den Parameter <strong>Offset</strong> auf die Gesamtzahl der Entitäten, die bereits zurückgegeben wurden.</p>
-<p>Die folgende Tabelle zeigt, wie Sie die Parameter <strong>Limit</strong> und <strong>Offset</strong> für paginierte Abfragen einstellen, wenn 100 Entitäten auf einmal zurückgegeben werden.</p>
+<p>Die nachstehende Tabelle zeigt, wie Sie die Parameter <strong>Limit</strong> und <strong>Offset</strong> für paginierte Abfragen einstellen, wenn 100 Entitäten auf einmal zurückgegeben werden.</p>
 <table>
    <tr>
      <th><p>Abfragen</p></th>

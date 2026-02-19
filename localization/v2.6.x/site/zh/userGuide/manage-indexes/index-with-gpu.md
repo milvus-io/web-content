@@ -20,6 +20,9 @@ title: 使用 GPU 建立索引
         ></path>
       </svg>
     </button></h1><p>本指南概述了在 Milvus 中建立支持 GPU 的索引的步骤，这可以显著提高高吞吐量和高调用场景中的搜索性能。有关 Milvus 支持的 GPU 索引类型的详细信息，请参阅<a href="/docs/zh/gpu_index.md">GPU 索引</a>。</p>
+<div class="alert warning">
+<p>此页面已被弃用。有关最新实现，请参阅<a href="/docs/zh/gpu-index-overview.md">GPU 索引概述</a></p>
+</div>
 <h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">为 GPU 内存控制配置 Milvus 设置<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +67,22 @@ title: 使用 GPU 建立索引
         ></path>
       </svg>
     </button></h2><p>以下示例演示了如何建立不同类型的 GPU 索引。</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">准备索引参数</h3><p>设置 GPU 索引参数时，请定义<strong>index_type</strong>、<strong>metric_type</strong> 和<strong>params</strong>：</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">准备索引参数<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>设置 GPU 索引参数时，请定义<strong>index_type</strong>、<strong>metric_type</strong> 和<strong>params</strong>：</p>
 <ul>
 <li><p><strong>index_type</strong><em>（字符串</em>）：用于加速向量搜索的索引类型。有效选项包括<strong>GPU_CAGRA</strong>、<strong>GPU_IVF_FLAT</strong>、<strong>GPU_IVF_PQ</strong> 和<strong>GPU_BRUTE_FORCE</strong>。</p></li>
 <li><p><strong>metric_type</strong><em>（字符串</em>）：用于衡量向量相似性的度量类型。有效选项为<strong>IP</strong>和<strong>L2</strong>。</p></li>
@@ -112,7 +130,22 @@ title: 使用 GPU 建立索引
 <button class="copy-code-btn"></button></code></pre>
 <p>不需要额外的<strong>参数</strong>配置。</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">构建索引</h3><p>在<strong>index_params</strong> 中配置索引参数后，调用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a>方法来构建索引。</p>
+<h3 id="Build-index" class="common-anchor-header">构建索引<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>在<strong>index_params</strong> 中配置索引参数后，调用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a>方法来构建索引。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -137,7 +170,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>建立 GPU 索引后，下一步是在进行搜索前准备搜索参数。</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">准备搜索参数</h3><p>以下是不同索引类型的配置示例：</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">准备搜索参数<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下是不同索引类型的配置示例：</p>
 <ul>
 <li><p><strong>GPU_BRUTE_FORCE</strong>索引</p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -173,7 +221,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>这两种索引类型的搜索参数与<strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>和<a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> 中使用的参数类似。更多信息，请参阅<a href="https://milvus.io/docs/search.md#Prepare-search-parameters">进行向量相似性搜索</a>。</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">进行搜索</h3><p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a>方法对 GPU 索引执行向量相似性搜索。</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">进行搜索<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a>方法对 GPU 索引执行向量相似性搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 

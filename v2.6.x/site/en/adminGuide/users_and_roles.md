@@ -257,10 +257,11 @@ The role name must follow the following rule:
 from pymilvus import MilvusClient
 
 client.create_role(role_name="role_a")
-import io.milvus.v2.service.rbac.request.CreateRoleReq;
 ```
 
 ```java
+import io.milvus.v2.service.rbac.request.CreateRoleReq;
+
 CreateRoleReq createRoleReq = CreateRoleReq.builder()
         .roleName("role_a")
         .build();
@@ -337,7 +338,7 @@ curl --request POST \
 
 Below is an example output. `admin` is the default role in Milvus. `role_a` is the new role that is just created.
 
-```
+```plaintext
 ['admin', 'role_a']
 ```
 

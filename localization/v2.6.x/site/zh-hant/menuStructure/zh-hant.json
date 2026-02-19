@@ -322,7 +322,7 @@
             "children": []
           },
           {
-            "label": "檢視收藏集",
+            "label": "檢視館藏",
             "id": "view-collections.md",
             "order": 3,
             "children": []
@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "主鍵搜尋",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "混合搜尋",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "查詢",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "過濾",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "篩選說明",
@@ -1007,37 +1013,49 @@
           {
             "label": "全文檢索",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "文字匹配",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "文字螢光筆",
+            "id": "text-highlighter.md",
+            "order": 10,
             "children": []
           },
           {
             "label": "詞組搭配",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "使用內嵌清單搜尋",
+            "id": "search-with-embedding-lists.md",
+            "order": 12,
             "children": []
           },
           {
             "label": "Elasticsearch 查詢至 Milvus",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "搜尋迭代器",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 14,
             "children": []
           },
           {
             "label": "使用磁碟分割金鑰",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 15,
             "children": []
           }
         ]
@@ -1091,7 +1109,7 @@
                 "children": []
               },
               {
-                "label": "Voyage AI",
+                "label": "航程 AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -1437,7 +1455,7 @@
             "children": []
           },
           {
-            "label": "在飛行中",
+            "label": "飛行中",
             "id": "dynamic_config.md",
             "order": 1,
             "children": []
@@ -1781,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "開關 MQ 類型",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "Milvus 集群切換器 MQ 類型",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus 獨立開關 MQ 類型",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -2332,7 +2369,7 @@
         "order": 6,
         "children": [
           {
-            "label": "拉格",
+            "label": "拉格舞曲",
             "id": "integrate_with_ragas.md",
             "order": 0,
             "children": []
@@ -2707,9 +2744,10 @@
         "children": []
       },
       {
-        "label": "使用 ColPali 進行多模式檢索",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "與 Milvus 搭配使用 ColBERT 和 ColPali",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

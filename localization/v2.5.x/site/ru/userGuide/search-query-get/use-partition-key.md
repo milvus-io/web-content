@@ -9,7 +9,6 @@ summary: >-
   статье мы расскажем о том, как использовать ключ раздела, и о связанных с этим
   моментах.
 ---
-
 <h1 id="Use-Partition-Key" class="common-anchor-header">Использование Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +76,22 @@ summary: >-
 <li><p><a href="/docs/ru/v2.5.x/use-partition-key.md#Set-Partition-Numbers">Задать количество создаваемых разделов</a> (необязательно) и</p></li>
 <li><p><a href="/docs/ru/v2.5.x/use-partition-key.md#Create-Filtering-Condition">создать условие фильтрации на основе ключа раздела</a>.</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">Установка ключа раздела</h3><p>Чтобы назначить скалярное поле в качестве ключа раздела, необходимо установить его атрибут <code translate="no">is_partition_key</code> на <code translate="no">true</code> при добавлении скалярного поля.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">Установка ключа раздела<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Чтобы назначить скалярное поле в качестве ключа раздела, необходимо установить его атрибут <code translate="no">is_partition_key</code> на <code translate="no">true</code> при добавлении скалярного поля.</p>
 <div class="alert note">
 <p>Когда вы устанавливаете скалярное поле в качестве ключа раздела, значения поля не могут быть пустыми или нулевыми.</p>
 </div>
@@ -88,30 +102,28 @@ summary: >-
 )
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>)
-
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>)
+    
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-datatype=DataType.FLOAT_VECTOR,
-dim=<span class="hljs-number">5</span>)
+    datatype=DataType.FLOAT_VECTOR,
+    dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
-datatype=DataType.VARCHAR,
-max_length=<span class="hljs-number">512</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-is_partition_key=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
+    datatype=DataType.VARCHAR, 
+    max_length=<span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">    is_partition_key=<span class="hljs-literal">True</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -143,8 +155,7 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">512</span>)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .isPartitionKey(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isPartitionKey(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -199,8 +210,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-        <span class="hljs-comment">// highlight-next-line</span>
-        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
     }
 ]
 <button class="copy-code-btn"></button></code></pre>
@@ -231,27 +241,40 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">Установка номеров разделов</h3><p>Когда вы назначаете скалярное поле в коллекции в качестве ключа раздела, Milvus автоматически создает 16 разделов в коллекции. Получив сущность, Milvus выбирает раздел на основе значения Partition Key этой сущности и сохраняет сущность в этом разделе, в результате чего некоторые или все разделы будут содержать сущности с разными значениями Partition Key.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">Установка номеров разделов<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Когда вы назначаете скалярное поле в коллекции в качестве ключа раздела, Milvus автоматически создает 16 разделов в коллекции. Получив сущность, Milvus выбирает раздел на основе значения Partition Key этой сущности и сохраняет сущность в этом разделе, в результате чего некоторые или все разделы будут содержать сущности с разными значениями Partition Key.</p>
 <p>Вы также можете определить количество разделов, которые нужно создать вместе с коллекцией. Это возможно только в том случае, если в качестве ключа раздела указано скалярное поле.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    num_partitions=<span class="hljs-number">128</span>
+<span class="highlighted-wrapper-line">    num_partitions=<span class="hljs-number">128</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.numPartitions(<span class="hljs-number">128</span>)
-.build();
-client.createCollection(createCollectionReq);
+                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                .collectionSchema(schema)
+                .numPartitions(<span class="hljs-number">128</span>)
+                .build();
+        client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -283,7 +306,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">Создание условия фильтрации</h3><p>При выполнении ANN-поиска в коллекции с включенной функцией Partition Key необходимо включить в запрос поиска выражение фильтрации, включающее Partition Key. В выражении фильтрации можно ограничить значение Partition Key определенным диапазоном, чтобы Milvus ограничил область поиска соответствующими разделами.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">Создание условия фильтрации<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>При выполнении ANN-поиска в коллекции с включенной функцией Partition Key необходимо включить в запрос поиска выражение фильтрации, включающее Partition Key. В выражении фильтрации можно ограничить значение Partition Key определенным диапазоном, чтобы Milvus ограничил область поиска соответствующими разделами.</p>
 <p>При выполнении операций удаления рекомендуется включать выражение фильтрации, в котором указывается один ключ раздела, чтобы добиться более эффективного удаления. Такой подход ограничивает операцию удаления определенным разделом, уменьшая усиление записи при уплотнении и экономя ресурсы для уплотнения и индексирования.</p>
 <p>Следующие примеры демонстрируют фильтрацию на основе ключей разделов по конкретному значению ключа раздела и набору значений ключей разделов.</p>
 <div class="multipleCode">
@@ -294,7 +332,6 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -347,14 +384,28 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>В настоящее время функция Partition-Key Isolation применяется только к поиску с типом индекса, установленным на HNSW.</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Включение функции изоляции ключей разделов</h3><p>В следующих примерах кода показано, как включить функцию Partition Key Isolation.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Включение функции изоляции ключей разделов<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>В следующих примерах кода показано, как включить функцию Partition Key Isolation.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -363,13 +414,12 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.properties(properties)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .properties(properties)
+        .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))

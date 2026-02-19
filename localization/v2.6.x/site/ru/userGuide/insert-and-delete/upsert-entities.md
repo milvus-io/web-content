@@ -112,17 +112,11 @@ summary: >-
 <li><p>Если вы выполняете апсерт с отключенным <code translate="no">partial_update</code>, поведение по умолчанию - <strong>переопределение</strong>. Это означает, что значение динамического поля будет переопределено всеми не определенными схемой полями, включенными в запрос, и их значениями.</p>
 <p>Например, если данные, включенные в запрос, имеют значение <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, то пары ключ-значение в динамическом поле целевой сущности будут обновлены до этого значения.</p></li>
 <li><p>Если вы выполняете апсерт с включенным <code translate="no">partial_update</code>, то по умолчанию будет выполняться <strong>слияние</strong>. Это означает, что значение динамического поля будет объединено со всеми не определенными схемой полями, включенными в запрос, и их значениями.</p>
-<p>Например, если данные, включенные в запрос, имеют значение <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, то пары ключ-значение в динамическом поле целевой сущности после апсерт станут <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
+<p>Например, если данные, включенные в запрос, имеют значение <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, то пары ключ-значение в динамическом поле целевой сущности после апсерт станут <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
 </ul></li>
 <li><p><strong>Апсертирование поля JSON.</strong></p>
 <p>Предположим, что в коллекции примеров есть определенное схемой поле JSON с именем <code translate="no">extras</code>, а пары ключ-значение в этом поле JSON сущности похожи на <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>При апсете поля <code translate="no">extras</code> сущности с измененными JSON-данными обратите внимание на следующее:</p>
-<ul>
-<li><p>Если вы выполняете апсерт при отключенном <code translate="no">partial_update</code>, то по умолчанию будет выполняться <strong>переопределение</strong>. Это означает, что значение JSON-поля, включенного в запрос, будет переопределять исходное значение JSON-поля целевой сущности.</p>
-<p>Например, если данные, включенные в запрос, имеют значение <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, пары ключ-значение в поле <code translate="no">extras</code> целевой сущности будут обновлены до <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
-<li><p>Если вы выполняете апсерт с включенным <code translate="no">partial_update</code>, то по умолчанию будет выполняться <strong>слияние</strong>. Это означает, что значение JSON-поля, включенного в запрос, будет объединено с исходным значением JSON-поля целевой сущности.</p>
-<p>Например, если данные, включенные в запрос, имеют формат <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, то пары ключ-значение в поле <code translate="no">extras</code> целевой сущности после udpate станут <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
-</ul></li>
+<p>При апселлинге поля <code translate="no">extras</code> сущности с измененными JSON-данными обратите внимание, что JSON-поле рассматривается как единое целое, и вы не можете обновлять отдельные ключи выборочно. Другими словами, поле JSON <strong>НЕ</strong> поддерживает upsert в режиме <strong>слияния</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Пределы и ограничения<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +133,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Исходя из приведенного выше содержания, существует несколько ограничений и запретов:</p>
+    </button></h3><p>Исходя из вышеизложенного, существует несколько ограничений и запретов, которые необходимо соблюдать:</p>
 <ul>
 <li><p>Запрос <code translate="no">upsert</code> всегда должен включать первичные ключи целевых сущностей.</p></li>
 <li><p>Целевая коллекция должна быть загружена и доступна для запросов.</p></li>
@@ -162,7 +156,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>В этом разделе мы выполним апсерт сущностей в коллекцию с именем <code translate="no">my_collection</code>. В этой коллекции есть только два поля, названные <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> и <code translate="no">issue</code>. Поле <code translate="no">id</code> является первичным полем, а поля <code translate="no">title</code> и <code translate="no">issue</code> - скалярными полями.</p>
+    </button></h2><p>В этом разделе мы выполним апсерт сущностей в коллекцию с именем <code translate="no">my_collection</code>. Эта коллекция имеет только два поля, названные <code translate="no">id</code>, <code translate="no">vector</code>, <code translate="no">title</code> и <code translate="no">issue</code>. Поле <code translate="no">id</code> является первичным полем, а поля <code translate="no">title</code> и <code translate="no">issue</code> - скалярными полями.</p>
 <p>Эти три сущности, если они существуют в коллекции, будут переопределены сущностями, включенными в запрос upsert.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>

@@ -944,21 +944,27 @@
             "children": []
           },
           {
+            "label": "البحث عن المفتاح الأساسي",
+            "id": "primary-key-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
             "label": "البحث الهجين",
             "id": "multi-vector-search.md",
-            "order": 4,
+            "order": 5,
             "children": []
           },
           {
             "label": "استعلام",
             "id": "get-and-scalar-query.md",
-            "order": 5,
+            "order": 6,
             "children": []
           },
           {
             "label": "التصفية",
             "id": "filtering",
-            "order": 6,
+            "order": 7,
             "children": [
               {
                 "label": "شرح التصفية",
@@ -1007,37 +1013,49 @@
           {
             "label": "البحث في النص الكامل",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "تطابق النص",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "أداة تمييز النص",
+            "id": "text-highlighter.md",
+            "order": 10,
             "children": []
           },
           {
             "label": "تطابق العبارات",
             "id": "phrase-match.md",
-            "order": 9,
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "البحث باستخدام قوائم التضمين",
+            "id": "search-with-embedding-lists.md",
+            "order": 12,
             "children": []
           },
           {
             "label": "استعلامات البحث المرن إلى ميلفوس",
             "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
+            "order": 13,
             "children": []
           },
           {
             "label": "مكرر البحث",
             "id": "with-iterators.md",
-            "order": 11,
+            "order": 14,
             "children": []
           },
           {
             "label": "استخدام مفتاح التقسيم",
             "id": "use-partition-key.md",
-            "order": 12,
+            "order": 15,
             "children": []
           }
         ]
@@ -1109,7 +1127,7 @@
                 "children": []
               },
               {
-                "label": "عناق الوجه المعانق TEI",
+                "label": "عناق الوجه TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
@@ -1781,6 +1799,25 @@
         "id": "use-woodpecker.md",
         "order": 13,
         "children": []
+      },
+      {
+        "label": "تبديل نوع MQ",
+        "id": "switch_milvus_mq_type",
+        "order": 14,
+        "children": [
+          {
+            "label": "مفتاح تبديل مجموعة ميلفوس العنقودية MQ النوع",
+            "id": "switch_milvus_cluster_mq_type-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "مفتاح ميلفوس المستقل من نوع MQ",
+            "id": "switch_milvus_standalone_mq_type-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1972,7 +2009,7 @@
                 "children": []
               },
               {
-                "label": "Sentence Transformers",
+                "label": "محولات الجمل",
                 "id": "embed-with-sentence-transform.md",
                 "order": 2,
                 "children": []
@@ -2707,9 +2744,10 @@
         "children": []
       },
       {
-        "label": "استخدام كولبالي للاسترجاع متعدد الوسائط",
-        "id": "use_ColPali_with_milvus.md",
+        "label": "استخدام كولبرت وكولبالي مع ميلفوس",
+        "id": "search-with-embedding-lists",
         "order": 10,
+        "externalLink": "https://milvus.io/docs/search-with-embedding-lists.md",
         "children": []
       },
       {

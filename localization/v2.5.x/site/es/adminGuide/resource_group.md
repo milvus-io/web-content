@@ -90,7 +90,7 @@ title: Gestionar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos los ejemplos de código de esta página están en PyMilvus 2.5.17. Actualiza tu instalación de PyMilvus antes de ejecutarlos.</p>
+<p>Todos los ejemplos de código de esta página están en PyMilvus 2.5.18. Actualiza tu instalación de PyMilvus antes de ejecutarlos.</p>
 </div>
 <ol>
 <li><p>Crear un grupo de recursos.</p>
@@ -183,7 +183,7 @@ milvus_client.load_partitions(collection, [partition], replica_number=<span clas
 <p>Tenga en cuenta que <code translate="no">_resource_groups</code> es un parámetro opcional, y dejándolo sin especificar Milvus cargará las réplicas en los nodos de consulta en el grupo de recursos por defecto.</p>
 <p>Para que Milus cargue cada réplica de una colección en un grupo de recursos separado, asegúrese de que el número de grupos de recursos es igual al número de réplicas.</p></li>
 <li><p>Transferir réplicas entre grupos de recursos.</p>
-<p>Milvus utiliza <a href="/docs/es/v2.5.x/replica.md">réplicas</a> para lograr el equilibrio de carga entre <a href="/docs/es/v2.5.x/glossary.md#Segment">segmentos</a> distribuidos en varios nodos de consulta. Puede mover ciertas réplicas de una colección de un grupo de recursos a otro de la siguiente manera:</p>
+<p>Milvus utiliza <a href="/docs/es/v2.5.x/replica.md">réplicas</a> para equilibrar la carga entre <a href="/docs/es/v2.5.x/glossary.md#Segment">segmentos</a> distribuidos en varios nodos de consulta. Puede mover ciertas réplicas de una colección de un grupo de recursos a otro de la siguiente manera:</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 collection_name = <span class="hljs-string">&#x27;c&#x27;</span>
@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Escalado en clúster</p>
-<p>De forma similar, podemos establecer reglas de escalado de entrada que prioricen la selección de QueryNodes del grupo de recursos <strong>__pending_nodes</strong>. Esta información puede obtenerse a través de la API <code translate="no">describe_resource_group</code>. Conseguir el objetivo de escalado en el grupo de recursos especificado.</p>
+<p>De forma similar, podemos establecer reglas de escalado que prioricen la selección de QueryNodes del grupo de recursos <strong>__pending_nodes</strong>. Esta información puede obtenerse a través de la API <code translate="no">describe_resource_group</code>. Conseguir el objetivo de escalado en el grupo de recursos especificado.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

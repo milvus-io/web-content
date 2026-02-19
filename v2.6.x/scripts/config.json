@@ -524,6 +524,16 @@
                         "token": "Oe7EwkvLDhT9p6b1o3tcFYMlnI9",
                         "type": "board",
                         "alt_text": "resource-hierachy"
+                    },
+                    {
+                        "token": "BqBlwM4OOh6hM9bmNwbc2xUUnxc",
+                        "type": "board",
+                        "alt_text": "late-interaction"
+                    },
+                    {
+                        "token": "SuHjwmWiDhLs79buw22cw9aAnqf",
+                        "type": "board",
+                        "alt_text": "copali-extension"
                     }
                 ]
             }

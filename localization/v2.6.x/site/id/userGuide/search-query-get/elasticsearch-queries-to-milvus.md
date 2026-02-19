@@ -123,7 +123,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Di Elasticsearch, kueri teks lengkap memungkinkan Anda untuk mencari bidang teks yang dianalisis seperti isi email. String kueri diproses menggunakan penganalisis yang sama dengan yang diterapkan pada bidang selama pengindeksan.</p>
-<h3 id="Match-query" class="common-anchor-header">Kueri kecocokan</h3><p>Di Elasticsearch, kueri pencocokan mengembalikan dokumen yang cocok dengan teks, angka, tanggal, atau nilai boolean yang disediakan. Teks yang disediakan dianalisis sebelum dicocokkan.</p>
+<h3 id="Match-query" class="common-anchor-header">Kueri kecocokan<button data-href="#Match-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, kueri pencocokan mengembalikan dokumen yang cocok dengan teks, angka, tanggal, atau nilai boolean yang disediakan. Teks yang disediakan dianalisis sebelum dicocokkan.</p>
 <p>Berikut ini adalah contoh permintaan pencarian Elasticsearch dengan kueri kecocokan.</p>
 <pre><code translate="no" class="language-bash">resp = client.search(
     query={
@@ -162,7 +177,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Di Elasticsearch, kueri tingkat istilah digunakan untuk menemukan dokumen berdasarkan nilai yang tepat dalam data terstruktur, seperti rentang tanggal, alamat IP, harga, atau ID produk. Bagian ini menguraikan kemungkinan padanan dari beberapa kueri tingkat istilah Elasticsearch di Milvus. Semua contoh di bagian ini diadaptasi untuk beroperasi dalam konteks penyaringan agar sesuai dengan kemampuan Milvus.</p>
-<h3 id="IDs" class="common-anchor-header">ID</h3><p>Di Elasticsearch, Anda dapat menemukan dokumen berdasarkan ID mereka dalam konteks filter sebagai berikut:</p>
+<h3 id="IDs" class="common-anchor-header">ID<button data-href="#IDs" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, Anda dapat menemukan dokumen berdasarkan ID mereka dalam konteks filter sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -195,7 +225,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat menemukan contoh Elasticsearch di <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-ids-query.html">halaman ini</a>. Untuk detail tentang permintaan kueri dan permintaan get serta ekspresi penyaringan di Milvus, lihat <a href="/docs/id/get-and-scalar-query.md">Kueri</a> dan <a href="/docs/id/filtering">Penyaringan</a>.</p>
-<h3 id="Prefix-query" class="common-anchor-header">Kueri awalan</h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung awalan tertentu di bidang yang disediakan dalam konteks filter sebagai berikut:</p>
+<h3 id="Prefix-query" class="common-anchor-header">Kueri awalan<button data-href="#Prefix-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung awalan tertentu di bidang yang disediakan dalam konteks filter sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -219,7 +264,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat menemukan contoh Elasticsearch di <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-prefix-query.html">halaman ini</a>. Untuk detail tentang operator <code translate="no">like</code> di Milvus, lihat <a href="/docs/id/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching">Menggunakan </a><code translate="no">LIKE</code><a href="/docs/id/basic-operators.md#Example-2-Using-LIKE-for-Pattern-Matching"> untuk Pencocokan Pola</a>.</p>
-<h3 id="Range-query" class="common-anchor-header">Kueri rentang</h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung istilah dalam rentang yang disediakan sebagai berikut:</p>
+<h3 id="Range-query" class="common-anchor-header">Kueri rentang<button data-href="#Range-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung istilah dalam rentang yang disediakan sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -244,7 +304,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat melihat contoh Elasticsearch di <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html">halaman ini</a>. Untuk rincian tentang operator perbandingan di Milvus, lihat <a href="/docs/id/basic-operators.md#Comparison-operators">Operator perbandingan</a>.</p>
-<h3 id="Term-query" class="common-anchor-header">Kueri istilah</h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung istilah yang <strong>tepat</strong> di bidang yang disediakan sebagai berikut:</p>
+<h3 id="Term-query" class="common-anchor-header">Kueri istilah<button data-href="#Term-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung istilah yang <strong>tepat</strong> di bidang yang disediakan sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -276,7 +351,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat menemukan contoh Elasticsearch di <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html">halaman ini</a>. Untuk detail tentang operator perbandingan di Milvus, lihat <a href="/docs/id/basic-operators.md#Comparison-operators">Operator perbandingan</a>.</p>
-<h3 id="Terms-query" class="common-anchor-header">Kueri istilah</h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung satu atau lebih istilah yang <strong>tepat</strong> di bidang yang disediakan sebagai berikut:</p>
+<h3 id="Terms-query" class="common-anchor-header">Kueri istilah<button data-href="#Terms-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang mengandung satu atau lebih istilah yang <strong>tepat</strong> di bidang yang disediakan sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -309,7 +399,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat menemukan contoh Elasticsearch di <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-terms-query.html">halaman ini</a>. Untuk detail tentang operator rentang di Milvus, lihat <a href="/docs/id/basic-operators.md#Range-operators">Operator rentang</a>.</p>
-<h3 id="Wildcard-query" class="common-anchor-header">Kueri wildcard</h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang berisi istilah yang cocok dengan pola wildcard sebagai berikut:</p>
+<h3 id="Wildcard-query" class="common-anchor-header">Kueri wildcard<button data-href="#Wildcard-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Di Elasticsearch, Anda dapat menemukan dokumen yang berisi istilah yang cocok dengan pola wildcard sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     query={
         <span class="hljs-string">&quot;bool&quot;</span>: {
@@ -394,7 +499,22 @@ res = client.query(
         ></path>
       </svg>
     </button></h2><p>Di Elasticsearch, kueri vektor adalah kueri khusus yang bekerja pada bidang vektor untuk melakukan pencarian semantik secara efisien.</p>
-<h3 id="Knn-query" class="common-anchor-header">Kueri Knn</h3><p>Elasticsearch mendukung kueri kNN perkiraan dan kueri kNN brute-force yang tepat. Anda dapat menemukan <em>k</em> vektor terdekat ke vektor kueri dengan salah satu dari kedua cara tersebut, yang diukur dengan metrik kemiripan, sebagai berikut:</p>
+<h3 id="Knn-query" class="common-anchor-header">Kueri Knn<button data-href="#Knn-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch mendukung kueri kNN perkiraan dan kueri kNN brute-force yang tepat. Anda dapat menemukan <em>k</em> vektor terdekat ke vektor kueri dengan salah satu dari kedua cara tersebut, yang diukur dengan metrik kemiripan, sebagai berikut:</p>
 <pre><code translate="no" class="language-python">resp = client.search(
     index=<span class="hljs-string">&quot;my-image-index&quot;</span>,
     size=<span class="hljs-number">3</span>,
@@ -422,7 +542,22 @@ res = client.query(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Anda dapat menemukan contoh Elasticsearch di <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-knn-query.html">halaman ini</a>. Untuk detail tentang pencarian ANN di Milvus, baca <a href="/docs/id/single-vector-search.md">Pencarian ANN Dasar</a>.</p>
-<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">Penggabungan Peringkat Timbal Balik</h3><p>Elasticsearch menyediakan Reciprocal Rank Fusion (RRF) untuk menggabungkan beberapa set hasil dengan indikator relevansi yang berbeda ke dalam satu set hasil berperingkat.</p>
+<h3 id="Reciprocal-Rank-Fusion" class="common-anchor-header">Penggabungan Peringkat Timbal Balik<button data-href="#Reciprocal-Rank-Fusion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Elasticsearch menyediakan Reciprocal Rank Fusion (RRF) untuk menggabungkan beberapa set hasil dengan indikator relevansi yang berbeda ke dalam satu set hasil berperingkat.</p>
 <p>Contoh berikut ini menunjukkan penggabungan pencarian berbasis istilah tradisional dengan pencarian vektor k-nearest neighbors (kNN) untuk meningkatkan relevansi pencarian:</p>
 <pre><code translate="no" class="language-python">client.search(
     index=<span class="hljs-string">&quot;my_index&quot;</span>,
@@ -469,7 +604,7 @@ res = client.query(
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;vector&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}, 
+        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     },
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">100</span>
 }
@@ -481,7 +616,6 @@ search_params_sparse = {
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
     <span class="hljs-string">&quot;param&quot;</span>: {
         <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>}
     }
 }
 
@@ -497,9 +631,9 @@ res = client.hybrid_search(
 <p>Contoh ini mendemonstrasikan pencarian hibrida di Milvus yang menggabungkan:</p>
 <ol>
 <li><p><strong>Pencarian vektor padat</strong>: Menggunakan metrik inner product (IP) dengan <code translate="no">nprobe</code> yang disetel ke 10 untuk pencarian perkiraan tetangga terdekat (ANN) pada bidang <code translate="no">vector</code>.</p></li>
-<li><p><strong>Pencarian vektor jarang</strong>: Menggunakan metrik kemiripan BM25 dengan parameter <code translate="no">drop_ratio_search</code> sebesar 0,2 pada bidang <code translate="no">text_sparse</code>.</p></li>
+<li><p><strong>Pencarian vektor jarang</strong>: Menggunakan metrik kemiripan BM25 pada bidang <code translate="no">text_sparse</code>.</p></li>
 </ol>
-<p>Hasil dari pencarian ini dieksekusi secara terpisah, digabungkan, dan diberi peringkat ulang menggunakan pemeringkat Reciprocal Rank Fusion (RRF). Pencarian gabungan mengembalikan 10 entitas teratas dari daftar peringkat ulang.</p>
+<p>Hasil dari pencarian ini dieksekusi secara terpisah, digabungkan, dan diperingkat ulang menggunakan pemeringkat Reciprocal Rank Fusion (RRF). Pencarian gabungan mengembalikan 10 entitas teratas dari daftar peringkat ulang.</p>
 <p>Tidak seperti peringkat RRF Elasticsearch, yang menggabungkan hasil dari kueri berbasis teks standar dan pencarian kNN, Milvus menggabungkan hasil dari pencarian vektor yang jarang dan padat, memberikan kemampuan pencarian hibrida unik yang dioptimalkan untuk data multimodal.</p>
 <h2 id="Recap" class="common-anchor-header">Rangkuman<button data-href="#Recap" class="anchor-icon" translate="no">
       <svg translate="no"

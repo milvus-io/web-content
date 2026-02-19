@@ -4,7 +4,7 @@ title: 多向量混合搜尋
 summary: >-
   在許多應用程式中，可以透過豐富的資訊（例如標題和描述）或多種模式（例如文字、影像和音訊）來搜尋物件。例如，包含一段文字和一張圖片的
   tweet，如果文字或圖片符合搜尋查詢的語意，就會被搜尋。混合搜尋透過結合這些不同領域的搜尋來增強搜尋體驗。Milvus
-  支援這一功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN)
+  支援此功能，允許在多向量領域進行搜尋，同時進行多個近似近鄰 (ANN)
   搜尋。如果您想要同時搜尋文字與影像、描述同一物件的多個文字欄位，或是密集與稀疏向量，多向量混合搜尋對改善搜尋品質特別有用。
 ---
 <h1 id="Multi-Vector-Hybrid-Search" class="common-anchor-header">多向量混合搜尋<button data-href="#Multi-Vector-Hybrid-Search" class="anchor-icon" translate="no">
@@ -719,7 +719,6 @@ request_1 = AnnSearchRequest(**search_param_1)
 search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: [query_text],
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>,
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 request_2 = AnnSearchRequest(**search_param_2)
@@ -759,7 +758,6 @@ searchRequests.add(AnnSearchReq.builder()
 searchRequests.add(AnnSearchReq.builder()
         .vectorFieldName(<span class="hljs-string">&quot;text_sparse&quot;</span>)
         .vectors(queryTexts)
-        .params(<span class="hljs-string">&quot;{\&quot;drop_ratio_search\&quot;: 0.2}&quot;</span>)
         .topK(<span class="hljs-number">2</span>)
         .build());
 searchRequests.add(AnnSearchReq.builder()
@@ -798,7 +796,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
 <span class="hljs-keyword">const</span> search_param_2 = {
     <span class="hljs-string">&quot;data&quot;</span>: query_text, 
     <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;text_sparse&quot;</span>, 
-    <span class="hljs-string">&quot;param&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},
     <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span>
 }
 
@@ -819,7 +816,6 @@ request3 := milvusclient.NewAnnRequest(<span class="hljs-string">&quot;image_den
     {
         &quot;data&quot;: [&quot;white headphones, quiet and comfortable&quot;],
         &quot;annsField&quot;: &quot;text_sparse&quot;,
-        &quot;params&quot;: {&quot;drop_ratio_search&quot;: 0.2},
         &quot;limit&quot;: 2
     },
     {

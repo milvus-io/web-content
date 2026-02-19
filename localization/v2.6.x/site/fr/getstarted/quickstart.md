@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>Nous pouvons maintenant effectuer des recherches sémantiques en représentant le texte de la requête sous forme de vecteur et effectuer une recherche de similarité vectorielle sur Milvus.</p>
-<h3 id="Vector-search" class="common-anchor-header">Recherche vectorielle</h3><p>Milvus accepte une ou plusieurs demandes de recherche vectorielle en même temps. La valeur de la variable query_vectors est une liste de vecteurs, où chaque vecteur est un tableau de nombres flottants.</p>
+<h3 id="Vector-search" class="common-anchor-header">Recherche vectorielle<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus accepte une ou plusieurs demandes de recherche vectorielle en même temps. La valeur de la variable query_vectors est une liste de vecteurs, où chaque vecteur est un tableau de nombres flottants.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -301,7 +316,22 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Par défaut, les champs scalaires ne sont pas indexés. Si vous avez besoin d'effectuer une recherche filtrée de métadonnées dans un grand ensemble de données, vous pouvez envisager d'utiliser un schéma fixe et d'activer l'<a href="https://milvus.io/docs/scalar_index.md">index</a> pour améliorer les performances de la recherche.</p>
 <p>Outre la recherche vectorielle, vous pouvez également effectuer d'autres types de recherche :</p>
-<h3 id="Query" class="common-anchor-header">Requête</h3><p>Une requête() est une opération qui permet de récupérer toutes les entités correspondant à un critère, tel qu'une <a href="https://milvus.io/docs/boolean.md">expression de filtre</a> ou certains identifiants.</p>
+<h3 id="Query" class="common-anchor-header">Requête<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une requête() est une opération qui permet de récupérer toutes les entités correspondant à un critère, tel qu'une <a href="https://milvus.io/docs/boolean.md">expression de filtre</a> ou la correspondance avec certains identifiants.</p>
 <p>Par exemple, récupérer toutes les entités dont le champ scalaire a une valeur particulière :</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -407,3 +437,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour migrer les données de Milvus Lite vers Milvus déployé sur Docker ou Kubernetes, reportez-vous à la section <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migration des données de Milvus Lite</a>.</p>
 <p>Milvus fournit des API REST et gRPC, avec des bibliothèques client dans des langages tels que <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# et <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Pour la conception des schémas, Milvus prend en charge la conception flexible des schémas, où vous pouvez définir les champs et leurs types de données, y compris les champs vectoriels. Vous pouvez également définir le type d'index et les paramètres de chaque champ. Pour plus d'informations, voir <a href="https://milvus.io/docs/schema-hands-on.md">Conception du modèle de données pour la recherche</a>.</p>

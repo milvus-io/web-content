@@ -42,14 +42,59 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>O HNSW_PQ combina duas técnicas de indexação: <strong>HNSW</strong> para uma navegação rápida baseada em grafos e <strong>PQ</strong> para uma compressão vetorial eficiente.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>O HNSW constrói um grafo de várias camadas em que cada nó corresponde a um vetor no conjunto de dados. Neste gráfico, os nós são ligados com base na sua semelhança, permitindo uma rápida deslocação através do espaço de dados. A estrutura hierárquica permite que o algoritmo de pesquisa reduza os vizinhos candidatos, acelerando significativamente o processo de pesquisa em espaços de elevada dimensão.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O HNSW constrói um grafo de várias camadas em que cada nó corresponde a um vetor no conjunto de dados. Neste gráfico, os nós são ligados com base na sua semelhança, permitindo uma rápida deslocação através do espaço de dados. A estrutura hierárquica permite que o algoritmo de pesquisa reduza os vizinhos candidatos, acelerando significativamente o processo de pesquisa em espaços de elevada dimensão.</p>
 <p>Para mais informações, consulte <a href="/docs/pt/hnsw.md">HNSW</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ é uma técnica de compressão de vectores que decompõe vectores de elevada dimensão em sub-vectores mais pequenos, que são depois quantizados e comprimidos. A compressão reduz drasticamente os requisitos de memória e acelera os cálculos de distância.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PQ é uma técnica de compressão de vectores que decompõe vectores de elevada dimensão em sub-vectores mais pequenos, que são depois quantizados e comprimidos. A compressão reduz drasticamente os requisitos de memória e acelera os cálculos de distância.</p>
 <p>Para mais informações, consulte <a href="/docs/pt/ivf-pq.md#PQ">IVF_PQ</a>.</p>
-<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>O HNSW_PQ combina os pontos fortes do HNSW e do PQ para permitir uma pesquisa eficiente do vizinho mais próximo aproximado. Utiliza PQ para comprimir os dados (reduzindo assim a utilização de memória) e, em seguida, constrói um gráfico HNSW nestes vectores comprimidos para permitir uma rápida recuperação de candidatos. Durante a pesquisa, o algoritmo pode, opcionalmente, refinar os resultados dos candidatos utilizando dados de maior precisão para melhorar a exatidão. Eis como funciona o processo:</p>
+<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ<button data-href="#HNSW-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>O HNSW_PQ combina os pontos fortes do HNSW e do PQ para permitir uma pesquisa eficiente do vizinho mais próximo aproximado. Utiliza PQ para comprimir os dados (reduzindo assim a utilização de memória) e, em seguida, constrói um gráfico HNSW nestes vectores comprimidos para permitir uma rápida recuperação de candidatos. Durante a pesquisa, o algoritmo pode, opcionalmente, refinar os resultados dos candidatos utilizando dados de maior precisão para melhorar a exatidão. Eis como funciona o processo:</p>
 <ol>
 <li><p><strong>Compressão de dados</strong>: O PQ divide cada vetor em vários sub-vectores e quantifica-os utilizando um livro de códigos de centróides, controlado por parâmetros como <code translate="no">m</code> (contagem de sub-vectores) e <code translate="no">nbits</code> (bits por sub-vetor).</p></li>
-<li><p><strong>Construção de gráficos</strong>: Os vectores comprimidos são então utilizados para construir um gráfico HNSW. Como os vectores são armazenados de forma comprimida, o gráfico resultante é normalmente mais pequeno, requer menos memória e pode ser percorrido mais rapidamente - acelerando significativamente a etapa de recuperação de candidatos.</p></li>
+<li><p><strong>Construção de gráficos</strong>: Os vectores comprimidos são então utilizados para construir um gráfico HNSW. Como os vectores são armazenados de forma comprimida, o gráfico resultante é normalmente mais pequeno, requer menos memória e pode ser percorrido mais rapidamente - acelerando significativamente o passo de recuperação de candidatos.</p></li>
 <li><p><strong>Recuperação de candidatos</strong>: Quando uma consulta é executada, o algoritmo utiliza os dados comprimidos no gráfico HNSW para identificar eficientemente um conjunto de vizinhos candidatos. Esta pesquisa baseada no gráfico reduz drasticamente o número de vectores que devem ser considerados, melhorando a latência da consulta em comparação com as pesquisas de força bruta.</p></li>
 <li><p><strong>(Opcional) Refinamento de resultados</strong>: Os resultados candidatos iniciais podem ser refinados para melhor precisão, com base nos seguintes parâmetros:</p>
 <ul>
@@ -117,7 +162,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de o índice ser construído e as entidades serem inseridas, pode efetuar pesquisas de semelhança no índice.</p>
+    </button></h2><p>Depois de o índice ter sido criado e as entidades terem sido inseridas, pode efetuar pesquisas de similaridade no índice.</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -153,14 +198,29 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Esta secção fornece uma visão geral dos parâmetros utilizados para construir um índice e executar pesquisas no índice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção de índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw-pq.md#Build-index">construir um índice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parâmetros de construção de índice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">params</code> ao <a href="/docs/pt/hnsw-pq.md#Build-index">construir um índice</a>.</p>
 <table>
    <tr>
      <th></th>
      <th><p>Parâmetro</p></th>
      <th><p>Descrição</p></th>
      <th><p>Intervalo de valores</p></th>
-     <th><p>Sugestão de afinação</p></th>
+     <th><p>Sugestão de ajuste</p></th>
    </tr>
    <tr>
      <td><p>HNSW</p></td>
@@ -188,15 +248,15 @@ res = MilvusClient.search(
      <td><p>O número de sub-vectores (utilizados para quantização) para dividir cada vetor de alta dimensão durante o processo de quantização.</p></td>
      <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 65536]</p>
 <p><strong>Valor predefinido</strong>: Nenhum</p></td>
-     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> deve ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
+     <td><p>Um valor <code translate="no">m</code> mais elevado pode melhorar a precisão, mas também aumenta a complexidade computacional e a utilização de memória. <code translate="no">m</code> tem de ser um divisor da dimensão do vetor<em>(D</em>) para garantir uma decomposição adequada. Um valor geralmente recomendado é <em>m = D/2</em>.</p>
 <p>Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [D/8, D].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>O número de bits utilizados para representar o índice do centróide de cada sub-vetor na forma comprimida. Ele determina diretamente o tamanho de cada livro de códigos. Cada livro de códigos conterá $2^{\textit{nbits}}$ centroides. Por exemplo, se <code translate="no">nbits</code> estiver definido para 8, cada sub-vetor será representado por um índice de centróide de 8 bits. Isto permite $2^8$ (256) centróides possíveis no livro de códigos para esse sub-vetor.</p></td>
-     <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 64]</p>
-<p><strong>Valor predefinido</strong>: <code translate="no">8</code></p></td>
+     <td><p>O número de bits utilizados para representar o índice do centróide de cada sub-vetor na forma comprimida. Determina diretamente o tamanho de cada livro de códigos. Cada livro de códigos conterá centroides de <sup>2nbits</sup>. Por exemplo, se <code translate="no">nbits</code> estiver definido para 8, cada sub-vetor será representado por um índice de centróide de 8 bits. Isto permite<sup>28</sup> (256) centróides possíveis no livro de códigos para esse sub-vetor.</p></td>
+     <td><p><strong>Tipo</strong>: Integer <strong>Intervalo</strong>: [1, 24]</p>
+<p><strong>Valor por defeito</strong>: <code translate="no">8</code></p></td>
      <td><p>Um valor <code translate="no">nbits</code> mais alto permite livros de códigos maiores, potencialmente levando a representações mais precisas dos vectores originais. No entanto, também significa utilizar mais bits para armazenar cada índice, resultando numa menor compressão. Na maioria dos casos, recomendamos que defina um valor dentro deste intervalo: [1, 16].</p></td>
    </tr>
    <tr>
@@ -216,7 +276,22 @@ res = MilvusClient.search(
      <td><p>Utilize <code translate="no">FP32</code> para obter a máxima precisão com um custo de memória mais elevado, ou <code translate="no">SQ6</code>/<code translate="no">SQ8</code> para uma melhor compressão. <code translate="no">BF16</code> e <code translate="no">FP16</code> oferecem uma alternativa equilibrada.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice</h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/hnsw-pq.md#Search-on-index">pesquisar no índice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parâmetros de pesquisa específicos do índice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>A tabela seguinte lista os parâmetros que podem ser configurados em <code translate="no">search_params.params</code> ao <a href="/docs/pt/hnsw-pq.md#Search-on-index">pesquisar no índice</a>.</p>
 <table>
    <tr>
      <th></th>

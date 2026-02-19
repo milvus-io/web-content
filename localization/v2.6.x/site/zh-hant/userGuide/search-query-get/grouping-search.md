@@ -37,12 +37,12 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>當搜尋結果中的實體在標量欄位中具有相同值時，這表示它們在特定屬性上相似，這可能會對搜尋結果造成負面影響。</p>
-<p>假設一個集合儲存了多個文件（以<strong>docId</strong> 表示）。在將文件轉換為向量時，為了盡可能保留語義資訊，每份文件都會被分割成較小的、可管理的段落 (<strong>或小塊</strong>)，並儲存為獨立的實體。即使文件被分割成較小的段落，使用者通常仍有興趣辨識哪些文件與他們的需求最相關。</p>
+<p>假設一個集合儲存了多個文件（以<strong>docId</strong> 表示）。在將文檔轉換為向量時，為了盡可能保留語意資訊，每個文檔都會被分割成較小的、可管理的段落 (<strong>或小塊</strong>)，並作為獨立的實體儲存。即使文件被分割成較小的段落，使用者通常仍有興趣辨識哪些文件與他們的需求最相關。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/ann-search.png" alt="Ann Search" class="doc-image" id="ann-search" />
     近似 </span> <span class="img-wrapper"> <span>搜索</span> </span></p>
-<p>對這樣的文集執行近似最近鄰 (ANN) 搜尋時，搜尋結果可能會包含來自同一個文件的數個段落，有可能導致其他文件被忽略，這可能與預期的用例不符。</p>
+<p>對這樣的文集執行近似最近鄰 (ANN) 搜尋時，搜尋結果可能會包含來自同一個文件的數個段落，有可能導致其他文件被忽略，這可能與預期的使用個案不符。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
@@ -86,7 +86,7 @@ summary: >-
 ]
 
 <button class="copy-code-btn"></button></code></pre>
-<p>在搜索請求中，將<code translate="no">group_by_field</code> 和<code translate="no">output_fields</code> 都設為<code translate="no">docId</code> 。Milvus 將根據指定欄位對結果進行分組，並從每個組中返回最相似的實體，包括每個返回實體的<code translate="no">docId</code> 值。</p>
+<p>在搜索請求中，將<code translate="no">group_by_field</code> 和<code translate="no">output_fields</code> 都設為<code translate="no">docId</code> 。Milvus 會根據指定欄位將結果分組，並從每個組中返回最相似的實體，包括每個返回實體的<code translate="no">docId</code> 值。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -389,6 +389,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h2><ul>
 <li><p><strong>索引</strong>：此分組功能僅適用於使用這些索引類型編制索引的集合：<strong>flat</strong>、<strong>ivf_flat</strong>、<strong>ivf_sq8</strong>、<strong>hnsw</strong>、<strong>hnsw_pq</strong>、<strong>hnsw_prq</strong>、<strong>hnsw_sq</strong>、<strong>diskann</strong>、<strong>sparse_inverted_index</strong>。</p></li>
 <li><p><strong>群組數</strong>：<code translate="no">limit</code> 參數控制返回搜尋結果的群組數目，而非每個群組內實體的特定數目。設定適當的<code translate="no">limit</code> 有助於控制搜尋多樣性和查詢效能。如果資料分佈密集或效能是考量因素，減少<code translate="no">limit</code> 可以降低計算成本。</p></li>
-<li><p><strong>每個群組的實體</strong>：<code translate="no">group_size</code> 參數控制每個群組傳回的實體數量。根據您的使用情況調整<code translate="no">group_size</code> 可以增加搜尋結果的豐富性。但是，如果資料分佈不均勻，某些群組返回的實體可能少於<code translate="no">group_size</code> 指定的數目，尤其是在資料有限的情況下。</p></li>
+<li><p><strong>每個群組的實體</strong>：<code translate="no">group_size</code> 參數控制每個群組返回的實體數量。根據您的使用情況調整<code translate="no">group_size</code> 可以增加搜尋結果的豐富性。但是，如果資料分佈不均勻，某些群組返回的實體可能少於<code translate="no">group_size</code> 指定的數目，尤其是在資料有限的情況下。</p></li>
 <li><p><strong>嚴格的群組大小</strong>：當<code translate="no">strict_group_size=True</code> 時，系統會嘗試為每個群組傳回指定數量的實體 (<code translate="no">group_size</code>)，除非該群組沒有足夠的資料。此設定可確保每個群組的實體數量一致，但在資料分佈不均或資源有限的情況下，可能會導致效能下降。如果不需要嚴格的實體數量，設定<code translate="no">strict_group_size=False</code> 可以提高查詢速度。</p></li>
+<li><p>如果查詢向量已經存在於目標資料集中，請考慮使用<code translate="no">ids</code> ，而不是在搜尋前擷取它們。如需詳細資訊，請參閱<a href="/docs/zh-hant/primary-key-search.md">Primary-Key Search</a>。</p></li>
 </ul>

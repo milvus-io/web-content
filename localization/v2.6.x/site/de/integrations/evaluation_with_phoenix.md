@@ -24,7 +24,7 @@ title: Auswertung mit Arize Pheonix
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Dieser Leitfaden zeigt, wie <a href="https://phoenix.arize.com/">Arize Pheonix</a> verwendet wird, um eine Retrieval-Augmented Generation (RAG) Pipeline zu evaluieren, die auf <a href="https://milvus.io/">Milvus</a> aufbaut.</p>
-<p>Das RAG-System kombiniert ein Retrievalsystem mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System ruft zunächst relevante Dokumente aus einem Korpus mit Milvus ab und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der abgerufenen Dokumente zu erzeugen.</p>
+<p>Das RAG-System kombiniert ein Retrieval-System mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System ruft zunächst relevante Dokumente aus einem Korpus mit Milvus ab und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der abgerufenen Dokumente zu erzeugen.</p>
 <p>Arize Pheonix ist ein Framework, das Ihnen hilft, Ihre RAG-Pipelines zu bewerten. Es gibt bereits Tools und Frameworks, die Ihnen bei der Erstellung dieser Pipelines helfen, aber die Bewertung und Quantifizierung der Leistung Ihrer Pipeline kann schwierig sein. Hier kommt Arize Pheonix ins Spiel.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ title: Auswertung mit Arize Pheonix
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
 </div>
-<p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
+<p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;sk-*****************&quot;</span>
@@ -361,7 +361,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 <li><strong>Laufzeitausnahmen</strong>: Erfassen Sie kritische Probleme wie Ratenbeschränkung.</li>
 <li><strong>Abgerufene Dokumente</strong>: Analysieren Sie den Abruf von Dokumenten, die Bewertung und die Reihenfolge.</li>
 </ul>
-<p>Durch die Nutzung des Tracing von Phoenix können Sie <strong>Engpässe identifizieren</strong>, <strong>Ressourcen optimieren</strong> und <strong>die Systemzuverlässigkeit</strong> über verschiedene Frameworks und Sprachen hinweg <strong>sicherstellen</strong>.</p>
+<p>Durch die Nutzung des Phoenix-Tracing können Sie <strong>Engpässe identifizieren</strong>, <strong>Ressourcen optimieren</strong> und <strong>die Systemzuverlässigkeit</strong> über verschiedene Frameworks und Sprachen hinweg <strong>sicherstellen</strong>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> phoenix <span class="hljs-keyword">as</span> px
 <span class="hljs-keyword">from</span> phoenix.trace.openai <span class="hljs-keyword">import</span> OpenAIInstrumentor
 

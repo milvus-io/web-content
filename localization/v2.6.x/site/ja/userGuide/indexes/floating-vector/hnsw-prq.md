@@ -37,9 +37,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PRQは2つのインデックス作成技術を組み合わせたものである：<strong>HSNWは</strong>グラフベースの高速なナビゲーションを行い、<strong>PRQは</strong>効率的なベクトル圧縮を行う。</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSWは、各ノードがデータセット中のベクトルに対応する多層グラフを構築する。このグラフでは、ノードは類似性に基づいて接続され、データ空間を高速にトラバースできる。階層構造により、検索アルゴリズムは近傍候補を絞り込むことができ、高次元空間での検索プロセスが大幅に高速化される。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSWは、各ノードがデータセット中のベクトルに対応する多層グラフを構築する。このグラフでは、ノードは類似性に基づいて接続され、データ空間を高速にトラバースできる。階層構造により、検索アルゴリズムは近傍候補を絞り込むことができ、高次元空間での検索プロセスが大幅に高速化される。</p>
 <p>詳細は<a href="/docs/ja/hnsw.md">HNSWを</a>参照。</p>
-<h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQは、2つの相補的な技術を組み合わせた多段ベクトル圧縮アプローチである：PQとRQです。まず高次元ベクトルを（PQによって）小さなサブベクトルに分割し、次に残りの差分を（RQによって）量子化することで、PRQは元のデータをコンパクトかつ正確に表現します。</p>
+<h3 id="PRQ" class="common-anchor-header">PRQ<button data-href="#PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQは、2つの相補的な技術を組み合わせた多段ベクトル圧縮アプローチである：PQとRQです。まず高次元ベクトルを（PQによって）小さなサブベクトルに分割し、次に残りの差分を（RQによって）量子化することで、PRQは元のデータをコンパクトかつ正確に表現します。</p>
 <p>下図はその仕組みを示している。</p>
 <p>
   
@@ -54,7 +84,22 @@ summary: >-
 <li><p><strong>最終的な圧縮表現</strong></p>
 <p>RQが残差の量子化を終えると、PQとRQの両方からの整数コードが1つの圧縮インデックスに結合されます。RQは、PQだけでは見逃す可能性のある精緻な詳細をキャプチャすることで、ストレージを大幅に増やすことなく精度を向上させます。このPQとRQの相乗効果こそが、PRQを定義するものである。</p></li>
 </ol>
-<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ</h3><p>HNSWとPRQを組み合わせることで、<strong>HNSW_PRQは</strong>HNSWの高速グラフベース検索を維持しつつ、PRQの多段階圧縮を活用する。ワークフローは次のようになる：</p>
+<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ<button data-href="#HNSW-+-PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSWとPRQを組み合わせることで、<strong>HNSW_PRQは</strong>HNSWの高速グラフベース検索を維持しつつ、PRQの多段階圧縮を活用する。ワークフローは次のようになる：</p>
 <ol>
 <li><p><strong>データ圧縮：</strong>各ベクトルはまずPQによって粗い表現に変換され、次にRQによって残差が量子化される。その結果、各ベクトルを表すコンパクトなコードの集合が得られる。</p></li>
 <li><p><strong>グラフの構築：</strong>圧縮されたベクトル（PQコードとRQコードの両方を含む）は、HNSWグラフを構築するための基礎となる。データがコンパクトな形で保存されるため、グラフに必要なメモリが少なくなり、グラフ内のナビゲーションが高速化される。</p></li>
@@ -126,7 +171,7 @@ index_params.add_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックスで類似検索を実行できます。</p>
+    </button></h2><p>インデックスが構築され、エンティティが挿入されると、インデックス上で類似検索を実行できます。</p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;ef&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Parameter controlling query time/accuracy trade-off</span>
@@ -162,7 +207,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を説明します。</p>
-<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ</h3><p>以下の表に、<code translate="no">params</code> で<a href="/docs/ja/hnsw-prq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータを列挙します。</p>
+<h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下の表に、<code translate="no">params</code> で<a href="/docs/ja/hnsw-prq.md#Build-index">インデックスを構築</a>する際に設定できるパラメータを列挙します。</p>
 <table>
    <tr>
      <th></th>
@@ -177,7 +237,7 @@ res = MilvusClient.search(
      <td><p>各ノードがグラフ内で持つことのできる接続(またはエッジ)の最大数。 このパラメータはインデックスの構築と検索の両方に直接影響する。</p></td>
      <td><p><strong>型</strong>：整数<strong>：</strong>[2, 2048]</p>
 <p><strong>デフォルト値</strong>:<code translate="no">30</code> (ノードあたり最大 30 の送信エッジと 30 の受信エッジ)</p></td>
-     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度が高く</strong>なるが、<strong>メモリ・オーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。 次元性の高いデータセットや、高い再現性が重要な場合は、<code translate="no">M</code> を大きくすることを検討する。</p>
+     <td><p><code translate="no">M</code> を大きくすると、一般的に<strong>精度は高く</strong>なるが、<strong>メモリ・オーバーヘッドが増加</strong>し、<strong>インデックス構築と検索の両方が遅くなる</strong>。 次元性の高いデータセットや、高い再現性が重要な場合は、<code translate="no">M</code> を大きくすることを検討する。</p>
 <p>メモリ使用量と検索速度が最大の関心事である場合は、<code translate="no">M</code> を減らすことを検討する。</p>
 <p>ほとんどの場合、この範囲内の値を設定することを推奨する：[5, 100].</p></td>
    </tr>
@@ -203,15 +263,15 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは $2^{textit{nbits}}$ 個のセントロイドを含む。例えば、<code translate="no">nbits</code> を8に設定すると、各サブベクトルは8ビットのセントロイドのインデックスで表現される。これにより、そのサブベクトルのコードブックには$2^8$ (256)個のセントロイドが存在することになる。</p></td>
-     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 64]</p>
+     <td><p>各サブベクトルの重心インデックスを圧縮形式で表現するためのビット数。各コードブックは2<sup>n</sup>ビットのセントロイドを含む。例えば、<code translate="no">nbits</code> が 8 に設定された場合、各サブベクトルは 8 ビットのセントロイドのインデックスで表現される。これにより、そのサブベクタのコードブックには<sup>28個</sup>(256個)のセントロイドの可能性がある。</p></td>
+     <td><p><strong>タイプ</strong>整数<strong>：</strong>[1, 24]</p>
 <p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
      <td><p><code translate="no">nbits</code> の値を大きくすると、コードブックが大きくなり、元のベクトルをより正確に表現できる可能性がある。ほとんどの場合、この範囲内の値を設定することを推奨します：[1, 16].</p></td>
    </tr>
    <tr>
      <td></td>
      <td><p><code translate="no">nrq</code></p></td>
-     <td><p>RQステージで使用する残差部分量子化器の数を制御します。より多くのサブクオンタイザを使用することで、より大きな圧縮を達成できる可能性がありますが、情報損失が大きくなる可能性があります。</p></td>
+     <td><p>RQステージで使用する残差部分量子化器の数を制御します。より多くのサブクオンタイザを使用すると、より大きな圧縮を達成できる可能性がありますが、情報損失が大きくなる可能性があります。</p></td>
      <td><p><strong>タイプ</strong>：整数<strong>：</strong>[1, 16]</p>
 <p><strong>デフォルト値</strong>：<code translate="no">2</code></p></td>
      <td><p>デフォルト値：<code translate="no">nrq</code> の値を大きくすると、残余の部分量子化ステップを増やすことができ、元のベクトルをより正確に再構成できる可能性がある。しかし、それはまた、より多くのサブクオンタイズを保存し計算することを意味し、より大きなインデックスサイズとより大きな計算オーバーヘッドをもたらします。</p></td>
@@ -233,7 +293,22 @@ res = MilvusClient.search(
      <td><p>より高いメモリコストで最大の精度を得るには<code translate="no">FP32</code> を使用し、より良い圧縮を得るには<code translate="no">SQ6</code>/<code translate="no">SQ8</code> を使用する。<code translate="no">BF16</code> と<code translate="no">FP16</code> は、バランスの取れた代替案を提供する。</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ</h3><p>次の表は、<a href="/docs/ja/hnsw-prq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定可能なパラメータの一覧です。</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>次の表は、<a href="/docs/ja/hnsw-prq.md#Search-on-index">インデックスを検索する</a>際に<code translate="no">search_params.params</code> で設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th></th>
@@ -249,7 +324,7 @@ res = MilvusClient.search(
  このパラメータは検索プロセスのみに影響し、グラフの最下層にのみ適用される。</p></td>
      <td><p><strong>タイプ</strong>整数<strong>Range</strong>：[1,<em>int_max］</em></p>
 <p><strong>デフォルト値</strong>:<em>limit</em>(TopK nearest neighbors to return)</p></td>
-     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これはまた<strong>検索時間を増加させます</strong>。 高い想起を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増加させることを検討してください。</p>
+     <td><p><code translate="no">ef</code> を大きくすると、より多くの近傍候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これは<strong>検索時間を増加させます</strong>。 高い想起を達成することが重要であり、検索速度があまり気にならない場合は、<code translate="no">ef</code> を増加させることを検討してください。</p>
 <p>特に精度が多少低下しても構わないようなシナリオでは、<code translate="no">ef</code> を減らして、より高速な検索を優先させることを検討してください。</p>
 <p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[K, 10K]。</p></td>
    </tr>

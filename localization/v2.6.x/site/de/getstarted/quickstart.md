@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>Jetzt können wir semantische Suchen durchführen, indem wir den Text der Suchanfrage als Vektor darstellen und eine Vektorähnlichkeitssuche auf Milvus durchführen.</p>
-<h3 id="Vector-search" class="common-anchor-header">Vektorielle Suche</h3><p>Milvus akzeptiert eine oder mehrere Vektorsuchanfragen zur gleichen Zeit. Der Wert der Variable query_vectors ist eine Liste von Vektoren, wobei jeder Vektor ein Array von Fließkommazahlen ist.</p>
+<h3 id="Vector-search" class="common-anchor-header">Vektorielle Suche<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus akzeptiert eine oder mehrere Vektorsuchanfragen zur gleichen Zeit. Der Wert der Variable query_vectors ist eine Liste von Vektoren, wobei jeder Vektor ein Array von Fließkommazahlen ist.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -271,7 +286,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Vektorsuche auch unter Berücksichtigung der Werte der Metadaten (in Milvus "skalare" Felder genannt, da sich skalar auf Nicht-Vektordaten bezieht) durchführen. Dies geschieht mit einem Filterausdruck, der bestimmte Kriterien angibt. Im folgenden Beispiel wird gezeigt, wie man mit dem Feld <code translate="no">subject</code> suchen und filtern kann.</p>
+    </button></h2><p>Sie können die Vektorsuche auch unter Berücksichtigung der Werte der Metadaten durchführen (in Milvus "skalare" Felder genannt, da sich skalar auf Nicht-Vektordaten bezieht). Dies geschieht mit einem Filterausdruck, der bestimmte Kriterien angibt. Im folgenden Beispiel wird gezeigt, wie man mit dem Feld <code translate="no">subject</code> suchen und filtern kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -301,7 +316,22 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Standardmäßig werden die skalaren Felder nicht indiziert. Wenn Sie eine gefilterte Metadatensuche in großen Datenbeständen durchführen müssen, können Sie die Verwendung eines festen Schemas in Betracht ziehen und auch den <a href="https://milvus.io/docs/scalar_index.md">Index</a> aktivieren, um die Suchleistung zu verbessern.</p>
 <p>Neben der Vektorsuche können Sie auch andere Arten von Suchen durchführen:</p>
-<h3 id="Query" class="common-anchor-header">Abfrage</h3><p>Eine Abfrage() ist eine Operation, die alle Entitäten abruft, die einem Kriterium entsprechen, wie z. B. einem <a href="https://milvus.io/docs/boolean.md">Filterausdruck</a> oder einigen IDs.</p>
+<h3 id="Query" class="common-anchor-header">Abfrage<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Eine Abfrage() ist eine Operation, die alle Entitäten abruft, die einem Kriterium entsprechen, wie z. B. einem <a href="https://milvus.io/docs/boolean.md">Filterausdruck</a> oder einigen IDs.</p>
 <p>Zum Beispiel werden alle Entitäten abgefragt, deren Skalarfeld einen bestimmten Wert hat:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -402,8 +432,9 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite ist ideal für den Einstieg in ein lokales Python-Programm. Wenn Sie große Datenmengen haben oder Milvus in der Produktion verwenden möchten, können Sie mehr über die Bereitstellung von Milvus auf <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> und <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> erfahren. Alle Bereitstellungsmodi von Milvus nutzen dieselbe API, sodass sich Ihr clientseitiger Code beim Wechsel zu einem anderen Bereitstellungsmodus nicht großartig ändern muss. Geben Sie einfach die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI und das Token</a> eines Milvus-Servers an, der irgendwo eingesetzt wird:</p>
+    </button></h2><p>Milvus Lite ist ideal für den Einstieg in ein lokales Python-Programm. Wenn Sie große Datenmengen haben oder Milvus in der Produktion verwenden möchten, können Sie sich über die Bereitstellung von Milvus auf <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> und <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> informieren. Alle Bereitstellungsmodi von Milvus nutzen dieselbe API, sodass Ihr clientseitiger Code beim Wechsel zu einem anderen Bereitstellungsmodus nicht viel geändert werden muss. Geben Sie einfach die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI und das Token</a> eines Milvus-Servers an, der irgendwo eingesetzt wird:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Um Daten von Milvus Lite zu Milvus zu migrieren, das auf Docker oder Kubernetes bereitgestellt wird, lesen Sie bitte <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migrieren von Daten von Milvus Lite</a>.</p>
 <p>Milvus bietet eine REST- und gRPC-API mit Client-Bibliotheken in Sprachen wie <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# und <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Für das Schema-Design unterstützt Milvus ein flexibles Schema-Design, bei dem Sie die Felder und ihre Datentypen, einschließlich Vektorfelder, definieren können. Sie können auch den Indextyp und die Parameter für jedes Feld definieren. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/schema-hands-on.md">Datenmodellentwurf für die Suche</a>.</p>

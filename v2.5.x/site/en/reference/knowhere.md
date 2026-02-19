@@ -6,11 +6,11 @@ title: Knowhere
 
 # Knowhere
 
-This topic introduces Knowhere, the core vector execution engine of Milvus.
+This topic introduces Knowhere, the core vector search engine of Milvus.
 
 ## Overview
 
-Knowhere is the core vector execution engine of Milvus, which incorporates several vector similarity search libraries including [Faiss](https://github.com/facebookresearch/faiss), [Hnswlib](https://github.com/nmslib/hnswlib) and [Annoy](https://github.com/spotify/annoy). Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations. More types of hardware including DPU and TPU will be supported in future releases.
+Knowhere is an open-source vector search engine which incorporates several vector similarity search libraries including [Faiss](https://github.com/facebookresearch/faiss), [Hnswlib](https://github.com/nmslib/hnswlib) and [Annoy](https://github.com/spotify/annoy). Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations. More types of hardware including DPU and TPU will be supported in future releases.
 
 ## Knowhere in the Milvus architecture
 

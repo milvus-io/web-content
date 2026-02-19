@@ -22,6 +22,9 @@ title: Index des champs scalaires
         ></path>
       </svg>
     </button></h1><p>Dans Milvus, un index scalaire est utilisé pour accélérer le métafiltrage par une valeur de champ non vectorielle spécifique, comme un index de base de données traditionnel. Ce guide vous guidera dans la création et la configuration d'index scalaires pour des champs tels que des entiers, des chaînes, etc.</p>
+<div class="alert warning">
+<p>Cette page est obsolète. Pour une mise en œuvre plus récente, reportez-vous à <a href="/docs/fr/bitmap.md">BITMAP</a>, <a href="/docs/fr/inverted.md">INVERTED</a>, <a href="/docs/fr/ngram.md">NGRAM</a>, <a href="/docs/fr/rtree.md">RTREE</a> <a href="/docs/fr/stl-sort.md">STL_SORT</a>, et plus encore.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Types d'indexation scalaire<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Index des champs scalaires
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexation automatique</a></strong>: Milvus décide automatiquement du type d'index en fonction du type de données du champ scalaire. Cette option convient lorsque vous n'avez pas besoin de contrôler le type d'index spécifique.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexation automatique</a></strong>: Milvus décide automatiquement du type d'index en fonction du type de données du champ scalaire. Cette méthode convient lorsque vous n'avez pas besoin de contrôler le type d'index spécifique.</p></li>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexation personnalisée</a></strong>: Vous spécifiez le type d'index exact, tel qu'un index inversé ou un <a href="/docs/fr/bitmap.md">index bitmap</a>. Cette option permet de mieux contrôler la sélection du type d'index.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Indexation automatique<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
@@ -190,7 +193,7 @@ client.createIndex(createIndexReq);
 <p>Le nom du champ scalaire à indexer.</p></li>
 <li><p><strong>index_type</strong><em>(chaîne</em>) :</p>
 <p>Le type d'index scalaire à créer. Pour l'indexation implicite, laissez ce paramètre vide ou omettez-le.</p>
-<p>Pour l'indexation personnalisée, les valeurs valides sont</p>
+<p>Pour l'indexation personnalisée, les valeurs valides sont les suivantes</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</p></li>
 <li><p><strong>BITMAP</strong>: Un type d'index qui stocke un tableau binaire de toutes les valeurs uniques d'un champ. Pour plus de détails, voir <a href="/docs/fr/bitmap.md">BITMAP</a>.</p></li>
@@ -264,7 +267,7 @@ client.createIndex(createIndexReq);
 <p>Utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> pour vérifier la création d'index scalaires :</p>
 </div>
 <div class="language-java">
-<p>Utilisez la méthode <code translate="no">listIndexes()</code> pour vérifier la création des index scalaires :</p>
+<p>Utilisez la méthode <code translate="no">listIndexes()</code> pour vérifier la création d'index scalaires :</p>
 </div>
 <div class="language-javascript">
 <p>Utilisez la méthode <code translate="no">listIndexes()</code> pour vérifier la création d'index scalaires :</p>

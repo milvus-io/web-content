@@ -1,15 +1,14 @@
 ---
 id: ngram.md
-title: NGRAMCompatible with Milvus v2.6.2+
+title: NGRAM
 summary: >-
   Milvus 中的 NGRAM 索引是为了加速对 VARCHAR 字段或 JSON 字段中特定 JSON 路径的 LIKE
   查询而构建的。在建立索引之前，Milvus 会将文本分割成固定长度为 n 的重叠短子串，称为 n-gram。例如，当 n = 3 时，单词 "Milvus
   "会被拆分成 3 个词组："Mil"、"ilv"、"lvu "和 "vus"。然后，这些 n
   个词组被存储在一个倒排索引中，该索引将每个词组映射到出现该词组的文档 ID。在查询时，该索引允许 Milvus
   将搜索范围迅速缩小到一小部分候选词，从而大大加快了查询的执行速度。
-beta: Milvus v2.6.2+
 ---
-<h1 id="NGRAM" class="common-anchor-header">NGRAM<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus v2.6.2+</span><button data-href="#NGRAM" class="anchor-icon" translate="no">
+<h1 id="NGRAM" class="common-anchor-header">NGRAM<button data-href="#NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,7 +24,7 @@ beta: Milvus v2.6.2+
         ></path>
       </svg>
     </button></h1><p>Milvus 中的<code translate="no">NGRAM</code> 索引是为了加速对<code translate="no">VARCHAR</code> 字段或<code translate="no">JSON</code> 字段内特定 JSON 路径的<code translate="no">LIKE</code> 查询而建立的。在建立索引之前，Milvus 会将文本分割成固定长度为<em>n</em> 的重叠短子串，称为<em>n-gram</em>。例如，<em>n = 3</em> 时，单词<em>"Milvus "</em>会被拆分成 3 个词组：<em>"Mil"、</em> <em>"ilv"、"</em> <em>lvu "</em>和<em>"vus"。</em>然后，这些 n 个词组被存储在一个倒排索引中，该索引将每个词组映射到出现该词组的文档 ID。在查询时，该索引允许 Milvus 将搜索范围迅速缩小到一小部分候选词，从而大大加快了查询执行速度。</p>
-<p>当你需要快速过滤前缀、后缀、前后缀或通配符时，可以使用它：</p>
+<p>当你需要快速过滤前缀、后缀、前后缀或通配符时，请使用它：</p>
 <ul>
 <li><p><code translate="no">name LIKE &quot;data%&quot;</code></p></li>
 <li><p><code translate="no">title LIKE &quot;%vector%&quot;</code></p></li>
@@ -76,40 +75,48 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">min_gram</code>:要生成的最短 n-gram。这也定义了可从索引中获益的最小查询子串长度。</p></li>
 <li><p><code translate="no">max_gram</code>:要生成的最长 n-gram。在查询时，它也被用作分割长查询字符串时的最大窗口大小。</p></li>
 </ul>
-<p>例如，在<code translate="no">min_gram=2</code> 和<code translate="no">max_gram=3</code> 的情况下，字符串<code translate="no">&quot;AI database&quot;</code> 的拆分情况如下：</p>
-<ul>
-<li><strong>2-grams：</strong> <code translate="no">AI</code>,<code translate="no">I_</code>,<code translate="no">_d</code>,<code translate="no">da</code>,<code translate="no">at</code>, ...</li>
-<li><strong>3-grams：</strong> <code translate="no">AI_</code>,<code translate="no">I_d</code>,<code translate="no">_da</code>,<code translate="no">dat</code>,<code translate="no">ata</code>, ...</li>
-</ul>
+<p>例如，在<code translate="no">min_gram=2</code> 和<code translate="no">max_gram=3</code> 的情况下，字符串<code translate="no">&quot;AI database&quot;</code> 的拆分情况如下：</p></li>
+</ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index.png" alt="Build Ngram Index" class="doc-image" id="build-ngram-index" />
    </span> <span class="img-wrapper"> <span>建立 Ngram 索引</span> </span></p>
-<blockquote>
-<p><strong>注释</strong></p>
-<ul>
-<li><p>对于一个范围<code translate="no">[min_gram, max_gram]</code> ，Milvus 会生成两个值之间每个长度（包括在内）的所有 n-gram。<br>
-示例：对于<code translate="no">[2,4]</code> 和单词<code translate="no">&quot;text&quot;</code> ，Milvus 会生成：</p>
-<ul>
-<li><strong>2-grams：</strong> <code translate="no">te</code>,<code translate="no">ex</code> 、<code translate="no">xt</code></li>
-<li><strong>3-grams：</strong> <code translate="no">tex</code>,<code translate="no">ext</code></li>
-<li><strong>4-grams</strong>：<code translate="no">text</code></li>
-</ul></li>
-<li><p>N-gram 分解以字符为基础，与语言无关。例如，在中文中，带有<code translate="no">min_gram = 2</code> 的<code translate="no">&quot;向量数据库&quot;</code> 可分解为<code translate="no">&quot;向量&quot;</code>,<code translate="no">&quot;量数&quot;</code>,<code translate="no">&quot;数据&quot;</code>,<code translate="no">&quot;据库&quot;</code> 。</p></li>
-<li><p>在分解过程中，空格和标点符号被视为字符。</p></li>
-<li><p>分解时保留原始大小写，匹配时区分大小写。例如，<code translate="no">&quot;Database&quot;</code> 和<code translate="no">&quot;database&quot;</code> 会生成不同的 n-gram，查询时需要进行精确的大小写匹配。</p></li>
-</ul>
-</blockquote></li>
-<li><p><strong>建立反转索引</strong>：创建一个<strong>倒排索引</strong>，将每个生成的 n-gram 映射到包含它的文档 ID 列表。</p>
+<pre><code translate="no">- **2-grams:** `AI`, `I_`, `_d`, `da`, `at`, ...
+
+- **3-grams:** `AI_`, `I_d`, `_da`, `dat`, `ata`, ...
+
+&lt;div class=&quot;alert note&quot;&gt;
+
+- For a range `[min_gram, max_gram]`, Milvus generates all n-grams for every length between the two values (inclusive). For example, with `[2,4]` and the word `&quot;text&quot;`, Milvus generates:
+
+- **2-grams:** `te`, `ex`, `xt`
+
+- **3-grams:** `tex`, `ext`
+
+- **4-grams:** `text`
+
+- N-gram decomposition is character-based and language-agnostic. For example, in Chinese, `&quot;向量数据库&quot;` with `min_gram = 2` is decomposed into: `&quot;向量&quot;`, `&quot;量数&quot;`, `&quot;数据&quot;`, `&quot;据库&quot;`.
+
+- Spaces and punctuation are treated as characters during decomposition.
+
+- Decomposition preserves original case, and matching is case-sensitive. For example, `&quot;Database&quot;` and `&quot;database&quot;` will generate different n-grams and require exact case matching during queries.
+
+&lt;/div&gt;
+</code></pre>
+<ol>
+<li><p><strong>建立倒排索引</strong>：创建一个<strong>倒排索引</strong>，将每个生成的 n-gram 映射到包含该 n-gram 的文档 ID 列表。</p>
 <p>例如，如果 2-gram<code translate="no">&quot;AI&quot;</code> 出现在 ID 为 1、5、6、8 和 9 的文档中，索引就会记录<code translate="no">{&quot;AI&quot;: [1, 5, 6, 8, 9]}</code> 。查询时可使用该索引快速缩小搜索范围。</p></li>
 </ol>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build-ngram-index-2.png" alt="Build Ngram Index 2" class="doc-image" id="build-ngram-index-2" />
-   </span> <span class="img-wrapper"> <span>建立 Ngram 索引 2</span> </span></p>
-<div class="alert note">
-<p>更宽的<code translate="no">[min_gram, max_gram]</code> 范围会产生更多的克和更大的映射列表。如果内存紧张，可考虑使用 mmap 模式处理超大张贴列表。有关详情，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p>
-</div>
+   </span> <span class="img-wrapper"> <span>构建 Ngram 索引 2</span> </span></p>
+<pre><code translate="no">&lt;div class=&quot;alert note&quot;&gt;
+
+A wider `[min_gram, max_gram]` range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to [Use mmap](https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb).
+
+&lt;/div&gt;
+</code></pre>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">第 2 阶段：加速查询<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +132,7 @@ beta: Milvus v2.6.2+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>当执行<code translate="no">LIKE</code> 过滤器时，Milvus 会使用 NGRAM 索引来加速查询，具体步骤如下：</p>
+    </button></h3><p>当执行<code translate="no">LIKE</code> 过滤器时，Milvus 使用 NGRAM 索引加速查询，具体步骤如下：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/accelerate-queries.png" alt="Accelerate Queries" class="doc-image" id="accelerate-queries" />
@@ -311,10 +318,6 @@ client.create_index(
       </svg>
     </button></h2><p>使用<code translate="no">drop_index()</code> 方法从 Collections 中删除现有索引。</p>
 <div class="alert note">
-<ul>
-<li><p>在<strong>v2.6.3</strong>或更早版本中，删除标量索引前必须释放 Collections。</p></li>
-<li><p>从<strong>v2.6.4</strong>或更高版本开始，一旦不再需要标量索引，就可以直接删除，无需先释放 Collections。</p></li>
-</ul>
 </div>
 <pre><code translate="no" class="language-python">client.drop_index(
     collection_name=<span class="hljs-string">&quot;Documents&quot;</span>,   <span class="hljs-comment"># Name of the collection</span>
@@ -338,8 +341,8 @@ client.create_index(
       </svg>
     </button></h2><ul>
 <li><p><strong>字段类型</strong>：支持<code translate="no">VARCHAR</code> 和<code translate="no">JSON</code> 字段。对于 JSON，请同时提供<code translate="no">params.json_path</code> 和<code translate="no">params.json_cast_type=&quot;varchar&quot;</code> 。</p></li>
-<li><p><strong>统一字符编码</strong>：NGRAM 分解以字符为基础，与语言无关，包括空白和标点符号。</p></li>
-<li><p><strong>时空权衡</strong>：更宽的克范围<code translate="no">[min_gram, max_gram]</code> 会产生更多的克和更大的索引。如果内存紧张，可考虑使用<code translate="no">mmap</code> 模式处理大型张贴列表。更多信息，请参阅<a href="/docs/zh/mmap.md">使用 mmap</a>。</p></li>
+<li><p><strong>Unicode</strong>：NGRAM 分解以字符为基础，与语言无关，包括空白和标点符号。</p></li>
+<li><p><strong>时空权衡</strong>：更宽的克范围<code translate="no">[min_gram, max_gram]</code> 会产生更多的克和更大的索引。如果内存紧张，可考虑使用<code translate="no">mmap</code> 模式处理大型张贴列表。更多信息，请参阅<a href="https://zilliverse.feishu.cn/wiki/P3wrwSMNNihy8Vkf9p6cTsWYnTb">使用 mmap</a>。</p></li>
 <li><p><strong>不变性</strong>：<code translate="no">min_gram</code> 和<code translate="no">max_gram</code> 不能就地更改，需要重新构建索引才能调整。</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">最佳实践<button data-href="#Best-practices" class="anchor-icon" translate="no">

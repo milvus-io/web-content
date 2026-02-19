@@ -22,6 +22,6 @@ summary: 프로덕션 애플리케이션에 Milvus를 도입한 기업에 대해
     </button></h1><p>Milvus는 기업 사용자들 사이에서 선도적인 벡터 데이터베이스로 자리 잡았으며, Nvidia, Roblox, AT&amp;T 등과 같은 저명한 기업의 지지를 받고 있습니다. 아래는 Milvus를 애플리케이션에 성공적으로 통합한 기업 목록입니다.</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/milvus_adopters_143e98c33b.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>Milvus 채택 기업</span> </span></p>
 <p>Milvus <a href="https://milvus.io/use-cases">사용 사례 페이지를</a> 방문하여 업계 리더들이 Milvus를 활용하여 AI 애플리케이션을 강화하고 비즈니스 성장을 가속화하는 방법을 알아보세요.</p>

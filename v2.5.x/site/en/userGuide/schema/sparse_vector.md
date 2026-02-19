@@ -546,11 +546,6 @@ To perform a similarity search using sparse vectors, prepare both the query data
 </div>
 
 ```python
-# Prepare search parameters
-search_params = {
-    "params": {"drop_ratio_search": 0.2},  # A tunable drop ratio parameter with a valid range between 0 and 1
-}
-
 # Query with sparse vector
 query_data = [{1: 0.2, 50: 0.4, 1000: 0.7}]
 ```
@@ -558,10 +553,6 @@ query_data = [{1: 0.2, 50: 0.4, 1000: 0.7}]
 ```java
 import io.milvus.v2.service.vector.request.data.EmbeddedText;
 import io.milvus.v2.service.vector.request.data.SparseFloatVec;
-
-// Prepare search parameters
-Map<String,Object> searchParams = new HashMap<>();
-searchParams.put("drop_ratio_search", 0.2);
 
 // Query with the sparse vector
 SortedMap<Long, Float> sparse = new TreeMap<>();
@@ -572,18 +563,11 @@ SparseFloatVec queryData = new SparseFloatVec(sparse);
 ```
 
 ```go
-// Prepare search parameters
-annSearchParams := index.NewCustomAnnParam()
-annSearchParams.WithExtraParam("drop_ratio_search", 0.2)
-
 // Query with the sparse vector
 queryData, _ := entity.NewSliceSparseEmbedding([]uint32{1, 50, 1000}, []float32{0.2, 0.4, 0.7})
 ```
 
 ```javascript
-// Prepare search parameters
-const searchParams = {drop_ratio_search: 0.2}
-
 // Query with the sparse vector
 const queryData = [{1: 0.2, 50: 0.4, 1000: 0.7}]
 ```
@@ -612,7 +596,6 @@ res = client.search(
     data=query_data,
     limit=3,
     output_fields=["pk"],
-    search_params=search_params,
 )
 
 print(res)
@@ -631,7 +614,6 @@ SearchResp searchR = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .data(Collections.singletonList(queryData))
         .annsField("sparse_vector")
-        .searchParams(searchParams)
         .topK(3)
         .outputFields(Collections.singletonList("pk"))
         .build());
@@ -649,7 +631,6 @@ await client.search({
     data: queryData,
     limit: 3,
     output_fields: ['pk'],
-    params: searchParams
 });
 ```
 
@@ -660,7 +641,6 @@ resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
     []entity.Vector{queryData},
 ).WithANNSField("sparse_vector").
     WithOutputFields("pk").
-    WithAnnParam(annSearchParams))
 if err != nil {
     fmt.Println(err.Error())
     // handle err
@@ -689,7 +669,6 @@ curl --request POST \
     "data": $queryData,
     "annsField": "sparse_vector",
     "limit": 3,
-    "searchParams": $searchParams,
     "outputFields": ["pk"]
 }'
 

@@ -22,6 +22,9 @@ title: Índice de campos escalares
         ></path>
       </svg>
     </button></h1><p>No Milvus, um índice escalar é usado para acelerar a metafiltragem por um valor de campo específico não-vetorial, semelhante a um índice de base de dados tradicional. Este guia irá guiá-lo na criação e configuração de índices escalares para campos como inteiros, strings, etc.</p>
+<div class="alert warning">
+<p>Esta página foi descontinuada. Para obter a implementação mais recente, consulte <a href="/docs/pt/bitmap.md">BITMAP</a>, <a href="/docs/pt/inverted.md">INVERTED</a>, <a href="/docs/pt/ngram.md">NGRAM</a>, <a href="/docs/pt/rtree.md">RTREE</a> <a href="/docs/pt/stl-sort.md">STL_SORT</a> e muito mais.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Tipos de indexação escalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +41,8 @@ title: Índice de campos escalares
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexação automática</a></strong>: O Milvus decide automaticamente o tipo de índice com base no tipo de dados do campo escalar. Esta opção é adequada quando não é necessário controlar o tipo de índice específico.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexação personalizada</a></strong>: O utilizador especifica o tipo de índice exato, como um índice invertido ou um <a href="/docs/pt/bitmap.md">índice de mapa de bits</a>. Isto proporciona um maior controlo sobre a seleção do tipo de índice.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexação</a></strong>: Milvus decide automaticamente o tipo de índice com base no tipo de dados do campo escalar. Esta opção é adequada quando não é necessário controlar o tipo de índice específico.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexação personalizada</a></strong>: O utilizador especifica o tipo de índice exato, como um índice invertido ou um <a href="/docs/pt/bitmap.md">índice bitmap</a>. Isto proporciona um maior controlo sobre a seleção do tipo de índice.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Indexação automática<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -235,7 +238,7 @@ client.createIndex(createIndexReq);
 <p>Cria o índice na coleção especificada.</p>
 <ul>
 <li><strong>nome_da_colecção</strong><em>(string</em>) O nome da coleção para a qual o índice é criado.</li>
-<li><strong>field_name</strong><em>(string</em>) O nome do campo escalar a indexar.</li>
+<li><strong>nome_do_campo</strong><em>(string</em>) O nome do campo escalar a indexar.</li>
 <li><strong>index_name</strong><em>(string</em>) O nome do índice escalar a criar. Cada campo escalar suporta um índice.</li>
 <li><strong>index_type</strong><em>(string</em>) O tipo do índice escalar a criar. Para indexação implícita, deixe-o vazio ou omita este parâmetro. Para indexação personalizada, os valores válidos são:<ul>
 <li><strong>INVERTED</strong>: (Recomendado) Um índice invertido consiste num dicionário de termos que contém todas as palavras tokenizadas ordenadas alfabeticamente. Para obter detalhes, consulte <a href="/docs/pt/scalar_index.md">Índice escalar</a>.</li>
@@ -264,7 +267,7 @@ client.createIndex(createIndexReq);
 <p>Utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> para verificar a criação de índices escalares:</p>
 </div>
 <div class="language-java">
-<p>Utilizar o método <code translate="no">listIndexes()</code> para verificar a criação de índices escalares:</p>
+<p>Utilize o método <code translate="no">listIndexes()</code> para verificar a criação de índices escalares:</p>
 </div>
 <div class="language-javascript">
 <p>Utilize o método <code translate="no">listIndexes()</code> para verificar a criação de índices escalares:</p>

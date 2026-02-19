@@ -42,8 +42,8 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p>Um campo <code translate="no">TIMESTAMPTZ</code> é um tipo de dados definido por um esquema (<code translate="no">DataType.TIMESTAMPTZ</code>) em Milvus que processa a entrada sensível ao fuso horário e armazena todos os pontos temporais internamente como hora absoluta UTC:</p>
 <ul>
-<li><p><strong>Formato de entrada aceite</strong>: Cadeias de caracteres <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> com um desvio de fuso horário (por exemplo, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> representa 11:59:59 PM em UTC+08:00).</p></li>
-<li><p><strong>Armazenamento interno</strong>: Todos os valores de <code translate="no">TIMESTAMPTZ</code> são normalizados e armazenados em <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Tempo Universal Coordenado</a> (UTC).</p></li>
+<li><p><strong>Formato de entrada aceite</strong>: Cadeias de caracteres <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> com um desvio de fuso horário (por exemplo, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> indica 11:59:59 PM em 1 de maio de 2025 (UTC+08:00)).</p></li>
+<li><p><strong>Armazenamento interno</strong>: Todos os valores de <code translate="no">TIMESTAMPTZ</code> são normalizados e armazenados no <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">Tempo Universal Coordenado</a> (UTC).</p></li>
 <li><p><strong>Comparação e filtragem</strong>: Todas as operações de filtragem e ordenação são realizadas em UTC, garantindo resultados consistentes e previsíveis em diferentes fusos horários.</p></li>
 </ul>
 <div class="alert note">
@@ -229,15 +229,15 @@ client.load_collection(collection_name)
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Consulta com filtragem de carimbo de data/hora</h4><p>Utilize operadores aritméticos como <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Para obter uma lista completa dos operadores aritméticos disponíveis no Milvus, consulte <a href="/docs/pt/basic-operators.md#Arithmetic-Operators">Operadores aritméticos</a>.</p>
 <p>O exemplo abaixo filtra entidades com carimbos de data e hora (<code translate="no">tsz</code>) que não são iguais a <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -386,7 +386,7 @@ res = client.search(
      <td><p>Mais alto</p></td>
    </tr>
 </table>
-<p>Para obter instruções passo-a-passo e exemplos de código, consulte as páginas dedicadas:</p>
+<p>Para obter instruções passo a passo e exemplos de código, consulte as páginas dedicadas:</p>
 <ul>
 <li><p><a href="/docs/pt/modify-collection.md#Example-6-Set-collection-time-zone">Modificar coleção</a></p></li>
 <li><p><a href="/docs/pt/manage_databases.md#Manage-database-properties">Base de dados</a></p></li>

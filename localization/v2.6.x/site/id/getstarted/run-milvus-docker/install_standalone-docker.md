@@ -63,10 +63,10 @@ title: Menjalankan Milvus di Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Apa yang baru di v2.6.6:</strong></p>
+<p><strong>Apa yang baru di v2.6.11:</strong></p>
 <ul>
 <li><strong>Streaming Node</strong>: Kemampuan pemrosesan data yang ditingkatkan</li>
-<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan pengurangan biaya pemeliharaan, lihat <a href="/docs/id/use-woodpecker.md">Gunakan Woodpecker</a> untuk detailnya</li>
+<li><strong>Woodpecker MQ</strong>: Antrian pesan yang ditingkatkan dengan pengurangan overhead pemeliharaan, lihat <a href="/docs/id/use-woodpecker.md">Gunakan Woodpecker</a> untuk detailnya</li>
 <li><strong>Arsitektur yang Dioptimalkan</strong>: Komponen yang terkonsolidasi untuk kinerja yang lebih baik</li>
 </ul>
 <p>Selalu unduh skrip terbaru untuk memastikan Anda mendapatkan konfigurasi dan peningkatan arsitektur terbaru.</p>

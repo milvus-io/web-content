@@ -19,7 +19,10 @@ title: 索引標量欄位
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，標量索引用來加速以特定的非向量欄位值進行元篩選，類似於傳統的資料庫索引。本指南將教您如何為整數、字串等欄位建立及設定標量索引。</p>
+    </button></h1><p>在 Milvus 中，標量索引用來加速以特定的非向量欄位值進行元篩選，類似於傳統的資料庫索引。本指南將引導您為整數、字串等欄位建立及設定標量索引。</p>
+<div class="alert warning">
+<p>本頁面已被廢棄。如需最新的實作，請參閱<a href="/docs/zh-hant/bitmap.md">BITMAP</a>、<a href="/docs/zh-hant/inverted.md">INVERTED</a>、<a href="/docs/zh-hant/ngram.md">NGRAM</a>、<a href="/docs/zh-hant/rtree.md">RTREE</a> <a href="/docs/zh-hant/stl-sort.md">STL_SORT</a> 等。</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">標量索引的類型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +39,7 @@ title: 索引標量欄位
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">自動索引</a></strong>：Milvus 根據標量字段的資料類型自動決定索引類型。這適用於不需要控制特定索引類型的情況。</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">自動索引</a></strong>：Milvus 根據標量值欄位的資料類型自動決定索引類型。這適用於不需要控制特定索引類型的情況。</p></li>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">自訂索引</a></strong>：您可以指定確切的索引類型，例如反向索引<a href="/docs/zh-hant/bitmap.md">或位圖索引</a>。這提供對索引類型選擇的更多控制。</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">自動索引<button data-href="#Auto-indexing" class="anchor-icon" translate="no">

@@ -13,7 +13,7 @@ You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-start
 
 <div class="alert note">
 
-**Message Queue limitations**: When upgrading to Milvus v2.6.7, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+**Message Queue limitations**: When upgrading to Milvus v2.6.11, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
 
 
 </div>

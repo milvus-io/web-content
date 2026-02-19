@@ -81,13 +81,14 @@ title: Sauvegarde Milvus
     </button></h2><p>Le tableau suivant répertorie les compatibilités de sauvegarde et de restauration entre les différentes versions de Milvus depuis Milvus Backup v0.5.7.</p>
 <table>
 <thead>
-<tr><th>Sauvegarde ↓ / Restauration →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th></tr>
+<tr><th>Sauvegarde depuis ↓ / Restauration vers →</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
 </thead>
 <tbody>
-<tr><td>Milvus v2.2.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Milvus v2.3.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Milvus v2.4.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
-<tr><td>Milvus v2.5.x</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td></tr>
+<tr><td>Milvus v2.2.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.3.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.4.x</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.5.x</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td><td>Oui</td></tr>
+<tr><td>Milvus v2.6.x</td><td>Non</td><td>Non</td><td>Non</td><td>Non</td><td>Oui</td></tr>
 </tbody>
 </table>
 <h2 id="Latest-release" class="common-anchor-header">Dernière version<button data-href="#Latest-release" class="anchor-icon" translate="no">
@@ -106,5 +107,5 @@ title: Sauvegarde Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10">v0.5.10</a></li>
 </ul>

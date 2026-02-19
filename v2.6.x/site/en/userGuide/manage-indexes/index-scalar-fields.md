@@ -9,6 +9,12 @@ title: Index Scalar Fields
 
 In Milvus, a scalar index is used to speed up metafiltering by a specific non-vector field value, similar to a traditional database index. This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.
 
+<div class="alert warning">
+
+This page has been deprecated. For the latest implementation, refer to [BITMAP](bitmap.md), [INVERTED](inverted.md), [NGRAM](ngram.md), [RTREE](rtree.md) [STL_SORT](stl-sort.md), and more.
+
+</div>
+
 ## Types of scalar indexing
 
 - __[Auto indexing](https://milvus.io/docs/index-scalar-fields.md#Auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.

@@ -115,7 +115,7 @@ title: الفهرسة على القرص
 <span class="hljs-attr">DiskIndex:</span>
   <span class="hljs-attr">MaxDegree:</span> <span class="hljs-number">56</span>
   <span class="hljs-attr">SearchListSize:</span> <span class="hljs-number">100</span>
-  <span class="hljs-attr">PQCodeBugetGBRatio:</span> <span class="hljs-number">0.125</span>
+  <span class="hljs-attr">PQCodeBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">SearchCacheBudgetGBRatio:</span> <span class="hljs-number">0.125</span>
   <span class="hljs-attr">BeamWidthRatio:</span> <span class="hljs-number">4.0</span>
 <span class="hljs-string">...</span>
@@ -127,7 +127,7 @@ title: الفهرسة على القرص
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>الدرجة القصوى للرسم البياني لفامانا. <br/> توفر القيمة الأكبر معدل استرجاع أعلى ولكنها تزيد من حجم الفهرس والوقت اللازم لبناء الفهرس.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>حجم القائمة المرشحة. <br/> تزيد القيمة الأكبر من الوقت المستغرق في بناء الفهرس ولكنها توفر معدل استدعاء أعلى. <br/> اضبطه على قيمة أصغر من <code translate="no">MaxDegree</code> إلا إذا كنت بحاجة إلى تقليل وقت بناء الفهرس.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>الحد الأقصى لحجم رمز PQ. <br/> توفر القيمة الأكبر معدل استدعاء أعلى ولكنها تزيد من استخدام الذاكرة.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBudgetGBRatio</code></td><td>الحد الأقصى لحجم رمز PQ. <br/> توفر القيمة الأكبر معدل استدعاء أعلى ولكنها تزيد من استخدام الذاكرة.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>نسبة أرقام العقد المخزنة مؤقتاً إلى البيانات الأولية. <br/> تؤدي القيمة الأكبر إلى تحسين أداء بناء الفهرس مع زيادة استخدام الذاكرة.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>النسبة بين الحد الأقصى لعدد طلبات الإدخال والإخراج لكل تكرار بحث ورقم وحدة المعالجة المركزية.</td><td>[1، الحد الأقصى (128 / رقم وحدة المعالجة المركزية، 16)]</td><td>4.0</td></tr>
 </tbody>
@@ -149,7 +149,7 @@ title: الفهرسة على القرص
       </svg>
     </button></h2><ul>
 <li><p>كيفية التعامل مع الخطأ <code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> ؟</p>
-<p>يوفر Linux kernel ميزة الإدخال/الإخراج غير المتزامن غير المحظور (AIO) التي تسمح للعملية ببدء عمليات إدخال/إخراج متعددة في وقت واحد دون الحاجة إلى انتظار اكتمال أي منها. يساعد ذلك في تعزيز الأداء للتطبيقات التي يمكن أن تتداخل فيها المعالجة مع الإدخال/الإخراج.</p>
+<p>يوفر Linux kernel ميزة الإدخال/الإخراج غير المتزامن غير المحظور (AIO) التي تسمح للعملية ببدء عمليات إدخال/إخراج متعددة في وقت واحد دون الحاجة إلى انتظار اكتمال أي منها. يساعد ذلك على تعزيز الأداء للتطبيقات التي يمكن أن تتداخل فيها المعالجة مع الإدخال/الإخراج.</p>
 <p>يمكن ضبط الأداء باستخدام الملف الظاهري <code translate="no">/proc/sys/fs/aio-max-nr</code> في نظام الملفات proc. تحدد المعلمة <code translate="no">aio-max-nr</code> الحد الأقصى لعدد الطلبات المتزامنة المسموح بها.</p>
 <p>يتم تعيين <code translate="no">aio-max-nr</code> افتراضيًا على <code translate="no">65535</code> ، ويمكنك ضبطه حتى <code translate="no">10485760</code>.</p></li>
 </ul>

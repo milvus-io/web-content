@@ -3,7 +3,6 @@ id: knowhere.md
 summary: Pelajari tentang Knowhere di Milvus.
 title: Knowhere
 ---
-
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +18,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Topik ini memperkenalkan Knowhere, mesin eksekusi vektor inti dari Milvus.</p>
+    </button></h1><p>Topik ini memperkenalkan Knowhere, mesin pencari vektor inti dari Milvus.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +34,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere adalah mesin eksekusi vektor inti dari Milvus, yang menggabungkan beberapa pustaka pencarian kemiripan vektor termasuk <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a>, dan <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere juga dirancang untuk mendukung komputasi heterogen. Knowhere mengontrol perangkat keras (CPU atau GPU) mana yang akan menjalankan pembuatan indeks dan permintaan pencarian. Inilah bagaimana Knowhere mendapatkan namanya - mengetahui di mana harus menjalankan operasi. Lebih banyak jenis perangkat keras termasuk DPU dan TPU akan didukung dalam rilis mendatang.</p>
+    </button></h2><p>Knowhere adalah mesin pencari vektor sumber terbuka yang menggabungkan beberapa pustaka pencarian kemiripan vektor termasuk <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a>, dan <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere juga dirancang untuk mendukung komputasi heterogen. Knowhere mengontrol perangkat keras mana (CPU atau GPU) yang akan mengeksekusi pembuatan indeks dan permintaan pencarian. Inilah bagaimana Knowhere mendapatkan namanya - mengetahui di mana harus menjalankan operasi. Lebih banyak jenis perangkat keras termasuk DPU dan TPU akan didukung dalam rilis mendatang.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Knowhere dalam arsitektur Milvus<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +72,7 @@ title: Knowhere
         ></path>
       </svg>
     </button></h2><p>Berikut ini adalah keunggulan Knowhere dibandingkan Faiss.</p>
-<h4 id="Support-for-BitsetView" class="common-anchor-header">Dukungan untuk BitsetView</h4><p>Milvus memperkenalkan mekanisme bitset untuk merealisasikan &quot;penghapusan lunak&quot;. Vektor yang dihapus secara lunak masih ada dalam database tetapi tidak akan dihitung selama pencarian atau kueri kemiripan vektor.</p>
+<h4 id="Support-for-BitsetView" class="common-anchor-header">Dukungan untuk BitsetView</h4><p>Milvus memperkenalkan mekanisme bitset untuk merealisasikan "penghapusan lunak". Vektor yang dihapus secara lunak masih ada dalam database tetapi tidak akan dihitung selama pencarian atau kueri kemiripan vektor.</p>
 <p>Setiap bit dalam bitset berhubungan dengan vektor yang diindeks. Jika sebuah vektor ditandai sebagai "1" dalam bitset, itu berarti vektor ini dihapus secara lunak dan tidak akan dilibatkan selama pencarian vektor. Parameter bitset diterapkan pada semua API kueri indeks Faiss yang terbuka di Knowhere, termasuk indeks CPU dan GPU.</p>
 <p>Untuk informasi lebih lanjut tentang mekanisme bitset, lihat <a href="/docs/id/v2.5.x/bitset.md">bitset</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Dukungan untuk beberapa metrik kemiripan untuk mengindeks vektor biner</h4><p>Knowhere mendukung <a href="/docs/id/v2.5.x/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/id/v2.5.x/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/id/v2.5.x/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/id/v2.5.x/metric.md#Superstructure">Superstruktur</a>, dan <a href="/docs/id/v2.5.x/metric.md#Substructure">Substruktur</a>. Jaccard dan Tanimoto dapat digunakan untuk mengukur kemiripan antara dua set sampel, sedangkan Superstruktur dan Substruktur dapat digunakan untuk mengukur kemiripan struktur kimia.</p>
@@ -99,7 +98,7 @@ title: Knowhere
     </button></h2><p>Komputasi dalam Milvus terutama melibatkan operasi vektor dan skalar. Knowhere hanya menangani operasi pengindeksan vektor.</p>
 <p>Indeks adalah struktur data yang terpisah dari data vektor aslinya. Secara umum, pengindeksan membutuhkan empat langkah: membuat indeks, melatih data, menyisipkan data, dan membangun indeks. Dalam beberapa aplikasi AI, pelatihan dataset dipisahkan dari pencarian vektor. Data dari dataset pertama-tama dilatih dan kemudian dimasukkan ke dalam basis data vektor seperti Milvus untuk pencarian kemiripan. Sebagai contoh, dataset terbuka sift1M dan sift1B membedakan data untuk pelatihan dan data untuk pengujian.</p>
 <p>Namun, di Knowhere, data untuk pelatihan dan pencarian adalah sama. Knowhere melatih semua data dalam sebuah <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Segments">segmen</a> dan kemudian memasukkan semua data yang telah dilatih dan membuat indeks untuk data tersebut.</p>
-<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: kelas dasar</h4><p><code translate="no">DataObj</code> adalah kelas dasar dari semua struktur data di Knowhere. <code translate="no">Size()</code> adalah satu-satunya metode virtual di <code translate="no">DataObj</code>. Kelas Index diwarisi dari <code translate="no">DataObj</code> dengan sebuah field bernama &quot;size_&quot;. Kelas Index juga memiliki dua metode virtual - <code translate="no">Serialize()</code> dan <code translate="no">Load()</code>. Kelas <code translate="no">VecIndex</code> yang diturunkan dari <code translate="no">Index</code> adalah kelas dasar virtual untuk semua indeks vektor. <code translate="no">VecIndex</code> menyediakan metode termasuk <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, dan <code translate="no">ClearStatistics()</code>.</p>
+<h4 id="DataObj-base-class" class="common-anchor-header"><code translate="no">DataObj</code>: kelas dasar</h4><p><code translate="no">DataObj</code> adalah kelas dasar dari semua struktur data di Knowhere. <code translate="no">Size()</code> adalah satu-satunya metode virtual di <code translate="no">DataObj</code>. Kelas Index diwarisi dari <code translate="no">DataObj</code> dengan sebuah field bernama "size_". Kelas Index juga memiliki dua metode virtual - <code translate="no">Serialize()</code> dan <code translate="no">Load()</code>. Kelas <code translate="no">VecIndex</code> yang diturunkan dari <code translate="no">Index</code> adalah kelas dasar virtual untuk semua indeks vektor. <code translate="no">VecIndex</code> menyediakan metode termasuk <code translate="no">Train()</code>, <code translate="no">Query()</code>, <code translate="no">GetStatistics()</code>, dan <code translate="no">ClearStatistics()</code>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/Knowhere_base_classes.png" alt="base class" class="doc-image" id="base-class" />
@@ -108,7 +107,7 @@ title: Knowhere
 <ul>
 <li><p>Indeks Faiss memiliki dua kelas dasar: <code translate="no">FaissBaseIndex</code> untuk semua indeks pada vektor float point, dan <code translate="no">FaissBaseBinaryIndex</code> untuk semua indeks pada vektor biner.</p></li>
 <li><p><code translate="no">GPUIndex</code> adalah kelas dasar untuk semua indeks GPU Faiss.</p></li>
-<li><p><code translate="no">OffsetBaseIndex</code> adalah kelas dasar untuk semua indeks yang dikembangkan sendiri. Dengan hanya ID vektor yang disimpan dalam berkas indeks, ukuran berkas untuk vektor 128 dimensi dapat dikurangi 2 kali lipat.</p></li>
+<li><p><code translate="no">OffsetBaseIndex</code> adalah kelas dasar untuk semua indeks yang dikembangkan sendiri. Karena hanya ID vektor yang disimpan dalam berkas indeks, ukuran berkas untuk vektor 128 dimensi dapat dikurangi 2 kali lipat.</p></li>
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>: pencarian secara kasar (brute-force)</h4><p>
   

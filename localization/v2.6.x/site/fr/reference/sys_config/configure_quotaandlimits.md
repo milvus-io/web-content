@@ -59,7 +59,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   <tbody>
     <tr>
       <td>        `true` pour activer les quotas et les limites, `false` pour les désactiver.      </td>
-      <td>true</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -81,7 +81,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
     </button></h2><table id="quotaAndLimits.quotaCenterCollectInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
+      <th class="width80">Description de la valeur par défaut</th>
       <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
@@ -148,7 +148,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        durée d'attente de la tentative en cas d'échec de la suppression de l'allocation de données à l'avance, en millisecondes      </td>
+      <td>        durée d'attente de la tentative en cas d'échec de la suppression de l'allocation des données à l'avance, en millisecondes      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -743,7 +743,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        qps du niveau de la base de données, pas de limite par défaut, taux de compactage manuel      </td>
+      <td>        qps du niveau db, pas de limite par défaut, taux de compactage manuel      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1583,7 +1583,7 @@ summary: Découvrez comment configurer quotaAndLimits pour Milvus.
     <tr>
       <td>
         <li>maxTimeTickDelay indique la contre-pression pour les opérations DML.</li>      
-        <li>Les taux de DML sont réduits en fonction du rapport entre le délai d'attente et le délai maxTimeTickDelay,</li>      
+        <li>Les taux de DML sont réduits en fonction du rapport entre le délai d'attente et maxTimeTickDelay,</li>      
         <li>si le délai est supérieur à maxTimeTickDelay, toutes les demandes DML sont rejetées.</li>      
         <li>secondes</li>      </td>
       <td>300</td>

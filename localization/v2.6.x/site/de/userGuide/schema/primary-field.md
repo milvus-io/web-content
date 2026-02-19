@@ -110,7 +110,10 @@ summary: >-
    </tr>
 </table>
 <div class="alert note">
-<p>Wenn Sie sich nicht sicher sind, welchen Modus Sie wählen sollen, <a href="/docs/de/primary-field.md#Quickstart-Use-AutoID">beginnen Sie mit AutoID</a> für eine einfachere Aufnahme und garantierte Eindeutigkeit.</p>
+<ul>
+<li><p>Wenn Sie sich nicht sicher sind, welchen Modus Sie wählen sollen, <a href="/docs/de/primary-field.md#Quickstart-Use-AutoID">beginnen Sie mit AutoID</a>, um die Aufnahme zu vereinfachen und die Eindeutigkeit zu gewährleisten.</p></li>
+<li><p>Wir empfehlen Ihnen, sich in allen Fällen auf <code translate="no">autoId</code> zu verlassen, es sei denn, das manuelle Setzen von Primärschlüsseln ist von Vorteil.</p></li>
+</ul>
 </div>
 <h2 id="Quickstart-Use-AutoID" class="common-anchor-header">Schnellstart: AutoID verwenden<button data-href="#Quickstart-Use-AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -169,7 +172,44 @@ schema.add_field(field_name=<span class="hljs-string">&quot;category&quot;</span
     client.drop_collection(<span class="hljs-string">&quot;demo_autoid&quot;</span>)
 client.create_collection(collection_name=<span class="hljs-string">&quot;demo_autoid&quot;</span>, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+        
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">collectionSchema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .build();
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">true</span>)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">4</span>)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;category&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">1000</span>)
+        .build());
+
+client.dropCollection(DropCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo_autoid&quot;</span>)
+        .build());
+
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo_autoid&quot;</span>)
+        .collectionSchema(collectionSchema)
+        .build();
+client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
@@ -210,6 +250,40 @@ client.create_collection(collection_name=<span class="hljs-string">&quot;demo_au
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> SCHEMA=<span class="hljs-string">&#x27;{
+    &quot;autoID&quot;: true,
+    &quot;fields&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;id&quot;,
+            &quot;dataType&quot;: &quot;Int64&quot;,
+            &quot;isPrimary&quot;: true,
+            &quot;elementTypeParams&quot;: {}
+        },
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;dataType&quot;: &quot;FloatVector&quot;,
+            &quot;isPrimary&quot;: false,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: &quot;4&quot;
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;category&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;isPrimary&quot;: false,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: &quot;1000&quot;
+            }
+        }
+    ]
+}&#x27;</span>
+
+curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
+-H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Insert-Data" class="common-anchor-header">Schritt 2: Daten einfügen<button data-href="#Step-2-Insert-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -240,7 +314,27 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_autoid&
 <span class="hljs-comment"># Output example:</span>
 <span class="hljs-comment"># Generated IDs: [461526052788333649, 461526052788333650]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
+
+List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row1.add(<span class="hljs-string">&quot;embedding&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>}));
+row1.addProperty(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;book&quot;</span>);
+rows.add(row1);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row2.add(<span class="hljs-string">&quot;embedding&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>}));
+row2.addProperty(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;toy&quot;</span>);
+rows.add(row2);
+
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo_autoid&quot;</span>)
+        .data(rows)
+        .build());
+System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</span>, insertR.getPrimaryKeys());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> data = [
     {<span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>], <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;book&quot;</span>},
@@ -257,6 +351,23 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_autoid&
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> INSERT_DATA=<span class="hljs-string">&#x27;[
+    {
+        &quot;embedding&quot;: [0.1, 0.2, 0.3, 0.4],
+        &quot;category&quot;: &quot;book&quot;
+    },
+    {
+        &quot;embedding&quot;: [0.2, 0.3, 0.4, 0.5],
+        &quot;category&quot;: &quot;toy&quot;
+    }
+]&#x27;</span>
+
+curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
+-H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;demo_autoid\&quot;,
+    \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Verwenden Sie <code translate="no">upsert()</code> anstelle von <code translate="no">insert()</code>, wenn Sie mit bestehenden Entitäten arbeiten, um Fehler durch doppelte IDs zu vermeiden.</p>
@@ -318,7 +429,45 @@ schema.add_field(field_name=<span class="hljs-string">&quot;category&quot;</span
     client.drop_collection(<span class="hljs-string">&quot;demo_manual_ids&quot;</span>)
 client.create_collection(collection_name=<span class="hljs-string">&quot;demo_manual_ids&quot;</span>, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AddFieldReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
+
+<span class="hljs-type">MilvusClientV2</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClientV2</span>(ConnectConfig.builder()
+        .uri(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
+        .build());
+        
+CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">collectionSchema</span> <span class="hljs-operator">=</span> CreateCollectionReq.CollectionSchema.builder()
+        .build();
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;product_id&quot;</span>)
+        .dataType(DataType.VarChar)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .maxLength(<span class="hljs-number">100</span>)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;embedding&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">4</span>)
+        .build());
+collectionSchema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;category&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">1000</span>)
+        .build());
+
+client.dropCollection(DropCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo_manual_ids&quot;</span>)
+        .build());
+
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">requestCreate</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo_manual_ids&quot;</span>)
+        .collectionSchema(collectionSchema)
+        .build();
+client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
@@ -357,6 +506,42 @@ client.create_collection(collection_name=<span class="hljs-string">&quot;demo_ma
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> SCHEMA=<span class="hljs-string">&#x27;{
+    &quot;autoID&quot;: false,
+    &quot;fields&quot;: [
+        {
+            &quot;fieldName&quot;: &quot;product_id&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;isPrimary&quot;: true,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: &quot;100&quot;
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;embedding&quot;,
+            &quot;dataType&quot;: &quot;FloatVector&quot;,
+            &quot;isPrimary&quot;: false,
+            &quot;elementTypeParams&quot;: {
+                &quot;dim&quot;: &quot;4&quot;
+            }
+        },
+        {
+            &quot;fieldName&quot;: &quot;category&quot;,
+            &quot;dataType&quot;: &quot;VarChar&quot;,
+            &quot;isPrimary&quot;: false,
+            &quot;elementTypeParams&quot;: {
+                &quot;max_length&quot;: &quot;1000&quot;
+            }
+        }
+    ]
+}&#x27;</span>
+
+curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/collections/create&#x27;</span> \
+-H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
+    \&quot;schema\&quot;: <span class="hljs-variable">$SCHEMA</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Insert-data-with-your-IDs" class="common-anchor-header">Schritt 2: Fügen Sie Daten mit Ihren IDs ein<button data-href="#Step-2-Insert-data-with-your-IDs" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -388,7 +573,29 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_manual_
 <span class="hljs-comment"># Output example:</span>
 <span class="hljs-comment"># Generated IDs: [&#x27;PROD-001&#x27;, &#x27;PROD-002&#x27;]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// java</span>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
+
+List&lt;JsonObject&gt; rows = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row1.addProperty(<span class="hljs-string">&quot;product_id&quot;</span>, <span class="hljs-string">&quot;PROD-001&quot;</span>);
+row1.add(<span class="hljs-string">&quot;embedding&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.1f</span>, <span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>}));
+row1.addProperty(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;book&quot;</span>);
+rows.add(row1);
+
+<span class="hljs-type">JsonObject</span> <span class="hljs-variable">row2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+row2.addProperty(<span class="hljs-string">&quot;product_id&quot;</span>, <span class="hljs-string">&quot;PROD-002&quot;</span>);
+row2.add(<span class="hljs-string">&quot;embedding&quot;</span>, gson.toJsonTree(<span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[]{<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.4f</span>, <span class="hljs-number">0.5f</span>}));
+row2.addProperty(<span class="hljs-string">&quot;category&quot;</span>, <span class="hljs-string">&quot;toy&quot;</span>);
+rows.add(row2);
+
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;demo_manual_ids&quot;</span>)
+        .data(rows)
+        .build());
+System.out.printf(<span class="hljs-string">&quot;Generated IDs: %s\n&quot;</span>, insertR.getPrimaryKeys());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">
 <span class="hljs-keyword">const</span> data = [
@@ -406,6 +613,26 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_manual_
 <pre><code translate="no" class="language-go"><span class="hljs-comment">// go</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<span class="hljs-built_in">export</span> INSERT_DATA=<span class="hljs-string">&#x27;[
+    {
+        &quot;product_id&quot;: &quot;PROD-001&quot;,
+        &quot;embedding&quot;: [0.1, 0.2, 0.3, 0.4],
+        &quot;category&quot;: &quot;book&quot;
+    },
+    {
+        &quot;product_id&quot;: &quot;PROD-002&quot;,
+        &quot;embedding&quot;: [0.2, 0.3, 0.4, 0.5],
+        &quot;category&quot;: &quot;toy&quot;
+    }
+]&#x27;</span>
+
+<span class="hljs-comment"># 插入数据</span>
+curl -X POST <span class="hljs-string">&#x27;http://localhost:19530/v2/vectordb/entities/insert&#x27;</span> \
+-H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+-d <span class="hljs-string">&quot;{
+    \&quot;collectionName\&quot;: \&quot;demo_manual_ids\&quot;,
+    \&quot;data\&quot;: <span class="hljs-variable">$INSERT_DATA</span>
+}&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Ihre Verantwortlichkeiten:</p>
 <ul>
@@ -467,7 +694,7 @@ res = client.insert(collection_name=<span class="hljs-string">&quot;demo_manual_
 <button class="copy-code-btn"></button></code></pre>
 <p>In dieser Konfiguration gibt <code translate="no">clusterID</code> den eindeutigen Bezeichner an, der bei der AutoID-Generierung verwendet wird und von 0 bis 7 reicht (unterstützt bis zu acht Cluster).</p>
 <div class="alert note">
-<p>Milvus handhabt die Bit-Umkehrung intern, um zukünftige Erweiterungen ohne ID-Überlappung zu ermöglichen. Neben der Einstellung der Cluster-ID ist keine manuelle Konfiguration erforderlich.</p>
+<p>Milvus handhabt die Bit-Umkehrung intern, um zukünftige Erweiterungen ohne ID-Überschneidungen zu ermöglichen. Neben der Einstellung der Cluster-ID ist keine manuelle Konfiguration erforderlich.</p>
 </div>
 <h2 id="Reference-How-AutoID-works" class="common-anchor-header">Referenz: Wie AutoID funktioniert<button data-href="#Reference-How-AutoID-works" class="anchor-icon" translate="no">
       <svg translate="no"

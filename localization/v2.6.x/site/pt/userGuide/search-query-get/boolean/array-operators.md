@@ -42,10 +42,10 @@ summary: >-
       </svg>
     </button></h2><p>Os operadores ARRAY permitem uma consulta detalhada dos campos de matriz em Milvus. Estes operadores são:</p>
 <ul>
-<li><p><code translate="no">ARRAY_CONTAINS(identifier, expr)</code>: verifica se um elemento específico existe num campo de matriz.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code>Operador ARRAY: garante que todos os elementos da lista especificada estão presentes no campo da matriz.</p></li>
-<li><p><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code>: verifica se algum dos elementos da lista especificada está presente no campo da matriz.</p></li>
-<li><p><code translate="no">ARRAY_LENGTH(identifier, expr)</code>Filtro de entidades: permite-lhe filtrar entidades com base no número de elementos num campo de matriz.</p></li>
+<li><p><a href="/docs/pt/array-operators.md#ARRAYCONTAINS"><code translate="no">ARRAY_CONTAINS(identifier, expr)</code></a>: verifica se um elemento específico existe num campo de matriz.</p></li>
+<li><p><a href="/docs/pt/array-operators.md#ARRAYCONTAINSALL"><code translate="no">ARRAY_CONTAINS_ALL(identifier, expr)</code></a>Operador ARRAY: assegura que todos os elementos da lista especificada estão presentes no campo da matriz.</p></li>
+<li><p><a href="/docs/pt/array-operators.md#ARRAYCONTAINSANY"><code translate="no">ARRAY_CONTAINS_ANY(identifier, expr)</code></a>Verifica se algum dos elementos da lista especificada está presente no campo da matriz.</p></li>
+<li><p><a href="/docs/pt/array-operators.md#ARRAYLENGTH"><code translate="no">ARRAY_LENGTH(identifier)</code></a>Retorna o número de elementos num campo de matriz e pode ser combinado com operadores de comparação para filtragem.</p></li>
 </ul>
 <h2 id="ARRAYCONTAINS" class="common-anchor-header">ARRAY_CONTAINS<button data-href="#ARRAYCONTAINS" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -104,7 +104,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O operador <code translate="no">ARRAY_CONTAINS_ANY</code> verifica se algum dos elementos da lista especificada está presente no campo da matriz. Isto é útil quando se pretende fazer corresponder entidades que contenham pelo menos um dos valores especificados na matriz.</p>
+    </button></h2><p>O operador <code translate="no">ARRAY_CONTAINS_ANY</code> verifica se algum dos elementos da lista especificada está presente no campo da matriz. Isto é útil quando se pretende fazer corresponder entidades que contêm pelo menos um dos valores especificados na matriz.</p>
 <p><strong>Exemplo</strong></p>
 <p>Para encontrar todas as entidades onde a matriz <code translate="no">history_temperatures</code> contém <code translate="no">23</code> ou <code translate="no">24</code>, você pode usar:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&#x27;</span>
@@ -125,9 +125,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O operador <code translate="no">ARRAY_LENGTH</code> permite-lhe filtrar entidades com base no número de elementos num campo de matriz. Isto é útil quando é necessário encontrar entidades com arrays de um determinado comprimento.</p>
+    </button></h2><p>O <code translate="no">ARRAY_LENGTH</code> retorna o comprimento (número de elementos) de um campo de matriz. Aceita exatamente um parâmetro: o identificador do campo da matriz.</p>
 <p><strong>Exemplo</strong></p>
-<p>Se você quiser encontrar todas as entidades onde a matriz <code translate="no">history_temperatures</code> tem menos de 10 elementos, você pode usar:</p>
+<p>Para encontrar todas as entidades em que a matriz <code translate="no">history_temperatures</code> tem menos de 10 elementos:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ARRAY_LENGTH(history_temperatures) &lt; 10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Isso retornará todas as entidades onde a matriz <code translate="no">history_temperatures</code> tem menos de 10 elementos.</p>
+<p>Isso retornará todas as entidades em que a matriz <code translate="no">history_temperatures</code> tem menos de 10 elementos.</p>

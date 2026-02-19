@@ -196,6 +196,12 @@ object Hello extends App {
 <tr><td><code translate="no">milvus.token</code></td><td><code translate="no">--</code></td><td>Milvus server token. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
 <tr><td><code translate="no">milvus.database.name</code></td><td><code translate="no">default</code></td><td>Name of the Milvus database to read or write.</td></tr>
 <tr><td><code translate="no">milvus.collection.name</code></td><td><code translate="no">hello_milvus</code></td><td>Name of the Milvus collection to read or write.</td></tr>
+<tr><td><code translate="no">milvus.secure</code></td><td><code translate="no">false</code></td><td>Enables secure TLS/SSL connections.</td></tr>
+<tr><td><code translate="no">milvus.secure.serverName</code></td><td><code translate="no">localhost</code></td><td>Expected hostname for TLS verification.</td></tr>
+<tr><td><code translate="no">milvus.secure.serverPemPath</code></td><td><code translate="no">--</code></td><td>Path to the server’s PEM file for TLS.</td></tr>
+<tr><td><code translate="no">milvus.secure.caCert</code></td><td><code translate="no">--</code></td><td>Path to the CA certificate file for verification.</td></tr>
+<tr><td><code translate="no">milvus.secure.clientCert</code></td><td><code translate="no">--</code></td><td>Path to the client certificate for authentication.</td></tr>
+<tr><td><code translate="no">milvus.secure.clientKey</code></td><td><code translate="no">--</code></td><td>Path to the client private key for authentication.</td></tr>
 <tr><td><code translate="no">milvus.collection.primaryKeyField</code></td><td><code translate="no">None</code></td><td>Name of the primary key field in the collection. Required if the collection does not exist.</td></tr>
 <tr><td><code translate="no">milvus.collection.vectorField</code></td><td><code translate="no">None</code></td><td>Name of the vector field in the collection. Required if the collection does not exist.</td></tr>
 <tr><td><code translate="no">milvus.collection.vectorDim</code></td><td><code translate="no">None</code></td><td>Dimension of the vector field in the collection. Required if the collection does not exist.</td></tr>

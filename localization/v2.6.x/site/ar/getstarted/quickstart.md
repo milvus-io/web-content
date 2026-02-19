@@ -61,7 +61,7 @@ title: البداية سريعة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>لإنشاء قاعدة بيانات Milvus vector محلية، ما عليك سوى إنشاء <code translate="no">MilvusClient</code> عن طريق تحديد اسم ملف لتخزين جميع البيانات، مثل "milvus_demo.db".</p>
+    </button></h2><p>لإنشاء قاعدة بيانات متجهية محلية لـ Milvus، ما عليك سوى إنشاء <code translate="no">MilvusClient</code> عن طريق تحديد اسم ملف لتخزين جميع البيانات، مثل "milvus_demo.db".</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>يمكننا الآن إجراء عمليات بحث دلالية من خلال تمثيل نص استعلام البحث كمتجه، وإجراء بحث تشابه المتجهات على ميلفوس.</p>
-<h3 id="Vector-search" class="common-anchor-header">البحث المتجه</h3><p>يقبل Milvus طلب بحث متجه واحد أو عدة طلبات بحث متجه في نفس الوقت. قيمة المتغير query_vectors هي قائمة من المتجهات، حيث يكون كل متجه عبارة عن مصفوفة من الأرقام العائمة.</p>
+<h3 id="Vector-search" class="common-anchor-header">البحث المتجه<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يقبل Milvus طلب بحث متجه واحد أو عدة طلبات بحث متجه في نفس الوقت. قيمة المتغير query_vectors هي قائمة من المتجهات، حيث يكون كل متجه عبارة عن مصفوفة من الأرقام العائمة.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -301,8 +316,23 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>بشكل افتراضي، لا تتم فهرسة الحقول العددية. إذا كنت بحاجة إلى إجراء بحث مفهرس للبيانات الوصفية في مجموعة بيانات كبيرة، يمكنك التفكير في استخدام مخطط ثابت وتشغيل <a href="https://milvus.io/docs/scalar_index.md">الفهرس</a> أيضًا لتحسين أداء البحث.</p>
 <p>بالإضافة إلى البحث المتجه، يمكنك أيضًا إجراء أنواع أخرى من عمليات البحث:</p>
-<h3 id="Query" class="common-anchor-header">الاستعلام</h3><p>الاستعلام() هو عملية تسترجع جميع الكيانات المطابقة لمعيار ما، مثل <a href="https://milvus.io/docs/boolean.md">تعبير مرشح</a> أو مطابقة بعض المعرفات.</p>
-<p>على سبيل المثال، استرداد جميع الكيانات التي يحتوي حقلها القياسي على قيمة معينة:</p>
+<h3 id="Query" class="common-anchor-header">الاستعلام<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الاستعلام() هو عملية تسترجع جميع الكيانات المطابقة لمعيار ما، مثل <a href="https://milvus.io/docs/boolean.md">تعبير مرشح</a> أو مطابقة بعض المعرفات.</p>
+<p>على سبيل المثال، استرجاع جميع الكيانات التي يحتوي حقلها القياسي على قيمة معينة:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
@@ -363,7 +393,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>نظرًا لأن جميع بيانات Milvus Lite يتم تخزينها في ملف محلي، يمكنك تحميل جميع البيانات في الذاكرة حتى بعد انتهاء البرنامج، وذلك عن طريق إنشاء <code translate="no">MilvusClient</code> بالملف الموجود. على سبيل المثال، سيؤدي ذلك إلى استرداد المجموعات من ملف "milvus_demo.db" ومتابعة كتابة البيانات فيه.</p>
+    </button></h2><p>نظرًا لأن جميع بيانات Milvus Lite يتم تخزينها في ملف محلي، يمكنك تحميل جميع البيانات في الذاكرة حتى بعد إنهاء البرنامج، وذلك عن طريق إنشاء <code translate="no">MilvusClient</code> بالملف الموجود. على سبيل المثال، سيؤدي ذلك إلى استرداد المجموعات من ملف "milvus_demo.db" ومتابعة كتابة البيانات فيه.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -406,4 +436,5 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>لترحيل البيانات من Milvus Lite إلى Milvus المنشور على Docker أو Kubernetes، راجع <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">ترحيل البيانات من Milvus Lite</a>.</p>
-<p>يوفر Milvus واجهة برمجة تطبيقات REST و gRPC، مع مكتبات العميل بلغات مثل <a href="https://milvus.io/docs/install-pymilvus.md">Python</a> و <a href="https://milvus.io/docs/install-java.md">Java</a> و <a href="https://milvus.io/docs/install-go.md">Go</a> و C# و <a href="https://milvus.io/docs/install-node.md">Node.js.</a></p>
+<p>يوفر Milvus واجهة برمجة تطبيقات REST و gRPC، مع مكتبات العميل بلغات مثل <a href="https://milvus.io/docs/install-pymilvus.md">Python</a> و <a href="https://milvus.io/docs/install-java.md">Java</a> و <a href="https://milvus.io/docs/install-go.md">Go</a> و C# و <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>بالنسبة لتصميم المخطط، يدعم Milvus تصميم مخطط مرن، حيث يمكنك تحديد الحقول وأنواع بياناتها، بما في ذلك الحقول المتجهة. يمكنك أيضًا تحديد نوع الفهرس والمعلمات لكل حقل. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/schema-hands-on.md">تصميم نموذج البيانات للبحث</a>.</p>

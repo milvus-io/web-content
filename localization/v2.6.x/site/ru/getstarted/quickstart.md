@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>Теперь мы можем выполнять семантический поиск, представляя текст поискового запроса в виде вектора, и проводить поиск по векторному сходству на Milvus.</p>
-<h3 id="Vector-search" class="common-anchor-header">Векторный поиск</h3><p>Milvus принимает один или несколько запросов на векторный поиск одновременно. Значением переменной query_vectors является список векторов, где каждый вектор - это массив чисел с плавающей точкой.</p>
+<h3 id="Vector-search" class="common-anchor-header">Векторный поиск<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus принимает один или несколько запросов на векторный поиск одновременно. Значением переменной query_vectors является список векторов, где каждый вектор - это массив чисел с плавающей точкой.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -301,7 +316,22 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>По умолчанию скалярные поля не индексируются. Если вам нужно выполнить поиск с фильтрацией метаданных в большом наборе данных, вы можете рассмотреть возможность использования фиксированной схемы, а также включить <a href="https://milvus.io/docs/scalar_index.md">индекс</a> для повышения производительности поиска.</p>
 <p>Помимо векторного поиска, вы можете выполнять и другие типы поиска:</p>
-<h3 id="Query" class="common-anchor-header">Запрос</h3><p>Запрос() - это операция, которая извлекает все сущности, соответствующие какому-либо критерию, например <a href="https://milvus.io/docs/boolean.md">выражению фильтра</a> или совпадению некоторых идентификаторов.</p>
+<h3 id="Query" class="common-anchor-header">Запрос<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Запрос() - это операция, которая извлекает все сущности, соответствующие какому-либо критерию, например <a href="https://milvus.io/docs/boolean.md">выражению фильтра</a> или совпадению некоторых идентификаторов.</p>
 <p>Например, поиск всех сущностей, скалярное поле которых имеет определенное значение:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -407,3 +437,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>Чтобы перенести данные с Milvus Lite на Milvus, развернутый на Docker или Kubernetes, обратитесь к разделу <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Перенос данных с Milvus Lite</a>.</p>
 <p>Milvus предоставляет API REST и gRPC, а также клиентские библиотеки на таких языках, как <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# и <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Для проектирования схем Milvus поддерживает гибкое проектирование схем, где вы можете определять поля и их типы данных, включая векторные поля. Вы также можете определить тип индекса и параметры для каждого поля. Дополнительные сведения см. в разделе <a href="https://milvus.io/docs/schema-hands-on.md">Проектирование модели данных для поиска</a>.</p>

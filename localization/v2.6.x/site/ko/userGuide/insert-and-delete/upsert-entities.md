@@ -110,17 +110,11 @@ summary: 업서트 작업은 컬렉션에 엔티티를 삽입하거나 업데이
 <li><p><code translate="no">partial_update</code> 을 비활성화한 상태로 업서트하는 경우 기본 동작은 <strong>재정의입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드와 그 값에 의해 재정의됩니다.</p>
 <p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍이 해당 값으로 업데이트됩니다.</p></li>
 <li><p><code translate="no">partial_update</code> 을 활성화한 상태로 업서트하면 기본 동작은 <strong>병합입니다</strong>. 즉, 동적 필드의 값은 요청에 포함된 모든 스키마 정의되지 않은 필드 및 해당 값과 병합됩니다.</p>
-<p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍은 업서트 후 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 이 됩니다.</p></li>
+<p>예를 들어 요청에 포함된 데이터가 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 인 경우 대상 엔티티의 동적 필드에 있는 키-값 쌍은 업서트 후 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 이 됩니다.</p></li>
 </ul></li>
 <li><p><strong>JSON 필드 업서트.</strong></p>
 <p>예제 컬렉션에 <code translate="no">extras</code> 이라는 스키마 정의 JSON 필드가 있고 엔티티의 이 JSON 필드에 있는 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> 과 유사하다고 가정해 보겠습니다.</p>
-<p>엔티티의 <code translate="no">extras</code> 필드를 수정된 JSON 데이터로 업서트할 때 주의하세요:</p>
-<ul>
-<li><p><code translate="no">partial_update</code> 을 비활성화한 상태에서 업서트하는 경우 기본 동작은 <strong>재정의입니다</strong>. 즉, 요청에 포함된 JSON 필드의 값이 대상 엔티티의 JSON 필드의 원래 값을 재정의합니다.</p>
-<p>예를 들어 요청에 포함된 데이터가 <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> 인 경우 대상 엔티티의 <code translate="no">extras</code> 필드에 있는 키-값 쌍이 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> 로 업데이트됩니다.</p></li>
-<li><p><code translate="no">partial_update</code> 를 활성화한 상태에서 업서트하면 기본 동작은 <strong>병합입니다</strong>. 즉, 요청에 포함된 JSON 필드의 값이 대상 엔티티의 JSON 필드의 원래 값과 병합됩니다.</p>
-<p>예를 들어 요청에 포함된 데이터가 <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> 인 경우 대상 엔티티의 <code translate="no">extras</code> 필드에 있는 키-값 쌍은 udpate 뒤에 <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> 가 됩니다.</p></li>
-</ul></li>
+<p>엔티티의 <code translate="no">extras</code> 필드에 수정된 JSON 데이터를 삽입할 때 JSON 필드는 전체로 취급되며 개별 키를 선택적으로 업데이트할 수 없다는 점에 유의하세요. 즉, JSON 필드는 <strong>병합</strong> 모드에서 업서트를 지원하지 <strong>않습니다</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">제한 및 제한 사항<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -490,7 +484,7 @@ curl --request POST \
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 코드 예제는 부분 업데이트가 있는 엔티티를 삽입하는 방법을 보여줍니다. 업데이트가 필요한 필드와 새 값만 명시적인 부분 업데이트 플래그와 함께 제공하세요.</p>
+    </button></h2><p>다음 코드 예제는 부분 업데이트가 있는 엔티티를 업서트하는 방법을 보여줍니다. 업데이트가 필요한 필드와 새 값만 명시적인 부분 업데이트 플래그와 함께 제공하세요.</p>
 <p>다음 예제에서는 업서트 요청에 지정된 엔티티의 <code translate="no">issue</code> 필드가 요청에 포함된 값으로 업데이트됩니다.</p>
 <div class="alert note">
 <p>병합 모드에서 업서트를 수행할 때는 요청에 포함된 엔티티의 필드 집합이 동일한지 확인하세요. 다음 코드 조각과 같이 업서트할 엔티티가 두 개 이상 있다고 가정할 때 오류를 방지하고 데이터 무결성을 유지하려면 동일한 필드를 포함하는 것이 중요합니다.</p>

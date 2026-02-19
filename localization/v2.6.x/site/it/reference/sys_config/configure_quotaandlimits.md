@@ -59,7 +59,7 @@ summary: Imparare a configurare quotaAndLimits per Milvus.
   <tbody>
     <tr>
       <td>        `true` per abilitare la quota e i limiti, `false` per disabilitare.      </td>
-      <td>vero</td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -743,7 +743,7 @@ summary: Imparare a configurare quotaAndLimits per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        qps del livello db, default nessun limite, velocità per la Compattazione manuale      </td>
+      <td>        qps del livello db, default nessun limite, tasso per la Compattazione manuale      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -864,7 +864,7 @@ summary: Imparare a configurare quotaAndLimits per Milvus.
     <tr>
       <td>
         <li>Velocità massima di inserimento dati per raccolta al secondo.</li>      
-        <li>L'impostazione di questa voce su 5 indica che Milvus consente l'inserimento di dati in qualsiasi raccolta solo alla velocità di 5 MB/s.</li>      
+        <li>L'impostazione di questa voce a 5 indica che Milvus consente l'inserimento di dati in qualsiasi raccolta solo alla velocità di 5 MB/s.</li>      
         <li>Per utilizzare questa impostazione, impostare contemporaneamente quotaAndLimits.dml.enabled su true.</li>      </td>
       <td>-1</td>
     </tr>
@@ -1041,7 +1041,7 @@ summary: Imparare a configurare quotaAndLimits per Milvus.
     <tr>
       <td>
         <li>Velocità massima di cancellazione dei dati al secondo.</li>      
-        <li>L'impostazione di questa voce a 0,1 indica che Milvus consente l'eliminazione dei dati solo alla velocità di 0,1 MB/s.</li>      
+        <li>L'impostazione di questa voce a 0,1 indica che Milvus consente solo l'eliminazione dei dati alla velocità di 0,1 MB/s.</li>      
         <li>Per utilizzare questa impostazione, impostare contemporaneamente quotaAndLimits.dml.enabled su true.</li>      </td>
       <td>-1</td>
     </tr>

@@ -59,7 +59,7 @@ summary: 'Узнайте, как настроить quotaAndLimits для Milvus
   <tbody>
     <tr>
       <td>        `true` для включения квот и лимитов, `false` для отключения.      </td>
-      <td>true</td>
+      <td>false</td>
     </tr>
   </tbody>
 </table>
@@ -444,7 +444,7 @@ summary: 'Узнайте, как настроить quotaAndLimits для Milvus
   </thead>
   <tbody>
     <tr>
-      <td>        qps уровня db, по умолчанию без ограничений, скорость для CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
+      <td>        qps уровня базы данных, по умолчанию без ограничений, скорость для CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1763,7 +1763,7 @@ summary: 'Узнайте, как настроить quotaAndLimits для Milvus
   <tbody>
     <tr>
       <td>
-        <li>Если размер растущих сегментов меньше нижнего водяного знака, никаких действий не предпринимается.</li>      
+        <li>Если размер растущих сегментов меньше нижнего водяного знака, никаких действий предприниматься не будет.</li>      
         <li>Если размер растущих сегментов превышает нижний водяной знак, скорость dml будет снижена,</li>      
         <li>но скорость не будет ниже, чем minRateRatio * dmlRate.</li>      </td>
       <td>false</td>
@@ -2202,7 +2202,7 @@ summary: 'Узнайте, как настроить quotaAndLimits для Milvus
     <tr>
       <td>
         <li>forceDeny false означает, что dql-запросы разрешены (за исключением некоторых</li>      
-        <li>определенных условий, например, коллекция была сброшена), true означает, что всегда отклоняются все dql-запросы.</li>      </td>
+        <li>определенных условий, например, коллекция была сброшена), true означает всегда отклонять все dql-запросы.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>

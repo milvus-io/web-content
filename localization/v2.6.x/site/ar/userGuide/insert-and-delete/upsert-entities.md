@@ -104,23 +104,17 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
 <li><p>للحفاظ على القيمة الأصلية للحقل <code translate="no">issue</code> ، تحتاج إما إلى تمكين <code translate="no">partial_update</code> وحذف الحقل <code translate="no">issue</code> أو تضمين الحقل <code translate="no">issue</code> بقيمته الأصلية في الطلب <code translate="no">upsert</code>.</p></li>
 </ul></li>
 <li><p><strong>رفع المفاتيح في الحقل الديناميكي</strong>.</p>
-<p>لنفترض أنك قمت بتمكين المفتاح الديناميكي في مثال المجموعة، وكانت أزواج المفاتيح-القيم في الحقل الديناميكي لكيان ما مشابهة لـ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>عندما تدرج الكيان بمفاتيح مثل <code translate="no">author</code> أو <code translate="no">year</code> أو أو <code translate="no">tags</code> أو تضيف مفاتيح أخرى، لاحظ ذلك:</p>
+<p>لنفترض أنك قمت بتمكين المفتاح الديناميكي في مجموعة الأمثلة، وكانت أزواج المفاتيح-القيم في الحقل الديناميكي لكيان ما مشابهة لـ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
+<p>عند إعادة إدراج الكيان بمفاتيح، مثل <code translate="no">author</code> أو <code translate="no">year</code> أو أو <code translate="no">tags</code> أو إضافة مفاتيح أخرى، لاحظ ذلك:</p>
 <ul>
 <li><p>إذا قمت بإعادة إدراج مع تعطيل <code translate="no">partial_update</code> ، فإن السلوك الافتراضي هو <strong>التجاوز</strong>. وهذا يعني أن قيمة الحقل الديناميكي سيتم تجاوزها من قبل جميع الحقول غير المعرفة من قبل المخطط المدرجة في الطلب وقيمها.</p>
 <p>على سبيل المثال، إذا كانت البيانات المضمنة في الطلب هي <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> ، فسيتم تحديث أزواج المفاتيح-القيم في الحقل الديناميكي للكيان الهدف إلى ذلك.</p></li>
 <li><p>إذا قمت بالإدراج مع تمكين <code translate="no">partial_update</code> ، فإن السلوك الافتراضي هو <strong>الدمج</strong>. ويعني ذلك أن قيمة الحقل الديناميكي سيتم دمجها مع جميع الحقول غير المحددة في النموذج المضمنة في الطلب وقيمها.</p>
-<p>على سبيل المثال، إذا كانت البيانات المضمنة في الطلب هي <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ، ستصبح أزواج المفاتيح-القيم في الحقل الديناميكي للكيان الهدف <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> بعد عملية الإضافة.</p></li>
+<p>على سبيل المثال، إذا كانت البيانات المضمنة في الطلب هي <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> ، ستصبح أزواج المفاتيح-القيم في الحقل الديناميكي للكيان الهدف <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> بعد عملية الإضافة.</p></li>
 </ul></li>
 <li><p><strong>إعادة إدراج حقل JSON.</strong></p>
 <p>لنفترض أن مجموعة الأمثلة تحتوي على حقل JSON معرّف من قبل المخطط اسمه <code translate="no">extras</code> ، وأزواج القيمة الرئيسية في حقل JSON هذا في كيان ما مشابهة لـ <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>عندما تقوم بإعادة إدراج الحقل <code translate="no">extras</code> الخاص بكيان ما ببيانات JSON المعدلة، لاحظ ذلك:</p>
-<ul>
-<li><p>إذا قمت بإعادة الإدراج مع تعطيل <code translate="no">partial_update</code> ، فإن السلوك الافتراضي هو <strong>التجاوز</strong>. وهذا يعني أن قيمة حقل JSON المضمنة في الطلب ستتجاوز القيمة الأصلية لحقل JSON الخاص بالكيان الهدف.</p>
-<p>على سبيل المثال، إذا كانت البيانات المضمنة في الطلب هي <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> ، فسيتم تحديث أزواج المفاتيح-القيم في الحقل <code translate="no">extras</code> للكيان الهدف إلى <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
-<li><p>إذا قمت بالإدراج مع تمكين <code translate="no">partial_update</code> ، فإن السلوك الافتراضي هو <strong>الدمج</strong>. وهذا يعني أن قيمة حقل JSON المضمن في الطلب سيتم دمجها مع القيمة الأصلية لحقل JSON الخاص بالكيان الهدف.</p>
-<p>على سبيل المثال، إذا كانت البيانات المضمنة في الطلب هي <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> ، فإن أزواج المفاتيح-القيم في الحقل <code translate="no">extras</code> للكيان الهدف ستصبح <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> بعد عملية الإدماج.</p></li>
-</ul></li>
+<p>عندما تقوم بإدراج الحقل <code translate="no">extras</code> الخاص بكيان ما ببيانات JSON المعدلة، لاحظ أنه يتم التعامل مع حقل JSON ككل، ولا يمكنك تحديث المفاتيح الفردية بشكل انتقائي. وبعبارة أخرى، <strong>لا</strong> يدعم حقل JSON عملية الإدراج في وضع <strong>الدمج</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">الحدود والقيود<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +133,7 @@ summary: توفر عملية upsert طريقة ملائمة لإدراج أو ت
       </svg>
     </button></h3><p>بناءً على المحتوى أعلاه، هناك العديد من الحدود والقيود التي يجب اتباعها:</p>
 <ul>
-<li><p>يجب أن يتضمن الطلب <code translate="no">upsert</code> دائماً المفاتيح الأساسية للكيانات المستهدفة.</p></li>
+<li><p>يجب أن يتضمن طلب <code translate="no">upsert</code> دائمًا المفاتيح الأساسية للكيانات المستهدفة.</p></li>
 <li><p>يجب أن تكون المجموعة المستهدفة محملة ومتاحة للاستعلامات.</p></li>
 <li><p>يجب أن تكون جميع الحقول المحددة في الطلب موجودة في مخطط المجموعة المستهدفة.</p></li>
 <li><p>يجب أن تتطابق قيم جميع الحقول المحددة في الطلب مع أنواع البيانات المحددة في المخطط.</p></li>

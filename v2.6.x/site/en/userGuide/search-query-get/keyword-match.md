@@ -28,7 +28,7 @@ When a user performs a text match, the inverted index is used to quickly retriev
 
 ## Enable text match
 
-Text match works on the `VARCHAR` field type, which is essentially the string data type in Milvus. To enable text match, set both `enable_analyzer` and `enable_match` to `True` and then optionally configure an [analyzer](analyzer-overview.md) for text analysis when defining your collection schema.
+Text match works on the [`VARCHAR`](string.md) field type, which is essentially the string data type in Milvus. To enable text match, set both `enable_analyzer` and `enable_match` to `True` and then optionally configure an [analyzer](analyzer-overview.md) for text analysis when defining your collection schema.
 
 ### Set `enable_analyzer` and `enable_match`
 
@@ -393,6 +393,12 @@ Text match can be used in combination with vector similarity search to narrow th
 
 In this example, the `filter` expression filters the search results to only include documents that match the specified term `keyword1` or `keyword2`. The vector similarity search is then performed on this filtered subset of documents.
 
+<div class="alert note">
+
+You can highlight the matched terms in search results by configuring a text highlighter. See [Text Highlighter](text-highlighter.md) for details.
+
+</div>
+
 <div class="multipleCode">
     <a href="#python">Python</a>
     <a href="#java">Java</a>
@@ -410,6 +416,7 @@ result = client.search(
     collection_name="my_collection", # Your collection name
     anns_field="embeddings", # Vector field name
     data=[query_vector], # Query vector
+    # highlight-next-line
     filter=filter,
     search_params={"params": {"nprobe": 10}},
     limit=10, # Max. number of results to return
@@ -424,6 +431,7 @@ SearchResp searchResp = client.search(SearchReq.builder()
         .collectionName("my_collection")
         .annsField("embeddings")
         .data(Collections.singletonList(queryVector)))
+        // highlight-next-line
         .filter(filter)
         .topK(10)
         .outputFields(Arrays.asList("id", "text"))
@@ -455,6 +463,7 @@ const result = await client.search(
     collection_name: "my_collection", // Your collection name
     anns_field: "embeddings", // Vector field name
     data: [query_vector], // Query vector
+    // highlight-next-line
     filter: filter,
     params: {"nprobe": 10},
     limit: 10, // Max. number of results to return
@@ -507,6 +516,7 @@ filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')"
 
 result = client.query(
     collection_name="my_collection",
+    # highlight-next-line
     filter=filter, 
     output_fields=["id", "text"]
 )
@@ -517,6 +527,7 @@ String filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
 
 QueryResp queryResp = client.query(QueryReq.builder()
         .collectionName("my_collection")
+        // highlight-next-line
         .filter(filter)
         .outputFields(Arrays.asList("id", "text"))
         .build()
@@ -541,6 +552,7 @@ const filter = "TEXT_MATCH(text, 'keyword1') and TEXT_MATCH(text, 'keyword2')";
 
 const result = await client.query(
     collection_name: "my_collection",
+    // highlight-next-line
     filter: filter, 
     output_fields: ["id", "text"]
 )

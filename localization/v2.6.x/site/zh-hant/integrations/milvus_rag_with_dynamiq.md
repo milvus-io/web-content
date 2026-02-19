@@ -2,7 +2,7 @@
 id: milvus_rag_with_dynamiq.md
 summary: >-
   在本教程中，我們將探討如何將 Dynamiq 與 Milvus 無縫搭配使用，Milvus 是專為 RAG 工作流程打造的高性能向量資料庫。Milvus
-  擅長於向量嵌入的高效儲存、索引和擷取，使其成為需要快速精確存取上下文資料的 AI 系統不可或缺的元件。
+  擅長於向量嵌入的高效儲存、索引和檢索，使其成為要求快速精確存取上下文資料的人工智能系統不可或缺的元件。
 title: 開始使用 Dynamiq 和 Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">

@@ -3,7 +3,7 @@ id: timestamptz-field.md
 title: TIMESTAMPTZ 領域Compatible with Milvus 2.6.6+
 summary: >-
   跨區域追蹤時間的應用程式，例如電子商務系統、協作工具或分散式日誌，需要精確地處理帶有時區的時間戳。Milvus 中的 TIMESTAMPTZ
-  資料類型透過儲存帶有相關時區的時間戳來提供此功能。
+  資料類型透過儲存時間戳與其相關的時區來提供此功能。
 beta: Milvus 2.6.6+
 ---
 <h1 id="TIMESTAMPTZ-Field" class="common-anchor-header">TIMESTAMPTZ 領域<span class="beta-tag" style="background-color:rgb(0, 179, 255);color:white" translate="no">Compatible with Milvus 2.6.6+</span><button data-href="#TIMESTAMPTZ-Field" class="anchor-icon" translate="no">
@@ -39,7 +39,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p><code translate="no">TIMESTAMPTZ</code> 欄位是 Milvus 中一個模式定義的資料類型 (<code translate="no">DataType.TIMESTAMPTZ</code>) ，它處理時區感應輸入，並在內部將所有時間點儲存為 UTC 絕對時間：</p>
 <ul>
-<li><p><strong>接受的輸入格式</strong>：帶有時區偏移的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 代表 UTC+08:00 中的 11:59:59）。</p></li>
+<li><p><strong>接受的輸入格式</strong>：帶有時區偏移的<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>字串（例如，<code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 表示 2025 年 5 月 1 日晚上 11:59:59 (UTC+08:00)）。</p></li>
 <li><p><strong>內部儲存</strong>：所有<code translate="no">TIMESTAMPTZ</code> 值均以統<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">一時間 (Coordinated Universal Time</a>, UTC) 標準化和儲存。</p></li>
 <li><p><strong>比較與篩選</strong>：所有篩選和排序作業都以 UTC 執行，確保不同時區的結果一致且可預測。</p></li>
 </ul>
@@ -226,15 +226,15 @@ client.load_collection(collection_name)
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">使用時間戳過濾查詢</h4><p>使用算術運算符如<code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;=</code>,<code translate="no">&gt;=</code> 。如需 Milvus 中可用的算術運算符的完整清單，請參閱<a href="/docs/zh-hant/basic-operators.md#Arithmetic-Operators">算術運算符</a>。</p>
 <p>以下範例過濾時間戳 (<code translate="no">tsz</code>) 不等於<strong>2025-01-03T00:00:00+08:00</strong> 的實體：</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)

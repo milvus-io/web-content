@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PQ</strong> nutzt Hierarchical Navigable Small World (HNSW)-Graphen mit Product Quantization (PQ), um eine fortschrittliche Vektorindizierungsmethode zu schaffen, die einen kontrollierbaren Kompromiss zwischen Größe und Genauigkeit bietet. Im Vergleich zu <a href="/docs/de/hnsw-sq.md">HNSW_SQ</a> liefert dieser Indextyp eine höhere Wiederauffindungsrate bei gleichem Komprimierungsgrad, wenn auch mit geringerer Abfrageverarbeitungsgeschwindigkeit und längerer Indexaufbauzeit.</p>
+    </button></h1><p><strong>HNSW_PQ</strong> nutzt Hierarchical Navigable Small World (HNSW)-Graphen mit Product Quantization (PQ), um eine fortschrittliche Vektorindizierungsmethode zu schaffen, die einen kontrollierbaren Kompromiss zwischen Größe und Genauigkeit bietet. Im Vergleich zu <a href="/docs/de/hnsw-sq.md">HNSW_SQ</a> liefert dieser Indextyp eine höhere Wiederauffindungsrate bei gleichem Komprimierungsgrad, wenn auch mit geringerer Abfrageverarbeitungsgeschwindigkeit und längerer Indexerstellungszeit.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,14 +41,59 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PQ kombiniert zwei Indizierungstechniken: <strong>HNSW</strong> für schnelle graphbasierte Navigation und <strong>PQ</strong> für effiziente Vektorkompression.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW konstruiert einen mehrschichtigen Graphen, bei dem jeder Knoten einem Vektor im Datensatz entspricht. In diesem Graphen sind die Knoten auf der Grundlage ihrer Ähnlichkeit miteinander verbunden, was eine schnelle Durchquerung des Datenraums ermöglicht. Die hierarchische Struktur ermöglicht es dem Suchalgorithmus, die in Frage kommenden Nachbarn einzugrenzen, wodurch der Suchprozess in hochdimensionalen Räumen erheblich beschleunigt wird.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW konstruiert einen mehrschichtigen Graphen, bei dem jeder Knoten einem Vektor im Datensatz entspricht. In diesem Graphen sind die Knoten auf der Grundlage ihrer Ähnlichkeit miteinander verbunden, was eine schnelle Durchquerung des Datenraums ermöglicht. Die hierarchische Struktur ermöglicht es dem Suchalgorithmus, die in Frage kommenden Nachbarn einzugrenzen, wodurch der Suchprozess in hochdimensionalen Räumen erheblich beschleunigt wird.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/hnsw.md">HNSW</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ ist eine Vektorkomprimierungstechnik, die hochdimensionale Vektoren in kleinere Untervektoren zerlegt, die dann quantisiert und komprimiert werden. Die Komprimierung reduziert den Speicherbedarf erheblich und beschleunigt die Entfernungsberechnungen.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PQ ist eine Vektorkomprimierungstechnik, die hochdimensionale Vektoren in kleinere Untervektoren zerlegt, die dann quantisiert und komprimiert werden. Die Komprimierung reduziert den Speicherbedarf erheblich und beschleunigt die Entfernungsberechnungen.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/ivf-pq.md#PQ">IVF_PQ</a>.</p>
-<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>HNSW_PQ kombiniert die Stärken von HNSW und PQ, um eine effiziente ungefähre Suche nach den nächsten Nachbarn zu ermöglichen. Der Algorithmus verwendet PQ, um die Daten zu komprimieren (und damit den Speicherbedarf zu verringern), und baut dann einen HNSW-Graphen auf diesen komprimierten Vektoren auf, um ein schnelles Auffinden von Kandidaten zu ermöglichen. Während der Suche kann der Algorithmus optional die Kandidatenergebnisse mit Hilfe von Daten höherer Präzision verfeinern, um die Genauigkeit zu verbessern. So funktioniert der Prozess:</p>
+<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ<button data-href="#HNSW-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW_PQ kombiniert die Stärken von HNSW und PQ, um eine effiziente ungefähre Suche nach den nächsten Nachbarn zu ermöglichen. Der Algorithmus verwendet PQ, um die Daten zu komprimieren (und damit den Speicherbedarf zu verringern), und baut dann einen HNSW-Graphen auf diesen komprimierten Vektoren auf, um ein schnelles Auffinden von Kandidaten zu ermöglichen. Während der Suche kann der Algorithmus optional die Kandidatenergebnisse mit Hilfe von Daten höherer Präzision verfeinern, um die Genauigkeit zu verbessern. So funktioniert der Prozess:</p>
 <ol>
 <li><p><strong>Datenkomprimierung</strong>: PQ teilt jeden Vektor in mehrere Untervektoren auf und quantisiert sie mithilfe eines Codebuchs von Zentroiden, das durch Parameter wie <code translate="no">m</code> (Anzahl der Untervektoren) und <code translate="no">nbits</code> (Bits pro Untervektor) gesteuert wird.</p></li>
-<li><p><strong>Konstruktion des Graphen</strong>: Die komprimierten Vektoren werden dann verwendet, um einen HNSW-Graphen zu erstellen. Da die Vektoren in komprimierter Form gespeichert werden, ist der resultierende Graph in der Regel kleiner, benötigt weniger Speicherplatz und kann schneller durchlaufen werden, was den Schritt des Kandidatenabrufs erheblich beschleunigt.</p></li>
+<li><p><strong>Konstruktion des Graphen</strong>: Die komprimierten Vektoren werden dann zum Aufbau eines HNSW-Graphen verwendet. Da die Vektoren in komprimierter Form gespeichert werden, ist der resultierende Graph in der Regel kleiner, benötigt weniger Speicherplatz und kann schneller durchlaufen werden, was den Schritt des Kandidatenabrufs erheblich beschleunigt.</p></li>
 <li><p><strong>Abruf von Kandidaten</strong>: Wenn eine Abfrage ausgeführt wird, verwendet der Algorithmus die komprimierten Daten im HNSW-Graphen, um effizient einen Pool von Nachbarschaftskandidaten zu identifizieren. Durch diese graphbasierte Suche wird die Anzahl der zu berücksichtigenden Vektoren drastisch reduziert, wodurch sich die Abfragelatenz im Vergleich zu Brute-Force-Suchen verbessert.</p></li>
 <li><p><strong>(Optional) Verfeinerung der Ergebnisse</strong>: Die anfänglichen Kandidatenergebnisse können zur Verbesserung der Genauigkeit anhand der folgenden Parameter verfeinert werden:</p>
 <ul>
@@ -152,7 +197,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/hnsw-pq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">params</code> beim <a href="/docs/de/hnsw-pq.md#Build-index">Aufbau eines Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>
@@ -193,8 +253,8 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Die Anzahl der Bits, die verwendet werden, um den Index des Schwerpunkts jedes Untervektors in komprimierter Form darzustellen. Sie bestimmt direkt die Größe jedes Codebuchs. Jedes Codebuch enthält $2^{\textit{nbits}}$ Zentroide. Wenn <code translate="no">nbits</code> beispielsweise auf 8 gesetzt ist, wird jeder Untervektor durch einen 8-Bit-Index des Schwerpunkts dargestellt. Dies ermöglicht $2^8$ (256) mögliche Zentroide im Codebuch für diesen Untervektor.</p></td>
-     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 64]</p>
+     <td><p>Die Anzahl der Bits, die verwendet werden, um den Index des Schwerpunkts jedes Untervektors in komprimierter Form darzustellen. Sie bestimmt direkt die Größe jedes Codebuchs. Jedes Codebuch enthält <sup>2nbits</sup> Zentroide. Wenn zum Beispiel <code translate="no">nbits</code> auf 8 eingestellt ist, wird jeder Untervektor durch einen 8-Bit-Schwerpunktindex dargestellt. Dies ermöglicht<sup>28</sup> (256) mögliche Schwerpunkte im Codebuch für diesen Teilvektor.</p></td>
+     <td><p><strong>Typ</strong>: Integer <strong>Bereich</strong>: [1, 24]</p>
 <p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
      <td><p>Ein höherer Wert von <code translate="no">nbits</code> ermöglicht größere Codebücher, was zu genaueren Darstellungen der ursprünglichen Vektoren führen kann. Allerdings bedeutet dies auch, dass mehr Bits zum Speichern jedes Index verwendet werden, was zu einer geringeren Komprimierung führt. In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs zu wählen: [1, 16].</p></td>
    </tr>
@@ -215,7 +275,22 @@ res = MilvusClient.search(
      <td><p>Verwenden Sie <code translate="no">FP32</code> für maximale Präzision bei höheren Speicherkosten oder <code translate="no">SQ6</code>/<code translate="no">SQ8</code> für eine bessere Komprimierung. <code translate="no">BF16</code> und <code translate="no">FP16</code> bieten eine ausgewogene Alternative.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter</h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/hnsw-pq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Indexspezifische Suchparameter<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>In der folgenden Tabelle sind die Parameter aufgeführt, die in <code translate="no">search_params.params</code> für die <a href="/docs/de/hnsw-pq.md#Search-on-index">Suche im Index</a> konfiguriert werden können.</p>
 <table>
    <tr>
      <th></th>

@@ -10,7 +10,6 @@ summary: >-
   articolo illustra l'uso della chiave di partizione e le relative
   considerazioni.
 ---
-
 <h1 id="Use-Partition-Key" class="common-anchor-header">Utilizzare la chiave di partizione<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +77,22 @@ summary: >-
 <li><p><a href="/docs/it/v2.5.x/use-partition-key.md#Set-Partition-Numbers">impostare il numero di partizioni da creare</a> (facoltativo), e</p></li>
 <li><p><a href="/docs/it/v2.5.x/use-partition-key.md#Create-Filtering-Condition">creare una condizione di filtraggio basata sulla chiave di partizione</a>.</p></li>
 </ul>
-<h3 id="Set-Partition-Key" class="common-anchor-header">Impostazione della chiave di partizione</h3><p>Per designare un campo scalare come chiave di partizione, è necessario impostare l'attributo <code translate="no">is_partition_key</code> su <code translate="no">true</code> quando si aggiunge il campo scalare.</p>
+<h3 id="Set-Partition-Key" class="common-anchor-header">Impostazione della chiave di partizione<button data-href="#Set-Partition-Key" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per designare un campo scalare come chiave di partizione, è necessario impostare l'attributo <code translate="no">is_partition_key</code> su <code translate="no">true</code> quando si aggiunge il campo scalare.</p>
 <div class="alert note">
 <p>Quando si imposta un campo scalare come chiave di partizione, i valori del campo non possono essere vuoti o nulli.</p>
 </div>
@@ -89,30 +103,28 @@ summary: >-
 )
 
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 )
 
 schema = client.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>)
-
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>)
+    
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-datatype=DataType.FLOAT_VECTOR,
-dim=<span class="hljs-number">5</span>)
+    datatype=DataType.FLOAT_VECTOR,
+    dim=<span class="hljs-number">5</span>)
 
 <span class="hljs-comment"># Add the partition key</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>,
-datatype=DataType.VARCHAR,
-max_length=<span class="hljs-number">512</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-is_partition_key=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;my_varchar&quot;</span>, 
+    datatype=DataType.VARCHAR, 
+    max_length=<span class="hljs-number">512</span>,
+<span class="highlighted-wrapper-line">    is_partition_key=<span class="hljs-literal">True</span>,</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -144,8 +156,7 @@ schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;my_varchar&quot;</span>)
         .dataType(DataType.VarChar)
         .maxLength(<span class="hljs-number">512</span>)
-        <span class="hljs-comment">// highlight-next-line</span>
-        .isPartitionKey(<span class="hljs-literal">true</span>)
+<span class="highlighted-wrapper-line">        .isPartitionKey(<span class="hljs-literal">true</span>)</span>
         .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-go"><span class="hljs-keyword">import</span> (
@@ -200,8 +211,7 @@ schema.WithField(entity.NewField().
         <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;my_varchar&quot;</span>,
         <span class="hljs-attr">data_type</span>: <span class="hljs-title class_">DataType</span>.<span class="hljs-property">VarChar</span>,
         <span class="hljs-attr">max_length</span>: <span class="hljs-number">512</span>,
-        <span class="hljs-comment">// highlight-next-line</span>
-        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span>
+<span class="highlighted-wrapper-line">        <span class="hljs-attr">is_partition_key</span>: <span class="hljs-literal">true</span></span>
     }
 ]
 <button class="copy-code-btn"></button></code></pre>
@@ -232,27 +242,40 @@ schema.WithField(entity.NewField().
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Partition-Numbers" class="common-anchor-header">Impostazione dei numeri di partizione</h3><p>Quando si designa un campo scalare in una collezione come chiave di partizione, Milvus crea automaticamente 16 partizioni nella collezione. Quando riceve un'entità, Milvus sceglie una partizione in base al valore della chiave di partizione di questa entità e memorizza l'entità nella partizione, in modo che alcune o tutte le partizioni contengano entità con valori diversi della chiave di partizione.</p>
+<h3 id="Set-Partition-Numbers" class="common-anchor-header">Impostazione dei numeri di partizione<button data-href="#Set-Partition-Numbers" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si designa un campo scalare in una collezione come chiave di partizione, Milvus crea automaticamente 16 partizioni nella collezione. Quando riceve un'entità, Milvus sceglie una partizione in base al valore della chiave di partizione di questa entità e memorizza l'entità nella partizione, in modo che alcune o tutte le partizioni contengano entità con valori diversi della chiave di partizione.</p>
 <p>È anche possibile determinare il numero di partizioni da creare insieme alla collezione. Questo è valido solo se si ha un campo scalare designato come chiave di partizione.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    num_partitions=<span class="hljs-number">128</span>
+<span class="highlighted-wrapper-line">    num_partitions=<span class="hljs-number">128</span></span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.numPartitions(<span class="hljs-number">128</span>)
-.build();
-client.createCollection(createCollectionReq);
+                .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+                .collectionSchema(schema)
+                .numPartitions(<span class="hljs-number">128</span>)
+                .build();
+        client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithNumPartitions(<span class="hljs-number">128</span>))
@@ -284,7 +307,22 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-Filtering-Condition" class="common-anchor-header">Creare una condizione di filtraggio</h3><p>Quando si effettuano ricerche RNA in una raccolta con la funzione Chiave di partizione attivata, è necessario includere nella richiesta di ricerca un'espressione di filtraggio che coinvolga la Chiave di partizione. Nell'espressione di filtraggio, è possibile limitare il valore della chiave di partizione all'interno di un intervallo specifico, in modo che Milvus restringa l'ambito di ricerca alle partizioni corrispondenti.</p>
+<h3 id="Create-Filtering-Condition" class="common-anchor-header">Creare una condizione di filtraggio<button data-href="#Create-Filtering-Condition" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Quando si effettuano ricerche RNA in una raccolta con la funzione Chiave di partizione attivata, è necessario includere nella richiesta di ricerca un'espressione di filtraggio che coinvolga la Chiave di partizione. Nell'espressione di filtraggio, è possibile limitare il valore della chiave di partizione all'interno di un intervallo specifico, in modo che Milvus restringa l'ambito di ricerca alle partizioni corrispondenti.</p>
 <p>Quando si eseguono operazioni di cancellazione, è consigliabile includere un'espressione di filtro che specifichi una singola chiave di partizione per ottenere una cancellazione più efficiente. Questo approccio limita l'operazione di cancellazione a una particolare partizione, riducendo l'amplificazione della scrittura durante la compattazione e conservando le risorse per la compattazione e l'indicizzazione.</p>
 <p>Gli esempi seguenti dimostrano il filtraggio basato sulle chiavi di partizione in base a un valore specifico della chiave di partizione e a un insieme di valori della chiave di partizione.</p>
 <div class="multipleCode">
@@ -295,7 +333,6 @@ curl --request POST \
 <span class="hljs-comment"># Filter based on multiple partition key values</span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;partition_key in [&quot;x&quot;, &quot;y&quot;, &quot;z&quot;] &amp;&amp; &lt;other conditions&gt;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// Filter based on a single partition key value, or</span>
 <span class="hljs-type">String</span> <span class="hljs-variable">filter</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;partition_key == &#x27;x&#x27; &amp;&amp; &lt;other conditions&gt;&quot;</span>;
 
@@ -348,14 +385,28 @@ filter = <span class="hljs-string">&quot;partition_key in [&#x27;x&#x27;, &#x27;
 <div class="alert note">
 <p>Attualmente, la funzione Isolamento chiave di partizione si applica solo alle ricerche con il tipo di indice impostato su HNSW.</p>
 </div>
-<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Abilitazione dell'isolamento delle chiavi di partizione</h3><p>I seguenti esempi di codice mostrano come abilitare l'isolamento delle chiavi di partizione.</p>
+<h3 id="Enable-Partition-Key-Isolation" class="common-anchor-header">Abilitazione dell'isolamento delle chiavi di partizione<button data-href="#Enable-Partition-Key-Isolation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>I seguenti esempi di codice mostrano come abilitare l'isolamento delle chiavi di partizione.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
     schema=schema,
-    <span class="hljs-comment"># highlight-next-line</span>
-    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}
+<span class="highlighted-wrapper-line">    properties={<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>: <span class="hljs-literal">True</span>}</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -364,13 +415,12 @@ Map&lt;String, String&gt; properties = <span class="hljs-keyword">new</span> <sp
 properties.put(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>);
 
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">createCollectionReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-.collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
-.collectionSchema(schema)
-.properties(properties)
-.build();
+        .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
+        .collectionSchema(schema)
+        .properties(properties)
+        .build();
 client.createCollection(createCollectionReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithProperty(<span class="hljs-string">&quot;partitionkey.isolation&quot;</span>, <span class="hljs-literal">true</span>))
@@ -403,4 +453,4 @@ curl --request POST \
     \&quot;params\&quot;: <span class="hljs-variable">$params</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Dopo aver abilitato l'isolamento della chiave di partizione, è possibile impostare la chiave di partizione e il numero di partizioni come descritto in <a href="/docs/it/v2.5.x/use-partition-key.md#Set-Partition-Numbers">Impostazione dei numeri di partizione</a>. Si noti che il filtro basato sulla chiave di partizione deve includere solo un valore specifico della chiave di partizione.</p>
+<p>Dopo aver abilitato l'isolamento della chiave di partizione, è possibile impostare la chiave di partizione e il numero di partizioni come descritto in <a href="/docs/it/v2.5.x/use-partition-key.md#Set-Partition-Numbers">Impostare i numeri di partizione</a>. Si noti che il filtro basato sulla chiave di partizione deve includere solo un valore specifico della chiave di partizione.</p>

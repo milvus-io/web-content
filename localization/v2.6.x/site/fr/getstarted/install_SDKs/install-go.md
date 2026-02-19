@@ -54,7 +54,7 @@ title: Installer Milvus Go SDK
         ></path>
       </svg>
     </button></h2><p>Installer le SDK Milvus GO et les dépendances via <code translate="no">go get</code>.</p>
-<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus-sdk-go/v2
+<pre><code translate="no" class="language-bash">$ go get -u github.com/milvus-io/milvus/client/v2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Et ensuite ?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

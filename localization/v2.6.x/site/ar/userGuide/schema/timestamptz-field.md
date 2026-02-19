@@ -41,8 +41,8 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p>الحقل <code translate="no">TIMESTAMPTZ</code> هو نوع بيانات معرّف من قبل المخطط (<code translate="no">DataType.TIMESTAMPTZ</code>) في Milvus يعالج المدخلات المدخلة مع المناطق الزمنية ويخزن جميع النقاط الزمنية داخلياً كتوقيت مطلق بالتوقيت العالمي المنسق UTC:</p>
 <ul>
-<li><p><strong>تنسيق الإدخال المقبول</strong>: سلاسل <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> مع إزاحة المنطقة الزمنية (على سبيل المثال، <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> يمثل 11:59:59 مساءً بالتوقيت العالمي المنسق +08:00).</p></li>
-<li><p><strong>التخزين الداخلي</strong>: يتم تطبيع جميع القيم <code translate="no">TIMESTAMPTZ</code> وتخزينها <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">بالتوقيت العالمي المنسق</a> (UTC).</p></li>
+<li><p><strong>تنسيق الإدخال المقبول</strong>: سلاسل <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> مع إزاحة المنطقة الزمنية (على سبيل المثال، <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> يشير إلى 11:59:59 مساءً في 1 مايو 2025 (UTC+08:00)).</p></li>
+<li><p><strong>التخزين الداخلي</strong>: يتم تطبيع جميع القيم <code translate="no">TIMESTAMPTZ</code> وتخزينها بالتوقيت <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">العالمي المنسق</a> (UTC).</p></li>
 <li><p><strong>المقارنة والتصفية</strong>: يتم تنفيذ جميع عمليات التصفية والترتيب بالتوقيت العالمي المنسق، مما يضمن نتائج متسقة ويمكن التنبؤ بها عبر المناطق الزمنية المختلفة.</p></li>
 </ul>
 <div class="alert note">
@@ -68,7 +68,7 @@ beta: Milvus 2.6.6+
         ></path>
       </svg>
     </button></h2><p>يعكس سير العمل الأساسي لاستخدام حقل <code translate="no">TIMESTAMPTZ</code> الحقول القياسية الأخرى في ميلفوس: تعريف الحقل ← إدراج البيانات ← الاستعلام/التصفية.</p>
-<h3 id="Step-1-Define-a-TIMESTAMPTZ-field" class="common-anchor-header">الخطوة 1: تعريف حقل TIMESTAMPTZ<button data-href="#Step-1-Define-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
+<h3 id="Step-1-Define-a-TIMESTAMPTZ-field" class="common-anchor-header">الخطوة 1: تحديد حقل TIMESTAMPTZ<button data-href="#Step-1-Define-a-TIMESTAMPTZ-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,7 +192,7 @@ client.insert(collection_name, data)
         ></path>
       </svg>
     </button></h3><p><code translate="no">TIMESTAMPTZ</code> يدعم المقارنات القياسية، وحساب الفترات الزمنية، واستخراج مكونات الوقت.</p>
-<p>قبل أن تتمكن من إجراء عمليات التصفية على حقول <code translate="no">TIMESTAMPTZ</code> ، تأكد من</p>
+<p>قبل أن تتمكن من إجراء عمليات تصفية على حقول <code translate="no">TIMESTAMPTZ</code> ، تأكد من</p>
 <ul>
 <li><p>قمت بإنشاء فهرس على كل حقل متجه.</p></li>
 <li><p>تم تحميل المجموعة في الذاكرة.</p></li>
@@ -228,15 +228,15 @@ client.load_collection(collection_name)
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">استعلام مع تصفية الطابع الزمني</h4><p>استخدم المشغلات الحسابية مثل <code translate="no">==</code> ، <code translate="no">!=</code> ، ، <code translate="no">&lt;</code> ، <code translate="no">&gt;</code> ، <code translate="no">&lt;=</code> ، <code translate="no">&gt;=</code>. للحصول على قائمة كاملة بالمشغلات الحسابية المتوفرة في ميلفوس، راجع <a href="/docs/ar/basic-operators.md#Arithmetic-Operators">المشغلات الحسابية</a>.</p>
 <p>يقوم المثال أدناه بتصفية الكيانات ذات الطوابع الزمنية (<code translate="no">tsz</code>) التي لا تساوي <strong>2025-01-03T00:00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#java">جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -256,7 +256,7 @@ results = client.query(
 <ul>
 <li><p><code translate="no">tsz</code> هو اسم الحقل <code translate="no">TIMESTAMPTZ</code> المحدد في المخطط.</p></li>
 <li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> هو الطابع الزمني الحرفي بتنسيق <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601،</a> بما في ذلك إزاحة المنطقة الزمنية.</p></li>
-<li><p><code translate="no">!=</code> يقارن قيمة الحقل مع تلك الحرفية. تتضمن العمليات المدعومة الأخرى <code translate="no">==</code> و <code translate="no">&lt;</code> و <code translate="no">&lt;=</code> و <code translate="no">&gt;</code> و <code translate="no">&gt;=</code>.</p></li>
+<li><p><code translate="no">!=</code> يقارن قيمة الحقل مع تلك الحرفية. تشمل العمليات المدعومة الأخرى <code translate="no">==</code> و <code translate="no">&lt;</code> و <code translate="no">&lt;=</code> و <code translate="no">&gt;</code> و <code translate="no">&gt;=</code>.</p></li>
 </ul>
 <h4 id="Interval-operations" class="common-anchor-header">عمليات الفاصل الزمني</h4><p>يمكنك إجراء عمليات حسابية على حقول <code translate="no">TIMESTAMPTZ</code> باستخدام قيم <strong>InterVAL</strong> <a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">بتنسيق المدة الزمنية ISO 8601</a>. يتيح لك ذلك إضافة أو طرح مدد، مثل الأيام أو الساعات أو الدقائق، من الطابع الزمني عند تصفية البيانات.</p>
 <p>على سبيل المثال، يقوم الاستعلام التالي بتصفية الكيانات التي <strong>لا يساوي</strong> الطابع الزمني (<code translate="no">tsz</code>) زائد صفر يوم <strong>2025-01-03T00:00:00:00+08:00</strong>:</p>

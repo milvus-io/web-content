@@ -3,10 +3,10 @@ id: milvus_rag_with_dynamiq.md
 summary: >-
   In questo tutorial, esploreremo come utilizzare senza problemi Dynamiq con
   Milvus, il database vettoriale ad alte prestazioni costruito appositamente per
-  i flussi di lavoro RAG. Milvus eccelle per l'archiviazione, l'indicizzazione e
-  il recupero efficiente delle incorporazioni vettoriali, rendendolo un
-  componente indispensabile per i sistemi di intelligenza artificiale che
-  richiedono un accesso rapido e preciso ai dati contestuali.
+  i flussi di lavoro RAG. Milvus eccelle nell'archiviazione, nell'indicizzazione
+  e nel recupero efficiente di embeddings vettoriali, rendendolo un componente
+  indispensabile per i sistemi di intelligenza artificiale che richiedono un
+  accesso rapido e preciso ai dati contestuali.
 title: Come iniziare con Dynamiq e Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
@@ -191,7 +191,7 @@ converter_added = rag_wf.flow.add_nodes(
 )  <span class="hljs-comment"># Set dependency on the PDF converter</span>
 splitter_added = rag_wf.flow.add_nodes(document_splitter)  <span class="hljs-comment"># Add to the DAG</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Define-Embedding-Node" class="common-anchor-header">Definire il nodo di inclusione<button data-href="#Define-Embedding-Node" class="anchor-icon" translate="no">
+<h3 id="Define-Embedding-Node" class="common-anchor-header">Definire il nodo di incorporamento<button data-href="#Define-Embedding-Node" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -282,7 +282,7 @@ milvus_writer_added = rag_wf.flow.add_nodes(vector_store)  <span class="hljs-com
 </ul>
 <p><strong>Zilliz Cloud (Servizio gestito)</strong></p>
 <ul>
-<li>Per un'esperienza Milvus completamente gestita e basata sul cloud, utilizzate <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
+<li>Per un'esperienza Milvus completamente gestita e basata sul cloud, utilizzare <a href="https://zilliz.com/cloud">Zilliz Cloud</a>.</li>
 <li>Impostare <code translate="no">uri</code> e <code translate="no">token</code> in base all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">endpoint pubblico e alla chiave API</a> forniti nella console di Zilliz Cloud.</li>
 </ul></li>
 </ul>
@@ -335,7 +335,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
 2024-11-19 22:14:10 - INFO - Flow b30b48ec-d5d2-4e4c-8e25-d6976c8a9c17: execution succeeded in 1.3s.
 2024-11-19 22:14:10 - INFO - Workflow 87878444-6a3d-43f3-ae32-0127564a959f: execution succeeded in 1.3s.
 </code></pre>
-<p>Attraverso questo flusso di lavoro, abbiamo implementato con successo una pipeline di indicizzazione di documenti utilizzando Milvus come database vettoriale e il modello di embedding di OpenAI per la rappresentazione semantica. Questa configurazione consente un recupero rapido e accurato basato su vettori, costituendo la base per i flussi di lavoro RAG come la ricerca semantica, il recupero di documenti e le interazioni contestuali guidate dall'intelligenza artificiale.</p>
+<p>Attraverso questo flusso di lavoro, abbiamo implementato con successo una pipeline di indicizzazione di documenti utilizzando Milvus come database vettoriale e il modello di embedding di OpenAI per la rappresentazione semantica. Questa configurazione consente un recupero rapido e accurato basato sui vettori, costituendo la base per i flussi di lavoro RAG come la ricerca semantica, il recupero di documenti e le interazioni contestuali guidate dall'intelligenza artificiale.</p>
 <p>Grazie alle capacità di archiviazione scalabili di Milvus e all'orchestrazione di Dynamiq, questa soluzione è pronta sia per la prototipazione che per le implementazioni di produzione su larga scala. È ora possibile estendere questa pipeline per includere attività aggiuntive come la risposta a domande basate sul reperimento o la generazione di contenuti guidati dall'intelligenza artificiale.</p>
 <h2 id="RAG-Document-Retrieval-Flow" class="common-anchor-header">Flusso di recupero dei documenti RAG<button data-href="#RAG-Document-Retrieval-Flow" class="anchor-icon" translate="no">
       <svg translate="no"

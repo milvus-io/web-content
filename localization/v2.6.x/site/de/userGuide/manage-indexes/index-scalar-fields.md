@@ -22,6 +22,9 @@ title: Skalare Felder indizieren
         ></path>
       </svg>
     </button></h1><p>In Milvus wird ein skalarer Index verwendet, um die Metafilterung nach einem bestimmten Nicht-Vektor-Feldwert zu beschleunigen, ähnlich wie bei einem traditionellen Datenbankindex. Diese Anleitung führt Sie durch das Erstellen und Konfigurieren von skalaren Indizes für Felder wie Ganzzahlen, Strings usw.</p>
+<div class="alert warning">
+<p>Diese Seite ist veraltet. Die neueste Implementierung finden Sie unter <a href="/docs/de/bitmap.md">BITMAP</a>, <a href="/docs/de/inverted.md">INVERTED</a>, <a href="/docs/de/ngram.md">NGRAM</a>, <a href="/docs/de/rtree.md">RTREE</a> <a href="/docs/de/stl-sort.md">STL_SORT</a> und mehr.</p>
+</div>
 <h2 id="Types-of-scalar-indexing" class="common-anchor-header">Arten der skalaren Indizierung<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +41,7 @@ title: Skalare Felder indizieren
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Automatische Indizierung</a></strong>: Milvus entscheidet automatisch über den Indextyp, basierend auf dem Datentyp des skalaren Feldes. Dies ist geeignet, wenn Sie den spezifischen Indextyp nicht kontrollieren müssen.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Automatische Indizierung</a></strong>: Milvus entscheidet automatisch über den Indextyp auf der Grundlage des Datentyps des skalaren Feldes. Dies ist geeignet, wenn Sie den spezifischen Indextyp nicht kontrollieren müssen.</p></li>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index oder einen <a href="/docs/de/bitmap.md">Bitmap-Index</a>. Damit haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Automatische Indizierung<button data-href="#Auto-indexing" class="anchor-icon" translate="no">

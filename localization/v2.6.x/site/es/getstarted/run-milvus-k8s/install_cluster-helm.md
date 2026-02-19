@@ -127,7 +127,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>¿Necesita un despliegue independiente en su lugar?</strong></p>
 <p>Si prefiere desplegar Milvus en modo autónomo (nodo único) para desarrollo o pruebas, utilice este comando:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.6 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.11 \
   --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> standalone.messageQueue=woodpecker \
@@ -137,9 +137,9 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Nota</strong>: El modo autónomo utiliza Woodpecker como cola de mensajes predeterminada y habilita el componente Streaming Node. Para más detalles, consulte la <a href="/docs/es/architecture_overview.md">Descripción general de la arquitectura</a> y el <a href="/docs/es/use-woodpecker.md">Uso de Woodpecker</a>.</p>
 </div>
 <p><strong>Despliegue del cluster Milvus:</strong></p>
-<p>El siguiente comando despliega un cluster Milvus con configuración optimizada para v2.6.6, utilizando Woodpecker como cola de mensajes recomendada:</p>
+<p>El siguiente comando despliega un cluster Milvus con configuración optimizada para v2.6.11, utilizando Woodpecker como cola de mensajes recomendada:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.6 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.11 \
   --<span class="hljs-built_in">set</span> pulsarv3.enabled=<span class="hljs-literal">false</span> \
   --<span class="hljs-built_in">set</span> woodpecker.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
@@ -164,7 +164,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
 <p><strong>Opciones alternativas de colas de mensajes:</strong></p>
 <p>Si prefiere utilizar <strong>Pulsar</strong> (opción tradicional) en lugar de Woodpecker:</p>
 <pre><code translate="no" class="language-bash">helm install my-release zilliztech/milvus \
-  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.6 \
+  --<span class="hljs-built_in">set</span> image.all.tag=v2.6.11 \
   --<span class="hljs-built_in">set</span> streaming.enabled=<span class="hljs-literal">true</span> \
   --<span class="hljs-built_in">set</span> indexNode.enabled=<span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -204,7 +204,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
     </button></h3><p>Verifique que su despliegue se ha realizado correctamente comprobando el estado del pod:</p>
 <pre><code translate="no" class="language-bash">kubectl get pods
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Espere a que todos los pods muestren el estado "Running".</strong> Con la configuración v2.6.6, debería ver pods similares a:</p>
+<p><strong>Espere a que todos los pods muestren el estado "Running".</strong> Con la configuración v2.6.11, debería ver pods similares a:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-0</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s
 my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><span class="hljs-operator">-</span>etcd<span class="hljs-number">-1</span>                                <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">1</span>    <span class="hljs-keyword">Running</span>   <span class="hljs-number">0</span>        <span class="hljs-number">3</span>m23s

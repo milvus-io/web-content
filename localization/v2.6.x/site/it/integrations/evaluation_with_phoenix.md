@@ -477,7 +477,7 @@ results_df.head()
       <td>[Copertura del codice] Prima di inviare il pull ...</td>
       <td>Prima di eseguire la copertura del codice, bisogna assicurarsi ...</td>
       <td>Prima di eseguire la copertura del codice, si dovrebbe fare ...</td>
-      <td>[Copertura del codice Prima di inviare il pull ...</td>
+      <td>[Prima di inviare il pull ...</td>
       <td>[Prima di inviare il pull...</td>
       <td>fattuale</td>
       <td>Il testo di riferimento specifica che prima di...</td>

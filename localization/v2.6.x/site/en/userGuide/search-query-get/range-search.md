@@ -60,27 +60,27 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>A smaller L2 distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>To ignore the most similar vector embeddings, ensure that</p><p><code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>A greater IP distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>To ignore the most similar vector embeddings, ensure that</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>A greater COSINE distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>To ignore the most similar vector embeddings, ensure that</p><p><code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>A smaller Jaccard distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>To ignore the most similar vector embeddings, ensure that</p><p><code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>A smaller Hamming distance indicates a higher similarity.</p></td>
-     <td><p>To ignore the most similar vector embeddings, ensure that <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
+     <td><p>To ignore the most similar vector embeddings, ensure that</p><p><code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -255,3 +255,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>If the query vectors already exist in the target collection, consider using <code translate="no">ids</code> instead of retrieving them before searches. For details, refer to <a href="/docs/primary-key-search.md">Primary-Key Search</a>.</p>
+</div>

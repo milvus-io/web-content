@@ -6,7 +6,6 @@ summary: >-
   可以在内存和硬盘中同时存储索引和数据。这种方法有助于根据访问频率优化数据放置策略，在不明显影响搜索性能的情况下扩大 Collections
   的存储容量。本页帮助你了解 Milvus 如何使用 mmap 实现快速高效的数据存储和检索。
 ---
-
 <h1 id="Use-mmap" class="common-anchor-header">使用 mmap<button data-href="#Use-mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +62,22 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Milvus 在全局、字段、索引和 Collections 层面提供分层 mmap 设置，其中索引和字段层级优先于 Collections 层级，而 Collections 层级优先于全局层级。</p>
-<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 设置</h3><p>集群级设置是全局设置，优先级最低。Milvus 在<code translate="no">milvus.yaml</code> 中提供了多个 mmap 相关设置。这些设置将适用于群集中的所有 Collections。</p>
+<h3 id="Global-mmap-settings" class="common-anchor-header">全局 mmap 设置<button data-href="#Global-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>集群级设置是全局设置，优先级最低。Milvus 在<code translate="no">milvus.yaml</code> 中提供了多个 mmap 相关设置。这些设置将适用于群集中的所有 Collections。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">mmap:</span>
@@ -109,7 +123,22 @@ summary: >-
 </table>
 <p>要将上述设置应用到你的 Milvus 集群，请按照《<a href="/docs/zh/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">使用 Helm 配置 Milvus</a>》和《<a href="/docs/zh/v2.5.x/configure_operator.md">使用 Milvus 操作符</a> <a href="/docs/zh/v2.5.x/configure-helm.md#Configure-Milvus-via-configuration-file">配置</a> <a href="/docs/zh/v2.5.x/configure_operator.md">Milvus</a>》中的步骤<a href="/docs/zh/v2.5.x/configure_operator.md">操作</a>。</p>
 <p>有时，全局 mmap 设置在面对特定用例时不够灵活。要将备用设置应用于特定 Collections 或其索引，可以考虑配置特定于某个 Collections、某个字段或某个索引的 mmap。在对 mmap 设置的更改生效前，需要释放并加载 Collections。</p>
-<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定字段的 mmap 设置</h3><p>要配置特定于字段的 mmap，需要在添加字段时包含<code translate="no">mmap_enabled</code> 参数。通过将该参数设置为<code translate="no">True</code> ，可以在特定字段上启用 mmap。</p>
+<h3 id="Field-specific-mmap-settings" class="common-anchor-header">特定字段的 mmap 设置<button data-href="#Field-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要配置特定于字段的 mmap，需要在添加字段时包含<code translate="no">mmap_enabled</code> 参数。通过将该参数设置为<code translate="no">True</code> ，可以在特定字段上启用 mmap。</p>
 <p>下面的示例演示了如何在添加字段时配置特定于字段的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -119,8 +148,8 @@ CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</s
 TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
 
 client = MilvusClient(
-uri=CLUSTER_ENDPOINT,
-token=TOKEN
+    uri=CLUSTER_ENDPOINT,
+    token=TOKEN
 )
 
 schema = MilvusClient.create_schema()
@@ -131,21 +160,20 @@ schema = MilvusClient.create_schema()
 
 <span class="hljs-comment"># Add a scalar field and enable mmap</span>
 schema.add_field(
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-datatype=DataType.INT64,
-is_primary=<span class="hljs-literal">True</span>,
-mmap_enabled=<span class="hljs-literal">True</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    datatype=DataType.INT64,
+    is_primary=<span class="hljs-literal">True</span>,
+    mmap_enabled=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Alter mmap settings on a specific field</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_collection_field(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
-field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    field_name=<span class="hljs-string">&quot;doc_chunk&quot;</span>,
+    field_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.Constant;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
@@ -300,7 +328,22 @@ curl --request POST \
 <p>考虑为存储大量数据的字段启用 mmap。标量字段和向量字段都支持。</p>
 </div>
 <p>然后，可以使用上述创建的 Schema 创建一个 Collection。收到加载 Collections 的请求后，Milvus 会使用内存映射将<strong>doc_chunk</strong>字段的原始数据映射到内存中。</p>
-<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的内存映射设置</h3><p>要配置特定于索引的毫米映射，需要在添加索引时在索引参数中包含<code translate="no">mmap.enable</code> 属性。通过将该属性设置为<code translate="no">true</code> ，可以在该特定索引上启用 mmap。</p>
+<h3 id="Index-specific-mmap-settings" class="common-anchor-header">特定索引的内存映射设置<button data-href="#Index-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要配置特定于索引的毫米映射，需要在添加索引时在索引参数中包含<code translate="no">mmap.enabled</code> 属性。通过将该属性设置为<code translate="no">true</code> ，可以在该特定索引上启用 mmap。</p>
 <p>下面的示例演示了如何在添加索引时配置特定于索引的 mmap。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -315,21 +358,19 @@ index_params = MilvusClient.prepare_index_params()
 
 <span class="hljs-comment"># Create index on the varchar field with mmap settings</span>
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;title&quot;</span>,
-index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
-<span class="hljs-comment"># highlight-next-line</span>
-params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }
+    field_name=<span class="hljs-string">&quot;title&quot;</span>,
+    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+<span class="highlighted-wrapper-line">    params={ <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-string">&quot;false&quot;</span> }</span>
 )
 
 <span class="hljs-comment"># Change mmap settings for an index</span>
 <span class="hljs-comment"># The following assumes that you have a collection named `my_collection`</span>
 client.alter_index_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-index_name=<span class="hljs-string">&quot;title&quot;</span>,
-properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    index_name=<span class="hljs-string">&quot;title&quot;</span>,
+    properties={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">schema.addField(AddFieldReq.builder()
         .fieldName(<span class="hljs-string">&quot;title&quot;</span>)
         .dataType(DataType.VarChar)
@@ -405,7 +446,22 @@ curl --request POST \
 <p>这适用于向量和标量字段的索引。</p>
 </div>
 <p>然后就可以在一个 Collection 中引用索引参数。收到加载 Collection 的请求后，Milvus 会将<strong>标题字段</strong>的索引内存映射到内存中。</p>
-<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定集合的毫米映射设置</h3><p>要配置整个 Collections 的 mmap 策略，需要在创建 Collections 的请求中包含<code translate="no">mmap.enabled</code> 属性。通过将此属性设置为<code translate="no">true</code> ，可以为某个 Collection 启用 mmap。</p>
+<h3 id="Collection-specific-mmap-settings" class="common-anchor-header">特定集合的毫米映射设置<button data-href="#Collection-specific-mmap-settings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>要配置整个 Collections 的 mmap 策略，需要在创建 Collections 的请求中包含<code translate="no">mmap.enabled</code> 属性。通过将此属性设置为<code translate="no">true</code> ，可以为某个 Collection 启用 mmap。</p>
 <p>下面的示例演示了如何在创建名为<strong>my_collection</strong>的 Collection 时启用 mmap。收到加载 Collection 的请求后，Milvus 会将所有字段的原始数据内存映射到内存中。</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
@@ -452,16 +508,15 @@ client.release_collection(<span class="hljs-string">&quot;my_collection&quot;</s
 <span class="hljs-comment"># Ensure that the collection has already been released </span>
 <span class="hljs-comment"># and run the following</span>
 client.alter_collection_properties(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-properties={
-<span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
-}
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: false
+    }
 )
 
 <span class="hljs-comment"># Load the collection to make the above change take effect</span>
 client.load_collection(<span class="hljs-string">&quot;my_collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">client.releaseCollection(ReleaseCollectionReq.builder()
         .collectionName(<span class="hljs-string">&quot;my_collection&quot;</span>)
         .build());

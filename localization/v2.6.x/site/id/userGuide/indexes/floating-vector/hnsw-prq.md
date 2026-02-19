@@ -27,7 +27,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><strong>HNSW_PRQ</strong> memanfaatkan grafik Hierarchical Navigable Small World (HNSW) dengan Product Residual Quantization (PRQ), menawarkan metode pengindeksan vektor tingkat lanjut yang memungkinkan Anda untuk menyesuaikan secara tepat antara ukuran dan akurasi indeks. PRQ melampaui Kuantisasi Produk (PQ) tradisional dengan memperkenalkan langkah kuantisasi residu (RQ) untuk menangkap informasi tambahan, sehingga menghasilkan akurasi yang lebih tinggi atau indeks yang lebih ringkas dibandingkan dengan metode berbasis PQ murni. Namun, langkah tambahan ini dapat menyebabkan overhead komputasi yang lebih tinggi selama pembuatan dan pencarian indeks.</p>
+    </button></h1><p><strong>HNSW_PRQ</strong> memanfaatkan grafik Hierarchical Navigable Small World (HNSW) dengan Product Residual Quantization (PRQ), menawarkan metode pengindeksan vektor tingkat lanjut yang memungkinkan Anda untuk menyelaraskan antara ukuran indeks dan akurasi. PRQ melampaui Kuantisasi Produk (PQ) tradisional dengan memperkenalkan langkah kuantisasi residu (RQ) untuk menangkap informasi tambahan, sehingga menghasilkan akurasi yang lebih tinggi atau indeks yang lebih ringkas dibandingkan dengan metode berbasis PQ murni. Namun, langkah tambahan ini dapat menyebabkan overhead komputasi yang lebih tinggi selama pembuatan dan pencarian indeks.</p>
 <h2 id="Overview" class="common-anchor-header">Gambaran Umum<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,9 +44,39 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PRQ menggabungkan dua teknik pengindeksan: <strong>HSNW</strong> untuk navigasi berbasis grafik yang cepat dan <strong>PRQ</strong> untuk kompresi vektor yang efisien.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW membangun grafik multi-layer di mana setiap node berhubungan dengan sebuah vektor dalam kumpulan data. Dalam grafik ini, node terhubung berdasarkan kesamaan mereka, memungkinkan penjelajahan yang cepat melalui ruang data. Struktur hirarkis memungkinkan algoritme pencarian untuk mempersempit kandidat tetangga, sehingga secara signifikan mempercepat proses pencarian dalam ruang dimensi tinggi.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW membangun grafik multi-layer di mana setiap node berhubungan dengan sebuah vektor dalam kumpulan data. Dalam grafik ini, node terhubung berdasarkan kesamaan mereka, memungkinkan penjelajahan yang cepat melalui ruang data. Struktur hirarkis memungkinkan algoritme pencarian untuk mempersempit kandidat tetangga, yang secara signifikan mempercepat proses pencarian dalam ruang dimensi tinggi.</p>
 <p>Untuk informasi lebih lanjut, lihat <a href="/docs/id/hnsw.md">HNSW</a>.</p>
-<h3 id="PRQ" class="common-anchor-header">PRQ</h3><p>PRQ adalah pendekatan kompresi vektor multi-tahap yang menggabungkan dua teknik yang saling melengkapi: PQ dan RQ. Dengan terlebih dahulu membagi vektor dimensi tinggi menjadi sub-vektor yang lebih kecil (melalui PQ) dan kemudian mengkuantifikasi perbedaan yang tersisa (melalui RQ), PRQ mencapai representasi yang ringkas namun akurat dari data asli.</p>
+<h3 id="PRQ" class="common-anchor-header">PRQ<button data-href="#PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PRQ adalah pendekatan kompresi vektor multi-tahap yang menggabungkan dua teknik yang saling melengkapi: PQ dan RQ. Dengan terlebih dahulu membagi vektor dimensi tinggi menjadi sub-vektor yang lebih kecil (melalui PQ) dan kemudian mengkuantifikasi perbedaan yang tersisa (melalui RQ), PRQ mencapai representasi yang ringkas namun akurat dari data asli.</p>
 <p>Gambar berikut menunjukkan cara kerjanya.</p>
 <p>
   
@@ -56,12 +86,27 @@ summary: >-
 <li><p><strong>Kuantisasi Produk (PQ)</strong></p>
 <p>Pada fase ini, vektor asli dibagi menjadi sub-vektor yang lebih kecil, dan setiap sub-vektor dipetakan ke centroid terdekat dalam codebook yang dipelajari. Pemetaan ini secara signifikan mengurangi ukuran data, namun menimbulkan beberapa kesalahan pembulatan karena setiap sub-vektor didekati oleh satu centroid. Untuk lebih jelasnya, lihat <a href="/docs/id/ivf-pq.md#PQ">IVF_PQ</a>.</p></li>
 <li><p><strong>Kuantisasi Sisa (RQ)</strong></p>
-<p>Setelah tahap PQ, RQ mengkuantisasi residual-selisih antara vektor asli dan perkiraan berbasis PQ-menggunakan codebook tambahan. Karena residual ini biasanya jauh lebih kecil, maka dapat dikodekan dengan lebih tepat tanpa peningkatan penyimpanan yang besar.</p>
+<p>Setelah tahap PQ, RQ mengkuantisasi residual-selisih antara vektor asli dan perkiraan berbasis PQ-menggunakan buku kode tambahan. Karena residual ini biasanya jauh lebih kecil, maka dapat dikodekan dengan lebih tepat tanpa peningkatan penyimpanan yang besar.</p>
 <p>Parameter <code translate="no">nrq</code> menentukan berapa kali residual ini dikuantisasi secara iteratif, sehingga Anda dapat menyempurnakan keseimbangan antara efisiensi dan akurasi kompresi.</p></li>
 <li><p><strong>Representasi Kompresi Akhir</strong></p>
 <p>Setelah RQ selesai mengkuantifikasi residual, kode integer dari PQ dan RQ digabungkan menjadi satu indeks terkompresi. Dengan menangkap detail halus yang mungkin terlewatkan oleh PQ, RQ meningkatkan akurasi tanpa menyebabkan peningkatan penyimpanan yang signifikan. Sinergi antara PQ dan RQ inilah yang mendefinisikan PRQ.</p></li>
 </ol>
-<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ</h3><p>Dengan menggabungkan HNSW dengan PRQ, <strong>HNSW_PRQ</strong> mempertahankan pencarian berbasis grafik yang cepat dari HNSW sambil memanfaatkan kompresi multi-tahap dari PRQ. Alur kerjanya terlihat seperti ini:</p>
+<h3 id="HNSW-+-PRQ" class="common-anchor-header">HNSW + PRQ<button data-href="#HNSW-+-PRQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dengan menggabungkan HNSW dengan PRQ, <strong>HNSW_PRQ</strong> mempertahankan pencarian berbasis grafik yang cepat dari HNSW sambil memanfaatkan kompresi multi-tahap dari PRQ. Alur kerjanya terlihat seperti ini:</p>
 <ol>
 <li><p><strong>Kompresi Data:</strong> Setiap vektor pertama-tama ditransformasikan melalui PQ ke representasi kasar, dan kemudian residu dikuantisasi melalui RQ untuk penyempurnaan lebih lanjut. Hasilnya adalah sekumpulan kode ringkas yang mewakili setiap vektor.</p></li>
 <li><p><strong>Konstruksi Graf:</strong> Vektor-vektor yang dikompresi (termasuk kode PQ dan RQ) menjadi dasar untuk membangun grafik HNSW. Karena data disimpan dalam bentuk yang ringkas, grafik membutuhkan lebih sedikit memori, dan navigasi melaluinya dipercepat.</p></li>
@@ -169,7 +214,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Bagian ini memberikan gambaran umum tentang parameter yang digunakan untuk membangun indeks dan melakukan pencarian pada indeks.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw-prq.md#Build-index">membangun indeks.</a></p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembuatan indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">params</code> saat <a href="/docs/id/hnsw-prq.md#Build-index">membangun indeks.</a></p>
 <table>
    <tr>
      <th></th>
@@ -210,8 +270,8 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Jumlah bit yang digunakan untuk merepresentasikan indeks centroid setiap sub-vektor dalam bentuk terkompresi. Ini secara langsung menentukan ukuran setiap codebook. Setiap codebook akan berisi $2^{\textit{nbits}}$ centroid. Sebagai contoh, jika <code translate="no">nbits</code> diatur ke 8, setiap sub-vektor akan diwakili oleh indeks centroid 8-bit. Hal ini memungkinkan adanya $2^8$ (256) kemungkinan centroid dalam buku kode untuk sub-vektor tersebut.</p></td>
-     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 64]</p>
+     <td><p>Jumlah bit yang digunakan untuk merepresentasikan indeks centroid setiap sub-vektor dalam bentuk terkompresi. Ini secara langsung menentukan ukuran setiap codebook. Setiap codebook akan berisi centroid <sup>2nbit</sup>. Sebagai contoh, jika <code translate="no">nbits</code> diatur ke 8, setiap sub-vektor akan diwakili oleh indeks centroid 8-bit. Hal ini memungkinkan<sup>28</sup> (256) kemungkinan centroid dalam codebook untuk sub-vektor tersebut.</p></td>
+     <td><p><strong>Jenis</strong>: <strong>Rentang</strong> Bilangan Bulat: [1, 24]</p>
 <p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
      <td><p>Nilai <code translate="no">nbits</code> yang lebih tinggi memungkinkan codebook yang lebih besar, yang berpotensi menghasilkan representasi yang lebih akurat dari vektor asli. Namun, ini juga berarti menggunakan lebih banyak bit untuk menyimpan setiap indeks, yang menghasilkan kompresi yang lebih sedikit. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [1, 16].</p></td>
    </tr>
@@ -240,7 +300,22 @@ res = MilvusClient.search(
      <td><p>Gunakan <code translate="no">FP32</code> untuk presisi maksimum dengan biaya memori yang lebih tinggi, atau <code translate="no">SQ6</code>/<code translate="no">SQ8</code> untuk kompresi yang lebih baik. <code translate="no">BF16</code> dan <code translate="no">FP16</code> menawarkan alternatif yang seimbang.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks</h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/hnsw-prq.md#Search-on-index">mencari di indeks</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parameter pencarian khusus indeks<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Tabel berikut mencantumkan parameter yang dapat dikonfigurasi di <code translate="no">search_params.params</code> saat <a href="/docs/id/hnsw-prq.md#Search-on-index">mencari di indeks</a>.</p>
 <table>
    <tr>
      <th></th>

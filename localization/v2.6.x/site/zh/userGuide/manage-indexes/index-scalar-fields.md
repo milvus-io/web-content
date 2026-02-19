@@ -20,7 +20,10 @@ title: 标量字段索引
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，标量索引用于通过特定的非向量字段值加速元过滤，类似于传统的数据库索引。本指南将指导你为整数、字符串等字段创建和配置标量索引。</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">标量索引的类型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+<div class="alert warning">
+<p>本页面已被弃用。有关最新实现，请参阅<a href="/docs/zh/bitmap.md">BITMAP</a>、<a href="/docs/zh/inverted.md">INVERTED</a>、<a href="/docs/zh/ngram.md">NGRAM</a>、<a href="/docs/zh/rtree.md">RTREE</a> <a href="/docs/zh/stl-sort.md">STL_SORT</a> 等。</p>
+</div>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">标量索引类型<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,7 +217,7 @@ client.createIndex(createIndexReq);
 <li><strong>IndexParam</strong>准备一个 IndexParam 对象。<ul>
 <li><strong>fieldName</strong><em>（字符串</em>） 要索引的标量字段的名称。</li>
 <li><strong>indexName</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
-<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
+<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，留空或省略此参数。 对于自定义索引，有效值为<ul>
 <li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>

@@ -39,7 +39,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p><code translate="no">TIMESTAMPTZ</code> 필드는 시간대 인식 입력을 처리하고 모든 시점을 내부적으로 UTC 절대 시간으로 저장하는 Milvus의 스키마 정의 데이터 유형(<code translate="no">DataType.TIMESTAMPTZ</code>)입니다:</p>
 <ul>
-<li><p><strong>허용되는 입력 형식입니다</strong>: 표준 시간대 오프셋이 있는 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 문자열(예: <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 은 UTC+08:00 기준 11:59:59 PM을 나타냄).</p></li>
+<li><p><strong>허용되는 입력 형식입니다</strong>: 표준 시간대 오프셋이 있는 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 문자열(예: <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> 은 2025년 5월 1일 오후 11:59:59(UTC+08:00)을 나타냄).</p></li>
 <li><p><strong>내부 저장소</strong>: 모든 <code translate="no">TIMESTAMPTZ</code> 값은 정규화되어 <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">협정 세계시</a> (UTC)로 저장됩니다.</p></li>
 <li><p><strong>비교 및 필터링</strong>: 모든 필터링 및 순서 지정 작업은 UTC로 수행되므로 서로 다른 시간대에 걸쳐 일관되고 예측 가능한 결과를 보장합니다.</p></li>
 </ul>
@@ -224,17 +224,17 @@ client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">타임스탬프 필터링으로 쿼리하기</h4><p><code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code> 와 같은 산술 연산자를 사용합니다. Milvus에서 사용할 수 있는 산술 연산자의 전체 목록은 산술 <a href="/docs/ko/basic-operators.md#Arithmetic-Operators">연산자를</a> 참조하세요.</p>
-<p>아래 예제는 타임스탬프(<code translate="no">tsz</code>)가 <strong>2025-01-03T00:00:00+08:00과</strong> 같지 않은 엔티티를 필터링합니다:</p>
+<p>아래 예는 타임스탬프(<code translate="no">tsz</code>)가 <strong>2025-01-03T00:00:00+08:00과</strong> 같지 않은 엔티티를 필터링합니다:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">파이썬</a> <a href="#java">자바</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)
@@ -253,7 +253,7 @@ results = client.query(
 <p>위의 예제에서</p>
 <ul>
 <li><p><code translate="no">tsz</code> 는 스키마에 정의된 <code translate="no">TIMESTAMPTZ</code> 필드 이름입니다.</p></li>
-<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> 는 시간대 오프셋을 포함한 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 형식의 타임스탬프 리터럴입니다.</p></li>
+<li><p><code translate="no">ISO '2025-01-03T00:00:00+08:00'</code> 은 시간대 오프셋을 포함한 <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> 형식의 타임스탬프 리터럴입니다.</p></li>
 <li><p><code translate="no">!=</code> 는 필드 값을 해당 리터럴과 비교합니다. 기타 지원되는 연산자로는 <code translate="no">==</code>, <code translate="no">&lt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;</code>, <code translate="no">&gt;=</code> 등이 있습니다.</p></li>
 </ul>
 <h4 id="Interval-operations" class="common-anchor-header">간격 연산</h4><p><a href="https://en.wikipedia.org/wiki/ISO_8601#Durations">ISO 8601 기간 형식의</a> <strong>INTERVAL</strong> 값을 사용하여 <code translate="no">TIMESTAMPTZ</code> 필드에서 산술을 수행할 수 있습니다. 이를 통해 데이터를 필터링할 때 타임스탬프에서 일, 시간 또는 분과 같은 기간을 더하거나 뺄 수 있습니다.</p>
@@ -406,5 +406,5 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>기본적으로 인덱스가 없는 <code translate="no">TIMESTAMPTZ</code> 필드에 대한 쿼리는 모든 행에 대한 전체 스캔을 수행하므로 대규모 데이터 세트에서는 속도가 느려질 수 있습니다. 타임스탬프 쿼리를 가속화하려면 <code translate="no">TIMESTAMPTZ</code> 필드에 <code translate="no">STL_SORT</code> 인덱스를 생성하세요.</p>
+    </button></h3><p>기본적으로 인덱스가 없는 <code translate="no">TIMESTAMPTZ</code> 필드에 대한 쿼리는 모든 행에 대한 전체 스캔을 수행하므로 대규모 데이터 세트에서는 속도가 느려질 수 있습니다. 타임스탬프 쿼리를 가속화하려면 <code translate="no">TIMESTAMPTZ</code> 필드에 <code translate="no">STL_SORT</code> 인덱스를 만드세요.</p>
 <p>자세한 내용은 <a href="/docs/ko/stl-sort.md">STL_SORT를</a> 참조하세요.</p>

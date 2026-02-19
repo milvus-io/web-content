@@ -96,7 +96,7 @@ index_params.add_index(
 </ul>
 <p>Weitere Informationen zu den für den <code translate="no">SCANN</code> Index verfügbaren Parametern finden Sie unter <a href="/docs/de/scann.md#Index-building-params">Indexerstellungsparameter</a>.</p></li>
 </ul>
-<p>Sobald die Indexparameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Indexparameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
+<p>Sobald die Index-Parameter konfiguriert sind, können Sie den Index erstellen, indem Sie die Methode <code translate="no">create_index()</code> direkt verwenden oder die Index-Parameter in der Methode <code translate="no">create_collection</code> übergeben. Weitere Informationen finden Sie unter <a href="/docs/de/create-collection.md">Sammlung erstellen</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Suche im Index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -116,6 +116,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -132,6 +133,7 @@ res = MilvusClient.search(
 <li><p><code translate="no">params</code>: Zusätzliche Konfigurationsoptionen für die Suche im Index.</p>
 <ul>
 <li><code translate="no">reorder_k</code>: Anzahl der zu verfeinernden Kandidaten während der Re-Ranking-Phase.</li>
+<li><code translate="no">nprobe</code>: Anzahl der Cluster, nach denen gesucht werden soll.</li>
 </ul>
 <p>Weitere Suchparameter, die für den Index <code translate="no">SCANN</code> verfügbar sind, finden Sie unter <a href="/docs/de/scann.md#Index-specific-search-params">Indexspezifische Suchparameter</a>.</p></li>
 </ul>
@@ -150,7 +152,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchen im Index verwendet werden.</p>
+    </button></h2><p>Dieser Abschnitt gibt einen Überblick über die Parameter, die für den Aufbau eines Index und die Durchführung von Suchvorgängen im Index verwendet werden.</p>
 <h3 id="Index-building-params" class="common-anchor-header">Indexaufbau-Parameter<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -215,5 +217,11 @@ res = MilvusClient.search(
      <td><p>Steuert die Anzahl der Kandidatenvektoren, die während der Re-Ranking-Phase verfeinert werden. Dieser Parameter legt fest, wie viele Top-Kandidaten aus der anfänglichen Partitionierungs- und Quantisierungsphase durch genauere Ähnlichkeitsberechnungen neu bewertet werden.</p></td>
      <td><p><strong>Typ</strong>: Integer</p><p><strong>Bereich</strong>: [1, <em>int_max</em>]</p><p><strong>Standardwert</strong>: Keine</p></td>
      <td><p>Eine größere <code translate="no">reorder_k</code> führt im Allgemeinen zu einer <strong>höheren Suchgenauigkeit</strong>, da in der letzten Verfeinerungsphase mehr Kandidaten berücksichtigt werden. Allerdings <strong>erhöht sich</strong> dadurch auch <strong>die Suchzeit</strong> aufgrund der zusätzlichen Berechnungen.</p><p>Erwägen Sie eine Erhöhung von <code translate="no">reorder_k</code>, wenn eine hohe Wiederfindungsrate entscheidend ist und die Suchgeschwindigkeit weniger wichtig ist. Ein guter Ausgangspunkt ist das 2-5fache der gewünschten <code translate="no">limit</code> (TopK-Ergebnisse, die zurückgegeben werden).</p><p>Ziehen Sie in Erwägung, <code translate="no">reorder_k</code> zu verringern, um schnelleren Suchen den Vorzug zu geben, insbesondere in Szenarien, in denen eine leichte Verringerung der Genauigkeit akzeptabel ist.</p><p>In den meisten Fällen empfehlen wir Ihnen, einen Wert innerhalb dieses Bereichs festzulegen:<em>[limit</em>, <em>limit</em> * 5].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>Die Anzahl der Cluster, in denen nach Kandidaten gesucht werden soll.</p></td>
+     <td><p><strong>Typ</strong>: Integer</p><p><strong>Bereich</strong>: [1, <em>nlist</em>]</p><p><strong>Standardwert</strong>: <code translate="no">8</code></p></td>
+     <td><p>Höhere Werte ermöglichen die Suche nach mehr Clustern, was die Wiederauffindbarkeit durch Erweiterung des Suchbereichs verbessert, jedoch auf Kosten einer erhöhten Abfrage-Latenz.</p><p>Stellen Sie <code translate="no">nprobe</code> proportional zu <code translate="no">nlist</code> ein, um Geschwindigkeit und Genauigkeit auszugleichen.</p><p>In den meisten Fällen wird empfohlen, einen Wert innerhalb dieses Bereichs einzustellen: [1, nlist].</p></td>
    </tr>
 </table>

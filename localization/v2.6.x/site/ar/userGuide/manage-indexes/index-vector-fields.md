@@ -21,7 +21,10 @@ title: فهرسة الحقول المتجهة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يرشدك هذا الدليل إلى العمليات الأساسية لإنشاء الفهارس وإدارتها على الحقول المتجهة في مجموعة.</p>
+    </button></h1><p>يرشدك هذا الدليل إلى العمليات الأساسية لإنشاء وإدارة الفهارس على الحقول المتجهة في مجموعة.</p>
+<div class="alert warning">
+<p>تم إهمال هذه الصفحة. للحصول على أحدث تطبيق، راجع <a href="/docs/ar/ivf-flat.md">IVF_FLAT</a> و <a href="/docs/ar/hnsw.md">HNSW</a> والمزيد.</p>
+</div>
 <h2 id="Overview" class="common-anchor-header">نظرة عامة<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: فهرسة الحقول المتجهة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>من خلال الاستفادة من البيانات الوصفية المخزنة في ملف الفهرس، ينظم Milvus بياناتك في بنية متخصصة، مما يسهل الاسترجاع السريع للمعلومات المطلوبة أثناء عمليات البحث أو الاستعلامات.</p>
+    </button></h2><p>من خلال الاستفادة من البيانات الوصفية المخزنة في ملف الفهرس، يقوم Milvus بتنظيم بياناتك في بنية متخصصة، مما يسهل الاسترجاع السريع للمعلومات المطلوبة أثناء عمليات البحث أو الاستعلامات.</p>
 <p>يوفر Milvus العديد من أنواع الفهارس والمقاييس لفرز قيم الحقول لإجراء عمليات بحث فعالة للتشابه. يسرد الجدول التالي أنواع الفهارس والمقاييس المدعومة لأنواع الحقول المتجهة المختلفة. يدعم Milvus حاليًا أنواعًا مختلفة من بيانات المتجهات، بما في ذلك التضمينات ذات النقطة العائمة (المعروفة غالبًا باسم متجهات النقطة العائمة أو المتجهات الكثيفة)، والتضمينات الثنائية (المعروفة أيضًا باسم المتجهات الثنائية)، والتضمينات المتفرقة (المعروفة أيضًا باسم المتجهات المتفرقة). لمزيد من التفاصيل، راجع <a href="/docs/ar/index.md">الفهرس داخل الذاكرة</a> <a href="/docs/ar/metric.md">ومقاييس التشابه</a>.</p>
 <div class="filter">
  <a href="#floating">تضمينات النقطة العائمة</a> <a href="#binary">التضمينات الثنائية التضمينات الثنائية</a> <a href="#sparse">التضمينات المتفرقة</a></div>
@@ -121,7 +124,7 @@ title: فهرسة الحقول المتجهة
 </ul>
 <p>يقوم مقتطف التعليمات البرمجية أدناه بإعادة استخدام التعليمات البرمجية الحالية لإنشاء اتصال بمثيل Milvus وإنشاء مجموعة دون تحديد معلمات الفهرس الخاصة بها. في هذه الحالة، تفتقر المجموعة إلى فهرس وتبقى غير محملة.</p>
 <div class="language-python">
-<p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> للاتصال بخادم Milvus وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
+<p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> للاتصال بخادم Milvus وإنشاء مجموعة باستخدام <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>و <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>للتحضير للفهرسة، استخدم <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> للاتصال بخادم ميلفوس وإعداد مجموعة باستخدام <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>و <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>

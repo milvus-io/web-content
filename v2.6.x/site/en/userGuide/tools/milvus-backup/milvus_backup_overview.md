@@ -29,14 +29,15 @@ To restore from a backup, Milvus Backup creates a new collection in the target M
 
 The following table lists the backup and restore compatibilities between different Milvus versions since Milvus Backup v0.5.7.
 
-| Backup ↓ / Restore → | Milvus v2.2.x | Milvus v2.3.x | Milvus v2.4.x | Milvus v2.5.x |
-| --------------------- | ------------- | ------------- | ------------- | ------------- |
-| Milvus v2.2.x         | No            | No            | Yes           | Yes           |
-| Milvus v2.3.x    | No            | No            | Yes           | Yes           |
-| Milvus v2.4.x    | No            | No            | Yes           | Yes           |
-| Milvus v2.5.x    | No            | No            | No            | Yes           |
+| Backup From ↓ / Restore To → | Milvus v2.2.x | Milvus v2.3.x | Milvus v2.4.x | Milvus v2.5.x | Milvus v2.6.x |
+| --------------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Milvus v2.2.x         | No            | No            | Yes           | Yes           | Yes
+| Milvus v2.3.x    | No            | No            | Yes           | Yes           | Yes  |              
+| Milvus v2.4.x    | No            | No            | Yes           | Yes           | Yes  |
+| Milvus v2.5.x    | No            | No            | No            | Yes           | Yes  |
+| Milvus v2.6.x    | No            | No            | No            | No           | Yes  |
 
 
 ## Latest release
 
-- [v0.5.7](https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7)
+- [v0.5.10](https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10)

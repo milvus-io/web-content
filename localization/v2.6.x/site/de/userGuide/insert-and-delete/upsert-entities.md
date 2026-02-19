@@ -53,7 +53,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Eine Upsert-Anfrage, die im Override-Modus arbeitet, kombiniert einen Einfüge- und einen Löschvorgang. Wenn eine <code translate="no">upsert</code> Anfrage für eine bestehende Entität empfangen wird, fügt Milvus die in der Nutzlast der Anfrage enthaltenen Daten ein und löscht gleichzeitig die bestehende Entität mit dem in den Daten angegebenen ursprünglichen Primärschlüssel.</p>
+    </button></h3><p>Eine Upsert-Anfrage, die im Override-Modus arbeitet, kombiniert einen Einfüge- und einen Löschvorgang. Wenn eine <code translate="no">upsert</code> -Anfrage für eine bestehende Entität empfangen wird, fügt Milvus die in der Nutzlast der Anfrage enthaltenen Daten ein und löscht gleichzeitig die bestehende Entität mit dem ursprünglichen Primärschlüssel, der in den Daten angegeben ist.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/upsert-in-override-mode.png" alt="Upsert In Override Mode" class="doc-image" id="upsert-in-override-mode" />
@@ -112,17 +112,11 @@ summary: >-
 <li><p>Wenn Sie mit deaktiviertem <code translate="no">partial_update</code> einfügen, ist das Standardverhalten, dass das dynamische Feld <strong>überschrieben</strong> wird. Das bedeutet, dass der Wert des dynamischen Feldes von allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und deren Werten überschrieben wird.</p>
 <p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität auf diesen Wert aktualisiert.</p></li>
 <li><p>Wenn Sie upsert mit <code translate="no">partial_update</code> aktivieren, ist das Standardverhalten das <strong>Zusammenführen</strong>. Das bedeutet, dass der Wert des dynamischen Feldes mit allen nicht schema-definierten Feldern, die in der Anfrage enthalten sind, und deren Werten zusammengeführt wird.</p>
-<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem Upsert zu <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
+<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code> sind, werden die Schlüssel-Wert-Paare im dynamischen Feld der Zielentität nach dem Upsert zu <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
 </ul></li>
 <li><p><strong>Upsert eines JSON-Feldes.</strong></p>
 <p>Angenommen, die Beispielsammlung hat ein schema-definiertes JSON-Feld mit dem Namen <code translate="no">extras</code> und die Schlüssel-Wert-Paare in diesem JSON-Feld einer Entität sind ähnlich wie <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Wenn Sie das Feld <code translate="no">extras</code> einer Entität mit geänderten JSON-Daten einfügen, beachten Sie Folgendes:</p>
-<ul>
-<li><p>Wenn Sie upsert mit <code translate="no">partial_update</code> deaktiviert, ist das Standardverhalten, um <strong>zu überschreiben</strong>. Das bedeutet, dass der Wert des JSON-Feldes, das in der Anfrage enthalten ist, den ursprünglichen Wert des JSON-Feldes der Zielentität außer Kraft setzt.</p>
-<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> sind, werden die Schlüssel-Wert-Paare im Feld <code translate="no">extras</code> der Ziel-Entität auf <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code> aktualisiert.</p></li>
-<li><p>Wenn Sie upsert mit <code translate="no">partial_update</code> aktiviert haben, ist das Standardverhalten das <strong>Zusammenführen</strong>. Das bedeutet, dass der Wert des JSON-Feldes, das in der Anfrage enthalten ist, mit dem ursprünglichen Wert des JSON-Feldes der Zielentität zusammengeführt wird.</p>
-<p>Wenn die in der Anfrage enthaltenen Daten beispielsweise <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code> lauten, werden die Schlüssel-Wert-Paare im Feld <code translate="no">extras</code> der Ziel-Entität nach dem Umpacken zu <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
-</ul></li>
+<p>Wenn Sie das Feld <code translate="no">extras</code> einer Entität mit geänderten JSON-Daten einfügen, beachten Sie, dass das JSON-Feld als Ganzes behandelt wird und Sie nicht einzelne Schlüssel selektiv aktualisieren können. Mit anderen Worten, das JSON-Feld unterstützt <strong>NICHT</strong> das Upserting im <strong>Merge-Modus</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Grenzen und Beschränkungen<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +133,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Auf der Grundlage des obigen Inhalts gibt es einige Einschränkungen und Begrenzungen zu beachten:</p>
+    </button></h3><p>Ausgehend von den oben genannten Inhalten sind einige Einschränkungen zu beachten:</p>
 <ul>
 <li><p>Die Anfrage <code translate="no">upsert</code> muss immer die Primärschlüssel der Zielentitäten enthalten.</p></li>
 <li><p>Die Zielsammlung muss geladen und für Abfragen verfügbar sein.</p></li>

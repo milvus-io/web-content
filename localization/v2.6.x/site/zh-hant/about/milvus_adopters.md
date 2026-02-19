@@ -22,6 +22,6 @@ summary: 了解已在生產應用中採用 Milvus 的公司。
     </button></h1><p>Milvus 是企業用戶中領先的向量資料庫，獲得了 Nvidia、Roblox、AT&amp;T 等知名公司的認可。以下是已成功將 Milvus 整合至其應用程式的企業名單。</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-adopters.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
+   <span class="img-wrapper"> <img translate="no" src="https://assets.zilliz.com/milvus_adopters_143e98c33b.png" alt="Milvus Adopters" class="doc-image" id="milvus-adopters" />
    </span> <span class="img-wrapper"> <span>Milvus 採用者</span> </span></p>
 <p>請造訪我們的<a href="https://milvus.io/use-cases">Milvus 使用案例頁面</a>，瞭解業界領導者如何利用 Milvus 來強化他們的 AI 應用程式，並加速業務成長。</p>

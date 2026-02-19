@@ -40,18 +40,48 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>في ميلفوس، يتم تصنيف عمليات البحث التي تمت تصفيتها إلى نوعين - التصفية <strong>القياسية</strong> <strong>والتصفية التكرارية</strong> - اعتمادًا على المرحلة التي يتم فيها تطبيق التصفية.</p>
-<h3 id="Standard-filtering" class="common-anchor-header">التصفية القياسية</h3><p>إذا كانت المجموعة تحتوي على كل من التضمينات المتجهة والبيانات الوصفية الخاصة بها، يمكنك تصفية البيانات الوصفية قبل بحث ANN لتحسين ملاءمة نتيجة البحث. بمجرد أن يتلقى ميلفوس طلب بحث يحمل شرط تصفية، فإنه يقيد نطاق البحث ضمن الكيانات المطابقة لشرط التصفية المحدد.</p>
+<h3 id="Standard-filtering" class="common-anchor-header">التصفية القياسية<button data-href="#Standard-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>إذا كانت المجموعة تحتوي على كل من التضمينات المتجهة والبيانات الوصفية الخاصة بها، يمكنك تصفية البيانات الوصفية قبل البحث في ANN لتحسين ملاءمة نتيجة البحث. بمجرد أن يتلقى ميلفوس طلب بحث يحمل شرط تصفية، فإنه يقيد نطاق البحث ضمن الكيانات المطابقة لشرط التصفية المحدد.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/filtered-search.png" alt="Filtered Search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>البحث المصفى</span> </span></p>
-<p>كما هو موضح في الرسم البياني أعلاه، يحمل طلب البحث <code translate="no">chunk like &quot;%red%&quot;</code> كشرط تصفية، مما يشير إلى أن Milvus يجب أن يجري البحث في الشبكة النانوية الوطنية ضمن جميع الكيانات التي تحتوي على كلمة <code translate="no">red</code> في الحقل <code translate="no">chunk</code>. على وجه التحديد، يقوم ميلفوس بما يلي:</p>
+<p>كما هو موضح في الرسم البياني أعلاه، يحمل طلب البحث <code translate="no">chunk like &quot;%red%&quot;</code> كشرط تصفية، مما يشير إلى أن ميلفوس يجب أن يجري بحث الشبكة النانوية ضمن جميع الكيانات التي تحتوي على كلمة <code translate="no">red</code> في الحقل <code translate="no">chunk</code>. على وجه التحديد، يقوم ميلفوس بما يلي:</p>
 <ul>
 <li><p>تصفية الكيانات التي تطابق شروط التصفية الواردة في طلب البحث.</p></li>
 <li><p>إجراء بحث ANN داخل الكيانات التي تمت تصفيتها.</p></li>
 <li><p>إرجاع الكيانات الأعلى-K.</p></li>
 </ul>
-<h3 id="Iterative-filtering" class="common-anchor-header">التصفية التكرارية</h3><p>تقوم عملية التصفية القياسية بتضييق نطاق البحث بشكل فعال إلى نطاق صغير. ومع ذلك، قد تؤدي تعبيرات التصفية المعقدة بشكل مفرط إلى زمن بحث مرتفع للغاية. في مثل هذه الحالات، يمكن أن تعمل التصفية التكرارية كبديل، مما يساعد على تقليل عبء العمل في التصفية التكرارية.</p>
+<h3 id="Iterative-filtering" class="common-anchor-header">التصفية التكرارية<button data-href="#Iterative-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>تقوم عملية التصفية القياسية بتضييق نطاق البحث بشكل فعال إلى نطاق صغير. ومع ذلك، قد تؤدي تعبيرات التصفية المعقدة بشكل مفرط إلى زمن بحث مرتفع للغاية. في مثل هذه الحالات، يمكن أن تعمل التصفية التكرارية كبديل، مما يساعد على تقليل عبء العمل في التصفية التكرارية.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/iterative-filtering.png" alt="Iterative Filtering" class="doc-image" id="iterative-filtering" />
@@ -88,7 +118,25 @@ summary: >-
     <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">9</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;vector&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.5718280481994695</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.24070317428066512</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.3737913482606834</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.06726932177492717</span><span class="hljs-punctuation">,</span> <span class="hljs-number">-0.6980531615588608</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;color&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;purple_4976&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;likes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">765</span><span class="hljs-punctuation">}</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-standard-filtering" class="common-anchor-header">البحث باستخدام التصفية القياسية</h3><p>توضح مقتطفات التعليمات البرمجية التالية بحثًا باستخدام التصفية القياسية، ويحمل الطلب في مقتطف التعليمات البرمجية التالية شرط تصفية وعدة حقول إخراج.</p>
+<div class="alert note">
+<p>إذا كانت متجهات الاستعلام موجودة بالفعل في المجموعة المستهدفة، ففكر في استخدام <code translate="no">ids</code> بدلاً من استرجاعها قبل البحث. لمزيد من التفاصيل، راجع <a href="/docs/ar/primary-key-search.md">بحث بالمفتاح الأساسي</a>.</p>
+</div>
+<h3 id="Search-with-standard-filtering" class="common-anchor-header">البحث باستخدام التصفية القياسية<button data-href="#Search-with-standard-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>توضح مقتطفات التعليمات البرمجية التالية بحثًا باستخدام التصفية القياسية، ويحمل الطلب في مقتطف التعليمات البرمجية التالية شرط تصفية وعدة حقول إخراج.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#go">جو</a> <a href="#javascript">نودجيس</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -174,25 +222,25 @@ client, err := client.New(ctx, &amp;client.ClientConfig{
 
 queryVector := []<span class="hljs-type">float32</span>{<span class="hljs-number">0.3580376395471989</span>, <span class="hljs-number">-0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, <span class="hljs-number">-0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>}
 
-    resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
-        <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
-        <span class="hljs-number">5</span>,               <span class="hljs-comment">// limit</span>
-        []entity.Vector{entity.FloatVector(queryVector)},
-    ).WithConsistencyLevel(entity.ClStrong).
-        WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
-        WithFilter(<span class="hljs-string">&quot;color like &#x27;red%&#x27; and likes &gt; 50&quot;</span>).
-        WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))
-    <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-        fmt.Println(err.Error())
-        <span class="hljs-comment">// handle error</span>
-    }
+resultSets, err := client.Search(ctx, milvusclient.NewSearchOption(
+    <span class="hljs-string">&quot;my_collection&quot;</span>, <span class="hljs-comment">// collectionName</span>
+    <span class="hljs-number">5</span>,               <span class="hljs-comment">// limit</span>
+    []entity.Vector{entity.FloatVector(queryVector)},
+).WithConsistencyLevel(entity.ClStrong).
+    WithANNSField(<span class="hljs-string">&quot;vector&quot;</span>).
+    WithFilter(<span class="hljs-string">&quot;color like &#x27;red%&#x27; and likes &gt; 50&quot;</span>).
+    WithOutputFields(<span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>))
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+    fmt.Println(err.Error())
+    <span class="hljs-comment">// handle error</span>
+}
 
-    <span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
-        fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
-        fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
-        fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;color&quot;</span>).FieldData().GetScalars())
-        fmt.Println(<span class="hljs-string">&quot;likes: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;likes&quot;</span>).FieldData().GetScalars())
-    }
+<span class="hljs-keyword">for</span> _, resultSet := <span class="hljs-keyword">range</span> resultSets {
+    fmt.Println(<span class="hljs-string">&quot;IDs: &quot;</span>, resultSet.IDs.FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;Scores: &quot;</span>, resultSet.Scores)
+    fmt.Println(<span class="hljs-string">&quot;color: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;color&quot;</span>).FieldData().GetScalars())
+    fmt.Println(<span class="hljs-string">&quot;likes: &quot;</span>, resultSet.GetColumn(<span class="hljs-string">&quot;likes&quot;</span>).FieldData().GetScalars())
+}
 
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
@@ -253,7 +301,22 @@ curl --request POST \
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>لمزيد من المعلومات حول العوامل التي يمكنك استخدامها في تصفية البيانات الوصفية، راجع <a href="/docs/ar/filtering">التصفية</a>.</p>
-<h3 id="Search-with-iterative-filtering" class="common-anchor-header">البحث باستخدام التصفية التكرارية</h3><p>لإجراء بحث مصفى باستخدام التصفية التكرارية، يمكنك القيام بما يلي:</p>
+<h3 id="Search-with-iterative-filtering" class="common-anchor-header">البحث باستخدام التصفية التكرارية<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لإجراء بحث مصفى باستخدام التصفية التكرارية، يمكنك القيام بما يلي:</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا</a> <a href="#go">جو جو</a> <a href="#javascript">NodeJS</a> <a href="#bash">CURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient

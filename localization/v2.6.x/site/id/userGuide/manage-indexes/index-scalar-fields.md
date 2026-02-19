@@ -22,7 +22,10 @@ title: Bidang Skalar Indeks
         ></path>
       </svg>
     </button></h1><p>Di Milvus, indeks skalar digunakan untuk mempercepat penyaringan metafilter berdasarkan nilai bidang non-vektor tertentu, mirip dengan indeks basis data tradisional. Panduan ini akan memandu Anda dalam membuat dan mengonfigurasi indeks skalar untuk bidang seperti bilangan bulat, string, dll.</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Jenis pengindeksan skalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+<div class="alert warning">
+<p>Halaman ini sudah tidak digunakan lagi. Untuk implementasi terbaru, lihat <a href="/docs/id/bitmap.md">BITMAP</a>, <a href="/docs/id/inverted.md">INVERTED</a>, <a href="/docs/id/ngram.md">NGRAM</a>, <a href="/docs/id/rtree.md">RTREE</a> <a href="/docs/id/stl-sort.md">STL_SORT</a>, dan lainnya.</p>
+</div>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">Jenis-jenis pengindeksan skalar<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,7 +41,7 @@ title: Bidang Skalar Indeks
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Pengindeksan otomatis</a></strong>: Milvus secara otomatis menentukan tipe indeks berdasarkan tipe data dari field skalar. Ini cocok bila Anda tidak perlu mengontrol jenis indeks tertentu.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Pengindeksan otomatis</a></strong>: Milvus secara otomatis menentukan tipe indeks berdasarkan tipe data dari bidang skalar. Ini cocok bila Anda tidak perlu mengontrol jenis indeks tertentu.</p></li>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Pengindeksan khusus</a></strong>: Anda menentukan jenis indeks yang tepat, seperti indeks terbalik atau <a href="/docs/id/bitmap.md">indeks bitmap</a>. Ini memberikan kontrol lebih besar atas pemilihan jenis indeks.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Pengindeksan otomatis<button data-href="#Auto-indexing" class="anchor-icon" translate="no">

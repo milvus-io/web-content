@@ -36,7 +36,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><p>リソースグループは、Milvusクラスタ内のクエリノードの一部またはすべてを保持することができます。リソースグループ間でクエリノードをどのように割り当てるかは、最も合理的な方法に基づいて決定します。例えば、マルチコレクションシナリオでは、各リソースグループに適切な数のクエリノードを割り当て、各コレクション内の操作が他のコレクション内の操作から物理的に独立するように、異なるリソースグループにコレクションをロードすることができます。</p>
-<p>Milvusインスタンスは、起動時にすべてのクエリノードを保持するデフォルトのリソースグループを保持し、<strong>__default_resource_groupと</strong>命名することに注意してください。</p>
+<p>Milvusインスタンスは、起動時にすべてのクエリノードを保持するデフォルトのリソースグループを保持し、それを<strong>__default_resource_groupと</strong>命名することに注意してください。</p>
 <p>バージョン2.4.1から、Milvusは宣言型リソースグループAPIを提供し、従来のリソースグループAPIは廃止されました。新しい宣言型APIにより、ユーザはidempotencyを実現し、クラウドネイティブ環境での二次開発を容易に行うことができるようになります。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">リソースグループの概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,14 +63,14 @@ title: リソースグループの管理
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><strong>requests</strong>属性は、リソースグループが満たすべき条件を指定する。</li>
-<li><strong>limits</strong>属性は、リソースグループが満たすべき条件を指定します。</li>
+<li><strong>limits</strong>属性はリソースグループが満たすべき条件を指定します。</li>
 <li><strong>transfer_from</strong>属性と<strong>transfer_to</strong>属性は、それぞれリソースグループがどのリソースグループからリソースを取得するのが望ましいか、どのリソースグループにリソースを転送するのが望ましいかを記述します。</li>
 </ul>
 <p>リソースグループのコンフィギュレーションが変更されると、milvusは新しいコンフィギュレーションに従って現在のQuery Nodeのリソースを可能な限り調整し、最終的に全てのリソースグループが以下の条件を満たすようにします：</p>
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>ただし、以下の場合を除く：</p>
 <ul>
-<li>Milvusクラスタ内のQueryNode数が不足している場合(<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>)、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
+<li>Milvusクラスタ内のQueryNode数が不足している場合（<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ）、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
 <li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
@@ -90,7 +90,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.6.3 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.6.9 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>

@@ -22,7 +22,7 @@ summary: 瞭解如何使用 Docker Compose 或 Helm 設定訊息儲存。
     </button></h1><p>Milvus 使用 Pulsar 或 Kafka 來管理最近變更的日誌、輸出串流日誌，以及提供日誌訂閱。Pulsar 是預設的訊息儲存系統。本主題介紹如何使用 Docker Compose 或 Helm 設定訊息儲存。</p>
 <p>您可以使用<a href="https://docs.docker.com/get-started/overview/">Docker Compose</a>或在 K8s 上設定 Pulsar，並在 K8s 上設定 Kafka。</p>
 <div class="alert note">
-<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.6 時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
+<p><strong>訊息佇列限制</strong>：升級至 Milvus v2.6.11 時，您必須維持目前的訊息佇列選擇。升級期間不支援在不同的訊息佇列系統之間切換。未來版本將支援變更訊息佇列系統。</p>
 </div>
 <h2 id="Configure-Pulsar-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 設定 Pulsar<button data-href="#Configure-Pulsar-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"

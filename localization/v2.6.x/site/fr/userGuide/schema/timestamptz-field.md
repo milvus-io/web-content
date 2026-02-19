@@ -43,7 +43,7 @@ beta: Milvus 2.6.6+
       </svg>
     </button></h2><p>Un champ <code translate="no">TIMESTAMPTZ</code> est un type de données défini par le schéma (<code translate="no">DataType.TIMESTAMPTZ</code>) dans Milvus qui traite les entrées tenant compte des fuseaux horaires et stocke tous les points temporels en interne en tant qu'heure absolue UTC :</p>
 <ul>
-<li><p><strong>Format d'entrée accepté</strong>: Format d'entrée accepté : chaînes <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> avec un décalage de fuseau horaire (par exemple, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> représente 11:59:59 PM en UTC+08:00).</p></li>
+<li><p><strong>Format d'entrée accepté</strong>: Format d'entrée accepté : chaînes <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> avec un décalage de fuseau horaire (par exemple, <code translate="no">&quot;2025-05-01T23:59:59+08:00&quot;</code> indique 11:59:59 PM le 1er mai 2025 (UTC+08:00)).</p></li>
 <li><p><strong>Stockage interne</strong>: Toutes les valeurs de <code translate="no">TIMESTAMPTZ</code> sont normalisées et stockées en <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">temps universel coordonné</a> (UTC).</p></li>
 <li><p><strong>Comparaison et filtrage</strong>: Toutes les opérations de filtrage et de classement sont effectuées en UTC, ce qui garantit des résultats cohérents et prévisibles dans différents fuseaux horaires.</p></li>
 </ul>
@@ -228,17 +228,17 @@ client.load_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
 <h4 id="Query-with-timestamp-filtering" class="common-anchor-header">Requête avec filtrage de l'horodatage</h4><p>Utilisez les opérateurs arithmétiques comme <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;=</code>, <code translate="no">&gt;=</code>. Pour une liste complète des opérateurs arithmétiques disponibles dans Milvus, voir <a href="/docs/fr/basic-operators.md#Arithmetic-Operators">Opérateurs arithmétiques</a>.</p>
-<p>L'exemple ci-dessous filtre les entités dont l'horodatage (<code translate="no">tsz</code>) est différent de <strong>2025-01-03T00:00:00+08:00</strong>:</p>
+<p>L'exemple ci-dessous filtre les entités dont l'horodatage (<code translate="no">tsz</code>) n'est pas égal à <strong>2025-01-03T00:00:00+08:00</strong>:</p>
 <div class="multipleCode">
-   <a href="#bash">cURL</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
-<span class="highlighted-wrapper-line"><span class="hljs-built_in">expr</span> = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
+   <a href="#python">Python</a> <a href="#java">Java</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Query for entities where tsz is not equal to &#x27;2025-01-03T00:00:00+08:00&#x27;</span>
+<span class="highlighted-wrapper-line">expr = <span class="hljs-string">&quot;tsz != ISO &#x27;2025-01-03T00:00:00+08:00&#x27;&quot;</span></span>
 
 results = client.query(
     collection_name=collection_name,
-    filter=<span class="hljs-built_in">expr</span>,
+    <span class="hljs-built_in">filter</span>=expr,
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;tsz&quot;</span>],
-    <span class="hljs-built_in">limit</span>=10
+    limit=<span class="hljs-number">10</span>
 )
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Query result: &quot;</span>, results)

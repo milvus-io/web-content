@@ -42,11 +42,56 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>HNSW_PQ combina due tecniche di indicizzazione: <strong>HNSW</strong> per una navigazione veloce basata sui grafi e <strong>PQ</strong> per un'efficiente compressione vettoriale.</p>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW costruisce un grafo multistrato in cui ogni nodo corrisponde a un vettore del set di dati. In questo grafo, i nodi sono collegati in base alla loro somiglianza, consentendo una rapida navigazione nello spazio dei dati. La struttura gerarchica consente all'algoritmo di ricerca di restringere i vicini candidati, accelerando in modo significativo il processo di ricerca in spazi ad alta dimensionalità.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW<button data-href="#HNSW" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW costruisce un grafo multistrato in cui ogni nodo corrisponde a un vettore del set di dati. In questo grafo, i nodi sono collegati in base alla loro somiglianza, consentendo una rapida navigazione nello spazio dei dati. La struttura gerarchica consente all'algoritmo di ricerca di restringere i vicini candidati, accelerando in modo significativo il processo di ricerca in spazi ad alta dimensionalità.</p>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/hnsw.md">HNSW</a>.</p>
-<h3 id="PQ" class="common-anchor-header">PQ</h3><p>PQ è una tecnica di compressione vettoriale che scompone i vettori ad alta dimensione in sottovettori più piccoli, che vengono poi quantizzati e compressi. La compressione riduce drasticamente i requisiti di memoria e accelera i calcoli della distanza.</p>
+<h3 id="PQ" class="common-anchor-header">PQ<button data-href="#PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>PQ è una tecnica di compressione vettoriale che scompone i vettori ad alta dimensione in sottovettori più piccoli, che vengono poi quantizzati e compressi. La compressione riduce drasticamente i requisiti di memoria e accelera i calcoli della distanza.</p>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/ivf-pq.md#PQ">FIV_PQ</a>.</p>
-<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ</h3><p>HNSW_PQ combina i punti di forza di HNSW e PQ per consentire un'efficiente ricerca approssimata dei vicini. Utilizza PQ per comprimere i dati (riducendo così l'uso della memoria) e quindi costruisce un grafo HNSW su questi vettori compressi per consentire un rapido recupero dei candidati. Durante la ricerca, l'algoritmo può opzionalmente raffinare i risultati dei candidati utilizzando dati di maggiore precisione per migliorare la precisione. Ecco come funziona il processo:</p>
+<h3 id="HNSW-+-PQ" class="common-anchor-header">HNSW + PQ<button data-href="#HNSW-+-PQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>HNSW_PQ combina i punti di forza di HNSW e PQ per consentire un'efficiente ricerca approssimata dei vicini. Utilizza PQ per comprimere i dati (riducendo così l'uso della memoria) e quindi costruisce un grafo HNSW su questi vettori compressi per consentire un rapido recupero dei candidati. Durante la ricerca, l'algoritmo può opzionalmente raffinare i risultati dei candidati utilizzando dati di maggiore precisione per migliorare la precisione. Ecco come funziona il processo:</p>
 <ol>
 <li><p><strong>Compressione dei dati</strong>: PQ divide ogni vettore in più sottovettori e li quantizza utilizzando un codebook di centroidi, controllato da parametri come <code translate="no">m</code> (numero di sottovettori) e <code translate="no">nbits</code> (bit per sottovettore).</p></li>
 <li><p><strong>Costruzione del grafico</strong>: I vettori compressi vengono quindi utilizzati per costruire un grafo HNSW. Poiché i vettori sono memorizzati in forma compressa, il grafo risultante è in genere più piccolo, richiede meno memoria e può essere percorso più rapidamente, accelerando notevolmente la fase di recupero dei candidati.</p></li>
@@ -153,7 +198,22 @@ res = MilvusClient.search(
         ></path>
       </svg>
     </button></h2><p>Questa sezione fornisce una panoramica dei parametri utilizzati per la creazione di un indice e per l'esecuzione di ricerche sull'indice.</p>
-<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> durante la <a href="/docs/it/hnsw-pq.md#Build-index">creazione di un indice</a>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parametri di costruzione dell'indice<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">params</code> durante la <a href="/docs/it/hnsw-pq.md#Build-index">creazione di un indice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -165,7 +225,7 @@ res = MilvusClient.search(
    <tr>
      <td><p>HNSW</p></td>
      <td><p><code translate="no">M</code></p></td>
-     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sia sulla costruzione dell'indice che sulla ricerca.</p></td>
+     <td><p>Numero massimo di connessioni (o bordi) che ogni nodo può avere nel grafo, compresi i bordi in uscita e in entrata. Questo parametro influisce direttamente sulla costruzione dell'indice e sulla ricerca.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [2, 2048]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">30</code> (fino a 30 bordi uscenti e 30 bordi entranti per nodo)</p></td>
      <td><p>Un valore maggiore di <code translate="no">M</code> porta generalmente a una <strong>maggiore accuratezza</strong>, ma <strong>aumenta l'overhead di memoria</strong> e <strong>rallenta sia la costruzione dell'indice che la ricerca</strong>. Considerare di aumentare <code translate="no">M</code> per i set di dati con elevata dimensionalità o quando è fondamentale un richiamo elevato.</p>
@@ -178,7 +238,7 @@ res = MilvusClient.search(
      <td><p>Numero di vicini candidati considerati per la connessione durante la costruzione dell'indice. Per ogni nuovo elemento viene valutato un pool più ampio di candidati, ma il numero massimo di connessioni effettivamente stabilite è ancora limitato da <code translate="no">M</code>.</p></td>
      <td><p><strong>Tipo</strong>: <strong>Intervallo</strong>: [1, <em>int_max</em>]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">360</code></p></td>
-     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, ciò comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare l'aumento di <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
+     <td><p>Un valore più alto di <code translate="no">efConstruction</code> si traduce tipicamente in un <strong>indice più accurato</strong>, poiché vengono esplorate più connessioni potenziali. Tuttavia, questo comporta anche <strong>tempi di indicizzazione più lunghi e un maggiore utilizzo della memoria</strong> durante la costruzione. Considerare l'aumento di <code translate="no">efConstruction</code> per migliorare l'accuratezza, soprattutto in scenari in cui il tempo di indicizzazione è meno critico.</p>
 <p>Considerare di diminuire <code translate="no">efConstruction</code> per accelerare la costruzione dell'indice quando le risorse sono limitate.</p>
 <p>Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [50, 500].</p></td>
    </tr>
@@ -194,8 +254,8 @@ res = MilvusClient.search(
    <tr>
      <td></td>
      <td><p><code translate="no">nbits</code></p></td>
-     <td><p>Il numero di bit utilizzati per rappresentare l'indice del centroide di ciascun sottovettore nella forma compressa. Determina direttamente la dimensione di ciascun codebook, che conterrà $2^{\textit{nbits}}$ centroidi. Ad esempio, se <code translate="no">nbits</code> è impostato su 8, ogni sottovettore sarà rappresentato da un indice del centroide a 8 bit. Ciò consente di avere $2^8$ (256) possibili centroidi nel codebook per quel sottovettore.</p></td>
-     <td><p><strong>Tipo</strong>: <strong>Intervallo di</strong> valori: [1, 64]</p>
+     <td><p>Il numero di bit utilizzati per rappresentare l'indice del centroide di ciascun sottovettore nella forma compressa. Determina direttamente la dimensione di ciascun codebook. Ogni codebook conterrà centroidi a 2 <sup>bit</sup>. Ad esempio, se <code translate="no">nbits</code> è impostato su 8, ogni sottovettore sarà rappresentato da un indice del centroide a 8 bit. Ciò consente di avere<sup>28</sup> (256) possibili centroidi nel codebook per quel sottovettore.</p></td>
+     <td><p><strong>Tipo</strong>: <strong>Intervallo di</strong> valori: [1, 24]</p>
 <p><strong>Valore predefinito</strong>: <code translate="no">8</code></p></td>
      <td><p>Un valore più alto di <code translate="no">nbits</code> consente di avere codebook più ampi, che potenzialmente portano a rappresentazioni più accurate dei vettori originali. Tuttavia, significa anche utilizzare più bit per memorizzare ciascun indice, con conseguente minore compressione. Nella maggior parte dei casi, si consiglia di impostare un valore compreso in questo intervallo: [1, 16].</p></td>
    </tr>
@@ -216,7 +276,22 @@ res = MilvusClient.search(
      <td><p>Utilizzare <code translate="no">FP32</code> per ottenere la massima precisione con un costo di memoria più elevato, oppure <code translate="no">SQ6</code>/<code translate="no">SQ8</code> per una migliore compressione. <code translate="no">BF16</code> e <code translate="no">FP16</code> offrono un'alternativa equilibrata.</p></td>
    </tr>
 </table>
-<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice</h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> per la <a href="/docs/it/hnsw-pq.md#Search-on-index">ricerca sull'indice</a>.</p>
+<h3 id="Index-specific-search-params" class="common-anchor-header">Parametri di ricerca specifici per l'indice<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La tabella seguente elenca i parametri che possono essere configurati in <code translate="no">search_params.params</code> per la <a href="/docs/it/hnsw-pq.md#Search-on-index">ricerca sull'indice</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -242,6 +317,6 @@ res = MilvusClient.search(
      <td><p>Fattore di ingrandimento che controlla quanti candidati in più vengono esaminati durante la fase di raffinamento (reranking), rispetto ai primi K risultati richiesti.</p></td>
      <td><p><strong>Tipo</strong>: Variabile <strong>Intervallo</strong>: [1, <em>float_max</em>)</p>
 <p><strong>Valore predefinito</strong>: 1</p></td>
-     <td><p>Valori più alti di <code translate="no">refine_k</code> possono migliorare il richiamo e l'accuratezza, ma aumentano anche il tempo di ricerca e l'utilizzo delle risorse. Un valore di 1 significa che il processo di affinamento considera solo i primi K risultati iniziali.</p></td>
+     <td><p>Valori più alti di <code translate="no">refine_k</code> possono migliorare il richiamo e l'accuratezza, ma aumentano anche il tempo di ricerca e l'utilizzo delle risorse. Un valore di 1 significa che il processo di raffinamento considera solo i primi K risultati iniziali.</p></td>
    </tr>
 </table>

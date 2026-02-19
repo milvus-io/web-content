@@ -69,8 +69,8 @@ await client.createDatabase({
 ```go
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
     Address: "localhost:19530",
-    Username: "Milvus",
-    Password: "root",
+    Username: "root",
+    Password: "Milvus",
 })
 if err != nil {
     // handle err

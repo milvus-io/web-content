@@ -60,7 +60,7 @@ summary: Scoprite come configurare l'archiviazione dei messaggi con Milvus Opera
 </ul></li>
 <li>L'archiviazione dei messaggi non può essere modificata mentre il sistema Milvus è in funzione.</li>
 <li>È supportata solo la versione di Kafka 2.x o 3.x.</li>
-<li><strong>Limitazioni dell'aggiornamento</strong>: <strong>Limitazioni della coda di messaggi</strong>: Quando si effettua l'aggiornamento a Milvus v2.6.6, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
+<li><strong>Limitazioni dell'aggiornamento</strong>: <strong>Limitazioni della coda di messaggi</strong>: Quando si effettua l'aggiornamento a Milvus v2.6.11, è necessario mantenere l'attuale scelta della coda di messaggi. Il passaggio da un sistema di code di messaggi all'altro durante l'aggiornamento non è supportato. Il supporto per il cambio di sistemi di code di messaggi sarà disponibile nelle versioni future.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurare RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"

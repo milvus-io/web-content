@@ -59,27 +59,27 @@ summary: >-
    <tr>
      <td><p><code translate="no">L2</code></p></td>
      <td><p>Jarak L2 yang lebih kecil menunjukkan kemiripan yang lebih tinggi.</p></td>
-     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa <code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></p></td>
+     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa</p><p><code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">IP</code></p></td>
      <td><p>Jarak IP yang lebih besar menunjukkan kemiripan yang lebih tinggi.</p></td>
-     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa <code translate="no">radius</code> &lt;= jarak &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa</p><p><code translate="no">radius</code> &lt; jarak &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">COSINE</code></p></td>
      <td><p>Jarak COSINE yang lebih besar menunjukkan kemiripan yang lebih tinggi.</p></td>
-     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa <code translate="no">radius</code> &lt; jarak &lt;= <code translate="no">range_filter</code></p></td>
+     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa</p><p><code translate="no">radius</code> &lt; jarak &lt;= <code translate="no">range_filter</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">JACCARD</code></p></td>
      <td><p>Jarak Jaccard yang lebih kecil menunjukkan kemiripan yang lebih tinggi.</p></td>
-     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa <code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></p></td>
+     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa</p><p><code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></p></td>
    </tr>
    <tr>
      <td><p><code translate="no">HAMMING</code></p></td>
      <td><p>Jarak Hamming yang lebih kecil menunjukkan kemiripan yang lebih tinggi.</p></td>
-     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa <code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></p></td>
+     <td><p>Untuk mengabaikan penyematan vektor yang paling mirip, pastikan bahwa</p><p><code translate="no">range_filter</code> &lt;= jarak &lt; <code translate="no">radius</code></p></td>
    </tr>
 </table>
 <h2 id="Examples" class="common-anchor-header">Contoh<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -249,3 +249,6 @@ curl --request POST \
 }&#x27;</span>
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Jika vektor kueri sudah ada di koleksi target, pertimbangkan untuk menggunakan <code translate="no">ids</code> alih-alih mengambilnya sebelum melakukan pencarian. Untuk detailnya, lihat <a href="/docs/id/primary-key-search.md">Pencarian Kunci Utama</a>.</p>
+</div>

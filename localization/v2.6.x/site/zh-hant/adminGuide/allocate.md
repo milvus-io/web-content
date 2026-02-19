@@ -19,7 +19,7 @@ summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
         ></path>
       </svg>
     </button></h1><p>本主題描述如何在 Kubernetes 上分配資源給 Milvus 叢集。</p>
-<p>一般而言，您在生產中分配給 Milvus 叢集的資源應與機器的工作量成正比。分配資源時，您也應該考慮機器類型。雖然您可以在群集執行時更新配置，但我們建議您在<a href="/docs/zh-hant/install_cluster-helm.md">部署群集</a>前設定這些值。</p>
+<p>一般而言，您在生產中分配給 Milvus 叢集的資源應與機器的工作量成正比。分配資源時，您也應該考慮機器類型。雖然您可以在群集執行時更新配置，但我們建議您在<a href="/docs/zh-hant/install_cluster-helm.md">部署群集</a>之前設定這些值。</p>
 <div class="alert note">
 <p>有關如何使用 Milvus Operator 分配資源的資訊，請參閱<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator">使用 Milvus Operator 分配資源</a>。</p>
 </div>
@@ -62,18 +62,48 @@ summary: 瞭解如何在 Kubernetes 上為 Milvus 分配資源。
 <li><a href="/docs/zh-hant/allocate.md#Allocate-resources-with-commands">使用指令</a></li>
 <li><a href="/docs/zh-hant/allocate.md#Allocate-resources-by-setting-configuration-file">在<code translate="no">YAML</code> 檔案中設定參數</a></li>
 </ul>
-<h3 id="Allocate-resources-with-commands" class="common-anchor-header">使用指令分配資源</h3><p>如果使用<code translate="no">--set</code> 更新資源配置，您需要為每個 Milvus 元件設定資源變數。</p>
+<h3 id="Allocate-resources-with-commands" class="common-anchor-header">使用指令分配資源<button data-href="#Allocate-resources-with-commands" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果使用<code translate="no">--set</code> 更新資源配置，您需要為每個 Milvus 元件設定資源變數。</p>
 <div class="filter">
 <a href="#standalone">Milvus 單機</a> <a href="#cluster">Milvus 集群</a></div>
-<div class="table-wrapper filter-standalone" markdown="block">
+<div class="filter-standalone table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set standalone.resources.limits.cpu=2 --set standalone.resources.limits.memory=4Gi --set standalone.resources.requests.cpu=0.1 --set standalone.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<div class="table-wrapper filter-cluster" markdown="block">
+<div class="filter-cluster table-wrapper" markdown="block">
 <pre><code translate="no" class="language-Shell">helm upgrade my-release milvus/milvus --reuse-values --set dataNode.resources.limits.cpu=2 --set dataNode.resources.limits.memory=4Gi --set dataNode.resources.requests.cpu=0.1 --set dataNode.resources.requests.memory=128Mi
 <button class="copy-code-btn"></button></code></pre>
 </div>
-<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">透過設定配置檔分配資源</h3><p>您也可以在<code translate="no">resources.yaml</code> 檔案中指定參數<code translate="no">resources.requests</code> 和<code translate="no">resources.limits</code> 來分配 CPU 和記憶體資源。</p>
+<h3 id="Allocate-resources-by-setting-configuration-file" class="common-anchor-header">透過設定配置檔分配資源<button data-href="#Allocate-resources-by-setting-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>您也可以在<code translate="no">resources.yaml</code> 檔案中指定參數<code translate="no">resources.requests</code> 和<code translate="no">resources.limits</code> 來分配 CPU 和記憶體資源。</p>
 <pre><code translate="no" class="language-Yaml"><span class="hljs-attr">dataNode:</span>
   <span class="hljs-attr">resources:</span>
     <span class="hljs-attr">limits:</span>

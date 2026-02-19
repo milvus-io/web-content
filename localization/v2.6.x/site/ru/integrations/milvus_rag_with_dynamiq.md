@@ -3,9 +3,10 @@ id: milvus_rag_with_dynamiq.md
 summary: >-
   В этом учебном пособии мы рассмотрим, как без проблем использовать Dynamiq с
   Milvus, высокопроизводительной векторной базой данных, специально созданной
-  для рабочих процессов RAG. Milvus обеспечивает эффективное хранение,
-  индексацию и поиск векторных вкраплений, что делает ее незаменимым компонентом
-  для систем ИИ, требующих быстрого и точного контекстного доступа к данным.
+  для рабочих процессов RAG. Milvus отличается эффективным хранением,
+  индексацией и поиском векторных вкраплений, что делает ее незаменимым
+  компонентом для систем искусственного интеллекта, требующих быстрого и точного
+  контекстного доступа к данным.
 title: Начало работы с Dynamiq и Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
@@ -70,7 +71,7 @@ title: Начало работы с Dynamiq и Milvus
     </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install dynamiq pymilvus milvus-lite</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Runtime" в верхней части экрана и выберите "Restart session" из выпадающего меню).</p>
 </div>
 <h3 id="Configure-the-LLM-agent" class="common-anchor-header">Настройка агента LLM<button data-href="#Configure-the-LLM-agent" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -352,7 +353,7 @@ ResourceWarning: Enable tracemalloc to get the object allocation traceback
         ></path>
       </svg>
     </button></h2><p>В этом учебном пособии мы реализуем рабочий процесс поиска документов с дополненной генерацией (Retrieval-Augmented Generation, RAG). Этот рабочий процесс принимает запрос пользователя, генерирует для него векторное вложение, извлекает наиболее релевантные документы из векторной базы данных Milvus и использует большую языковую модель (LLM) для создания подробного и учитывающего контекст ответа на основе извлеченных документов.</p>
-<p>Следуя этому процессу, вы создадите комплексное решение для семантического поиска и ответов на вопросы, сочетающее в себе мощь векторного поиска документов и возможности продвинутых LLM от OpenAI. Такой подход позволяет эффективно и интеллектуально отвечать на запросы пользователей, используя знания, хранящиеся в вашей базе данных документов.</p>
+<p>Следуя этому процессу, вы создадите комплексное решение для семантического поиска и ответов на вопросы, сочетающее в себе мощь векторного поиска документов и возможности передовых LLM OpenAI. Такой подход позволяет эффективно и интеллектуально отвечать на запросы пользователей, используя знания, хранящиеся в вашей базе данных документов.</p>
 <h3 id="Import-Required-Libraries-and-Initialize-Workflow" class="common-anchor-header">Импорт необходимых библиотек и инициализация рабочего процесса<button data-href="#Import-Required-Libraries-and-Initialize-Workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

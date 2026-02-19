@@ -42,7 +42,7 @@ title: 使用 Arize Pheonix 進行評估
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas <span class="hljs-string">&quot;arize-phoenix&gt;=4.29.0&quot;</span> nest_asyncio
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動運行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
+<p>如果您使用的是 Google Colab，為了啟用剛安裝的相依性，您可能需要<strong>重新啟動執行時</strong>（點選畫面頂端的「Runtime」功能表，並從下拉式功能表中選擇「Restart session」）。</p>
 </div>
 <p>在本範例中，我們將使用 OpenAI 作為 LLM。您應該準備<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作為環境變數。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
@@ -478,7 +478,7 @@ results_df.head()
       <td>[Code coverage\n\nBefore submitting your pull ...</td>
       <td>[Code coverage\n/nBefore submitting your pull ...</td>
       <td>事實</td>
-      <td>參考文獻中規定，在 runni...</td>
+      <td>參考文獻規定，在執行程式碼覆蓋之前，您應該...</td>
       <td>正確</td>
       <td>要確定答案是否正確，我們需要...</td>
     </tr>

@@ -41,7 +41,22 @@ summary: >-
       </svg>
     </button></h2><p>بعد تهيئة مثيل Milvus، يتم إنشاء مستخدم جذر تلقائياً للمصادقة عند الاتصال ب Milvus للمرة الأولى. اسم المستخدم للمستخدم الجذر هو <code translate="no">root</code> وكلمة المرور هي <code translate="no">Milvus</code>. الدور الافتراضي للمستخدم الجذر هو <code translate="no">admin</code> ، والذي لديه حق الوصول إلى جميع الموارد. لضمان أمن البيانات، يرجى الحفاظ على بيانات اعتماد المستخدم الجذر آمنة لمنع الوصول غير المصرح به.</p>
 <p>للعمليات اليومية، نوصي بإنشاء مستخدمين بدلاً من استخدام المستخدم الجذر.</p>
-<h3 id="Create-a-user" class="common-anchor-header">إنشاء مستخدم</h3><p>يوضح المثال التالي كيفية إنشاء مستخدم باسم المستخدم <code translate="no">user_1</code> وكلمة المرور <code translate="no">P@ssw0rd</code>. يجب أن يتبع اسم المستخدم وكلمة المرور للمستخدم القواعد التالية:</p>
+<h3 id="Create-a-user" class="common-anchor-header">إنشاء مستخدم<button data-href="#Create-a-user" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية إنشاء مستخدم باسم المستخدم <code translate="no">user_1</code> وكلمة المرور <code translate="no">P@ssw0rd</code>. يجب أن يتبع اسم المستخدم وكلمة المرور للمستخدم القواعد التالية:</p>
 <ul>
 <li><p>اسم المستخدم: يجب أن يبدأ بحرف ويمكن أن يتضمن فقط أحرفًا كبيرة أو صغيرة وأرقامًا وشروطًا سفلية.</p></li>
 <li><p>كلمة المرور: يجب أن يتراوح طولها بين 8 و64 حرفًا ويجب أن تتضمن ثلاثة مما يلي: أحرف كبيرة وأحرف صغيرة وأرقام وأحرف خاصة.</p></li>
@@ -124,7 +139,22 @@ curl --request POST \
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Update-password" class="common-anchor-header">تحديث كلمة المرور</h3><p>بعد إنشاء مستخدم، يمكنك تحديث كلمة المرور إذا نسيت.</p>
+<h3 id="Update-password" class="common-anchor-header">تحديث كلمة المرور<button data-href="#Update-password" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إنشاء مستخدم، يمكنك تحديث كلمة المرور إذا نسيت.</p>
 <p>يجب أن تتبع كلمة المرور الجديدة القاعدة التالية:</p>
 <ul>
 <li>يجب أن تتكون من 8-64 حرفًا وأن تتضمن ثلاثة مما يلي: أحرف كبيرة وأحرف صغيرة وأرقام وأحرف خاصة.</li>
@@ -173,7 +203,22 @@ client.updatePassword(updatePasswordReq);
     &quot;password&quot;: &quot;P@ssw0rd&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-users" class="common-anchor-header">سرد المستخدمين</h3><p>بعد إنشاء عدة مستخدمين، يمكنك سرد وعرض جميع المستخدمين الحاليين.</p>
+<h3 id="List-users" class="common-anchor-header">سرد المستخدمين<button data-href="#List-users" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إنشاء عدة مستخدمين، يمكنك سرد وعرض جميع المستخدمين الحاليين.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -215,7 +260,22 @@ client.list_users()
         ></path>
       </svg>
     </button></h2><p>يوفر Milvus دورًا مدمجًا يسمى <code translate="no">admin</code> ، وهو دور مسؤول يمكنه الوصول إلى الموارد ضمن جميع المثيلات ولديه امتيازات لجميع العمليات. للحصول على إدارة وصول أكثر دقة وأمان محسّن للبيانات، يوصى بإنشاء أدوار مخصصة بناءً على احتياجاتك.</p>
-<h3 id="Create-a-role" class="common-anchor-header">إنشاء دور</h3><p>يوضح المثال التالي كيفية إنشاء دور باسم <code translate="no">role_a</code>.</p>
+<h3 id="Create-a-role" class="common-anchor-header">إنشاء دور<button data-href="#Create-a-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يوضح المثال التالي كيفية إنشاء دور باسم <code translate="no">role_a</code>.</p>
 <p>يجب أن يتبع اسم الدور القاعدة التالية:</p>
 <ul>
 <li>يجب أن يبدأ بحرف ويمكن أن يتضمن فقط أحرفًا كبيرة أو صغيرة وأرقامًا وشرطات سفلية.</li>
@@ -225,9 +285,10 @@ client.list_users()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>)
-<span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.rbac.request.CreateRoleReq;
+
+<span class="hljs-type">CreateRoleReq</span> <span class="hljs-variable">createRoleReq</span> <span class="hljs-operator">=</span> CreateRoleReq.builder()
         .roleName(<span class="hljs-string">&quot;role_a&quot;</span>)
         .build();
        
@@ -250,7 +311,22 @@ client.create_role(role_name=<span class="hljs-string">&quot;role_a&quot;</span>
     &quot;roleName&quot;: &quot;role_a&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-roles" class="common-anchor-header">سرد الأدوار</h3><p>بعد إنشاء عدة أدوار، يمكنك سرد جميع الأدوار الموجودة وعرضها.</p>
+<h3 id="List-roles" class="common-anchor-header">سرد الأدوار<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>بعد إنشاء عدة أدوار، يمكنك سرد جميع الأدوار الموجودة وعرضها.</p>
 <div class="multipleCode">
    <a href="#python">Python</a> <a href="#java">Java Java</a> <a href="#go">Go</a> <a href="#javascript">NodeJS</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -276,5 +352,5 @@ client.list_roles()
 -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>فيما يلي مثال على الإخراج. <code translate="no">admin</code> هو الدور الافتراضي في ميلفوس. <code translate="no">role_a</code> هو الدور الجديد الذي تم إنشاؤه للتو.</p>
-<pre><code translate="no"><span class="hljs-selector-attr">[<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;role_a&#x27;</span>]</span>
+<pre><code translate="no" class="language-plaintext">[&#x27;admin&#x27;, &#x27;role_a&#x27;]
 <button class="copy-code-btn"></button></code></pre>

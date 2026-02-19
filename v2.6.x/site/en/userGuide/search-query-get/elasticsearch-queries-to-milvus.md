@@ -485,7 +485,7 @@ search_params_dense = {
     "anns_field": "vector",
     "param": {
         "metric_type": "IP",
-        "params": {"nprobe": 10}, 
+        "params": {"nprobe": 10},
     },
     "limit": 100
 }
@@ -497,7 +497,6 @@ search_params_sparse = {
     "anns_field": "text_sparse",
     "param": {
         "metric_type": "BM25",
-        "params": {"drop_ratio_search": 0.2}
     }
 }
 
@@ -515,7 +514,7 @@ This example demonstrates a hybrid search in Milvus that combines:
 
 1. **Dense vector search**: Using the inner product (IP) metric with `nprobe` set to 10 for approximate nearest neighbor (ANN) search on the `vector` field.
 
-1. **Sparse vector search**: Using the BM25 similarity metric with a `drop_ratio_search` parameter of 0.2 on the `text_sparse` field.
+1. **Sparse vector search**: Using the BM25 similarity metric on the `text_sparse` field.
 
 The results from these searches are executed separately, combined, and reranked using the Reciprocal Rank Fusion (RRF) ranker. The hybrid search returns the top 10 entities from the reranked list.
 

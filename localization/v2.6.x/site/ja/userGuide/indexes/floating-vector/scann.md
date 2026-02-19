@@ -112,6 +112,7 @@ index_params.add_index(
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;params&quot;</span>: {
         <span class="hljs-string">&quot;reorder_k&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-comment"># Number of candidates to refine</span>
+        <span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">8</span> <span class="hljs-comment"># Number of clusters to search</span>
     }
 }
 
@@ -127,7 +128,8 @@ res = MilvusClient.search(
 <ul>
 <li><p><code translate="no">params</code>:インデックスで検索するための追加構成オプション。</p>
 <ul>
-<li><code translate="no">reorder_k</code>:再順位付け段階で絞り込む候補の数。</li>
+<li><code translate="no">reorder_k</code>:再ランク付けの段階で絞り込む候補の数。</li>
+<li><code translate="no">nprobe</code>:検索するクラスタの数。</li>
 </ul>
 <p><code translate="no">SCANN</code> インデックスで利用可能な検索パラメータについては、<a href="/docs/ja/scann.md#Index-specific-search-params">インデックス固有の検索パラメータ</a> を参照。</p></li>
 </ul>
@@ -146,7 +148,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、インデックスを構築し、インデックス上で検索を実行するために使用されるパラメータの概要を説明します。</p>
+    </button></h2><p>この節では、インデックスの構築とインデックスに対する検索の実行に使用するパラメータの概要を説明します。</p>
 <h3 id="Index-building-params" class="common-anchor-header">インデックス構築パラメータ<button data-href="#Index-building-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -162,7 +164,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>以下の表に、<code translate="no">params</code> で<a href="/docs/ja/scann.md#Build-index">インデックスを構築</a>する際に設定できるパラメータを列挙します。</p>
+    </button></h3><p>以下の表は、<code translate="no">params</code> で<a href="/docs/ja/scann.md#Build-index">インデックスを構築する</a>際に設定できるパラメータの一覧です。</p>
 <table>
    <tr>
      <th><p>パラメータ</p></th>
@@ -174,13 +176,13 @@ res = MilvusClient.search(
      <td><p><code translate="no">nlist</code></p></td>
      <td><p>クラスタ・ユニット数</p></td>
      <td><p>[1, 65536]</p></td>
-     <td><p><em>nlistを</em>大きくすると、枝刈りの効率が上がり、一般的に粗い探索が速くなりますが、パーティションが小さくなりすぎ、リコールが低下する可能性があります；<em>nlistを</em>小さくすると、より大きなクラスタをスキャンし、リコールは向上しますが、探索が遅くなります。</p></td>
+     <td><p><em>nlistを</em>大きくすると、枝刈りの効率が上がり、一般的に粗い探索が速くなりますが、パーティションが小さくなりすぎてリコールが低下する可能性があります；<em>nlistを</em>小さくすると、より大きなクラスタをスキャンし、リコールは向上しますが、探索が遅くなります。</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">with_raw_data</code></p></td>
      <td><p>元のベクトルデータを量子化された表現と一緒に保存するかどうか。有効にすると、再順位付けの段階で、量子化された近似ベクトルではなく元のベクトルを使用することで、より正確な類似度計算が可能になる。</p></td>
      <td><p><strong>型</strong>：ブール値</p><p><strong>範囲</strong>：<code translate="no">true</code>,<code translate="no">false</code></p><p><strong>デフォルト値</strong>：<code translate="no">true</code></p></td>
-     <td><p><strong>より高い検索精度を</strong>得るため、またストレージ容量が重要でない場合は、<code translate="no">true</code> に設定する。オリジナルのベクトル・データにより、再ランキング時に、より正確な類似度計算が可能になる。</p><p><code translate="no">false</code> に設定すると、特に大きなデータセットの場合、<strong>ストレージのオーバーヘッドと</strong>メモリ使用<strong>量が削減される</strong>。ただし、再ランキング段階では量子化されたベクトルが使用されるため、検索精度が若干低下する可能性があります。</p><p><strong>推奨</strong>：精度が重要なプロダクション・アプリケーションには<code translate="no">true</code> を使用する。</p></td>
+     <td><p><strong>より高い検索精度を</strong>得るため、またストレージ容量が重要でない場合は、<code translate="no">true</code> に設定する。オリジナルのベクトル・データにより、再ランキング時に、より正確な類似度計算が可能になる。</p><p><code translate="no">false</code> に設定すると、特に大きなデータセットの場合、<strong>ストレージのオーバーヘッドと</strong>メモリ使用<strong>量が削減される</strong>。ただし、再ランキング段階では量子化されたベクトルを使用するため、検索精度が若干低下する可能性があります。</p><p><strong>推奨</strong>：精度が重要なプロダクション・アプリケーションには<code translate="no">true</code> を使用する。</p></td>
    </tr>
 </table>
 <h3 id="Index-specific-search-params" class="common-anchor-header">インデックス固有の検索パラメータ<button data-href="#Index-specific-search-params" class="anchor-icon" translate="no">
@@ -211,5 +213,11 @@ res = MilvusClient.search(
      <td><p>再順位付け段階で絞り込まれる候補ベクトルの数を制御する。このパラメータは、最初のパーティショニングと量子化段階からの上位候補が、より正確な類似度計算を使用して再評価される数を決定します。</p></td>
      <td><p><strong>タイプ</strong>整数</p><p><strong>範囲</strong>: [1, int_max]：[1,<em>int_max］</em></p><p><strong>デフォルト値</strong>：なし</p></td>
      <td><p><code translate="no">reorder_k</code> を大きくすると、最終的な絞り込み段階でより多くの候補が考慮されるため、一般的に<strong>検索精度が高く</strong>なる。しかし、これはまた、追加の計算のために<strong>検索時間を増加させます</strong>。</p><p>高い想起率を達成することが重要で、検索速度があまり気にならない場合は、<code translate="no">reorder_k</code> を増やすことを検討してください。<code translate="no">limit</code> (TopK results to return)の2-5倍から始めるのがよいでしょう。</p><p>特に、精度が多少低下しても構わないようなシナリオでは、より高速な検索を優先するため、<code translate="no">reorder_k</code> を減らすことを検討してください。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[<em>limit</em>,<em>limit</em>* 5]。</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">nprobe</code></p></td>
+     <td><p>候補を検索するクラスタ数。</p></td>
+     <td><p><strong>タイプ</strong>整数</p><p><strong>範囲</strong>[1,<em>nlist</em>] とする。</p><p><strong>デフォルト値</strong>：<code translate="no">8</code></p></td>
+     <td><p>より高い値は、より多くのクラスタを検索することを可能にし、検索範囲を拡大することでリコールを向上させるが、その代償としてクエリの待ち時間が増加する。</p><p>速度と精度のバランスをとるために、<code translate="no">nlist</code> に比例して<code translate="no">nprobe</code> を設定します。</p><p>ほとんどの場合、この範囲内の値を設定することをお勧めします：[1, nlist]。</p></td>
    </tr>
 </table>

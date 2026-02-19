@@ -133,6 +133,12 @@ In the [Quick Start](#Quick-start) section, we have shown setting options during
 | `milvus.token` | `--` | Milvus server token. See [Manage Milvus Connections](https://milvus.io/docs/manage_connection.md) for detail. |
 | `milvus.database.name` | `default` | Name of the Milvus database to read or write. |
 | `milvus.collection.name` | `hello_milvus` | Name of the Milvus collection to read or write. |
+| `milvus.secure` | `false` | Enables secure TLS/SSL connections. |
+| `milvus.secure.serverName` | `localhost` | Expected hostname for TLS verification. |
+| `milvus.secure.serverPemPath` | `--` | Path to the server's PEM file for TLS. |
+| `milvus.secure.caCert` | `--` | Path to the CA certificate file for verification. |
+| `milvus.secure.clientCert` | `--` | Path to the client certificate for authentication. |
+| `milvus.secure.clientKey` | `--` | Path to the client private key for authentication. |
 | `milvus.collection.primaryKeyField` | `None` | Name of the primary key field in the collection. Required if the collection does not exist. |
 | `milvus.collection.vectorField` | `None` | Name of the vector field in the collection. Required if the collection does not exist. |
 | `milvus.collection.vectorDim` | `None` | Dimension of the vector field in the collection. Required if the collection does not exist. |

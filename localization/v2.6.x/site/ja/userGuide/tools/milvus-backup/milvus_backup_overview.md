@@ -79,13 +79,14 @@ title: Milvusバックアップ
     </button></h2><p>Milvus Backup v0.5.7以降のMilvusバージョン間のバックアップ・リストアの互換性を以下の表に示します。</p>
 <table>
 <thead>
-<tr><th>バックアップ ↓ / リストア → （英語</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th></tr>
+<tr><th>バックアップ元 ↓ / リストア先</th><th>Milvus v2.2.x</th><th>Milvus v2.3.x</th><th>Milvus v2.4.x</th><th>Milvus v2.5.x</th><th>Milvus v2.6.x</th></tr>
 </thead>
 <tbody>
-<tr><td>Milvus v2.2.x</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>いいえ</td></tr>
-<tr><td>Milvus v2.3.x</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td></tr>
-<tr><td>Milvus v2.4.x</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td></tr>
-<tr><td>Milvus v2.5.x</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td></tr>
+<tr><td>Milvus v2.2.x</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>Milvus v2.3.x</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>Milvus v2.4.x</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td><td>はい</td></tr>
+<tr><td>Milvus v2.5.x</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td><td>はい</td></tr>
+<tr><td>Milvus v2.6.x</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>いいえ</td><td>はい</td></tr>
 </tbody>
 </table>
 <h2 id="Latest-release" class="common-anchor-header">最新リリース<button data-href="#Latest-release" class="anchor-icon" translate="no">
@@ -104,5 +105,5 @@ title: Milvusバックアップ
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.7">v0.5.7</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.5.10">v0.5.10</a></li>
 </ul>

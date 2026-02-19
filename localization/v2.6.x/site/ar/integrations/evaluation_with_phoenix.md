@@ -419,7 +419,7 @@ results_df.head()
 <button class="copy-code-btn"></button></code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr tr th:only-of-type { محاذاة رأسية: وسط؛ }<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr tr th:only-of-type { محاذاة رأسية: الوسط؛ }<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -449,7 +449,7 @@ results_df.head()
       <th>0</th>
       <td>ما هي مواصفات متطلبات الأجهزة التالية؟</td>
       <td>[متطلبات الأجهزة \n\nما هي مواصفات متطلبات الأجهزة التالية...</td>
-      <td>ما هي مواصفات متطلبات الأجهزة اللازمة لبناء نظام....</td>
+      <td>ما هي مواصفات متطلبات الأجهزة اللازمة لبناء نظام.....</td>
       <td>إذا كنت ترغب في إنشاء برنامج Milvus وتشغيله من المصدر...</td>
       <td>[متطلبات الأجهزة \\nالمواصفات التالية لبناء...</td>
       <td>[متطلبات الأجهزة \n\nالمواصفات التالية...</td>

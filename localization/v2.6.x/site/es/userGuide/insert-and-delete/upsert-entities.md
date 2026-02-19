@@ -112,17 +112,11 @@ summary: >-
 <li><p>Si upsert con <code translate="no">partial_update</code> desactivado, el comportamiento por defecto es <strong>anular</strong>. Esto significa que el valor del campo dinámico será anulado por todos los campos no definidos por el esquema incluidos en la solicitud y sus valores.</p>
 <p>Por ejemplo, si los datos incluidos en la solicitud son <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>, los pares clave-valor del campo dinámico de la entidad de destino se actualizarán a ese valor.</p></li>
 <li><p>Si upsert con <code translate="no">partial_update</code> activado, el comportamiento por defecto es <strong>fusionar</strong>. Esto significa que el valor del campo dinámico se fusionará con todos los campos no definidos por el esquema incluidos en la solicitud y sus valores.</p>
-<p>Por ejemplo, si los datos incluidos en la solicitud son <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, los pares clave-valor del campo dinámico de la entidad de destino se convertirán en <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> tras la inserción ascendente.</p></li>
+<p>Por ejemplo, si los datos incluidos en la solicitud son <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>, los pares clave-valor del campo dinámico de la entidad de destino se convertirán en <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> tras la inserción ascendente.</p></li>
 </ul></li>
 <li><p><strong>Upsert de un campo JSON.</strong></p>
 <p>Supongamos que la colección de ejemplo tiene un campo JSON definido por esquema denominado <code translate="no">extras</code>, y los pares clave-valor de este campo JSON de una entidad son similares a <code translate="no">{&quot;author&quot;: &quot;John&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;]}</code>.</p>
-<p>Cuando haga upsert en el campo <code translate="no">extras</code> de una entidad con datos JSON modificados, tenga en cuenta que:</p>
-<ul>
-<li><p>Si upsert con <code translate="no">partial_update</code> desactivado, el comportamiento por defecto es <strong>anular</strong>. Esto significa que el valor del campo JSON incluido en la solicitud anulará el valor original del campo JSON de la entidad de destino.</p>
-<p>Por ejemplo, si los datos incluidos en la solicitud son <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, los pares clave-valor del campo <code translate="no">extras</code> de la entidad de destino se actualizarán a <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}</code>.</p></li>
-<li><p>Si upsert con <code translate="no">partial_update</code> activado, el comportamiento por defecto es <strong>fusionar</strong>. Esto significa que el valor del campo JSON incluido en la solicitud se fusionará con el valor original del campo JSON de la entidad de destino.</p>
-<p>Por ejemplo, si los datos incluidos en la solicitud son <code translate="no">{extras: {&quot;author&quot;: &quot;Jane&quot;, &quot;genre&quot;: &quot;fantasy&quot;}}</code>, los pares clave-valor del campo <code translate="no">extras</code> de la entidad de destino se convertirán en <code translate="no">{&quot;author&quot;: &quot;Jane&quot;, &quot;year&quot;: 2020, &quot;tags&quot;: [&quot;fiction&quot;], &quot;genre&quot;: &quot;fantasy&quot;}</code> después de la udpate.</p></li>
-</ul></li>
+<p>Al insertar el campo <code translate="no">extras</code> de una entidad con datos JSON modificados, tenga en cuenta que el campo JSON se trata como un todo, y no puede actualizar claves individuales de forma selectiva. En otras palabras, el campo JSON <strong>NO</strong> admite upsert en modo <strong>merge</strong>.</p></li>
 </ul>
 <h3 id="Limits--Restrictions" class="common-anchor-header">Límites y restricciones<button data-href="#Limits--Restrictions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,9 +133,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Basándose en el contenido anterior, existen varios límites y restricciones a seguir:</p>
+    </button></h3><p>Basándonos en el contenido anterior, existen varios límites y restricciones a seguir:</p>
 <ul>
-<li><p>La petición <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino.</p></li>
+<li><p>La solicitud <code translate="no">upsert</code> debe incluir siempre las claves primarias de las entidades de destino.</p></li>
 <li><p>La colección de destino debe estar cargada y disponible para consultas.</p></li>
 <li><p>Todos los campos especificados en la solicitud deben existir en el esquema de la colección de destino.</p></li>
 <li><p>Los valores de todos los campos especificados en la petición deben coincidir con los tipos de datos definidos en el esquema.</p></li>
