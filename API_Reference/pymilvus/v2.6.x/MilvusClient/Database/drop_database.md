@@ -16,7 +16,7 @@ drop_database(
 
 - **db_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the database to drop.
 

@@ -16,13 +16,13 @@ revoke_role(
 
 - **user_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing user.
 
 - **role_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to revoke.
 

@@ -14,7 +14,7 @@ list_privilege_groups(
 
 **PARAMETERS:**
 
-- **timeout** (*Optional&#91;float&#93;*) - 
+- **timeout** (*Optional[float]*) - 
 
     The timeout duration for this operation.
 
@@ -22,7 +22,7 @@ list_privilege_groups(
 
 **RETURN TYPE:**
 
-*List&#91;Dict&#91;str, str&#93;&#93;*
+*List[Dict[str, str]]*
 
 **RETURNS:**
 

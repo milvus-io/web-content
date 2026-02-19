@@ -20,7 +20,7 @@ drop_collection_properties(
 
     The name of the target collection.
 
-- **property_keys** (*List&#91;str&#93;*) -
+- **property_keys** (*List[str]*) -
 
     The names of the properties to drop in a list. Possible values are as follows:
 
@@ -30,7 +30,7 @@ drop_collection_properties(
 
     - `partitionkey.isolation`
 
-- **timeout** (*Optional&#91;float&#93;*) - 
+- **timeout** (*Optional[float]*) - 
 
     The timeout duration for this operation.
 

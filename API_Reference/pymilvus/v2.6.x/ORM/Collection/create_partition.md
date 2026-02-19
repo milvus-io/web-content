@@ -15,7 +15,7 @@ create_partition(
 
 - **partition_name** (*string*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the partition to create.
 

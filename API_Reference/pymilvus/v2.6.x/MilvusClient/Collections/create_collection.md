@@ -24,7 +24,7 @@ create_collection(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to create.
 
@@ -322,24 +322,3 @@ You can choose between a quick setup or a customized setup as follows:
     ```
 
     In the above code, the collection will also be created. However, without `index_param`, data in the collection will not be indexed and loaded into memory.
-
-## Related methods
-
-- [create_schema()](create_schema.md)
-
-- [describe_collection()](describe_collection.md)
-
-- [drop_collection()](drop_collection.md)
-
-- [get_collection_stats()](get_collection_stats.md)
-
-- [has_collection()](has_collection.md)
-
-- [list_collections()](list_collections.md)
-
-- [rename_collection()](rename_collection.md)
-
-- [IndexType](IndexType.md)
-
-- [DataType](DataType.md)
-

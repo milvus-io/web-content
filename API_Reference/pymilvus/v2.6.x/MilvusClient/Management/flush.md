@@ -19,7 +19,7 @@ flush(
 
     The name of the target collection.
 
-- **timeout** (*Optional&#91;float&#93;*) - 
+- **timeout** (*Optional[float]*) - 
 
     The timeout duration for this operation.
 

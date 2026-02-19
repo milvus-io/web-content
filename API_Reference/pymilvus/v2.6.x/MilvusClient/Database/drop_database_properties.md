@@ -6,52 +6,49 @@ This operation drops the setting of the specified properties.
 
 ```python
 drop_database_properties(
-    db_name: str, 
-    property_keys: List[string],
-    timeout: Optional[float] = None,
+    db_name: str,
+    property_keys: List[str],
     **kwargs,
 )
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
+- **db_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the database whose properties are to be dropped.
 
-- **properties** (*&#91;&#93;string* | *None*) -
+- **property_keys** (*list[str]*) -
+
+    **[REQUIRED]**
 
     Names of the properties to drop. Possible database properties are as follows:
 
-    - **database.replica.number** (*int*) -
+      - **database.replica.number** (*int*) - Number of replicas for the database.
 
-        Number of replicas for the database.
+      - **database.resource_groups** (*list[str]*) - Resource groups dedicated to the database.
 
-    - **database.resource_groups** (*&#91;&#93;str*) -
+      - **database.diskQuota.mb** (*int*) - Disk quota allocated to the database in megabytes (**MB**).
 
-        Resource groups dedicated to the database.
+      - **database.max.collections** (*int*) - Maximum number of collections allowed in the database.
 
-    - **database.diskQuota.mb** (*int*) -
+      - **database.force.deny.writing** (*bool*) - Whether to deny all write operations in the database.
 
-        Disk quota allocated to the database in megabytes (**MB**).
+      - **database.force.deny.reading** (*bool*) - Whether to deny all read operations in the database.
 
-    - **database.max.collections** (*int*) -
+    - **database.replica.number** (*int*) - Number of replicas for the database.
 
-        Maximum number of collections allowed in the database.
+    - **database.resource_groups** (*list[str]*) - Resource groups dedicated to the database.
 
-    - **database.force.deny.writing** (*bool*) -
+    - **database.diskQuota.mb** (*int*) - Disk quota allocated to the database in megabytes (**MB**).
 
-        Whether to deny all write operations in the database.
+    - **database.max.collections** (*int*) - Maximum number of collections allowed in the database.
 
-    - **database.force.deny.reading** (*bool*) -
+    - **database.force.deny.writing** (*bool*) - Whether to deny all write operations in the database.
 
-        Whether to deny all read operations in the database.
-
-- **timeout** (*float* | *None*) -
-
-    The timeout duration for this operation. Setting this to *None* indicates that it timeouts when a response arrives, or an error occurs.
+    - **database.force.deny.reading** (*bool*) - Whether to deny all read operations in the database.
 
 **RETURN TYPE:**
 
@@ -63,17 +60,19 @@ drop_database_properties(
 
 **EXCEPTIONS:**
 
-- `MilvusException` - Raised if any error occurs during this operation.
+- **MilvusException**
+
+    This exception will be raised when any error occurs during this operation.
 
 ## Examples
 
 ```python
 from pymilvus import MilvusClient
 
-client = MilvusClient(uri, token) # db = "default" 
+client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 
 client.drop_database_properties(
     db_name="my_db",
-    properties=["a", "b"]
+    property_keys=["database.replica.number", "database.diskQuota.mb"]
 )
 ```

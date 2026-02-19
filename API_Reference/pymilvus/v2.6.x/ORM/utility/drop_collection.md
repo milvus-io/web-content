@@ -16,7 +16,7 @@ drop_collection(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection to delete.
 

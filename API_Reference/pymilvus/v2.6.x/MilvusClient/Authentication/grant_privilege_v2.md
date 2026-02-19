@@ -20,13 +20,13 @@ grant_privilege_v2(
 
 - **role_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to assign privileges to.
 
 - **privilege** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the privilege to assign. 
 
@@ -34,7 +34,7 @@ grant_privilege_v2(
 
 - **collection_name** (*str*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection. To grant privileges regarding all collections in the current database, set this parameter to `*`. 
 

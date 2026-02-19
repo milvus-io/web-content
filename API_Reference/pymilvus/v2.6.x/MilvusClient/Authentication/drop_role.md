@@ -7,7 +7,9 @@ This operation drops a custom role.
 ```python
 drop_role(
     role_name: str,
-    timeout: Optional[float] = None
+    force_drop: bool = False,
+    timeout: Optional[float] = None,
+    **kwargs,
 ) -> None
 ```
 
@@ -15,15 +17,17 @@ drop_role(
 
 - **role_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to drop.
 
-- **timeout** (*float* | *None*)  
+- **force_drop** (*bool*) -
 
-    The timeout duration for this operation. 
+    Whether to forcefully drop the role even if it has privileges or users assigned. Defaults to **False**.
 
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+- **timeout** (*float* | *None*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
 **RETURN TYPE:**
 
@@ -48,15 +52,17 @@ None
 ```python
 from pymilvus import MilvusClient
 
-# 1. Create a milvus client
 client = MilvusClient(
     uri="http://localhost:19530",
     token="root:Milvus"
 )
 
-# 2. Create a role
+# Create a role
 client.create_role(role_name="read_only")
 
-# 3. Drop a role
+# Drop a role
 client.drop_role(role_name="read_only")
+
+# Force drop a role with assigned privileges
+client.drop_role(role_name="custom_role", force_drop=True)
 ```

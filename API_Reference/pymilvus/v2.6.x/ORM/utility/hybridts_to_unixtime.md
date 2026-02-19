@@ -14,7 +14,7 @@ hybridts_to_unixtime(
 
 - **hybridts** (*int*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A hybrid timestamp.
 

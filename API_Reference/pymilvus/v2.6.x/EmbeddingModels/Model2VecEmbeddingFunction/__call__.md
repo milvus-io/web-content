@@ -18,13 +18,13 @@ model2vec_ef(
 
 **PARAMETERS:**
 
-- **texts** (*List&#91;str&#93;*)
+- **texts** (*List[str]*)
 
     A list of string values, where each string represents text that will be passed to the embedding model for encoding. The model will generate an embedding vector for each string in the list.
 
 **RETURN TYPE:**
 
-*List&#91;np.array&#93;*
+*List[np.array]*
 
 **RETURNS:**
 

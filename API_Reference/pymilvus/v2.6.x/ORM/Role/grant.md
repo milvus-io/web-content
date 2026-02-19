@@ -25,7 +25,7 @@ grant(
 
 - **object** (*string*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The type of the object to grant the privilege.
 
@@ -33,7 +33,7 @@ grant(
 
 - **object_name** (*string*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a target object of the type specified in **object**.
 
@@ -41,7 +41,7 @@ grant(
 
 - **privilege** (*string*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the privilege to grant.
 

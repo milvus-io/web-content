@@ -30,7 +30,7 @@ Partition(
 
 - **collection** (*Collection* | *str*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The collection in which to create a partition. 
 
@@ -47,7 +47,7 @@ Partition(
 
 - **name** (*string*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the partition to create.
 

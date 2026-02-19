@@ -14,7 +14,7 @@ partition(
 
 - **partition_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the partition to get.
 

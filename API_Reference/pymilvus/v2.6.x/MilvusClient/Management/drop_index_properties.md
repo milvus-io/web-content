@@ -25,13 +25,13 @@ drop_index_properties(
 
     The name of the index file to drop.
 
-- **property_keys** (*List&#91;str&#93;*) -
+- **property_keys** (*List[str]*) -
 
     The names of the properties to drop in a list. Possible properties are as follows:
 
     - `mmap.enabled`
 
-- **timeout** (*Optional&#91;float&#93;*) - 
+- **timeout** (*Optional[float]*) - 
 
     The timeout duration for this operation.
 

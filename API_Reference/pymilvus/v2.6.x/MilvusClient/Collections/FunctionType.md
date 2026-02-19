@@ -15,7 +15,3 @@ This is an enumeration that provides the following constants.
 - RERANK = 3
 
     Sets the function type to **RERANK**. This indicates that Milvus will use a ranker to rerank candidates for improved search performance.
-
-- UNKNOWN = 999
-
-    Sets the data type to **Unknown**.

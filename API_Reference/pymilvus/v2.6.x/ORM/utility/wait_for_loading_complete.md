@@ -16,7 +16,7 @@ wait_for_loading_complete(
 **PARAMETERS:**
 **collection_name** (*str*) -
 
-- **partition_names** (*list&#91;str&#93;*) -
+- **partition_names** (*list[str]*) -
 
     A list of partition names.
 

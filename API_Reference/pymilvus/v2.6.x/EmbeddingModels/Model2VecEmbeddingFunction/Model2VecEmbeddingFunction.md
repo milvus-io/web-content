@@ -25,7 +25,7 @@ Model2VecEmbeddingFunction(
 
     Valid options for Hugging Face model identifier are **minishlab/potion-base-8M** (default), **minishlab/potion-base-4M**, **minishlab/potion-base-2M**, **minishlab/potion-base-32M**, and **minishlab/potion-retrieval-32M**
 
-- ****kwargs**
+- **&ast;&ast;kwargs**
 
     Allows additional keyword arguments to be passed to the model initialization when loading a model from the Hugging Face Hub, including parameters such as huggingface authentication tokens.
 

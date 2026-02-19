@@ -17,7 +17,7 @@ create_database(
 
 - **db_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the database to create.
 
@@ -29,7 +29,7 @@ create_database(
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*&#91;&#93;str*) -
+    - **database.resource_groups** (*[]str*) -
 
         Resource groups dedicated to the database.
 

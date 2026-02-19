@@ -6,7 +6,7 @@ This operation adds a new scalar field to an existing collection without recreat
 
 <p><b>notes</b></p>
 
-<p>If the collection has dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via <code>$meta&#91;'field_name'&#93;</code> syntax.</p>
+<p>If the collection has dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via <code>$meta['field_name']</code> syntax.</p>
 
 </div>
 
@@ -15,9 +15,6 @@ This operation adds a new scalar field to an existing collection without recreat
 ```python
 add_collection_field(
     collection_name: str,
-    field_name: str,
-    data_type: DataType,
-    desc: str = "",
     timeout: Optional[float] = None,
     **kwargs
 )
@@ -27,19 +24,19 @@ add_collection_field(
 
 - **collection_name** *(string)* –
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection.
 
 - **field_name** *(string)* –
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the new field.
 
 - **data_type** *(DataType)* –
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The data type of the new field. See DataType for supported types.
 

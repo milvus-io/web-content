@@ -16,7 +16,7 @@ list_grant(
 
 - **object** (*str*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The type of the object to grant the privilege.
 
@@ -24,7 +24,7 @@ list_grant(
 
 - **object_name** (*str*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a target object of the type specified in **object**.
 

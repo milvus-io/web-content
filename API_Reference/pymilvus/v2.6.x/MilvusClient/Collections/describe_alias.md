@@ -15,7 +15,7 @@ describe_alias(
 
 - **alias** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The alias of a collection. 
 

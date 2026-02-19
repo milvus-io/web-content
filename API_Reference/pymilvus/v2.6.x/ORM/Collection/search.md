@@ -20,9 +20,9 @@ search(
 
 **PARAMETERS:**
 
-- **data** (*list&#91;list&#91;float&#93;&#93;*) - 
+- **data** (*list[list[float]]*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of vector embeddings.
 
@@ -30,13 +30,13 @@ search(
 
 - **anns_field** (str) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the vector field in the current collection
 
 - **param** (dict) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The parameter settings specific to this operation.
 
@@ -160,11 +160,11 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
     - A **Hits** object has the following fields:
 
-        - **ids** (*list&#91;int&#93;* | *list&#91;str&#93;*)
+        - **ids** (*list[int]* | *list[str]*)
 
             A list containing the IDs of the hit entities.
 
-        - **distances** (list&#91;float&#93;) 
+        - **distances** (list[float]) 
 
             A list of distances from the hit entities' vector fields to the query vector.
 
@@ -182,7 +182,7 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
             An alias to **distance**.
 
-        - **vector** (*list&#91;float&#93;*)   
+        - **vector** (*list[float]*)   
 
             The vector field of a hit entity.
 

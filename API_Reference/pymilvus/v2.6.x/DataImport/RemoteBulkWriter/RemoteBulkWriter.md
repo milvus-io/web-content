@@ -35,13 +35,13 @@ writer = RemoteBulkWriter(
 
 - **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The schema of a target collection to which the rewritten data is to be imported.
 
 - **remote_path** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The path to the directory that is to hold the rewritten data.
 

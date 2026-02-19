@@ -17,13 +17,13 @@ create_index(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **index_params** (*IndexParams*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     An **IndexParams** object containing a list of **IndexParam** objects.
 

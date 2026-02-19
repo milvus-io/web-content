@@ -19,17 +19,17 @@ get(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **ids** (*list* | *str* | *int*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A specific entity ID or a list of entity IDs.
 
-- **output_fields** (*list&#91;str&#93;* | *None*) -
+- **output_fields** (*list[str]* | *None*) -
 
     A list of field names to include in each entity in return.
 
@@ -41,7 +41,7 @@ get(
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **partition_names** (*list&#91;str&#93;* | *None*) -
+- **partition_names** (*list[str]* | *None*) -
 
     A list of partition names.
 
@@ -51,7 +51,7 @@ get(
 
 **RETURN TYPE:**
 
-*list&#91;dict&#93;*
+*list[dict]*
 
 **RETURNS:**
 

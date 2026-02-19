@@ -17,13 +17,13 @@ insert(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **data** (*dict* | *list&#91;dict&#93;*) -
+- **data** (*dict* | *list[dict]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The data to insert into the current collection.
 

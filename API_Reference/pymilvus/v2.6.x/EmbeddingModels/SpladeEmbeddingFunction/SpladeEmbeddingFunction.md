@@ -53,7 +53,7 @@ SpladeEmbeddingFunction(
 
     The number of top tokens to use for document encodings. If not specified, it will use all non-zero tokens.
 
-- ****kwargs**
+- **&ast;&ast;kwargs**
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [AutoModelForMaskedLM](https://huggingface.co/docs/transformers/model_doc/auto#transformers.AutoModelForMaskedLM).
 

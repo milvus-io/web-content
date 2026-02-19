@@ -14,7 +14,7 @@ remove_user(
 
 - **username** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the user to remove from a role.
 

@@ -20,11 +20,11 @@ remove_privileges_from_group(
 
     The name of the target privilege group.
 
-- **privileges** (*List&#91;str&#93;*) -
+- **privileges** (*List[str]*) -
 
     The privilages to remove in a list.
 
-- **timeout** (*Optional&#91;float&#93;*) - 
+- **timeout** (*Optional[float]*) - 
 
     The timeout duration for this operation.
 

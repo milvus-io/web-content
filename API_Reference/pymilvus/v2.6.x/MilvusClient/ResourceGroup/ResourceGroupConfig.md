@@ -36,7 +36,7 @@ ResourceGroupConfig(
 
         Maximum number of required nodes.
 
-- **transfer_from** (*List&#91;ResourceGroupTransfer&#93;*) - 
+- **transfer_from** (*List[ResourceGroupTransfer]*) - 
 
     A list of **ResourceGroupTransfer** instances that defines the source resource groups for necessary transfers. A **ResourceGroupTransfer** instance provides the following fields:
 
@@ -44,7 +44,7 @@ ResourceGroupConfig(
 
         Name of a resource group.
 
-- **transfer_to** (*List&#91;ResourceGroupTransfer&#93;*) - 
+- **transfer_to** (*List[ResourceGroupTransfer]*) - 
 
     A list of **ResourceGroupTransfer** instances that defines the target resource groups for necessary transfers. A **ResourceGroupTransfer** instance provides the following fields:
 

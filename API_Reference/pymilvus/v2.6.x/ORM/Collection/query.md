@@ -18,7 +18,7 @@ query(
 
 - **expr** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A scalar filtering condition to filter matching entities. 
 
@@ -106,7 +106,7 @@ query(
 
 **RETURN TYPE:**
 
-*list&#91;dict&#93;*
+*list[dict]*
 
 **RETURNS:**
 

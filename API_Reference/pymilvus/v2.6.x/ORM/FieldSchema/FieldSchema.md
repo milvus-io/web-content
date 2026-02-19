@@ -22,13 +22,13 @@ FieldSchema(
 
 - **name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the field.
 
 - **dtype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Data type of the field.
 

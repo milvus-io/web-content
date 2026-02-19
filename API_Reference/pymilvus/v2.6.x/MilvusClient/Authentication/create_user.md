@@ -16,13 +16,13 @@ create_user(
 
 - **user_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the user to create.
 
 - **password** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The password of the user to create.
 

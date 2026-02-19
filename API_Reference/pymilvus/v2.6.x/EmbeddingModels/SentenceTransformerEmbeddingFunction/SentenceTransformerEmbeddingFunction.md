@@ -48,7 +48,7 @@ SentenceTransformerEmbeddingFunction(
 
     Whether to normalize returned vectors to have length 1. In that case, the faster dot-product (util.dot_score) instead of cosine similarity can be used.
 
-- ****kwargs**
+- **&ast;&ast;kwargs**
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [SentenceTransformer](https://github.com/UKPLab/sentence-transformers/blob/master/sentence_transformers/SentenceTransformer.py).
 

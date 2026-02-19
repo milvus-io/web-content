@@ -24,13 +24,13 @@ Function(
 
 - `name` (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the function. This identifier is used to reference the function within queries and collections.
 
 - `function_type` (*FunctionType*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The type of embedding function to use. Possible values:
 
@@ -38,15 +38,15 @@ Function(
 
     - `FunctionType.TEXTEMBEDDING`: Generates dense vectors that capture semantic meaning from a `VARCHAR` field.
 
-    - `FunctionType.RERANK`: Applies reranking strategies to the search results.
+- `FunctionType.RERANK`: Applies reranking strategies to the search results.
 
-- `input_field_names` (*Union&#91;str, List&#91;str&#93;&#93;*) -
+- `input_field_names` (*Union[str, List[str]]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the field containing the raw data that requires conversion to a vector representation. This parameter accepts only one field name.
 
-- `output_field_names` (*Union&#91;str, List&#91;str&#93;&#93;*) -
+- `output_field_names` (*Union[str, List[str]]*) -
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. This parameter accepts only one field name.
 
@@ -128,7 +128,7 @@ Function(
 
             - `reranker` (*str*): Specifies the reranking method to use. Must be set to `weighted` to use Weighted Ranker.
 
-            - `weights` (*List&#91;float&#93;*): Array of weights corresponding to each search path; values ∈ &#91;0,1&#93;. For details, refer to [Mechanism of Weighted Ranker](https://milvus.io/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker).
+            - `weights` (*List[float]*): Array of weights corresponding to each search path; values ∈ [0,1]. For details, refer to [Mechanism of Weighted Ranker](https://milvus.io/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker).
 
             - `norm_score` (*boolean*): Whether to normalize raw scores (using arctan) before weighting. For details, refer to [Mechanism of Weighted Ranker](https://milvus.io/docs/weighted-ranker.md#Mechanism-of-Weighted-Ranker).
 
@@ -249,29 +249,29 @@ Function(
 
             - `provider` (*str*): The model service provider to use for reranking. Possible values: `"tei"` or `"vllm"`. For details, refer to [Choose a model provider for your needs](https://milvus.io/docs/model-ranker-overview.md#Choose-a-model-provider-for-your-needs).
 
-            - `queries` (*List&#91;str&#93;*): List of query strings used by the reranking model to calculate relevance scores.
+            - `queries` (*List[str]*): List of query strings used by the reranking model to calculate relevance scores.
 
             - `endpoint` (*str*): URL of the model service.
 
             - `max_client_batch_size` *(int)*: Maximum number of documents to process in a single batch. Default: 32.
 
-            - `truncate` *(bool)*: **&#91;TEI only&#93;** Whether to truncate inputs that exceed the maximum supported size. For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
+            - `truncate` *(bool)*: **[TEI only]** Whether to truncate inputs that exceed the maximum supported size. For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
 
-            - `truncation_direction` (*str*): **&#91;TEI only&#93;** Direction for truncation (`"Left"` or `"Right"`). For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
+            - `truncation_direction` (*str*): **[TEI only]** Direction for truncation (`"Left"` or `"Right"`). For details, refer to [TEI Ranker](https://milvus.io/docs/tei-ranker.md).
 
-            - `truncate_prompt_tokens` *(int)*: **&#91;vLLM only&#93;** Number of tokens to keep from the end of the prompt when truncating. For details, refer to [vLLM Ranker](https://milvus.io/docs/vllm-ranker.md).
+            - `truncate_prompt_tokens` *(int)*: **[vLLM only]** Number of tokens to keep from the end of the prompt when truncating. For details, refer to [vLLM Ranker](https://milvus.io/docs/vllm-ranker.md).
 
-            - `max_tokens_per_doc` *(int)*: **&#91;Cohere only&#93;** Maximum number of tokens per document. Long documents will be automatically truncated to the specified number of tokens. For details, refer to Cohere Ranker.
+            - `max_tokens_per_doc` *(int)*: **[Cohere only]** Maximum number of tokens per document. Long documents will be automatically truncated to the specified number of tokens. For details, refer to [Cohere Ranker](https://milvus.io/docs/cohere-ranker.md).
 
-            - `truncation` *(bool)*: **&#91;Voyage AI only&#93;** Whether to truncate the input to satisfy the "context length limit" on the query and the documents. For details, refer to Voyage AI Ranker.
+            - `truncation` *(bool)*: **[Voyage AI only]** Whether to truncate the input to satisfy the "context length limit" on the query and the documents. For details, refer to [Voyage AI Ranker](https://milvus.io/docs/voyage-ai-ranker.md).
 
-            - `max_chunks_per_doc` *(int)*: **&#91;SiliconFlow only&#93;** Maximum number of chunks generated from within a document. For details, refer to SiliconFlow Ranker.
+            - `max_chunks_per_doc` *(int)*: **[SiliconFlow only]** Maximum number of chunks generated from within a document. For details, refer to [SiliconFLow Ranker](https://milvus.io/docs/siliconflow-ranker.md).
 
-            - `overlap_tokens`  *(int)*: **&#91;SiliconFlow only&#93;** Number of token overlaps between adjacent chunks when documents are chunked. For details, refer to SiliconFlow Ranker.
+            - `overlap_tokens`  *(int)*: **[SiliconFlow only]** Number of token overlaps between adjacent chunks when documents are chunked. For details, refer to [SiliconFLow Ranker](https://milvus.io/docs/siliconflow-ranker.md).
 
 - `description` (*str*) -
 
-    **&#91;OPTIONAL&#93;**
+    **[OPTIONAL]**
 
     A brief description of the function's purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 

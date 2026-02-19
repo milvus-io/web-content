@@ -5,65 +5,63 @@ This operation drops a collection.
 ## Request syntax
 
 ```python
-drop_collection(collection_name: str) -> None
+drop_collection(
+    collection_name: str,
+    timeout: Optional[float] = None,
+    **kwargs,
+) -> None
 ```
 
 **PARAMETERS:**
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
+
+- **timeout** (*Optional[float]*) -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
+**RETURN TYPE:**
+
+*NoneType*
+
+**RETURNS:**
+
+None
+
+**EXCEPTIONS:**
+
+- **MilvusException**
+
+    This exception will be raised when any error occurs during this operation.
 
 ## Examples
 
 ```python
 from pymilvus import MilvusClient
 
-# 1. Set up a milvus client
 client = MilvusClient(
     uri="http://localhost:19530",
     token="root:Milvus"
 )
 
-# 2. Create a collection
+# Create a collection
 client.create_collection(
     collection_name="test_collection",
     dimension=5
 )
 
-# 3. List collections
-res = client.list_collections() 
-
+# List collections
+res = client.list_collections()
 # ['test_collection']
 
-# 4. Drop the collection
+# Drop the collection
 client.drop_collection(collection_name="test_collection")
 
-# 5. List collections
-res = client.list_collections() 
-
+# Verify
+res = client.list_collections()
 # []
 ```
-
-## Related methods
-
-- [create_collection()](create_collection.md)
-
-- [create_schema()](create_schema.md)
-
-- [describe_collection()](describe_collection.md)
-
-- [get_collection_stats()](get_collection_stats.md)
-
-- [has_collection()](has_collection.md)
-
-- [list_collections()](list_collections.md)
-
-- [rename_collection()](rename_collection.md)
-
-- [IndexType](IndexType.md)
-
-- [DataType](DataType.md)
-

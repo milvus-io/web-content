@@ -22,7 +22,7 @@ Collection(
 
 - **name** (*string*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to create.
 

@@ -19,7 +19,7 @@ transfer_replica(
 
 - **source_group** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the source resource group from which the query nodes are moved.
 
@@ -27,7 +27,7 @@ transfer_replica(
 
 - **target_group** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the source resource group to which the query nodes are moved.
 
@@ -35,7 +35,7 @@ transfer_replica(
 
 - **num_replicas** (*int*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The number of replicas to move between the source and target resource groups.
 

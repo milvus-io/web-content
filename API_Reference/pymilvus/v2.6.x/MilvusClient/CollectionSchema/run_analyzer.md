@@ -16,11 +16,11 @@ run_analyzer(
 
 **PARAMETERS:**
 
-- `texts` (*Union&#91;str, List&#91;str&#93;&#93;*) -
+- `texts` (*Union[str, List[str]]*) -
 
     The input text or a list of texts to be analyzed.
 
-- `analyzer_params` (*Union&#91;str, Dict, None&#93;*) -
+- `analyzer_params` (*Union[str, Dict, None]*) -
 
     The parameters for the analyzer. If set to `None`, defaults to an empty dictionary.
 
@@ -38,7 +38,7 @@ run_analyzer(
 
 **RETURN TYPE:**
 
-*List&#91;str&#93;, List&#91;List&#91;str&#93;&#93;*
+*List[str], List[List[str]]*
 
 **RETURNS:**
 

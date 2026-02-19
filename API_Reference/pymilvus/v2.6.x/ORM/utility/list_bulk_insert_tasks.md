@@ -21,7 +21,7 @@ list_bulk_insert_tasks(
 
     The value defaults to **0**, indicating that no limit applies. 
 
-- **collection_name** (*list&#91;str&#93;*) -
+- **collection_name** (*list[str]*) -
 
     A list of collection names.
 

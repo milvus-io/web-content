@@ -19,19 +19,19 @@ query(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **filter** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A scalar filtering condition to filter matching entities. 
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-- **output_fields** (*list&#91;str&#93;* | *None*) -
+- **output_fields** (*list[str]* | *None*) -
 
     A list of field names to include in each entity in return.
 
@@ -42,8 +42,8 @@ query(
     <p><b>notes</b></p>
 
     <ul>
-    <li><p>Setting this as <code>output_fields=&#91;"\*"&#93;</code> outputs all fields.</p></li>
-    <li><p>Setting this as <code>output_fields=&#91;"count(\*)"&#93;</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
+    <li><p>Setting this as <code>output_fields=["\*"]</code> outputs all fields.</p></li>
+    <li><p>Setting this as <code>output_fields=["count(\*)"]</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
     </ul>
 
     </div>
@@ -52,7 +52,7 @@ query(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **partition_names** (*list&#91;str&#93;* | *None*) -
+- **partition_names** (*list[str]* | *None*) -
 
     A list of partition names.
 
@@ -122,9 +122,21 @@ query(
 
         The sum of this value and `offset` should be less than 16,384.
 
+    - **timezone** (*str*)
+
+        Temporarily override the collection or database default time zone for a single query by setting an [IANA identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). This controls how `TIMESTAMPTZ` values are interpreted, displayed, and compared during that operation only; it does not modify stored data or collection settings.
+
+        For more information, refer to [TIMESTAMPZ Field](https://milvus.io/docs/timestamptz-field.md).
+
+    - **time_fields** (*str*)
+
+        Extract specific time components from a `TIMESTAMPTZ` field during query or search operations. Use a comma-separated list to specify which elements to extract. Supported elements include: `year`, `month`, `day`, `hour`, `minute`, `second`, and `microsecond`.
+
+        For more information, refer to TIMESTAMPZ Field.
+
 **RETURN TYPE:**
 
-*list&#91;dict&#93;*
+*list[dict]*
 
 **RETURNS:**
 
@@ -348,16 +360,4 @@ res = client.query(
 
 # [{'count(*)': 3}]
 ```
-
-## Related methods
-
-- [delete()](delete.md)
-
-- [get()](get.md)
-
-- [insert()](insert.md)
-
-- search()
-
-- [upsert()](upsert.md)
 

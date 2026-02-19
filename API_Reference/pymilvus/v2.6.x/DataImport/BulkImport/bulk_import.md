@@ -16,19 +16,19 @@ bulk_import(
 
 - **url** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The URI of your Milvus instance.
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection in the target cluster of this operation.
 
 - **files** (*list*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The list of string lists, each string list contains a singular row-based file path or multiple column-based file paths.
 

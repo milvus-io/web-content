@@ -38,7 +38,7 @@ alter_collection_properties(
 
     - **dynamicfield.enabled** (bool) -
 
-        Whether to enable the dynamic field. For details, refer to Dynamic Field.
+        Whether to enable the dynamic field. For details, refer to [Dynamic Field](https://milvus.io/docs/enable-dynamic-field.md).
 
     - **allow_insert_auto_id** (*str*) -
 
@@ -48,7 +48,11 @@ alter_collection_properties(
 
         - When set to **"false"**: User-provided primary key values are rejected or ignored and primary key values are always auto-generated. The default is **"false"**.
 
-- **timeout** (*Optional&#91;float&#93;*) - 
+    - **timezone** (*str*) -
+
+        Sets a default time zone for your collection. The value must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). For more information, refer to [TIMESTAMPZ Field](https://milvus.io/docs/timestamptz-field.md) and [Query](https://milvus.io/docs/get-and-scalar-query.md).
+
+- **timeout** (*Optional[float]*) - 
 
     The timeout duration for this operation.
 

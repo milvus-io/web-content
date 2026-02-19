@@ -17,7 +17,7 @@ alter_database_properties(
 
 - **db_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the database whose properties are to be modified.
 
@@ -29,7 +29,7 @@ alter_database_properties(
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*&#91;&#93;str*) -
+    - **database.resource_groups** (*[]str*) -
 
         Resource groups dedicated to the database.
 
@@ -48,6 +48,10 @@ alter_database_properties(
     - **database.force.deny.reading** (*bool*) -
 
         Whether to deny all read operations in the database.
+
+    - **timezone** (*str*) -
+
+        Sets a default time zone for your database. The value must be a valid [IANA time zone identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). For more information, refer to TIMESTAMPZ Field.
 
 - **timeout** (*float* | *None*) -
 

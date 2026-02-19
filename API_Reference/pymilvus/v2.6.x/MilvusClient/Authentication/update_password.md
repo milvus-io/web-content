@@ -19,19 +19,19 @@ update_password(
 
 - **user_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing user.
 
 - **old_password** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The original password of the user.
 
 - **new_password** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The new password of the user.
 

@@ -21,7 +21,7 @@ CollectionSchema(
 
 - **fields** (*list*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of **FieldSchema** objects that define the fields in the collection schema.
 

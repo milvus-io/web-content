@@ -16,7 +16,7 @@ describe_resource_group(
 
 - **name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the resource group to describe.
 

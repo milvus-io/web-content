@@ -23,7 +23,7 @@ delete(
 
 - **expr** (*string*) -
 
-    **&#91;REQUIRED&#93;** 
+    **[REQUIRED]** 
 
     A boolean expression to filter the entities to delete.
 

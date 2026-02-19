@@ -23,7 +23,7 @@ hybrid_search(
 
     The name of the collection to create.
 
-- **reqs** (*List&#91;AnnSearchRequest&#93;*) -
+- **reqs** (*List[AnnSearchRequest]*) -
 
     A list of search requests, where each request is an **ANNSearchRequest** object. Each request corresponds to a different vector field and a different set of search parameters.
 
@@ -52,11 +52,11 @@ hybrid_search(
 
             If you choose to use placeholders in `expr` as stated in [Filtering Templating](https://milvus.io/docs/filtering-templating.md), then you can specify the actual values for these placeholders as key-value pairs as the value of this parameter.
 
-- **ranker** (*Union&#91;BaseRanker, Function&#93;*) -
+- **ranker** (*Union[BaseRanker, Function]*) -
 
     The reranking strategy to use for hybrid search.
 
-    For details, refer to Weighted Ranker, RRF Ranker.
+    For details, refer to [Weighted Ranker](https://milvus.io/docs/weighted-ranker.md), [RRF Ranker](https://milvus.io/docs/rrf-ranker.md) and [Model Ranker Overview](https://milvus.io/docs/model-ranker-overview.md).
 
 - **limit** (*int*) -
 
@@ -66,13 +66,13 @@ hybrid_search(
 
     The sum of this value and `offset` in **param** should be less than 16,384.
 
-- **partition_names** (*List&#91;str&#93;*) -
+- **partition_names** (*List[str]*) -
 
     A list of partition names.
 
     The value defaults to **None**. If specified, only the specified partitions are involved in queries.
 
-- **output_fields** (*List&#91;str&#93;*) -
+- **output_fields** (*List[str]*) -
 
     A list of field names to include in each entity in return.
 
@@ -99,6 +99,18 @@ hybrid_search(
 - **strict_group_size** (*bool*)
 
     Controls whether **group_size** should be strictly enforced. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
+
+- **timezone** (*str*)
+
+    Temporarily override the collection or database default time zone for a single query by setting an [IANA identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). This controls how `TIMESTAMPTZ` values are interpreted, displayed, and compared during that operation only; it does not modify stored data or collection settings.
+
+    For more information, refer to TIMESTAMPZ Field.
+
+- **time_fields** (*str*)
+
+    Extract specific time components from a `TIMESTAMPTZ` field during query or search operations. Use a comma-separated list to specify which elements to extract. Supported elements include: `year`, `month`, `day`, `hour`, `minute`, `second`, and `microsecond`.
+
+    For more information, refer to TIMESTAMPZ Field.
 
 **RETURN TYPE:**
 
@@ -136,11 +148,11 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
     - A **Hits** object has the following fields:
 
-        - **ids** (*list&#91;int&#93;* | *list&#91;str&#93;*)
+        - **ids** (*list[int]* | *list[str]*)
 
             A list containing the IDs of the hit entities.
 
-        - **distances** (list&#91;float&#93;) 
+        - **distances** (list[float]) 
 
             A list of distances from the hit entities' vector fields to the query vector.
 
@@ -158,7 +170,7 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
             An alias to **distance**.
 
-        - **vector** (*list&#91;float&#93;*)   
+        - **vector** (*list[float]*)   
 
             The vector field of a hit entity.
 

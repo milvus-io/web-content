@@ -21,13 +21,13 @@ CollectionSchema(
 
 - **name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the schema. 
 
 - **fields** (*list*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of **FieldSchema** objects that define the fields in the schema of a struct in an array of structs field.
 

@@ -13,7 +13,7 @@ add(
 
 **PARAMETERS:**
 
-- **embedding** (*np.ndarray, List&#91;Any&#93;*) - 
+- **embedding** (*np.ndarray, List[Any]*) - 
 
     The vector embedding that is to be added to the current **EmbeddingList** instance.
 

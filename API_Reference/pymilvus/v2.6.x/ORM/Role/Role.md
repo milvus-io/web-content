@@ -29,7 +29,7 @@ Role(
 
 - **name** (*string*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to create.
 

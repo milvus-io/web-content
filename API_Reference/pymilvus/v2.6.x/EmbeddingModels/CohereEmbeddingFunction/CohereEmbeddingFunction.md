@@ -43,7 +43,7 @@ CohereEmbeddingFunction(
 
     - `"clustering"`: Used for the embeddings run through a clustering algorithm.
 
-- **embedding_types** (*List&#91;str&#93;*)
+- **embedding_types** (*List[str]*)
 
     The type of embeddings you want to get back. Not required and default is None, which returns the Embed Floats response type. Currently, you can only specify a single value for this parameter. Possible values:
 

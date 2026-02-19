@@ -17,11 +17,11 @@ load_state(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
-- **partition_names** (*list&#91;str&#93;*) -
+- **partition_names** (*list[str]*) -
 
     A list of partition names.
 

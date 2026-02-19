@@ -20,7 +20,7 @@ EmbeddingList(
 
 **PARAMETERS:**
 
-- **embeddings** (*np.ndarray, List&#91;np.ndarray*) -
+- **embeddings** (*np.ndarray, List[np.ndarray*) -
 
     A list of vector embeddings, which can be either of the following types:
 
@@ -28,7 +28,7 @@ EmbeddingList(
 
     - **np.ndarray** with shape **(dim,)**, indicating a single vector embedding
 
-    - **List&#91;np.ndarray&#93;**, indicating a list of vector embedding arrays
+    - **List[np.ndarray]**, indicating a list of vector embedding arrays
 
 - **dim** (*int*) -
 
@@ -72,16 +72,4 @@ embeddingList3 = EmbeddingList(
     dim=5
 )
 ```
-
-## Related methods
-
-- [add()](add.md)
-
-- [add_batch()](add_batch.md)
-
-- [to_flat_array()](to_flat_array.md)
-
-- [to_numpy()](to_numpy.md)
-
-- [clear()](clear.md)
 

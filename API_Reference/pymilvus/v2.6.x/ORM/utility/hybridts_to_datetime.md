@@ -15,7 +15,7 @@ hybridts_to_datetime(
 
 - **hybridts** (*int*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A hybrid timestamp.
 

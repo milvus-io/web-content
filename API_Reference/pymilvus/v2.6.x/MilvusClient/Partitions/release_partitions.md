@@ -16,13 +16,13 @@ release_partitions(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **partition_names** (*str | list&#91;str&#93;*) -
+- **partition_names** (*str | list[str]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of the names of the partitions to release.
 

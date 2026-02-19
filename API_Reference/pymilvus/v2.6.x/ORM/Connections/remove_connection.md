@@ -12,7 +12,7 @@ remove_connection(alias: str)
 
 - **alias** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A connection alias
 

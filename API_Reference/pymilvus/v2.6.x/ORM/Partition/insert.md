@@ -23,7 +23,7 @@ insert(
 
 - **data** (*list* | *dict* | *pandas.DataFrame*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The data to insert into the current collection.
 

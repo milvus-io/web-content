@@ -16,7 +16,7 @@ list_users(
 
 - **include_role_info** (*bool*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Whether Milvus lists the roles granted to the specified user.
 

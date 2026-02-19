@@ -22,7 +22,7 @@ bge_rf(
 
     The query string to use for ranking.
 
-- `documents` (*List&#91;str&#93;*)
+- `documents` (*List[str]*)
 
     A list of document strings that will be ranked for the given query.
 
@@ -32,7 +32,7 @@ bge_rf(
 
 **RETURN TYPE:**
 
-*List&#91;RerankResult&#93;*
+*List[RerankResult]*
 
 **RETURNS:**
 

@@ -18,13 +18,13 @@ upsert(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **data** (*dict* | *list&#91;dict&#93;*) -
+- **data** (*dict* | *list[dict]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The data to insert or update into the current collection.
 
@@ -231,16 +231,4 @@ res = client.upsert(
 
 # {'upsert_count': 2: primary_keys: [1, 2]}
 ```
-
-## Related methods
-
-- [delete()](delete.md)
-
-- [get()](get.md)
-
-- [insert()](insert.md)
-
-- [query()](query.md)
-
-- search()
 

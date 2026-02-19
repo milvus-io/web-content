@@ -21,9 +21,9 @@ search_iterator(
 
 **PARAMETERS:**
 
-- **data** (*list&#91;list&#91;float&#93;&#93;*) - 
+- **data** (*list[list[float]]*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of vector embeddings.
 
@@ -31,13 +31,13 @@ search_iterator(
 
 - **anns_field** (str) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the vector field in the current collection.
 
 - **param** (dict) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The parameter settings specific to this operation.
 

@@ -16,21 +16,21 @@ load_partitions(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **partition_names** (*str | list&#91;str&#93;*) -
+- **partition_names** (*str | list[str]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of the names of the partitions to load.
 
-- **resource_groups** (*str&#91;&#93;*) -
+- **resource_groups** (*str[]*) -
 
     The target resource groups of this operation.
 
-- **load_fields** (*str&#91;&#93;*) -
+- **load_fields** (*str[]*) -
 
     The names of the fields to load. 
 

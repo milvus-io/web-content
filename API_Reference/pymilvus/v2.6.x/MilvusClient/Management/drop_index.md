@@ -17,13 +17,13 @@ drop_index(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **index_name** (str) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the index to drop.
 

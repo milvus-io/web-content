@@ -13,7 +13,7 @@ add_batch(
 
 **PARAMETERS:**
 
-- **embeddings** (*List&#91;np.ndarray&#93;, np.ndarray*) - 
+- **embeddings** (*List[np.ndarray], np.ndarray*) - 
 
     The vector embeddings that are to be added to the current **EmbeddingList** instance.
 

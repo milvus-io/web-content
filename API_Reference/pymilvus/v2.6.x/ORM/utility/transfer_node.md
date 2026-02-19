@@ -18,7 +18,7 @@ transfer_node(
 
 - **source_group** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the source resource group from which the query nodes are moved.
 
@@ -26,7 +26,7 @@ transfer_node(
 
 - **target_group** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the source resource group to which the query nodes are moved.
 
@@ -34,7 +34,7 @@ transfer_node(
 
 - **num_nodes** (*int*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The number of query nodes to move between the source and target resource groups.
 

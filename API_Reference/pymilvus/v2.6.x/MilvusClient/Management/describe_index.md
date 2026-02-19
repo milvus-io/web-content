@@ -16,7 +16,7 @@ describe_index(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -24,7 +24,7 @@ describe_index(
 
 - **index_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the index to describe.
 

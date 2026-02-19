@@ -17,13 +17,13 @@ delete_user(
 
 - **user** (*string*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the new user to delete.
 
 - **password** (*string*) - 
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The corresponding password to the new user to create.
 

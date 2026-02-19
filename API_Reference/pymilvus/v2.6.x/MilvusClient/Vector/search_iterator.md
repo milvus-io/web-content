@@ -26,13 +26,13 @@ search_iterator(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **data** (*List&#91;list&#93;, list&#93;*) -
+- **data** (*List[list], list]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of vector embeddings.
 
@@ -62,7 +62,7 @@ search_iterator(
 
     The sum of this value and **offset** in **param** should be less than 16,384. 
 
-- **output_fields** (l*ist&#91;str&#93;*) -
+- **output_fields** (l*ist[str]*) -
 
     A list of field names to include in each entity in return.
 

@@ -16,7 +16,7 @@ load_collection(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
@@ -37,11 +37,11 @@ load_collection(
 
     </div>
 
-- **resource_groups** (*str&#91;&#93;*) -
+- **resource_groups** (*str[]*) -
 
     The target resource groups of this operation.
 
-- **load_fields** (*str&#91;&#93;*) -
+- **load_fields** (*str[]*) -
 
     The names of the fields to load. 
 

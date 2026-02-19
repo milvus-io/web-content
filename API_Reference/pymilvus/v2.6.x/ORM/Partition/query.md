@@ -17,11 +17,11 @@ query(
 
 - **expr** (*string*) -
 
-    **&#91;REQUIRED&#93;** 
+    **[REQUIRED]** 
 
     A boolean expression to filter the entity scalar fields.
 
-- **output_fields** (List&#91;str&#93; | *None*) -
+- **output_fields** (List[str] | *None*) -
 
     A list of the names of fields that has to be contained in the output. Setting this to **None** indicates that this operation only outputs the primary key field.
 

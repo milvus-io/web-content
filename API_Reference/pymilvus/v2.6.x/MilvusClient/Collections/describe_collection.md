@@ -15,7 +15,7 @@ describe_collection(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -130,7 +130,7 @@ A dictionary that contains detailed information about the specified collection.
 
         The data type of the elements in the field values. This is displayed if the current field is an ARRAY field.
 
-    - **struct_fields** (*List&#91;Field&#93;*) -
+    - **struct_fields** (*List[Field]*) -
 
         A list of fields added to the struct element in an array of structs field. For details on the possible field types, refer to [Array of Structs](https://milvus.io/docs/array-of-structs.md).
 
@@ -138,11 +138,11 @@ A dictionary that contains detailed information about the specified collection.
 
         Whether the current field serves as the primary key of the collection.
 
-- **functions** (*list[[Function](../Function/Function.md)&#93;*) -
+- **functions** (*list[[Function](../Function/Function.md)]*) -
 
     The functions that have been defined in the schema.
 
-- **aliases** (*list&#91;str&#93;*) -      
+- **aliases** (*list[str]*) -      
 
     A list of collection aliases. You can use any alias in the list to use the current collection.  
 
@@ -247,24 +247,4 @@ client.describe_collection(collection_name="test_collection")
 #      'updated_timestamp': 461643298319106049
 # }
 ```
-
-## Related methods
-
-- create_collection()
-
-- [create_schema()](create_schema.md)
-
-- [drop_collection()](drop_collection.md)
-
-- [get_collection_stats()](get_collection_stats.md)
-
-- [has_collection()](has_collection.md)
-
-- [list_collections()](list_collections.md)
-
-- [rename_collection()](rename_collection.md)
-
-- IndexType
-
-- DataType
 

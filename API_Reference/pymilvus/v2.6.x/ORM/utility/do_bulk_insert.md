@@ -19,13 +19,13 @@ do_bulk_insert(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection of this operation.
 
-- **files** (*list&#91;str&#93;*) -
+- **files** (*list[str]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of paths to the files that contain the source data. 
 
@@ -48,8 +48,8 @@ do_bulk_insert(
     </ul>
     <p>Let's take a Milvus instance set up using Docker Compose as an example, and the bucket name is <code>a-bucket</code>.</p>
     <ul>
-    <li><p>If you upload the source data files to this bucket, you should include only the file names with extensions in the <strong>files</strong> list. For example, <code>files=&#91;"id.npy", "vector.npy"&#93;</code> or <code>files=&#91;"data.json"&#93;</code>.</p></li>
-    <li><p>If you upload the source data files to a sub-directory in this bucket, you should include the file paths relative to the bucket. For example, if the sub-directory is <code>data</code>, the parameter settings should be <code>files=&#91;"data/id.npy", "data/vector.py"&#93;</code> or <code>files=&#91;"data.json"&#93;</code>.</p></li>
+    <li><p>If you upload the source data files to this bucket, you should include only the file names with extensions in the <strong>files</strong> list. For example, <code>files=["id.npy", "vector.npy"]</code> or <code>files=["data.json"]</code>.</p></li>
+    <li><p>If you upload the source data files to a sub-directory in this bucket, you should include the file paths relative to the bucket. For example, if the sub-directory is <code>data</code>, the parameter settings should be <code>files=["data/id.npy", "data/vector.py"]</code> or <code>files=["data.json"]</code>.</p></li>
     <li><p>To find the name of the MinIO bucket your Milvus instance uses, simply log into the MinIO server and find out. </p></li>
     </ul>
 

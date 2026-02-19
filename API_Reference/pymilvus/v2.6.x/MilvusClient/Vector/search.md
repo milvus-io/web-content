@@ -9,6 +9,7 @@ search(
     self,
     collection_name: str,
     data: Union[List[list], list],
+    ids: Union[List[str], List[int]],
     filter: str = "",
     limit: int = 10,
     output_fields: Optional[List[str]] = None,
@@ -17,6 +18,7 @@ search(
     partition_names: Optional[List[str]] = None,
     anns_field: Optional[str] = None,
     ranker: Optional[Union[Function, FunctionScore]] = None,
+    highlighter: Optional[Highlighter] = None,
     **kwargs,
 ) -> List[List[dict]]
 ```
@@ -25,17 +27,27 @@ search(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **data** (*List&#91;list&#93;, list&#93;*) -
+- **data** (*List[list], list]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
+
+    This parameter is mutually exclusive with **ids**.
+
+- **ids** (*Union[List[str], List[int]]*) -
+
+    A list of primary keys.
+
+    Milvus searches for the most similar vector embeddings to those in the specified entities.
+
+    This parameter is mutually exclusive with **data**.
 
 - **anns_field** (*str*) -
 
@@ -63,7 +75,7 @@ search(
 
     In a grouping search, however, `limit` specifies the maximum number of groups to return, rather than individual entities. Each group is formed based on the specified `group_by_field`.
 
-- **output_fields** (l*ist&#91;str&#93;*) -
+- **output_fields** (l*ist[str]*) -
 
     A list of field names to include in each entity in return.
 
@@ -149,11 +161,15 @@ search(
 
     This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-- **ranker** (*Function* | *FunctionScore*)
+- **ranker** (*Function* | *FunctionScore*) -
 
     The ranker to use for the search.
 
-    For details, refer to Decay Ranker Overview and Model Ranker Overview.
+    For details, refer to [Decay Ranker Overview](https://milvus.io/docs/decay-ranker-overview.md) and [Model Ranker Overview](https://milvus.io/docs/model-ranker-overview.md).
+
+- **highlighter** (*Highlighter*) -
+
+    The highlighter to highlight matched terms in search operations. For details, refer to [Lexical Highlighter](https://milvus.io/docs/text-highlighter.md).
 
 - **kwargs** -
 
@@ -171,9 +187,21 @@ search(
 
         The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
+    - **timezone** (*str*)
+
+        Temporarily override the collection or database default time zone for a single query by setting an [IANA identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) (for example, **Asia/Shanghai**, **America/Chicago**, or **UTC**). This controls how `TIMESTAMPTZ` values are interpreted, displayed, and compared during that operation only; it does not modify stored data or collection settings.
+
+        For more information, refer to [TIMESTAMPZ Field](https://milvus.io/docs/timestamptz-field.md).
+
+    - **time_fields** (*str*)
+
+        Extract specific time components from a `TIMESTAMPTZ` field during query or search operations. Use a comma-separated list to specify which elements to extract. Supported elements include: `year`, `month`, `day`, `hour`, `minute`, `second`, and `microsecond`.
+
+        For more information, refer to TIMESTAMPZ Field.
+
 **RETURN TYPE:**
 
-*list&#91;dict&#93;*
+*list[dict]*
 
 **RETURNS:**
 A list of dictionaries that contains the searched entities with specified output fields.
@@ -318,16 +346,4 @@ res = client.search(
 #   {'id': 2, 'distance': 0.3205878734588623, 'entity': {}},
 #   {'id': 1, 'distance': 0.2993225157260895, 'entity': {}}]]
 ```
-
-## Related methods
-
-- [delete()](delete.md)
-
-- [get()](get.md)
-
-- [insert()](insert.md)
-
-- [query()](query.md)
-
-- [upsert()](upsert.md)
 

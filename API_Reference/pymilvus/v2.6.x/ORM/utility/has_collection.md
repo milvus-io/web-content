@@ -16,7 +16,7 @@ has_collection(
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
     The name of an existing collection.
 
 - **using** (*str*) - 

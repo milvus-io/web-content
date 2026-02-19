@@ -58,7 +58,7 @@ BGEM3EmbeddingFunction(
 
     Whether to return ColBERT-style contextualized embedding vectors.
 
-- ****kwargs**
+- **&ast;&ast;kwargs**
 
     Allows additional keyword arguments to be passed to the model initialization. For more information, refer to [bge_m3](https://github.com/FlagOpen/FlagEmbedding/blob/master/FlagEmbedding/bge_m3.py).
 
@@ -68,7 +68,7 @@ BGEM3EmbeddingFunction(
 from pymilvus import model
 
 bge_m3_ef = model.hybrid.BGEM3EmbeddingFunction(
-    model_name='BAAI/bge-m3', # Specify the model name
+    model_name='BAAI/bge-m3', # Specify t`he model name
     device='cpu', # Specify the device to use, e.g., 'cpu' or 'cuda:0'
     use_fp16=False # Whether to use fp16. `False` for `device='cpu'`.
 )

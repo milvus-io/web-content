@@ -13,7 +13,7 @@ update_resource_groups(
 
 **PARAMETERS:**
 
-- **configs** (*Dict&#91;str, ResourceGroupConfig&#93;*) - 
+- **configs** (*Dict[str, ResourceGroupConfig]*) - 
 
     A dictionary containing the resource group name as the key and the configuration of the resource group after the update as the value. The value should be a **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
 
