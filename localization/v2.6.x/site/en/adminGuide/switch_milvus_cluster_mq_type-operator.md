@@ -19,7 +19,7 @@ title: Switch MQ Type for Milvus Cluster
         ></path>
       </svg>
     </button></h1><p>This topic describes how to switch the message queue (MQ) type for an existing Milvus cluster deployment. Milvus supports online MQ switching between Pulsar, Kafka, and Woodpecker without downtime.</p>
-<div class="alert warn">
+<div class="alert warning">
 <p>This feature is pending release and is subject to change. Please reach out to Milvus support if you want to try it out or have any questions.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
