@@ -8,6 +8,12 @@ title: Switch MQ Type for Milvus Standalone
 
 This topic describes how to switch the message queue (MQ) type for an existing Milvus standalone deployment. Milvus supports online MQ switching without downtime.
 
+<div class="alert warn">
+
+This feature is pending release and is subject to change. Please reach out to Milvus support if you want to try it out or have any questions.
+
+</div>
+
 ## Prerequisites
 
 - A running Milvus Standalone instance installed via [Docker](install_standalone-docker.md) or [Docker Compose](install_standalone-docker-compose.md).
