@@ -6,6 +6,8 @@ summary: Learn how to configure NATs for Milvus standalone.
 title: NATS-related Configurations
 ---
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 # NATS-related Configurations
 
 This topic introduces the NATs-related configurations of Milvus.

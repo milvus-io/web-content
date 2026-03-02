@@ -61,6 +61,8 @@ spec:
   config: {}
 ```
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 ## Configure NATS
 
 NATS is an alternative message storage for NATS.

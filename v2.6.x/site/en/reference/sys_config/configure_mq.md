@@ -7,15 +7,15 @@ summary: Learn how to configure mq for Milvus.
 
 # mq-related Configurations
 
-Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.
+Milvus supports three MQ: rocksmq(based on RockDB), Pulsar and Kafka.
 
 You can change your mq by setting mq.type field.
 
 If you don't set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.
 
-1. standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka
+1. standalone(local) mode: rocksmq(default) > Pulsar > Kafka
 
-2. cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)
+2. cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)
 
 ## `mq.type`
 
@@ -30,7 +30,7 @@ If you don't set mq.type field as default, there is a note about enabling priori
     <tr>
       <td>
         <li>Default value: "default"</li>      
-        <li>Valid values: [default, pulsar, kafka, rocksmq, natsmq]</li>      </td>
+        <li>Valid values: [default, pulsar, kafka, rocksmq]</li>      </td>
       <td>default</td>
     </tr>
   </tbody>

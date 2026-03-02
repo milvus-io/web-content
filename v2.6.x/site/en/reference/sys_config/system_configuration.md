@@ -57,15 +57,15 @@ See [minio-related Configurations](configure_minio.md) for detailed description 
 
 ### `mq`
 
-Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.
+Milvus supports three MQ: rocksmq(based on RockDB), Pulsar and Kafka.
 
 You can change your mq by setting mq.type field.
 
 If you don't set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.
 
-1. standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka
+1. standalone(local) mode: rocksmq(default) > Pulsar > Kafka
 
-2. cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)
+2. cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)
 
 See [mq-related Configurations](configure_mq.md) for detailed description for each parameter under this section.
 
@@ -108,14 +108,6 @@ kafka:
 
 
 See [rocksmq-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
-
-### `natsmq`
-
-natsmq configuration.
-
-more detail: https://docs.nats.io/running-a-nats-service/configuration
-
-See [natsmq-related Configurations](configure_natsmq.md) for detailed description for each parameter under this section.
 
 ### `rootCoord`
 

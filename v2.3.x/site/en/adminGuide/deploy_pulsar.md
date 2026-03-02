@@ -125,6 +125,8 @@ Changing the message store is not recommended. If this is you want to do this, s
 
 </div>
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 ## Configure NATS with Helm
 
 NATS is an experimental message store alternative to RocksMQ. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [NATS-related configurations](configure_nats.md).

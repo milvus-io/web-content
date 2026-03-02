@@ -52,6 +52,8 @@ Under this section, you can configure message size, retention time and size, etc
 
 See [RocksMQ-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 ### `nats`
 
 NATS is a message-oriented middleware that allows data exchange between applications and services, segmented in the form of messages. Milvus uses NATS as a underlying engine for reliable storage and pub/sub of message streams. You can use it as an alternative to RocksMQ.

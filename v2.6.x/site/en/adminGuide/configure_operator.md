@@ -149,7 +149,6 @@ To configure resources for a specific component, add the component name in the f
             <li><a href="configure_indexcoord.md">Index coord</a></li>
             <li><a href="configure_metastore.md">Metastore</a></li>
             <li><a href="configure_mq.md">Message Queue</a></li>
-            <li><a href="configure_natsmq.md">Natsmq</a></li>
             <li><a href="configure_tikv.md">Tikv</a></li>
             <li><a href="configure_trace.md">Trace</a></li>
             <li><a href="configure_quotaandlimits.md">Quota and Limits</a></li>

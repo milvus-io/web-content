@@ -5,6 +5,8 @@ group: system_configuration.md
 summary: Learn how to configure mq for Milvus.
 ---
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 # mq-related Configurations
 
 Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.

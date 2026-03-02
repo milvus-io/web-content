@@ -109,6 +109,8 @@ kafka:
 
 See [rocksmq-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 ### `natsmq`
 
 natsmq configuration.
