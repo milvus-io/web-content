@@ -8,6 +8,25 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.27
+
+Release date: February 27, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.5.27         | 2.5.18             | 2.5.13              | 2.5.14           | 2.5.14         |
+
+Milvus 2.5.27 is a critical security release that fixes [CVE-2026-26190](https://github.com/milvus-io/milvus/security/advisories/GHSA-7ppg-37fh-vcr6) (CVSS 9.8), an authentication bypass vulnerability on the metrics port (9091) that could allow unauthenticated access to the REST API and sensitive system operations. This release also includes important bug fixes and dependency updates. **We strongly recommend all 2.5.x users upgrade immediately.**
+
+### Improvements
+
+- Upgraded Go to 1.24.12 and updated dependencies to fix CVEs ([#47561](https://github.com/milvus-io/milvus/pull/47561))
+
+### Bug fixes
+
+- Fixed imported segment positions to use actual data timestamps instead of channel checkpoints ([#47372](https://github.com/milvus-io/milvus/pull/47372))
+- Added authentication to metrics endpoint when authorization is enabled ([#47405](https://github.com/milvus-io/milvus/pull/47405))
+
 ## v2.5.26
 
 Release date: January 27, 2026
