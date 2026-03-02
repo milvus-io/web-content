@@ -125,6 +125,66 @@ Changing the message store is not recommended. If this is you want to do this, s
 
 </div>
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
+## Configure NATS with Helm
+
+NATS is an experimental message store alternative to RocksMQ. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [NATS-related configurations](configure_natsmq.md).
+
+- If you start Milvus with NATS and want to change its settings, you can run `helm upgrade -f ` with the changed settings in the following YAML file.
+
+- If you have installed Milvus standalone with a message store other than NATS and want to change it to NATS, run `helm upgrade -f ` with the following YAML file after you flushed all collections and stopped Milvus.
+
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    mq:
+      type: natsmq
+    natsmq:
+      # server side configuration for natsmq.
+      server: 
+        # 4222 by default, Port for nats server listening.
+        port: 4222 
+        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
+        storeDir: /var/lib/milvus/nats 
+        # (B) 16GB by default, Maximum size of the 'file' storage.
+        maxFileStore: 17179869184 
+        # (B) 8MB by default, Maximum number of bytes in a message payload.
+        maxPayload: 8388608 
+        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
+        maxPending: 67108864 
+        # (√ms) 4s by default, waiting for initialization of natsmq finished.
+        initializeTimeout: 4000 
+        monitor:
+          # false by default, If true enable debug log messages.
+          debug: false 
+          # true by default, If set to false, log without timestamps.
+          logTime: true 
+          # no log file by default, Log file path relative to.. .
+          logFile: 
+          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
+          logSizeLimit: 0 
+        retention:
+          # (min) 3 days by default, Maximum age of any message in the P-channel.
+          maxAge: 4320 
+          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
+          maxBytes:
+          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
+          maxMsgs: 
+```
+
+<div class="alert note">
+
+**Choose between RocksMQ and NATS?**
+
+RockMQ uses CGO to interact with RocksDB and manages the memory by itself, while the pure-GO NATS embedded in the Milvus installation delegates its memory management to Go's garbage collector (GC).
+
+In the scenario where the data packet is smaller than 64 kb, RocksDB outperforms in terms of memory usage, CPU usage, and response time. On the other hand, if the data packet is greater than 64 kb, NATS excels in terms of response time with sufficient memory and ideal GC scheduling.
+
+Currently, you are advised to use NATS only for experiments.
+
+</div>
+
 ## What's next
 
 Learn how to configure other Milvus dependencies with Docker Compose or Helm:
