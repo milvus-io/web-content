@@ -21,6 +21,9 @@ title: MQ-Typ für Milvus Standalone wechseln
         ></path>
       </svg>
     </button></h1><p>In diesem Thema wird beschrieben, wie Sie den Message Queue (MQ)-Typ für eine bestehende Milvus-Standalone-Bereitstellung wechseln können. Milvus unterstützt den Online-MQ-Wechsel ohne Ausfallzeit.</p>
+<div class="alert warning">
+<p>Diese Funktion ist noch nicht freigegeben und kann sich noch ändern. Bitte wenden Sie sich an den Milvus-Support, wenn Sie es ausprobieren möchten oder Fragen haben.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +40,7 @@ title: MQ-Typ für Milvus Standalone wechseln
         ></path>
       </svg>
     </button></h2><ul>
-<li>Eine laufende Milvus Standalone-Instanz, die über <a href="/docs/de/v2.6.x/install_standalone-docker.md">Docker</a> oder <a href="/docs/de/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a> installiert wurde.</li>
+<li>Eine laufende Milvus Standalone-Instanz, die über <a href="/docs/de/install_standalone-docker.md">Docker</a> oder <a href="/docs/de/install_standalone-docker-compose.md">Docker Compose</a> installiert wurde.</li>
 <li>Die Milvus-Instanz wurde auf die neueste Version aktualisiert, die diese Switch MQ-Funktion unterstützt.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Allgemeiner Arbeitsablauf<button data-href="#General-workflow" class="anchor-icon" translate="no">

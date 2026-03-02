@@ -19,6 +19,9 @@ title: Trocar o tipo de MQ para o Milvus Standalone
         ></path>
       </svg>
     </button></h1><p>Este tópico descreve como mudar o tipo de fila de mensagens (MQ) para uma implantação autônoma do Milvus existente. O Milvus suporta a troca de MQ online sem tempo de inatividade.</p>
+<div class="alert warning">
+<p>Este recurso está pendente de lançamento e está sujeito a alterações. Entre em contato com o suporte do Milvus se quiser experimentar ou tiver alguma dúvida.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Pré-requisitos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: Trocar o tipo de MQ para o Milvus Standalone
         ></path>
       </svg>
     </button></h2><ul>
-<li>Uma instância do Milvus Standalone em execução instalada via <a href="/docs/pt/v2.6.x/install_standalone-docker.md">Docker</a> ou <a href="/docs/pt/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
-<li>A instância do Milvus foi atualizada para a versão mais recente que suporta esse recurso Switch MQ.</li>
+<li>Uma instância Milvus Standalone em execução instalada via <a href="/docs/pt/install_standalone-docker.md">Docker</a> ou <a href="/docs/pt/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>A instância do Milvus foi atualizada para a versão mais recente que suporta esse recurso do Switch MQ.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Fluxo de trabalho geral<button data-href="#General-workflow" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -19,6 +19,9 @@ title: Cambiar el tipo de MQ para Milvus Standalone
         ></path>
       </svg>
     </button></h1><p>Este tema describe cómo cambiar el tipo de cola de mensajes (MQ) para un despliegue independiente de Milvus existente. Milvus admite el cambio de MQ en línea sin tiempo de inactividad.</p>
+<div class="alert warning">
+<p>Esta característica está pendiente de lanzamiento y está sujeta a cambios. Póngase en contacto con el soporte de Milvus si desea probarla o si tiene alguna pregunta.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: Cambiar el tipo de MQ para Milvus Standalone
         ></path>
       </svg>
     </button></h2><ul>
-<li>Una instancia Milvus Standalone en ejecución instalada a través de <a href="/docs/es/v2.6.x/install_standalone-docker.md">Docker</a> o <a href="/docs/es/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
-<li>La instancia de Milvus se ha actualizado a la última versión que admite esta función Switch MQ.</li>
+<li>Una instancia Milvus Standalone en ejecución instalada a través de <a href="/docs/es/install_standalone-docker.md">Docker</a> o <a href="/docs/es/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>La instancia de Milvus se ha actualizado a la última versión compatible con esta función de Switch MQ.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Flujo de trabajo general<button data-href="#General-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -95,7 +98,7 @@ title: Cambiar el tipo de MQ para Milvus Standalone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Asegúrese de que su instancia Milvus Standalone Docker se está ejecutando correctamente. Puede comprobarlo creando una colección de prueba, insertando datos y ejecutando una consulta.</p>
+    </button></h3><p>Asegúrese de que su instancia Milvus Standalone Docker está funcionando correctamente. Puede comprobarlo creando una colección de prueba, insertando datos y ejecutando una consulta.</p>
 <h3 id="Step-2-Configure-Woodpecker-with-local-storage" class="common-anchor-header">Paso 2: Configurar Woodpecker con almacenamiento local<button data-href="#Step-2-Configure-Woodpecker-with-local-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

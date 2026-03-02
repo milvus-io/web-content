@@ -19,6 +19,9 @@ title: 切换 Milvus 群集的 MQ 类型
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何为现有的 Milvus 群集部署切换消息队列（MQ）类型。Milvus 支持在 Pulsar、Kafka 和 Woodpecker 之间进行在线 MQ 切换，无需停机。</p>
+<div class="alert warning">
+<p>此功能尚未发布，可能会有变动。如果您想试用或有任何疑问，请联系 Milvus 支持人员。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: 切换 Milvus 群集的 MQ 类型
         ></path>
       </svg>
     </button></h2><ul>
-<li>通过<a href="/docs/zh/v2.6.x/install_cluster-milvusoperator.md">Milvus Operator</a>或<a href="/docs/zh/v2.6.x/install_cluster-helm.md">Helm</a> 安装的正在运行的 Milvus 群集实例。</li>
-<li>Milvus 实例已升级到支持此切换 MQ 功能的最新版本。</li>
+<li>通过 Milvus<a href="/docs/zh/install_cluster-milvusoperator.md">Operator</a>或<a href="/docs/zh/install_cluster-helm.md">Helm</a> 安装正在运行的 Milvus 集群实例。</li>
+<li>Milvus 实例已升级到支持此 Switch MQ 功能的最新版本。</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">从 Pulsar/Kafka 切换到 Woodpecker (MinIO)<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,8 +95,8 @@ title: 切换 Milvus 群集的 MQ 类型
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>对于<strong>Helm</strong>，有关更新配置的说明，请参阅<a href="/docs/zh/v2.6.x/configure-helm.md">使用 Helm 图表配置 Milvus</a>。</li>
-<li>对于<strong>Milvus 操作符</strong>，请参阅<a href="/docs/zh/v2.6.x/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>，了解更新配置的说明。</li>
+<li>对于<strong>Helm</strong>，有关更新配置的说明，请参阅<a href="/docs/zh/configure-helm.md">使用 Helm 图表配置 Milvus</a>。</li>
+<li>对于<strong>Milvus 操作符</strong>，请参阅<a href="/docs/zh/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>，了解更新配置的说明。</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">步骤 3：执行 MQ 切换<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,7 +212,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">选项 B：内部 Pulsar/Kafka（由 Milvus Operator 管理）</h4><p>如果使用 Milvus Operator，请更新 Milvus 自定义资源，以包含目标 MQ 访问配置。有关更新 Milvus 配置的详细信息，请参阅<a href="/docs/zh/v2.6.x/configure_operator.md">使用 Milvus Operator</a>配置 Milvus。</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">选项 B：内部 Pulsar/Kafka（由 Milvus Operator 管理）</h4><p>如果使用 Milvus Operator，请更新 Milvus 自定义资源，以包含目标 MQ 访问配置。有关更新 Milvus 配置的详细信息，请参阅<a href="/docs/zh/configure_operator.md">使用 Milvus Operator</a>配置 Milvus。</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">选项 C：外部 Pulsar/Kafka</h4><p>如果使用外部 Pulsar 或 Kafka 服务，则无需更改<code translate="no">mqType</code> 。只需将外部 MQ 访问配置添加到<code translate="no">values.yaml</code> ，然后重启 Milvus 实例以呈现配置。</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">第 3 步：执行 MQ 切换<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

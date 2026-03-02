@@ -18,7 +18,10 @@ title: 切換 Milvus 集群的 MQ 類型
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主題描述如何切換現有 Milvus 集群部署的訊息佇列 (MQ) 類型。Milvus 支援在 Pulsar、Kafka 和 Woodpecker 之間進行線上 MQ 切換，無須停機。</p>
+    </button></h1><p>本主題描述如何切換現有 Milvus 集群部署的訊息佇列 (MQ) 類型。Milvus 支援在 Pulsar、Kafka 和 Woodpecker 之間進行線上 MQ 切換，而無需停機。</p>
+<div class="alert warning">
+<p>此功能尚待釋出，可能會有所變更。如果您想試用或有任何問題，請聯絡 Milvus 支援。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">先決條件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: 切換 Milvus 集群的 MQ 類型
         ></path>
       </svg>
     </button></h2><ul>
-<li>透過 Milvus<a href="/docs/zh-hant/v2.6.x/install_cluster-milvusoperator.md">Operator</a>或<a href="/docs/zh-hant/v2.6.x/install_cluster-helm.md">Helm</a> 安裝一個執行中的 Milvus 叢集實例。</li>
-<li>Milvus 实例已升级到支持此切换 MQ 功能的最新版本。</li>
+<li>透過 Milvus<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Operator</a>或<a href="/docs/zh-hant/install_cluster-helm.md">Helm</a> 安裝的運行中的 Milvus 集群實例。</li>
+<li>Milvus 實例已升級到支援此 Switch MQ 功能的最新版本。</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">從 Pulsar/Kafka 切換到 Woodpecker (MinIO)<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,7 +57,7 @@ title: 切換 Milvus 集群的 MQ 類型
         ></path>
       </svg>
     </button></h2><p>按照以下步驟，將 MQ 類型從 Pulsar 或 Kafka 切換到使用 MinIO 儲存的 Woodpecker。</p>
-<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">步驟 1: 確認 Milvus 實例正在運行<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">步驟 1：確認 Milvus 實例正在運行<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,8 +95,8 @@ title: 切換 Milvus 集群的 MQ 類型
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>對於<strong>Helm</strong>，請參閱<a href="/docs/zh-hant/v2.6.x/configure-helm.md">使用 Helm Charts 配置 Milvus</a>，以取得更新組態的指示。</li>
-<li>對於<strong>Milvus Operator</strong>，請參閱<a href="/docs/zh-hant/v2.6.x/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>，以獲得更新配置的指示。</li>
+<li>對於<strong>Helm</strong>，請參閱<a href="/docs/zh-hant/configure-helm.md">使用 Helm Charts 配置 Milvus</a>，以取得更新組態的指示。</li>
+<li>對於<strong>Milvus Operator</strong>，請參閱<a href="/docs/zh-hant/configure_operator.md">使用 Milvus Operator 配置 Milvus</a>，以獲得更新配置的指示。</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">步驟 3：執行 MQ 切換<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,7 +212,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">選項 B：內部 Pulsar/Kafka（由 Milvus Operator 管理）</h4><p>如果您使用 Milvus Operator，請更新 Milvus 自訂資源以包含目標 MQ 存取配置。有關更新 Milvus 配置的詳細資訊，請參閱<a href="/docs/zh-hant/v2.6.x/configure_operator.md">使用</a>Milvus<a href="/docs/zh-hant/v2.6.x/configure_operator.md">Operator</a>配置 Milvus。</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">選項 B：內部 Pulsar/Kafka（由 Milvus Operator 管理）</h4><p>如果您使用 Milvus Operator，請更新 Milvus 自訂資源以包含目標 MQ 存取配置。有關更新 Milvus 配置的詳細資訊，請參閱<a href="/docs/zh-hant/configure_operator.md">使用</a>Milvus<a href="/docs/zh-hant/configure_operator.md">Operator</a>配置 Milvus。</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">選項 C：外部 Pulsar/Kafka</h4><p>如果您使用外部 Pulsar 或 Kafka 服務，您不需要更改<code translate="no">mqType</code> 。只需將外部 MQ 存取配置添加到<code translate="no">values.yaml</code> ，並重新啟動 Milvus 實例以呈現配置。</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">步驟 3：執行 MQ 切換<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

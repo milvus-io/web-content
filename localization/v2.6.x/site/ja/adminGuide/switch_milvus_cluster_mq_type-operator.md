@@ -18,7 +18,10 @@ title: MilvusクラスタのMQタイプの切り替え
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、既存のMilvusクラスターでメッセージ・キュー(MQ)のタイプを切り替える方法について説明します。Milvusは、ダウンタイムなしでPulsar、Kafka、Woodpecker間のオンラインMQ切り替えをサポートしています。</p>
+    </button></h1><p>このトピックでは、既存のMilvusクラスターでメッセージ・キュー(MQ)のタイプを切り替える方法について説明します。Milvusでは、ダウンタイムなしでPulsar、Kafka、Woodpecker間のオンラインMQ切り替えをサポートしています。</p>
+<div class="alert warning">
+<p>この機能はリリース待ちであり、変更される可能性があります。お試しやご質問はMilvusサポートまでお問い合わせください。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: MilvusクラスタのMQタイプの切り替え
         ></path>
       </svg>
     </button></h2><ul>
-<li>Milvus<a href="/docs/ja/v2.6.x/install_cluster-milvusoperator.md">Operator</a>または<a href="/docs/ja/v2.6.x/install_cluster-helm.md">Helm</a>経由でインストールされた稼働中のMilvusクラスタ・インスタンス。</li>
-<li>Milvusインスタンスが、このSwitch MQ機能をサポートする最新バージョンにアップグレードされていること。</li>
+<li>Milvus<a href="/docs/ja/install_cluster-milvusoperator.md">Operator</a>または<a href="/docs/ja/install_cluster-helm.md">Helm</a>経由でインストールされた稼働中のMilvusクラスタインスタンス。</li>
+<li>MilvusインスタンスがこのSwitch MQ機能をサポートする最新バージョンにアップグレードされていること。</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">Pulsar/KafkaからWoodpecker (MinIO)への切り替え<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,8 +95,8 @@ title: MilvusクラスタのMQタイプの切り替え
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><strong>Helmの</strong>場合は、"<a href="/docs/ja/v2.6.x/configure-helm.md">Helm ChartsでMilvusを設定する</a>"を参照し、設定を更新してください。</li>
-<li><strong>Milvus Operatorの</strong>場合は、<a href="/docs/ja/v2.6.x/configure_operator.md">Milvus Operatorを使用してMilvusを設定するを</a>参照してください。</li>
+<li><strong>Helmの</strong>場合は、"<a href="/docs/ja/configure-helm.md">Helm ChartsでMilvusを設定する</a>"を参照し、設定を更新してください。</li>
+<li><strong>Milvus Operatorの</strong>場合は、<a href="/docs/ja/configure_operator.md">Milvus Operatorを使用してMilvusを設定するを</a>参照して設定を更新してください。</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">ステップ3: MQスイッチの実行<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,7 +212,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">オプションB： 内部Pulsar/Kafka（Milvus Operatorで管理）</h4><p>Milvus Operatorを使用している場合は、Milvusカスタム・リソースを更新し、ターゲットMQアクセス構成を含めます。Milvus設定の更新の詳細については、「<a href="/docs/ja/v2.6.x/configure_operator.md">Milvus Operatorを使用したMilvusの設定</a>」を参照してください。</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">オプションB： 内部Pulsar/Kafka（Milvus Operatorで管理）</h4><p>Milvus Operatorを使用している場合は、Milvusカスタム・リソースを更新し、ターゲットMQアクセス構成を含めます。Milvus設定の更新の詳細については、「<a href="/docs/ja/configure_operator.md">Milvus Operatorを使用したMilvusの設定</a>」を参照してください。</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">オプションC： 外部Pulsar/Kafka</h4><p>外部PulsarまたはKafkaサービスを使用している場合、<code translate="no">mqType</code> を変更する必要はありません。<code translate="no">values.yaml</code> に外部MQアクセス設定を追加し、Milvusインスタンスを再起動するだけで設定が反映されます。</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">ステップ 3: MQ スイッチの実行<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

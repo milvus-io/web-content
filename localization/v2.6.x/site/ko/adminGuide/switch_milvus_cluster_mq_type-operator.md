@@ -19,6 +19,9 @@ title: Milvus 클러스터의 MQ 유형 전환하기
         ></path>
       </svg>
     </button></h1><p>이 도움말 항목에서는 기존 Milvus 클러스터 배포의 메시지 큐(MQ) 유형을 전환하는 방법에 대해 설명합니다. Milvus는 가동 중단 시간 없이 Pulsar, Kafka, Woodpecker 간의 온라인 MQ 전환을 지원합니다.</p>
+<div class="alert warning">
+<p>이 기능은 출시 대기 중이며 변경될 수 있습니다. 사용해 보고 싶거나 궁금한 점이 있으면 Milvus 지원팀에 문의하세요.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: Milvus 클러스터의 MQ 유형 전환하기
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ko/v2.6.x/install_cluster-milvusoperator.md">Milvus Operator</a> 또는 <a href="/docs/ko/v2.6.x/install_cluster-helm.md">Helm을</a> 통해 설치된 실행 중인 Milvus 클러스터 인스턴스.</li>
+<li><a href="/docs/ko/install_cluster-milvusoperator.md">밀버스 오퍼레이터</a> 또는 <a href="/docs/ko/install_cluster-helm.md">헬름을</a> 통해 설치된 실행 중인 밀버스 클러스터 인스턴스.</li>
 <li>Milvus 인스턴스가 이 Switch MQ 기능을 지원하는 최신 버전으로 업그레이드되었습니다.</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">Pulsar/Kafka에서 Woodpecker(MinIO)로 전환하기<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
@@ -92,8 +95,8 @@ title: Milvus 클러스터의 MQ 유형 전환하기
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><strong>헬름의</strong> 경우 구성 업데이트에 대한 지침은 <a href="/docs/ko/v2.6.x/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조하세요.</li>
-<li><strong>밀버스 오퍼</strong>레이터의 경우, 구성 업데이트에 대한 지침은 <a href="/docs/ko/v2.6.x/configure_operator.md">밀버스 오퍼레이터로 밀버스 구</a> 성을 참조하세요.</li>
+<li><strong>헬름의</strong> 경우 구성 업데이트에 대한 지침은 <a href="/docs/ko/configure-helm.md">헬름 차트로 Milvus 구성을</a> 참조하세요.</li>
+<li><strong>밀버스 오퍼</strong>레이터의 경우, 구성 업데이트에 대한 지침은 <a href="/docs/ko/configure_operator.md">밀버스 오퍼레이터로 밀버스 구</a> 성을 참조하세요.</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">3단계: MQ 스위치 실행하기<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -209,7 +212,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">옵션 B: 내부 Pulsar/Kafka(Milvus Operator에서 관리)</h4><p>Milvus Operator를 사용하는 경우, 대상 MQ 액세스 구성을 포함하도록 Milvus 사용자 정의 리소스를 업데이트하세요. Milvus 구성 업데이트에 대한 자세한 내용은 Milvus <a href="/docs/ko/v2.6.x/configure_operator.md">Operator로 Milvus 구성하기를</a> 참조하세요.</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">옵션 B: 내부 Pulsar/Kafka(Milvus Operator에서 관리)</h4><p>Milvus Operator를 사용하는 경우, 대상 MQ 액세스 구성을 포함하도록 Milvus 사용자 정의 리소스를 업데이트하세요. Milvus 구성 업데이트에 대한 자세한 내용은 Milvus <a href="/docs/ko/configure_operator.md">Operator로 Milvus 구성하기를</a> 참조하세요.</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">옵션 C: 외부 Pulsar/Kafka</h4><p>외부 Pulsar 또는 Kafka 서비스를 사용하는 경우 <code translate="no">mqType</code> 을 변경할 필요가 없습니다. <code translate="no">values.yaml</code> 에 외부 MQ 액세스 구성을 추가하고 Milvus 인스턴스를 다시 시작하여 구성을 렌더링하기만 하면 됩니다.</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">3단계: MQ 스위치 실행하기<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

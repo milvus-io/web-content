@@ -19,6 +19,9 @@ title: تبديل نوع MQ لمجموعة Milvus Cluster
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية تبديل نوع قائمة انتظار الرسائل (MQ) لنشر مجموعة Milvus الحالية. يدعم Milvus تبديل MQ عبر الإنترنت بين Pulsar وKafka وWoodpecker دون توقف.</p>
+<div class="alert warning">
+<p>هذه الميزة في انتظار الإصدار وهي عرضة للتغيير. يرجى التواصل مع دعم Milvus إذا كنت ترغب في تجربتها أو لديك أي أسئلة.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: تبديل نوع MQ لمجموعة Milvus Cluster
         ></path>
       </svg>
     </button></h2><ul>
-<li>مثيل مجموعة Milvus قيد التشغيل مثبت عبر <a href="/docs/ar/v2.6.x/install_cluster-milvusoperator.md">مشغل Milvus</a> أو <a href="/docs/ar/v2.6.x/install_cluster-helm.md">Helm</a>.</li>
+<li>مثيل مجموعة Milvus قيد التشغيل مثبت عبر <a href="/docs/ar/install_cluster-milvusoperator.md">مشغل Milvus</a> أو <a href="/docs/ar/install_cluster-helm.md">Helm</a>.</li>
 <li>تمت ترقية مثيل Milvus إلى أحدث إصدار يدعم ميزة تبديل MQ هذه.</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">التبديل من بولسار/كافكا إلى نقار الخشب (MinIO)<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
@@ -92,8 +95,8 @@ title: تبديل نوع MQ لمجموعة Milvus Cluster
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>بالنسبة لـ <strong>Helm،</strong> راجع <a href="/docs/ar/v2.6.x/configure-helm.md">تكوين Milvus مع مخططات Helm</a> للحصول على إرشادات حول تحديث التكوين.</li>
-<li>بالنسبة <strong>لمشغل Mil</strong>vus، راجع <a href="/docs/ar/v2.6.x/configure_operator.md">تكوين Milvus مع مشغل Milvus</a> للحصول على إرشادات حول تحديث التكوين.</li>
+<li>بالنسبة لـ <strong>Helm،</strong> راجع <a href="/docs/ar/configure-helm.md">تكوين Milvus مع مخططات Helm</a> للحصول على إرشادات حول تحديث التكوين.</li>
+<li>بالنسبة <strong>لمشغل Mil</strong>vus، راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع مشغل Milvus</a> للحصول على إرشادات حول تحديث التكوين.</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">الخطوة 3: تنفيذ مفتاح التبديل MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -162,7 +165,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
         ></path>
       </svg>
     </button></h2><p>اتبع هذه الخطوات لتبديل نوع MQ من Woodpecker إلى Pulsar أو Kafka.</p>
-<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">الخطوة 1: تحقق من أن مثيل Milvus قيد التشغيل<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">الخطوة 1: تحقق من أن مثيل ميلفوس قيد التشغيل<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,7 +212,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">الخيار ب: بولسار/كافكا الداخلي (تتم إدارته بواسطة مشغل Milvus)</h4><p>إذا كنت تستخدم مشغل Milvus، قم بتحديث مورد Milvus المخصص لتضمين تكوين الوصول إلى MQ الهدف. راجع <a href="/docs/ar/v2.6.x/configure_operator.md">تكوين Milvus مع مشغل Milvus</a> للحصول على تفاصيل حول تحديث تكوين Milvus.</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">الخيار ب: بولسار/كافكا الداخلي (تتم إدارته بواسطة مشغل Milvus)</h4><p>إذا كنت تستخدم مشغل Milvus، فقم بتحديث مورد Milvus المخصص لتضمين تكوين الوصول إلى MQ الهدف. راجع <a href="/docs/ar/configure_operator.md">تكوين Milvus مع مشغل Milvus</a> للحصول على تفاصيل حول تحديث تكوين Milvus.</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">الخيار ج: النابض الخارجي/كافكا الخارجي</h4><p>إذا كنت تستخدم خدمة بولسار أو كافكا خارجية، فلن تحتاج إلى تغيير <code translate="no">mqType</code>. ما عليك سوى إضافة تكوين الوصول إلى MQ الخارجي إلى <code translate="no">values.yaml</code> الخاص بك وإعادة تشغيل مثيل Milvus لعرض التكوين.</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">الخطوة 3: تنفيذ تبديل MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

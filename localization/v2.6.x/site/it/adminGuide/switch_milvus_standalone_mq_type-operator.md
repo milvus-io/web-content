@@ -19,6 +19,9 @@ title: Cambio del tipo di MQ per Milvus Standalone
         ></path>
       </svg>
     </button></h1><p>Questo argomento descrive come cambiare il tipo di coda di messaggi (MQ) per una distribuzione Milvus standalone esistente. Milvus supporta il cambio di MQ online senza tempi di inattività.</p>
+<div class="alert warning">
+<p>Questa funzione è in attesa di rilascio ed è soggetta a modifiche. Contattate il supporto Milvus se volete provarla o se avete domande.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: Cambio del tipo di MQ per Milvus Standalone
         ></path>
       </svg>
     </button></h2><ul>
-<li>Un'istanza Milvus Standalone in esecuzione, installata tramite <a href="/docs/it/v2.6.x/install_standalone-docker.md">Docker</a> o <a href="/docs/it/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>Un'istanza Milvus Standalone in esecuzione, installata tramite <a href="/docs/it/install_standalone-docker.md">Docker</a> o <a href="/docs/it/install_standalone-docker-compose.md">Docker Compose</a>.</li>
 <li>L'istanza Milvus è stata aggiornata all'ultima versione che supporta questa funzione di Switch MQ.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Flusso di lavoro generale<button data-href="#General-workflow" class="anchor-icon" translate="no">
@@ -140,7 +143,7 @@ title: Cambio del tipo di MQ per Milvus Standalone
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Sostituire <code translate="no">&lt;mixcoord_addr&gt;</code> con l'indirizzo effettivo del servizio MixCoord (per impostazione predefinita, <code translate="no">localhost</code> per le implementazioni standalone).</p>
+<p>Sostituite <code translate="no">&lt;mixcoord_addr&gt;</code> con l'indirizzo effettivo del vostro servizio MixCoord (per impostazione predefinita, <code translate="no">localhost</code> per le implementazioni standalone).</p>
 </div>
 <h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">Passo 4: Verificare il completamento del passaggio<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,7 +223,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>La configurazione predefinita di Milvus imposta già il tipo di archiviazione di Woodpecker su MinIO, quindi nella maggior parte dei casi non è necessaria alcuna configurazione aggiuntiva.</p>
+    </button></h3><p>La configurazione predefinita di Milvus imposta già il tipo di storage di Woodpecker su MinIO, quindi nella maggior parte dei casi non è necessaria alcuna configurazione aggiuntiva.</p>
 <p>Tuttavia, se la configurazione di Woodpecker è stata precedentemente personalizzata, è necessario assicurarsi che <code translate="no">woodpecker.storage.type</code> sia impostato su <code translate="no">minio</code>. Creare o aggiornare il file <code translate="no">user.yaml</code> con il seguente contenuto:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">woodpecker:</span>
   <span class="hljs-attr">storage:</span>

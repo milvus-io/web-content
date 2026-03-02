@@ -19,6 +19,9 @@ title: Mengganti Jenis MQ untuk Milvus Standalone
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara mengganti jenis antrean pesan (MQ) untuk penerapan mandiri Milvus yang sudah ada. Milvus mendukung peralihan MQ online tanpa waktu henti.</p>
+<div class="alert warning">
+<p>Fitur ini masih dalam proses rilis dan dapat berubah sewaktu-waktu. Silakan hubungi tim dukungan Milvus jika Anda ingin mencobanya atau memiliki pertanyaan.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: Mengganti Jenis MQ untuk Milvus Standalone
         ></path>
       </svg>
     </button></h2><ul>
-<li>Instance Milvus Standalone yang sedang berjalan yang diinstal melalui <a href="/docs/id/v2.6.x/install_standalone-docker.md">Docker</a> atau <a href="/docs/id/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>Instance Milvus Standalone yang sedang berjalan yang diinstal melalui <a href="/docs/id/install_standalone-docker.md">Docker</a> atau <a href="/docs/id/install_standalone-docker-compose.md">Docker Compose</a>.</li>
 <li>Instance Milvus telah ditingkatkan ke versi terbaru yang mendukung fitur Switch MQ ini.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Alur kerja umum<button data-href="#General-workflow" class="anchor-icon" translate="no">
@@ -62,7 +65,7 @@ title: Mengganti Jenis MQ untuk Milvus Standalone
 <li>Pantau log untuk memverifikasi peralihan telah berhasil dilakukan.</li>
 </ol>
 <div class="alert note">
-<p>Sebelum beralih, pastikan bahwa MQ target tidak mengandung topik dengan nama yang sama dengan yang digunakan oleh instans Milvus saat ini. Hal ini terutama penting jika layanan MQ target sebelumnya telah digunakan oleh instans Milvus lain, karena nama topik yang bertentangan dapat menyebabkan perilaku yang tidak diharapkan.</p>
+<p>Sebelum beralih, pastikan bahwa MQ target tidak mengandung topik dengan nama yang sama dengan yang digunakan oleh instans Milvus saat ini. Hal ini terutama penting jika layanan MQ target sebelumnya telah digunakan oleh instans Milvus lain, karena nama topik yang saling bertentangan dapat menyebabkan perilaku yang tidak diharapkan.</p>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="common-anchor-header">Beralih dari RocksMQ ke Woodpecker (Penyimpanan Lokal)<button data-href="#Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="anchor-icon" translate="no">
       <svg translate="no"

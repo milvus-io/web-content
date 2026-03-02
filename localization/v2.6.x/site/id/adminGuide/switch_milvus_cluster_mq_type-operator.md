@@ -19,6 +19,9 @@ title: Mengganti Jenis MQ untuk Milvus Cluster
         ></path>
       </svg>
     </button></h1><p>Topik ini menjelaskan cara mengganti jenis antrean pesan (MQ) untuk penerapan cluster Milvus yang sudah ada. Milvus mendukung peralihan MQ online antara Pulsar, Kafka, dan Woodpecker tanpa waktu henti.</p>
+<div class="alert warning">
+<p>Fitur ini masih dalam proses perilisan dan dapat berubah sewaktu-waktu. Silakan hubungi tim dukungan Milvus jika Anda ingin mencobanya atau memiliki pertanyaan.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Prasyarat<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: Mengganti Jenis MQ untuk Milvus Cluster
         ></path>
       </svg>
     </button></h2><ul>
-<li>Instance cluster Milvus yang sedang berjalan yang diinstal melalui <a href="/docs/id/v2.6.x/install_cluster-milvusoperator.md">Milvus Operator</a> atau <a href="/docs/id/v2.6.x/install_cluster-helm.md">Helm</a>.</li>
+<li>Instance cluster Milvus yang sedang berjalan yang diinstal melalui <a href="/docs/id/install_cluster-milvusoperator.md">Milvus Operator</a> atau <a href="/docs/id/install_cluster-helm.md">Helm</a>.</li>
 <li>Instance Milvus telah ditingkatkan ke versi terbaru yang mendukung fitur Switch MQ ini.</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">Beralih dari Pulsar/Kafka ke Woodpecker (MinIO)<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
@@ -54,7 +57,7 @@ title: Mengganti Jenis MQ untuk Milvus Cluster
         ></path>
       </svg>
     </button></h2><p>Ikuti langkah-langkah berikut untuk mengganti jenis MQ dari Pulsar atau Kafka ke Woodpecker dengan penyimpanan MinIO.</p>
-<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Langkah 1: Pastikan instans Milvus sedang berjalan<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
+<h3 id="Step-1-Verify-the-Milvus-instance-is-running" class="common-anchor-header">Langkah 1: Pastikan instans Milvus sudah berjalan<button data-href="#Step-1-Verify-the-Milvus-instance-is-running" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,8 +95,8 @@ title: Mengganti Jenis MQ untuk Milvus Cluster
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Untuk <strong>Helm</strong>, lihat <a href="/docs/id/v2.6.x/configure-helm.md">Mengkonfigurasi Milvus dengan Helm Charts</a> untuk instruksi tentang cara memperbarui konfigurasi.</li>
-<li>Untuk <strong>Milvus Operator</strong>, lihat <a href="/docs/id/v2.6.x/configure_operator.md">Mengkonfigurasi Milvus dengan Milvus Operator</a> untuk instruksi tentang memperbarui konfigurasi.</li>
+<li>Untuk <strong>Helm</strong>, lihat <a href="/docs/id/configure-helm.md">Mengkonfigurasi Milvus dengan Helm Charts</a> untuk instruksi tentang cara memperbarui konfigurasi.</li>
+<li>Untuk <strong>Milvus Operator</strong>, lihat <a href="/docs/id/configure_operator.md">Mengkonfigurasi Milvus dengan Milvus Operator</a> untuk instruksi tentang memperbarui konfigurasi.</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">Langkah 3: Jalankan sakelar MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +136,7 @@ title: Mengganti Jenis MQ untuk Milvus Cluster
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Proses peralihan selesai secara otomatis. Pantau log Milvus untuk pesan-pesan kunci berikut ini untuk mengonfirmasi bahwa peralihan telah selesai:</p>
+    </button></h3><p>Proses peralihan selesai secara otomatis. Pantau log Milvus untuk pesan-pesan kunci berikut ini untuk mengonfirmasi peralihan telah selesai:</p>
 <pre><code translate="no">WAL <span class="hljs-keyword">switch</span> success: &lt;MQ1&gt; <span class="hljs-keyword">switch</span> to &lt;MQ2&gt; finish, re-opening required
 AlterWAL broadcast message acknowledged <span class="hljs-keyword">by</span> all vchannels
 successfully updated mq.type configuration <span class="hljs-keyword">in</span> etcd
@@ -209,7 +212,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">Opsi B: Pulsar/Kafka internal (dikelola oleh Milvus Operator)</h4><p>Jika Anda menggunakan Milvus Operator, perbarui sumber daya khusus Milvus untuk menyertakan konfigurasi akses MQ target. Lihat Mengkonfigurasi <a href="/docs/id/v2.6.x/configure_operator.md">Milvus dengan Milvus Operator</a> untuk detail tentang memperbarui konfigurasi Milvus.</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">Opsi B: Pulsar/Kafka internal (dikelola oleh Milvus Operator)</h4><p>Jika Anda menggunakan Milvus Operator, perbarui sumber daya khusus Milvus untuk menyertakan konfigurasi akses MQ target. Lihat Mengkonfigurasi <a href="/docs/id/configure_operator.md">Milvus dengan Milvus Operator</a> untuk detail tentang memperbarui konfigurasi Milvus.</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">Opsi C: Pulsar/Kafka Eksternal</h4><p>Jika Anda menggunakan layanan Pulsar atau Kafka eksternal, Anda tidak perlu mengubah <code translate="no">mqType</code>. Cukup tambahkan konfigurasi akses MQ eksternal ke <code translate="no">values.yaml</code> dan mulai ulang instans Milvus untuk merender konfigurasi.</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">Langkah 3: Jalankan sakelar MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -21,6 +21,9 @@ title: MQ-Typ für Milvus-Cluster wechseln
         ></path>
       </svg>
     </button></h1><p>In diesem Thema wird beschrieben, wie Sie den Message Queue (MQ)-Typ für eine bestehende Milvus-Cluster-Bereitstellung umschalten. Milvus unterstützt den Online-MQ-Wechsel zwischen Pulsar, Kafka und Woodpecker ohne Ausfallzeit.</p>
+<div class="alert warning">
+<p>Diese Funktion ist noch nicht freigegeben und kann sich noch ändern. Bitte wenden Sie sich an den Milvus-Support, wenn Sie es ausprobieren möchten oder Fragen haben.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,8 +40,8 @@ title: MQ-Typ für Milvus-Cluster wechseln
         ></path>
       </svg>
     </button></h2><ul>
-<li>Eine laufende Milvus-Cluster-Instanz, die über <a href="/docs/de/v2.6.x/install_cluster-milvusoperator.md">Milvus Operator</a> oder <a href="/docs/de/v2.6.x/install_cluster-helm.md">Helm</a> installiert wurde.</li>
-<li>Die Milvus-Instanz wurde auf die neueste Version aktualisiert, die diese MQ-Umschaltfunktion unterstützt.</li>
+<li>Eine laufende Milvus-Cluster-Instanz, die über <a href="/docs/de/install_cluster-milvusoperator.md">Milvus Operator</a> oder <a href="/docs/de/install_cluster-helm.md">Helm</a> installiert wurde.</li>
+<li>Die Milvus-Instanz wurde auf die neueste Version aktualisiert, die diese Switch MQ-Funktion unterstützt.</li>
 </ul>
 <h2 id="Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="common-anchor-header">Umschalten von Pulsar/Kafka auf Woodpecker (MinIO)<button data-href="#Switch-from-PulsarKafka-to-Woodpecker-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -94,8 +97,8 @@ title: MQ-Typ für Milvus-Cluster wechseln
     <span class="hljs-attr">type:</span> <span class="hljs-string">minio</span>
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Für <strong>Helm</strong>: Anweisungen zur Aktualisierung der Konfiguration finden Sie unter <a href="/docs/de/v2.6.x/configure-helm.md">Konfigurieren von Milvus mit Helm Charts</a>.</li>
-<li>Für <strong>Milvus Operator</strong> finden Sie Anweisungen zum Aktualisieren der Konfiguration unter <a href="/docs/de/v2.6.x/configure_operator.md">Konfigurieren von Milvus mit Milvus Operator</a>.</li>
+<li>Für <strong>Helm</strong>: Anweisungen zur Aktualisierung der Konfiguration finden Sie unter <a href="/docs/de/configure-helm.md">Konfigurieren von Milvus mit Helm Charts</a>.</li>
+<li>Für <strong>Milvus Operator</strong> finden Sie Anweisungen zum Aktualisieren der Konfiguration unter <a href="/docs/de/configure_operator.md">Konfigurieren von Milvus mit Milvus Operator</a>.</li>
 </ul>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">Schritt 3: Führen Sie den MQ-Wechsel aus<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,7 +214,7 @@ successfully updated mq.type configuration <span class="hljs-keyword">in</span> 
   <span class="hljs-attr">address:</span> <span class="hljs-string">&lt;pulsar-proxy-address&gt;</span>
   <span class="hljs-attr">port:</span> <span class="hljs-number">6650</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">Option B: Interner Pulsar/Kafka (von Milvus Operator verwaltet)</h4><p>Wenn Sie Milvus Operator verwenden, aktualisieren Sie die benutzerdefinierte Milvus-Ressource, um die Ziel-MQ-Zugangskonfiguration aufzunehmen. Einzelheiten zur Aktualisierung der Milvus-Konfiguration finden Sie unter <a href="/docs/de/v2.6.x/configure_operator.md">Konfigurieren von Milvus mit Milvus Operator</a>.</p>
+<h4 id="Option-B-Internal-PulsarKafka-managed-by-Milvus-Operator" class="common-anchor-header">Option B: Interner Pulsar/Kafka (von Milvus Operator verwaltet)</h4><p>Wenn Sie Milvus Operator verwenden, aktualisieren Sie die benutzerdefinierte Milvus-Ressource, um die Ziel-MQ-Zugangskonfiguration aufzunehmen. Einzelheiten zur Aktualisierung der Milvus-Konfiguration finden Sie unter <a href="/docs/de/configure_operator.md">Konfigurieren von Milvus mit Milvus Operator</a>.</p>
 <h4 id="Option-C-External-PulsarKafka" class="common-anchor-header">Option C: Externer Pulsar/Kafka</h4><p>Wenn Sie einen externen Pulsar- oder Kafka-Dienst verwenden, müssen Sie die <code translate="no">mqType</code> nicht ändern. Fügen Sie einfach die externe MQ-Zugangskonfiguration zu Ihrer <code translate="no">values.yaml</code> hinzu und starten Sie die Milvus-Instanz neu, um die Konfiguration zu rendern.</p>
 <h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">Schritt 3: Ausführen der MQ-Umschaltung<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"

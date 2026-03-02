@@ -18,7 +18,10 @@ title: MilvusスタンドアロンのMQタイプの切り替え
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、既存のMilvusスタンドアロンのメッセージキュー(MQ)タイプを切り替える方法について説明します。MilvusはダウンタイムなしでオンラインMQ切り替えをサポートしています。</p>
+    </button></h1><p>このトピックでは、既存のMilvusスタンドアロンのメッセージキュー(MQ)タイプを切り替える方法について説明します。Milvusでは、ダウンタイムなしのオンラインMQ切り替えをサポートしています。</p>
+<div class="alert warning">
+<p>この機能はリリース待ちであり、変更される可能性があります。Milvusサポートまでお問い合わせください。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: MilvusスタンドアロンのMQタイプの切り替え
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="/docs/ja/v2.6.x/install_standalone-docker.md">Docker</a>または<a href="/docs/ja/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>経由でインストールされたMilvusスタンドアロンインスタンスが稼動していること。</li>
-<li>MilvusインスタンスがこのSwitch MQ機能をサポートする最新バージョンにアップグレードされていること。</li>
+<li><a href="/docs/ja/install_standalone-docker.md">Docker</a>または<a href="/docs/ja/install_standalone-docker-compose.md">Docker Compose</a>経由でインストールされたMilvus Standaloneインスタンスが稼動していること。</li>
+<li>Milvusインスタンスが本Switch MQ機能をサポートする最新バージョンにアップグレードされていること。</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">一般的なワークフロー<button data-href="#General-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -62,7 +65,7 @@ title: MilvusスタンドアロンのMQタイプの切り替え
 <li>ログを監視し、切り替えが正常に完了したことを確認する。</li>
 </ol>
 <div class="alert note">
-<p>切り替える前に、ターゲットMQに現在のMilvusインスタンスが使用しているものと同じ名前のトピックが含まれていないことを確認してください。これは、ターゲットMQサービスが以前別のMilvusインスタンスで使用されていた場合、トピック名が競合すると予期せぬ動作につながる可能性があるため、特に重要です。</p>
+<p>切り替える前に、ターゲットMQに現在のMilvusインスタンスで使用されているものと同じ名前のトピックが含まれていないことを確認してください。これは、ターゲットMQサービスが以前別のMilvusインスタンスで使用されていた場合、トピック名が競合すると予期せぬ動作につながる可能性があるため、特に重要です。</p>
 </div>
 <h2 id="Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="common-anchor-header">RocksMQからWoodpecker（ローカルストレージ）への切り替え<button data-href="#Switch-from-RocksMQ-to-Woodpecker-Local-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -251,7 +254,7 @@ docker compose up -d
   -d &#x27;{&quot;target_wal_name&quot;: &quot;woodpecker&quot;}&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">&lt;mixcoord_addr&gt;</code> 」をMixCoordサービスの実際のアドレスに置き換えてください（デフォルトでは、スタンドアロンの場合、<code translate="no">localhost</code> ）。</p>
+<p><code translate="no">&lt;mixcoord_addr&gt;</code> （デフォルトでは<code translate="no">localhost</code> ）をMixCoordサービスの実際のアドレスに置き換えてください。</p>
 </div>
 <h3 id="Step-4-Verify-the-switch-is-complete" class="common-anchor-header">ステップ4：切り替え完了の確認<button data-href="#Step-4-Verify-the-switch-is-complete" class="anchor-icon" translate="no">
       <svg translate="no"

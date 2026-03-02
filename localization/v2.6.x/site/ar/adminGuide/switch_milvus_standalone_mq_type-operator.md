@@ -19,6 +19,9 @@ title: تبديل نوع MQ لـ Milvus Standalone
         ></path>
       </svg>
     </button></h1><p>يصف هذا الموضوع كيفية تبديل نوع قائمة انتظار الرسائل (MQ) لنشر Milvus مستقل موجود. يدعم Milvus تبديل MQ عبر الإنترنت دون توقف.</p>
+<div class="alert warning">
+<p>هذه الميزة في انتظار الإصدار وهي عرضة للتغيير. يرجى التواصل مع دعم Milvus إذا كنت ترغب في تجربتها أو لديك أي أسئلة.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">المتطلبات الأساسية<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +38,7 @@ title: تبديل نوع MQ لـ Milvus Standalone
         ></path>
       </svg>
     </button></h2><ul>
-<li>مثيل Milvus مستقل قيد التشغيل مثبت عبر <a href="/docs/ar/v2.6.x/install_standalone-docker.md">Docker</a> أو <a href="/docs/ar/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>مثيل Milvus مستقل قيد التشغيل مثبت عبر <a href="/docs/ar/install_standalone-docker.md">Docker</a> أو <a href="/docs/ar/install_standalone-docker-compose.md">Docker Compose</a>.</li>
 <li>تمت ترقية مثيل Milvus إلى أحدث إصدار يدعم ميزة تبديل MQ هذه.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">سير العمل العام<button data-href="#General-workflow" class="anchor-icon" translate="no">
@@ -119,7 +122,7 @@ title: تبديل نوع MQ لـ Milvus Standalone
 <p>ثم أعد تشغيل مثيل Milvus لتطبيق التكوين:</p>
 <pre><code translate="no" class="language-shell">bash standalone_embed.sh restart
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">الخطوة 3: قم بتشغيل مفتاح MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
+<h3 id="Step-3-Execute-the-MQ-switch" class="common-anchor-header">الخطوة 3: قم بتنفيذ مفتاح MQ<button data-href="#Step-3-Execute-the-MQ-switch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

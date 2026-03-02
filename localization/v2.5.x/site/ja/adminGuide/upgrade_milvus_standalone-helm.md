@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusのアップグレードパスは以下のように選択できます：</p>
-<div style="display: none;">- Milvus v2.2.3およびそれ以降のリリースからv2.5.26への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
+<div style="display: none;">- Milvus v2.2.3以降からv2.5.27へのアップグレード](#conduct-a-rolling-upgrade)。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.26へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
-<li><p>Milvus v2.1.xからv2.5.26へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.5.27へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
+<li><p>Milvus v2.1.xからv2.5.27へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">ローリングアップグレードの実施<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -131,7 +131,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>Milvus 2.2.3以降では、Milvusコーディネータをアクティブスタンバイ モードで動作するように設定し、コーディネータのローリングアップグレード機能を有効にすることで、コーディネータのアップグレード中にMilvusが受信したリクエストに応答できるようになります。以前のリリースでは、アップグレード中にコーディネータを削除してから作成するため、サービスのダウンタイムが発生する可能性がありました。</p>
 <p>ローリングアップグレードでは、コーディネータをアクティブスタンバイで動作させる必要があります。弊社が提供する<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">スクリプトを</a>使用して、コーディネーターをアクティブスタンバイ モードで動作するように設定し、ローリングアップグレードを開始できます。</p>
-<p>Kubernetesが提供するローリングアップデートの機能に基づいて、上記のスクリプトは、デプロイメントの依存関係に従って順序付けられたアップデートを強制します。さらに、Milvusはアップグレード中もそのコンポーネントに依存しているコンポーネントとの互換性を維持するメカニズムを実装し、潜在的なサービスのダウンタイムを大幅に削減します。</p>
+<p>Kubernetesが提供するローリングアップデートの機能に基づいて、上記のスクリプトは、デプロイメントの依存関係に従って順序付けられたアップデートを強制します。さらに、Milvusはアップグレード中もそのコンポーネントに依存しているコンポーネントとの互換性を維持するメカニズムを実装し、潜在的なサービスダウンタイムを大幅に削減します。</p>
 <p>このスクリプトは、HelmとともにインストールされたMilvusのアップグレードにのみ適用されます。次の表は、スクリプトで使用可能なコマンドフラグの一覧です。</p>
 <table>
 <thead>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>
 </table>
-<p>Milvusインスタンスのすべてのデプロイが正常な状態であることを確認したら、以下のコマンドを実行してください。以下のコマンドを実行することで、Milvusインスタンスを2.5.26にアップグレードすることができます。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.26 -w &#x27;milvusdb/milvus:v2.5.26&#x27;
+<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.5.27にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.5.27にアップグレードすることができます。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.sh -n default -i my-release -o update -t 2.5.27 -w &#x27;milvusdb/milvus:v2.5.27&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -295,25 +295,25 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
 <li>Milvusメタデータを移行します。</li>
 <li>新しいイメージでMilvusコンポーネントを起動する。</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2526" class="common-anchor-header">2.Milvusをv2.1.xから2.5.26にアップグレードする。</h4><p>以下のコマンドは、Milvusをv2.1.4から2.5.26にアップグレードすることを前提としています。必要なバージョンに変更してください。</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2527" class="common-anchor-header">2.Milvusをv2.1.xから2.5.27にアップグレードする。</h4><p>以下のコマンドは、Milvusをv2.1.4から2.5.27にアップグレードすることを想定しています。必要なバージョンに変更してください。</p>
 <ol>
 <li><p>Milvusインスタンス名、ソースMilvusバージョン、ターゲットMilvusバージョンを指定します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.26
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.27
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>MilvusがデフォルトのK8s名前空間にインストールされていない場合は<code translate="no">-n</code> 。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.26
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.27
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusがカスタム<code translate="no">rootpath</code> でインストールされている場合は、<code translate="no">-r</code> でルートパスを指定してください。</p>
-<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">26</span> -<span class="hljs-attribute">r</span> by-dev
+<pre><code translate="no">./migrate<span class="hljs-selector-class">.sh</span> -<span class="hljs-selector-tag">i</span> my-release -n milvus -s <span class="hljs-number">2.1</span>.<span class="hljs-number">4</span> -t <span class="hljs-number">2.5</span>.<span class="hljs-number">27</span> -<span class="hljs-attribute">r</span> by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusがカスタム<code translate="no">image</code> でインストールされている場合は、<code translate="no">-w</code> でイメージタグを指定してください。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.26 -r by-dev -w milvusdb/milvus:v2.5.26
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.27 -r by-dev -w milvusdb/milvus:v2.5.27
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>マイグレーション完了後にマイグレーションポッドを自動的に削除する場合は、<code translate="no">-d true</code> を設定します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.26 -w milvusdb/milvus:v2.5.26 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.27 -w milvusdb/milvus:v2.5.27 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>マイグレーションに失敗した場合は、ロールバックしてマイグレーションをやり直します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.26 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.26 -r by-dev -o migrate -w milvusdb/milvus:v2.5.26
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.27 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.27 -r by-dev -o migrate -w milvusdb/milvus:v2.5.27
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

@@ -1,9 +1,9 @@
 ---
 id: switch_milvus_standalone_mq_type-operator.md
 summary: 了解如何切换 Milvus Standalone 的信息队列类型。
-title: 切换 Milvus 单机的 MQ 类型
+title: 为 Milvus 单机版切换 MQ 类型
 ---
-<h1 id="Switch-MQ-Type-for-Milvus-Standalone" class="common-anchor-header">切换 Milvus 单机的 MQ 类型<button data-href="#Switch-MQ-Type-for-Milvus-Standalone" class="anchor-icon" translate="no">
+<h1 id="Switch-MQ-Type-for-Milvus-Standalone" class="common-anchor-header">为 Milvus 单机版切换 MQ 类型<button data-href="#Switch-MQ-Type-for-Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,6 +19,9 @@ title: 切换 Milvus 单机的 MQ 类型
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何为现有的 Milvus 单机部署切换消息队列（MQ）类型。Milvus 支持在线 MQ 切换，无需停机。</p>
+<div class="alert warning">
+<p>此功能尚未发布，可能会有变动。如果您想尝试或有任何问题，请联系 Milvus 支持。</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: 切换 Milvus 单机的 MQ 类型
         ></path>
       </svg>
     </button></h2><ul>
-<li>通过<a href="/docs/zh/v2.6.x/install_standalone-docker.md">Docker</a>或<a href="/docs/zh/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a> 安装的运行中的 Milvus Standalone 实例。</li>
-<li>Milvus 实例已升级到支持此切换 MQ 功能的最新版本。</li>
+<li>通过<a href="/docs/zh/install_standalone-docker.md">Docker</a>或<a href="/docs/zh/install_standalone-docker-compose.md">Docker Compose</a> 安装的运行中的 Milvus Standalone 实例。</li>
+<li>Milvus 实例已升级到支持此 Switch MQ 功能的最新版本。</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">一般工作流程<button data-href="#General-workflow" class="anchor-icon" translate="no">
       <svg translate="no"

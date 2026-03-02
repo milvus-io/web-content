@@ -19,6 +19,9 @@ title: Переключение типа MQ для автономного Milvus
         ></path>
       </svg>
     </button></h1><p>В этой теме описывается, как переключить тип очереди сообщений (MQ) для существующего автономного развертывания Milvus. Milvus поддерживает переключение MQ в режиме онлайн без простоев.</p>
+<div class="alert warning">
+<p>Эта функция находится на стадии выпуска и может быть изменена. Обратитесь в службу поддержки Milvus, если хотите опробовать ее или у вас возникли вопросы.</p>
+</div>
 <h2 id="Prerequisites" class="common-anchor-header">Необходимые условия<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,8 +38,8 @@ title: Переключение типа MQ для автономного Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Работающий экземпляр Milvus Standalone, установленный с помощью <a href="/docs/ru/v2.6.x/install_standalone-docker.md">Docker</a> или <a href="/docs/ru/v2.6.x/install_standalone-docker-compose.md">Docker Compose</a>.</li>
-<li>Экземпляр Milvus был обновлен до последней версии, поддерживающей эту функцию Switch MQ.</li>
+<li>Работающий экземпляр Milvus Standalone, установленный с помощью <a href="/docs/ru/install_standalone-docker.md">Docker</a> или <a href="/docs/ru/install_standalone-docker-compose.md">Docker Compose</a>.</li>
+<li>Экземпляр Milvus обновлен до последней версии, поддерживающей эту функцию Switch MQ.</li>
 </ul>
 <h2 id="General-workflow" class="common-anchor-header">Общий рабочий процесс<button data-href="#General-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
