@@ -22,12 +22,12 @@ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/ma
 You only need to edit the code template in `milvus_cluster_default.yaml` to configure third-party dependencies. The following sections introduce how to configure object storage, etcd, and Pulsar respectively.
 
 ## Before you begin
-The table below shows whether RocksMQ, Pulsar, and Kafka are supported in Milvus standalone and cluster mode.
+The table below shows whether RocksMQ, Pulsar, Kafka, and Woodpecker are supported in Milvus standalone and cluster mode.
 
-|                 | RocksMQ | Pulsar | Kafka |
-|:---------------:|:-------:|:------:|:-----:|
-| Standalone mode |    ✔️    |   ✔️    |   ✔️   |
-|   Cluster mode  |    ✖️    |   ✔️    |   ✔️   |
+|                 | RocksMQ | Pulsar | Kafka | Woodpecker |
+|:---------------:|:-------:|:------:|:-----:|:----------:|
+| Standalone mode |    ✔️    |   ✔️    |   ✔️   |     ✔️      |
+|   Cluster mode  |    ✖️    |   ✔️    |   ✔️   |     ✔️      |
 
 There are also other limitations for specifying the message storage:
 - Only one message storage for one Milvus instance is supported. However we still have backward compatibility with multiple message storages set for one instance. The priority is as follows:
@@ -83,6 +83,10 @@ spec:
 * `accessModes`: Typically `ReadWriteOnce` for block storage
 * `storageClassName`: Your cluster's storage class
 * `storage`: Size of the persistent volume
+
+## Configure Woodpecker
+
+Woodpecker is a cloud-native Write-Ahead Log (WAL) designed for object storage. It offers high throughput, low operational overhead, and seamless scalability. For more details, see [Use Woodpecker](use-woodpecker.md).
 
 ## Configure Pulsar
 
