@@ -7,7 +7,7 @@ summary: Learn how to configure mq for Milvus.
 
 # mq-related Configurations
 
-Milvus supports three MQ: rocksmq(based on RockDB), Pulsar and Kafka.
+Milvus supports four MQ: rocksmq(based on RockDB), Pulsar, Kafka and Woodpecker.
 
 You can change your mq by setting mq.type field.
 
@@ -16,6 +16,8 @@ If you don't set mq.type field as default, there is a note about enabling priori
 1. standalone(local) mode: rocksmq(default) > Pulsar > Kafka
 
 2. cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)
+
+3. Woodpecker can be used in both standalone and cluster mode by setting mq.type to woodpecker.
 
 ## `mq.type`
 
@@ -30,7 +32,7 @@ If you don't set mq.type field as default, there is a note about enabling priori
     <tr>
       <td>
         <li>Default value: "default"</li>      
-        <li>Valid values: [default, pulsar, kafka, rocksmq]</li>      </td>
+        <li>Valid values: [default, pulsar, kafka, rocksmq, woodpecker]</li>      </td>
       <td>default</td>
     </tr>
   </tbody>

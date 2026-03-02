@@ -57,7 +57,7 @@ See [minio-related Configurations](configure_minio.md) for detailed description 
 
 ### `mq`
 
-Milvus supports three MQ: rocksmq(based on RockDB), Pulsar and Kafka.
+Milvus supports four MQ: rocksmq(based on RockDB), Pulsar, Kafka and Woodpecker.
 
 You can change your mq by setting mq.type field.
 
@@ -66,6 +66,8 @@ If you don't set mq.type field as default, there is a note about enabling priori
 1. standalone(local) mode: rocksmq(default) > Pulsar > Kafka
 
 2. cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)
+
+3. Woodpecker can be used in both standalone and cluster mode by setting mq.type to woodpecker.
 
 See [mq-related Configurations](configure_mq.md) for detailed description for each parameter under this section.
 
@@ -108,6 +110,12 @@ kafka:
 
 
 See [rocksmq-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
+
+### `woodpecker`
+
+Related configuration of woodpecker, used to manage Milvus logs of recent mutation operations, output streaming log, and provide embedded log sequential read and write.
+
+See [woodpecker-related Configurations](configure_woodpecker.md) for detailed description for each parameter under this section.
 
 ### `rootCoord`
 

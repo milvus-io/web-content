@@ -129,6 +129,7 @@ To configure resources for a specific component, add the component name in the f
             <li><a href="configure_minio.md">MinIO or S3</a></li>
             <li><a href="configure_pulsar.md">Pulsar</a></li>
             <li><a href="configure_rocksmq.md">RocksMQ</a></li>
+            <li><a href="configure_woodpecker.md">Woodpecker</a></li>
         </ul>
     </td>
     <td>
