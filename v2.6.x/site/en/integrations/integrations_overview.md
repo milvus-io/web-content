@@ -77,3 +77,5 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Use Milvus in AnythingLLM](use_milvus_in_anythingllm.md) | Orchestration | Milvus, AnythingLLM |
 | [Using NLWeb with Milvus](NLWeb_with_milvus.md) | Data Sources | Milvus, NLWeb |
 | [LangExtract + Milvus Integration](langextract_milvus_demo.md) | Data Sources | Milvus, LangExtract |
+| [Semantic Search with ZeroEntropy and Milvus](https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing) | Semantic Search | Milvus, ZeroEntropy |
+| [Integrating Milvus Text Embedding Function with LangChain](langchain_milvus_dido.md) | Text Embedding | Milvus, LangChain |

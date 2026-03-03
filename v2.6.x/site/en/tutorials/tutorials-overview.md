@@ -12,7 +12,7 @@ This page provides a list of tutorials for you to interact with Milvus.
 | -------- | -------- | --------- |
 | [Build RAG with Milvus](build-rag-with-milvus.md) |  RAG | vector search |
 | [Advanced RAG](how_to_enhance_your_rag.md) | RAG | vector search |
-| [Full Text Search with Milvus](full_text_search_with_milvus.md) | Quickstart | Full-Text Search |
+| [Full Text Search with LangChain and Milvus](full_text_search_with_milvus.md) | Quickstart | Full-Text Search |
 | [Hybrid Search with Milvus](hybrid_search_with_milvus.md) | Hybrid Search | hybrid search, multi vector, dense embedding, sparse embedding |
 | [Image Search with Milvus](image_similarity_search.md) | Semantic Search | vector search, dynamic field |
 | [Multimodal RAG with Milvus](multimodal_rag_with_milvus.md) | RAG | vector search, dynamic field |
