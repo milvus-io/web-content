@@ -217,6 +217,9 @@ summary: Learn how to configure message storage with Docker Compose or Helm.
 <div class="alert warning">
 <p>Changing the message store is not recommended. If this is you want to do this, stop all DDL operations, then call the FlushAll API to flush all collections, and finally stop Milvus in the end before you actually change the message store.</p>
 </div>
+<blockquote>
+<p><strong>Deprecated</strong>: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.</p>
+</blockquote>
 <h2 id="Configure-NATS-with-Helm" class="common-anchor-header">Configure NATS with Helm<button data-href="#Configure-NATS-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

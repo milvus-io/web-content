@@ -113,6 +113,9 @@ summary: Learn how to configure message storage with Milvus Operator.
 <li><code translate="no">storageClassName</code>: Your cluster’s storage class</li>
 <li><code translate="no">storage</code>: Size of the persistent volume</li>
 </ul>
+<blockquote>
+<p><strong>Deprecated</strong>: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.</p>
+</blockquote>
 <h2 id="Configure-NATS" class="common-anchor-header">Configure NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -201,6 +201,9 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeout: 10</p>
 <p>See <a href="/docs/v2.5.x/configure_rocksmq.md">rocksmq-related Configurations</a> for detailed description for each parameter under this section.</p>
+<blockquote>
+<p><strong>Deprecated</strong>: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.</p>
+</blockquote>
 <h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
