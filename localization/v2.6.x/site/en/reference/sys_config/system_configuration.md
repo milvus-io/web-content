@@ -141,12 +141,13 @@ In current release, all parameters take effect only after being configured at th
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.</p>
+    </button></h3><p>Milvus supports four MQ: rocksmq(based on RockDB), Pulsar, Kafka and Woodpecker.</p>
 <p>You can change your mq by setting mq.type field.</p>
 <p>If you don’t set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.</p>
 <ol>
-<li><p>standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka</p></li>
-<li><p>cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)</p></li>
+<li><p>standalone(local) mode: rocksmq(default) > Pulsar > Kafka</p></li>
+<li><p>cluster mode:  Pulsar(default) > Kafka (rocksmq is unsupported in cluster mode)</p></li>
+<li><p>Woodpecker can be used in both standalone and cluster mode by setting mq.type to woodpecker.</p></li>
 </ol>
 <p>See <a href="/docs/configure_mq.md">mq-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
@@ -201,24 +202,6 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeout: 10</p>
 <p>See <a href="/docs/configure_rocksmq.md">rocksmq-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>natsmq configuration.</p>
-<p>more detail: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>See <a href="/docs/configure_natsmq.md">natsmq-related Configurations</a> for detailed description for each parameter under this section.</p>
 <h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

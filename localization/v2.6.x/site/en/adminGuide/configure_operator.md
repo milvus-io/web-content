@@ -178,7 +178,6 @@ In addition, when configuring proxy, there is an extra field called `serviceType
             <li><a href="/docs/configure_indexcoord.md">Index coord</a></li>
             <li><a href="/docs/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/configure_mq.md">Message Queue</a></li>
-            <li><a href="/docs/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/configure_trace.md">Trace</a></li>
             <li><a href="/docs/configure_quotaandlimits.md">Quota and Limits</a></li>
