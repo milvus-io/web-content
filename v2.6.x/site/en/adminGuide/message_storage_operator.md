@@ -94,13 +94,16 @@ NATS is an alternative message storage for NATS.
 The following example configures a NATS service. 
 
 ```YAML
-apiVersion: milvus.io/v1alpha1
+apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  dependencies: 
-    msgStreamType: 'natsmq'
+  mode: standalone
+  # CONFIG: Application-level tuning
+  # All configurations in the milvus.yaml can be changed here.
+  # This section bypasses strict CRD validation to inject raw parameters.
+  config:
     natsmq:
       # server side configuration for natsmq.
       server: 
@@ -128,12 +131,30 @@ spec:
         retention:
           # (min) 3 days by default, Maximum age of any message in the P-channel.
           maxAge: 4320 
-          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
+          # (B) None by default, How many bytes the single P-channel may contain.
           maxBytes:
-          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
+          # None by default, How many message the single P-channel may contain.
           maxMsgs: 
+
+  # DEPENDENCIES: Infrastructure-level management
+  # This block must follow the strict v1beta1 CRD schema.
+  dependencies: 
+    msgStreamType: 'natsmq'
+    natsmq:
+      persistence:
+        # If Enabled, will create/use a PVC for NATS data persistence.
+        enabled: true
+        # When true, the PVC will be deleted when the Milvus instance is deleted.
+        pvcDeletion: true
+        persistentVolumeClaim:
+          # Standard Kubernetes PVC specification.
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 20Gi
+
   components: {}
-  config: {}
 ```
 
 To migrate the message storage from RocksMQ to NATS, do as follows:
