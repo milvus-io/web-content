@@ -5,6 +5,8 @@ group: system_configuration.md
 summary: Learn how to configure natsmq for Milvus.
 ---
 
+> **Deprecated**: NATS (natsmq) is deprecated and will be removed in Milvus v2.6. Please use RocksMQ, Pulsar, or Kafka instead.
+
 # natsmq-related Configurations
 
 natsmq configuration.
