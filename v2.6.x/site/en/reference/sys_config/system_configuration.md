@@ -111,12 +111,6 @@ kafka:
 
 See [rocksmq-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
 
-### `woodpecker`
-
-Related configuration of woodpecker, used to manage Milvus logs of recent mutation operations, output streaming log, and provide embedded log sequential read and write.
-
-See [woodpecker-related Configurations](configure_woodpecker.md) for detailed description for each parameter under this section.
-
 ### `rootCoord`
 
 Related configuration of rootCoord, used to handle data definition language (DDL) and data control language (DCL) requests
