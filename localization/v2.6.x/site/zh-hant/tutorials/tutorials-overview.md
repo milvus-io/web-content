@@ -26,7 +26,7 @@ title: 教學總覽
 <tbody>
 <tr><td><a href="/docs/zh-hant/build-rag-with-milvus.md">使用 Milvus 建立 RAG</a></td><td>RAG</td><td>向量搜尋</td></tr>
 <tr><td><a href="/docs/zh-hant/how_to_enhance_your_rag.md">進階 RAG</a></td><td>RAG</td><td>向量搜尋</td></tr>
-<tr><td><a href="/docs/zh-hant/full_text_search_with_milvus.md">使用 Milvus 進行全文檢索</a></td><td>快速入門</td><td>全文檢索</td></tr>
+<tr><td><a href="/docs/zh-hant/full_text_search_with_milvus.md">使用 LangChain 和 Milvus 進行全文檢索</a></td><td>快速入門</td><td>全文檢索</td></tr>
 <tr><td><a href="/docs/zh-hant/hybrid_search_with_milvus.md">使用 Milvus 的混合搜尋</a></td><td>混合搜尋</td><td>混合搜尋、多向量、密集嵌入、稀疏嵌入</td></tr>
 <tr><td><a href="/docs/zh-hant/image_similarity_search.md">使用 Milvus 的圖像搜尋</a></td><td>語意搜尋</td><td>向量搜尋、動態領域</td></tr>
 <tr><td><a href="/docs/zh-hant/multimodal_rag_with_milvus.md">使用 Milvus 的多模態 RAG</a></td><td>RAG</td><td>向量搜尋、動態領域</td></tr>

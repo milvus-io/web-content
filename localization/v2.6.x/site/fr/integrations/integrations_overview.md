@@ -93,5 +93,7 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/use_milvus_in_anythingllm.md">Utiliser Milvus dans AnythingLLM</a></td><td>Orchestration</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/fr/NLWeb_with_milvus.md">Utiliser NLWeb avec Milvus</a></td><td>Sources de données</td><td>Milvus, NLWeb</td></tr>
 <tr><td><a href="/docs/fr/langextract_milvus_demo.md">Intégration LangExtract + Milvus</a></td><td>Sources de données</td><td>Milvus, LangExtract</td></tr>
+<tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Recherche sémantique avec ZeroEntropy et Milvus</a></td><td>Recherche sémantique</td><td>Milvus, ZeroEntropy</td></tr>
+<tr><td><a href="/docs/fr/langchain_milvus_dido.md">Intégration de la fonction d'incorporation de texte de Milvus avec LangChain</a></td><td>Intégration de texte</td><td>Milvus, LangChain</td></tr>
 </tbody>
 </table>

@@ -24,6 +24,7 @@ title: Мультимодальный RAG с Milvus
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>В этом уроке демонстрируется мультимодальный RAG на базе Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">визуализированной модели BGE</a> и <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. В этой системе пользователи могут загружать изображения и редактировать текстовые инструкции, которые обрабатываются составленной BGE моделью поиска для поиска изображений-кандидатов. Затем GPT-4o выступает в роли реранкера, выбирая наиболее подходящее изображение и обосновывая свой выбор. Эта мощная комбинация обеспечивает бесперебойный и интуитивно понятный поиск изображений, используя Milvus для эффективного поиска, модель BGE для точной обработки и сопоставления изображений и GPT-4o для расширенного реранкинга.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">Подготовка<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +61,7 @@ title: Мультимодальный RAG с Milvus
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Если вы используете Google Colab, для включения только что установленных зависимостей может потребоваться <strong>перезапуск среды выполнения</strong> (нажмите на меню "Время выполнения" в верхней части экрана и выберите "Перезапустить сессию" из выпадающего меню).</p>
+<p>Если вы используете Google Colab, для включения только что установленных зависимостей вам может потребоваться <strong>перезапустить среду выполнения</strong> (нажмите на меню "Время выполнения" в верхней части экрана и выберите "Перезапустить сессию" в выпадающем меню).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">Загрузить данные<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"

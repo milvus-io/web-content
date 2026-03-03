@@ -2165,33 +2165,39 @@
                 "children": []
               },
               {
+                "label": "텍스트 삽입",
+                "id": "langchain_milvus_dido.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "RAG",
                 "id": "integrate_with_langchain.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "하이브리드 검색",
                 "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "전체 텍스트 검색",
                 "id": "full_text_search_with_langchain.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "비동기 검색",
                 "id": "langchain_milvus_async.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "에이전트 RAG",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

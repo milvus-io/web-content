@@ -5,7 +5,7 @@ summary: >-
   관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드
   매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. 검색 증강 생성(RAG) 파이프라인을 구축하는 일반적인 접근 방식은 시맨틱 검색과
   전체 텍스트 검색을 모두 통해 문서를 검색한 다음, 재랭크 프로세스를 통해 결과를 구체화하는 것입니다.
-title: Milvus로 전체 텍스트 검색
+title: LangChain 및 Milvus에서 전체 텍스트 검색 사용하기
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
@@ -13,7 +13,7 @@ title: Milvus로 전체 텍스트 검색
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">Milvus로 전체 텍스트 검색<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Using-Full-Text-Search-with-LangChain-and-Milvus" class="common-anchor-header">LangChain 및 Milvus에서 전체 텍스트 검색 사용하기<button data-href="#Using-Full-Text-Search-with-LangChain-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -28,21 +28,17 @@ title: Milvus로 전체 텍스트 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. 검색 증강 생성(RAG) 파이프라인을 구축하는 일반적인 접근 방식은 시맨틱 검색과 전체 텍스트 검색을 모두 통해 문서를 검색한 다음, 재랭크 프로세스를 통해 결과를 구체화하는 것입니다.</p>
-<p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
-    <span></span>
-  </span>
-</p>
-<p>이 접근 방식은 BM25 채점을 위해 텍스트를 스파스 벡터로 변환합니다. 사용자는 문서를 수집하기 위해 스파스 벡터를 수동으로 계산할 필요 없이 원시 텍스트를 입력하기만 하면 됩니다. 밀버스는 자동으로 스파스 벡터를 생성하고 저장합니다. 문서를 검색하려면 사용자는 텍스트 검색 쿼리를 지정하기만 하면 됩니다. Milvus는 내부적으로 BM25 점수를 계산하여 순위가 매겨진 결과를 반환합니다.</p>
-<p>Milvus는 또한 전체 텍스트 검색과 고밀도 벡터 기반 시맨틱 검색을 결합하여 하이브리드 검색을 지원합니다. 일반적으로 키워드 매칭과 의미론적 이해의 균형을 맞춰 검색 품질을 개선하고 사용자에게 더 나은 결과를 제공합니다.</p>
-<div class="alert note">
+    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색은</a> 텍스트의 특정 키워드나 구문을 일치시켜 문서를 검색하는 전통적인 방법입니다. 이는 용어 빈도 등의 요소로 계산된 관련성 점수를 기반으로 결과의 순위를 매깁니다. 시맨틱 검색은 의미와 문맥을 이해하는 데 더 효과적이지만, 전체 텍스트 검색은 정확한 키워드 매칭에 탁월하므로 시맨틱 검색을 보완하는 데 유용합니다. BM25 알고리즘은 전체 텍스트 검색에서 순위를 매기는 데 널리 사용되며 검색 증강 세대(RAG)에서 핵심적인 역할을 합니다.</p>
+<p><a href="https://milvus.io/blog/introduce-milvus-2-5-full-text-search-powerful-metadata-filtering-and-more.md">Milvus 2.5에는</a> BM25를 사용한 기본 전체 텍스트 검색 기능이 도입되었습니다. 이 접근 방식은 텍스트를 BM25 점수를 나타내는 스파스 벡터로 변환합니다. 사용자는 원시 텍스트를 입력하기만 하면, 수동으로 스파스 임베딩을 생성할 필요 없이 Milvus가 자동으로 스파스 벡터를 생성하고 저장합니다.</p>
+<p>LangChain과 Milvus의 통합으로 이 기능도 도입되어 전체 텍스트 검색을 RAG 애플리케이션에 통합하는 프로세스가 간소화되었습니다. 전체 텍스트 검색과 고밀도 벡터를 사용한 시맨틱 검색을 결합함으로써, 고밀도 임베딩의 시맨틱 컨텍스트와 단어 매칭의 정확한 키워드 관련성을 모두 활용하는 하이브리드 접근 방식을 달성할 수 있습니다. 이러한 통합은 검색 시스템의 정확성, 연관성 및 사용자 경험을 향상시킵니다.</p>
+<p>이 튜토리얼에서는 애플리케이션에서 전체 텍스트 검색을 구현하기 위해 LangChain과 Milvus를 사용하는 방법을 보여드립니다.</p>
+<blockquote>
 <ul>
-<li>전체 텍스트 검색은 현재 Milvus Standalone, Milvus Distributed, Zilliz Cloud에서 사용할 수 있지만, Milvus Lite(향후 이 기능이 구현될 예정)에서는 아직 지원되지 않습니다. 자세한 내용은 support@zilliz.com 으로 문의하세요.</li>
+<li>전체 텍스트 검색은 현재 Milvus 독립형, Milvus 분산형 및 Zilliz Cloud에서 사용할 수 있지만, Milvus Lite(향후 이 기능이 구현될 예정)에서는 아직 지원되지 않습니다. 자세한 내용은 support@zilliz.com 으로 문의하세요.</li>
+<li>이 튜토리얼을 진행하기 전에 <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">전체 텍스트 검색과</a> LangChain Milvus 통합의 <a href="https://milvus.io/docs/basic_usage_langchain.md">기본 사용법에</a> 대한 기본적인 이해가 있는지 확인하세요.</li>
 </ul>
-</div>
-<h2 id="Preparation" class="common-anchor-header">준비 과정<button data-href="#Preparation" class="anchor-icon" translate="no">
+</blockquote>
+<h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,208 +53,31 @@ title: Milvus로 전체 텍스트 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-PyMilvus" class="common-anchor-header">PyMilvus 설치</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus -U</span>
+    </button></h2><p>이 노트북을 실행하기 전에 다음 종속성이 설치되어 있는지 확인하세요:</p>
+<pre><code translate="no" class="language-shell">! pip install --upgrade --quiet  langchain langchain-core langchain-community langchain-text-splitters langchain-milvus langchain-openai bs4 #langchain-voyageai
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
-</div>
-<h3 id="Set-OpenAI-API-Key" class="common-anchor-header">OpenAI API 키 설정</h3><p>벡터 임베딩 및 생성 응답을 생성하기 위해 OpenAI의 모델을 사용합니다. 환경 변수로 <code translate="no">OPENAI_API_KEY</code> <a href="https://platform.openai.com/docs/quickstart">API 키를</a> 준비해야 합니다.</p>
+<blockquote>
+<p>Google Colab을 사용하는 경우, 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
+</blockquote>
+<p>OpenAI의 모델을 사용하겠습니다. <a href="https://platform.openai.com/docs/quickstart">OpenAI에서</a> 환경 변수 <code translate="no">OPENAI_API_KEY</code> 를 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Setup-and-Configuration" class="common-anchor-header">설정 및 구성<button data-href="#Setup-and-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>필요한 라이브러리 가져오기</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
-<span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
-
-<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
-    MilvusClient,
-    DataType,
-    Function,
-    FunctionType,
-    AnnSearchRequest,
-    RRFRanker,
-)
+<p>Milvus 서버 <code translate="no">URI</code> (및 선택적으로 <code translate="no">TOKEN</code>)를 지정합니다. Milvus 서버를 설치하고 시작하는 방법은 이 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">가이드를</a> 따르세요.</p>
+<pre><code translate="no" class="language-python">URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+<span class="hljs-comment"># TOKEN = ...</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>MilvusClient를 사용하여 Milvus 서버에 연결을 설정하겠습니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
-uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-collection_name = <span class="hljs-string">&quot;full_text_demo&quot;</span>
-client = MilvusClient(uri=uri)
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>connection_args:</p>
-<ul>
-<li><a href="https://milvus.io/docs/quickstart.md">도커 또는 쿠버네티스에서</a> 보다 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소(예:<code translate="no">http://localhost:19530</code>)를 <code translate="no">uri</code> 으로 사용하세요.</li>
-<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
-</ul>
-</div>
-<h2 id="Collection-Setup-for-Full-Text-Search" class="common-anchor-header">전체 텍스트 검색을 위한 컬렉션 설정<button data-href="#Collection-Setup-for-Full-Text-Search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>전체 텍스트 검색을 위한 컬렉션을 설정하려면 몇 가지 설정 단계가 필요합니다. 하나씩 살펴보겠습니다.</p>
-<h3 id="Text-Analysis-Configuration" class="common-anchor-header">텍스트 분석 구성</h3><p>전체 텍스트 검색을 위해 텍스트 처리 방식을 정의합니다. 분석기는 문장을 토큰으로 나누고 어간 및 중지 단어 제거와 같은 어휘 분석을 수행하여 전체 텍스트 검색에 필수적입니다. 여기서는 분석기에 대해 간단히 정의하겠습니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define tokenizer parameters for text analysis</span>
-analyzer_params = {<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]}
-<button class="copy-code-btn"></button></code></pre>
-<p>분석기에 대한 자세한 개념은 분석기 <a href="https://milvus.io/docs/analyzer-overview.md">설명서를</a> 참조하세요.</p>
-<h3 id="Collection-Schema-and-BM25-Function" class="common-anchor-header">수집 스키마와 BM25 함수</h3><p>이제 기본 키, 텍스트 콘텐츠, 스파스 벡터(전체 텍스트 검색용), 고밀도 벡터(시맨틱 검색용) 및 메타데이터에 대한 필드가 포함된 스키마를 정의합니다. 또한 전체 텍스트 검색을 위한 BM25 함수도 구성합니다.</p>
-<p>BM25 기능은 텍스트 콘텐츠를 스파스 벡터로 자동 변환하여, 수동으로 스파스 임베딩을 생성할 필요 없이 밀버스가 복잡한 전체 텍스트 검색을 처리할 수 있게 해줍니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create schema</span>
-schema = MilvusClient.create_schema()
-schema.add_field(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.VARCHAR,
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">True</span>,
-    max_length=<span class="hljs-number">100</span>,
-)
-schema.add_field(
-    field_name=<span class="hljs-string">&quot;content&quot;</span>,
-    datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">65535</span>,
-    analyzer_params=analyzer_params,
-    enable_match=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable text matching</span>
-    enable_analyzer=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable text analysis</span>
-)
-schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
-schema.add_field(
-    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">1536</span>,  <span class="hljs-comment"># Dimension for text-embedding-3-small</span>
-)
-schema.add_field(field_name=<span class="hljs-string">&quot;metadata&quot;</span>, datatype=DataType.JSON)
+<p>몇 가지 예제 문서를 준비합니다:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
-<span class="hljs-comment"># Define BM25 function to generate sparse vectors from text</span>
-bm25_function = Function(
-    name=<span class="hljs-string">&quot;bm25&quot;</span>,
-    function_type=FunctionType.BM25,
-    input_field_names=[<span class="hljs-string">&quot;content&quot;</span>],
-    output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-)
-
-<span class="hljs-comment"># Add the function to schema</span>
-schema.add_function(bm25_function)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 100}, 'is_primary': True, 'auto_id': True}, {'name': 'content', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase']}}}, {'name': 'sparse_vector', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'dense_vector', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'metadata', 'description': '', 'type': &lt;DataType.JSON: 23&gt;}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['content'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
-</code></pre>
-<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">색인 및 컬렉션 생성</h3><p>검색 성능을 최적화하기 위해 희소 및 고밀도 벡터 필드 모두에 대한 인덱스를 생성한 다음 Milvus에서 컬렉션을 생성합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define indexes</span>
-index_params = MilvusClient.prepare_index_params()
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-)
-index_params.add_index(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>)
-
-<span class="hljs-comment"># Drop collection if exist</span>
-<span class="hljs-keyword">if</span> client.has_collection(collection_name):
-    client.drop_collection(collection_name)
-<span class="hljs-comment"># Create the collection</span>
-client.create_collection(
-    collection_name=collection_name,
-    schema=schema,
-    index_params=index_params,
-)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Collection &#x27;<span class="hljs-subst">{collection_name}</span>&#x27; created successfully&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Collection 'full_text_demo' created successfully
-</code></pre>
-<h2 id="Insert-Data" class="common-anchor-header">데이터 삽입<button data-href="#Insert-Data" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>컬렉션을 설정한 후에는 텍스트 콘텐츠와 벡터 표현을 모두 갖춘 엔티티를 준비하여 데이터를 삽입합니다. 임베딩 함수를 정의한 다음 컬렉션에 데이터를 삽입해 보겠습니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up OpenAI for embeddings</span>
-openai_client = OpenAI(api_key=os.environ.get(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>))
-model_name = <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>
-
-
-<span class="hljs-comment"># Define embedding generation function for reuse</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_embeddings</span>(<span class="hljs-params">texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">float</span>]]:
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> texts:
-        <span class="hljs-keyword">return</span> []
-
-    response = openai_client.embeddings.create(<span class="hljs-built_in">input</span>=texts, model=model_name)
-    <span class="hljs-keyword">return</span> [embedding.embedding <span class="hljs-keyword">for</span> embedding <span class="hljs-keyword">in</span> response.data]
-<button class="copy-code-btn"></button></code></pre>
-<p>예제 문서를 컬렉션에 삽입합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example documents to insert</span>
-documents = [
-    {
-        <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;Milvus is a vector database built for embedding similarity search and AI applications.&quot;</span>,
-        <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;documentation&quot;</span>, <span class="hljs-string">&quot;topic&quot;</span>: <span class="hljs-string">&quot;introduction&quot;</span>},
-    },
-    {
-        <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;Full-text search in Milvus allows you to search using keywords and phrases.&quot;</span>,
-        <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tutorial&quot;</span>, <span class="hljs-string">&quot;topic&quot;</span>: <span class="hljs-string">&quot;full-text search&quot;</span>},
-    },
-    {
-        <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;Hybrid search combines the power of sparse BM25 retrieval with dense vector search.&quot;</span>,
-        <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;blog&quot;</span>, <span class="hljs-string">&quot;topic&quot;</span>: <span class="hljs-string">&quot;hybrid search&quot;</span>},
-    },
+docs = [
+    Document(page_content=<span class="hljs-string">&quot;I like this apple&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;fruit&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like swimming&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;sport&quot;</span>}),
+    Document(page_content=<span class="hljs-string">&quot;I like dogs&quot;</span>, metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;pets&quot;</span>}),
 ]
-
-<span class="hljs-comment"># Prepare entities for insertion</span>
-entities = []
-texts = [doc[<span class="hljs-string">&quot;content&quot;</span>] <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> documents]
-embeddings = get_embeddings(texts)
-
-<span class="hljs-keyword">for</span> i, doc <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(documents):
-    entities.append(
-        {
-            <span class="hljs-string">&quot;content&quot;</span>: doc[<span class="hljs-string">&quot;content&quot;</span>],
-            <span class="hljs-string">&quot;dense_vector&quot;</span>: embeddings[i],
-            <span class="hljs-string">&quot;metadata&quot;</span>: doc.get(<span class="hljs-string">&quot;metadata&quot;</span>, {}),
-        }
-    )
-
-<span class="hljs-comment"># Insert data</span>
-client.insert(collection_name, entities)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Inserted <span class="hljs-subst">{<span class="hljs-built_in">len</span>(entities)}</span> documents&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Inserted 3 documents
-</code></pre>
-<h2 id="Perform-Retrieval" class="common-anchor-header">검색 수행<button data-href="#Perform-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Initialization-with-BM25-Function" class="common-anchor-header">BM25 함수를 사용한 초기화<button data-href="#Initialization-with-BM25-Function" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,105 +92,7 @@ client.insert(collection_name, entities)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">search()</code> 또는 <code translate="no">hybrid_search()</code> 방법을 유연하게 사용하여 전체 텍스트 검색(스파스), 시맨틱 검색(밀도) 및 하이브리드 검색을 구현하여 보다 강력하고 정확한 검색 결과를 얻을 수 있습니다.</p>
-<h3 id="Full-Text-Search" class="common-anchor-header">전체 텍스트 검색</h3><p>스파스 검색은 BM25 알고리즘을 활용하여 특정 키워드나 구문이 포함된 문서를 찾습니다. 이 전통적인 검색 방식은 정확한 용어 매칭에 탁월하며 사용자가 찾고자 하는 내용을 정확히 알고 있을 때 특히 효과적입니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for keyword search</span>
-query = <span class="hljs-string">&quot;full-text search keywords&quot;</span>
-
-<span class="hljs-comment"># BM25 sparse vectors</span>
-results = client.search(
-    collection_name=collection_name,
-    data=[query],
-    anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>],
-)
-sparse_results = results[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Print results</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nSparse Search (Full-text search):&quot;</span>)
-<span class="hljs-keyword">for</span> i, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(sparse_results):
-    <span class="hljs-built_in">print</span>(
-        <span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>, Content: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;content&#x27;</span>]}</span>&quot;</span>
-    )
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Sparse Search (Full-text search):
-1. Score: 3.1261, Content: Full-text search in Milvus allows you to search using keywords and phrases.
-2. Score: 0.1836, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
-3. Score: 0.1335, Content: Milvus is a vector database built for embedding similarity search and AI applications.
-</code></pre>
-<h3 id="Semantic-Search" class="common-anchor-header">시맨틱 검색</h3><p>밀도 검색은 벡터 임베딩을 사용해 정확히 동일한 키워드를 공유하지 않더라도 비슷한 의미를 가진 문서를 찾습니다. 이 접근 방식은 문맥과 의미를 이해하는 데 도움이 되므로 보다 자연스러운 언어 쿼리에 이상적입니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for semantic search</span>
-query = <span class="hljs-string">&quot;How does Milvus help with similarity search?&quot;</span>
-
-<span class="hljs-comment"># Generate embedding for query</span>
-query_embedding = get_embeddings([query])[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Semantic search using dense vectors</span>
-results = client.search(
-    collection_name=collection_name,
-    data=[query_embedding],
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>],
-)
-dense_results = results[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Print results</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nDense Search (Semantic):&quot;</span>)
-<span class="hljs-keyword">for</span> i, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(dense_results):
-    <span class="hljs-built_in">print</span>(
-        <span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>, Content: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;content&#x27;</span>]}</span>&quot;</span>
-    )
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Dense Search (Semantic):
-1. Score: 0.6959, Content: Milvus is a vector database built for embedding similarity search and AI applications.
-2. Score: 0.6501, Content: Full-text search in Milvus allows you to search using keywords and phrases.
-3. Score: 0.4371, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
-</code></pre>
-<h3 id="Hybrid-Search" class="common-anchor-header">하이브리드 검색</h3><p>하이브리드 검색은 전체 텍스트 검색과 시맨틱 밀도 검색을 결합한 것입니다. 이 균형 잡힌 접근 방식은 두 가지 방법의 강점을 활용하여 검색 정확도와 견고성을 향상시킵니다.</p>
-<p>하이브리드 검색은 의미론적 이해와 정확한 키워드 매칭이 모두 더 나은 검색 결과에 기여하는 검색 증강 생성(RAG) 애플리케이션에서 특히 유용합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for hybrid search</span>
-query = <span class="hljs-string">&quot;what is hybrid search&quot;</span>
-
-<span class="hljs-comment"># Get query embedding</span>
-query_embedding = get_embeddings([query])[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Set up BM25 search request</span>
-sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>}
-sparse_request = AnnSearchRequest(
-    [query], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=<span class="hljs-number">5</span>
-)
-
-<span class="hljs-comment"># Set up dense vector search request</span>
-dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-dense_request = AnnSearchRequest(
-    [query_embedding], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=<span class="hljs-number">5</span>
-)
-
-<span class="hljs-comment"># Perform hybrid search with reciprocal rank fusion</span>
-results = client.hybrid_search(
-    collection_name,
-    [sparse_request, dense_request],
-    ranker=RRFRanker(),  <span class="hljs-comment"># Reciprocal Rank Fusion for combining results</span>
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>],
-)
-hybrid_results = results[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Print results</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nHybrid Search (Combined):&quot;</span>)
-<span class="hljs-keyword">for</span> i, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(hybrid_results):
-    <span class="hljs-built_in">print</span>(
-        <span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>, Content: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;content&#x27;</span>]}</span>&quot;</span>
-    )
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Hybrid Search (Combined):
-1. Score: 0.0328, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
-2. Score: 0.0320, Content: Milvus is a vector database built for embedding similarity search and AI applications.
-3. Score: 0.0320, Content: Full-text search in Milvus allows you to search using keywords and phrases.
-</code></pre>
-<h2 id="Answer-Generation" class="common-anchor-header">답변 생성<button data-href="#Answer-Generation" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Hybrid-Search" class="common-anchor-header">하이브리드 검색<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -386,35 +107,367 @@ hybrid_results = results[<span class="hljs-number">0</span>]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>하이브리드 검색으로 관련 문서를 검색한 후에는 LLM을 사용해 검색된 정보를 기반으로 종합적인 답변을 생성할 수 있습니다. 이것이 RAG(검색 증강 생성) 파이프라인의 마지막 단계입니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Format retrieved documents into context</span>
-context = <span class="hljs-string">&quot;\n\n&quot;</span>.join([doc[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>] <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> hybrid_results])
+    </button></h3><p>전체 텍스트 검색을 위해 Milvus VectorStore는 <code translate="no">builtin_function</code> 파라미터를 허용합니다. 이 매개변수를 통해 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 전달할 수 있습니다. 이는 일반적으로 밀도가 높은 임베딩을 <code translate="no">VectorStore</code> 으로 전달하는 시맨틱 검색과는 다릅니다,</p>
+<p>다음은 시맨틱 검색을 위한 OpenAI 고밀도 임베딩과 전체 텍스트 검색을 위한 BM25를 사용한 Milvus의 간단한 하이브리드 검색 예시입니다:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
-<span class="hljs-comment"># Create prompt</span>
-prompt = <span class="hljs-string">f&quot;&quot;&quot;Answer the following question based on the provided context. 
-If the context doesn&#x27;t contain relevant information, just say &quot;I don&#x27;t have enough information to answer this question.&quot;
 
-Context:
-<span class="hljs-subst">{context}</span>
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),
+    <span class="hljs-comment"># `dense` is for OpenAI embeddings, `sparse` is the output field of BM25 function</span>
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,</span>
+    <span class="hljs-comment"># drop_old=True,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>위의 코드에서는 <code translate="no">BM25BuiltInFunction</code> 의 인스턴스를 정의하고 <code translate="no">Milvus</code> 객체에 전달합니다. <code translate="no">BM25BuiltInFunction</code> 는 Milvus의 경량 래퍼 클래스입니다. <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> 의 경량 래퍼 클래스입니다.</p>
+<p><code translate="no">BM25BuiltInFunction</code> 의 매개변수에서 이 함수에 대한 입력 및 출력 필드를 지정할 수 있습니다:</p>
+<ul>
+<li><code translate="no">input_field_names</code> (str): 입력 필드의 이름, 기본값은 <code translate="no">text</code> 입니다. 이 함수가 입력으로 읽을 필드를 나타냅니다.</li>
+<li><code translate="no">output_field_names</code> (str): 출력 필드의 이름, 기본값은 <code translate="no">sparse</code> 입니다. 이 함수가 계산된 결과를 출력할 필드를 나타냅니다.</li>
+</ul>
+<p>위에서 언급한 Milvus 초기화 매개변수에서는 <code translate="no">vector_field=[&quot;dense&quot;, &quot;sparse&quot;]</code> 도 지정합니다. <code translate="no">sparse</code> 필드는 <code translate="no">BM25BuiltInFunction</code> 에 정의된 출력 필드로 간주되므로 다른 <code translate="no">dense</code> 필드는 OpenAIEmbedding의 출력 필드에 자동으로 할당됩니다.</p>
+<p>실제로, 특히 여러 임베딩이나 함수를 결합할 때는 모호성을 피하기 위해 각 함수에 대한 입력 및 출력 필드를 명시적으로 지정하는 것이 좋습니다.</p>
+<p>다음 예시에서는 <code translate="no">BM25BuiltInFunction</code> 의 입력 및 출력 필드를 명시적으로 지정하여 내장 함수가 어떤 필드를 위한 것인지 명확히 합니다.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># from langchain_voyageai import VoyageAIEmbeddings</span>
 
-Question: <span class="hljs-subst">{query}</span>
+embedding1 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-ada-002&quot;</span>)
+embedding2 = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
+<span class="hljs-comment"># embedding2 = VoyageAIEmbeddings(model=&quot;voyage-3&quot;)  # You can also use embedding from other embedding model providers, e.g VoyageAIEmbeddings</span>
 
-Answer:&quot;&quot;&quot;</span>
 
-<span class="hljs-comment"># Call OpenAI API</span>
-response = openai_client.chat.completions.create(
-    model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>,
-    messages=[
-        {
-            <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;system&quot;</span>,
-            <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;You are a helpful assistant that answers questions based on the provided context.&quot;</span>,
-        },
-        {<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: prompt},
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=[embedding1, embedding2],
+    builtin_function=BM25BuiltInFunction(
+        input_field_names=<span class="hljs-string">&quot;text&quot;</span>, output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>
+    ),
+    text_field=<span class="hljs-string">&quot;text&quot;</span>,  <span class="hljs-comment"># `text` is the input field name of BM25BuiltInFunction</span>
+    <span class="hljs-comment"># `sparse` is the output field name of BM25BuiltInFunction, and `dense1` and `dense2` are the output field names of embedding1 and embedding2</span>
+    vector_field=[<span class="hljs-string">&quot;dense1&quot;</span>, <span class="hljs-string">&quot;dense2&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,</span>
+    <span class="hljs-comment"># drop_old=True,</span>
+)
+
+vectorstore.vector_fields
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">['dense1', 'dense2', 'sparse']
+</code></pre>
+<p>이 예제에는 세 개의 벡터 필드가 있습니다. 이 중 <code translate="no">sparse</code> 은 <code translate="no">BM25BuiltInFunction</code> 의 출력 필드로 사용되며, 나머지 두 개의 <code translate="no">dense1</code> 과 <code translate="no">dense2</code> 은 두 개의 <code translate="no">OpenAIEmbeddings</code> 모델의 출력 필드로 자동 할당됩니다(순서에 따라).</p>
+<p>이러한 방식으로 여러 개의 벡터 필드를 정의하고 다양한 임베딩 또는 함수 조합을 할당하여 하이브리드 검색을 구현할 수 있습니다.</p>
+<p>하이브리드 검색을 수행할 때는 쿼리 텍스트를 전달하고 선택적으로 topK 및 재랭커 매개변수를 설정하기만 하면 됩니다. <code translate="no">vectorstore</code> 인스턴스는 벡터 임베딩과 내장 함수를 자동으로 처리하고 마지막으로 재랭커를 사용하여 결과를 구체화합니다. 검색 프로세스의 기본 구현 세부 사항은 사용자에게 숨겨져 있습니다.</p>
+<pre><code translate="no" class="language-python">vectorstore.similarity_search(
+    <span class="hljs-string">&quot;Do I like apples?&quot;</span>, k=<span class="hljs-number">1</span>
+)  <span class="hljs-comment"># , ranker_type=&quot;weighted&quot;, ranker_params={&quot;weights&quot;:[0.3, 0.3, 0.4]})</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">[Document(metadata={'category': 'fruit', 'pk': 454646931479251897}, page_content='I like this apple')]
+</code></pre>
+<p>하이브리드 검색에 대한 자세한 내용은 <a href="https://milvus.io/docs/multi-vector-search.md#Hybrid-Search">하이브리드 검색 소개</a> 및 이 <a href="https://milvus.io/docs/milvus_hybrid_search_retriever.md">LangChain Milvus 하이브리드 검색 튜토리얼을</a> 참조하세요.</p>
+<h3 id="BM25-search-without-embedding" class="common-anchor-header">임베딩 없이 BM25 검색<button data-href="#BM25-search-without-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>임베딩 기반 시맨틱 검색을 사용하지 않고 BM25 함수로만 전체 텍스트 검색을 수행하려면 임베딩 파라미터를 <code translate="no">None</code> 로 설정하고 BM25 함수 인스턴스로 지정된 <code translate="no">builtin_function</code> 만 유지하면 됩니다. 벡터 필드에는 "스파스" 필드만 있습니다. 예를 들어</p>
+<pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=<span class="hljs-literal">None</span>,
+    builtin_function=BM25BuiltInFunction(
+        output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>,
+    ),
+    vector_field=<span class="hljs-string">&quot;sparse&quot;</span>,
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,</span>
+    <span class="hljs-comment"># drop_old=True,</span>
+)
+
+vectorstore.vector_fields
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">['sparse']
+</code></pre>
+<h2 id="Customize-analyzer" class="common-anchor-header">분석기 사용자 지정<button data-href="#Customize-analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>분석기는 문장을 토큰으로 나누고 어간 및 중지 단어 제거와 같은 어휘 분석을 수행하여 전체 텍스트 검색에 필수적입니다. 분석기는 일반적으로 언어별로 다릅니다. <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">이 가이드를</a> 참조하여 Milvus의 분석기에 대해 자세히 알아볼 수 있습니다.</p>
+<p>Milvus는 두 가지 유형의 분석기를 지원합니다: <strong>기본 제공 분석</strong> 기와 <strong>사용자 정의 분석기입니다</strong>. 기본적으로 <code translate="no">BM25BuiltInFunction</code> 에서는 구두점으로 텍스트를 토큰화하는 가장 기본적인 분석기인 <a href="https://milvus.io/docs/standard-analyzer.md">표준 내장 분석기를</a> 사용합니다.</p>
+<p>다른 분석기를 사용하거나 분석기를 사용자 정의하려면 <code translate="no">BM25BuiltInFunction</code> 초기화에서 <code translate="no">analyzer_params</code> 매개 변수를 전달하면 됩니다.</p>
+<pre><code translate="no" class="language-python">analyzer_params_custom = {
+    <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+    <span class="hljs-string">&quot;filter&quot;</span>: [
+        <span class="hljs-string">&quot;lowercase&quot;</span>,  <span class="hljs-comment"># Built-in filter</span>
+        {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>, <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">40</span>},  <span class="hljs-comment"># Custom filter</span>
+        {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>, <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;of&quot;</span>, <span class="hljs-string">&quot;to&quot;</span>]},  <span class="hljs-comment"># Custom filter</span>
     ],
+}
+
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(
+        output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>,
+        enable_match=<span class="hljs-literal">True</span>,
+        analyzer_params=analyzer_params_custom,
+    ),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,</span>
+    <span class="hljs-comment"># drop_old=True,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvus 컬렉션의 스키마를 살펴보고 사용자 정의된 분석기가 올바르게 설정되었는지 확인할 수 있습니다.</p>
+<pre><code translate="no" class="language-python">vectorstore.col.schema
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">{'auto_id': True, 'description': '', 'fields': [{'name': 'text', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase', {'type': 'length', 'max': 40}, {'type': 'stop', 'stop_words': ['of', 'to']}]}}}, {'name': 'pk', 'description': '', 'type': &lt;DataType.INT64: 5&gt;, 'is_primary': True, 'auto_id': True}, {'name': 'dense', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'sparse', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'category', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535}}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25_function_de368e79', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['text'], 'output_field_names': ['sparse'], 'params': {}}]}
+</code></pre>
+<p>더 자세한 개념 <a href="https://milvus.io/docs/analyzer-overview.md">설명은</a> <code translate="no">analyzer</code><a href="https://milvus.io/docs/analyzer-overview.md">,</a> <code translate="no">tokenizer</code><a href="https://milvus.io/docs/analyzer-overview.md">,</a> <code translate="no">filter</code><a href="https://milvus.io/docs/analyzer-overview.md">,</a> <code translate="no">enable_match</code><a href="https://milvus.io/docs/analyzer-overview.md">,</a> <code translate="no">analyzer_params</code><a href="https://milvus.io/docs/analyzer-overview.md">, 분석기 설명서를</a> 참조하세요.</p>
+<h3 id="Multi-language-Analyzer" class="common-anchor-header">다국어 분석기<button data-href="#Multi-language-Analyzer" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus는 여러 언어로 된 문서를 위한 다국어 분석기를 지원합니다. <code translate="no">BM25BuiltInFunction</code> 에서 <code translate="no">multi_analyzer_params</code> 을 사용하세요:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType
+
+multi_analyzer_params = {
+    <span class="hljs-string">&quot;analyzers&quot;</span>: {
+        <span class="hljs-string">&quot;english&quot;</span>: {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>},
+        <span class="hljs-string">&quot;chinese&quot;</span>: {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;chinese&quot;</span>},
+        <span class="hljs-string">&quot;default&quot;</span>: {<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;icu&quot;</span>},
+    },
+    <span class="hljs-string">&quot;by_field&quot;</span>: <span class="hljs-string">&quot;language&quot;</span>,
+}
+
+vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(
+        output_field_names=<span class="hljs-string">&quot;sparse&quot;</span>,
+        multi_analyzer_params=multi_analyzer_params,
+    ),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    metadata_schema={<span class="hljs-string">&quot;language&quot;</span>: {<span class="hljs-string">&quot;dtype&quot;</span>: DataType.VARCHAR, <span class="hljs-string">&quot;kwargs&quot;</span>: {<span class="hljs-string">&quot;max_length&quot;</span>: <span class="hljs-number">100</span>}}},
+    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>자세한 내용은 <a href="https://milvus.io/docs/multi-language-analyzers.md">다국어 분석기 설명서를</a> 참조하세요.</p>
+<h2 id="Using-Hybrid-Search-and-Reranking-in-RAG" class="common-anchor-header">RAG에서 하이브리드 검색 및 재랭크 사용하기<button data-href="#Using-Hybrid-Search-and-Reranking-in-RAG" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>지금까지 랭체인과 밀버스에서 기본 BM25 내장 기능을 사용하는 방법을 배웠습니다. 이번에는 하이브리드 검색과 재랭크 기능을 통해 최적화된 RAG 구현을 소개하겠습니다.</p>
+<p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.6.x/assets/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
+    <span></span>
+  </span>
+</p>
+<p>이 다이어그램은 키워드 매칭을 위한 BM25와 시맨틱 검색을 위한 벡터 검색을 결합한 하이브리드 검색 및 재랭크 프로세스를 보여줍니다. 두 방법의 결과를 병합하고 순위를 재조정하여 LLM으로 전달하여 최종 답변을 생성합니다.</p>
+<p>하이브리드 검색은 정확도와 의미론적 이해의 균형을 유지하여 다양한 쿼리에 대한 정확도와 견고성을 향상시킵니다. BM25 전체 텍스트 검색과 벡터 검색으로 후보를 검색하여 의미론적, 문맥 인식, 정확한 검색을 모두 보장합니다.</p>
+<p>예제를 통해 시작해 보겠습니다.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Langchain WebBaseLoader를 사용해 웹 소스에서 문서를 로드하고 RecursiveCharacterTextSplitter를 사용해 청크로 분할합니다.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
+<span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
+<span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
+
+<span class="hljs-comment"># Create a WebBaseLoader instance to load documents from web sources</span>
+loader = WebBaseLoader(
+    web_paths=(
+        <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span>,
+        <span class="hljs-string">&quot;https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/&quot;</span>,
+    ),
+    bs_kwargs=<span class="hljs-built_in">dict</span>(
+        parse_only=bs4.SoupStrainer(
+            class_=(<span class="hljs-string">&quot;post-content&quot;</span>, <span class="hljs-string">&quot;post-title&quot;</span>, <span class="hljs-string">&quot;post-header&quot;</span>)
+        )
+    ),
+)
+<span class="hljs-comment"># Load documents from web sources using the loader</span>
+documents = loader.load()
+<span class="hljs-comment"># Initialize a RecursiveCharacterTextSplitter for splitting text into chunks</span>
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=<span class="hljs-number">2000</span>, chunk_overlap=<span class="hljs-number">200</span>)
+
+<span class="hljs-comment"># Split the documents into chunks using the text_splitter</span>
+docs = text_splitter.split_documents(documents)
+
+<span class="hljs-comment"># Let&#x27;s take a look at the first document</span>
+docs[<span class="hljs-number">1</span>]
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
+</code></pre>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">밀버스 벡터 저장소에 문서 로드<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>위에서 소개한 것처럼 준비된 문서를 초기화하여 Milvus 벡터 스토어에 로드합니다. <code translate="no">dense</code> 은 OpenAI 임베딩용, <code translate="no">sparse</code> 은 BM25 함수용 벡터 필드 두 개가 포함되어 있습니다.</p>
+<pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
+    documents=docs,
+    embedding=OpenAIEmbeddings(),
+    builtin_function=BM25BuiltInFunction(),
+    vector_field=[<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;sparse&quot;</span>],
+    connection_args={
+        <span class="hljs-string">&quot;uri&quot;</span>: URI,
+    },
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,</span>
+    <span class="hljs-comment"># drop_old=True,</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Build-RAG-chain" class="common-anchor-header">RAG 체인 구축<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>LLM 인스턴스와 프롬프트를 준비한 다음 LangChain 표현 언어를 사용하여 RAG 파이프라인으로 결합합니다.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
+<span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
+<span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser
+<span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI
+
+<span class="hljs-comment"># Initialize the OpenAI language model for response generation</span>
+llm = ChatOpenAI(model_name=<span class="hljs-string">&quot;gpt-4o&quot;</span>, temperature=<span class="hljs-number">0</span>)
+
+<span class="hljs-comment"># Define the prompt template for generating AI responses</span>
+PROMPT_TEMPLATE = <span class="hljs-string">&quot;&quot;&quot;
+Human: You are an AI assistant, and provides answers to questions by using fact based and statistical information when possible.
+Use the following pieces of information to provide a concise answer to the question enclosed in &lt;question&gt; tags.
+If you don&#x27;t know the answer, just say that you don&#x27;t know, don&#x27;t try to make up an answer.
+&lt;context&gt;
+{context}
+&lt;/context&gt;
+
+&lt;question&gt;
+{question}
+&lt;/question&gt;
+
+The response should be specific and use statistics or numbers when possible.
+
+Assistant:&quot;&quot;&quot;</span>
+
+<span class="hljs-comment"># Create a PromptTemplate instance with the defined template and input variables</span>
+prompt = PromptTemplate(
+    template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
+)
+<span class="hljs-comment"># Convert the vector store to a retriever</span>
+retriever = vectorstore.as_retriever()
+
+
+<span class="hljs-comment"># Define a function to format the retrieved documents</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\n\n&quot;</span>.join(doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs)
+<button class="copy-code-btn"></button></code></pre>
+<p>LCEL(LangChain 표현식 언어)을 사용하여 RAG 체인을 빌드합니다.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the RAG (Retrieval-Augmented Generation) chain for AI response generation</span>
+rag_chain = (
+    {<span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs, <span class="hljs-string">&quot;question&quot;</span>: RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
 )
 
-<span class="hljs-built_in">print</span>(response.choices[<span class="hljs-number">0</span>].message.content)
+<span class="hljs-comment"># rag_chain.get_graph().print_ascii()</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
+<p>특정 질문으로 RAG 체인을 호출하고 응답을 검색합니다.</p>
+<pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What is PAL and PoT?&quot;</span>
+res = rag_chain.invoke(query)
+res
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">'PAL (Program-aided Language models) and PoT (Program of Thoughts prompting) are approaches that involve using language models to generate programming language statements to solve natural language reasoning problems. This method offloads the solution step to a runtime, such as a Python interpreter, allowing for complex computation and reasoning to be handled externally. PAL and PoT rely on language models with strong coding skills to effectively generate and execute these programming statements.'
 </code></pre>
-<p>끝입니다! 이제 BM25 기반 전체 텍스트 검색과 고밀도 벡터 기반 시맨틱 검색의 강력한 기능을 결합한 하이브리드 검색으로 RAG를 구축했습니다.</p>
+<p>축하합니다! Milvus와 LangChain으로 구동되는 하이브리드(밀도 벡터 + 스파스 bm25 함수) 검색 RAG 체인을 구축하셨습니다.</p>

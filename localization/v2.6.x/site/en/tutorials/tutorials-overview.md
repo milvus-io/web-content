@@ -26,7 +26,7 @@ title: Tutorials Overview
 <tbody>
 <tr><td><a href="/docs/build-rag-with-milvus.md">Build RAG with Milvus</a></td><td>RAG</td><td>vector search</td></tr>
 <tr><td><a href="/docs/how_to_enhance_your_rag.md">Advanced RAG</a></td><td>RAG</td><td>vector search</td></tr>
-<tr><td><a href="/docs/full_text_search_with_milvus.md">Full Text Search with Milvus</a></td><td>Quickstart</td><td>Full-Text Search</td></tr>
+<tr><td><a href="/docs/full_text_search_with_milvus.md">Full Text Search with LangChain and Milvus</a></td><td>Quickstart</td><td>Full-Text Search</td></tr>
 <tr><td><a href="/docs/hybrid_search_with_milvus.md">Hybrid Search with Milvus</a></td><td>Hybrid Search</td><td>hybrid search, multi vector, dense embedding, sparse embedding</td></tr>
 <tr><td><a href="/docs/image_similarity_search.md">Image Search with Milvus</a></td><td>Semantic Search</td><td>vector search, dynamic field</td></tr>
 <tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal RAG with Milvus</a></td><td>RAG</td><td>vector search, dynamic field</td></tr>

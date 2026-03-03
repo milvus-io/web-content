@@ -24,6 +24,7 @@ title: Milvus를 사용한 멀티모달 RAG
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>이 튜토리얼에서는 Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">시각화된 BGE 모델</a> 및 <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o로</a> 구동되는 멀티모달 RAG를 소개합니다. 이 시스템을 사용하면 사용자가 이미지를 업로드하고 텍스트 지침을 편집하면 BGE의 구성된 검색 모델에서 처리하여 후보 이미지를 검색할 수 있습니다. 그런 다음 GPT-4o는 가장 적합한 이미지를 선택하고 그 선택의 근거를 제공하는 재랭커 역할을 합니다. 이 강력한 조합은 효율적인 검색을 위한 Milvus, 정밀한 이미지 처리 및 매칭을 위한 BGE 모델, 고급 재랭킹을 위한 GPT-4o를 활용하여 원활하고 직관적인 이미지 검색 환경을 구현합니다.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +61,7 @@ title: Milvus를 사용한 멀티모달 RAG
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install -e FlagEmbedding</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
 </div>
 <h3 id="Download-Data" class="common-anchor-header">데이터 다운로드<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"

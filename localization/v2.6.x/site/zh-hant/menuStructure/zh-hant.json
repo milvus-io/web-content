@@ -1109,7 +1109,7 @@
                 "children": []
               },
               {
-                "label": "航程 AI",
+                "label": "Voyage AI",
                 "id": "voyage-ai.md",
                 "order": 6,
                 "children": []
@@ -2165,33 +2165,39 @@
                 "children": []
               },
               {
+                "label": "文字嵌入",
+                "id": "langchain_milvus_dido.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "RAG",
                 "id": "integrate_with_langchain.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "混合搜尋",
                 "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "全文檢索",
                 "id": "full_text_search_with_langchain.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "非同步搜尋",
                 "id": "langchain_milvus_async.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "代理 RAG",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

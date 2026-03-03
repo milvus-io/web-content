@@ -25,8 +25,8 @@ title: チュートリアル概要
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/build-rag-with-milvus.md">MilvusでRAGを構築する</a></td><td>RAG</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/how_to_enhance_your_rag.md">高度なRAG</a></td><td>RAG</td><td>ベクター検索</td></tr>
-<tr><td><a href="/docs/ja/full_text_search_with_milvus.md">Milvusによる全文検索</a></td><td>クイックスタート</td><td>全文検索</td></tr>
+<tr><td><a href="/docs/ja/how_to_enhance_your_rag.md">高度なRAG</a></td><td>RAG</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/full_text_search_with_milvus.md">LangChainとmilvusによる全文検索</a></td><td>クイックスタート</td><td>全文検索</td></tr>
 <tr><td><a href="/docs/ja/hybrid_search_with_milvus.md">Milvusによるハイブリッド検索</a></td><td>ハイブリッド検索</td><td>ハイブリッド検索, マルチベクトル, 密埋め込み, 疎埋め込み</td></tr>
 <tr><td><a href="/docs/ja/image_similarity_search.md">Milvusによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
 <tr><td><a href="/docs/ja/multimodal_rag_with_milvus.md">MilvusによるマルチモーダルRAG</a></td><td>RAG</td><td>ベクトル検索, ダイナミックフィールド</td></tr>

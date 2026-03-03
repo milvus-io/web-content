@@ -24,6 +24,7 @@ title: RAG multimodale con Milvus
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>Questo tutorial illustra il RAG multimodale basato su Milvus, il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modello BGE visualizzato</a> e <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Con questo sistema, gli utenti possono caricare un'immagine e modificare le istruzioni di testo, che vengono elaborate dal modello di recupero composto di BGE per cercare le immagini candidate. GPT-4o agisce quindi come un reranker, selezionando l'immagine più adatta e fornendo le motivazioni alla base della scelta. Questa potente combinazione consente di ottenere un'esperienza di ricerca delle immagini intuitiva e senza soluzione di continuità, sfruttando Milvus per un reperimento efficiente, il modello BGE per un'elaborazione e una corrispondenza precisa delle immagini e GPT-4o per un reranking avanzato.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

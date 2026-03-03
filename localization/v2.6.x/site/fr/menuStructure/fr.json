@@ -1882,7 +1882,7 @@
                 "children": []
               },
               {
-                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "label": "Migrer d'une instance à l'autre d'un environnement S3 à l'autre",
                 "id": "multi-storage-backup-and-restore.md",
                 "order": 3,
                 "children": []
@@ -2165,33 +2165,39 @@
                 "children": []
               },
               {
+                "label": "Intégration de texte",
+                "id": "langchain_milvus_dido.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "RAG",
                 "id": "integrate_with_langchain.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Recherche hybride",
                 "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "Recherche en texte intégral",
                 "id": "full_text_search_with_langchain.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "Recherche asynchrone",
                 "id": "langchain_milvus_async.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Agent RAG",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

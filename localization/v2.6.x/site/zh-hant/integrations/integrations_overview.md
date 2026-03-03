@@ -91,5 +91,7 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>協調</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/zh-hant/NLWeb_with_milvus.md">在 Milvus 中使用 NLWeb</a></td><td>資料來源</td><td>Milvus, NLWeb</td></tr>
 <tr><td><a href="/docs/zh-hant/langextract_milvus_demo.md">LangExtract + Milvus 整合</a></td><td>資料來源</td><td>Milvus、LangExtract</td></tr>
+<tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">使用 ZeroEntropy 和 Milvus 進行語意搜尋</a></td><td>語意搜尋</td><td>Milvus、ZeroEntropy</td></tr>
+<tr><td><a href="/docs/zh-hant/langchain_milvus_dido.md">整合 Milvus 文字嵌入功能與 LangChain</a></td><td>文字嵌入</td><td>Milvus、LangChain</td></tr>
 </tbody>
 </table>

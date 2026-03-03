@@ -24,6 +24,7 @@ title: 使用 Milvus 的多模式 RAG
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>本教學展示了由 Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">可視化 BGE 模型</a>和<a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> 所提供的多模式 RAG。透過此系統，使用者可以上傳圖片並編輯文字說明，經由 BGE 的組成檢索模型處理後，搜尋候選圖片。然後，GPT-4o 會扮演重新篩選者的角色，選出最適合的影像，並提供選擇背後的理由。這種強大的組合可實現無縫且直觀的圖像搜尋體驗，利用 Milvus 進行高效率的檢索，利用 BGE 模型進行精確的圖像處理和匹配，並利用 GPT-4o 進行先進的重新排序。</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">準備工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

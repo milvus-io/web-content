@@ -1,6 +1,6 @@
 ---
 id: tutorials-overview.md
-summary: Esta página fornece uma lista de tutoriais para interagir com o Milvus.
+summary: Esta página apresenta uma lista de tutoriais para interagir com o Milvus.
 title: Visão geral dos tutoriais
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Visão geral dos tutoriais<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
@@ -26,7 +26,7 @@ title: Visão geral dos tutoriais
 <tbody>
 <tr><td><a href="/docs/pt/build-rag-with-milvus.md">Construir RAG com Milvus</a></td><td>RAG</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/how_to_enhance_your_rag.md">RAG avançado</a></td><td>RAG</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/full_text_search_with_milvus.md">Pesquisa de texto integral com Milvus</a></td><td>Início rápido</td><td>Pesquisa de texto integral</td></tr>
+<tr><td><a href="/docs/pt/full_text_search_with_milvus.md">Pesquisa de texto integral com LangChain e Milvus</a></td><td>Início rápido</td><td>Pesquisa de texto integral</td></tr>
 <tr><td><a href="/docs/pt/hybrid_search_with_milvus.md">Pesquisa híbrida com Milvus</a></td><td>Pesquisa híbrida</td><td>pesquisa híbrida, multi-vetor, incorporação densa, incorporação esparsa</td></tr>
 <tr><td><a href="/docs/pt/image_similarity_search.md">Pesquisa de imagens com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial, campo dinâmico</td></tr>
 <tr><td><a href="/docs/pt/multimodal_rag_with_milvus.md">RAG multimodal com Milvus</a></td><td>RAG</td><td>pesquisa vetorial, campo dinâmico</td></tr>
@@ -44,7 +44,7 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/question_answering_system.md">Sistema de resposta a perguntas</a></td><td>Resposta a perguntas</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/recommendation_system.md">Sistema de recomendação</a></td><td>Sistema de Recomendação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/video_similarity_search.md">Pesquisa de similaridade de vídeo</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/dna_sequence_classification.md">Classificação de ADN</a></td><td>Classificação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/text_search_engine.md">Motor de pesquisa de texto</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/image_deduplication_system.md">Deduplicação de imagens</a></td><td>Deduplicação</td><td>pesquisa vetorial</td></tr>

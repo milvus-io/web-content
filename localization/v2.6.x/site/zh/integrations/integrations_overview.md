@@ -24,7 +24,7 @@ title: 集成概述
 <tr><th>教程</th><th>使用案例</th><th>合作伙伴或堆栈</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus、LLamaIndex</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus 和 LLamaIndex</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_langchain.md">使用 Milvus 和 LangChain 的 RAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/zh/milvus_hybrid_search_retriever.md">Milvus 混合搜索检索器在 LangChain 中的应用</a></td><td>混合搜索</td><td>Milvus、LangChain</td></tr>
 <tr><td><a href="/docs/zh/basic_usage_langchain.md">在LangChain中使用Milvus作为向量库</a></td><td>语义搜索</td><td>Milvus、LangChain</td></tr>
@@ -49,7 +49,7 @@ title: 集成概述
 <tr><td><a href="/docs/zh/integrate_with_ragas.md">使用 Ragas 和 Milvus 进行 RAG 评估</a></td><td>评估</td><td>Milvus、Ragas</td></tr>
 <tr><td><a href="/docs/zh/evaluation_with_deepeval.md">使用 DeepEval 进行评估</a></td><td>评估与可观察性</td><td>Milvus、DeepEval</td></tr>
 <tr><td><a href="/docs/zh/evaluation_with_phoenix.md">使用 Arize Pheonix 进行评估</a></td><td>评估与可观察性</td><td>Milvus、Arize Pheonix</td></tr>
-<tr><td><a href="/docs/zh/integrate_with_langfuse.md">Milvus 在 Langfuse 中的应用</a></td><td>可观察性</td><td>Milvus、Langfuse</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_langfuse.md">Langfuse 中的 Milvus</a></td><td>可观察性</td><td>Milvus、Langfuse</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_openai.md">使用 Milvus 和 OpenAI 进行语义搜索</a></td><td>语义搜索</td><td>Milvus、OpenAI</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_cohere.md">使用 Milvus 和 Cohere 进行问题解答</a></td><td>语义搜索</td><td>Milvus、Cohere</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_hugging-face.md">使用 Milvus 和 HuggingFace 进行问题解答</a></td><td>问题解答</td><td>Milvus、HuggingFace</td></tr>
@@ -91,5 +91,7 @@ title: 集成概述
 <tr><td><a href="/docs/zh/use_milvus_in_anythingllm.md">在 AnythingLLM 中使用 Milvus</a></td><td>编排</td><td>Milvus、AnythingLLM</td></tr>
 <tr><td><a href="/docs/zh/NLWeb_with_milvus.md">在 Milvus 中使用 NLWeb</a></td><td>数据源</td><td>Milvus、NLWeb</td></tr>
 <tr><td><a href="/docs/zh/langextract_milvus_demo.md">LangExtract + Milvus 集成</a></td><td>数据源</td><td>Milvus、LangExtract</td></tr>
+<tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">使用 ZeroEntropy 和 Milvus 进行语义搜索</a></td><td>语义搜索</td><td>Milvus、ZeroEntropy</td></tr>
+<tr><td><a href="/docs/zh/langchain_milvus_dido.md">将 Milvus 文本嵌入功能与 LangChain 相结合</a></td><td>文本嵌入</td><td>Milvus、LangChain</td></tr>
 </tbody>
 </table>

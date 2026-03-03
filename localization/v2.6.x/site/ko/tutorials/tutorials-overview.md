@@ -26,7 +26,7 @@ title: 튜토리얼 개요
 <tbody>
 <tr><td><a href="/docs/ko/build-rag-with-milvus.md">Milvus로 RAG 빌드하기</a></td><td>RAG</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/how_to_enhance_your_rag.md">고급 RAG</a></td><td>RAG</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/full_text_search_with_milvus.md">Milvus로 전체 텍스트 검색</a></td><td>빠른 시작</td><td>전체 텍스트 검색</td></tr>
+<tr><td><a href="/docs/ko/full_text_search_with_milvus.md">LangChain 및 Milvus를 사용한 전체 텍스트 검색</a></td><td>빠른 시작</td><td>전체 텍스트 검색</td></tr>
 <tr><td><a href="/docs/ko/hybrid_search_with_milvus.md">Milvus를 사용한 하이브리드 검색</a></td><td>하이브리드 검색</td><td>하이브리드 검색, 멀티 벡터, 고밀도 임베딩, 스파스 임베딩</td></tr>
 <tr><td><a href="/docs/ko/image_similarity_search.md">Milvus를 사용한 이미지 검색</a></td><td>시맨틱 검색</td><td>벡터 검색, 동적 필드</td></tr>
 <tr><td><a href="/docs/ko/multimodal_rag_with_milvus.md">Milvus를 사용한 멀티모달 RAG</a></td><td>RAG</td><td>벡터 검색, 동적 필드</td></tr>

@@ -76,7 +76,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_fireworks.md">Construir o RAG com Milvus e Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Construir RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow.md">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
-<tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturadas</a></td><td>Estruturadas</td><td>Milvus, não estruturado</td></tr>
+<tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturados</a></td><td>Estruturadas</td><td>Milvus, não estruturado</td></tr>
 <tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Construir um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
 <tr><td><a href="/docs/pt/knowledge_table_with_milvus.md">Tabela de conhecimentos com Milvus</a></td><td>Engenharia do conhecimento</td><td>Tabela de conhecimentos, Milvus</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_cognee.md">Criar RAG com Milvus e Cognee</a></td><td>Engenharia do conhecimento</td><td>Milvus, Cognee</td></tr>
@@ -93,5 +93,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/use_milvus_in_anythingllm.md">Usar o Milvus no AnythingLLM</a></td><td>Orquestração</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/pt/NLWeb_with_milvus.md">Usando NLWeb com Milvus</a></td><td>Fontes de dados</td><td>Milvus, NLWeb</td></tr>
 <tr><td><a href="/docs/pt/langextract_milvus_demo.md">Integração LangExtract + Milvus</a></td><td>Fontes de dados</td><td>Milvus, LangExtract</td></tr>
+<tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Pesquisa semântica com ZeroEntropy e Milvus</a></td><td>Pesquisa semântica</td><td>Milvus, ZeroEntropy</td></tr>
+<tr><td><a href="/docs/pt/langchain_milvus_dido.md">Integração da função de incorporação de texto do Milvus com LangChain</a></td><td>Incorporação de texto</td><td>Milvus, LangChain</td></tr>
 </tbody>
 </table>

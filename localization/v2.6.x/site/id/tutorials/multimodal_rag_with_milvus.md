@@ -24,6 +24,7 @@ title: RAG multimodal dengan Milvus
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>Tutorial ini menampilkan RAG multimodal yang didukung oleh Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">model BGE yang divisualisasikan</a>, dan <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Dengan sistem ini, pengguna dapat mengunggah gambar dan mengedit instruksi teks, yang diproses oleh model pengambilan yang disusun oleh BGE untuk mencari gambar kandidat. GPT-4o kemudian bertindak sebagai pemeringkat, memilih gambar yang paling sesuai dan memberikan alasan di balik pilihan tersebut. Kombinasi yang kuat ini memungkinkan pengalaman pencarian gambar yang mulus dan intuitif, memanfaatkan Milvus untuk pengambilan yang efisien, model BGE untuk pemrosesan dan pencocokan gambar yang tepat, dan GPT-4o untuk pemeringkatan ulang tingkat lanjut.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">Persiapan<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

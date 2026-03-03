@@ -24,6 +24,7 @@ title: milvusによるマルチモーダルRAG
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>このチュートリアルでは、Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">ビジュアライズドBGEモデル</a>、<a href="https://openai.com/index/hello-gpt-4o/">GPT-4oによる</a>マルチモーダルRAGを紹介します。このシステムでは、ユーザは画像をアップロードし、テキスト指示を編集することができます。このテキスト指示はBGEの構成検索モデルによって処理され、候補画像を検索します。その後、GPT-4oがリランカーとして機能し、最適な画像を選択し、選択の根拠を提供します。この強力な組み合わせにより、Milvusによる効率的な検索、BGEモデルによる正確な画像処理とマッチング、GPT-4oによる高度なリランキングを活用した、シームレスで直感的な画像検索が可能になります。</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,8 +206,8 @@ Number of encoded images: 900
 <div class="alert note">
 <p>引数は<code translate="no">MilvusClient</code> ：</p>
 <ul>
-<li><code translate="no">./milvus_demo.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定すると、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>利用して自動的にすべてのデータがこのファイルに格納されるので、最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li><code translate="no">./milvus_demo.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定すると、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite を</a>利用して自動的にすべてのデータをこのファイルに格納することができるので、最も便利な方法です。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
@@ -261,7 +262,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このセクションでは、まずマルチモーダルなクエリによって関連する画像を検索し、LLMサービスを使って結果をランク付けし、説明とともに最適な画像を見つけます。</p>
+    </button></h2><p>このセクションでは、まずマルチモーダルなクエリで関連する画像を検索し、LLMサービスを使って結果をランク付けし、説明付きで最適なものを見つけます。</p>
 <h3 id="Run-search" class="common-anchor-header">検索の実行<button data-href="#Run-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -277,7 +278,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>画像とテキストで構成されたクエリデータを使って、高度な画像検索を実行します。</p>
+    </button></h3><p>それでは、画像とテキストからなるクエリデータを使って、高度な画像検索を実行します。</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
 )  <span class="hljs-comment"># Change to your own query image path</span>
@@ -447,7 +448,7 @@ show_combined_image.show()
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
    </span> <span class="img-wrapper"> <span>パノラマビューの作成</span> </span></p>
 <p><strong>2.再ランク付けと説明</strong></p>
-<p>合成された画像は、適切なプロンプトとともにマルチモーダルLLMサービスに送られ、検索結果の順位付けと説明が行われます。GPT-4oをLLMとして有効にするには、<a href="https://platform.openai.com/docs/quickstart">OpenAIのAPI Keyを</a>用意する必要があります。</p>
+<p>合成された画像を、適切なプロンプトとともにマルチモーダルLLMサービスに送信し、検索された結果を説明付きでランク付けします。GPT-4oをLLMとして有効にするには、<a href="https://platform.openai.com/docs/quickstart">OpenAIのAPI Keyを</a>用意する必要があります。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64
 

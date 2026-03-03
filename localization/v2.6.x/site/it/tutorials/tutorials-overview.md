@@ -1,6 +1,6 @@
 ---
 id: tutorials-overview.md
-summary: Questa pagina fornisce un elenco di tutorial per interagire con Milvus.
+summary: Questa pagina fornisce un elenco di esercitazioni per interagire con Milvus.
 title: Panoramica dei tutorial
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Panoramica dei tutorial<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
@@ -26,7 +26,7 @@ title: Panoramica dei tutorial
 <tbody>
 <tr><td><a href="/docs/it/build-rag-with-milvus.md">Costruire RAG con Milvus</a></td><td>RAG</td><td>Ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/how_to_enhance_your_rag.md">RAG avanzato</a></td><td>RAG</td><td>ricerca vettoriale</td></tr>
-<tr><td><a href="/docs/it/full_text_search_with_milvus.md">Ricerca full text con Milvus</a></td><td>Avvio rapido</td><td>Ricerca a tutto testo</td></tr>
+<tr><td><a href="/docs/it/full_text_search_with_milvus.md">Ricerca full text con LangChain e Milvus</a></td><td>Avvio rapido</td><td>Ricerca a tutto testo</td></tr>
 <tr><td><a href="/docs/it/hybrid_search_with_milvus.md">Ricerca ibrida con Milvus</a></td><td>Ricerca ibrida</td><td>ricerca ibrida, multi vettoriale, incorporazione densa, incorporazione rada</td></tr>
 <tr><td><a href="/docs/it/image_similarity_search.md">Ricerca per immagini con Milvus</a></td><td>Ricerca semantica</td><td>ricerca vettoriale, campo dinamico</td></tr>
 <tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">RAG multimodale con Milvus</a></td><td>RAG</td><td>ricerca vettoriale, campo dinamico</td></tr>
@@ -47,7 +47,7 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/audio_similarity_search.md">Ricerca per similarità audio</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/dna_sequence_classification.md">Classificazione del DNA</a></td><td>Classificazione</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/text_search_engine.md">Motore di ricerca testuale</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
-<tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione di immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione delle immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/generating_milvus_query_filter_expressions.md">Generazione di espressioni di filtro per query Milvus con modelli linguistici di grandi dimensioni</a></td><td>Filtraggio dei metadati</td><td>ricerca vettoriale</td></tr>
 </tbody>
 </table>

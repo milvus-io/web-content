@@ -26,7 +26,7 @@ title: Обзор учебников
 <tbody>
 <tr><td><a href="/docs/ru/build-rag-with-milvus.md">Создание RAG с помощью Milvus</a></td><td>RAG</td><td>векторный поиск</td></tr>
 <tr><td><a href="/docs/ru/how_to_enhance_your_rag.md">Расширенный RAG</a></td><td>RAG</td><td>векторный поиск</td></tr>
-<tr><td><a href="/docs/ru/full_text_search_with_milvus.md">Полнотекстовый поиск с помощью Milvus</a></td><td>Быстрый старт</td><td>Полнотекстовый поиск</td></tr>
+<tr><td><a href="/docs/ru/full_text_search_with_milvus.md">Полнотекстовый поиск с помощью LangChain и Milvus</a></td><td>Быстрый старт</td><td>Полнотекстовый поиск</td></tr>
 <tr><td><a href="/docs/ru/hybrid_search_with_milvus.md">Гибридный поиск с Milvus</a></td><td>Гибридный поиск</td><td>гибридный поиск, многовекторный, плотное вложение, разреженное вложение</td></tr>
 <tr><td><a href="/docs/ru/image_similarity_search.md">Поиск изображений с помощью Milvus</a></td><td>Семантический поиск</td><td>векторный поиск, динамическое поле</td></tr>
 <tr><td><a href="/docs/ru/multimodal_rag_with_milvus.md">Мультимодальный RAG с Milvus</a></td><td>RAG</td><td>векторный поиск, динамическое поле</td></tr>

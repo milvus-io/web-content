@@ -26,7 +26,7 @@ title: Visión general de los tutoriales
 <tbody>
 <tr><td><a href="/docs/es/build-rag-with-milvus.md">Construir RAG con Milvus</a></td><td>RAG</td><td>Búsqueda vectorial</td></tr>
 <tr><td><a href="/docs/es/how_to_enhance_your_rag.md">RAG avanzada</a></td><td>RAG</td><td>búsqueda vectorial</td></tr>
-<tr><td><a href="/docs/es/full_text_search_with_milvus.md">Búsqueda de texto completo con Milvus</a></td><td>Inicio rápido</td><td>Búsqueda de texto completo</td></tr>
+<tr><td><a href="/docs/es/full_text_search_with_milvus.md">Búsqueda de texto completo con LangChain y Milvus</a></td><td>Inicio rápido</td><td>Búsqueda de texto completo</td></tr>
 <tr><td><a href="/docs/es/hybrid_search_with_milvus.md">Búsqueda híbrida con Milvus</a></td><td>Búsqueda híbrida</td><td>búsqueda híbrida, multivectorial, incrustación densa, incrustación dispersa</td></tr>
 <tr><td><a href="/docs/es/image_similarity_search.md">Búsqueda de imágenes con Milvus</a></td><td>Búsqueda semántica</td><td>búsqueda vectorial, campo dinámico</td></tr>
 <tr><td><a href="/docs/es/multimodal_rag_with_milvus.md">RAG multimodal con Milvus</a></td><td>RAG</td><td>búsqueda vectorial, campo dinámico</td></tr>

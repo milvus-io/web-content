@@ -26,7 +26,7 @@ title: نظرة عامة على البرامج التعليمية
 <tbody>
 <tr><td><a href="/docs/ar/build-rag-with-milvus.md">بناء RAG مع ميلفوس</a></td><td>RAG</td><td>بحث المتجهات</td></tr>
 <tr><td><a href="/docs/ar/how_to_enhance_your_rag.md">RAG متقدم</a></td><td>RAG</td><td>بحث متجه</td></tr>
-<tr><td><a href="/docs/ar/full_text_search_with_milvus.md">البحث عن النص الكامل مع ميلفوس</a></td><td>البدء السريع</td><td>البحث بالنص الكامل</td></tr>
+<tr><td><a href="/docs/ar/full_text_search_with_milvus.md">البحث عن النص الكامل باستخدام LangChain و Milvus</a></td><td>البدء السريع</td><td>البحث بالنص الكامل</td></tr>
 <tr><td><a href="/docs/ar/hybrid_search_with_milvus.md">البحث الهجين مع ميلفوس</a></td><td>البحث الهجين</td><td>بحث هجين, بحث هجين, متجهات متعددة, تضمين كثيف, تضمين متناثر</td></tr>
 <tr><td><a href="/docs/ar/image_similarity_search.md">البحث عن الصور باستخدام ميلفوس</a></td><td>البحث الدلالي</td><td>البحث المتجه، المجال الديناميكي</td></tr>
 <tr><td><a href="/docs/ar/multimodal_rag_with_milvus.md">البحث متعدد الوسائط RAG مع ميلفوس</a></td><td>RAG</td><td>بحث متجه، مجال ديناميكي</td></tr>

@@ -2165,33 +2165,39 @@
                 "children": []
               },
               {
+                "label": "Встраивание текста",
+                "id": "langchain_milvus_dido.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "RAG",
                 "id": "integrate_with_langchain.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "Гибридный поиск",
                 "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "Полнотекстовый поиск",
                 "id": "full_text_search_with_langchain.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "Асинхронный поиск",
                 "id": "langchain_milvus_async.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "Агент RAG",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]

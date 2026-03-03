@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "インメモリーレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -1041,7 +1041,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchクエリからmilvusへ",
+            "label": "Elasticsearchからmilvusへのクエリ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "エンベッディングとリランキング",
+        "label": "エンベッディングと再ランキング",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -2165,33 +2165,39 @@
                 "children": []
               },
               {
+                "label": "テキストの埋め込み",
+                "id": "langchain_milvus_dido.md",
+                "order": 2,
+                "children": []
+              },
+              {
                 "label": "ラグ",
                 "id": "integrate_with_langchain.md",
-                "order": 2,
+                "order": 3,
                 "children": []
               },
               {
                 "label": "ハイブリッド検索",
                 "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
+                "order": 4,
                 "children": []
               },
               {
                 "label": "全文検索",
                 "id": "full_text_search_with_langchain.md",
-                "order": 4,
+                "order": 5,
                 "children": []
               },
               {
                 "label": "非同期検索",
                 "id": "langchain_milvus_async.md",
-                "order": 5,
+                "order": 6,
                 "children": []
               },
               {
                 "label": "エージェントRAG",
                 "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
+                "order": 7,
                 "children": []
               }
             ]
@@ -2781,7 +2787,7 @@
         "children": []
       },
       {
-        "label": "Milvusによるテキストから画像への検索",
+        "label": "milvusによるテキストから画像への検索",
         "id": "text_image_search.md",
         "order": 16,
         "children": []
@@ -2804,7 +2810,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

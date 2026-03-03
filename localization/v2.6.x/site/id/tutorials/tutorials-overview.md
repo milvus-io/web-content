@@ -28,7 +28,7 @@ title: Ikhtisar Tutorial
 <tbody>
 <tr><td><a href="/docs/id/build-rag-with-milvus.md">Membangun RAG dengan Milvus</a></td><td>RAG</td><td>Pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/how_to_enhance_your_rag.md">RAG tingkat lanjut</a></td><td>RAG</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/full_text_search_with_milvus.md">Pencarian Teks Lengkap dengan Milvus</a></td><td>Mulai Cepat</td><td>Pencarian Teks Lengkap</td></tr>
+<tr><td><a href="/docs/id/full_text_search_with_milvus.md">Pencarian Teks Lengkap dengan LangChain dan Milvus</a></td><td>Mulai Cepat</td><td>Pencarian Teks Lengkap</td></tr>
 <tr><td><a href="/docs/id/hybrid_search_with_milvus.md">Pencarian Hibrida dengan Milvus</a></td><td>Pencarian Hibrida</td><td>pencarian hibrida, multi vektor, penyematan padat, penyematan jarang</td></tr>
 <tr><td><a href="/docs/id/image_similarity_search.md">Pencarian Gambar dengan Milvus</a></td><td>Pencarian Semantik</td><td>pencarian vektor, bidang dinamis</td></tr>
 <tr><td><a href="/docs/id/multimodal_rag_with_milvus.md">RAG multimodal dengan Milvus</a></td><td>RAG</td><td>pencarian vektor, bidang dinamis</td></tr>
@@ -44,7 +44,7 @@ title: Ikhtisar Tutorial
 <tr><td><a href="/docs/id/movie_recommendation_with_milvus.md">Rekomendasi Film dengan Milvus</a></td><td>Sistem Rekomendasi</td><td>pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/funnel_search_with_matryoshka.md">Pencarian Corong dengan Penyematan Matryoshka</a></td><td>Mulai cepat</td><td>Pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/question_answering_system.md">Sistem Penjawab Pertanyaan</a></td><td>Menjawab Pertanyaan</td><td>Pencarian vektor</td></tr>
-<tr><td><a href="/docs/id/recommendation_system.md">Sistem Rekomendasi</a></td><td>Sistem Rekomendasi</td><td>pencarian vektor</td></tr>
+<tr><td><a href="/docs/id/recommendation_system.md">Sistem Rekomendasi</a></td><td>Sistem Rekomendasi</td><td>Pencarian Vektor</td></tr>
 <tr><td><a href="/docs/id/video_similarity_search.md">Pencarian Kemiripan Video</a></td><td>Pencarian Semantik</td><td>Pencarian Vektor</td></tr>
 <tr><td><a href="/docs/id/audio_similarity_search.md">Pencarian Kemiripan Audio</a></td><td>Pencarian Semantik</td><td>pencarian vektor</td></tr>
 <tr><td><a href="/docs/id/dna_sequence_classification.md">Klasifikasi DNA</a></td><td>Klasifikasi</td><td>pencarian vektor</td></tr>

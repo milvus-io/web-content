@@ -93,5 +93,7 @@ title: نظرة عامة على عمليات التكامل
 <tr><td><a href="/docs/ar/use_milvus_in_anythingllm.md">استخدام Milvus في AnythingLLM</a></td><td>التنسيق</td><td>ميلفوس، AnythingLLLM</td></tr>
 <tr><td><a href="/docs/ar/NLWeb_with_milvus.md">استخدام NLWeb مع ميلفوس</a></td><td>مصادر البيانات</td><td>ميلفوس، إن إل ويب</td></tr>
 <tr><td><a href="/docs/ar/langextract_milvus_demo.md">تكامل لانج إكستراكت + ميلفوس</a></td><td>مصادر البيانات</td><td>ميلفوس، لانج إكستراكت</td></tr>
+<tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">البحث الدلالي باستخدام ZeroEntropy و Milvus</a></td><td>البحث الدلالي</td><td>ميلفوس، ZeroEntropy</td></tr>
+<tr><td><a href="/docs/ar/langchain_milvus_dido.md">دمج وظيفة تضمين النص في ميلفوس مع سلسلة اللغات</a></td><td>تضمين النص</td><td>ميلفوس، لانغشين</td></tr>
 </tbody>
 </table>

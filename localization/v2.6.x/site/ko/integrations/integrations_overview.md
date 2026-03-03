@@ -91,5 +91,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/use_milvus_in_anythingllm.md">AnythingLLM에서 Milvus 사용</a></td><td>오케스트레이션</td><td>Milvus, AnythingLLM</td></tr>
 <tr><td><a href="/docs/ko/NLWeb_with_milvus.md">Milvus와 함께 NLWeb 사용</a></td><td>데이터 소스</td><td>Milvus, NLWeb</td></tr>
 <tr><td><a href="/docs/ko/langextract_milvus_demo.md">LangExtract + Milvus 통합</a></td><td>데이터 소스</td><td>Milvus, LangExtract</td></tr>
+<tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">제로엔트로피와 Milvus를 사용한 시맨틱 검색</a></td><td>시맨틱 검색</td><td>밀버스, 제로엔트로피</td></tr>
+<tr><td><a href="/docs/ko/langchain_milvus_dido.md">밀버스 텍스트 임베딩 기능과 LangChain의 통합</a></td><td>텍스트 임베딩</td><td>밀버스, 랭체인</td></tr>
 </tbody>
 </table>

@@ -24,6 +24,7 @@ title: RAG multimodal con Milvus
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
 <p>Este tutorial muestra el RAG multimodal con Milvus, el <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modelo BGE visualizado</a> y <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Con este sistema, los usuarios pueden cargar una imagen y editar instrucciones de texto, que son procesadas por el modelo de recuperación compuesto de BGE para buscar imágenes candidatas. A continuación, GPT-4o actúa como reranker, seleccionando la imagen más adecuada y proporcionando la justificación de la elección. Esta potente combinación permite una experiencia de búsqueda de imágenes intuitiva y sin fisuras, aprovechando Milvus para una recuperación eficaz, el modelo BGE para un procesamiento y una correspondencia precisos de las imágenes, y GPT-4o para una reordenación avanzada.</p>
+<p><img translate="no" src="/docs/v2.6.x/assets/multimodal_rag_with_milvus.png" width="100%" /></p>
 <h2 id="Preparation" class="common-anchor-header">Preparación<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -207,7 +208,7 @@ Number of encoded images: 900
 <ul>
 <li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo <code translate="no">./milvus_demo.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
 <li>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
-<li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que se corresponden con <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">el punto final público y la clave Api</a> en Zilliz Cloud.</li>
+<li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y a la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -261,7 +262,7 @@ DEBUG:pymilvus.milvus_client.milvus_client:Successfully created an index on coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En esta sección, en primer lugar, buscaremos imágenes relevantes mediante una consulta multimodal y, a continuación, utilizaremos el servicio LLM para renombrar los resultados y encontrar el mejor con una explicación.</p>
+    </button></h2><p>En esta sección, en primer lugar, buscaremos imágenes relevantes mediante una consulta multimodal y, a continuación, utilizaremos el servicio LLM para jerarquizar los resultados y encontrar el mejor con una explicación.</p>
 <h3 id="Run-search" class="common-anchor-header">Ejecutar la búsqueda<button data-href="#Run-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
