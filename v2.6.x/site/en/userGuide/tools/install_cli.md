@@ -14,7 +14,7 @@ You can install Milvus_CLI from [PyPI](https://pypi.org/project/milvus-cli/).
 
 ### Prerequisites
 
-- Install [Python 3.8.5](https://www.python.org/downloads/release/python-385/) or later
+- Install [Python 3.9](https://www.python.org/downloads/release/python-390/) or later
 - Install [pip](https://pip.pypa.io/en/stable/installation/)
 
 ### Install via pip
