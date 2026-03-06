@@ -51,7 +51,7 @@ title: Install Milvus_CLI
         ></path>
       </svg>
     </button></h3><ul>
-<li>Install <a href="https://www.python.org/downloads/release/python-385/">Python 3.8.5</a> or later</li>
+<li>Install <a href="https://www.python.org/downloads/release/python-390/">Python 3.9</a> or later</li>
 <li>Install <a href="https://pip.pypa.io/en/stable/installation/">pip</a></li>
 </ul>
 <h3 id="Install-via-pip" class="common-anchor-header">Install via pip<button data-href="#Install-via-pip" class="anchor-icon" translate="no">
