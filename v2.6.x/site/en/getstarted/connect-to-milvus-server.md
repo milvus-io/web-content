@@ -14,7 +14,7 @@ This topic describes how to establish a client connection to a Milvus server and
 
 - A Milvus server address (for local default: `http://localhost:19530`, proxy port **19530**).
 
-- If [authentication is enabled](authenticate.md), provide either a **token** or a **username + password**. A token can be `username:password` (e.g., `root:Milvus`). See [Authenticate User Access](authenticate.md) and [Create Users & Roles](users_and_roles.md) for details.
+- If [authentication is enabled](authenticate.md?tab=docker), provide either a **token** or a **username + password**. A token can be `username:password` (e.g., `root:Milvus`). See [Authenticate User Access](authenticate.md) and [Create Users & Roles](users_and_roles.md) for details.
 
 ## Connect by URI (authentication disabled)
 
