@@ -16,7 +16,7 @@ program
   .option('-p, --position <position>', 'set the position of the current document among its siblings')
   .option('-r, --recursive', 'use the recursive mode for publishing multiple documents')
   .action(async (options) => {
-      const { manual, doc, output, position, iterative } = options;
+      const { manual, doc, output, position, recursive } = options;
       const configFile = path.join(__dirname, 'config.json');
       
       if (!fs.existsSync(configFile)) {
@@ -29,7 +29,7 @@ program
       const { menuStructure, outputDir, imageDir } = targets;
       const milvusDocsGen = new MilvusDocsGen(base, sourceType, menuStructure, imageDir, images.alt_texts);
 
-      if (!iterative) {
+      if (!recursive) {
          // write single document
          const result = await milvusDocsGen.write_doc(doc);
 

@@ -3,6 +3,23 @@
         "guides": {
             "base": "QrNlwhfIeiKqL7k04mlc9kPendg:tblDEFqgQwxiyVvB",
             "sourceType": "wiki",
+            "roots": [
+                { "title": "About Milvus",             "recursive": true  },
+                { "title": "Connect to Milvus Server", "recursive": false },
+                { "title": "Database",                 "recursive": false },
+                { "title": "Collection",               "recursive": true  },
+                { "title": "Schema & Data Fields",     "recursive": true  },
+                { "title": "Insert & Delete",          "recursive": true  },
+                { "title": "Indexes",                  "recursive": true  },
+                { "title": "Search",                   "recursive": true  },
+                { "title": "Embeddings & Reranking",   "recursive": true  },
+                { "title": "Storage Optimization",     "recursive": true  },
+                { "title": "Enable RBAC",              "recursive": true  },
+                { "title": "Concepts",                 "recursive": true  },
+                { "title": "Best Practices",           "recursive": true  },
+                { "title": "Scaling",                  "recursive": true  },
+                { "title": "Tools",                    "recursive": true  }
+            ],
             "targets": {
                 "menuStructure": "site/en/menuStructure/en.json",
                 "outputDir": "site/en",

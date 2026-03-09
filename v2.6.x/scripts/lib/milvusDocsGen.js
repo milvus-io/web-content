@@ -3,6 +3,7 @@ const larkDocWriter = require('./larkDocWriter.js')
 const fetch = require('node-fetch')
 const fs = require('fs')
 const path = require('path');
+const slugify = require('slugify');
 const inquirer = require('inquirer');
 
 class MilvusDocsGen extends larkDocWriter {
@@ -13,7 +14,6 @@ class MilvusDocsGen extends larkDocWriter {
         this.menuStructure = menuStructure;
         this.tokenFetcher = new larkTokenFetcher();
         this.alt_texts = alt_texts;
-        this.inquirer = inquirer.createPromptModule();
         this.tokens = [];
     }
 
@@ -245,55 +245,23 @@ class MilvusDocsGen extends larkDocWriter {
         return codeBlockGroups;
     }
 
-    async __alt_text_prompt(type, token) {
-        const alt_text = await inquirer.prompt([
-            {
-                type: 'input',
-                name: 'alt_text',
-                message: `Enter the alternative text for the ${type} type image ${token}:`,
-            }
-        ])
+    __resolve_alt_text(token, feishu_caption) {
+        // 1. Check config (backward compat for existing images)
+        const cached = this.alt_texts.find(entry => entry.token === token);
+        if (cached) return cached.alt_text;
 
-        this.alt_texts.push({
-            token: token,
-            type: type,
-            alt_text: alt_text.alt_text
-        })
+        // 2. Use Feishu caption if available (images only)
+        if (feishu_caption) return slugify(feishu_caption, { lower: true, strict: true });
 
-        const would_be_file_path = path.join(this.imageDir, alt_text.alt_text + ".png")
-        let confirm = true;
-        if (fs.existsSync(would_be_file_path)) {
-            confirm = await inquirer.prompt([
-                {
-                    type: 'confirm',
-                    name: 'confirm',
-                    message: `A file named ${alt_text.alt_text}.png already exists. Do you want to overwrite it?`,
-                    default: true
-                }
-            ])
-
-            confirm = confirm.confirm
-        }
-
-        return [ alt_text.alt_text, confirm ]
+        // 3. Fall back to token (block ID)
+        return slugify(token, { lower: true, strict: true });
     }
 
-    __locate_alt_text(token) {
-        const alt_text = this.alt_texts.find(alt_text => alt_text.token === token)
-        return alt_text?.alt_text || token
-    }
-
-    async __image (image) {
+    async __image(image) {
         const root = this.imageDir.replace(/^static\//g, '')
-
-        let alt_text = this.__locate_alt_text(image.token)
-        let confirm = true;
-
-        if (alt_text === image.token) {
-            [ alt_text, confirm ] = await this.__alt_text_prompt("image", image.token)
-        }
-
-        const caption = alt_text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+        const feishu_caption = image.caption?.content?.trim() || null;
+        const alt_text = this.__resolve_alt_text(image.token, feishu_caption);
+        const caption = alt_text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
         if (this.skip_image_download) {
             return `![${caption}](/${root}/${alt_text}.png)`;
@@ -302,11 +270,8 @@ class MilvusDocsGen extends larkDocWriter {
         try {
             console.log(`Downloading image ${alt_text}.png ...`)
             const file_path = path.join(this.downloader.target_path, alt_text + ".png");
-
-            if (confirm) {
-                const result = await this.downloader.__downloadImage(image.token)
-                result.body.pipe(fs.createWriteStream(file_path));
-            }
+            const result = await this.downloader.__downloadImage(image.token);
+            result.body.pipe(fs.createWriteStream(file_path));
         } catch (error) {
             console.log(error)
             console.log("-------------- A retry is needed -----------------");
@@ -320,35 +285,23 @@ class MilvusDocsGen extends larkDocWriter {
 
     async __board(board, indent) {
         const root = this.imageDir.replace(/^static\//g, '')
-
-        var alt_text = this.__locate_alt_text(board.token)
-        var confirm = true;
-
-        if (alt_text === board.token) {
-            [ alt_text, confirm ] = await this.__alt_text_prompt("board", board.token)
-        }
-
-        const caption = alt_text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+        const alt_text = this.__resolve_alt_text(board.token, null);
+        const caption = alt_text.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
         if (this.skip_image_download) {
             return `![${caption}](/${root}/${alt_text}.png)`;
         }
 
-        console.log(`Downloading image ${alt_text}.png ...`)
+        console.log(`Downloading board ${alt_text}.png ...`)
         const file_path = path.join(this.downloader.target_path, alt_text + ".png");
-
-        if (confirm) {
-            const result = await this.downloader.__downloadBoardPreview(board.token)
-            var buffers = [];
-            result.body.on('data', (chunk) => {
-                buffers.push(chunk);
-            });
-            result.body.on('end', async () => {
-                const buffer = Buffer.concat(buffers);
-                const trimmedBuffer = await this.__trim_white_borders(buffer);
-                fs.writeFileSync(file_path, trimmedBuffer);
-            });  
-        }              
+        const result = await this.downloader.__downloadBoardPreview(board.token);
+        var buffers = [];
+        result.body.on('data', (chunk) => { buffers.push(chunk); });
+        result.body.on('end', async () => {
+            const buffer = Buffer.concat(buffers);
+            const trimmedBuffer = await this.__trim_white_borders(buffer);
+            fs.writeFileSync(file_path, trimmedBuffer);
+        });
 
         return `![${caption}](/${root}/${alt_text}.png)`;
     }
@@ -797,15 +750,16 @@ class MilvusDocsGen extends larkDocWriter {
         return null;
     }
 
-    __iterate_sources(record_id, children = []) {
-        const sources = this.records || this.__list_sources();
+    __iterate_sources(record_id) {
+        const sources = this.records;
         const current_children = sources.filter(source => source.parent === record_id);
+        let result = [...current_children];
 
-        current_children.forEach(child => {
-            this.__iterate_sources(child.record_id, children.concat(current_children))
-        })
+        for (const child of current_children) {
+            result = result.concat(this.__iterate_sources(child.record_id));
+        }
 
-        return children.concat(current_children);
+        return result;
     }
 }
 
