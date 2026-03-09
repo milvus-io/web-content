@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: 'Erfahren Sie, wie Sie mq für Milvus konfigurieren.'
 ---
+<blockquote>
+<p><strong>Veraltet</strong>: NATS (natsmq) ist veraltet und wird in Milvus v2.6 entfernt werden. Bitte verwenden Sie stattdessen RocksMQ, Pulsar oder Kafka.</p>
+</blockquote>
 <h1 id="mq-related-Configurations" class="common-anchor-header">mq-bezogene Konfigurationen<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -23,7 +26,7 @@ summary: 'Erfahren Sie, wie Sie mq für Milvus konfigurieren.'
 <p>Sie können Ihr MQ durch Setzen des Feldes mq.type ändern.</p>
 <p>Wenn Sie das Feld mq.type nicht als Standard einstellen, gibt es einen Hinweis zur Aktivierung der Priorität, wenn wir mehrere mq in dieser Datei konfigurieren.</p>
 <ol>
-<li><p>Standalone(lokaler) Modus: rocksmq(Standard) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
+<li><p>Standalone-Modus (lokal): rocksmq (Standard) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
 <li><p>Clustermodus:  Pulsar(Standard) &gt; Kafka (rocksmq und natsmq werden im Clustermodus nicht unterstützt)</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">

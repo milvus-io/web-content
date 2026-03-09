@@ -4,7 +4,10 @@ related_key: configure
 group: system_configuration.md
 summary: Apprenez à configurer mq pour Milvus.
 ---
-<h1 id="mq-related-Configurations" class="common-anchor-header">Configurations liées à mq<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
+<blockquote>
+<p><strong>Déclassé</strong>: NATS (natsmq) est obsolète et sera supprimé dans Milvus v2.6. Veuillez utiliser RocksMQ, Pulsar ou Kafka à la place.</p>
+</blockquote>
+<h1 id="mq-related-Configurations" class="common-anchor-header">Configurations liées à MQ<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -284,7 +287,7 @@ summary: Apprenez à configurer mq pour Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Valeur par défaut : "3", délai (en secondes) pendant lequel la cible envoie des msgPack      </td>
+      <td>        Valeur par défaut : "3", délai (en secondes) pendant lequel la cible envoie msgPack      </td>
       <td>3</td>
     </tr>
   </tbody>

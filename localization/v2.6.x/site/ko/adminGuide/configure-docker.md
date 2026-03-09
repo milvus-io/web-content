@@ -97,7 +97,6 @@ title: Docker Compose로 Milvus 구성하기
             <li><a href="/docs/ko/configure_indexcoord.md">인덱스 조정</a></li>
             <li><a href="/docs/ko/configure_metastore.md">메타스토어</a></li>
             <li><a href="/docs/ko/configure_mq.md">메시지 큐</a></li>
-            <li><a href="/docs/ko/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ko/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ko/configure_trace.md">Trace</a></li>
             <li><a href="/docs/ko/configure_quotaandlimits.md">할당량 및 제한</a></li>
@@ -112,7 +111,7 @@ title: Docker Compose로 Milvus 구성하기
 <thead>
   <tr>
     <th>목적</th>
-    <th>파라미터</th>
+    <th>매개변수</th>
   </tr>
 </thead>
 <tbody>

@@ -41,14 +41,14 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表顯示 Milvus 獨立模式和集群模式是否支援 RocksMQ、NATS、Pulsar 和 Kafka。</p>
+    </button></h2><p>下表顯示 Milvus 獨立模式和集群模式是否支援 RocksMQ、Pulsar、Kafka 和 Woodpecker。</p>
 <table>
 <thead>
-<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">NATS</th><th style="text-align:center">Pulsar</th><th style="text-align:center">卡夫卡</th></tr>
+<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">Pulsar</th><th style="text-align:center">卡夫卡</th><th style="text-align:center">啄木鳥</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:center">單機模式</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
-<tr><td style="text-align:center">叢集模式</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">叢集模式</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
 <p>指定訊息儲存也有其他限制：</p>
@@ -56,10 +56,9 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <li>一個 Milvus 實例只支援一個訊息儲存空間。然而，我們仍然向後相容為一個實例設定多個訊息儲存空間。優先順序如下：<ul>
 <li>獨立模式：  RocksMQ (預設) &gt; Pulsar &gt; Kafka</li>
 <li>群集模式：Pulsar (預設) &gt; Kafka</li>
-<li>為了向下相容性，2.3 引入的 Nats 不參與這些優先順序規則。</li>
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
-<li>僅支援 Kafka 2.x 或 3.x 版本。</li>
+<li>只支援 Kafka 2.x 或 3.x 版本。</li>
 <li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.11時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
@@ -113,7 +112,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <li><code translate="no">storageClassName</code>:您集群的儲存類別</li>
 <li><code translate="no">storage</code>:持久卷的大小</li>
 </ul>
-<h2 id="Configure-NATS" class="common-anchor-header">配置 NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-Woodpecker" class="common-anchor-header">配置 Woodpecker<button data-href="#Configure-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,67 +127,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS 是 NATS 的另一種訊息儲存方式。</p>
-<h4 id="Example" class="common-anchor-header">範例</h4><p>下面的示例配置了一个 NATS 服务。</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">dependencies:</span> 
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">&#x27;natsmq&#x27;</span>
-    <span class="hljs-attr">natsmq:</span>
-      <span class="hljs-comment"># server side configuration for natsmq.</span>
-      <span class="hljs-attr">server:</span> 
-        <span class="hljs-comment"># 4222 by default, Port for nats server listening.</span>
-        <span class="hljs-attr">port:</span> <span class="hljs-number">4222</span> 
-        <span class="hljs-comment"># /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.</span>
-        <span class="hljs-attr">storeDir:</span> <span class="hljs-string">/var/lib/milvus/nats</span> 
-        <span class="hljs-comment"># (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.</span>
-        <span class="hljs-attr">maxFileStore:</span> <span class="hljs-number">17179869184</span> 
-        <span class="hljs-comment"># (B) 8MB by default, Maximum number of bytes in a message payload.</span>
-        <span class="hljs-attr">maxPayload:</span> <span class="hljs-number">8388608</span> 
-        <span class="hljs-comment"># (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.</span>
-        <span class="hljs-attr">maxPending:</span> <span class="hljs-number">67108864</span> 
-        <span class="hljs-comment"># (√ms) 4s by default, waiting for initialization of natsmq finished.</span>
-        <span class="hljs-attr">initializeTimeout:</span> <span class="hljs-number">4000</span> 
-        <span class="hljs-attr">monitor:</span>
-          <span class="hljs-comment"># false by default, If true enable debug log messages.</span>
-          <span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span> 
-          <span class="hljs-comment"># true by default, If set to false, log without timestamps.</span>
-          <span class="hljs-attr">logTime:</span> <span class="hljs-literal">true</span> 
-          <span class="hljs-comment"># no log file by default, Log file path relative to.. .</span>
-          <span class="hljs-attr">logFile:</span> 
-          <span class="hljs-comment"># (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.</span>
-          <span class="hljs-attr">logSizeLimit:</span> <span class="hljs-number">0</span> 
-        <span class="hljs-attr">retention:</span>
-          <span class="hljs-comment"># (min) 3 days by default, Maximum age of any message in the P-channel.</span>
-          <span class="hljs-attr">maxAge:</span> <span class="hljs-number">4320</span> 
-          <span class="hljs-comment"># (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.</span>
-          <span class="hljs-attr">maxBytes:</span>
-          <span class="hljs-comment"># None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    </span>
-          <span class="hljs-attr">maxMsgs:</span> 
-  <span class="hljs-attr">components:</span> {}
-  <span class="hljs-attr">config:</span> {}
-<button class="copy-code-btn"></button></code></pre>
-<p>要將 RocksMQ 的訊息儲存空間遷移至 NATS，步驟如下：</p>
-<ol>
-<li><p>停止所有 DDL 操作。</p></li>
-<li><p>调用 FlushAll API，然后在 API 调用执行完毕后停止 Milvus。</p></li>
-<li><p>將<code translate="no">msgStreamType</code> 改為<code translate="no">natsmq</code> ，並在<code translate="no">spec.dependencies.natsmq</code> 中對 NATS 設定進行必要的修改。</p></li>
-<li><p>再次啟動 Milvus 並檢查是否：</p>
-<ul>
-<li>日誌中是否有讀取<code translate="no">mqType=natsmq</code> 的日誌項目。</li>
-<li>在<code translate="no">spec.dependencies.natsmq.server.storeDir</code> 中指定的目錄中是否存在名為<code translate="no">jetstream</code> 的目錄。</li>
-</ul></li>
-<li><p>(可選）備份並清理 RocksMQ 儲存目錄中的資料檔案。</p></li>
-</ol>
-<div class="alert note">
-<p><strong>在 RocksMQ 和 NATS 之間做選擇？</strong></p>
-<p>RockMQ使用CGO與RocksDB互動，並自行管理記憶體，而內嵌在Milvus安裝中的純GO NATS則將記憶體管理委託給Go的垃圾收集器(GC)。</p>
-<p>在資料封包小於 64 kb 的情況下，RocksDB 在記憶體使用量、CPU 使用量和回應時間上都比較優勝。另一方面，如果資料封包大於 64 kb，NATS 在有足夠記憶體和理想 GC 排程的情況下，在回應時間上表現優異。</p>
-<p>目前，建議您僅在實驗中使用 NATS。</p>
-</div>
+    </button></h2><p>Woodpecker 是專為物件儲存而設計的雲端原生 Write-Ahead Log (WAL)。它提供高吞吐量、低操作開銷和無縫擴充能力。如需詳細資訊，請參閱<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>。</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">設定 Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -204,7 +143,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar 管理最近變更的日誌、輸出串流日誌，並提供日誌訂閱。Milvus 獨立版和 Milvus 集群都支援配置 Pulsar 作訊息儲存。然而，使用 Milvus Operator，您只能設定 Pulsar 為 Milvus 叢集的訊息儲存。添加<code translate="no">spec.dependencies.pulsar</code> 下的必填欄位以配置 Pulsar。</p>
+    </button></h2><p>Pulsar 管理最近變更的日誌、輸出串流日誌，並提供日誌訂閱。Milvus 獨立版和 Milvus 集群都支援配置 Pulsar 作為訊息儲存。然而，使用 Milvus Operator，您只能設定 Pulsar 為 Milvus 叢集的訊息儲存。添加<code translate="no">spec.dependencies.pulsar</code> 下的必填欄位以配置 Pulsar。</p>
 <p><code translate="no">pulsar</code> 支援<code translate="no">external</code> 和<code translate="no">inCluster</code> 。</p>
 <h3 id="External-Pulsar" class="common-anchor-header">外部 Pulsar<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"

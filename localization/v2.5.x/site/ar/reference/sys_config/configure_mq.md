@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: تعرف على كيفية تهيئة mq لـ Milvus.
 ---
+<blockquote>
+<p><strong>تم إهمالها</strong>: تم إهمال NATS (natsmq) وستتم إزالته في الإصدار 2.6 من Milvus. يرجى استخدام RocksMQ أو Pulsar أو Kafka بدلاً من ذلك.</p>
+</blockquote>
 <h1 id="mq-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بـ mq<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +22,7 @@ summary: تعرف على كيفية تهيئة mq لـ Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>يدعم Milvus أربعة MQ: rocksmq (استنادًا إلى RockDB)، و natsmq (خادم nats-server المدمج)، وPulsar وKafka.</p>
+    </button></h1><p>يدعم Milvus أربعة من MQ: Rocksmq (استنادًا إلى RockDB)، وNATSMQ (خادم natsmq المدمج)، وPulsar وKafka.</p>
 <p>يمكنك تغيير mq الخاص بك عن طريق تعيين حقل mq.type.</p>
 <p>إذا لم تقم بتعيين الحقل mq.type كإعداد افتراضي، فهناك ملاحظة حول تمكين الأولوية إذا قمنا بتكوين عدة mq في هذا الملف.</p>
 <ol>
@@ -51,8 +54,8 @@ summary: تعرف على كيفية تهيئة mq لـ Milvus.
   <tbody>
     <tr>
       <td>
-        <li>القيمة الافتراضية: "افتراضي"</li>      
-        <li>قيم صالحة: [افتراضي، نابلس، كافكا، روكسمك، ناتسمك]</li>      </td>
+        <li>القيمة الافتراضية "افتراضي"</li>      
+        <li>قيم صالحة: [افتراضي، بولسار، كافكا، روكسمك، ناتسمك]</li>      </td>
       <td>افتراضي</td>
     </tr>
   </tbody>

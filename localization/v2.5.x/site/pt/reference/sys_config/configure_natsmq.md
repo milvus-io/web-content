@@ -4,7 +4,10 @@ related_key: configure
 group: system_configuration.md
 summary: Saiba como configurar o natsmq para o Milvus.
 ---
-<h1 id="natsmq-related-Configurations" class="common-anchor-header">Configurações relacionadas com o natsmq<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
+<blockquote>
+<p><strong>Preterido</strong>: NATS (natsmq) está obsoleto e será removido no Milvus v2.6. Por favor, use RocksMQ, Pulsar, ou Kafka em seu lugar.</p>
+</blockquote>
+<h1 id="natsmq-related-Configurations" class="common-anchor-header">Configurações relacionadas ao natsmq<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +23,7 @@ summary: Saiba como configurar o natsmq para o Milvus.
         ></path>
       </svg>
     </button></h1><p>configuração do natsmq.</p>
-<p>mais pormenores: https://docs.nats.io/running-a-nats-service/configuration</p>
+<p>mais detalhes: https://docs.nats.io/running-a-nats-service/configuration</p>
 <h2 id="natsmqserverport" class="common-anchor-header"><code translate="no">natsmq.server.port</code><button data-href="#natsmqserverport" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +43,7 @@ summary: Saiba como configurar o natsmq para o Milvus.
   <thead>
     <tr>
       <th class="width80">Descrição</th>
-      <th class="width20">Valor por defeito</th> 
+      <th class="width20">Valor predefinido</th> 
     </tr>
   </thead>
   <tbody>
@@ -74,7 +77,7 @@ summary: Saiba como configurar o natsmq para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Diretório a utilizar para o armazenamento de nats do JetStream      </td>
+      <td>        Diretório a utilizar para o armazenamento de nats no JetStream      </td>
       <td>/var/lib/milvus/nats</td>
     </tr>
   </tbody>

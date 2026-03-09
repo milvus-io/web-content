@@ -65,12 +65,27 @@ title: 使用 Milvus Operator 配置 Milvus
 <ul>
 <li><code translate="no">image</code>:使用的 Milvus docker 映像檔。</li>
 <li><code translate="no">resources</code>:分配給每個元件的計算資源。</li>
-<li><code translate="no">tolerations</code> 以及 : K8s 集群中每個 Milvus 元件的排程規則。更多資訊請參閱<code translate="no">nodeSelector</code><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">容忍度</a>和<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">nodeSelector</a>。</li>
+<li><code translate="no">tolerations</code> 以及<code translate="no">nodeSelector</code>: K8s 集群中每個 Milvus 元件的排程規則。更多資訊請參閱<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">容忍度</a>和<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">nodeSelector</a>。</li>
 <li><code translate="no">env</code>:環境變數。</li>
 </ul>
 <p>如果您想要設定更多欄位，請參閱<a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">這裡的</a>說明文件。</p>
 <p>要設定 Milvus 叢集的全局資源，請建立<code translate="no">milvuscluster_resource.yaml</code> 檔案。</p>
-<h3 id="Example" class="common-anchor-header">範例</h3><p>以下範例設定 Milvus 叢集的全局資源。</p>
+<h3 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下範例設定 Milvus 叢集的全局資源。</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -159,7 +174,6 @@ title: 使用 Milvus Operator 配置 Milvus
             <li><a href="/docs/zh-hant/configure_indexcoord.md">索引坐標</a></li>
             <li><a href="/docs/zh-hant/configure_metastore.md">元存儲</a></li>
             <li><a href="/docs/zh-hant/configure_mq.md">訊息佇列</a></li>
-            <li><a href="/docs/zh-hant/configure_natsmq.md">訊息佇列</a></li>
             <li><a href="/docs/zh-hant/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/zh-hant/configure_trace.md">追蹤</a></li>
             <li><a href="/docs/zh-hant/configure_quotaandlimits.md">配額與限制</a></li>
@@ -264,7 +278,22 @@ title: 使用 Milvus Operator 配置 Milvus
 </tbody>
 </table>
 </div>
-<h3 id="Example" class="common-anchor-header">範例</h3><p>以下範例在<code translate="no">milvuscluster.yaml</code> 檔案中設定 proxy 和 datanode 的複本和運算資源。</p>
+<h3 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下範例在<code translate="no">milvuscluster.yaml</code> 檔案中設定 proxy 和 datanode 的複本和運算資源。</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

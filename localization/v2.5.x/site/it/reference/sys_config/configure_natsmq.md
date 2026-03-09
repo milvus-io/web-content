@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: Imparare a configurare natsmq per Milvus.
 ---
+<blockquote>
+<p><strong>Deprecato</strong>: NATS (natsmq) è deprecato e sarà rimosso con Milvus v2.6. Utilizzare invece RocksMQ, Pulsar o Kafka.</p>
+</blockquote>
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">Configurazioni relative a natsmq<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +23,7 @@ summary: Imparare a configurare natsmq per Milvus.
         ></path>
       </svg>
     </button></h1><p>configurazione di natsmq.</p>
-<p>maggiori dettagli: https://docs.nats.io/running-a-nats-service/configuration</p>
+<p>Maggiori dettagli: https://docs.nats.io/running-a-nats-service/configuration</p>
 <h2 id="natsmqserverport" class="common-anchor-header"><code translate="no">natsmq.server.port</code><button data-href="#natsmqserverport" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -364,7 +367,7 @@ summary: Imparare a configurare natsmq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Età massima di un messaggio nel canale P </td>
+      <td>        Età massima di qualsiasi messaggio nel canale P </td>
       <td>4320</td>
     </tr>
   </tbody>

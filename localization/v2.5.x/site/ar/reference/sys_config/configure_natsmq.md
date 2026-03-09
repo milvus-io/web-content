@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: تعرف على كيفية تهيئة natsmq لميلفوس.
 ---
+<blockquote>
+<p><strong>تم إهمالها</strong>: تم إهمال NATS (natsmq) وستتم إزالته في الإصدار 2.6 من Milvus. يرجى استخدام RocksMQ أو Pulsar أو Kafka بدلاً من ذلك.</p>
+</blockquote>
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">التكوينات المتعلقة بـ natsmq<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -161,7 +164,7 @@ summary: تعرف على كيفية تهيئة natsmq لميلفوس.
   </thead>
   <tbody>
     <tr>
-      <td>        الحد الأقصى لعدد البايتات المخزنة مؤقتاً للاتصال ينطبق على اتصالات العميل      </td>
+      <td>        الحد الأقصى لعدد وحدات البايت المخزنة مؤقتاً للاتصال ينطبق على اتصالات العميل      </td>
       <td>67108864</td>
     </tr>
   </tbody>

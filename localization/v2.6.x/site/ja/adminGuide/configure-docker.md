@@ -97,7 +97,6 @@ title: Docker ComposeでMilvusを設定する
             <li><a href="/docs/ja/configure_indexcoord.md">インデックス・コーダ</a></li>
             <li><a href="/docs/ja/configure_metastore.md">メタストア</a></li>
             <li><a href="/docs/ja/configure_mq.md">メッセージキュー</a></li>
-            <li><a href="/docs/ja/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ja/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ja/configure_trace.md">トレース</a></li>
             <li><a href="/docs/ja/configure_quotaandlimits.md">クォータと制限</a></li>

@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: 'Узнайте, как настроить mq для Milvus.'
 ---
+<blockquote>
+<p><strong>Утратил актуальность</strong>: NATS (natsmq) устарел и будет удален в Milvus v2.6. Вместо него используйте RocksMQ, Pulsar или Kafka.</p>
+</blockquote>
 <h1 id="mq-related-Configurations" class="common-anchor-header">Конфигурации, связанные с mq<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

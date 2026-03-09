@@ -97,10 +97,9 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
             <li><a href="/docs/it/configure_indexcoord.md">Indice coord</a></li>
             <li><a href="/docs/it/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/it/configure_mq.md">Coda di messaggi</a></li>
-            <li><a href="/docs/it/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/it/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/it/configure_trace.md">Traccia</a></li>
-            <li><a href="/docs/it/configure_quotaandlimits.md">Quote e limiti</a></li>
+            <li><a href="/docs/it/configure_quotaandlimits.md">Quota e limiti</a></li>
         </ul>
     </td>
   </tr>

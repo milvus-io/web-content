@@ -97,7 +97,6 @@ title: تكوين Milvus باستخدام Docker Compose
             <li><a href="/docs/ar/configure_indexcoord.md">تنسيق الفهرس</a></li>
             <li><a href="/docs/ar/configure_metastore.md">مخزن الميتاستور</a></li>
             <li><a href="/docs/ar/configure_mq.md">قائمة انتظار الرسائل</a></li>
-            <li><a href="/docs/ar/configure_natsmq.md">ناتسمك</a></li>
             <li><a href="/docs/ar/configure_tikv.md">تيكف</a></li>
             <li><a href="/docs/ar/configure_trace.md">التتبع</a></li>
             <li><a href="/docs/ar/configure_quotaandlimits.md">الحصة والحدود</a></li>

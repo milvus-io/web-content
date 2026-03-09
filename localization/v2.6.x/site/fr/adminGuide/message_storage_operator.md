@@ -41,14 +41,14 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Le tableau ci-dessous indique si RocksMQ, NATS, Pulsar et Kafka sont pris en charge dans Milvus en mode autonome et en mode cluster.</p>
+    </button></h2><p>Le tableau ci-dessous indique si RocksMQ, Pulsar, Kafka et Woodpecker sont pris en charge dans Milvus en mode autonome et en mode cluster.</p>
 <table>
 <thead>
-<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">NATS</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th></tr>
+<tr><th style="text-align:center"></th><th style="text-align:center">RocksMQ</th><th style="text-align:center">Pulsar</th><th style="text-align:center">Kafka</th><th style="text-align:center">Woodpecker</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:center">Mode autonome</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
-<tr><td style="text-align:center">Mode cluster</td><td style="text-align:center">✖️</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
+<tr><td style="text-align:center">Mode cluster</td><td style="text-align:center">✖️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td><td style="text-align:center">✔️</td></tr>
 </tbody>
 </table>
 <p>Il existe également d'autres limitations pour la spécification du stockage des messages :</p>
@@ -56,10 +56,9 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 <li>Un seul stockage de messages pour une instance Milvus est pris en charge. Cependant, il existe toujours une compatibilité ascendante avec les stockages de messages multiples définis pour une instance. La priorité est la suivante<ul>
 <li>mode autonome :  RocksMQ (par défaut) &gt; Pulsar &gt; Kafka</li>
 <li>mode cluster : Pulsar (par défaut) &gt; Kafka</li>
-<li>Les nats introduits dans la version 2.3 ne participent pas à ces règles de priorité pour des raisons de compatibilité ascendante.</li>
 </ul></li>
 <li>Le stockage des messages ne peut pas être modifié lorsque le système Milvus est en cours d'exécution.</li>
-<li>Seule la version 2.x ou 3.x de Kafka est prise en charge.</li>
+<li>Seule la version Kafka 2.x ou 3.x est prise en charge.</li>
 <li><strong>Limitations de la mise à niveau</strong>: <strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.11, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurer RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
@@ -113,7 +112,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 <li><code translate="no">storageClassName</code>: La classe de stockage de votre cluster</li>
 <li><code translate="no">storage</code>: Taille du volume persistant</li>
 </ul>
-<h2 id="Configure-NATS" class="common-anchor-header">Configurer le NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-Woodpecker" class="common-anchor-header">Configurer Woodpecker<button data-href="#Configure-Woodpecker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,67 +127,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS est une alternative de stockage de messages pour NATS.</p>
-<h4 id="Example" class="common-anchor-header">Exemple de configuration</h4><p>L'exemple suivant configure un service NATS.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
-<span class="hljs-attr">metadata:</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
-<span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">dependencies:</span> 
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">&#x27;natsmq&#x27;</span>
-    <span class="hljs-attr">natsmq:</span>
-      <span class="hljs-comment"># server side configuration for natsmq.</span>
-      <span class="hljs-attr">server:</span> 
-        <span class="hljs-comment"># 4222 by default, Port for nats server listening.</span>
-        <span class="hljs-attr">port:</span> <span class="hljs-number">4222</span> 
-        <span class="hljs-comment"># /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.</span>
-        <span class="hljs-attr">storeDir:</span> <span class="hljs-string">/var/lib/milvus/nats</span> 
-        <span class="hljs-comment"># (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.</span>
-        <span class="hljs-attr">maxFileStore:</span> <span class="hljs-number">17179869184</span> 
-        <span class="hljs-comment"># (B) 8MB by default, Maximum number of bytes in a message payload.</span>
-        <span class="hljs-attr">maxPayload:</span> <span class="hljs-number">8388608</span> 
-        <span class="hljs-comment"># (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.</span>
-        <span class="hljs-attr">maxPending:</span> <span class="hljs-number">67108864</span> 
-        <span class="hljs-comment"># (√ms) 4s by default, waiting for initialization of natsmq finished.</span>
-        <span class="hljs-attr">initializeTimeout:</span> <span class="hljs-number">4000</span> 
-        <span class="hljs-attr">monitor:</span>
-          <span class="hljs-comment"># false by default, If true enable debug log messages.</span>
-          <span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span> 
-          <span class="hljs-comment"># true by default, If set to false, log without timestamps.</span>
-          <span class="hljs-attr">logTime:</span> <span class="hljs-literal">true</span> 
-          <span class="hljs-comment"># no log file by default, Log file path relative to.. .</span>
-          <span class="hljs-attr">logFile:</span> 
-          <span class="hljs-comment"># (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.</span>
-          <span class="hljs-attr">logSizeLimit:</span> <span class="hljs-number">0</span> 
-        <span class="hljs-attr">retention:</span>
-          <span class="hljs-comment"># (min) 3 days by default, Maximum age of any message in the P-channel.</span>
-          <span class="hljs-attr">maxAge:</span> <span class="hljs-number">4320</span> 
-          <span class="hljs-comment"># (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.</span>
-          <span class="hljs-attr">maxBytes:</span>
-          <span class="hljs-comment"># None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    </span>
-          <span class="hljs-attr">maxMsgs:</span> 
-  <span class="hljs-attr">components:</span> {}
-  <span class="hljs-attr">config:</span> {}
-<button class="copy-code-btn"></button></code></pre>
-<p>Pour migrer le stockage de messages de RocksMQ vers NATS, procédez comme suit :</p>
-<ol>
-<li><p>Arrêtez toutes les opérations DDL.</p></li>
-<li><p>Appeler l'API FlushAll et arrêter Milvus une fois que l'appel API a fini de s'exécuter.</p></li>
-<li><p>Remplacer <code translate="no">msgStreamType</code> par <code translate="no">natsmq</code> et apporter les modifications nécessaires aux paramètres NATS dans <code translate="no">spec.dependencies.natsmq</code>.</p></li>
-<li><p>Redémarrer Milvus et vérifier si :</p>
-<ul>
-<li>Une entrée de journal indiquant <code translate="no">mqType=natsmq</code> est présente dans les journaux.</li>
-<li>Un répertoire nommé <code translate="no">jetstream</code> est présent dans le répertoire spécifié dans <code translate="no">spec.dependencies.natsmq.server.storeDir</code>.</li>
-</ul></li>
-<li><p>(Facultatif) Sauvegarder et nettoyer les fichiers de données dans le répertoire de stockage RocksMQ.</p></li>
-</ol>
-<div class="alert note">
-<p><strong>Choisir entre RocksMQ et NATS ?</strong></p>
-<p>RockMQ utilise CGO pour interagir avec RocksDB et gère lui-même la mémoire, tandis que le NATS purement Go intégré dans l'installation Milvus délègue la gestion de la mémoire au garbage collector (GC) de Go.</p>
-<p>Dans le scénario où le paquet de données est inférieur à 64 kb, RocksDB est plus performant en termes d'utilisation de la mémoire, d'utilisation de l'unité centrale et de temps de réponse. En revanche, si le paquet de données est supérieur à 64 kb, NATS excelle en termes de temps de réponse avec une mémoire suffisante et une planification idéale du GC.</p>
-<p>Pour l'instant, il est conseillé de n'utiliser le NATS que pour des expériences.</p>
-</div>
+    </button></h2><p>Woodpecker est un journal en avance sur l'écriture (WAL) conçu pour le stockage d'objets. Il offre un débit élevé, une faible surcharge opérationnelle et une évolutivité transparente. Pour plus de détails, voir <a href="/docs/fr/use-woodpecker.md">Utiliser Woodpecker</a>.</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Configurer Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -204,7 +143,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pulsar gère les journaux des modifications récentes, produit des journaux de flux et fournit des abonnements aux journaux. La configuration de Pulsar pour le stockage des messages est prise en charge à la fois dans Milvus standalone et Milvus cluster. Toutefois, avec Milvus Operator, vous ne pouvez configurer Pulsar comme stockage de messages que pour Milvus cluster. Ajouter les champs obligatoires sous <code translate="no">spec.dependencies.pulsar</code> pour configurer Pulsar.</p>
+    </button></h2><p>Pulsar gère les journaux des modifications récentes, produit des journaux de flux et fournit des abonnements aux journaux. La configuration de Pulsar pour le stockage des messages est prise en charge dans Milvus standalone et Milvus cluster. Toutefois, avec Milvus Operator, vous ne pouvez configurer Pulsar comme stockage de messages que pour Milvus cluster. Ajouter les champs obligatoires sous <code translate="no">spec.dependencies.pulsar</code> pour configurer Pulsar.</p>
 <p><code translate="no">pulsar</code> prend en charge <code translate="no">external</code> et <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar externe<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -424,7 +363,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Découvrez comment configurer d'autres dépendances Milvus avec Milvus Operator :</p>
+    </button></h2><p>Apprenez à configurer d'autres dépendances Milvus avec Milvus Operator :</p>
 <ul>
 <li><a href="/docs/fr/object_storage_operator.md">Configurer le stockage d'objets avec Milvus Operator</a></li>
 <li><a href="/docs/fr/meta_storage_operator.md">Configurer le méta stockage avec Milvus Operator</a></li>

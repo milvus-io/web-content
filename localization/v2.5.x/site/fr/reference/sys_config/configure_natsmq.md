@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: Découvrez comment configurer natsmq pour Milvus.
 ---
+<blockquote>
+<p><strong>Déclassé</strong>: NATS (natsmq) est obsolète et sera supprimé dans Milvus v2.6. Veuillez utiliser RocksMQ, Pulsar ou Kafka à la place.</p>
+</blockquote>
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">Configurations liées à natsmq<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +23,7 @@ summary: Découvrez comment configurer natsmq pour Milvus.
         ></path>
       </svg>
     </button></h1><p>Configuration de natsmq.</p>
-<p>Plus d'informations : https://docs.nats.io/running-a-nats-service/configuration</p>
+<p>Plus de détails : https://docs.nats.io/running-a-nats-service/configuration</p>
 <h2 id="natsmqserverport" class="common-anchor-header"><code translate="no">natsmq.server.port</code><button data-href="#natsmqserverport" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

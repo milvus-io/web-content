@@ -97,9 +97,8 @@ Pada rilis saat ini, semua parameter hanya berlaku setelah Milvus dimulai ulang.
             <li><a href="/docs/id/configure_indexcoord.md">Kode indeks</a></li>
             <li><a href="/docs/id/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/id/configure_mq.md">Antrian Pesan</a></li>
-            <li><a href="/docs/id/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/id/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/id/configure_trace.md">Lacak</a></li>
+            <li><a href="/docs/id/configure_trace.md">Jejak</a></li>
             <li><a href="/docs/id/configure_quotaandlimits.md">Kuota dan Batas</a></li>
         </ul>
     </td>

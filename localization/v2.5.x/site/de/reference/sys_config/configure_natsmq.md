@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: 'Erfahren Sie, wie Sie natsmq für Milvus konfigurieren.'
 ---
+<blockquote>
+<p><strong>Veraltet</strong>: NATS (natsmq) ist veraltet und wird in Milvus v2.6 entfernt werden. Bitte verwenden Sie stattdessen RocksMQ, Pulsar oder Kafka.</p>
+</blockquote>
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">natsmq-bezogene Konfigurationen<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +23,7 @@ summary: 'Erfahren Sie, wie Sie natsmq für Milvus konfigurieren.'
         ></path>
       </svg>
     </button></h1><p>natsmq-Konfiguration.</p>
-<p>mehr dazu: https://docs.nats.io/running-a-nats-service/configuration</p>
+<p>mehr Details: https://docs.nats.io/running-a-nats-service/configuration</p>
 <h2 id="natsmqserverport" class="common-anchor-header"><code translate="no">natsmq.server.port</code><button data-href="#natsmqserverport" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -74,7 +77,7 @@ summary: 'Erfahren Sie, wie Sie natsmq für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Verzeichnis, das für die JetStream-Speicherung von nats verwendet wird    </td>
+      <td>        Zu verwendendes Verzeichnis für die JetStream-Speicherung von nats    </td>
       <td>/var/lib/milvus/nats</td>
     </tr>
   </tbody>

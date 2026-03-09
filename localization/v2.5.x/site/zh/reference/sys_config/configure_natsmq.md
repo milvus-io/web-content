@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: 了解如何为 Milvus 配置 natsmq。
 ---
+<blockquote>
+<p><strong>已废弃</strong>：NATS (natsmq) 已被弃用，并将在 Milvus v2.6 中移除。请使用 RocksMQ、Pulsar 或 Kafka 代替。</p>
+</blockquote>
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">natsmq 相关配置<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -20,7 +23,7 @@ summary: 了解如何为 Milvus 配置 natsmq。
         ></path>
       </svg>
     </button></h1><p>natsmq 配置。</p>
-<p>更多详情： https://docs.nats.io/running-a-nats-service/configuration</p>
+<p>更多详情：https://docs.nats.io/running-a-nats-service/configuration</p>
 <h2 id="natsmqserverport" class="common-anchor-header"><code translate="no">natsmq.server.port</code><button data-href="#natsmqserverport" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

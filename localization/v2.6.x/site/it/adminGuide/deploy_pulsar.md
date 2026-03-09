@@ -294,69 +294,7 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>La modifica dell'archivio messaggi non è consigliata. Se si desidera farlo, interrompere tutte le operazioni DDL, quindi richiamare l'API FlushAll per eseguire il flush di tutte le collezioni e infine arrestare Milvus alla fine, prima di cambiare effettivamente l'archivio dei messaggi.</p>
-</div>
-<h2 id="Configure-NATS-with-Helm" class="common-anchor-header">Configurare NATS con Helm<button data-href="#Configure-NATS-with-Helm" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>NATS è un archivio di messaggi sperimentale alternativo a RocksMQ. Per informazioni dettagliate su come configurare Milvus con Helm, consultare <a href="/docs/it/configure-helm.md">Configurare Milvus con i grafici di Helm</a>. Per i dettagli sulle voci di configurazione relative a RocksMQ, fate riferimento a <a href="/docs/it/configure_natsmq.md">Configurazioni relative a NATS</a>.</p>
-<ul>
-<li><p>Se si avvia Milvus con NATS e si vogliono modificare le sue impostazioni, si può eseguire <code translate="no">helm upgrade -f</code> con le impostazioni modificate nel seguente file YAML.</p></li>
-<li><p>Se avete installato Milvus standalone con un message store diverso da NATS e volete cambiarlo con NATS, eseguite <code translate="no">helm upgrade -f</code> con il seguente file YAML dopo aver scaricato tutte le collezioni e fermato Milvus.</p></li>
-</ul>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
-  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
-    mq:
-      type: natsmq
-    natsmq:
-      # server side configuration for natsmq.
-      server: 
-        # 4222 by default, Port for nats server listening.
-        port: 4222 
-        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
-        storeDir: /var/lib/milvus/nats 
-        # (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.
-        maxFileStore: 17179869184 
-        # (B) 8MB by default, Maximum number of bytes in a message payload.
-        maxPayload: 8388608 
-        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
-        maxPending: 67108864 
-        # (√ms) 4s by default, waiting for initialization of natsmq finished.
-        initializeTimeout: 4000 
-        monitor:
-          # false by default, If true enable debug log messages.
-          debug: false 
-          # true by default, If set to false, log without timestamps.
-          logTime: true 
-          # no log file by default, Log file path relative to.. .
-          logFile: 
-          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
-          logSizeLimit: 0 
-        retention:
-          # (min) 3 days by default, Maximum age of any message in the P-channel.
-          maxAge: 4320 
-          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
-          maxBytes:
-          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
-          maxMsgs: 
-</span><button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p><strong>Scegliere tra RocksMQ e NATS?</strong></p>
-<p>RockMQ usa CGO per interagire con RocksDB e gestisce la memoria da solo, mentre il NATS puro di Go incorporato nell'installazione di Milvus delega la gestione della memoria al garbage collector (GC) di Go.</p>
-<p>Nello scenario in cui il pacchetto di dati è più piccolo di 64 kb, RocksDB ha prestazioni migliori in termini di utilizzo della memoria, della CPU e del tempo di risposta. D'altra parte, se il pacchetto di dati è superiore a 64 kb, NATS eccelle in termini di tempo di risposta con una memoria sufficiente e una pianificazione GC ideale.</p>
-<p>Attualmente, si consiglia di utilizzare NATS solo per esperimenti.</p>
+<p>La modifica dell'archivio messaggi non è consigliata. Se si desidera farlo, interrompere tutte le operazioni DDL, quindi chiamare l'API FlushAll per eseguire il flush di tutte le collezioni e infine arrestare Milvus prima di cambiare effettivamente l'archivio dei messaggi.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Il prossimo passo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -373,8 +311,8 @@ summary: Imparate a configurare l'archiviazione dei messaggi con Docker Compose 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Scoprite come configurare le altre dipendenze di Milvus con Docker Compose o Helm:</p>
+    </button></h2><p>Scoprite come configurare altre dipendenze di Milvus con Docker Compose o Helm:</p>
 <ul>
-<li><a href="/docs/it/deploy_s3.md">Configurazione dell'archiviazione degli oggetti con Docker Compose o Helm</a></li>
-<li><a href="/docs/it/deploy_etcd.md">Configurazione del Meta Storage con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_s3.md">Configurazione dell'archiviazione a oggetti con Docker Compose o Helm</a></li>
+<li><a href="/docs/it/deploy_etcd.md">Configurare il Meta Storage con Docker Compose o Helm</a></li>
 </ul>

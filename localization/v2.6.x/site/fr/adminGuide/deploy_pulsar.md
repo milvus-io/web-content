@@ -298,68 +298,6 @@ summary: >-
 <div class="alert warning">
 <p>Il n'est pas recommandé de changer de magasin de messages. Si vous souhaitez le faire, arrêtez toutes les opérations DDL, puis appelez l'API FlushAll pour vider toutes les collections, et enfin arrêtez Milvus à la fin avant de modifier le magasin de messages.</p>
 </div>
-<h2 id="Configure-NATS-with-Helm" class="common-anchor-header">Configurer NATS avec Helm<button data-href="#Configure-NATS-with-Helm" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>NATS est un magasin de messages expérimental qui remplace RocksMQ. Pour des étapes détaillées sur la configuration de Milvus avec Helm, voir <a href="/docs/fr/configure-helm.md">Configurer Milvus avec Helm Charts</a>. Pour plus de détails sur les éléments de configuration liés à RocksMQ, reportez-vous aux <a href="/docs/fr/configure_natsmq.md">configurations liées à NATS</a>.</p>
-<ul>
-<li><p>Si vous démarrez Milvus avec NATS et que vous souhaitez modifier ses paramètres, vous pouvez exécuter <code translate="no">helm upgrade -f</code> avec les paramètres modifiés dans le fichier YAML suivant.</p></li>
-<li><p>Si vous avez installé Milvus en mode autonome avec un magasin de messages autre que NATS et que vous souhaitez le remplacer par NATS, exécutez <code translate="no">helm upgrade -f</code> avec le fichier YAML suivant après avoir nettoyé toutes les collections et arrêté Milvus.</p></li>
-</ul>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
-  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
-    mq:
-      type: natsmq
-    natsmq:
-      # server side configuration for natsmq.
-      server: 
-        # 4222 by default, Port for nats server listening.
-        port: 4222 
-        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
-        storeDir: /var/lib/milvus/nats 
-        # (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.
-        maxFileStore: 17179869184 
-        # (B) 8MB by default, Maximum number of bytes in a message payload.
-        maxPayload: 8388608 
-        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
-        maxPending: 67108864 
-        # (√ms) 4s by default, waiting for initialization of natsmq finished.
-        initializeTimeout: 4000 
-        monitor:
-          # false by default, If true enable debug log messages.
-          debug: false 
-          # true by default, If set to false, log without timestamps.
-          logTime: true 
-          # no log file by default, Log file path relative to.. .
-          logFile: 
-          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
-          logSizeLimit: 0 
-        retention:
-          # (min) 3 days by default, Maximum age of any message in the P-channel.
-          maxAge: 4320 
-          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
-          maxBytes:
-          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
-          maxMsgs: 
-</span><button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p><strong>Choisir entre RocksMQ et NATS ?</strong></p>
-<p>RockMQ utilise CGO pour interagir avec RocksDB et gère lui-même la mémoire, tandis que le NATS purement Go intégré dans l'installation de Milvus délègue la gestion de la mémoire au garbage collector (GC) de Go.</p>
-<p>Dans le scénario où le paquet de données est inférieur à 64 kb, RocksDB est plus performant en termes d'utilisation de la mémoire, d'utilisation de l'unité centrale et de temps de réponse. En revanche, si le paquet de données est supérieur à 64 kb, NATS excelle en termes de temps de réponse avec une mémoire suffisante et une planification idéale du GC.</p>
-<p>Pour l'instant, il est conseillé de n'utiliser les NATS qu'à des fins expérimentales.</p>
-</div>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

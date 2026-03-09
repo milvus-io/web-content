@@ -3,7 +3,7 @@ id: deploy_pulsar.md
 title: Configurar o armazenamento de mensagens com Docker Compose ou Helm
 related_key: 'Pulsar, storage'
 summary: >-
-  Saiba como configurar o armazenamento de mensagens com o Docker Compose ou
+  Saiba como configurar o armazenamento de mensagens com o Docker Compose ou o
   Helm.
 ---
 <h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configurar o armazenamento de mensagens com Docker Compose ou Helm<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>O Milvus usa Pulsar ou Kafka para gerenciar logs de mudanças recentes, gerar logs de fluxo e fornecer assinaturas de log. O Pulsar é o sistema de armazenamento de mensagens padrão. Este tópico apresenta como configurar o armazenamento de mensagens com o Docker Compose ou Helm.</p>
-<p>É possível configurar o Pulsar com o <a href="https://docs.docker.com/get-started/overview/">Docker Com</a> pose ou no K8s e configurar o Kafka no K8s.</p>
+<p>É possível configurar o Pulsar com o <a href="https://docs.docker.com/get-started/overview/">Docker Compose</a> ou no K8s e configurar o Kafka no K8s.</p>
 <div class="alert note">
 <p><strong>Limitações da fila de mensagens</strong>: Ao atualizar para o Milvus v2.6.11, você deve manter sua escolha atual de fila de mensagens. Não é possível alternar entre diferentes sistemas de filas de mensagens durante a atualização. O suporte para alterar os sistemas de filas de mensagens estará disponível em versões futuras.</p>
 </div>
@@ -81,7 +81,7 @@ summary: >-
     </button></h3><p>Execute o seguinte comando para iniciar o Milvus que usa as configurações do Pulsar.</p>
 <pre><code translate="no"><span class="hljs-attribute">docker</span> compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">As configurações só têm efeito depois que o Milvus é iniciado. Consulte <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Iniciar o Milvus</a> para obter mais informações.</div>
+<div class="alert note">As configurações só têm efeito após o início do Milvus. Consulte <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Iniciar o Milvus</a> para obter mais informações.</div>
 <h2 id="Configure-Pulsar-with-Helm" class="common-anchor-header">Configurar o Pulsar com o Helm<button data-href="#Configure-Pulsar-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -255,7 +255,7 @@ summary: >-
       securityProtocol: SASL_SSL    
 </span><button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Após configurar as seções anteriores e salvar o arquivo <code translate="no">values.yaml</code>, execute o seguinte comando para instalar o Milvus que usa as configurações do Kafka.</li>
+<li>Depois de configurar as seções anteriores e salvar o arquivo <code translate="no">values.yaml</code>, execute o seguinte comando para instalar o Milvus que usa as configurações do Kafka.</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -277,7 +277,7 @@ summary: >-
     </button></h2><p>O Milvus standalone usa o RocksMQ como armazenamento de mensagens padrão. Para obter etapas detalhadas sobre como configurar o Milvus com o Helm, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com gráficos do Helm</a>. Para obter detalhes sobre os itens de configuração relacionados ao RocksMQ, consulte <a href="/docs/pt/configure_rocksmq.md">Configurações relacionadas ao RocksMQ</a>.</p>
 <ul>
 <li><p>Se você iniciar o Milvus com o RocksMQ e quiser alterar suas configurações, poderá executar <code translate="no">helm upgrade -f</code> com as configurações alteradas no seguinte arquivo YAML.</p></li>
-<li><p>Se tiver instalado o Milvus standalone usando o Helm com um armazenamento de mensagens diferente do RocksMQ e quiser alterá-lo de volta para o RocksMQ, execute <code translate="no">helm upgrade -f</code> com o seguinte arquivo YAML depois de ter liberado todas as coleções e parado o Milvus.</p></li>
+<li><p>Se você instalou o Milvus standalone usando o Helm com um armazenamento de mensagens diferente do RocksMQ e deseja alterá-lo de volta para o RocksMQ, execute <code translate="no">helm upgrade -f</code> com o seguinte arquivo YAML depois de ter liberado todas as coleções e parado o Milvus.</p></li>
 </ul>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
   <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
@@ -296,69 +296,7 @@ summary: >-
       compressionTypes: [0, 0, 7, 7, 7]    
 </span><button class="copy-code-btn"></button></code></pre>
 <div class="alert warning">
-<p>Não é recomendável alterar o armazenamento de mensagens. Se quiser fazer isso, interrompa todas as operações DDL e, em seguida, chame a API FlushAll para liberar todas as coleções e, finalmente, interrompa o Milvus no final, antes de realmente alterar o armazenamento de mensagens.</p>
-</div>
-<h2 id="Configure-NATS-with-Helm" class="common-anchor-header">Configurar o NATS com o Helm<button data-href="#Configure-NATS-with-Helm" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>O NATS é um armazenamento de mensagens experimental alternativo ao RocksMQ. Para obter etapas detalhadas sobre como configurar o Milvus com o Helm, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com Helm Charts</a>. Para obter detalhes sobre os itens de configuração relacionados ao RocksMQ, consulte <a href="/docs/pt/configure_natsmq.md">Configurações relacionadas ao NATS</a>.</p>
-<ul>
-<li><p>Se você iniciar o Milvus com NATS e quiser alterar suas configurações, poderá executar <code translate="no">helm upgrade -f</code> com as configurações alteradas no seguinte arquivo YAML.</p></li>
-<li><p>Se tiver instalado o Milvus standalone com um armazenamento de mensagens diferente do NATS e pretender alterá-lo para o NATS, execute <code translate="no">helm upgrade -f</code> com o seguinte ficheiro YAML depois de ter descarregado todas as colecções e parado o Milvus.</p></li>
-</ul>
-<pre><code translate="no" class="language-yaml"><span class="hljs-attr">extraConfigFiles:</span>
-  <span class="hljs-attr">user.yaml:</span> <span class="hljs-string">|+
-    mq:
-      type: natsmq
-    natsmq:
-      # server side configuration for natsmq.
-      server: 
-        # 4222 by default, Port for nats server listening.
-        port: 4222 
-        # /var/lib/milvus/nats by default, directory to use for JetStream storage of nats.
-        storeDir: /var/lib/milvus/nats 
-        # (B) 16GB by default, Maximum size of the &#x27;file&#x27; storage.
-        maxFileStore: 17179869184 
-        # (B) 8MB by default, Maximum number of bytes in a message payload.
-        maxPayload: 8388608 
-        # (B) 64MB by default, Maximum number of bytes buffered for a connection applies to client connections.
-        maxPending: 67108864 
-        # (√ms) 4s by default, waiting for initialization of natsmq finished.
-        initializeTimeout: 4000 
-        monitor:
-          # false by default, If true enable debug log messages.
-          debug: false 
-          # true by default, If set to false, log without timestamps.
-          logTime: true 
-          # no log file by default, Log file path relative to.. .
-          logFile: 
-          # (B) 0, unlimited by default, Size in bytes after the log file rolls over to a new one.
-          logSizeLimit: 0 
-        retention:
-          # (min) 3 days by default, Maximum age of any message in the P-channel.
-          maxAge: 4320 
-          # (B) None by default, How many bytes the single P-channel may contain. Removing oldest messages if the P-channel exceeds this size.
-          maxBytes:
-          # None by default, How many message the single P-channel may contain. Removing oldest messages if the P-channel exceeds this limit.    
-          maxMsgs: 
-</span><button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p><strong>Escolher entre RocksMQ e NATS?</strong></p>
-<p>O RockMQ usa o CGO para interagir com o RocksDB e gerencia a memória sozinho, enquanto o NATS puro do Go incorporado na instalação do Milvus delega seu gerenciamento de memória ao coletor de lixo (GC) do Go.</p>
-<p>No cenário em que o pacote de dados é menor que 64 kb, o RocksDB tem um desempenho melhor em termos de uso de memória, uso de CPU e tempo de resposta. Por outro lado, se o pacote de dados for maior que 64 kb, o NATS se sobressai em termos de tempo de resposta com memória suficiente e agendamento ideal do GC.</p>
-<p>Atualmente, aconselha-se a utilização do NATS apenas para experiências.</p>
+<p>Não é recomendável alterar o armazenamento de mensagens. Se quiser fazer isso, interrompa todas as operações DDL e, em seguida, chame a API FlushAll para liberar todas as coleções e, finalmente, interrompa o Milvus no final, antes de alterar o armazenamento de mensagens.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

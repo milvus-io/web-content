@@ -70,7 +70,22 @@ Konfigurasi sumber daya privat akan menimpa konfigurasi sumber daya global. Jika
 </ul>
 <p>Jika Anda ingin mengonfigurasi lebih banyak bidang, lihat dokumentasi <a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">di sini</a>.</p>
 <p>Untuk mengonfigurasi sumber daya global untuk klaster Milvus, buat file <code translate="no">milvuscluster_resource.yaml</code>.</p>
-<h3 id="Example" class="common-anchor-header">Contoh</h3><p>Contoh berikut ini mengonfigurasi sumber daya global untuk cluster Milvus.</p>
+<h3 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Contoh berikut ini mengonfigurasi sumber daya global untuk cluster Milvus.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -115,7 +130,7 @@ Sumber daya cluster akan diperbarui sesuai dengan file konfigurasi jika ada clus
 <p>Bidang umum yang digunakan untuk mengonfigurasi setiap komponen meliputi:</p>
 <ul>
 <li><code translate="no">replica</code>: Jumlah replika setiap komponen.</li>
-<li><code translate="no">port</code>: Nomor port listen dari setiap komponen.</li>
+<li><code translate="no">port</code>: Nomor port dengar dari setiap komponen.</li>
 <li>Empat bidang yang umum digunakan dalam konfigurasi sumber daya global: <code translate="no">image</code> <code translate="no">env</code> , <code translate="no">nodeSelector</code>, <code translate="no">tolerations</code>, <code translate="no">resources</code> (lihat di atas). Untuk bidang yang dapat dikonfigurasi lebih lanjut, klik pada setiap komponen dalam <a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents">dokumentasi ini</a>.</li>
 </ul>
 <div class="alert note">
@@ -159,9 +174,8 @@ Selain itu, ketika mengkonfigurasi proxy, ada bidang tambahan yang disebut `serv
             <li><a href="/docs/id/configure_indexcoord.md">Kode indeks</a></li>
             <li><a href="/docs/id/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/id/configure_mq.md">Antrian Pesan</a></li>
-            <li><a href="/docs/id/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/id/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/id/configure_trace.md">Lacak</a></li>
+            <li><a href="/docs/id/configure_trace.md">Jejak</a></li>
             <li><a href="/docs/id/configure_quotaandlimits.md">Kuota dan Batas</a></li>
         </ul>
     </td>
@@ -264,7 +278,22 @@ Selain itu, ketika mengkonfigurasi proxy, ada bidang tambahan yang disebut `serv
 </tbody>
 </table>
 </div>
-<h3 id="Example" class="common-anchor-header">Contoh</h3><p>Contoh di bawah ini mengonfigurasi replika dan sumber daya komputasi proxy dan datanode dalam berkas <code translate="no">milvuscluster.yaml</code>.</p>
+<h3 id="Example" class="common-anchor-header">Contoh<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Contoh di bawah ini mengonfigurasi replika dan sumber daya komputasi proxy dan datanode dalam berkas <code translate="no">milvuscluster.yaml</code>.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

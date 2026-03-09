@@ -19,12 +19,13 @@ summary: 'Узнайте, как настроить mq для Milvus.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus поддерживает четыре MQ: rocksmq (основанный на RockDB), natsmq (встроенный nats-сервер), Pulsar и Kafka.</p>
+    </button></h1><p>Milvus поддерживает четыре MQ: rocksmq (основанный на RockDB), Pulsar, Kafka и Woodpecker.</p>
 <p>Вы можете изменить свой MQ, задав поле mq.type.</p>
-<p>Если вы не установите поле mq.type по умолчанию, в этом файле есть примечание о включении приоритета, если мы настраиваем несколько mq.</p>
+<p>Если вы не установите поле mq.type по умолчанию, в этом файле есть примечание о включении приоритета при настройке нескольких MQ.</p>
 <ol>
-<li><p>автономный (локальный) режим: rocksmq (по умолчанию) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>кластерный режим:  Pulsar(по умолчанию) &gt; Kafka (rocksmq и natsmq не поддерживаются в кластерном режиме)</p></li>
+<li><p>автономный (локальный) режим: rocksmq (по умолчанию) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>кластерный режим:  Pulsar(по умолчанию) &gt; Kafka (rocksmq не поддерживается в кластерном режиме).</p></li>
+<li><p>Woodpecker можно использовать как в автономном, так и в кластерном режиме, установив в mq.type значение woodpecker.</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +53,7 @@ summary: 'Узнайте, как настроить mq для Milvus.'
     <tr>
       <td>
         <li>Значение по умолчанию: "default"</li>      
-        <li>Допустимые значения: [default, pulsar, kafka, rocksmq, natsmq].</li>      </td>
+        <li>Допустимые значения: [default, pulsar, kafka, rocksmq, woodpecker].</li>      </td>
       <td>по умолчанию</td>
     </tr>
   </tbody>

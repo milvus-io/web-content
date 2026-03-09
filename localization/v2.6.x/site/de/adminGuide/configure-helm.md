@@ -39,10 +39,40 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
         ></path>
       </svg>
     </button></h2><p>Sie können Milvus mit einer Konfigurationsdatei <code translate="no">values.yaml</code> konfigurieren.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">Herunterladen einer Konfigurationsdatei</h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Laden Sie</a> <code translate="no">values.yaml</code> direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">herunter</a>.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">Herunterladen einer Konfigurationsdatei<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">Laden Sie</a> <code translate="no">values.yaml</code> direkt oder mit dem folgenden Befehl<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">herunter</a>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Modify-the-configuration-file" class="common-anchor-header">Ändern Sie die Konfigurationsdatei</h3><p>Konfigurieren Sie Ihre Milvus-Instanz so, dass sie Ihren Anwendungsszenarien entspricht, indem Sie die entsprechenden Parameter in <code translate="no">values.yaml</code> anpassen.</p>
+<h3 id="Modify-the-configuration-file" class="common-anchor-header">Ändern Sie die Konfigurationsdatei<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurieren Sie Ihre Milvus-Instanz so, dass sie Ihren Anwendungsszenarien entspricht, indem Sie die entsprechenden Parameter in <code translate="no">values.yaml</code> anpassen.</p>
 <p>Suchen Sie insbesondere nach <code translate="no">extraConfigFiles</code> in <code translate="no">values.yaml</code> und fügen Sie Ihre Konfigurationen wie folgt in diesen Abschnitt ein:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
@@ -80,7 +110,7 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
     </td>
     <td>
         <ul>
-            <li><a href="/docs/de/configure_rootcoord.md">Root-Koordinate</a></li>
+            <li><a href="/docs/de/configure_rootcoord.md">Wurzel-Koordinate</a></li>
             <li><a href="/docs/de/configure_proxy.md">Proxy</a></li>
             <li><a href="/docs/de/configure_querycoord.md">Abfrage-Koordinate</a></li>
             <li><a href="/docs/de/configure_querynode.md">Abfrageknoten</a></li>
@@ -96,9 +126,8 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_indexcoord.md">Index-Koordinate</a></li>
             <li><a href="/docs/de/configure_metastore.md">Metaspeicher</a></li>
             <li><a href="/docs/de/configure_mq.md">Nachrichten-Warteschlange</a></li>
-            <li><a href="/docs/de/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/de/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/de/configure_trace.md">Trace</a></li>
+            <li><a href="/docs/de/configure_trace.md">Verfolgung</a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md">Quoten und Limits</a></li>
         </ul>
     </td>
@@ -196,7 +225,22 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
 </table>
 </div>
 <p>Weitere Parameter, die speziell für die Kubernetes-Installation gelten, finden Sie unter <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">Milvus Helm Chart Configuration</a>.</p>
-<h3 id="Start-Milvus" class="common-anchor-header">Milvus starten</h3><p>Nachdem Sie die Konfigurationsdatei angepasst haben, können Sie Milvus mit dieser Datei starten.</p>
+<h3 id="Start-Milvus" class="common-anchor-header">Milvus starten<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nachdem Sie die Konfigurationsdatei angepasst haben, können Sie Milvus mit dieser Datei starten.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">Milvus über die Kommandozeile konfigurieren<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
@@ -215,10 +259,40 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
         ></path>
       </svg>
     </button></h2><p>Alternativ können Sie Milvus-Konfigurationen auch direkt mit dem Helm-Befehl aktualisieren.</p>
-<h3 id="Check-the-configurable-parameters" class="common-anchor-header">Überprüfen Sie die konfigurierbaren Parameter</h3><p>Vor dem Upgrade können Sie die konfigurierbaren Parameter mit Helm-Diagrammen überprüfen.</p>
+<h3 id="Check-the-configurable-parameters" class="common-anchor-header">Überprüfen Sie die konfigurierbaren Parameter<button data-href="#Check-the-configurable-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Vor dem Upgrade können Sie die konfigurierbaren Parameter mit Helm-Diagrammen überprüfen.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Start-Milvus" class="common-anchor-header">Starten Sie Milvus</h3><p>Konfigurieren und starten Sie Milvus, indem Sie <code translate="no">--values</code> oder <code translate="no">--set</code> in den Befehl für das Upgrade einfügen.</p>
+<h3 id="Start-Milvus" class="common-anchor-header">Starten Sie Milvus<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Konfigurieren und starten Sie Milvus, indem Sie <code translate="no">--values</code> oder <code translate="no">--set</code> in den Befehl für das Upgrade einfügen.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>

@@ -4,7 +4,10 @@ related_key: configure
 group: system_configuration.md
 summary: 學習如何為 Milvus 設定 mq。
 ---
-<h1 id="mq-related-Configurations" class="common-anchor-header">mq 相關配置<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
+<blockquote>
+<p><strong>已廢棄</strong>：NATS (natsmq) 已經廢棄，並將在 Milvus v2.6 中移除。請改用 RocksMQ、Pulsar 或 Kafka。</p>
+</blockquote>
+<h1 id="mq-related-Configurations" class="common-anchor-header">mq 相關設定<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +22,7 @@ summary: 學習如何為 Milvus 設定 mq。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支援四種 MQ：rocksmq（基於 RockDB）、natsmq（嵌入式 nats-server）、Pulsar 和 Kafka。</p>
+    </button></h1><p>Milvus 支援四種 MQ：rocksmq(基於 RockDB)、natsmq(內嵌 nats-server)、Pulsar 和 Kafka。</p>
 <p>您可以透過設定 mq.type 欄位來變更您的 MQ。</p>
 <p>如果您不將 mq.type 欄位設定為預設值，如果我們在此檔案中設定多個 mq，則會有啟用優先順序的注意事項。</p>
 <ol>

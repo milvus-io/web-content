@@ -19,12 +19,13 @@ summary: Milvus용 mq를 구성하는 방법을 알아보세요.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 rocksmq(RockDB 기반), natsmq(임베디드 nats 서버), Pulsar, Kafka의 네 가지 MQ를 지원합니다.</p>
+    </button></h1><p>밀버스는 락스엠큐(RockDB 기반), 펄서, 카프카, 우드페커의 네 가지 MQ를 지원합니다.</p>
 <p>mq.type 필드를 설정하여 mq를 변경할 수 있습니다.</p>
-<p>mq.type 필드를 기본값으로 설정하지 않은 경우, 이 파일에 여러 개의 mq를 구성하는 경우 우선순위를 활성화하는 것에 대한 참고 사항이 있습니다.</p>
+<p>mq.type 필드를 기본값으로 설정하지 않으면 이 파일에 여러 개의 mq를 구성하는 경우 우선순위를 활성화하는 것에 대한 참고 사항이 있습니다.</p>
 <ol>
-<li><p>독립형(로컬) 모드: rocksmq(기본값) &gt; natsmq &gt; Pulsar &gt; Kafka.</p></li>
-<li><p>클러스터 모드:  Pulsar(기본값) &gt; Kafka(클러스터 모드에서 rocksmq 및 natsmq는 지원되지 않음)</p></li>
+<li><p>독립형(로컬) 모드: rocksmq(기본값) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>클러스터 모드:  Pulsar(기본값) &gt; Kafka(클러스터 모드에서 rocksmq는 지원되지 않음)</p></li>
+<li><p>독립형과 클러스터 모드에서 모두 사용하려면 mq.type을 woodpecker로 설정하면 됩니다.</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +53,7 @@ summary: Milvus용 mq를 구성하는 방법을 알아보세요.
     <tr>
       <td>
         <li>기본값입니다: "default"</li>      
-        <li>유효한 값: [default, pulsar, kafka, rocksmq, natsmq]</li>      </td>
+        <li>유효한 값: [default, pulsar, kafka, rocksmq, 딱따구리]</li>      </td>
       <td>default</td>
     </tr>
   </tbody>

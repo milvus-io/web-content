@@ -96,8 +96,7 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après le re
             <li><a href="/docs/fr/configure_grpc.md">GRPC</a></li>
             <li><a href="/docs/fr/configure_indexcoord.md">Coordonnées de l'index</a></li>
             <li><a href="/docs/fr/configure_metastore.md">Métastore</a></li>
-            <li><a href="/docs/fr/configure_mq.md">File d'attente de messages</a></li>
-            <li><a href="/docs/fr/configure_natsmq.md">Natsmq</a></li>
+            <li><a href="/docs/fr/configure_mq.md">File d'attente des messages</a></li>
             <li><a href="/docs/fr/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/fr/configure_trace.md">Trace</a></li>
             <li><a href="/docs/fr/configure_quotaandlimits.md">Quota et limites</a></li>

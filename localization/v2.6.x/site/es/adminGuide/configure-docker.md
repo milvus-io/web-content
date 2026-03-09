@@ -97,10 +97,9 @@ En la versión actual, todos los parámetros tienen efecto sólo después de rei
             <li><a href="/docs/es/configure_indexcoord.md">Índice de coordenadas</a></li>
             <li><a href="/docs/es/configure_metastore.md">Metastore</a></li>
             <li><a href="/docs/es/configure_mq.md">Cola de mensajes</a></li>
-            <li><a href="/docs/es/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/es/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/es/configure_trace.md">Rastreo</a></li>
-            <li><a href="/docs/es/configure_quotaandlimits.md">Cuotas y límites</a></li>
+            <li><a href="/docs/es/configure_quotaandlimits.md">Cuota y límites</a></li>
         </ul>
     </td>
   </tr>
@@ -111,7 +110,7 @@ En la versión actual, todos los parámetros tienen efecto sólo después de rei
 <table id="purpose">
 <thead>
   <tr>
-    <th>Propósito</th>
+    <th>Finalidad</th>
     <th>Parámetros</th>
   </tr>
 </thead>

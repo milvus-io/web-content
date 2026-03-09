@@ -24,8 +24,9 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>AISAQ adalah indeks vektor berbasis disk yang memperluas <a href="/docs/id/diskann.md">DISKANN</a> untuk menangani set data berskala miliaran tanpa melebihi batas RAM. Tidak seperti DISKANN, yang menyimpan vektor terkompresi dalam memori, AISAQ menyimpan semua data pada disk-menawarkan dua mode untuk menyeimbangkan kinerja dan biaya penyimpanan.</p>
-<p>Gunakan AISAQ ketika dataset vektor Anda terlalu besar untuk ditampung dalam RAM, atau ketika Anda perlu mengoptimalkan biaya infrastruktur dengan menukar beberapa kinerja kueri untuk mengurangi kebutuhan memori.</p>
+    </button></h1><p>AISAQ adalah indeks vektor berbasis disk yang memperluas <a href="/docs/id/diskann.md">DISKANN</a> untuk menangani dataset berskala miliaran dengan jejak DRAM yang minimal.</p>
+<p>Tidak seperti DISKANN, yang menyimpan vektor terkompresi dalam memori, AISAQ dirancang dengan "Arsitektur DRAM Nyaris Nol" yang berarti menyimpan semua struktur data pada SSD.</p>
+<p>AISAQ memungkinkan menjalankan database berskala sangat tinggi menggunakan server standar sekaligus menawarkan mode operasi untuk menyeimbangkan kinerja dan biaya penyimpanan.</p>
 <h2 id="How-AISAQ-works" class="common-anchor-header">Cara kerja AISAQ<button data-href="#How-AISAQ-works" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,7 +72,7 @@ beta: Milvus 2.6.4+
 </ul>
 <p>Karena data PQ sudah di-cache di DRAM, setiap kunjungan node hanya membutuhkan satu disk I/O, sehingga mencapai kecepatan kueri yang tinggi dengan penggunaan memori yang moderat.</p>
 <p>Untuk penjelasan rinci tentang komponen dan parameter ini, lihat <a href="/docs/id/diskann.md">DISKANN</a>.</p>
-<h3 id="AISAQ-modes" class="common-anchor-header">Mode AISAQ<button data-href="#AISAQ-modes" class="anchor-icon" translate="no">
+<h3 id="AISAQ-Operation-Modes" class="common-anchor-header">Mode Operasi AISAQ<button data-href="#AISAQ-Operation-Modes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -86,26 +87,26 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>AISAQ menawarkan dua strategi penyimpanan berbasis disk. Perbedaan utamanya adalah bagaimana data yang dikompresi PQ disimpan.</p>
-<h4 id="AISAQ-performance" class="common-anchor-header">Kinerja AISAQ</h4><p><strong>Performa AISAQ</strong> mencapai penyimpanan berbasis disk sepenuhnya dengan memindahkan data PQ dari memori ke disk sambil mempertahankan IOPS yang rendah melalui kolokasi dan redundansi data.</p>
-<p>Dalam mode ini:</p>
+    </button></h3><p>AISAQ menawarkan dua mode operasi untuk menangani dua kasus penggunaan yang berbeda:</p>
+<p>Mode kinerja: dioptimalkan untuk aplikasi yang membutuhkan latensi rendah dan throughput tinggi dalam skala besar, seperti pencarian semantik online.</p>
+<p>Mode skala: dioptimalkan untuk aplikasi dengan batasan latensi yang lebih longgar, seperti RAG dan pencarian semantik offline, sekaligus memungkinkan perluasan dataset yang hemat biaya hingga skala sangat tinggi.</p>
+<h4 id="AISAQ-performance-mode" class="common-anchor-header">Mode performa AISAQ</h4><p><strong>Performa AISAQ</strong> mencapai "Jejak DRAM Nyaris Nol" dengan memindahkan data PQ dari memori ke disk dengan tetap mempertahankan IOPS yang rendah melalui kolokasi dan redundansi data.</p>
 <ul>
 <li><p>Vektor mentah setiap node, daftar tepi, dan data PQ tetangganya disimpan bersama pada disk.</p></li>
-<li><p>Tata letak ini memastikan bahwa mengunjungi sebuah node (misalnya, <em>vektor 0</em>) hanya membutuhkan satu disk I/O.</p></li>
-<li><p>Namun, karena data PQ disimpan secara berlebihan di dekat beberapa node, ukuran file indeks meningkat secara signifikan, menghabiskan lebih banyak ruang disk.</p></li>
+<li><p>Tata letak ini memastikan bahwa mengunjungi sebuah node (misalnya, vektor 0) hanya membutuhkan satu disk I/O.</p></li>
+<li><p>Karena data PQ disimpan secara berlebihan di dekat beberapa node, ukuran file indeks meningkat secara signifikan, menghabiskan lebih banyak ruang disk.</p></li>
 </ul>
-<h4 id="AISAQ-scale" class="common-anchor-header">Skala AISAQ</h4><p><strong>Skala AISAQ</strong> berfokus pada <em>pengurangan penggunaan ruang disk</em> sambil tetap menyimpan semua data di disk.</p>
+<h4 id="AISAQ-scale-mode" class="common-anchor-header">Mode skala AISAQ</h4><p><strong>Skala AISAQ</strong> berfokus pada pengurangan penggunaan ruang disk sekaligus memenuhi persyaratan kinerja aplikasi targetnya.</p>
 <p>Dalam mode ini:</p>
 <ul>
 <li><p>Data PQ disimpan secara terpisah pada disk, tanpa redundansi.</p></li>
-<li><p>Desain ini meminimalkan ukuran indeks tetapi menyebabkan lebih banyak operasi I / O selama penjelajahan grafik.</p></li>
-<li><p>Untuk mengurangi biaya overhead IOPS, AISAQ memperkenalkan dua pengoptimalan:</p>
+<li><p>Desain ini meminimalkan ukuran indeks tetapi menyebabkan lebih banyak operasi I / O selama penelusuran grafik.</p></li>
+<li><p>Untuk mengurangi biaya overhead IOPS, AISAQ memperkenalkan dua optimasi:</p>
 <ul>
-<li><p>Strategi penyusunan ulang yang mengurutkan vektor PQ berdasarkan prioritas untuk meningkatkan lokalitas data.</p></li>
-<li><p>Cache PQ dalam DRAM (pq_cache_size) yang menyimpan data PQ yang sering diakses.</p></li>
+<li><p>Algoritma penyusunan ulang yang mengurutkan vektor PQ berdasarkan prioritas untuk meningkatkan lokalitas data.</p></li>
+<li><p>Cache PQ dalam DRAM (pq_read_page_cache_size) yang menyimpan data PQ yang sering diakses.</p></li>
 </ul></li>
 </ul>
-<p>Hasilnya, skala AISAQ mencapai efisiensi penyimpanan yang lebih baik tetapi kinerja lebih rendah daripada DISKANN atau AISAQ-Performance.</p>
 <h2 id="Example-configuration" class="common-anchor-header">Contoh konfigurasi<button data-href="#Example-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,13 +126,22 @@ beta: Milvus 2.6.4+
 <span class="hljs-attr">knowhere:</span>
   <span class="hljs-attr">AISAQ:</span>
     <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Maximum degree of the Vamana graph</span>
-      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Size limit on the PQ code (compared with raw data)</span>
-      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Size of the candidate list during building graph</span>
+      <span class="hljs-attr">max_degree:</span> <span class="hljs-number">56</span> <span class="hljs-comment"># Controls the maximum number of connections (edges) each data point can have in the Vamana graph</span>
+      <span class="hljs-attr">search_list_size:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># During index construction, this parameter defines the size of the candidate pool used when searching for the nearest neighbors for each node. For every node being added to the graph, the algorithm maintains a list of the search_list_size best candidates found so far. The search for neighbors stops when this list can no longer be improved. From this final candidate pool, the top max_degree nodes are selected to form the final edges</span>
+      <span class="hljs-attr">inline_pq:</span> <span class="hljs-number">-1</span> <span class="hljs-comment"># Number of PQ vectors stored inline per Index node (read when node is accessed, to reduce IO)</span>
+      <span class="hljs-attr">rearrange:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Re-arrange the PQ vectors data structure to improve data locality and reduce disk accesses during search (ignored in performance mode)</span>
+      <span class="hljs-attr">num_entry_points:</span> <span class="hljs-number">100</span> <span class="hljs-comment"># Number of candidate entry points to optimize search entry-point selection</span>
+      <span class="hljs-attr">pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.125</span> <span class="hljs-comment"># Controls the size of the PQ codes (compressed representations of data points) compared to the size of the uncompressed data</span>
+      <span class="hljs-attr">disk_pq_code_budget_gb_ratio:</span> <span class="hljs-number">0.25</span> <span class="hljs-comment"># Controls the size of the PQ codes of the high precision vectors stored in the index (used for re-ranking), compared to the size of the uncompressed data</span>
+      <span class="hljs-attr">pq_cache_size:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># PQ vectors cache size in DRAM (bytes). The PQ vectors cache is loaded during Index load and used during search to reduce IOs (ignored in performance mode)</span>
+      <span class="hljs-attr">search_cache_budget_gb_ratio:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># Controls the amount of DRAM to be used for caching frequently accessed index nodes. This cache is loaded during index load and used during search to reduce IOs</span>
     <span class="hljs-attr">search:</span>
-      <span class="hljs-attr">beam_width_ratio:</span> <span class="hljs-number">4</span> <span class="hljs-comment"># Ratio between the maximum number of IO requests per search iteration and CPU number</span>
+      <span class="hljs-attr">search_list:</span> <span class="hljs-number">16</span> <span class="hljs-comment"># During a search operation, this parameter determines the size of the candidate pool that the algorithm maintains as it traverses the graph. A larger value increases the chances of finding the true nearest neighbors (higher recall) but also increases search latency</span>
+      <span class="hljs-attr">beamwidth:</span> <span class="hljs-number">8</span> <span class="hljs-comment"># Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read the index nodes</span>
+      <span class="hljs-attr">vectors_beamwidth:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># Controls the degree of parallelism during search by determining the maximum number of parallel disk I/O requests to read groups of neighboring PQ vectors (ignored in performance mode)</span>
+      <span class="hljs-attr">pq_read_page_cache_size:</span> <span class="hljs-number">5242880</span> <span class="hljs-string">(5MiB)</span> <span class="hljs-comment"># PQ read cache size in DRAM per search thread (bytes). It caches frequently accessed data pages containing PQ vectors (ignored in performance mode and applicable only when rearrange is true). The PQ read cache memory is reused across all AISAQ segments</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="AISAQ-specific-parameters" class="common-anchor-header">Parameter khusus AISAQ<button data-href="#AISAQ-specific-parameters" class="anchor-icon" translate="no">
+<h2 id="AISAQ-parameters" class="common-anchor-header">Parameter AISAQ<button data-href="#AISAQ-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -146,7 +156,23 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AISAQ mewarisi banyak parameter dari DISKANN. Untuk menghindari redundansi, hanya parameter khusus AISAQ yang dirinci di bawah ini. Untuk deskripsi parameter bersama seperti <code translate="no">max_degree</code>, <code translate="no">pq_code_budget_gb_ratio</code>, <code translate="no">search_list_size</code>, dan <code translate="no">beam_width_ratio</code>, lihat <a href="/docs/id/diskann.md#DISKANN-params">DISKANN</a>.</p>
+    </button></h2><p>AISAQ mewarisi beberapa parameter dari DISKANN - <code translate="no">max_degree</code>, <code translate="no">search_list_size</code>, dan <code translate="no">pq_code_budget_gb_ratio</code>.</p>
+<h3 id="Index-building-params" class="common-anchor-header">Parameter pembangun indeks<button data-href="#Index-building-params" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Parameter-parameter ini mempengaruhi bagaimana indeks AISAQ dibangun. Menyesuaikan parameter ini dapat memengaruhi ukuran indeks, waktu pembuatan, dan kualitas pencarian.</p>
 <table>
    <tr>
      <th><p>Parameter</p></th>
@@ -155,25 +181,61 @@ beta: Milvus 2.6.4+
      <th><p>Saran Penyetelan</p></th>
    </tr>
    <tr>
+     <td><p><code translate="no">max_degree</code></p></td>
+     <td><p>Mengontrol jumlah maksimum koneksi (sisi) yang dapat dimiliki setiap titik data dalam grafik Vamana.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, 512]</p><p><strong>Nilai default</strong>: <code translate="no">56</code></p></td>
+     <td><p>Nilai yang lebih tinggi akan membuat grafik yang lebih padat, berpotensi meningkatkan pemanggilan (menemukan hasil yang lebih relevan), tetapi juga meningkatkan penggunaan memori dan waktu pembuatan. Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: [10, 100].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">search_list_size</code></p></td>
+     <td><p>Selama pembangunan indeks, parameter ini mendefinisikan ukuran kumpulan kandidat yang digunakan ketika mencari tetangga terdekat untuk setiap node. Untuk setiap simpul yang ditambahkan ke dalam graf, algoritma akan menyimpan sebuah daftar kandidat terbaik yang ditemukan sejauh ini. Pencarian tetangga berhenti ketika daftar ini tidak lagi dapat ditingkatkan. Dari kumpulan kandidat akhir ini, node-node dengan max_degree tertinggi dipilih untuk membentuk sisi-sisi akhir.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, 512]</p><p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
+     <td><p>Ukuran search_list_size yang lebih besar meningkatkan kemungkinan menemukan tetangga terdekat yang sebenarnya untuk setiap simpul, yang dapat menghasilkan grafik berkualitas lebih tinggi dan kinerja pencarian yang lebih baik (recall). Namun, hal ini memerlukan waktu pembuatan indeks yang jauh lebih lama. Ini harus selalu diatur ke nilai yang lebih besar atau sama dengan max_degree.</p></td>
+   </tr>
+   <tr>
      <td><p><code translate="no">inline_pq</code></p></td>
-     <td><p>Jumlah vektor PQ yang disimpan sebaris per node. Menentukan tata letak penyimpanan (mode Performa vs Skala).</p></td>
+     <td><p>Jumlah vektor PQ yang disimpan sebaris per simpul Indeks (dibaca ketika simpul diakses, untuk mengurangi IO)</p></td>
      <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [0, <em>max_degree</em>]</p><p><strong>Nilai default</strong>: <code translate="no">-1</code></p></td>
-     <td><p>Semakin dekat <code translate="no">inline_pq</code> ke <em>max_degree</em>, kinerja cenderung lebih baik, tetapi ukuran file indeks meningkat secara signifikan.</p><p>Ketika <code translate="no">inline_pq</code> mendekati 0, kinerja menurun, dan ukuran indeks menjadi serupa dengan DISKANN.</p><p><strong>Catatan</strong>: Ini sangat tergantung pada kinerja disk. Jika kinerja disk buruk, tidak disarankan untuk mengaktifkan opsi ini, karena bandwidth disk yang terbatas dapat menjadi hambatan dan menurunkan kinerja secara keseluruhan.</p></td>
+     <td><p>Nilai <code translate="no">inline_pq</code> yang lebih tinggi akan meningkatkan performa namun menambah ruang disk.</p><p>Tetapkan <code translate="no">inline_pq</code>=0 untuk AISAQ dalam mode skala.</p><p>Atur <code translate="no">inline_pq</code>=-1 untuk secara otomatis mengisi ruang yang tidak terpakai dalam indeks dengan vektor PQ untuk optimalisasi lebih lanjut AISAQ dalam mode skala.</p><p>Tetapkan <code translate="no">inline_pq</code><em>=max_degree</em> untuk AISAQ dalam mode performa.</p><p><code translate="no">inline_pq</code> Pengaturan di antara 0 dan <em>max_degree</em> memungkinkan keseimbangan yang dapat disesuaikan antara kinerja dan konsumsi ruang disk.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">rearrange</code></p></td>
-     <td><p>Mengaktifkan pengurutan vektor PQ berdasarkan prioritas untuk meningkatkan lokalitas I/O.</p></td>
-     <td><p><strong>Jenis</strong> Boolean</p><p><strong>Rentang</strong>: [benar, salah]</p><p><strong>Nilai default</strong>: <code translate="no">false</code></p></td>
-     <td><p>Mengurangi I/O kueri tetapi meningkatkan waktu pembuatan indeks.</p></td>
+     <td><p>Atur ulang struktur data vektor PQ untuk meningkatkan lokalitas data dan mengurangi akses disk selama pencarian (diabaikan dalam mode kinerja).</p></td>
+     <td><p><strong>Jenis</strong> Boolean</p><p><strong>Rentang</strong>: [benar, salah]</p><p><strong>Nilai default</strong>: <code translate="no">true</code></p></td>
+     <td><p>Jika benar, mengurangi IO selama pencarian dengan hanya sedikit peningkatan memori dan waktu pembuatan indeks.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">num_entry_points</code></p></td>
+     <td><p>Jumlah kandidat titik masuk untuk mengoptimalkan pemilihan titik masuk pencarian.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [0, 1000]</p><p><strong>Nilai default</strong>: <code translate="no">100</code></p></td>
+     <td><p>Nilai yang tinggi dapat mengurangi waktu pencarian dengan memulai pencarian dari titik masuk yang lebih dekat.</p><p>Tetapkan nilai yang lebih tinggi untuk segmen besar (misalnya untuk vektor 10M dan di atasnya gunakan nilai 1000).</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">pq_code_budget_gb_ratio</code></p></td>
+     <td><p>Mengontrol ukuran kode PQ (representasi titik data yang dikompresi) dibandingkan dengan ukuran data yang tidak dikompresi.</p></td>
+     <td><p><strong>Tipe</strong> Mengapung</p><p><strong>Rentang</strong>: (0.0, 0.25]</p><p><strong>Nilai default</strong>: <code translate="no">0.125</code></p></td>
+     <td><p>Rasio yang lebih tinggi akan menghasilkan hasil pencarian yang lebih akurat, secara efektif menyimpan lebih banyak informasi tentang vektor asli, tetapi meningkatkan kompleksitas komputasi selama pencarian.</p><p>Dalam kebanyakan kasus, kami sarankan Anda menetapkan nilai dalam kisaran ini: (0,0417, 0,25].</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">disk_pq_code_budget_gb_ratio</code></p></td>
+     <td><p>Mengontrol ukuran kode PQ dari vektor presisi tinggi yang disimpan dalam indeks (digunakan untuk pemeringkatan ulang), dibandingkan dengan ukuran data yang tidak dikompresi.</p></td>
+     <td><p><strong>Tipe</strong> Mengapung</p><p><strong>Rentang</strong>: [0, 0.25]</p><p><strong>Nilai default</strong>: <code translate="no">0.25</code></p></td>
+     <td><p>Dengan nilai default 0,25, vektor akan dikuantisasi menjadi 25% dari ukuran aslinya (kompresi 4×), sehingga mengurangi jejak disk dengan dampak akurasi yang relatif minimal.</p><p>Tetapkan nilai 0 untuk menyimpan vektor presisi penuh dalam indeks disk untuk pemeringkatan ulang. Nilai yang lebih besar menawarkan tingkat penemuan kembali yang lebih tinggi tetapi meningkatkan penggunaan disk.</p></td>
    </tr>
    <tr>
      <td><p><code translate="no">pq_cache_size</code></p></td>
-     <td><p>Ukuran cache PQ dalam DRAM (byte).</p></td>
-     <td><p><strong>Jenis</strong>: Bilangan bulat</p><p><strong>Rentang</strong>: [0, 1&lt;&lt;30]</p><p><strong>Nilai default</strong>: <code translate="no">0</code></p></td>
+     <td><p>Ukuran cache vektor PQ dalam DRAM (byte). Cache vektor PQ dimuat selama pemuatan indeks dan digunakan selama pencarian untuk mengurangi IO (diabaikan dalam mode kinerja).</p></td>
+     <td><p><strong>Jenis</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [0, 1073741824]</p><p><strong>Nilai default</strong>: <code translate="no">0</code></p></td>
      <td><p>Cache yang lebih besar meningkatkan kinerja kueri tetapi meningkatkan penggunaan DRAM.</p></td>
    </tr>
+   <tr>
+     <td><p><code translate="no">search_cache_budget_gb_ratio</code></p></td>
+     <td><p>Mengontrol jumlah DRAM yang akan digunakan untuk cache node indeks yang sering diakses</p><p>Cache ini dimuat selama pemuatan indeks dan digunakan selama pencarian untuk mengurangi IO.</p></td>
+     <td><p><strong>Tipe</strong> Mengapung</p><p><strong>Rentang</strong>: [0.0, 0.3)</p><p><strong>Nilai default</strong>: <code translate="no">0</code></p></td>
+     <td><p>Nilai yang lebih tinggi mengalokasikan lebih banyak memori untuk caching, mengurangi IO disk, namun menghabiskan lebih banyak memori sistem. Nilai yang lebih rendah menggunakan lebih sedikit memori untuk caching, sehingga berpotensi meningkatkan kebutuhan akses disk.</p></td>
+   </tr>
 </table>
-<h2 id="Considerations" class="common-anchor-header">Pertimbangan<button data-href="#Considerations" class="anchor-icon" translate="no">
+<h3 id="Index-search-params" class="common-anchor-header">Parameter pencarian indeks<button data-href="#Index-search-params" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -188,8 +250,36 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><ul>
-<li><p>Performa disk penting. AISAQ sangat bergantung pada IOPS SSD; penyimpanan yang buruk dapat mengurangi QPS.</p></li>
-<li><p>Mode performa AISAQ ≈ latensi DISKANN, tetapi mungkin memerlukan ruang disk beberapa kali lebih besar.</p></li>
-<li><p>Mode skala AISAQ cocok untuk pencarian offline atau beban kerja pengarsipan data di mana QPS tidak terlalu penting.</p></li>
-</ul>
+    </button></h3><p>Parameter ini mempengaruhi bagaimana AISAQ melakukan pencarian. Menyesuaikannya dapat memengaruhi kecepatan pencarian, latensi, dan penggunaan sumber daya.</p>
+<table>
+   <tr>
+     <th><p>Parameter</p></th>
+     <th><p>Deskripsi</p></th>
+     <th><p>Rentang Nilai</p></th>
+     <th><p>Saran Penyetelan</p></th>
+   </tr>
+   <tr>
+     <td><p><code translate="no">search_list</code></p></td>
+     <td><p>Selama operasi pencarian, parameter ini menentukan ukuran kumpulan kandidat yang dipertahankan oleh algoritme saat melintasi grafik. Nilai yang lebih besar meningkatkan peluang menemukan tetangga terdekat yang sebenarnya (recall yang lebih tinggi) tetapi juga meningkatkan latensi pencarian.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [topk, int32_max]</p><p><strong>Nilai default</strong>: <code translate="no">16</code></p></td>
+     <td><p>Untuk keseimbangan yang baik antara performa dan akurasi, disarankan untuk menetapkan nilai ini sama atau sedikit lebih besar daripada jumlah hasil yang ingin Anda ambil (top_k).</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">beamwidth</code></p></td>
+     <td><p>Mengontrol tingkat paralelisme selama pencarian dengan menentukan jumlah maksimum permintaan I/O disk paralel untuk membaca simpul indeks.</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, 16]</p><p><strong>Nilai default</strong>: <code translate="no">8</code></p></td>
+     <td><p>Nilai yang lebih tinggi meningkatkan paralelisme, yang dapat mempercepat pencarian pada sistem dengan CPU dan SSD yang kuat. Namun, pengaturan yang terlalu tinggi dapat menyebabkan perebutan sumber daya yang berlebihan.</p><p>Pada kebanyakan kasus, kami sarankan Anda menetapkan nilai 2.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">vectors_beamwidth</code></p></td>
+     <td><p>Mengontrol tingkat paralelisme selama pencarian dengan menentukan jumlah maksimum permintaan I/O disk paralel untuk membaca kelompok vektor PQ yang berdekatan (diabaikan dalam mode kinerja).</p></td>
+     <td><p><strong>Tipe</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [1, 4] harus &lt;= <em>beamwidth</em></p><p><strong>Nilai default</strong>: <code translate="no">1</code></p></td>
+     <td><p>Nilai yang lebih tinggi meningkatkan paralelisme, yang dapat mempercepat pencarian pada sistem dengan CPU dan SSD yang kuat. Namun, pengaturan yang terlalu tinggi dapat menyebabkan perebutan sumber daya yang berlebihan, karena setiap kelompok vektor PQ yang bertetangga dapat berisi hingga vektor dengan derajat maksimal.</p><p>Dalam kebanyakan kasus, kami menyarankan Anda menetapkan nilai 1.</p></td>
+   </tr>
+   <tr>
+     <td><p><code translate="no">pq_read_page_cache_size</code></p></td>
+     <td><p>Ukuran cache baca PQ dalam DRAM per thread pencarian (byte). Memori ini menyimpan halaman data yang sering diakses yang berisi vektor PQ (diabaikan dalam mode kinerja dan hanya berlaku bila pengaturan ulang benar).</p><p>Memori cache baca PQ digunakan kembali di semua segmen AISAQ.</p></td>
+     <td><p><strong>Jenis</strong> Bilangan bulat</p><p><strong>Rentang</strong>: [0, 33554432]</p><p><strong>Nilai default</strong>: <code translate="no">5242880 (5MiB)</code></p></td>
+     <td><p>Cache yang lebih besar meningkatkan kinerja kueri tetapi meningkatkan penggunaan DRAM.</p><p>Nilai yang disarankan berkisar dari 2 MiB untuk segmen kecil (1 M vektor), 5 MiB untuk segmen sedang (50 M vektor) dan 10 MiB untuk segmen besar (250 M vektor).</p></td>
+   </tr>
+</table>

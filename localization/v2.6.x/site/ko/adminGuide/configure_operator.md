@@ -29,7 +29,7 @@ title: Milvus Operator로 Milvus 구성하기
 <li>프라이빗 리소스 구성</li>
 </ul>
 <div class="alert note">
-프라이빗 리소스 구성은 글로벌 리소스 구성을 덮어씁니다. 리소스를 전역으로 구성하면서 동시에 특정 구성 요소의 프라이빗 리소스를 지정하면 구성 요소는 프라이빗 구성의 우선순위를 지정하고 이에 먼저 응답합니다.</div>
+프라이빗 리소스 구성은 글로벌 리소스 구성을 덮어씁니다. 리소스를 전역으로 구성하면서 동시에 특정 구성 요소의 프라이빗 리소스를 지정하면 구성 요소는 프라이빗 구성의 우선순위를 지정하고 먼저 응답합니다.</div>
 <h2 id="Configure-global-resources" class="common-anchor-header">글로벌 리소스 구성<button data-href="#Configure-global-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +61,7 @@ title: Milvus Operator로 Milvus 구성하기
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">spec.components</code> 필드에는 모든 Milvus 구성 요소의 전역 및 비공개 리소스 구성이 모두 포함됩니다. 다음은 글로벌 리소스를 구성하는 데 일반적으로 사용되는 네 가지 필드입니다.</p>
+<p><code translate="no">spec.components</code> 필드에는 모든 Milvus 구성 요소의 글로벌 및 프라이빗 리소스 구성이 모두 포함됩니다. 다음은 글로벌 리소스를 구성하는 데 일반적으로 사용되는 네 가지 필드입니다.</p>
 <ul>
 <li><code translate="no">image</code>: 사용된 Milvus 도커 이미지.</li>
 <li><code translate="no">resources</code>: 각 구성 요소에 할당된 컴퓨팅 리소스.</li>
@@ -70,7 +70,22 @@ title: Milvus Operator로 Milvus 구성하기
 </ul>
 <p>더 많은 필드를 구성하려면 <a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">여기</a> 설명서를 참조하세요.</p>
 <p>Milvus 클러스터에 대한 글로벌 리소스를 구성하려면 <code translate="no">milvuscluster_resource.yaml</code> 파일을 생성합니다.</p>
-<h3 id="Example" class="common-anchor-header">예제</h3><p>다음 예는 Milvus 클러스터에 대한 글로벌 리소스를 구성하는 예제입니다.</p>
+<h3 id="Example" class="common-anchor-header">예제<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>다음 예는 Milvus 클러스터에 대한 글로벌 리소스를 구성하는 예제입니다.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -159,7 +174,6 @@ K8s 클러스터에 <code translate="no">my-release</code> 이라는 이름의 M
             <li><a href="/docs/ko/configure_indexcoord.md">인덱스 조정</a></li>
             <li><a href="/docs/ko/configure_metastore.md">메타스토어</a></li>
             <li><a href="/docs/ko/configure_mq.md">메시지 큐</a></li>
-            <li><a href="/docs/ko/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ko/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ko/configure_trace.md">Trace</a></li>
             <li><a href="/docs/ko/configure_quotaandlimits.md">할당량 및 제한</a></li>
@@ -174,7 +188,7 @@ K8s 클러스터에 <code translate="no">my-release</code> 이라는 이름의 M
 <thead>
   <tr>
     <th>목적</th>
-    <th>파라미터</th>
+    <th>매개변수</th>
   </tr>
 </thead>
 <tbody>
@@ -264,7 +278,22 @@ K8s 클러스터에 <code translate="no">my-release</code> 이라는 이름의 M
 </tbody>
 </table>
 </div>
-<h3 id="Example" class="common-anchor-header">예제</h3><p>아래 예는 <code translate="no">milvuscluster.yaml</code> 파일에서 프록시 및 데이터노드의 복제본과 컴퓨팅 리소스를 구성하는 예제입니다.</p>
+<h3 id="Example" class="common-anchor-header">예제<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>아래 예는 <code translate="no">milvuscluster.yaml</code> 파일에서 프록시 및 데이터노드의 복제본과 컴퓨팅 리소스를 구성하는 예제입니다.</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

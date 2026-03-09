@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: Imparate a configurare mq per Milvus.
 ---
+<blockquote>
+<p><strong>Deprecato</strong>: NATS (natsmq) è deprecato e sarà rimosso con Milvus v2.6. Utilizzare invece RocksMQ, Pulsar o Kafka.</p>
+</blockquote>
 <h1 id="mq-related-Configurations" class="common-anchor-header">Configurazioni relative a mq<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

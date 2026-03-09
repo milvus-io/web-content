@@ -4,6 +4,9 @@ related_key: configure
 group: system_configuration.md
 summary: Milvus용 natsmq를 구성하는 방법을 알아보세요.
 ---
+<blockquote>
+<p><strong>사용</strong> 중단되었습니다: NATS(natsmq)는 더 이상 사용되지 않으며 Milvus v2.6에서 제거될 예정입니다. 대신 RocksMQ, Pulsar 또는 Kafka를 사용하세요.</p>
+</blockquote>
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">natsmq 관련 구성<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

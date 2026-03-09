@@ -19,12 +19,13 @@ summary: milvusのmqの設定方法について説明します。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>milvusはrocksmq(RockDBベース)、natsmq(組み込みnats-server)、Pulsar、Kafkaの4つのMQをサポートしています。</p>
+    </button></h1><p>Milvusはrocksmq(RockDBベース)、Pulsar、Kafka、Woodpeckerの4つのMQをサポートしています。</p>
 <p>mq.typeフィールドを設定することでMQを変更することができます。</p>
-<p>mq.typeフィールドをデフォルトに設定しない場合は、このファイルに複数のmqを設定する場合の優先順位の有効化に関する注意書きがあります。</p>
+<p>mq.typeフィールドをデフォルトに設定しない場合は、このファイルに複数のMQを設定する場合の優先順位の有効化に関する注意書きがあります。</p>
 <ol>
-<li><p>スタンドアロン(ローカル)モード: rocksmq(デフォルト) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>クラスタモード：  Pulsar(デフォルト) &gt; Kafka (rocksmqとnatsmqはクラスタ・モードではサポートされていません)</p></li>
+<li><p>スタンドアロン(ローカル)モード: rocksmq(デフォルト) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>クラスタモード：  Pulsar(デフォルト) &gt; Kafka (rocksmqはクラスタ・モードではサポートされていません)</p></li>
+<li><p>woodpeckerは、mq.typeをwoodpeckerに設定することで、スタンドアロン・モードとクラスタ・モードの両方で使用することができます。</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,8 +52,8 @@ summary: milvusのmqの設定方法について説明します。
   <tbody>
     <tr>
       <td>
-        <li>デフォルト値："デフォルト"</li>      
-        <li>有効な値：[default、pulsar、kafka、rocksmq、natsmq]。</li>      </td>
+        <li>デフォルト値："default"</li>      
+        <li>有効な値：[default、pulsar、kafka、rocksmq、woodpecker]。</li>      </td>
       <td>デフォルト</td>
     </tr>
   </tbody>
@@ -226,7 +227,7 @@ summary: milvusのmqの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        ディスパッチャがマージするかどうかをチェックする間隔時間(秒)      </td>
+      <td>        ディスパッチャがマージするかどうかをチェックする間隔(秒)      </td>
       <td>1</td>
     </tr>
   </tbody>

@@ -4,7 +4,10 @@ related_key: configure
 group: system_configuration.md
 summary: Pelajari cara mengonfigurasi mq untuk Milvus.
 ---
-<h1 id="mq-related-Configurations" class="common-anchor-header">Konfigurasi yang berhubungan dengan MQ<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
+<blockquote>
+<p>Tidak<strong>digunakan</strong> lagi: NATS (natsmq) sudah tidak digunakan lagi dan akan dihapus di Milvus v2.6. Silakan gunakan RocksMQ, Pulsar, atau Kafka sebagai gantinya.</p>
+</blockquote>
+<h1 id="mq-related-Configurations" class="common-anchor-header">Konfigurasi yang berhubungan dengan mq<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

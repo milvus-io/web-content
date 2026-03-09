@@ -19,12 +19,13 @@ summary: 了解如何为 Milvus 配置 mq。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 支持四种 MQ：rocksmq（基于 RockDB）、natsmq（嵌入式 nats-server）、Pulsar 和 Kafka。</p>
+    </button></h1><p>Milvus 支持四种 MQ：rocksmq（基于 RockDB）、Pulsar、Kafka 和 Woodpecker。</p>
 <p>您可以通过设置 mq.type 字段来更改您的 MQ。</p>
-<p>如果不将 mq.type 字段设为默认值，那么如果我们在该文件中配置了多个 mq，就需要注意启用优先级。</p>
+<p>如果不将 mq.type 字段设为默认值，那么在该文件中，如果我们配置了多个 MQ，会有一个关于启用优先级的说明。</p>
 <ol>
-<li><p>独立（本地）模式：Rocksmq（默认） &gt; Natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>集群模式：  Pulsar（默认） &gt; Kafka（集群模式下不支持 rocksmq 和 natsmq）</p></li>
+<li><p>独立（本地）模式：Rocksmq（默认） &gt; Pulsar &gt; Kafka</p></li>
+<li><p>集群模式：  Pulsar（默认） &gt; Kafka（集群模式下不支持 rocksmq）</p></li>
+<li><p>通过将 mq.type 设置为 woodpecker，Woodpecker 可以在单机和集群模式下使用。</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +53,7 @@ summary: 了解如何为 Milvus 配置 mq。
     <tr>
       <td>
         <li>默认值："默认"</li>      
-        <li>有效值：[默认、pulsar、kafka、rocksmq、natsmq］</li>      </td>
+        <li>有效值：[默认、脉冲星、卡夫卡、rocksmq、啄木鸟］</li>      </td>
       <td>默认</td>
     </tr>
   </tbody>
@@ -75,7 +76,7 @@ summary: 了解如何为 Milvus 配置 mq。
     </button></h2><table id="mq.enablePursuitMode">
   <thead>
     <tr>
-      <th class="width80">说明</th>
+      <th class="width80">描述</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>
@@ -133,7 +134,7 @@ summary: 了解如何为 Milvus 配置 mq。
     </button></h2><table id="mq.pursuitBufferSize">
   <thead>
     <tr>
-      <th class="width80">说明</th>
+      <th class="width80">描述</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>

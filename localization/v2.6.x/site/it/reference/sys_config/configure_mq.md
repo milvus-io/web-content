@@ -19,12 +19,13 @@ summary: Imparate a configurare mq per Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supporta quattro MQ: rocksmq (basato su RockDB), natsmq (server nats incorporato), Pulsar e Kafka.</p>
-<p>È possibile cambiare il proprio MQ impostando il campo mq.type.</p>
+    </button></h1><p>Milvus supporta quattro MQ: rocksmq (basato su RockDB), Pulsar, Kafka e Woodpecker.</p>
+<p>È possibile cambiare il proprio mq impostando il campo mq.type.</p>
 <p>Se non si imposta il campo mq.type come predefinito, c'è una nota sull'abilitazione della priorità se si configurano più mq in questo file.</p>
 <ol>
-<li><p>modalità standalone (locale): rocksmq (predefinito) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>modalità cluster:  Pulsar (predefinito) &gt; Kafka (rocksmq e natsmq non sono supportati in modalità cluster).</p></li>
+<li><p>modalità standalone (locale): rocksmq (predefinito) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>modalità cluster:  Pulsar (predefinito) &gt; Kafka (rocksmq non è supportato in modalità cluster).</p></li>
+<li><p>Woodpecker può essere usato sia in modalità standalone che in cluster impostando mq.type su woodpecker.</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +53,7 @@ summary: Imparate a configurare mq per Milvus.
     <tr>
       <td>
         <li>Valore predefinito: "default"</li>      
-        <li>Valori validi: [default, pulsar, kafka, rocksmq, natsmq].</li>      </td>
+        <li>Valori validi: [default, pulsar, kafka, rocksmq, woodpecker].</li>      </td>
       <td>default</td>
     </tr>
   </tbody>
@@ -226,7 +227,7 @@ summary: Imparate a configurare mq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        l'intervallo di tempo (in secondi) in cui il dispatcher controlla se unire o meno i dati    </td>
+      <td>        l'intervallo di tempo (in secondi) in cui il dispatcher controlla se unire o meno    </td>
       <td>1</td>
     </tr>
   </tbody>

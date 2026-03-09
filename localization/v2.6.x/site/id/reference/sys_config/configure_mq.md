@@ -4,7 +4,7 @@ related_key: configure
 group: system_configuration.md
 summary: Pelajari cara mengonfigurasi mq untuk Milvus.
 ---
-<h1 id="mq-related-Configurations" class="common-anchor-header">Konfigurasi yang berhubungan dengan MQ<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="mq-related-Configurations" class="common-anchor-header">Konfigurasi yang berhubungan dengan mq<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,12 +19,13 @@ summary: Pelajari cara mengonfigurasi mq untuk Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus mendukung empat MQ: rocksmq (berdasarkan RockDB), natsmq (embedded nats-server), Pulsar, dan Kafka.</p>
+    </button></h1><p>Milvus mendukung empat MQ: rocksmq (berdasarkan RockDB), Pulsar, Kafka, dan Woodpecker.</p>
 <p>Anda dapat mengubah mq Anda dengan mengatur bidang mq.type.</p>
 <p>Jika Anda tidak mengatur bidang mq.type sebagai default, ada catatan tentang mengaktifkan prioritas jika kita mengkonfigurasi beberapa mq dalam berkas ini.</p>
 <ol>
-<li><p>mode standalone (lokal): rocksmq (default) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>mode cluster:  Pulsar(default) &gt; Kafka (rocksmq dan natsmq tidak didukung dalam mode cluster)</p></li>
+<li><p>mode standalone (lokal): rocksmq (default) &gt; Pulsar &gt; Kafka</p></li>
+<li><p>mode cluster:  Pulsar(default) &gt; Kafka (rocksmq tidak didukung dalam mode cluster)</p></li>
+<li><p>Woodpecker dapat digunakan baik dalam mode standalone maupun cluster dengan mengatur mq.type ke woodpecker.</p></li>
 </ol>
 <h2 id="mqtype" class="common-anchor-header"><code translate="no">mq.type</code><button data-href="#mqtype" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +53,7 @@ summary: Pelajari cara mengonfigurasi mq untuk Milvus.
     <tr>
       <td>
         <li>Nilai default: "default"</li>      
-        <li>Nilai yang valid: [default, pulsar, kafka, rocksmq, natsmq]</li>      </td>
+        <li>Nilai yang valid: [default, pulsar, kafka, rocksmq, pelatuk]</li>      </td>
       <td>default</td>
     </tr>
   </tbody>
@@ -76,7 +77,7 @@ summary: Pelajari cara mengonfigurasi mq untuk Milvus.
   <thead>
     <tr>
       <th class="width80">Deskripsi</th>
-      <th class="width20">Nilai Default</th> 
+      <th class="width20">Nilai default</th> 
     </tr>
   </thead>
   <tbody>

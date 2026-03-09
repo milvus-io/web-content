@@ -97,7 +97,6 @@ title: Настройка Milvus с помощью Docker Compose
             <li><a href="/docs/ru/configure_indexcoord.md">Индексный коорд</a></li>
             <li><a href="/docs/ru/configure_metastore.md">Метахранилище</a></li>
             <li><a href="/docs/ru/configure_mq.md">Очередь сообщений</a></li>
-            <li><a href="/docs/ru/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/ru/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/ru/configure_trace.md">Трассировка</a></li>
             <li><a href="/docs/ru/configure_quotaandlimits.md">Квоты и лимиты</a></li>
@@ -132,7 +131,7 @@ title: Настройка Milvus с помощью Docker Compose
     </td>
   </tr>
   <tr>
-    <td>Данные и мета</td>
+    <td>Данные и метаданные</td>
     <td>
         <ul>
             <li><a href="/docs/ru/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>

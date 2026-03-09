@@ -97,7 +97,6 @@ title: 使用 Docker Compose 配置 Milvus
             <li><a href="/docs/zh/configure_indexcoord.md">索引坐标</a></li>
             <li><a href="/docs/zh/configure_metastore.md">元存储</a></li>
             <li><a href="/docs/zh/configure_mq.md">消息队列</a></li>
-            <li><a href="/docs/zh/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/zh/configure_tikv.md">Tikv</a></li>
             <li><a href="/docs/zh/configure_trace.md">跟踪</a></li>
             <li><a href="/docs/zh/configure_quotaandlimits.md">配额和限制</a></li>

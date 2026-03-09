@@ -97,9 +97,8 @@ In der aktuellen Version werden alle Parameter erst nach einem Neustart von Milv
             <li><a href="/docs/de/configure_indexcoord.md">Index-Koordinate</a></li>
             <li><a href="/docs/de/configure_metastore.md">Metaspeicher</a></li>
             <li><a href="/docs/de/configure_mq.md">Nachrichten-Warteschlange</a></li>
-            <li><a href="/docs/de/configure_natsmq.md">Natsmq</a></li>
             <li><a href="/docs/de/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/de/configure_trace.md">Trace</a></li>
+            <li><a href="/docs/de/configure_trace.md">Verfolgung</a></li>
             <li><a href="/docs/de/configure_quotaandlimits.md">Quoten und Limits</a></li>
         </ul>
     </td>
