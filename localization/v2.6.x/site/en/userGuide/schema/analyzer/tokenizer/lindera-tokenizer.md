@@ -45,7 +45,7 @@ summary: >-
    <tr>
      <th><p>Language</p></th>
      <th><p>Root word</p></th>
-     <th><ul><li>Particle</li></ul></th>
+     <th><p>+ Particle</p></th>
      <th><p>= Combined form</p></th>
      <th><p>Meaning</p></th>
    </tr>
