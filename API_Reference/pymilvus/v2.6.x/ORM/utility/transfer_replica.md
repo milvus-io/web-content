@@ -39,13 +39,13 @@ transfer_replica(
 
     The number of replicas to move between the source and target resource groups.
 
-    <div class="admonition note">
-
-    <p><b>what is a replica?</b></p>
-
-    <p>With replicas, Milvus can load the same segments on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment. </p>
-    <p>Replicas are organized as replica groups. Each replica group contains <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">shard</a> replicas. Each shard replica has a streaming replica and a historical replica that correspond to the growing and sealed <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">segments</a> in the shard.</p>
-    <p>Shards can be regarded as DML channels for distributed data write operations among multiple nodes to make the most of the parallel computing potential out of a Milvus cluster.</p>
+    <div class="alert note">
+    
+    With replicas, Milvus can load the same segments on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment. 
+    
+    Replicas are organized as replica groups. Each replica group contains [shard](https://milvus.io/docs/v2.1.x/glossary.md#Sharding) replicas. Each shard replica has a streaming replica and a historical replica that correspond to the growing and sealed [segments](https://milvus.io/docs/v2.1.x/glossary.md#Segment) in the shard.
+    
+    Shards can be regarded as DML channels for distributed data write operations among multiple nodes to make the most of the parallel computing potential out of a Milvus cluster.
 
     </div>
 
@@ -118,13 +118,13 @@ utility.transfer_node(
 
 The following operations are related to `transfer_replica()`:
 
-- [create_resource_group()](create_resource_group.md)
+- [create_resource_group()](https://zilliverse.feishu.cn/docx/X5qsdhFQ5oOhkcxOprzcOZq4nMc)
 
-- [describe_resource_group()](describe_resource_group.md)
+- [describe_resource_group()](https://zilliverse.feishu.cn/docx/HScCdxLNJotPCcxb4AZcxsNJn9c)
 
-- [drop_resource_group()](drop_resource_group.md)
+- [drop_resource_group()](https://zilliverse.feishu.cn/docx/EofGdftYjoQ9E6x8mxLcpbG1nhc)
 
-- [list_resource_groups()](list_resource_groups.md)
+- [list_resource_groups()](https://zilliverse.feishu.cn/docx/FXTZd5FgNo9ta0xvjaIclEM1nPf)
 
-- [transfer_node()](transfer_node.md)
+- [transfer_node()](https://zilliverse.feishu.cn/docx/QHcpd1aJzo5aYbxJtMXc58een4f)
 

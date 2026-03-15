@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*[DataType](../Collections/DataType.md)*) - 
+- **datatype** (*[DataType](https://zilliverse.feishu.cn/docx/KvNsd3aV4ocRNJxrZN2cg1zenqb)*) - 
 
     **[REQUIRED]**
 
@@ -43,7 +43,7 @@ add_field(
 
 **RETURN TYPE:**
 
-*[StructFieldSchema](StructFieldSchema.md)*
+*[StructFieldSchema](https://zilliverse.feishu.cn/docx/ZnKKd2PsyoRc1MxtC1BcJQjgnBh)*
 
 **RETURNS:**
 

@@ -136,15 +136,15 @@ utility.index_building_progress(
 
 The following operations are related to `index_building_progress()`
 
-- [create_index()](../Collection/create_index.md)
+- [create_index()](https://zilliverse.feishu.cn/docx/J76vdPHNgoyp2wxAiTcceIVJnOe)
 
-- [drop_index()](../Collection/drop_index.md)
+- [drop_index()](https://zilliverse.feishu.cn/docx/AtkDdtMAWodFzExARxnco5xLnsg)
 
-- [has_index()](../Collection/has_index.md)
+- [has_index()](https://zilliverse.feishu.cn/docx/WDk4dXY8IoV3SJxp9e7c3aq1nBh)
 
-- [index()](../Collection/index.md)
+- [index()](https://zilliverse.feishu.cn/docx/RkQ8dnWDHo3DiDxiCVRcP1xPnob)
 
-- [wait_for_index_building_complete()](wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](https://zilliverse.feishu.cn/docx/MfR8dw5TioPvw3xvrstcgYixnUb)
 
-- [list_indexes()](list_indexes.md)
+- [list_indexes()](https://zilliverse.feishu.cn/docx/XLepdUCcTow6rpx5vxxcbLXZnyb)
 

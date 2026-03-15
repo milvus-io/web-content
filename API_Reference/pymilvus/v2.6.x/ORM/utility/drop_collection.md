@@ -60,15 +60,15 @@ utility.drop_collection(
 
 The following operations are related to the `drop_collection()` method:
 
-- [flush_all()](flush_all.md)
+- [flush_all()](https://zilliverse.feishu.cn/docx/Uwsfd443boKKgyx2zZTcYDqKnCe)
 
-- [get_query_segment_info()](get_query_segment_info.md)
+- [get_query_segment_info()](https://zilliverse.feishu.cn/docx/CB9edh2ySoJyWhxBoLcchPj9nxg)
 
-- [has_collection()](has_collection.md)
+- [has_collection()](https://zilliverse.feishu.cn/docx/TWOxdwDYRo4CCHxDdZbc7IOznCg)
 
-- [has_partition()](has_partition.md)
+- [has_partition()](https://zilliverse.feishu.cn/docx/KsmadNcXRoElO2xJi5HcJO57nwb)
 
-- [list_collections()](list_collections.md)
+- [list_collections()](https://zilliverse.feishu.cn/docx/QgxEdfBMSodYo6xCg24cH3hInr4)
 
-- [rename_collection()](rename_collection.md)
+- [rename_collection()](https://zilliverse.feishu.cn/docx/M0qRdF1cLokrxvxyrXScJ64FnEe)
 

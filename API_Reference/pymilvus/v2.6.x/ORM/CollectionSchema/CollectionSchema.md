@@ -25,11 +25,9 @@ CollectionSchema(
 
     A list of **FieldSchema** objects that define the fields in the collection schema.
 
-    <div class="admonition note">
-
-    <p><b>what is a field schema?</b></p>
-
-    <p>A field schema represents and contains metadata for a single field, while <strong>CollectionSchema</strong> ties together a list of FieldSchema objects to define the full schema.</p>
+    <div class="alert note">
+    
+    A field schema represents and contains metadata for a single field, while **CollectionSchema** ties together a list of FieldSchema objects to define the full schema.
 
     </div>
 
@@ -53,11 +51,9 @@ CollectionSchema(
 
         When you set this to **True**, Milvus and  will create a field called **&#36;meta** to store any undefined fields and their values from the data that is inserted.
 
-        <div class="admonition note">
-
-        <p><b>what is a dynamic field?</b></p>
-
-        <p>If the data being inserted into the target collection includes fields that are not defined in the collection's schema, those fields will be saved in a dynamic field as key-value pairs.</p>
+        <div class="alert note">
+        
+        If the data being inserted into the target collection includes fields that are not defined in the collection's schema, those fields will be saved in a dynamic field as key-value pairs.
 
         </div>
 
@@ -79,13 +75,13 @@ CollectionSchema(
 
         As an alternative, you can set **is_partition_key** when creating a **FieldSchema** object.
 
-        <div class="admonition note">
-
-        <p><b>what is a partition key?</b></p>
-
-        <p>Once a field is designated as the partition key, Milvus automatically creates a partition for each unique value in this field and saves entities in these partitions accordingly.</p>
-        <p>This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.</p>
-        <p>As an alternative, you can set <strong>partition<em>key</em>field</strong> when creating a <strong>CollectionSchema</strong> object.</p>
+        <div class="alert note">
+        
+        Once a field is designated as the partition key, Milvus automatically creates a partition for each unique value in this field and saves entities in these partitions accordingly.
+        
+        This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
+        
+        As an alternative, you can set **partition_key_field** when creating a **CollectionSchema** object.
 
         </div>
 

@@ -2,11 +2,9 @@
 
 This operation returns the status of the specified compaction job.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This method is deprecated. For the latest equivalent, refer to <a href="./Management-get_compaction_state">get<em>compaction</em>state()</a>.</p>
+This method is deprecated. For the latest equivalent, refer to [get_compaction_state()](https://zilliverse.feishu.cn/docx/MSDVdu103obklexX8GvcW5cWnCf).
 
 </div>
 

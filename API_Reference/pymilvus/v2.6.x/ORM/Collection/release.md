@@ -43,13 +43,13 @@ collection.release()
 
 The following operations are related to `release()`:
 
-- [Partition](../Partition/Partition.md)
+- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
 
-- [load()](load.md)
+- [load()](https://zilliverse.feishu.cn/docx/HQDndiGwloWKIexgPCUcEZGenOh)
 
-- [load_state()](../utility/load_state.md)
+- [load_state()](https://zilliverse.feishu.cn/docx/BJysdlj1MoksHZxNRxicHn9fnSh)
 
-- [loading_progress()](../utility/loading_progress.md)
+- [loading_progress()](https://zilliverse.feishu.cn/docx/HQiHd82orov0XvxAzLWcl5xRnzc)
 
-- [wait_for_loading_complete()](../utility/wait_for_loading_complete.md)
+- [wait_for_loading_complete()](https://zilliverse.feishu.cn/docx/PLKXdUB1EoNX8gxKHruc9GcEnsg)
 

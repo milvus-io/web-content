@@ -125,9 +125,9 @@ collection, results = Collection.construct_from_dataframe(
 
 The following operations are related to `construct_from_dataframe()`:
 
-- [Collection](Collection.md)
+- [Collection](https://zilliverse.feishu.cn/docx/OSehdj15Ao3AUvxOIJucXzU8nWW)
 
-- [CollectionSchema](../CollectionSchema/CollectionSchema.md)
+- [CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)
 
-- [FieldSchema](../FieldSchema/FieldSchema.md)
+- [FieldSchema](https://zilliverse.feishu.cn/docx/EVKhdy0vwoSLSux2RW2c660unjh)
 

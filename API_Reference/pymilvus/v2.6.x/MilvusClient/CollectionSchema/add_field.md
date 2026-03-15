@@ -20,7 +20,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*[DataType](../Collections/DataType.md)*) - 
+- **datatype** (*[DataType](https://zilliverse.feishu.cn/docx/KvNsd3aV4ocRNJxrZN2cg1zenqb)*) - 
 
     **[REQUIRED]**
 
@@ -60,15 +60,12 @@ add_field(
 
     Whether the current field is the primary field in a collection.
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <ul>
-    <li><p>Each collection has only one primary field.</p></li>
-    <li><p>A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    - Each collection has only one primary field.
+    
+    - A primary field should be of either the **DataType.INT64** type or the **DataType.VARCHAR** type.
+    
     </div>
 
 - **max_length** (*int*) -
@@ -101,13 +98,13 @@ add_field(
 
     This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-    <div class="admonition note">
-
-    <p><b>what is the partition key?</b></p>
-
-    <p>To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.</p>
-    <p>When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.</p>
-    <p>For details, refer to <a href="https://milvus.io/docs/use-partition-key">Use Partition Key</a> and <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenancy</a>.</p>
+    <div class="alert note">
+    
+    To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.
+    
+    When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.
+    
+    For details, refer to [Use Partition Key](https://milvus.io/docs/use-partition-key) and [Multi-tenancy](https://milvus.io/docs/multi_tenancy.md).
 
     </div>
 
@@ -194,7 +191,7 @@ add_field(
 
 **RETURN TYPE:**
 
-*[CollectionSchema](CollectionSchema.md)*
+*[CollectionSchema](https://zilliverse.feishu.cn/docx/BqR9dyTk6oOl8BxbZOOcW2Phnsn)*
 
 **RETURNS:**
 

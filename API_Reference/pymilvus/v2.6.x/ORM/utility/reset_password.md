@@ -2,11 +2,9 @@
 
 This operation resets the password for a specific user. 
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This operation differs from <strong>update_password()</strong> in that this operation also resets the current connection using the newly set credentials.</p>
+This operation differs from **update_password()** in that this operation also resets the current connection using the newly set credentials.
 
 </div>
 
@@ -94,19 +92,19 @@ reset_password(
 
 The following operations are related to `reset_password()`
 
-- [Role](../Role/Role.md)
+- [Role](https://zilliverse.feishu.cn/docx/LZL1d0kckouPXNxJLCmcwbCTnkG)
 
-- [create_user()](create_user.md)
+- [create_user()](https://zilliverse.feishu.cn/docx/N44ndTSrgoEBx7xCID5cXRS7n1c)
 
-- [delete_user()](delete_user.md)
+- [delete_user()](https://zilliverse.feishu.cn/docx/E7zOdU2JpoqaU5xNYXvcAjgPnNh)
 
-- [list_roles()](list_roles.md)
+- [list_roles()](https://zilliverse.feishu.cn/docx/ClLXdDs64oixJBxlIrCcEB2dngb)
 
-- [list_user()](list_user.md)
+- [list_user()](https://zilliverse.feishu.cn/docx/JeG6d5Sg2oPmXPxEhnyciq4snNd)
 
-- [list_users()](list_users.md)
+- [list_users()](https://zilliverse.feishu.cn/docx/MtF2dkZcso4XduxM194cUaiinqb)
 
-- [list_usernames()](list_usernames.md)
+- [list_usernames()](https://zilliverse.feishu.cn/docx/RXi3dgtNYogU0cxmTsgcdT72nsc)
 
-- [update_password()](update_password.md)
+- [update_password()](https://zilliverse.feishu.cn/docx/SGjed7w9toewDlxmXHKc7BFancf)
 

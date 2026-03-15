@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [JinaEmbeddingFunction](JinaEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [JinaEmbeddingFunction](https://zilliverse.feishu.cn/docx/U7NJd5eKAo0c1TxYZndcgPj2nlc) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of JinaEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
+The **\_\_call\_\_()** method of JinaEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/ZMs1dJJOGobyBjxRo7icXtE8nPe) and [encode_queries()](https://zilliverse.feishu.cn/docx/FgbjdQHBEoITxgxk7NMc1NzpnAc).
 
 ## Request syntax
 

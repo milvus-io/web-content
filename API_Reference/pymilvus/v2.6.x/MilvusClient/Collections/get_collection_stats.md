@@ -42,12 +42,11 @@ A dictionary containing collected statistics on the specified collection.
 }
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>why doesn't the row count match the number of entities inserted?</b></p>
+The data you insert will undergo processing before it is finally saved. Initially, it will arrive as data streams. Then, it will be stored in segments as entities. Milvus will select an appropriate growing segment to store data in streams until it reaches its upper limit and becomes sealed.
 
-<p>The data you insert will undergo processing before it is finally saved. Initially, it will arrive as data streams. Then, it will be stored in segments as entities. Milvus will select an appropriate growing segment to store data in streams until it reaches its upper limit and becomes sealed.</p>
-<p>However, note that the displayed row count may not match the number of records inserted, as stream data is not included.</p>
+However, note that the displayed row count may not match the number of records inserted, as stream data is not included.
 
 </div>
 

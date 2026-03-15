@@ -143,13 +143,13 @@ res = client.get(
 
 ## Related methods
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/DWLXdSCYnoPT4ExktRKceEqLnAd)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/QI87dhVnioL9JLxnNKxcM8jWnkh)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/LkmSddW2NolgitxLhy9cx22Dnpe)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/D74JdcitKobd7cxNdDdcGAz6nuf)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/WRYFdoDe8ofrlDxxTxQcdoJjnAh)
 

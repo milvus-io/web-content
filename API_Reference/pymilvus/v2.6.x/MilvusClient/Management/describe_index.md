@@ -220,13 +220,13 @@ client.describe_index(
 
 ## Related methods
 
-- [add_index()](add_index.md)
+- [add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)
 
-- [create_index()](create_index.md)
+- [create_index()](https://zilliverse.feishu.cn/docx/B3n3db0idoia02xXxJfcONK8nRh)
 
-- [drop_index()](drop_index.md)
+- [drop_index()](https://zilliverse.feishu.cn/docx/NPnQdZCJ7oF002xTntecdI2ini8)
 
-- [list_indexes()](list_indexes.md)
+- [list_indexes()](https://zilliverse.feishu.cn/docx/ZqmudJWyFonUKGxAxXncYrLZn2e)
 
-- [prepare_index_params()](prepare_index_params.md)
+- [prepare_index_params()](https://zilliverse.feishu.cn/docx/CAzpdAw3wo4ZqrxhjTLcEGBBn1S)
 

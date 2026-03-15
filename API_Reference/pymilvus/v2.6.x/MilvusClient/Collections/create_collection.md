@@ -44,7 +44,7 @@ create_collection(
 
     This parameter is designed for the quick setup of a collection and will ignored if the **schema** is not **None** and a field in the schema has its **is_primary** set to **True**.
 
-- **id_type** (*[DataType](DataType.md)*) -
+- **id_type** (*[DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)*) -
 
     The data type of the primary field in this collection.
 
@@ -112,12 +112,11 @@ create_collection(
 
         This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-        <div class="admonition note">
-
-        <p><b>what is sharding?</b></p>
-
-        <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-        <p>By default, a collection contains one shard.</p>
+        <div class="alert note">
+        
+        Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.
+        
+        By default, a collection contains one shard.
 
         </div>
 
@@ -129,13 +128,13 @@ create_collection(
 
         This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-        <div class="admonition note">
-
-        <p><b>what is the partition key?</b></p>
-
-        <p>To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.</p>
-        <p>When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.</p>
-        <p>For details, refer to <a href="https://milvus.io/docs/use-partition-key">Use Partition Key</a> and <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenancy</a>.</p>
+        <div class="alert note">
+        
+        To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.
+        
+        When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.
+        
+        For details, refer to [Use Partition Key](https://milvus.io/docs/use-partition-key) and [Multi-tenancy](https://milvus.io/docs/multi_tenancy.md).
 
         </div>
 
@@ -157,13 +156,13 @@ create_collection(
 
         When you run Milvus Lite, the only valid value for this parameter is **Strong**. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-        <div class="admonition note">
-
-        <p><b>what is the consistency level?</b></p>
-
-        <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-        <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-        <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+        <div class="alert note">
+        
+        Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+        
+        Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is **Bounded Staleness**.
+        
+        You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
         </div>
 

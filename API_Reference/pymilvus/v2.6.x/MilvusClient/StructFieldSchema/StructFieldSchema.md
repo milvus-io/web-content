@@ -31,11 +31,9 @@ CollectionSchema(
 
     A list of **FieldSchema** objects that define the fields in the schema of a struct in an array of structs field.
 
-    <div class="admonition note">
-
-    <p><b>what is a field schema?</b></p>
-
-    <p>A field schema represents and contains metadata for a single field, while <strong>StructFieldSchema</strong> ties together a list of <strong>FieldSchema</strong> objects to define the schema of a struct in an array of structs field.</p>
+    <div class="alert note">
+    
+    A field schema represents and contains metadata for a single field, while **StructFieldSchema** ties together a list of **FieldSchema** objects to define the schema of a struct in an array of structs field.
 
     </div>
 

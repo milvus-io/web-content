@@ -91,15 +91,15 @@ connections.add_connection(
 
 The following operations are related to `add_connection()`:
 
-- [connect()](connect.md)
+- [connect()](https://zilliverse.feishu.cn/docx/KzCXdTVVSoOmkbxuFjsccDlXnff)
 
-- [disconnect()](disconnect.md)
+- [disconnect()](https://zilliverse.feishu.cn/docx/IpSBdcabbosobvxQkAEcv6CvnJd)
 
-- [get_connection_addr()](get_connection_addr.md)
+- [get_connection_addr()](https://zilliverse.feishu.cn/docx/H2zBdRHVtovNQGxvb0xcwpSKnBd)
 
-- [has_connection()](has_connection.md)
+- [has_connection()](https://zilliverse.feishu.cn/docx/XeZwdeK64oGD8rx9DA3ciqNinnh)
 
-- [list_connections()](list_connections.md)
+- [list_connections()](https://zilliverse.feishu.cn/docx/DyPldeRNXo4nMqxQeE0cMnd2nEf)
 
-- [remove_connection()](remove_connection.md)
+- [remove_connection()](https://zilliverse.feishu.cn/docx/L4KSdOVTEotaiyxjTddcVRDhn3E)
 

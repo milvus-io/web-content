@@ -96,15 +96,15 @@ collection.index(index_name="_default_idex_101")
 
 The following operations are related to `index()`
 
-- [create_index()](create_index.md)
+- [create_index()](https://zilliverse.feishu.cn/docx/J76vdPHNgoyp2wxAiTcceIVJnOe)
 
-- [drop_index()](drop_index.md)
+- [drop_index()](https://zilliverse.feishu.cn/docx/AtkDdtMAWodFzExARxnco5xLnsg)
 
-- [has_index()](has_index.md)
+- [has_index()](https://zilliverse.feishu.cn/docx/WDk4dXY8IoV3SJxp9e7c3aq1nBh)
 
-- [index_building_progress()](../utility/index_building_progress.md)
+- [index_building_progress()](https://zilliverse.feishu.cn/docx/OVfodiKa6o3qTGxadYicI975nhh)
 
-- [wait_for_index_building_complete()](../utility/wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](https://zilliverse.feishu.cn/docx/MfR8dw5TioPvw3xvrstcgYixnUb)
 
-- [list_indexes()](../utility/list_indexes.md)
+- [list_indexes()](https://zilliverse.feishu.cn/docx/XLepdUCcTow6rpx5vxxcbLXZnyb)
 

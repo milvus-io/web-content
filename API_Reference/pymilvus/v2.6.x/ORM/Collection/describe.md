@@ -189,11 +189,11 @@ collection.describe()
 
 ## Related operations
 
-- [drop()](drop.md)
+- [drop()](https://zilliverse.feishu.cn/docx/L8UTdDNkPoeew0x6LoDcfHx4nof)
 
-- [flush()](flush.md)
+- [flush()](https://zilliverse.feishu.cn/docx/VdiwdqQ9iofbkoxcc8Kcqk5gnhZ)
 
-- [get_replicas()](get_replicas.md)
+- [get_replicas()](https://zilliverse.feishu.cn/docx/BQKPdDd5xo8OPgxoXorcMxk0nVb)
 
-- [set_properties()](set_properties.md)
+- [set_properties()](https://zilliverse.feishu.cn/docx/ECmAdaYKboPTNlxqkLxcUEZ4nrh)
 

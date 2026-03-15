@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [Model2VecEmbeddingFunction](../Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [Model2VecEmbeddingFunction](https://zilliverse.feishu.cn/docx/WiT4dJ1SJod0fdx4z23cwFbAn7c) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **GeminiEmbeddingFunction()** method of Model2VecEmbeddingFunction shares the same functionality as [encode_documents()](../Model2VecEmbeddingFunction/encode_documents.md) and [encode_queries()](../Model2VecEmbeddingFunction/encode_queries.md).
+The **GeminiEmbeddingFunction()** method of Model2VecEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/WJY1dMUO5owB1gxkOlLcaB2Rn7g) and [encode_queries()](https://zilliverse.feishu.cn/docx/Px9Ydg6KSoNFV2xBumpcGBNqn8d).
 
 ## Request syntax
 

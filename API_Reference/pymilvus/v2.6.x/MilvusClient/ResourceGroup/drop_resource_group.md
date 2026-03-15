@@ -35,12 +35,11 @@ None
 
 ## Examples
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
+Before dropping a resource group, ensure that the number of required nodes and the maximum number of required nodes in its configuration are zeros.
 
-<p>Before dropping a resource group, ensure that the number of required nodes and the maximum number of required nodes in its configuration are zeros.</p>
-<p>You can use <a href="./ResourceGroup-update_resource_groups">update<em>resource</em>groups()</a> to make the change.</p>
+You can use [update_resource_groups()](https://zilliverse.feishu.cn/docx/TJmCdUvGRoOLFAx55qVcqbWGnRs) to make the change.
 
 </div>
 

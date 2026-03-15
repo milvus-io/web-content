@@ -17,11 +17,9 @@ Role(
 )
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Calling the constructor alone does not create the role. You have to explicitly call the <code>create()</code> method of the role object to create the role.</p>
+Calling the constructor alone does not create the role. You have to explicitly call the `create()` method of the role object to create the role.
 
 </div>
 

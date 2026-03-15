@@ -95,7 +95,7 @@ print(job_id)
 
 ## Related methods
 
-- [get_import_progress()](get_import_progress.md)
+- [get_import_progress()](https://zilliverse.feishu.cn/docx/MkWNdU1tvoqlBRxI05Rcu09cnEc)
 
-- [list_import_jobs()](list_import_jobs.md)
+- [list_import_jobs()](https://zilliverse.feishu.cn/docx/P0vxdEVBPoTNKLxkKIzcznlYnNc)
 

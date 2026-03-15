@@ -2,11 +2,9 @@
 
 This operation revokes a privilege granted to the current role.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to <a href="https://milvus.io/docs/authenticate.md">Authenticate User Access</a>.</p>
+To complete this operation, you need to enable authentication on your Milvus instance. For details, refer to [Authenticate User Access](https://milvus.io/docs/authenticate.md).
 
 </div>
 
@@ -47,15 +45,12 @@ revoke(
 
     Applicable privileges vary with the specified **object**. For details, refer to refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <ul>
-    <li><p>To grant all privileges to a kind of object, like <strong>Collection</strong>, <strong>Global</strong>, <strong>User</strong>, use <code>*</code> for privilege name.</p></li>
-    <li><p>When <code>object</code> is set to <code>Global</code>, setting <code>privilege</code> to <code>\*</code> is not equivalent to setting it to <code>All</code>. The <code>All</code> privilege includes all permissions, including any collection and user object.</p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    - To grant all privileges to a kind of object, like **Collection**, **Global**, **User**, use `*` for privilege name.
+    
+    - When `object` is set to `Global`, setting `privilege` to `\*` is not equivalent to setting it to `All`. The `All` privilege includes all permissions, including any collection and user object.
+    
     </div>
 
 - **db_name** (*string*)
@@ -92,21 +87,21 @@ role.revoke("Collection", collection_name, "Insert")
 
 The following operations are related to `revoke()`:
 
-- [add_user()](add_user.md)
+- [add_user()](https://zilliverse.feishu.cn/docx/W7GJdpYrYoYhSaxW6uzcVAZinYf)
 
-- [create()](create.md)
+- [create()](https://zilliverse.feishu.cn/docx/G3h4d3jx6oXFHBxFZlyc9jLKnTO)
 
-- [drop()](drop.md)
+- [drop()](https://zilliverse.feishu.cn/docx/KEzNdJPoDoHOjlx2FC8cNcHqngg)
 
-- [get_users()](get_users.md)
+- [get_users()](https://zilliverse.feishu.cn/docx/CCOhd671iog6rRxu8aOcaPncnLK)
 
-- [grant()](grant.md)
+- [grant()](https://zilliverse.feishu.cn/docx/BapSdVXjQoQXnbxnRYScCagAn1f)
 
-- [is_exist()](is_exist.md)
+- [is_exist()](https://zilliverse.feishu.cn/docx/F8WOdIoz4okn5OxMEymcXNuRnkb)
 
-- [list_grant()](list_grant.md)
+- [list_grant()](https://zilliverse.feishu.cn/docx/JXNXdQuwhoYmZQxSohNcdxtwnzh)
 
-- [list_grants()](list_grants.md)
+- [list_grants()](https://zilliverse.feishu.cn/docx/YRoGdgQmWoIEaJx84ICcHTILnMe)
 
-- [remove_user()](remove_user.md)
+- [remove_user()](https://zilliverse.feishu.cn/docx/SlmSdaD7rocMJsxThNHcOtEknVd)
 

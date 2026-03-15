@@ -26,7 +26,7 @@ FieldSchema(
 
     Name of the field.
 
-- **dtype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) -
+- **dtype** (*[DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)*) -
 
     **[REQUIRED]**
 
@@ -68,13 +68,13 @@ FieldSchema(
 
         Setting this to **True** makes the current field serve as the partition key. In this case, Milvus manages all partitions in the current collection.
 
-        <div class="admonition note">
-
-        <p><b>what is a partition key?</b></p>
-
-        <p>Once a field is designated as the partition key, Milvus automatically creates a partition for each unique value in this field and saves entities in these partitions accordingly.</p>
-        <p>This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.</p>
-        <p>As an alternative, you can set <strong>partition<em>key</em>field</strong> when creating a <strong>CollectionSchema</strong> object.</p>
+        <div class="alert note">
+        
+        Once a field is designated as the partition key, Milvus automatically creates a partition for each unique value in this field and saves entities in these partitions accordingly.
+        
+        This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
+        
+        As an alternative, you can set **partition_key_field** when creating a **CollectionSchema** object.
 
         </div>
 

@@ -2,11 +2,9 @@
 
 This operation switches the client to use a different database. Future operations will use the specified database. The method validates that the database exists before switching.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This is an alias method for <a href="./Database-using_database"><code>using_database()</code></a>.</p>
+This is an alias method for [`using_database()`](https://zilliverse.feishu.cn/docx/OCfid8DdPo1ga1x24JZcV92xnwd).
 
 </div>
 

@@ -10,11 +10,9 @@ class pymilvus.Partition
 
 Constructs a partition in a collection by name, description, and other parameters. 
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>When using partitions, ensure that <strong>enable<em>partition</em>key</strong> is not set to <strong>True</strong> in the collection schema. Otherwise, an error will occur.</p>
+When using partitions, ensure that **enable_partition_key** is not set to **True** in the collection schema. Otherwise, an error will occur.
 
 </div>
 
@@ -36,12 +34,11 @@ Partition(
 
     You can either reference a **Collection** object or its name.
 
-    <div class="admonition note">
-
-    <p><b>what is a collection?</b></p>
-
-    <p>A collection collects data in a two-dimensional table with a fixed number of columns and a variable number of rows. In the table, each column corresponds to a field, and each row represents an entity.</p>
-    <p>A collection can support up to 64 partitions.</p>
+    <div class="alert note">
+    
+    A collection collects data in a two-dimensional table with a fixed number of columns and a variable number of rows. In the table, each column corresponds to a field, and each row represents an entity.
+    
+    A collection can support up to 64 partitions.
 
     </div>
 

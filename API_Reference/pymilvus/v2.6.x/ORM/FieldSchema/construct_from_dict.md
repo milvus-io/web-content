@@ -10,12 +10,11 @@ construct_from_dict(
 )
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
+This is a class method. You should call it from the class instead of an instance of the class as follows:
 
-<p>This is a class method. You should call it from the class instead of an instance of the class as follows:</p>
-<p><code>FieldSchema.construct_from_dict()</code></p>
+`FieldSchema.construct_from_dict()`
 
 </div>
 

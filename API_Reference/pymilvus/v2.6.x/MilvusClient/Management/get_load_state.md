@@ -36,11 +36,9 @@ get_load_state(
 
 A dictionary that contains the status of the specified collection or partition. 
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>A collection is in the loaded state if any or all of its partitions are loaded.</p>
+A collection is in the loaded state if any or all of its partitions are loaded.
 
 </div>
 
@@ -101,9 +99,9 @@ client.get_load_state(
 
 ## Related methods
 
-- [load_collection()](load_collection.md)
+- [load_collection()](https://zilliverse.feishu.cn/docx/FLmWdFP9Zo3JcixOEgucU8JMnLc)
 
-- [refresh_load()](refresh_load.md)
+- [refresh_load()](https://zilliverse.feishu.cn/docx/X3NXdtC2koiAxyxhcUBcv38Wnsh)
 
-- [release_collection()](release_collection.md)
+- [release_collection()](https://zilliverse.feishu.cn/docx/PRR7dRfi8o1s61xFRovccAdRnHe)
 

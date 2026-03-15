@@ -56,11 +56,9 @@ load_partitions(
 
 None
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>A collection is in the loaded state only if any or all of its partitions are loaded.</p>
+A collection is in the loaded state only if any or all of its partitions are loaded.
 
 </div>
 
@@ -115,15 +113,15 @@ client.get_load_state(
 
 ## Related methods
 
-- [create_partition()](create_partition.md)
+- [create_partition()](https://zilliverse.feishu.cn/docx/I6hvdlYUuoUaw3xWqSnce4Fin9g)
 
-- [drop_partition()](drop_partition.md)
+- [drop_partition()](https://zilliverse.feishu.cn/docx/EMI8dM8uooIAFPxVfffcoqRwnZf)
 
-- [get_partition_stats()](get_partition_stats.md)
+- [get_partition_stats()](https://zilliverse.feishu.cn/docx/Jjbsd2I8doQ9pBxBp57ckRdZnZd)
 
-- [has_partition()](has_partition.md)
+- [has_partition()](https://zilliverse.feishu.cn/docx/MxTAd0haboKnRrxQvoOckGghn1T)
 
-- [list_partitions()](list_partitions.md)
+- [list_partitions()](https://zilliverse.feishu.cn/docx/Dxgqdvlk5o2VScxqmL1ctc1Inqb)
 
-- [release_partitions()](release_partitions.md)
+- [release_partitions()](https://zilliverse.feishu.cn/docx/VblKdUEU4o4t31xcFiicIGtjn9g)
 

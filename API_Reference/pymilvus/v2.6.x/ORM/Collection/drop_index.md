@@ -74,15 +74,15 @@ collection.has_index() # False
 
 The following operations are related to `drop_index()`:
 
-- [create_index()](create_index.md)
+- [create_index()](https://zilliverse.feishu.cn/docx/J76vdPHNgoyp2wxAiTcceIVJnOe)
 
-- [has_index()](has_index.md)
+- [has_index()](https://zilliverse.feishu.cn/docx/WDk4dXY8IoV3SJxp9e7c3aq1nBh)
 
-- [index()](index.md)
+- [index()](https://zilliverse.feishu.cn/docx/RkQ8dnWDHo3DiDxiCVRcP1xPnob)
 
-- [index_building_progress()](../utility/index_building_progress.md)
+- [index_building_progress()](https://zilliverse.feishu.cn/docx/OVfodiKa6o3qTGxadYicI975nhh)
 
-- [wait_for_index_building_complete()](../utility/wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](https://zilliverse.feishu.cn/docx/MfR8dw5TioPvw3xvrstcgYixnUb)
 
-- [list_indexes()](../utility/list_indexes.md)
+- [list_indexes()](https://zilliverse.feishu.cn/docx/XLepdUCcTow6rpx5vxxcbLXZnyb)
 

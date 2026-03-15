@@ -73,13 +73,13 @@ utility.wait_for_loading_complete(
 
 The following operations are related to `wait_for_loading_complete()`:
 
-- [Partition](../Partition/Partition.md)
+- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
 
-- [load()](../Collection/load.md)
+- [load()](https://zilliverse.feishu.cn/docx/HQDndiGwloWKIexgPCUcEZGenOh)
 
-- [release()](../Collection/release.md)
+- [release()](https://zilliverse.feishu.cn/docx/CBwkdDs7MoKkVKx0kJgcPUNxn6s)
 
-- [load_state()](load_state.md)
+- [load_state()](https://zilliverse.feishu.cn/docx/BJysdlj1MoksHZxNRxicHn9fnSh)
 
-- [loading_progress()](loading_progress.md)
+- [loading_progress()](https://zilliverse.feishu.cn/docx/HQiHd82orov0XvxAzLWcl5xRnzc)
 

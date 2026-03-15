@@ -66,11 +66,11 @@ collection.set_properties(
 
 The following operations are related to `insert()`:
 
-- [describe()](describe.md)
+- [describe()](https://zilliverse.feishu.cn/docx/EZwsd887JojFjLxbMByckhW0nxg)
 
-- [drop()](drop.md)
+- [drop()](https://zilliverse.feishu.cn/docx/L8UTdDNkPoeew0x6LoDcfHx4nof)
 
-- [flush()](flush.md)
+- [flush()](https://zilliverse.feishu.cn/docx/VdiwdqQ9iofbkoxcc8Kcqk5gnhZ)
 
-- [get_replicas()](get_replicas.md)
+- [get_replicas()](https://zilliverse.feishu.cn/docx/BQKPdDd5xo8OPgxoXorcMxk0nVb)
 

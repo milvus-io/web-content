@@ -108,16 +108,15 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
 - Response structure
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>A <strong>SearchResult</strong> object contains a list of <strong>Hits</strong> objects, each corresponding to a query vector in the search request. </p>
-    <p>A <strong>Hits</strong> object contains a list of <strong>Hit</strong> objects, each corresponding to an entity hit by the search.</p>
+    <div class="alert note">
+    
+    A **SearchResult** object contains a list of **Hits** objects, each corresponding to a query vector in the search request. 
+    
+    A **Hits** object contains a list of **Hit** objects, each corresponding to an entity hit by the search.
 
     </div>
 
-    ```plaintext
+    ```python
     ├── SearchResult
     │   └── Hits  
     │       ├── ids
@@ -230,13 +229,13 @@ for hits in res:
 
 The following operations are related to `search()`:
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/V9BidASNqoWYrmxo11ecuN99neg)
 
-- [flush()](flush.md)
+- [flush()](https://zilliverse.feishu.cn/docx/VRGwdg75Ao7ZXQx7uANc9wzXnVb)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/QXDxdv36FoVgjcxDV1gcDwWXnsd)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/N97pdfkjlo9j61xrtL2cbB79nKe)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/MQMzddDnao5Zz0xmSRncZM2nn5b)
 

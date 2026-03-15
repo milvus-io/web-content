@@ -47,15 +47,12 @@ query_iterator(
 
     The value defaults to **None**.
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <ul>
-    <li><p>Setting this as <code>output_fields=["\*"]</code> outputs all fields.</p></li>
-    <li><p>Setting this as <code>output_fields=["count(\*)"]</code> outputs the loaded entities that match the conditions specified in the <strong>filter</strong> argument. </p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    - Setting this as `output_fields=["\*"]` outputs all fields.
+    
+    - Setting this as `output_fields=["count(\*)"]` outputs the loaded entities that match the conditions specified in the **filter** argument.
+    
     </div>
 
 - **timeout** (*float* | *None*) -
@@ -78,13 +75,13 @@ query_iterator(
 
         The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
-        <div class="admonition note">
-
-        <p><b>what is the consistency level?</b></p>
-
-        <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-        <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-        <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+        <div class="alert note">
+        
+        Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+        
+        Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is **Bounded Staleness**.
+        
+        You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
         </div>
 
@@ -94,11 +91,9 @@ query_iterator(
 
         If this parameter is set, MilvusZilliz Cloud executes the query only if all entities inserted before this timestamp are visible to query nodes. 
 
-        <div class="admonition note">
-
-        <p><b>notes</b></p>
-
-        <p>This parameter is valid when the default consistency level applies.</p>
+        <div class="alert note">
+        
+        This parameter is valid when the default consistency level applies.
 
         </div>
 
@@ -108,11 +103,9 @@ query_iterator(
 
         The value defaults to **5**. If this parameter is set, MilvusZilliz Cloud calculates the guarantee timestamp by subtracting this from the current timestamp.
 
-        <div class="admonition note">
-
-        <p><b>notes</b></p>
-
-        <p>This parameter is valid when a consistency level other than the default one applies.</p>
+        <div class="alert note">
+        
+        This parameter is valid when a consistency level other than the default one applies.
 
         </div>
 
@@ -148,11 +141,9 @@ A **QueryIterator** instance that provides the following methods:
 
     This method closes the current **QueryIterator** instance.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
+If the number of returned entities is less than expected, duplicate entities may exist in your collection.
 
 </div>
 

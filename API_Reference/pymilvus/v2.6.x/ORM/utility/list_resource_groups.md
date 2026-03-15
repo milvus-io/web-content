@@ -60,13 +60,13 @@ utility.list_resource_groups(
 
 The following operations are related to `list_resource_groups()`:
 
-- [create_resource_group()](create_resource_group.md)
+- [create_resource_group()](https://zilliverse.feishu.cn/docx/X5qsdhFQ5oOhkcxOprzcOZq4nMc)
 
-- [describe_resource_group()](describe_resource_group.md)
+- [describe_resource_group()](https://zilliverse.feishu.cn/docx/HScCdxLNJotPCcxb4AZcxsNJn9c)
 
-- [drop_resource_group()](drop_resource_group.md)
+- [drop_resource_group()](https://zilliverse.feishu.cn/docx/EofGdftYjoQ9E6x8mxLcpbG1nhc)
 
-- [transfer_node()](transfer_node.md)
+- [transfer_node()](https://zilliverse.feishu.cn/docx/QHcpd1aJzo5aYbxJtMXc58een4f)
 
-- [transfer_replica()](transfer_replica.md)
+- [transfer_replica()](https://zilliverse.feishu.cn/docx/SuePdciB0o4du5xtpIhcMVyYnPb)
 

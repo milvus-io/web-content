@@ -24,7 +24,7 @@ encode_queries(
 
 A dictionary containing the query embeddings.
 
-When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
+When initializing [BGEM3EmbeddingFunction](https://zilliverse.feishu.cn/docx/XYSVdCqCDoJ9Y5xqKEAceYkpnnh?from=from_copylink), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
 **Exceptions:**
 

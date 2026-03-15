@@ -2,13 +2,13 @@
 
 This operation creates a new resource group. 
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>what is a resource group?</b></p>
+A resource group can hold several or all of the query nodes in a Milvus instance. When you load a collection by calling load(), Milvus loads the data of the collection into certain query nodes.
 
-<p>A resource group can hold several or all of the query nodes in a Milvus instance. When you load a collection by calling load(), Milvus loads the data of the collection into certain query nodes.</p>
-<p>There is a default resource group named <strong>_<em>default</em>resource_group</strong> available in every Milvus instance that holds all its query nodes. </p>
-<p>Use <strong>describe<em>resource</em>group()</strong> to check the actual number. If there are multiple query nodes available, consider creating resource groups and distributing the query nodes among them.</p>
+There is a default resource group named **__default_resource_group** available in every Milvus instance that holds all its query nodes. 
+
+Use **describe_resource_group()** to check the actual number. If there are multiple query nodes available, consider creating resource groups and distributing the query nodes among them.
 
 </div>
 
@@ -119,13 +119,13 @@ except Exception:
 
 The following operations are related to `create_resource_group()`:
 
-- [describe_resource_group()](describe_resource_group.md)
+- [describe_resource_group()](https://zilliverse.feishu.cn/docx/HScCdxLNJotPCcxb4AZcxsNJn9c)
 
-- [drop_resource_group()](drop_resource_group.md)
+- [drop_resource_group()](https://zilliverse.feishu.cn/docx/EofGdftYjoQ9E6x8mxLcpbG1nhc)
 
-- [list_resource_groups()](list_resource_groups.md)
+- [list_resource_groups()](https://zilliverse.feishu.cn/docx/FXTZd5FgNo9ta0xvjaIclEM1nPf)
 
-- [transfer_node()](transfer_node.md)
+- [transfer_node()](https://zilliverse.feishu.cn/docx/QHcpd1aJzo5aYbxJtMXc58een4f)
 
-- [transfer_replica()](transfer_replica.md)
+- [transfer_replica()](https://zilliverse.feishu.cn/docx/SuePdciB0o4du5xtpIhcMVyYnPb)
 

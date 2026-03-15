@@ -73,17 +73,17 @@ client.grant_role(user_name="user_1", role_name="read_only")
 
 ## Related methods
 
-- [create_role()](create_role.md)
+- [create_role()](https://zilliverse.feishu.cn/docx/OUz3drncZo1Er8xyITZcYz66nWE)
 
-- [describe_role()](describe_role.md)
+- [describe_role()](https://zilliverse.feishu.cn/docx/JJz3dFrE2oJP3AxySWYcJlf4nMh)
 
-- [drop_role()](drop_role.md)
+- [drop_role()](https://zilliverse.feishu.cn/docx/Vmxpd3MttodOE3x3V11cVTeunDh)
 
-- [grant_privilege()](grant_privilege.md)
+- [grant_privilege()](https://zilliverse.feishu.cn/docx/W39Wdr7S6ohrtfxI8r7cyTeInlb)
 
-- [list_roles()](list_roles.md)
+- [list_roles()](https://zilliverse.feishu.cn/docx/MApVdDl17oU8OixzbMPcgceKnOh)
 
-- [revoke_privileges()](revoke_privileges.md)
+- [revoke_privileges()](https://zilliverse.feishu.cn/docx/UP2GdfHHzoIQ56x2JvScs0sAnzh)
 
-- [revoke_role()](revoke_role.md)
+- [revoke_role()](https://zilliverse.feishu.cn/docx/JJOId59ePoMLefxz1ChcBZ6inOh)
 
