@@ -1,0 +1,145 @@
+# create_schema()
+
+This operation creates a collection schema.
+
+## Request syntax
+
+```python
+MilvusClient.create_schema(**kwargs) -> CollectionSchema
+```
+
+<div class="alert note">
+
+This is a class method. You should call this method like this: `MilvusClient.create_schema()`.
+
+</div>
+
+**PARAMETERS:**
+
+- **kwargs** -
+
+    - **auto_id** (*bool*)
+
+        Whether allows the primary field to automatically increment.
+
+        Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.
+
+    - **enable_dynamic_field** (*bool*)
+
+        Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.
+
+        When you set this to **True**, Milvus  will create a field called **&#36;meta** to store any undefined fields and their values from the data that is inserted.
+
+        <div class="alert note">
+        
+        If the data being inserted into the target collection includes fields that are not defined in the collection's schema, those fields will be saved in a reserved dynamic field named **&#36;meta** as key-value pairs.
+
+        </div>
+
+    - **primary_field** (*str*)
+
+        The name of the primary field.
+
+    - **partition_key_field** (*str*)
+
+        The name of the field that serves as the partition key.
+
+        Setting this makes Milvus manage all partitions in the current collection.
+
+        This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
+
+        <div class="alert note">
+        
+        Once a field is designated as the partition key, Milvus calculates a hash based on the partition key value of each inserted entity and saves entities in the partitions of the target collection accordingly.
+        
+        This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
+
+        </div>
+
+**RETURN TYPE:**
+
+*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*
+
+**RETURNS:**
+
+A **[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)** object.
+
+**EXCEPTIONS:**
+
+- **MilvusException**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Examples
+
+```python
+from pymilvus import MilvusClient, DataType
+
+# 1. Create a schema
+schema = MilvusClient.create_schema(
+    auto_id=False,
+    enable_dynamic_field=False,
+)
+
+# 2. Add fields to schema
+schema.add_field(field_name="my_id", datatype=DataType.INT64, is_primary=True)
+
+# {
+#     'auto_id': False, 
+#     'description': '', 
+#     'fields': [
+#         {
+#             'name': 'my_id', 
+#             'description': '', 
+#             'type': <DataType.INT64: 5>, 
+#             'is_primary': True, 
+#             'auto_id': False
+#         }
+#     ]
+# }
+
+schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
+
+# {
+#     'auto_id': False, 
+#     'description': '', 
+#     'fields': [
+#         {
+#             'name': 'my_id', 
+#             'description': '', 
+#             'type': <DataType.INT64: 5>, 
+#             'is_primary': True, 
+#             'auto_id': False
+#         }, 
+#         {
+#             'name': 'my_vector', 
+#             'description': '', 
+#             'type': <DataType.FLOAT_VECTOR: 101>, 
+#             'params': {
+#                 'dim': 5
+#             }
+#         }        
+#     ]
+# }
+```
+
+## Related methods
+
+- [create_collection()](https://zilliverse.feishu.cn/docx/TziHdCu4VoURrfxAMsUcsRhQnub)
+
+- [describe_collection()](https://zilliverse.feishu.cn/docx/MCkjdiRNKo2HCCxzHReclrgAnbg)
+
+- [drop_collection()](https://zilliverse.feishu.cn/docx/QNB4d2q2ZorIApxpnzqczW2HnL7)
+
+- [get_collection_stats()](https://zilliverse.feishu.cn/docx/VVyNdx038oECxNxMQavc9vssnoh)
+
+- [has_collection()](https://zilliverse.feishu.cn/docx/SSQ6dFGdxouy7hxRwCOcatnEn0e)
+
+- [list_collections()](https://zilliverse.feishu.cn/docx/BHyidrVcyoPwxexHLrnceOSAnRe)
+
+- [rename_collection()](https://zilliverse.feishu.cn/docx/IeiIdJ71Pox2OjxMiOzczUTenud)
+
+- [IndexType](https://zilliverse.feishu.cn/docx/FdLUdaL43oIuqTxJVnbcHxgqnkh)
+
+- [DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)
+
