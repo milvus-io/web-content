@@ -1,0 +1,29 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: {{ sidebar_position }}
+slug: /restful/{{ page_slug }}
+beta: {{ beta_tag }}
+title: "{{ page_title }} | RESTful"
+description: "{{ page_excerpt }} | RESTful"
+hide_table_of_contents: true
+sidebar_label: "{{ page_title }}"
+sidebar_custom_props: { badges: ['{{ page_method }}']}
+keywords: 
+  - zilliz cloud
+  - zilliz
+  - cloud
+  - "{{ page_title }}"
+  - "{{ page_method }}"
+  - RESTful
+  - API
+---
+
+# {{ page_title }}
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="{{target}}" lang="{{lang}}" />
+
+export const specs = {{ specs }}
+export const endpoint = "{{ page_url }}"
+export const method = "{{ page_method }}"

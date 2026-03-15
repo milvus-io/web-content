@@ -1,0 +1,9 @@
+{
+    "documentation-qa-using-zilliz-cloud-and-llamaindex": "Integrations with LLamaIndex",
+    "image-search-with-zilliz-cloud-and-pytorch": "Integrations with PyTorch",
+    "movie-search-using-zilliz-cloud-and-sentencetransformers": "Integrations with SentenceTransformers",
+    "question-answering-over-documents-with-zilliz-cloud-and-langchain": "Integrations with LangChain",
+    "question-answering-using-zilliz-cloud-and-cohere": "Integrations with Cohere",
+    "question-answering-using-zilliz-cloud-and-hugging-face": "Integrations with Hugging Face",
+    "similarity-search-with-zilliz-cloud-and-openai": "Integrations with OpenAI"
+}

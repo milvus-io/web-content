@@ -1,0 +1,146 @@
+[
+    {
+        "name": "cloud-meta",
+        "description": "This set of APIs provides a way to view cloud providers and regions."
+    },
+    {
+        "name": "cluster-operations",
+        "description": "This set of APIs provides a way to manage Zilliz Cloud clusters in a cloud provider."
+    },
+    {
+        "name": "collection-operations",
+        "description": "This set of APIs provides a way to manage collections",
+        "milvus": {
+            "name": "Collection (v1)"
+        }
+    },
+    {
+        "name": "import-operations",
+        "description": "This set of APIs provides a way to import data."
+    },
+    {
+        "name": "pipeline-operations",
+        "description": "This set of APIs provides a way to manage Zilliz Cloud Pipelines."
+    },
+    {
+        "name": "vector-operations",
+        "description": "This set of APIs provides a way to perform CRUD operations.",
+        "milvus": {
+            "name": "Vector (v1)"
+        }
+    },
+    {
+        "name": "collection-operations-v2",
+        "description": "This set of APIs provides a way to manage collections.",
+        "milvus": {
+            "name": "Collection (v2)"
+        }
+    },
+    {
+        "name": "vector-operations-v2",
+        "description": "This set of APIs provides a way to perform CRUD operations",
+        "milvus": {
+            "name": "Vector (v2)"
+        }
+    },
+    {
+        "name": "partition-operations-v2",
+        "description": "This set of APIs provides a way to manage partitions.",
+        "milvus": {
+            "name": "Partition (v2)"
+        }
+    },
+    {
+        "name": "user-operations-v2",
+        "description": "This set of APIs provides a way to manage the users.",
+        "milvus": {
+            "name": "User (v2)"
+        }
+    },
+    {
+        "name": "role-operations-v2",
+        "description": "This set of APIs provides a way to manage roles.",
+        "milvus": {
+            "name": "Role (v2)"
+        }
+    },
+    {
+        "name": "index-operations-v2",
+        "description": "This set of APIs provides a way to manage indexes.",
+        "milvus": {
+            "name": "Index (v2)"
+        }
+    },
+    {
+        "name": "alias-operations-v2",
+        "description": "This set of APIs provides a way to manage collection aliases.",
+        "milvus": {
+            "name": "Alias (v2)"
+        }
+    },
+    {
+        "name": "cloud-meta-v2",
+        "description": "This set of APIs provides a way to view cloud providers and regions."
+    },
+    {
+        "name": "cluster-operations-v2",
+        "description": "This set of APIs provides a way to manage Zilliz Cloud clusters in a cloud provider."
+    },
+    {
+        "name": "import-operations-v2",
+        "description": "This set of APIs provides a way to import data.",
+        "milvus": {
+            "name": "Import (v2)"
+        }
+    },
+    {
+        "name": "cloud-migration-v2",
+        "description": "This set of APIs provides a way to migration data into Zilliz Cloud clusters."
+    },
+    {
+        "name": "cloud-job-v2",
+        "description": "This set of APIs provides a way to manipulate control plane jobs in Zilliz Cloud."
+    },
+    {
+        "name": "backup-and-restore-v2",
+        "description": "This set of APIs provides a way to backup and restore data in Zilliz Cloud."
+    },
+    {
+        "name": "database-operations-v2",
+        "description": "This set of APIs provides a way to manage databases.",
+        "milvus": {
+            "name": "Database (v2)"
+        }
+    },
+    {
+        "name": "resource-group-v2",
+        "description": "This set of APIs provides a way to manage resource groups.",
+        "milvus": {
+            "name": "Resource Group (v2)"
+        }
+    },
+    {
+        "name": "invoices-v2",
+        "description": "This set of APIs provides a way to list invoices and their details."
+    },
+    {
+        "name": "usage-v2",
+        "description": "This set of APIs provides a way to list usage details."
+    },
+    {
+        "name": "metrics-and-alerts-v2",
+        "description": "This set of APIs provides a way to manage metrics and alerts."
+    },
+    {
+        "name": "extract-load-and-transform-v2",
+        "description": "This set of APIs provides a way to extract, load, and transform data."
+    },
+    {
+        "name": "volume-operations-v2",
+        "description": "This set of APIs provides a way to manage volumes."
+    },
+    {
+        "name": "project-operations-v2",
+        "description": "This set of APIs provides a way to manage projects."
+    }
+]

@@ -3,3 +3,5 @@ node_modules
 .env
 .output
 yarn-error.log
+
+scripts/lark-docs/meta/sources/

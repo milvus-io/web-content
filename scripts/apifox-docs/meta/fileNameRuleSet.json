@@ -1,0 +1,142 @@
+[
+    {
+        "path": "-collections",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-collection",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "delete",
+        "name": "Delete",
+        "match": "endsWith"
+    },
+    {   
+        "path": "get",
+        "name": "Get",
+        "match": "endsWith"
+    },
+    {
+        "path": "insert",
+        "name": "Insert",
+        "match": "endsWith"
+    },
+    {
+        "path": "hybrid-search",
+        "name": "Hybrid Search",
+        "match": "contains"
+    },
+    {
+        "path": "search",
+        "name": "Search",
+        "match": "endsWith"
+    },
+    {
+        "path": "upsert",
+        "name": "Upsert",
+        "match": "endsWith"
+    },
+    {
+        "path": "query",
+        "name": "Query",
+        "match": "endsWith"
+    },
+    {
+        "path": "-aliases",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-alias",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-index",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-partitions",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-partition",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-to-user",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-from-user",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-user",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },    
+    {
+        "path": "-to-role",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-from-role",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-role",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-import-jobs",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-import-job",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "alter-field-properties",
+        "name": "Alter Field Properties",
+        "match": "contains"
+    },
+    {
+        "path": "refresh-load",
+        "name": "Refresh Load",
+        "match": "contains"
+    },
+    {
+        "path": "-database",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-databases",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },    
+    {
+        "path": "-resource-group",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    },
+    {
+        "path": "-resource-groups",
+        "name": "-",
+        "match": "removeAndCapitalize"
+    }
+]
