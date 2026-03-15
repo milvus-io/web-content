@@ -8,9 +8,9 @@ This is an enumeration that provides the following constants.
 
     Sets the file type to **NumPy** (*.npy*).
 
-- **JSON** = 2
+- **JSON_RB** = 2
 
-    Sets the file type to **JSON** (*.json*). 
+    Sets the file type to **JSON** (*.json*).
 
 - **PARQUET** = 3
 
@@ -30,6 +30,6 @@ local_writer = LocalBulkWriter(
     local_path=Path(OUTPUT_PATH).joinpath('json'),
     segment_size=4*1024*1024,
     # highlight-next
-    file_type=BulkFileType.PARQUET
+    file_type=BulkFileType.JSON_RB
 )
 ```
