@@ -3,13 +3,13 @@
 This operation creates a user.
 
 ```javascript
-createUser(data): Promise<ResStatus>
+await milvusClient.createUser(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createUser({
+await milvusClient.createUser({
    username: string,
    password: string,
    timeout?: number
@@ -20,13 +20,13 @@ milvusClient.createUser({
 
 - **username** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the user to create.
 
 - **password** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The password of the user to create.
 
@@ -36,7 +36,7 @@ milvusClient.createUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -64,8 +64,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.createUser({
+```javascript
+await milvusClient.createUser({
    username: 'exampleUser',
    password: 'examplePassword',
  })

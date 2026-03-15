@@ -3,13 +3,13 @@
 This operation checks whether the specified partition exists in the specified collection.
 
 ```javascript
-hasPartition(data): Promise<BoolResponse>
+await milvusClient.hasPartition(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.hasPartition({
+await milvusClient.hasPartition({
     db_name: string,
     collection_name: string,
     partition_name: string,
@@ -25,13 +25,13 @@ milvusClient.hasPartition({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **partition_name** (*string*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the partition to check.
 
@@ -41,7 +41,7 @@ milvusClient.hasPartition({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;BoolResponse&gt;*
+**RETURNS** *Promise\<BoolResponse>*
 
 This method returns a promise that resolves to a BoolResponse object.
 
@@ -74,8 +74,11 @@ This method returns a promise that resolves to a BoolResponse object.
 
 ## Example
 
-```java
-new milvusClient(MILUVS_ADDRESS).hasPartition({
+```javascript
+new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+}).hasPartition({
     collection_name: 'my_collection',
     partition_name: 'my_partition',
  });

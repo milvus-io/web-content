@@ -3,13 +3,13 @@
 This operation checks whether a specific collection exists.
 
 ```javascript
-hasCollection(data): Promise<BoolResponse>
+await milvusClient.hasCollection(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.hasCollection({ 
+await milvusClient.hasCollection({ 
     db_name: string,
     collection_name: string,
     timeout?: number
@@ -24,7 +24,7 @@ milvusClient.hasCollection({
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
@@ -34,7 +34,7 @@ milvusClient.hasCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;BoolResponse&gt;*
+**RETURNS** *Promise\<BoolResponse>*
 
 This method returns a promise that resolves to a **BoolResponse** object.
 
@@ -67,8 +67,11 @@ This method returns a promise that resolves to a **BoolResponse** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const res = await milvusClient.hasCollection({ collection_name: 'my_collection' });
 ```
 

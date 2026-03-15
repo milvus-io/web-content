@@ -3,13 +3,13 @@
 This is a method template.
 
 ```javascript
-describeUser(data): Promise<SelectUserResponse>
+await milvusClient.describeUser(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.describeUser({
+await milvusClient.describeUser({
     includeRoleInfo?: boolean,
     timeout?: number,
     username: string
@@ -20,7 +20,7 @@ milvusClient.describeUser({
 
 - **username** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the user to describe.
 
@@ -34,7 +34,7 @@ milvusClient.describeUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;SelectUserResponse&gt;*
+**RETURNS** *Promise\<SelectUserResponse>*
 
 This method returns a promise that resolves to a **SelectUserResponse** object.
 
@@ -51,7 +51,7 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 
     A **UserResult** type.
 
-    - **roles** (*RoleEntity&#91;&#93;*) -
+    - **roles** (*RoleEntity[]*) -
 
         - **name** (*string*) - 
 
@@ -81,7 +81,7 @@ This method returns a promise that resolves to a **SelectUserResponse** object.
 
 ## Example
 
-```java
+```javascript
 milvusClient.describeUser({username: 'name'})
 ```
 

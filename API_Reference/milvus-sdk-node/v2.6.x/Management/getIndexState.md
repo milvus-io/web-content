@@ -3,13 +3,13 @@
 This operation gets the status of the specified index.
 
 ```javascript
-getIndexState(data): Promise<GetIndexStateResponse>
+await milvusClient.getIndexState(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getIndexState({
+await milvusClient.getIndexState({
       db_name?: string,
       collection_name: string,
       field_name?: string,
@@ -26,7 +26,7 @@ milvusClient.getIndexState({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -42,7 +42,7 @@ milvusClient.getIndexState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;GetIndexStateResponse&gt;*
+**RETURNS** *Promise\<GetIndexStateResponse>*
 
 This method returns a promise that resolves to a **GetIndexStateResponse** object.
 
@@ -105,7 +105,7 @@ This method returns a promise that resolves to a **GetIndexStateResponse** objec
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const getIndexStateReq = {
   collection_name: 'my_collection',

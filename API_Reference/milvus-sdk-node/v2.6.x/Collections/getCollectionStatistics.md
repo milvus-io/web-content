@@ -3,13 +3,13 @@
 This operation lists the statistics collected on a specific collection.
 
 ```javascript
-getCollectionStatistics(data): Promise<StatisticsResponse>
+await milvusClient.getCollectionStatistics(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getCollectionStatistics({ 
+await milvusClient.getCollectionStatistics({ 
     db_name: string,
     collection_name: string,
     timeout?: number 
@@ -24,7 +24,7 @@ milvusClient.getCollectionStatistics({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
@@ -34,7 +34,7 @@ milvusClient.getCollectionStatistics({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;StatisticsResponse&gt;*
+**RETURNS** *Promise\<StatisticsResponse>*
 
 This method returns a promise that resolves to a **StatisticsResponse** object.
 
@@ -68,8 +68,11 @@ This method returns a promise that resolves to a **StatisticsResponse** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const res = await milvusClient.getCollectionStatistics({ collection_name: 'my_collection' });
 ```
 

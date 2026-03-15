@@ -3,7 +3,7 @@
 This operation drops a user.
 
 ```javascript
-deleteUser(data): Promise<ResStatus>
+await milvusClient.deleteUser(data)
 ```
 
 ## Request Syntax
@@ -11,7 +11,7 @@ deleteUser(data): Promise<ResStatus>
 This method has the following alternatives.
 
 ```javascript
-milvusClient.deleteUser({
+await milvusClient.deleteUser({
     username: string,
     timeout?: number
 })
@@ -21,7 +21,7 @@ milvusClient.deleteUser({
 
 - **username** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the user to drop.
 
@@ -31,7 +31,7 @@ milvusClient.deleteUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -59,8 +59,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.deleteUser({
+```javascript
+await milvusClient.deleteUser({
     username: 'exampleUser'
 })
 ```

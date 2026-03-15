@@ -3,13 +3,13 @@
 This operation drops a specified collection alias. 
 
 ```javascript
-dropAlias(data): Promise<ResStatus>
+await milvusClient.dropAlias(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropAlias({
+await milvusClient.dropAlias({
    alias: string,
    db_name: string,
    collection_name: string,
@@ -21,7 +21,7 @@ milvusClient.dropAlias({
 
 - **alias** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The alias of a collection. 
 
@@ -41,7 +41,7 @@ milvusClient.dropAlias({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -69,8 +69,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.dropAlias({
    alias: 'my_collection_alias',
    collection_name: 'my_collection',

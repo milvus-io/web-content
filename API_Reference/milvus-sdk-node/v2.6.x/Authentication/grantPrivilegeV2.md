@@ -3,7 +3,7 @@
 This operation assigns a privilege or a privilege group to a role.
 
 ```javascript
-grantPrivilegeV2(data): Promise<ResStatus>
+await milvusClient.grantPrivilegeV2(data)
 ```
 
 ## Request Syntax
@@ -22,13 +22,13 @@ grantPrivilegeV2(data): Promise<ResStatus>
 
 - **role** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to assign privileges to.
 
 - **privilege** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the privilege or privilege group to assign. 
 
@@ -36,13 +36,13 @@ grantPrivilegeV2(data): Promise<ResStatus>
 
 - **db_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target database of this operation. 
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection of this operation. 
 
@@ -52,7 +52,7 @@ grantPrivilegeV2(data): Promise<ResStatus>
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -80,7 +80,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 await milvusClient.grantPrivilegeV2({
     role: 'exampleRole',
     privilege: 'CreateCollection',

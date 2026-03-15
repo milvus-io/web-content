@@ -3,13 +3,13 @@
 This operation sets the active database for the gRPC client.
 
 ```javascript
-useDatabase(data?): Promise<ResStatus>
+await milvusClient.useDatabase(data?)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.useDatabase({
+await milvusClient.useDatabase({
     db_name: string
 })
 ```
@@ -22,7 +22,7 @@ milvusClient.useDatabase({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -51,6 +51,9 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.useDatabase({ db_name: 'new_db' });
 ```

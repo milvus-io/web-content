@@ -3,13 +3,13 @@
 This operation gets specific entities by their IDs.
 
 ```javascript
-get(data): Promise<QueryResults>
+await milvusClient.get(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.get({
+await milvusClient.get({
    db_name: string,
    collection_name: string,
    consistency_level?: ConsistencyLevelEnum,
@@ -30,13 +30,13 @@ milvusClient.get({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **ids** (*string&#91;&#93;* | *number&#91;&#93;*) -
+- **ids** (*string[]* | *number[]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A specific entity ID or a list of entity IDs.
 
@@ -60,11 +60,11 @@ milvusClient.get({
 
     The sum of this value and `limit` should be less than 16,384. 
 
-- **partition_names** (*string&#91;&#93;*) -
+- **partition_names** (*string[]*) -
 
     A list of the names of the partitions in the target collection.
 
-- **output_fields** (*string&#91;&#93;*) -
+- **output_fields** (*string[]*) -
 
     A list of field names to include in each entity in return.
 
@@ -76,7 +76,7 @@ milvusClient.get({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -89,7 +89,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 **PARAMETERS:**
 
-- **data** (*list&#91;string&#93;*) -
+- **data** (*list[string]*) -
 
     A list of entities returned.
 
@@ -109,8 +109,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const getResults = await milvusClient.get({
    collection_name: 'my_collection',
    ids: ['1','2','3','4','5','6','7','8'],

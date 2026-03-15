@@ -3,13 +3,13 @@
 This operation lists detailed information about a specific collection.
 
 ```javascript
-describeCollection(data): Promise<DescribeCollectionResponse>
+await milvusClient.describeCollection(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.describeCollection({ 
+await milvusClient.describeCollection({ 
     db_name: string,
     collection_name: string 
 })
@@ -23,7 +23,7 @@ milvusClient.describeCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -33,7 +33,7 @@ milvusClient.describeCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns Promise\&lt;DescribeCollectionResponse&gt;*
+**Returns Promise\<DescribeCollectionResponse>*
 
 This method returns a promise that resolves to a **DescribeCollectionResponse** object.
 
@@ -41,21 +41,16 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 {
     aliases: string,
     collectionID: string,
-    collectionName: string,
     consistency_level: string,
     created_timestamp: string,
     created_utc_timestamp: string,
     db_name: string,
-    functions: FunctionObject[],
     num_partitions: string,
     physical_channel_names: string,
-    properties: KeyValuePair<string, string | number>[],
     schema: object,
     shards_num: int,
     start_positions: string,
     status: object,
-    update_timestamp: number,
-    update_timestamp_str: string,
     virtual_channel_names: string  
 }
 ```
@@ -69,10 +64,6 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 - **collectionID** (*string*)-
 
     The ID of the collection.
-
-- **collectionName** (*string*) -
-
-    The name of the collection.
 
 - **consistency_level** (*string*)-
 
@@ -90,10 +81,6 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     The name of the cluster to which the collection belongs.
 
-- **functions** (*FunctionObject&#91;&#93;*) -
-
-    The list of functions configured in the collection.
-
 - **num_partitions** (*string*)-
 
     The number of partitions in the collection.
@@ -101,10 +88,6 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 - **physical_channel_names** (*string*)-
 
     A list of the names of the physical channels in this collection.
-
-- **properties** (*KeyValuePair&lt;string, string | number&gt;*) -
-
-    The collection properties in key-value pairs. 
 
 - **schema** (*object*)-
 
@@ -122,7 +105,7 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
         Whether the reserved JSON field **&#36;meta** is used to store non-schema-defined fields in key-value pairs.
 
-    - **fields** (*FieldSchema&#91;&#93;*) -
+    - **fields** (*FieldSchema[]*) -
 
         A list of schema-defined fields. 
 
@@ -134,9 +117,9 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
     The number of shards in the collection.
 
-- **start_positions** (*string&#91;&#93;*) -
+- **virtual_channel_names** (*string*)-
 
-    A list of start positions.
+A list of the names of the virtual channels in this collection.
 
 - **status** (*object*)-
 
@@ -152,22 +135,17 @@ This method returns a promise that resolves to a **DescribeCollectionResponse** 
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **update_timestamp** (*number*) -
+- **shards_num** (*string*)-
 
-    The timestamp at which the collection has been updated.
-
-- **update_timestamp_str** (*string*) -
-
-    The update timestamp in string format.
-
-- **virtual_channel_names** (*string&#91;&#93;*) -
-
-    A list of the names of the virtual channels in this collection.
+    The number of shards in the collection.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const res = await milvusClient.describeCollection({ collection_name: 'my_collection' });
 ```
 

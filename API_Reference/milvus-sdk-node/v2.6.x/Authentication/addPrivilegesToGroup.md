@@ -3,13 +3,13 @@
 This operation adds privileges to a specific privilege group in Milvus.
 
 ```javascript
-addPrivilegesToGroup(data): Promise<ResStatus>
+await milvusClient.addPrivilegesToGroup(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.addPrivilegesToGroup({
+await milvusClient.addPrivilegesToGroup({
    group_name: string,
    privileges: string[],
    timeout?: number
@@ -20,13 +20,13 @@ milvusClient.addPrivilegesToGroup({
 
 - **group_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a privilege group.
 
-- **privileges** (*string&#91;&#93;*) -
+- **privileges** (*string[]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The list of privileges to add to the above group.
 
@@ -36,7 +36,7 @@ milvusClient.addPrivilegesToGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -64,7 +64,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 await milvusClient.addPrivilegesToGroup({
     group_name: 'exampleGroup',
     privileges: ['CreateCollection', 'DropCollection'],

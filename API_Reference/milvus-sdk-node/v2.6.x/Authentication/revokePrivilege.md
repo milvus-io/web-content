@@ -3,13 +3,13 @@
 This operation revokes a privilege already assigned to a role.
 
 ```javascript
-revokePrivilege(data): Promise<ResStatus>
+await milvusClient.revokePrivilege(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.revokePrivilege({
+await milvusClient.revokePrivilege({
    roleName: string,
    object: RbacObjects,
    objectName: string,
@@ -21,13 +21,13 @@ milvusClient.revokePrivilege({
 
 - **roleName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to revoke privileges from.
 
 - **object** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The type of object for which the privilege is to be assigned.
 
@@ -35,7 +35,7 @@ milvusClient.revokePrivilege({
 
     - **Global**
 
-        System-wide objects that allow the user to perform actions that affect all collections, users, or system-wide settings. When **object** is set to **Global**, set **objectName** to the wildcard (*****), indicating all objects of the specified type.
+        System-wide objects that allow the user to perform actions that affect all collections, users, or system-wide settings. When **object** is set to **Global**, set **objectName** to the wildcard (**&ast;**), indicating all objects of the specified type.
 
     - **Collection**
 
@@ -47,15 +47,15 @@ milvusClient.revokePrivilege({
 
 - **objectName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
-    When **object** is set to **Global**, set **objectName** to the wildcard (*****), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+    When **object** is set to **Global**, set **objectName** to the wildcard (**&ast;**), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
 - **privilegeName** (*PrivilegesTypes*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the privilege to assign. You can use any value in the **Enumeration Members** column of the following table.
 
@@ -86,7 +86,7 @@ milvusClient.revokePrivilege({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -114,8 +114,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.revokePrivilege({
+```javascript
+await milvusClient.revokePrivilege({
    roleName: 'roleName',
    object: 'Collection', // Valid value: Global, Collection or User.
    objectName: 'CollectionName', // The name of the collection to revoke privilege from. Use "*" to revoke privilege from all collections.

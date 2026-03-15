@@ -3,7 +3,7 @@
 This operation assigns a privilege to a role.
 
 ```javascript
-grantPrivilege(data): Promise<ResStatus>
+await milvusClient.grantPrivilege(data)
 ```
 
 ## Request Syntax
@@ -22,13 +22,13 @@ grantPrivilege(data): Promise<ResStatus>
 
 - **roleName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to assign privileges to.
 
 - **object** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The type of object for which the privilege is to be assigned.
 
@@ -36,7 +36,7 @@ grantPrivilege(data): Promise<ResStatus>
 
     - **Global**
 
-        System-wide objects that allow the user to perform actions that affect all collections, users, or system-wide settings. When **object** is set to **Global**, set **objectName** to the wildcard (*****), indicating all objects of the specified type.
+        System-wide objects that allow the user to perform actions that affect all collections, users, or system-wide settings. When **object** is set to **Global**, set **objectName** to the wildcard (**&ast;**), indicating all objects of the specified type.
 
     - **Collection**
 
@@ -48,15 +48,15 @@ grantPrivilege(data): Promise<ResStatus>
 
 - **objectName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
-    When **object** is set to **Global**, set **objectName** to the wildcard (*****), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+    When **object** is set to **Global**, set **objectName** to the wildcard (**&ast;**), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
 - **privilegeName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the privilege to assign. 
 
@@ -68,7 +68,7 @@ grantPrivilege(data): Promise<ResStatus>
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -96,8 +96,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.grantPrivilege({
+```javascript
+await milvusClient.grantPrivilege({
    roleName: 'roleName',
    object: 'Collection', // Valid value: Global, Collection or User.
    objectName: 'CollectionName', // The name of the collection to grant access to. Use "*" to grant access to all collections.

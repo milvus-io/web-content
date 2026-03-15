@@ -3,13 +3,13 @@
 This operation creates a custom role.
 
 ```javascript
-createRole(data): Promise<ResStatus>
+await milvusClient.createRole(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createRole({
+await milvusClient.createRole({
    roleName: string,
    timeout?: number
  })
@@ -19,7 +19,7 @@ milvusClient.createRole({
 
 - **roleName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to create.
 
@@ -29,7 +29,7 @@ milvusClient.createRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -57,8 +57,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.createRole({
+```javascript
+await milvusClient.createRole({
    roleName: 'exampleRole',
  })
 ```

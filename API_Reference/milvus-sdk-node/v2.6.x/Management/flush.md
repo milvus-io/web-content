@@ -3,21 +3,19 @@
 This operation manually seals a segment and persists the data on disk. It is recommended that this operation be called after all the data has been inserted into a collection.
 
 ```javascript
-flush(data): Promise<FlushResult>
+await milvusClient.flush(data)
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Milvus automatically flushes data into persistent storage at intervals. You are advised to rely on this automatic data persistence mechnism.</p>
+Milvus automatically flushes data into persistent storage at intervals. You are advised to rely on this automatic data persistence mechnism.
 
 </div>
 
 ## Request Syntax
 
 ```javascript
-milvusClient.flush({
+await milvusClient.flush({
     db_name?: string,
     collection_names: string[],
     timeout?: number
@@ -30,9 +28,9 @@ milvusClient.flush({
 
     The name of the target database to which the target collections belong.
 
-- **collection_names** (*string&#91;&#93;*) -
+- **collection_names** (*string[]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of the target collection names.
 
@@ -42,7 +40,7 @@ milvusClient.flush({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;FlushResult&gt;*
+**RETURNS** *Promise\<FlushResult>*
 
 This method returns a promise that resolves to a **FlushResult** object.
 
@@ -79,8 +77,11 @@ This method returns a promise that resolves to a **FlushResult** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const flushStatus = await milvusClient.flush({
     collection_names: ['my_collection'],
 });

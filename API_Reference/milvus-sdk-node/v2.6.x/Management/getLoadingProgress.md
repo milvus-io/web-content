@@ -3,13 +3,13 @@
 This operation gets the loading progress of a specific collection.
 
 ```javascript
-getLoadingProgress(data): Promise<GetLoadingProgressResponse>
+await milvusClient.getLoadingProgress(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getLoadingProgress({
+await milvusClient.getLoadingProgress({
       db_name?: string,
       collection_name: string,
       partition_names?: string[]
@@ -25,11 +25,11 @@ milvusClient.getLoadingProgress({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection.
 
-- **partition_names** (*string&#91;&#93;*) -
+- **partition_names** (*string[]*) -
 
     The name of the target partitions.
 
@@ -37,7 +37,7 @@ milvusClient.getLoadingProgress({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;GetLoadingProgressResponse&gt;*
+**RETURNS** *Promise\<GetLoadingProgressResponse>*
 
 This method returns a promise that resolves to a **GetLoadingProgressResponse** object.
 
@@ -80,8 +80,11 @@ This method returns a promise that resolves to a **GetLoadingProgressResponse** 
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.getLoadingProgress({
     collection_name: 'my_collection',
 });

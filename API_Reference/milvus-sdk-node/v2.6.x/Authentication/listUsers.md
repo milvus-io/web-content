@@ -3,7 +3,7 @@
 This operation lists currently available users.
 
 ```javascript
-listUsers(data): Promise<ListCredUsersResponse>
+await milvusClient.listUsers(data)
 ```
 
 ## Request Syntax
@@ -20,7 +20,7 @@ milvusClient.listUsers()
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-*Returns Promise\&lt;ListCredUsersResponse&gt;*
+*Returns Promise\<ListCredUsersResponse>*
 
 This method returns a promise that resolves to a **ListCredUsersResponse** object.
 
@@ -33,7 +33,7 @@ This method returns a promise that resolves to a **ListCredUsersResponse** objec
 
 **PARAMETERS:**
 
-- **usernames** (*string&#91;&#93;*) -
+- **usernames** (*string[]*) -
 
     A list of user names.
 
@@ -55,7 +55,7 @@ This method returns a promise that resolves to a **ListCredUsersResponse** objec
 
 ## Example
 
-```java
+```javascript
 milvusClient.listUsers()
 ```
 

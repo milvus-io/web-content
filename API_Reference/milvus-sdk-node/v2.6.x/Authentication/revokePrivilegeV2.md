@@ -3,13 +3,13 @@
 This operation revokes a privilege already assigned to a role.
 
 ```javascript
-revokePrivilegeV2(data): Promise<ResStatus>
+await milvusClient.revokePrivilegeV2(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.revokePrivilege({
+await milvusClient.revokePrivilege({
    role: string,
    privilege: string,
    db_name: string,
@@ -22,13 +22,13 @@ milvusClient.revokePrivilege({
 
 - **role** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role from which to revoke the specified privileges.
 
 - **privilege** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the privilege or privilege group to assign. 
 
@@ -36,13 +36,13 @@ milvusClient.revokePrivilege({
 
 - **db_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target database of this operation. 
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection of this operation. 
 
@@ -52,7 +52,7 @@ milvusClient.revokePrivilege({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -80,7 +80,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 await milvusClient.revokePrivilegeV2({
     role: 'exampleRole',
     privilege: 'CreateCollection',

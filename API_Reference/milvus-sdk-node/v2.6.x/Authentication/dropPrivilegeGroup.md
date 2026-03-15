@@ -3,13 +3,13 @@
 This operation adds a user to a specific role.
 
 ```javascript
-dropPrivilegeGroup(data): Promise<ResStatus>
+await milvusClient.dropPrivilegeGroup(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropPrivilegeGroup({
+await milvusClient.dropPrivilegeGroup({
    timeout?: number
 })
 ```
@@ -22,7 +22,7 @@ milvusClient.dropPrivilegeGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a list of promises, each of which resolves to a **ResStatus** object.
 
@@ -50,7 +50,7 @@ This method returns a list of promises, each of which resolves to a **ResStatus*
 
 ## Example
 
-```java
+```javascript
 milvusClient.dropPrivilegeGroup()
 ```
 

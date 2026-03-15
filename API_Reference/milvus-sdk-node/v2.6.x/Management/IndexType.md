@@ -68,3 +68,15 @@ Sets the index type to Trie.
 - **BITMAP** = 'BITMAP'
 
     Sets the index type to BITMAP.
+
+- **IVF_RABITQ** = 'IVF_RABITQ',
+
+    Sets the index type to IVF_RABITQ.
+
+- **MINHASH_LSH** = 'MINHASH_LSH'
+
+    Sets the index type to MINHASH_LSH.
+
+- **RTREE** = 'RTREE'
+
+    Sets the index type to RTREE.

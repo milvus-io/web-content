@@ -3,13 +3,13 @@
 This operation adds a user to a specific role.
 
 ```javascript
-addUserToRole(data): Promise<ResStatus>
+await milvusClient.addUserToRole(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.addUserToRole({
+await milvusClient.addUserToRole({
    username: string,
    rolename: string,
    timeout?: number
@@ -20,13 +20,13 @@ milvusClient.addUserToRole({
 
 - **username** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a user.
 
 - **rolename** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a role
 
@@ -36,7 +36,7 @@ milvusClient.addUserToRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -64,8 +64,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.addUserToRole({
+```javascript
+await milvusClient.addUserToRole({
     username: 'myUser',
     roleName: 'myRole'
 });

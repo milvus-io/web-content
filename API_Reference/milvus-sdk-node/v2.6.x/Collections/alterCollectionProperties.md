@@ -3,13 +3,13 @@
 This operation modifies the properties of a specified collection.
 
 ```javascript
-alterCollectionProperties(data): Promise<ResStatus>
+await milvusClient.alterCollectionProperties(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.alterCollectionProperties({
+await milvusClient.alterCollectionProperties({
    db_name?: string
    collection_name: string,
    delete_keys?: string[],
@@ -26,17 +26,17 @@ milvusClient.alterCollectionProperties({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection to reassign an alias to.
 
-- **delete_keys** (*string&#91;&#93;*) -
+- **delete_keys** (*string[]*) -
 
     The properties to delete.
 
 - **properties** (*Properties*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The properties to change and their expected values in a TypeScript **Record**. Possible values are as follows:
 
@@ -54,7 +54,7 @@ milvusClient.alterCollectionProperties({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -82,8 +82,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.alterCollection({
     collection_name: 'my-collection',
     properties: {"collection.ttl.seconds": 18000}

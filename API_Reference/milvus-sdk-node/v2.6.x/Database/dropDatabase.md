@@ -3,13 +3,13 @@
 This operation drops a database.
 
 ```javascript
-dropDatabase(data?): Promise<ResStatus>
+await milvusClient.dropDatabase(data?)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabase({
+await milvusClient.dropDatabase({
     db_name: string,
     timeout?: number
 })
@@ -29,7 +29,7 @@ milvusClient.dropDatabase({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -58,7 +58,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.dropDatabase({ db_name: 'db_to_drop' });
 ```
 

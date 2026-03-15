@@ -3,13 +3,13 @@
 This operation gets the build progress of the specified index.
 
 ```javascript
-getIndexBuildProgress(data): Promise<GetIndexBuildProgressResponse>
+await milvusClient.getIndexBuildProgress(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getIndexBuildProgress({
+await milvusClient.getIndexBuildProgress({
       db_name?: string,
       collection_name: string,
       field_name: string,
@@ -26,19 +26,19 @@ milvusClient.getIndexBuildProgress({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **index_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target index. This parameter and `field_name` are mutually exclusive. 
 
 - **field_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target field. This parameter and `index_name` are mutually exclusive. When you use this parameter, ensure that an index has been built upon the specified field.
 
@@ -46,7 +46,7 @@ milvusClient.getIndexBuildProgress({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;GetIndexBuildProgressResponse&gt;*
+**RETURNS** *Promise\<GetIndexBuildProgressResponse>*
 
 This method returns a promise that resolves to a **GetIndexBuildProgressResponse** object.
 
@@ -90,7 +90,7 @@ This method returns a promise that resolves to a **GetIndexBuildProgressResponse
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const getIndexBuildProgressReq = {
   collection_name: 'my_collection',

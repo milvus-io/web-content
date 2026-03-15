@@ -3,7 +3,7 @@
 This operation describes a specific index.
 
 ```javascript
-describeIndex(data): Promise<DescribeIndexResponse>
+await milvusClient.describeIndex(data)
 ```
 
 ## Request Syntax
@@ -26,7 +26,7 @@ describeIndex(data): Promise<DescribeIndexResponse>
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -42,7 +42,7 @@ describeIndex(data): Promise<DescribeIndexResponse>
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;DescribeIndexResponse&gt;*
+**RETURNS** *Promise\<DescribeIndexResponse>*
 
 This method returns a promise that resolves to a **DescribeIndexResponse** object.
 
@@ -55,7 +55,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 **PARAMETERS:**
 
-- **index_descriptions** (*IndexDescription&#91;&#93;*) -
+- **index_descriptions** (*IndexDescription[]*) -
 
     - **field_name** (*string*) -
 
@@ -113,7 +113,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const describeIndexReq = {
   collection_name: 'my_collection',

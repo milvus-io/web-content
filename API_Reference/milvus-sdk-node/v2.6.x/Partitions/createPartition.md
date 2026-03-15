@@ -3,13 +3,13 @@
 This operation creates a partition in the target collection.
 
 ```javascript
-createPartition(data): Promise<ResStatus>
+await milvusClient.createPartition(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createPartition({
+await milvusClient.createPartition({
     db_name: string,
     collection_name: string,
     partition_name: string,
@@ -25,13 +25,13 @@ milvusClient.createPartition({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **partition_name** (*string*)
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the partition to create.
 
@@ -41,7 +41,7 @@ milvusClient.createPartition({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -69,8 +69,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-new milvusClient(MILUVS_ADDRESS).createPartition({
+```javascript
+new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+}).createPartition({
     collection_name: 'my_collection',
     partition_name: 'my_partition',
  });

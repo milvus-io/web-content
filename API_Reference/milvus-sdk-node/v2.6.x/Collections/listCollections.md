@@ -20,7 +20,7 @@ listCollections({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -34,7 +34,7 @@ listCollections({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;ShowCollectionsResponse&gt;*
+**RETURNS** *Promise\<ShowCollectionsResponse>*
 
 This method returns a promise that resolves to a **ShowCollectionsResponse** object.
 
@@ -49,11 +49,11 @@ This method returns a promise that resolves to a **ShowCollectionsResponse** obj
 
 **PARAMETERS:**
 
-- **created_timestamps** (*string* | *list&#91;string&#93;*) -
+- **created_timestamps** (*string* | *list[string]*) -
 
     The timestamps indicating the creation time of the collections.
 
-- **created_utc_timestamps** (*string* | *list&#91;string&#93;*) -
+- **created_utc_timestamps** (*string* | *list[string]*) -
 
     The timestamps in UTC indicating the creation time of the collections.
 
@@ -91,8 +91,11 @@ This method returns a promise that resolves to a **ShowCollectionsResponse** obj
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const res = await milvusClient.listCollections({ collection_name: 'my_collection' });
 ```
 

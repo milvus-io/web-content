@@ -3,21 +3,19 @@
 This operation returns the flush status of a specific segment.
 
 ```javascript
-getFlushState(data): Promise<GetFlushStateResponse>
+await milvusClient.getFlushState(data)
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Milvus automatically flushes data into persistent storage at intervals. You are advised to rely on this automatic data persistence mechnism.</p>
+Milvus automatically flushes data into persistent storage at intervals. You are advised to rely on this automatic data persistence mechnism.
 
 </div>
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getFlushState({
+await milvusClient.getFlushState({
     segment_ids: number[],
     timeout?: number
 })
@@ -25,9 +23,9 @@ milvusClient.getFlushState({
 
 **PARAMETERS:**
 
-- **segment_ids** (*number&#91;&#93;*) -
+- **segment_ids** (*number[]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of the target segment IDs.
 
@@ -37,7 +35,7 @@ milvusClient.getFlushState({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;GetFlushStateResponse&gt;*
+**RETURNS** *Promise\<GetFlushStateResponse>*
 
 This method returns a promise that resolves to a **GetFlushStateResponse** object.
 
@@ -74,8 +72,11 @@ This method returns a promise that resolves to a **GetFlushStateResponse** objec
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const flushState = await milvusClient.getFlushState({
     segmentIDs: [1,2,3,4],
 });

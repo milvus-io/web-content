@@ -3,13 +3,13 @@
 This operation displays the statistics collected on a specific partition.
 
 ```javascript
-getPartitionStatistics(data): Promise<StatisticsResponse>
+await milvusClient.getPartitionStatistics(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getPartitionStatistics({
+await milvusClient.getPartitionStatistics({
     db_name: string,
     collection_name: string,
     partition_name: string,
@@ -25,13 +25,13 @@ milvusClient.getPartitionStatistics({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **partition_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing partition.
 
@@ -41,7 +41,7 @@ milvusClient.getPartitionStatistics({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;StatisticsResponse&gt;*
+**RETURNS** *Promise\<StatisticsResponse>*
 
 This method returns a promise that resolves to a **StatisticsResponse** object.
 
@@ -79,8 +79,11 @@ This method returns a promise that resolves to a **StatisticsResponse** object.
 
 ## Example
 
-```java
-new milvusClient(MILUVS_ADDRESS).getPartitionStatistics({
+```javascript
+new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+}).getPartitionStatistics({
     collection_name: 'my_collection',
     partition_name: "_default",
  });

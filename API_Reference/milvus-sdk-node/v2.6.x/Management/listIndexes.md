@@ -3,13 +3,13 @@
 This operation lists the indexes of a specific collection
 
 ```javascript
-listIndexes(data): Promise<ListIndexResponse>
+await milvusClient.listIndexes(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.listIndexes({
+await milvusClient.listIndexes({
    db_name: string,
    collection_name: string,
    field_name?: string,
@@ -26,7 +26,7 @@ milvusClient.listIndexes({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -42,7 +42,7 @@ milvusClient.listIndexes({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;DescribeIndexResponse&gt;*
+**RETURNS** *Promise\<DescribeIndexResponse>*
 
 This method returns a promise that resolves to a **DescribeIndexResponse** object.
 
@@ -55,7 +55,7 @@ This method returns a promise that resolves to a **DescribeIndexResponse** objec
 
 **PARAMETERS:**
 
-- **indexes** (*string&#91;&#93;*) -
+- **indexes** (*string[]*) -
 
     A list of index names.
 

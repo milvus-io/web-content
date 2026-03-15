@@ -3,13 +3,13 @@
 This operation drops the setting of the specified properties.
 
 ```javascript
-dropDatabaseProperties(data): Promise<ResStatus>
+await milvusClient.dropDatabaseProperties(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropDatabaseProperties({
+await milvusClient.dropDatabaseProperties({
     db_name: string,
     delete_properties: string[],
     timeout?: number
@@ -24,7 +24,7 @@ milvusClient.dropDatabaseProperties({
 
     There should be a database with the specified name. Otherwise, exceptions will occur.
 
-- **delete_properties** (*string&#91;&#93;*) -
+- **delete_properties** (*string[]*) -
 
     Names of the properties to drop in an array. Possible database properties are as follows:
 
@@ -32,7 +32,7 @@ milvusClient.dropDatabaseProperties({
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*&#91;&#93;str*) -
+    - **database.resource_groups** (*[]str*) -
 
         Resource groups dedicated to the database.
 
@@ -58,7 +58,7 @@ milvusClient.dropDatabaseProperties({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -87,7 +87,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.dropDatabaseProperties({ 
     db_name: 'new_db',
     delete_properties: ["database.replica.number"] 

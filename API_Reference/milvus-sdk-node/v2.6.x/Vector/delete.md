@@ -3,7 +3,7 @@
 This operation deletes entities by their IDs or with a boolean expression.
 
 ```javascript
-delete(data): Promise<MutationResult>
+await milvusClient.delete(data)
 ```
 
 ## Request Syntax
@@ -13,7 +13,7 @@ This method has the following alternatives.
 ### With DeleteByIdsReq
 
 ```javascript
-milvusClient.delete({
+await milvusClient.delete({
    db_name: string,
    collection_name: string,
    partition_name?: string,
@@ -31,7 +31,7 @@ milvusClient.delete({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -39,9 +39,9 @@ milvusClient.delete({
 
     The name of an existing partition in the collection.
 
-- **ids** (*string&#91;&#93;* | *number&#91;&#93;*) -
+- **ids** (*string[]* | *number[]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A specific entity ID or a list of entity IDs.
 
@@ -57,12 +57,12 @@ milvusClient.delete({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;MutationResult&gt;*
+**RETURNS** *Promise\<MutationResult>*
 
 ### With DeleteByFilterReq
 
 ```javascript
-milvusClient.delete({
+await milvusClient.delete({
    db_name: string,
    collection_name: string,
    partition_name?: string,
@@ -81,7 +81,7 @@ milvusClient.delete({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -107,28 +107,48 @@ milvusClient.delete({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;MutationResult&gt;*
+**RETURNS** *Promise\<MutationResult>*
 
 ## Example
 
-<div class="multipleCode">
-    <a href="#python">Python</a>
-    <a href="#java">Java</a>
-</div>
+<Tabs groupId="code" defaultValue='python' values={[{"label":"Python","value":"python"},{"label":"Java","value":"java"}]}>
+<TabItem value='python'>
 
-```python
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.delete({
    collection_name: 'my_collection',
    ids: [1,2,3,4]
  });
 ```
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
- const resStatus = await milvusClient.delete({
-   collection_name: 'my_collection',
-   filter: 'id in [1,2,3,4]'
- });
+</TabItem>
+
+<TabItem value='java'>
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+// Delete by IDs
+const resStatus1 = await milvusClient.delete({
+    collection_name: 'my_collection',
+    ids: [1, 2, 3, 4],
+});
+
+// Delete by filter
+const resStatus2 = await milvusClient.delete({
+    collection_name: 'my_collection',
+    filter: 'id in [5, 6, 7, 8]',
+});
 ```
 
+</TabItem>
+</Tabs>

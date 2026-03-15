@@ -3,13 +3,13 @@
 This operation modifies the properties of a specified collection field.
 
 ```javascript
-alterCollectionFieldProperties(data): Promise<ResStatus>
+await milvusClient.alterCollectionFieldProperties(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.alterCollectionFieldProperties({
+await milvusClient.alterCollectionFieldProperties({
    db_name?: string
    collection_name: string,
    field_name: string,
@@ -26,25 +26,25 @@ milvusClient.alterCollectionFieldProperties({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection to reassign an alias to.
 
 - **field_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target field name.
 
 - **properties** (*Properties*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The properties to change and their expected values in a TypeScript **Record**. Possible values are as follows:
 
     - **max_length** (*number*) -
 
-        The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: &#91;1, 65,535&#93;.
+        The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
 
         This is mandatory for a **DataType.VARCHAR** field.
 
@@ -64,7 +64,7 @@ milvusClient.alterCollectionFieldProperties({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -92,8 +92,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.alterCollectionField({
   collection_name: 'my-collection',
   field_name: 'my-field',

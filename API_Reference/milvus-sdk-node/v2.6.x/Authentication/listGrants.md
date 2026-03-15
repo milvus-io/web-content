@@ -3,7 +3,7 @@
 This operation lists the privileges granted to the specified role.
 
 ```javascript
-listGrants(data): Promise<SelectGrantResponse>
+await milvusClient.listGrants(data)
 ```
 
 ## Request Syntax
@@ -22,7 +22,7 @@ listGrants(data): Promise<SelectGrantResponse>
 
     Setting this to the name of a non-existing role may result in errors.
 
-*Returns Promise\&lt;SelectGrantResponse&gt;*
+*Returns Promise\<SelectGrantResponse>*
 
 This method returns a promise that resolves to a **SelectGrantResponse** object.
 
@@ -42,7 +42,7 @@ This method returns a promise that resolves to a **SelectGrantResponse** object.
 
 **PARAMETERS:**
 
-- **entities** (*GrantEntity&#91;&#93;*) -
+- **entities** (*GrantEntity[]*) -
 
     A list of grant entities, each of which is shaped as follows:
 

@@ -3,13 +3,13 @@
 This operation renames an existing collection.
 
 ```javascript
-renameCollection(data): Promise<ResStatus>
+await milvusClient.renameCollection(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.renameCollection({
+await milvusClient.renameCollection({
    db_name: string,
    collection_name: string,
    new_collection_name: string,
@@ -25,13 +25,13 @@ milvusClient.renameCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **new_collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection after this operation.
 
@@ -41,7 +41,7 @@ milvusClient.renameCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -69,8 +69,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.renameCollection({
    collection_name: 'my_collection',
    new_collection_name: 'my_new_collection'

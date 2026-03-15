@@ -3,13 +3,13 @@
 This operation lists all available resource groups.
 
 ```javascript
-listResourceGroups(data): Promise<ListResourceGroupsResponse>
+await milvusClient.listResourceGroups(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.describeResourceGroup({
+await milvusClient.describeResourceGroup({
     timeout?: number
 })
 ```
@@ -22,7 +22,7 @@ milvusClient.describeResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;DescribeResourceGroupResponse&gt;*
+**RETURNS** *Promise |<DescribeResourceGroupResponse>*
 
 This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 
@@ -49,14 +49,17 @@ This method returns a promise that resolves to a **DescribeResourceGroupResponse
 
     The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **resource_groups** (*string&#91;&#93;*) -
+- **resource_groups** (*string[]*) -
 
     A list of resource group names.
 
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 
 const res = await milvusClient.listResourceGroups();
 ```

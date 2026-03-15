@@ -1,0 +1,65 @@
+# alterDatabase()
+
+This operation modifies database properties, such as setting or deleting configuration key-value pairs.
+
+```javascript
+await milvusClient.alterDatabase(data: AlterDatabaseRequest)
+```
+
+## Request Syntax
+
+```javascript
+await milvusClient.alterDatabase({
+    db_name: string,
+    properties: object,
+    delete_keys?: string[],
+    timeout?: number,
+})
+```
+
+**PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    **[REQUIRED]**
+
+    The name of the database.
+
+- **properties** (*object*) -
+
+    **[REQUIRED]**
+
+    An object of properties to set (e.g., `{ "database.replica.number": "2" }`).
+
+- **delete_keys** (*string[]*) -
+
+    Property keys to delete. Optional.
+
+- **timeout** (*number*) -
+
+    RPC timeout in milliseconds. Optional.
+
+**RETURNS:**
+
+*Promise\<ResStatus\>*
+
+**EXCEPTIONS:**
+
+- **MilvusError**
+
+    This exception will be raised when any error occurs during this operation.
+
+## Example
+
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const client = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+await client.alterDatabase({
+    db_name: 'my_database',
+    properties: { 'database.replica.number': '2' },
+});
+```

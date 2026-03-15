@@ -3,13 +3,13 @@
 This operation resets the properties of a specific collection to their default values.
 
 ```javascript
-dropCollectionProperties(data): Promise<ResStatus>
+await milvusClient.dropCollectionProperties(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropCollectionProperties({
+await milvusClient.dropCollectionProperties({
    db_name?: string
    collection_name: string,
    properties: string[],
@@ -25,13 +25,13 @@ milvusClient.dropCollectionProperties({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection.
 
-- **properties** (*string&#91;&#93;*) -
+- **properties** (*string[]*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The properties to change and their expected values in a TypeScript **Record**. Possible values are as follows:
 
@@ -49,7 +49,7 @@ milvusClient.dropCollectionProperties({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -77,8 +77,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.dropCollectionProperties({
     collection_name: 'my-collection',
     delete_keys: ["collection.ttl.seconds"]

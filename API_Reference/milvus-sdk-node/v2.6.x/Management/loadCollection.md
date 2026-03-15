@@ -3,13 +3,13 @@
 This operation loads the data of a specific collection into memory.
 
 ```javascript
-loadCollection(data): Promise<ResStatus>
+await milvusClient.loadCollection(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.loadCollection({ 
+await milvusClient.loadCollection({ 
     db_name: string,
     collection_name: string,
     refresh?: boolean,
@@ -27,7 +27,7 @@ milvusClient.loadCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
@@ -39,7 +39,7 @@ milvusClient.loadCollection({
 
     The number of replicas of the collection to load.
 
-- **resource_groups** (*string&#91;&#93;*) -
+- **resource_groups** (*string[]*) -
 
     The number of resource groups in the collection to load.
 
@@ -49,7 +49,7 @@ milvusClient.loadCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -77,8 +77,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.loadCollection({ collection_name: 'my_collection' });
 ```
 

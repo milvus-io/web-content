@@ -3,13 +3,13 @@
 This operation imports the data from a specified data file into Milvus.
 
 ```javascript
-bulkInsert(data): Promise<ImportResponse>
+await milvusClient.bulkInsert(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.bulkInsert({
+await milvusClient.bulkInsert({
     db_name?: string,
     collection_name: string,
     partition_name?: string,
@@ -27,7 +27,7 @@ milvusClient.bulkInsert({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection.
 
@@ -35,7 +35,7 @@ milvusClient.bulkInsert({
 
     The name of the target partition.
 
-- **files** (*string&#91;&#93;*) -
+- **files** (*string[]*) -
 
     A list of paths to the data files from which the import is conducted.
 
@@ -45,13 +45,13 @@ milvusClient.bulkInsert({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **options** (*KeyValuePair&lt;string, string | number&gt;&#91;&#93;*) -   
+- **options** (*KeyValuePair<string, string | number>[]*) -   
 
     Extra options for the current operation in key-value pairs.
 
 **RETURN TYPE:**
 
-*Promise*&lt;*ImportResponse*&gt;
+*Promise*<*ImportResponse*>
 
 **RETURNS:**
 
@@ -91,7 +91,10 @@ This method returns a promise that resolves to an **ImportResponse** object.
 ## Examples
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const importResponse = await milvusClient.bulkInsert({
   collection_name: 'my_collection',
   files: ['path-to-data-file.json'],
