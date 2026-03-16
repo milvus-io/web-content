@@ -79,3 +79,4 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [LangExtract + Milvus Integration](langextract_milvus_demo.md) | Data Sources | Milvus, LangExtract |
 | [Semantic Search with ZeroEntropy and Milvus](https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing) | Semantic Search | Milvus, ZeroEntropy |
 | [Integrating Milvus Text Embedding Function with LangChain](langchain_milvus_dido.md) | Text Embedding | Milvus, LangChain |
+| [Building a Dual-Source RAG Agent with Exa and Milvus] | Data Sources | Milvus, Exa |
