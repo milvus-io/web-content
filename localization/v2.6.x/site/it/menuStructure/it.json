@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -717,7 +717,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali flottanti",
+            "label": "Indici vettoriali fluttuanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1189,7 +1189,7 @@
                     "children": []
                   },
                   {
-                    "label": "Tutorial: Implementare la classificazione basata sul tempo in Milvus",
+                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
                     "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
                     "order": 4,
                     "children": []
@@ -1257,7 +1257,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -2659,6 +2659,12 @@
             "id": "langextract_milvus_demo.md",
             "order": 13,
             "children": []
+          },
+          {
+            "label": "Exa",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 14,
+            "children": []
           }
         ]
       },
@@ -2769,7 +2775,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2822,7 +2828,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

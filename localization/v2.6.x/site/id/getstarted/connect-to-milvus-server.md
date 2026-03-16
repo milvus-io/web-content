@@ -39,7 +39,7 @@ summary: >-
     </button></h2><ul>
 <li><p>SDK bahasa Anda telah terinstal. Untuk detailnya, lihat <a href="/docs/id/install-pymilvus.md">Python SDK</a>, <a href="/docs/id/install-java.md">Java</a> <a href="/docs/id/install-go.md">SDK, Go SDK</a>, atau <a href="/docs/id/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>Alamat server Milvus (untuk default lokal: <code translate="no">http://localhost:19530</code>, port proxy <strong>19530</strong>).</p></li>
-<li><p>Jika <a href="/docs/id/authenticate.md?tab=docker">autentikasi diaktifkan</a>, berikan <strong>token</strong> atau <strong>nama pengguna + kata sandi</strong>. Token dapat berupa <code translate="no">username:password</code> (misalnya, <code translate="no">root:Milvus</code>). Lihat <a href="/docs/id/authenticate.md">Mengautentikasi Akses Pengguna</a> dan <a href="/docs/id/users_and_roles.md">Membuat Pengguna &amp; Peran</a> untuk detailnya.</p></li>
+<li><p>Jika <a href="/docs/id/authenticate.md">autentikasi diaktifkan</a>, berikan <strong>token</strong> atau <strong>nama pengguna + kata sandi</strong>. Token dapat berupa <code translate="no">username:password</code> (misalnya, <code translate="no">root:Milvus</code>). Lihat <a href="/docs/id/authenticate.md">Mengautentikasi Akses Pengguna</a> dan <a href="/docs/id/users_and_roles.md">Membuat Pengguna &amp; Peran</a> untuk detailnya.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Hubungkan dengan URI (autentikasi dinonaktifkan)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"

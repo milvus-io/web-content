@@ -2659,6 +2659,12 @@
             "id": "langextract_milvus_demo.md",
             "order": 13,
             "children": []
+          },
+          {
+            "label": "Exa",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 14,
+            "children": []
           }
         ]
       },

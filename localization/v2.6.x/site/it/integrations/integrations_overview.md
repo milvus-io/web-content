@@ -87,7 +87,7 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_firecrawl.md">Creazione di RAG con Milvus e Firecrawl</a></td><td>Fonti di dati</td><td>Milvus, Firecrawl</td></tr>
 <tr><td><a href="/docs/it/integration_with_mindsdb.md">Integrare Milvus con MindsDB</a></td><td>Ingegneria della conoscenza</td><td>Milvus, MindsDB</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_feast.md">Costruire RAG con Milvus e Feast</a></td><td>Fonti di dati</td><td>Milvus, Feast</td></tr>
-<tr><td><a href="/docs/it/build_RAG_with_milvus_and_docling.md">Creare RAG con Milvus e Docling</a></td><td>Fonti di dati</td><td>Milvus, Docling</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_docling.md">Costruire RAG con Milvus e Docling</a></td><td>Fonti di dati</td><td>Milvus, Docling</td></tr>
 <tr><td><a href="/docs/it/build_RAG_with_milvus_and_embedAnything.md">Costruire RAG con Milvus e EmbedAnything</a></td><td>Incorporare</td><td>Milvus, EmbedAnything</td></tr>
 <tr><td><a href="/docs/it/milvus_and_n8n.md">Come iniziare con Milvus e n8n</a></td><td>Orchestrazione</td><td>Milvus, n8n</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_anythingllm.md">Utilizzare Milvus in AnythingLLM</a></td><td>Orchestrazione</td><td>Milvus, AnythingLLM</td></tr>
@@ -95,5 +95,6 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/langextract_milvus_demo.md">Integrazione LangExtract + Milvus</a></td><td>Fonti di dati</td><td>Milvus, LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Ricerca semantica con ZeroEntropy e Milvus</a></td><td>Ricerca semantica</td><td>Milvus, ZeroEntropy</td></tr>
 <tr><td><a href="/docs/it/langchain_milvus_dido.md">Integrazione della funzione di inclusione del testo di Milvus con LangChain</a></td><td>Incorporamento del testo</td><td>Milvus, LangChain</td></tr>
+<tr><td>[Creazione di un agente RAG a doppia fonte con Exa e Milvus].</td><td>Fonti di dati</td><td>Milvus, Exa</td></tr>
 </tbody>
 </table>

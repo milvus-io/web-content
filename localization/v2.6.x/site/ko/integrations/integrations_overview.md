@@ -93,5 +93,6 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/langextract_milvus_demo.md">LangExtract + Milvus 통합</a></td><td>데이터 소스</td><td>Milvus, LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">제로엔트로피와 Milvus를 사용한 시맨틱 검색</a></td><td>시맨틱 검색</td><td>밀버스, 제로엔트로피</td></tr>
 <tr><td><a href="/docs/ko/langchain_milvus_dido.md">밀버스 텍스트 임베딩 기능과 LangChain의 통합</a></td><td>텍스트 임베딩</td><td>밀버스, 랭체인</td></tr>
+<tr><td>[엑사와 밀버스로 듀얼 소스 RAG 에이전트 구축하기]</td><td>데이터 소스</td><td>밀버스, 엑사</td></tr>
 </tbody>
 </table>

@@ -25,7 +25,7 @@ title: インテグレーション概要
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/integrate_with_llamaindex.md">MilvusとLlamaIndexを使用したRAG</a></td><td>RAG</td><td>MilvusとLLamaIndexの組み合わせ</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainとのRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainを使用したRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/milvus_hybrid_search_retriever.md">LangChainのMilvusハイブリッド検索レトリバー</a></td><td>ハイブリッド検索</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/basic_usage_langchain.md">LangChainでMilvusをベクトルストアとして使う</a></td><td>セマンティック検索</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/full_text_search_with_langchain.md">LangChainとMilvusを使った全文検索</a></td><td>全文検索</td><td>Milvus、LangChain</td></tr>
@@ -51,7 +51,7 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/evaluation_with_phoenix.md">Arize Pheonixによる評価</a></td><td>評価と観測可能性</td><td>Milvus、Arize Pheonix</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_langfuse.md">LangfuseでのMilvus</a></td><td>観測可能性</td><td>Milvus、Langfuse</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_openai.md">MilvusとOpenAIによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、OpenAI</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_cohere.md">MilvusとCohereを用いた質問応答</a></td><td>セマンティック検索</td><td>Milvus, Cohere</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_cohere.md">MilvusとCohereを用いた質問応答</a></td><td>セマンティック検索</td><td>Milvus、Cohere</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_hugging-face.md">MilvusとHuggingFaceを使った質問応答</a></td><td>質問応答</td><td>Milvus, HuggingFace</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_pytorch.md">MilvusとPytorchを使った画像検索</a></td><td>意味検索</td><td>MilvusとPytorchを使った画像検索</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_sentencetransformers.md">MilvusとSentenceTransfromersを使った動画検索</a></td><td>意味検索</td><td>MilvusとSentenceTransformersを使った映画検索</td></tr>
@@ -93,5 +93,6 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/langextract_milvus_demo.md">LangExtractとMilvusの統合</a></td><td>データソース</td><td>Milvus、LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">ZeroEntropyとMilvusによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、ZeroEntropy</td></tr>
 <tr><td><a href="/docs/ja/langchain_milvus_dido.md">LangChainとMilvusテキスト埋め込み機能の統合</a></td><td>テキスト埋め込み</td><td>Milvus, LangChain</td></tr>
+<tr><td>[ExaとMilvusによるデュアルソースRAGエージェントの構築]を参照。</td><td>データソース</td><td>Milvus, Exa</td></tr>
 </tbody>
 </table>

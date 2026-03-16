@@ -39,7 +39,7 @@ summary: >-
     </button></h2><ul>
 <li><p>تثبيت SDK الخاص بلغتك. للحصول على التفاصيل، راجع <a href="/docs/ar/install-pymilvus.md">Python SDK</a> أو <a href="/docs/ar/install-java.md">Java SDK</a> أو <a href="/docs/ar/install-go.md">Go SDK</a> أو <a href="/docs/ar/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>عنوان خادم Milvus (افتراضي محلي: <code translate="no">http://localhost:19530</code> ، منفذ الوكيل <strong>19530</strong>).</p></li>
-<li><p>إذا <a href="/docs/ar/authenticate.md?tab=docker">تم تمكين المصادقة،</a> قدم إما رمزًا <strong>مميزًا</strong> أو <strong>اسم مستخدم + كلمة مرور</strong>. يمكن أن يكون الرمز المميز <code translate="no">username:password</code> (على سبيل المثال، <code translate="no">root:Milvus</code>). راجع <a href="/docs/ar/authenticate.md">مصادقة وصول المستخدم</a> <a href="/docs/ar/users_and_roles.md">وإنشاء المستخدمين والأدوار</a> للحصول على التفاصيل.</p></li>
+<li><p>إذا <a href="/docs/ar/authenticate.md">تم تمكين المصادقة،</a> قدم إما رمزًا <strong>مميزًا</strong> أو <strong>اسم مستخدم + كلمة مرور</strong>. يمكن أن يكون الرمز المميز <code translate="no">username:password</code> (على سبيل المثال، <code translate="no">root:Milvus</code>). راجع <a href="/docs/ar/authenticate.md">مصادقة وصول المستخدم</a> <a href="/docs/ar/users_and_roles.md">وإنشاء المستخدمين والأدوار</a> للحصول على التفاصيل.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">الاتصال بواسطة URI (تم تعطيل المصادقة)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,7 +202,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>تُستخدم هذه المهلة فقط عند إنشاء الاتصالات. لا يعمل كمهلة افتراضية لعمليات واجهة برمجة التطبيقات الأخرى.</p>
+<p>تُستخدم هذه المهلة فقط عند إنشاء الاتصالات. لا يُستخدم كمهلة افتراضية لعمليات واجهة برمجة التطبيقات الأخرى.</p>
 </div>
 <h2 id="Connect-to-a-specific-database" class="common-anchor-header">الاتصال بقاعدة بيانات محددة<button data-href="#Connect-to-a-specific-database" class="anchor-icon" translate="no">
       <svg translate="no"

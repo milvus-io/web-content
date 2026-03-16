@@ -29,7 +29,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integrate_with_llamaindex.md">RAG com Milvus e LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_langchain.md">RAG com Milvus e LangChain</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/milvus_hybrid_search_retriever.md">Milvus Hybrid Search Retriever em LangChain</a></td><td>Pesquisa híbrida</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/pt/basic_usage_langchain.md">Utilizar o Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/pt/basic_usage_langchain.md">Usar o Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/full_text_search_with_langchain.md">Usando a pesquisa de texto completo com LangChain e Milvus</a></td><td>Pesquisa de texto completo</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_haystack.md">RAG com Milvus e Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/pt/llamaindex_milvus_async.md">RAG com Milvus e API assíncrona LlamaIndex</a></td><td>Ochestração</td><td>Milvus, LlamaIndex</td></tr>
@@ -76,7 +76,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_fireworks.md">Construir o RAG com Milvus e Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Construir RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow.md">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
-<tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturados</a></td><td>Estruturadas</td><td>Milvus, não estruturado</td></tr>
+<tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturadas</a></td><td>Estruturadas</td><td>Milvus, não estruturado</td></tr>
 <tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Construir um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
 <tr><td><a href="/docs/pt/knowledge_table_with_milvus.md">Tabela de conhecimentos com Milvus</a></td><td>Engenharia do conhecimento</td><td>Tabela de conhecimentos, Milvus</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_cognee.md">Criar RAG com Milvus e Cognee</a></td><td>Engenharia do conhecimento</td><td>Milvus, Cognee</td></tr>
@@ -95,5 +95,6 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/langextract_milvus_demo.md">Integração LangExtract + Milvus</a></td><td>Fontes de dados</td><td>Milvus, LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Pesquisa semântica com ZeroEntropy e Milvus</a></td><td>Pesquisa semântica</td><td>Milvus, ZeroEntropy</td></tr>
 <tr><td><a href="/docs/pt/langchain_milvus_dido.md">Integração da função de incorporação de texto do Milvus com LangChain</a></td><td>Incorporação de texto</td><td>Milvus, LangChain</td></tr>
+<tr><td>[Construir um agente RAG de fonte dupla com Exa e Milvus]</td><td>Fontes de dados</td><td>Milvus, Exa</td></tr>
 </tbody>
 </table>

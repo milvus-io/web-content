@@ -95,5 +95,6 @@ title: Обзор интеграций
 <tr><td><a href="/docs/ru/langextract_milvus_demo.md">Интеграция LangExtract + Milvus</a></td><td>Источники данных</td><td>Milvus, LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Семантический поиск с помощью ZeroEntropy и Milvus</a></td><td>Семантический поиск</td><td>Milvus, ZeroEntropy</td></tr>
 <tr><td><a href="/docs/ru/langchain_milvus_dido.md">Интеграция функции встраивания текста Milvus с LangChain</a></td><td>Встраивание текста</td><td>Milvus, LangChain</td></tr>
+<tr><td>[Создание агента RAG с двумя источниками данных с помощью Exa и Milvus].</td><td>Источники данных</td><td>Milvus, Exa</td></tr>
 </tbody>
 </table>

@@ -23,7 +23,7 @@ title: Übersicht über Integrationen
     </button></h1><p>Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen die Interaktion mit Milvus und Tools von Drittanbietern erleichtern.</p>
 <table>
 <thead>
-<tr><th>Lernprogramm</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
+<tr><th>Lehrgang</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/de/integrate_with_llamaindex.md">RAG mit Milvus und LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
@@ -95,5 +95,6 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/langextract_milvus_demo.md">LangExtract + Milvus-Integration</a></td><td>Datenquellen</td><td>Milvus, LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Semantische Suche mit ZeroEntropy und Milvus</a></td><td>Semantische Suche</td><td>Milvus, NullEntropie</td></tr>
 <tr><td><a href="/docs/de/langchain_milvus_dido.md">Integration der Milvus Texteinbettungsfunktion mit LangChain</a></td><td>Text-Einbettung</td><td>Milvus, LangChain</td></tr>
+<tr><td>[Aufbau eines Dual-Source RAG Agenten mit Exa und Milvus]</td><td>Datenquellen</td><td>Milvus, Exa</td></tr>
 </tbody>
 </table>

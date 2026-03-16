@@ -37,7 +37,7 @@ summary: 本主題描述如何建立用戶端與 Milvus 伺服器的連線，以
     </button></h2><ul>
 <li><p>已安裝您語言的 SDK。詳情請參閱<a href="/docs/zh-hant/install-pymilvus.md">Python SDK</a>、<a href="/docs/zh-hant/install-java.md">Java SDK</a>、<a href="/docs/zh-hant/install-go.md">Go SDK</a> 或<a href="/docs/zh-hant/install-node.md">Nodejs SDK</a>。</p></li>
 <li><p>Milvus 伺服器位址 (本機預設：<code translate="no">http://localhost:19530</code> ，proxy 埠<strong>19530</strong>)。</p></li>
-<li><p>如果<a href="/docs/zh-hant/authenticate.md?tab=docker">啟用了驗證</a>，請提供<strong>令牌</strong>或<strong>使用者名稱 + 密碼</strong>。令牌可以是<code translate="no">username:password</code> (例如：<code translate="no">root:Milvus</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/authenticate.md">驗證使用者存取</a>及<a href="/docs/zh-hant/users_and_roles.md">建立使用者與角色</a>。</p></li>
+<li><p>如果<a href="/docs/zh-hant/authenticate.md">啟用了驗證</a>，請提供<strong>令牌</strong>或<strong>使用者名稱 + 密碼</strong>。令牌可以是<code translate="no">username:password</code> (例如：<code translate="no">root:Milvus</code>)。如需詳細資訊，請參閱<a href="/docs/zh-hant/authenticate.md">驗證使用者存取</a>及<a href="/docs/zh-hant/users_and_roles.md">建立使用者與角色</a>。</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">透過 URI 連線 (停用驗證)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"

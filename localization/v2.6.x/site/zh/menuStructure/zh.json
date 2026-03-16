@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON 粉碎",
+                "label": "JSON 碎纸",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -1864,7 +1864,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和恢复",
+                "label": "在一个实例中进行备份和还原",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []
@@ -2658,6 +2658,12 @@
             "label": "语言提取",
             "id": "langextract_milvus_demo.md",
             "order": 13,
+            "children": []
+          },
+          {
+            "label": "Exa",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 14,
             "children": []
           }
         ]

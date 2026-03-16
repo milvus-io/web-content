@@ -1467,7 +1467,7 @@
             "children": []
           },
           {
-            "label": "Configurar la caché de trozos",
+            "label": "Configurar Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1696,7 +1696,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1801,7 +1801,7 @@
         "children": []
       },
       {
-        "label": "Conmutador Tipo MQ",
+        "label": "Interruptor Tipo MQ",
         "id": "switch_milvus_mq_type",
         "order": 14,
         "children": [
@@ -2658,6 +2658,12 @@
             "label": "LangExtract",
             "id": "langextract_milvus_demo.md",
             "order": 13,
+            "children": []
+          },
+          {
+            "label": "Exa",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 14,
             "children": []
           }
         ]

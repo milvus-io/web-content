@@ -29,7 +29,7 @@ title: RAG mit Milvus und Gemini aufbauen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die <a href="https://ai.google.dev/gemini-api/docs">Gemini-API</a> und <a href="https://ai.google.dev/aistudio">Google AI Studio</a> helfen Ihnen, mit den neuesten Modellen von Google zu arbeiten und Ihre Ideen in skalierbare Anwendungen umzusetzen. Gemini bietet Zugang zu leistungsstarken Sprachmodellen wie <code translate="no">Gemini-2.0-Flash</code>, <code translate="no">Gemini-2.0-Pro</code> und anderen Versionen für Aufgaben wie Texterstellung, Dokumentenverarbeitung, Bildverarbeitung, Audioanalyse und mehr. Die API ermöglicht die Eingabe langer Kontexte mit Millionen von Token, die Feinabstimmung von Modellen für bestimmte Aufgaben, die Erzeugung strukturierter Ausgaben wie JSON und die Nutzung von Funktionen wie semantisches Retrieval und Codeausführung.</p>
+    </button></h1><p>Die <a href="https://ai.google.dev/gemini-api/docs">Gemini-API</a> und <a href="https://ai.google.dev/aistudio">Google AI Studio</a> helfen Ihnen, mit den neuesten Modellen von Google zu arbeiten und Ihre Ideen in skalierbare Anwendungen umzusetzen. Gemini bietet Zugang zu leistungsstarken Sprachmodellen wie <code translate="no">Gemini-2.5-Flash</code> und <code translate="no">Gemini-2.5-Pro</code> für Aufgaben wie Texterstellung, Dokumentenverarbeitung, Bildverarbeitung, Audioanalyse und mehr. Es bietet auch <code translate="no">Gemini Embedding 2</code>, ein multimodales Einbettungsmodell, das Text, Bilder, Video, Audio und PDF-Dokumente mit flexiblen Ausgabedimensionen über Matryoshka Representation Learning unterstützt. Die API ermöglicht die Eingabe langer Kontexte mit Millionen von Token, die Feinabstimmung von Modellen für bestimmte Aufgaben, die Erzeugung strukturierter Ausgaben wie JSON und die Nutzung von Funktionen wie semantisches Retrieval und Codeausführung.</p>
 <p>In diesem Tutorial zeigen wir Ihnen, wie Sie eine RAG-Pipeline (Retrieval-Augmented Generation) mit Milvus und Gemini aufbauen. Wir werden das Gemini-Modell verwenden, um Antworten auf der Grundlage einer gegebenen Abfrage zu generieren, die mit relevanten, von Milvus abgerufenen Informationen angereichert werden.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -118,30 +118,40 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Wir verwenden die <code translate="no">gemini-2.0-flash</code> als LLM und die <code translate="no">text-embedding-004</code> als Einbettungsmodell.</p>
-<p>Lassen Sie uns versuchen, eine Testantwort aus der LLM zu generieren:</p>
+    </button></h3><p>Wir verwenden <code translate="no">gemini-2.5-flash</code> als LLM und <code translate="no">gemini-embedding-2-preview</code> als Einbettungsmodell. <code translate="no">gemini-embedding-2-preview</code> ist Googles neuestes multimodales Einbettungsmodell, das Text-, Bild-, Video-, Audio- und PDF-Dokumente mit flexiblen Ausgabedimensionen (128-3.072) über Matryoshka Representation Learning unterstützt.</p>
+<p>Lassen Sie uns versuchen, eine Testantwort aus dem LLM zu generieren:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai
 
 client = genai.Client(api_key=os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>])
 
 response = client.models.generate_content(
-    model=<span class="hljs-string">&quot;gemini-2.0-flash&quot;</span>, contents=<span class="hljs-string">&quot;who are you&quot;</span>
+    model=<span class="hljs-string">&quot;gemini-2.5-flash&quot;</span>, contents=<span class="hljs-string">&quot;who are you&quot;</span>
 )
 <span class="hljs-built_in">print</span>(response.text)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">I am a large language model, trained by Google.
+
+I'm designed to process and generate human-like text based on the vast amount of data I was trained on. This allows me to:
+
+*   Answer questions
+*   Provide summaries
+*   Generate creative content
+*   Translate languages
+*   And much more
+
+I don't have personal experiences, feelings, or consciousness. I'm a tool designed to be helpful and informative.
 </code></pre>
 <p>Erzeugen Sie eine Testeinbettung und drucken Sie ihre Dimension und die ersten Elemente aus.</p>
 <pre><code translate="no" class="language-python">test_embeddings = client.models.embed_content(
-    model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
+    model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>, contents=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
 )
 
 embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embeddings[<span class="hljs-number">0</span>].values)
 <span class="hljs-built_in">print</span>(embedding_dim)
 <span class="hljs-built_in">print</span>(test_embeddings.embeddings[<span class="hljs-number">0</span>].values[:<span class="hljs-number">10</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">768
-[0.013588584, -0.004361838, -0.08481652, -0.039724775, 0.04723794, -0.0051557426, 0.026071774, 0.045514572, -0.016867816, 0.039378334]
+<pre><code translate="no">3072
+[-0.016769307, 0.013630492, 0.020277105, 0.0035285393, 0.003968259, -0.013498845, 0.028525498, 0.025498547, -0.021553498, 0.015233516]
 </code></pre>
 <h2 id="Load-data-into-Milvus" class="common-anchor-header">Laden Sie Daten in Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,7 +208,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    <span class="hljs-comment"># Strong consistency waits for all loads to complete, adding latency with large datasets</span>
+    <span class="hljs-comment"># consistency_level=&quot;Strong&quot;,  # Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Daten einfügen<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -222,7 +233,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
 data = []
 
-doc = client.models.embed_content(model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=text_lines)
+doc = client.models.embed_content(model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>, contents=text_lines)
 
 <span class="hljs-keyword">for</span> i, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(tqdm(text_lines, desc=<span class="hljs-string">&quot;Creating embeddings&quot;</span>)):
     data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: doc.embeddings[i].values, <span class="hljs-string">&quot;text&quot;</span>: line})
@@ -271,7 +282,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Suchen Sie nach der Frage in der Sammlung und rufen Sie die semantischen Top-3-Treffer ab.</p>
-<pre><code translate="no" class="language-python">quest_embed = client.models.embed_content(model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=question)
+<pre><code translate="no" class="language-python">quest_embed = client.models.embed_content(model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>, contents=question)
 
 search_res = milvus_client.search(
     collection_name=collection_name,
@@ -292,15 +303,15 @@ retrieved_lines_with_distances = [
 <pre><code translate="no">[
     [
         &quot; Where does Milvus store data?\n\nMilvus deals with two types of data, inserted data and metadata. \n\nInserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).\n\nMetadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.\n\n###&quot;,
-        0.8048275113105774
+        0.864
     ],
     [
-        &quot;Does the query perform in memory? What are incremental data and historical data?\n\nYes. When a query request comes, Milvus searches both incremental data and historical data by loading them into memory. Incremental data are in the growing segments, which are buffered in memory before they reach the threshold to be persisted in storage engine, while historical data are from the sealed segments that are stored in the object storage. Incremental data and historical data together constitute the whole dataset to search.\n\n###&quot;,
-        0.7574886679649353
+        &quot;Why is there no vector data in etcd?\n\netcd stores Milvus module metadata; MinIO stores entities.&quot;,
+        0.7923
     ],
     [
         &quot;What is the maximum dataset size Milvus can handle?\n\n  \nTheoretically, the maximum dataset size Milvus can handle is determined by the hardware it is run on, specifically system memory and storage:\n\n- Milvus loads all specified collections and partitions into memory before running queries. Therefore, memory size determines the maximum amount of data Milvus can query.\n- When new entities and and collection-related schema (currently only MinIO is supported for data persistence) are added to Milvus, system storage determines the maximum allowable size of inserted data.\n\n###&quot;,
-        0.7453608512878418
+        0.7857
     ]
 ]
 </code></pre>
@@ -324,7 +335,7 @@ retrieved_lines_with_distances = [
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Definieren Sie System- und Benutzer-Prompts für das Lanage Model. Diese Eingabeaufforderung wird mit den abgerufenen Dokumenten aus Milvus zusammengestellt.</p>
+<p>Definieren Sie System- und Benutzer-Prompts für das Sprachmodell. Dieser Prompt wird mit den abgerufenen Dokumenten aus Milvus zusammengestellt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google.genai <span class="hljs-keyword">import</span> types
 
 SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
@@ -340,14 +351,209 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Verwenden Sie den Gemini, um eine Antwort auf der Grundlage der Prompts zu generieren.</p>
+<p>Verwenden Sie Gemini, um eine Antwort auf der Grundlage der Prompts zu generieren.</p>
 <pre><code translate="no" class="language-python">response = client.models.generate_content(
-    model=<span class="hljs-string">&quot;gemini-2.0-flash&quot;</span>,
+    model=<span class="hljs-string">&quot;gemini-2.5-flash&quot;</span>,
     config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
     contents=USER_PROMPT,
 )
 <span class="hljs-built_in">print</span>(response.text)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Milvus stores two types of data: inserted data and metadata. Inserted data, which includes vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends. Metadata is generated within Milvus, and each Milvus module has its own metadata that is stored in etcd.
+<pre><code translate="no">Milvus stores data in two main ways:
+
+1.  **Inserted Data:** This includes vector data, scalar data, and collection-specific schema. This type of data is stored in persistent storage as an incremental log. Milvus supports various object storage backends for this, such as MinIO, AWS S3, Google Cloud Storage (GCS), Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS).
+2.  **Metadata:** Metadata is generated within Milvus by its various modules. Each module's metadata is stored in etcd.
 </code></pre>
-<p>Großartig! Wir haben erfolgreich eine RAG-Pipeline mit Milvus und Gemini aufgebaut.</p>
+<h2 id="Multimodal-Search" class="common-anchor-header">Multimodale Suche<button data-href="#Multimodal-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Da <code translate="no">gemini-embedding-2-preview</code> Text, Bilder und andere Modalitäten im gleichen Einbettungsraum abbildet, können wir eine multimodale Suche durchführen - zum Beispiel eine Textabfrage verwenden, um die relevantesten Bilder zu finden.</p>
+<h3 id="Prepare-image-data" class="common-anchor-header">Bilddaten vorbereiten<button data-href="#Prepare-image-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir laden eine Reihe von RAG-Architekturdiagrammen aus dem Milvus Bootcamp Repository herunter, um sie als unseren Bilddatensatz zu verwenden.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> urllib.request
+<span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path
+
+image_dir = Path(<span class="hljs-string">&quot;images&quot;</span>)
+image_dir.mkdir(exist_ok=<span class="hljs-literal">True</span>)
+
+image_files = [
+    <span class="hljs-string">&quot;vanilla_rag.png&quot;</span>,
+    <span class="hljs-string">&quot;hyde.png&quot;</span>,
+    <span class="hljs-string">&quot;query_routing.png&quot;</span>,
+    <span class="hljs-string">&quot;self_reflection.png&quot;</span>,
+    <span class="hljs-string">&quot;hybrid_and_rerank.png&quot;</span>,
+    <span class="hljs-string">&quot;hierarchical_index.png&quot;</span>,
+]
+
+base_url = <span class="hljs-string">&quot;https://raw.githubusercontent.com/milvus-io/bootcamp/master/pics/advanced_rag/&quot;</span>
+
+<span class="hljs-keyword">for</span> fname <span class="hljs-keyword">in</span> image_files:
+    path = image_dir / fname
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> path.exists():
+        urllib.request.urlretrieve(base_url + fname, path)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Downloaded <span class="hljs-subst">{fname}</span>&quot;</span>)
+    <span class="hljs-keyword">else</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Already exists <span class="hljs-subst">{fname}</span>&quot;</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\nTotal images: <span class="hljs-subst">{<span class="hljs-built_in">len</span>(image_files)}</span>&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Downloaded vanilla_rag.png
+Downloaded hyde.png
+Downloaded query_routing.png
+Downloaded self_reflection.png
+Downloaded hybrid_and_rerank.png
+Downloaded hierarchical_index.png
+
+Total images: 6
+</code></pre>
+<h3 id="Embed-images-and-store-in-Milvus" class="common-anchor-header">Bilder einbetten und in Milvus speichern<button data-href="#Embed-images-and-store-in-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Wir lesen jedes Bild als Bytes und übergeben es an <code translate="no">gemini-embedding-2-preview</code>, um Einbettungen zu generieren, und speichern sie dann in einer neuen Milvus-Sammlung.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google.genai <span class="hljs-keyword">import</span> types
+
+image_data = []
+
+<span class="hljs-keyword">for</span> fname <span class="hljs-keyword">in</span> image_files:
+    path = image_dir / fname
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:
+        image_bytes = f.read()
+
+    result = client.models.embed_content(
+        model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>,
+        contents=types.Part.from_bytes(data=image_bytes, mime_type=<span class="hljs-string">&quot;image/png&quot;</span>),
+    )
+    image_data.append(
+        {
+            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-built_in">len</span>(image_data),
+            <span class="hljs-string">&quot;vector&quot;</span>: result.embeddings[<span class="hljs-number">0</span>].values,
+            <span class="hljs-string">&quot;filename&quot;</span>: fname,
+        }
+    )
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Embedded <span class="hljs-subst">{fname}</span>&quot;</span>)
+
+<span class="hljs-comment"># Create a new collection for images</span>
+image_collection = <span class="hljs-string">&quot;image_collection&quot;</span>
+<span class="hljs-keyword">if</span> milvus_client.has_collection(image_collection):
+    milvus_client.drop_collection(image_collection)
+
+milvus_client.create_collection(
+    collection_name=image_collection,
+    dimension=<span class="hljs-built_in">len</span>(image_data[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;vector&quot;</span>]),
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+)
+
+milvus_client.insert(collection_name=image_collection, data=image_data)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\nInserted <span class="hljs-subst">{<span class="hljs-built_in">len</span>(image_data)}</span> image embeddings (dim=<span class="hljs-subst">{<span class="hljs-built_in">len</span>(image_data[<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;vector&#x27;</span>])}</span>)&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Embedded vanilla_rag.png
+Embedded hyde.png
+Embedded query_routing.png
+Embedded self_reflection.png
+Embedded hybrid_and_rerank.png
+Embedded hierarchical_index.png
+
+Inserted 6 image embeddings (dim=3072)
+</code></pre>
+<h3 id="Cross-modal-search-Text-query-→-Image-results" class="common-anchor-header">Modalübergreifende Suche: Textabfrage → Bildergebnisse<button data-href="#Cross-modal-search-Text-query-→-Image-results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nun wollen wir eine Textabfrage verwenden, um über Bildeinbettungen zu suchen. Da sowohl Text als auch Bilder auf denselben Einbettungsraum abgebildet werden, können wir sie direkt miteinander vergleichen.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display, Image
+
+text_queries = [
+    <span class="hljs-string">&quot;How does a basic RAG pipeline work?&quot;</span>,
+    <span class="hljs-string">&quot;What is the hypothetical document embedding approach?&quot;</span>,
+    <span class="hljs-string">&quot;How to combine hybrid search with reranking?&quot;</span>,
+]
+
+<span class="hljs-keyword">for</span> query <span class="hljs-keyword">in</span> text_queries:
+    query_embed = client.models.embed_content(
+        model=<span class="hljs-string">&quot;gemini-embedding-2-preview&quot;</span>, contents=query
+    )
+
+    results = milvus_client.search(
+        collection_name=image_collection,
+        data=[query_embed.embeddings[<span class="hljs-number">0</span>].values],
+        limit=<span class="hljs-number">1</span>,
+        search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}},
+        output_fields=[<span class="hljs-string">&quot;filename&quot;</span>],
+    )
+
+    best = results[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;\nQuery: <span class="hljs-subst">{query}</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Match: <span class="hljs-subst">{best[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;filename&#x27;</span>]}</span> (score: <span class="hljs-subst">{best[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>)&quot;</span>)
+    display(Image(filename=<span class="hljs-built_in">str</span>(image_dir / best[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;filename&quot;</span>]), width=<span class="hljs-number">600</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Query: How does a basic RAG pipeline work?
+Match: vanilla_rag.png (score: 0.5132)
+</code></pre>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build_RAG_with_milvus_and_gemini_38_1.png" alt="Vanilla RAG Pipeline" class="doc-image" id="vanilla-rag-pipeline" />
+   </span> <span class="img-wrapper"> <span>Vanille-RAG-Pipeline</span> </span></p>
+<pre><code translate="no">Query: What is the hypothetical document embedding approach?
+Match: hyde.png (score: 0.4756)
+</code></pre>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build_RAG_with_milvus_and_gemini_38_3.png" alt="HyDE" class="doc-image" id="hyde" />
+   </span> <span class="img-wrapper"> <span>HyDE</span> </span></p>
+<pre><code translate="no">Query: How to combine hybrid search with reranking?
+Match: hybrid_and_rerank.png (score: 0.5271)
+</code></pre>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/build_RAG_with_milvus_and_gemini_38_5.png" alt="Hybrid Retrieval and Reranking" class="doc-image" id="hybrid-retrieval-and-reranking" />
+   </span> <span class="img-wrapper"> <span>Hybrides Retrieval und Reranking</span> </span></p>
+<p>Großartig! Wir haben erfolgreich eine RAG-Pipeline mit Milvus und Gemini aufgebaut und eine cross-modale Suche mit Textanfragen zum Auffinden relevanter Bilder demonstriert - alles auf der Grundlage des einheitlichen Einbettungsraums von <code translate="no">gemini-embedding-2-preview</code>.</p>

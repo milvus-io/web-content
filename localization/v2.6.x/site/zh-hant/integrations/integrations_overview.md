@@ -93,5 +93,6 @@ title: 整合概述
 <tr><td><a href="/docs/zh-hant/langextract_milvus_demo.md">LangExtract + Milvus 整合</a></td><td>資料來源</td><td>Milvus、LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">使用 ZeroEntropy 和 Milvus 進行語意搜尋</a></td><td>語意搜尋</td><td>Milvus、ZeroEntropy</td></tr>
 <tr><td><a href="/docs/zh-hant/langchain_milvus_dido.md">整合 Milvus 文字嵌入功能與 LangChain</a></td><td>文字嵌入</td><td>Milvus、LangChain</td></tr>
+<tr><td>[使用 Exa 和 Milvus 建立雙源 RAG Agent］</td><td>資料來源</td><td>Milvus、Exa</td></tr>
 </tbody>
 </table>

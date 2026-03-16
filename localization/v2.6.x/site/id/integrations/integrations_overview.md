@@ -95,5 +95,6 @@ title: Ikhtisar Integrasi
 <tr><td><a href="/docs/id/langextract_milvus_demo.md">Integrasi LangExtract + Milvus</a></td><td>Sumber Data</td><td>Milvus, LangExtract</td></tr>
 <tr><td><a href="https://colab.research.google.com/drive/1bONndT8MIxJZzzV4QTpQfU-eyWdL1Q1m?usp=sharing">Pencarian Semantik dengan ZeroEntropy dan Milvus</a></td><td>Pencarian Semantik</td><td>Milvus, ZeroEntropy</td></tr>
 <tr><td><a href="/docs/id/langchain_milvus_dido.md">Mengintegrasikan Fungsi Penyematan Teks Milvus dengan LangChain</a></td><td>Penyematan Teks</td><td>Milvus, LangChain</td></tr>
+<tr><td>[Membangun Agen RAG Sumber Ganda dengan Exa dan Milvus]</td><td>Sumber Data</td><td>Milvus, Exa</td></tr>
 </tbody>
 </table>

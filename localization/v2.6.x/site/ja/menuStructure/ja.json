@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "エンベッディングと再ランキング",
+        "label": "エンベッディングとリランキング",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -2659,6 +2659,12 @@
             "id": "langextract_milvus_demo.md",
             "order": 13,
             "children": []
+          },
+          {
+            "label": "エクサ",
+            "id": "build_RAG_with_milvus_and_exa.md",
+            "order": 14,
+            "children": []
           }
         ]
       },
@@ -2810,7 +2816,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []
