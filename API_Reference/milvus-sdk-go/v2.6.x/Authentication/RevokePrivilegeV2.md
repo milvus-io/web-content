@@ -1,84 +1,76 @@
 # RevokePrivilegeV2()
 
-This method revokes a privilege or a privilege group from a role. In Milvus, you can allocate multiple privileges or privilege groups to a role and grant the role to a user so that the user gains the privileges allocated to the role.
+This operation revokes a privilege from a role using the v2 API.
 
-```plaintext
+```go
 func (c *Client) RevokePrivilegeV2(ctx context.Context, option RevokePrivilegeV2Option, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-RevokePrivilegeV2#revokeprivilegev2option"><code>RevokePrivilegeV2Option</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## RevokePrivilegeV2Option
-
-This is an interface type. The `revokePrivilegeV2Option` struct type implements this interface type. 
-
-You can use the `NewRemovePrivilegeV2Option()` function to get the concrete implementation.
-
-### NewRemovePrivilegeV2Option
-
-The signature of the `NewRemovePrivilegeV2Option()` is as follows:
+## Request Syntax
 
 ```go
-func NewRevokePrivilegeV2Option(roleName, privilegeName, collectionName string) *revokePrivilegeV2Option
+option := milvusclient.NewRevokePrivilegeV2Option(roleName, privilegeName, collectionName).
+    WithDbName(dbName)
+
+err := client.RevokePrivilegeV2(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>roleName</code></p></td>
-     <td><p>Name of the target role of this operation.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>privilegeName</code></p></td>
-     <td><p>Name of the privilege or privilege group to assign.</p><p>For details, refer to the <strong>Privilege name</strong> column in the table on page Users and Roles.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **roleName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the role.
 
-## Return
+- **privilegeName** (*string*)
 
-Null
+      The name of the privilege.
+
+- **collectionName** (*string*)
+
+      The name of the target collection.
+
+**OPTION METHODS:**
+
+- `WithDbName(dbName string)`
+
+      Specifies the database to use for the operation.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
+import (
+	"context"
 
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+err = cli.RevokePrivilegeV2(ctx, milvusclient.NewRevokePrivilegeV2Option("my_role", "Search", "quick_setup"))
+if err != nil {
+	// handle error
+}
 ```
-

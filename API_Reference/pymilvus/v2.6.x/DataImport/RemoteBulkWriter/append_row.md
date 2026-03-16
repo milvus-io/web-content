@@ -57,7 +57,7 @@ writer.append_row(
 
 - [commit()](commit.md)
 
-- [AzureConnectParam](AzureConnectParam/AzureConnectParam.md)
+- [AzureConnectParam](AzureConnectParam.md)
 
-- [S3ConnectParam](S3ConnectParam/S3ConnectParam.md)
+- [S3ConnectParam](S3ConnectParam.md)
 

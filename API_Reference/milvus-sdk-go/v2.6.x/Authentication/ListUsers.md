@@ -1,79 +1,49 @@
 # ListUsers()
 
-This method returns a list of existing users.
+This operation lists all users in the Milvus instance.
 
 ```go
 func (c *Client) ListUsers(ctx context.Context, opt ListUserOption, callOpts ...grpc.CallOption) ([]string, error)
 ```
 
-## Request Parameters
+**RETURN TYPE:**
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-ListUsers#listuseroption"><code>ListUserOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
+*[]string, error*
 
-## ListUserOption
+**RETURNS:**
 
-This is an interface type. The `listUserOption` struct type implements this interface type. 
+A list of names. Returns an error if the operation fails.
 
-You can use the `NewListUserOption()` function to get the concrete implementation.
+**EXCEPTIONS:**
 
-### NewListUserOption
+- **error**
 
-The signature of `NewListUserOption()` is as follows:
-
-```go
-func NewListUserOption() *listUserOption
-```
-
-## grpc.CallOption
-
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
-
-## Return
-
-`[]string`
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-opts := client.NewListUserOption()
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
 
-onFinish := func(ctx context.Context, err error) {
-    if err != nil {
-        fmt.Printf("gRPC call finished with error: %v\n", err)
-    } else {
-        fmt.Printf("gRPC call finished successfully")
-    }
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
 }
+defer cli.Close(ctx)
 
-callOption := grpc.OnFinish(onFinish)
-
-err := mclient.ListUsers(context.Background(), opts, callOption)
+users, err := cli.ListUsers(ctx, milvusclient.NewListUserOption())
+if err != nil {
+	// handle error
+}
+fmt.Println(users)
 ```
-

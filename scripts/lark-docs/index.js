@@ -17,9 +17,10 @@ program
     .option('-r, --recursive', 'Recursively publish all child documents')
     .option('-a, --all', 'Fetch all documents from all top-level categories')
     .option('--skipImageDown', 'Skip image download')
+    .option('--dry-run', 'Scan for stale links without writing files (SDK manuals only)')
     .action(async (opts) => {
-        if (!opts.doc && !opts.all) {
-            console.error('error: --doc or --all is required')
+        if (!opts.doc && !opts.all && !opts.dryRun) {
+            console.error('error: --doc, --all, or --dry-run is required')
             process.exit(1)
         }
 
@@ -35,6 +36,28 @@ program
         const GenClass = sourceType === 'wiki' ? MilvusDocsGen : MilvusSdkDocsGen
         const gen = new GenClass(base, sourceType, menuStructure, imageDir, images.alt_texts, language)
         gen.skip_image_download = !!opts.skipImageDown
+
+        // Dry-run: scan for stale links without writing files
+        if (opts.dryRun) {
+            if (!(gen instanceof MilvusSdkDocsGen)) {
+                console.error('--dry-run is only supported for SDK manuals (sourceType: drive)')
+                process.exit(1)
+            }
+            console.log(`Scanning ${opts.manual} for stale links...`)
+            const issues = await gen.scan_stale_links()
+            if (issues.length === 0) {
+                console.log('No stale links found.')
+            } else {
+                console.log(`\nFound ${issues.length} stale link(s):\n`)
+                for (const { page_id, token, url } of issues) {
+                    console.log(`  ${page_id}`)
+                    console.log(`    token: ${token}`)
+                    console.log(`    url:   ${url}`)
+                }
+                process.exit(1)
+            }
+            return
+        }
 
         // Collect all docs to write
         let docs = []

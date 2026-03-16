@@ -1,78 +1,66 @@
 # DropDatabaseProperties()
 
-This method resets the specified property of a database to its default value.
+This operation removes specified properties from a database.
 
 ```go
 func (c *Client) DropDatabaseProperties(ctx context.Context, option DropDatabasePropertiesOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Database-DropDatabaseProperties#dropdatabasepropertiesoption"><code>DropDatabasePropertiesOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DropDatabasePropertiesOption
-
-This is an interface type. The `dropDatabasePropertiesOption` struct type implements this interface type. 
-
-You can use the `NewDropDatabasePropertiesOption()` function to get the concrete implementation.
-
-### NewDropDatabasePropertiesOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewDropDatabasePropertiesOption(dbName string, propertyKeys ...string) *dropDatabasePropertiesOption
+option := milvusclient.NewDropDatabasePropertiesOption(dbName, propertyKeys)
+
+err := client.DropDatabaseProperties(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>dbName</code></p></td>
-     <td><p>Name of the target database.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>propertyKeys</code></p></td>
-     <td><p>List of the database properties to reset.</p></td>
-     <td><p><code>...string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **dbName** (*string*)
 
-Null
+      The name of the database.
+
+- **propertyKeys** (*...string*)
+
+      The property keys.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
-dbName := `test_db`
-err = cli.DropDatabaseProperties(ctx, milvusclient.NewDropDatabasePropertiesOption(dbName, "database.replica.number"))
+import (
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+	"github.com/milvus-io/milvus/pkg/v2/common"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
 if err != nil {
-    // handle err
+	// handle err
+}
+defer cli.Close(ctx)
+
+err = cli.DropDatabaseProperties(ctx, milvusclient.NewDropDatabasePropertiesOption("my_database", common.DatabaseReplicaNumber))
+if err != nil {
+	// handle err
 }
 ```

@@ -1,90 +1,64 @@
 # DescribeAlias()
 
-This method describes an alias by providing detailed information about its associated collection.
+This operation returns the details of a collection alias, including the collection it references.
 
 ```go
 func (c *Client) DescribeAlias(ctx context.Context, option DescribeAliasOption, callOptions ...grpc.CallOption) (*entity.Alias, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Collection-DescribeAlias#describealiasoption"><code>DescribeAliasOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DescribeAliasOption
-
-This is an interface type. The `describeAliasOption` struct type implements this interface type. 
-
-You can use the `NewDescribeAliasOption()` function to get the concrete implementation.
-
-### NewDescribeAliasOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewDescribeAliasOption(alias string) *describeAliasOption
+option := milvusclient.NewDescribeAliasOption(alias)
+
+result, err := client.DescribeAlias(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>alias</code></p></td>
-     <td><p>Alias to be described.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## entity.Alias
+- **alias** (*string*)
 
-The `entity.Alias` struct type is as follows:
+      The alias name to assign.
 
-```go
-type Alias struct {
-    DbName         string
-    Alias          string
-    CollectionName string
-}
-```
+**RETURN TYPE:**
 
-## Return
+**[entity.Alias](Alias.md), error*
 
-`*entity.Alias`
+**RETURNS:**
+
+The alias details including the associated collection name. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle error
+}
 
 alias, err := cli.DescribeAlias(ctx, milvusclient.NewDescribeAliasOption("bob"))
 if err != nil {
-        // handle error
+	// handle error
 }
 fmt.Println(alias)
 ```

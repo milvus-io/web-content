@@ -1,79 +1,98 @@
 # LoadPartitions()
 
-This method loads one or multiple specified partitions.
+This operation loads specific partitions of a collection into memory.
 
 ```go
 func (c *Client) LoadPartitions(ctx context.Context, option LoadPartitionsOption, callOptions ...grpc.CallOption) (LoadTask, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Management-LoadPartitions#loadpartitionsoption"><code>LoadPartitionsOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## LoadPartitionsOption
-
-This is an interface type. The `loadPartitionsOption` struct type implements this interface type. 
-
-You can use the `NewLoadPartitionsOption()` function to get the concrete implementation.
-
-### NewLoadPartitionsOption()
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewLoadPartitionsOption(collectionName string, partitionsNames ...string) *loadPartitionsOption
+option := milvusclient.NewLoadPartitionsOption(collectionName, partitionsNames).
+    WithReplica(num).
+    WithResourceGroup(resourceGroups).
+    WithLoadFields(loadFields).
+    WithSkipLoadDynamicField(skipFlag).
+    WithRefresh(isRefresh)
+
+result, err := client.LoadPartitions(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>partitionsNames</code></p></td>
-     <td><p>Names of the partitions to load.</p></td>
-     <td><p><code>...string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **collectionName** (*string*)
 
-[`LoadTask`](LoadCollection.md#LoadTask)
+      The name of the target collection.
+
+- **partitionsNames** (*...string*)
+
+      The partitions names.
+
+**OPTION METHODS:**
+
+- `WithReplica(num int)`
+
+      Sets the replica for the operation.
+
+- `WithResourceGroup(resourceGroups ...string)`
+
+      Sets the resource group for the operation.
+
+- `WithLoadFields(loadFields ...string)`
+
+      Specifies which fields to load into memory.
+
+- `WithSkipLoadDynamicField(skipFlag bool)`
+
+      Sets the skip load dynamic field for the operation.
+
+- `WithRefresh(isRefresh bool)`
+
+      Enables refresh mode to reload newly inserted data.
+
+**RETURN TYPE:**
+
+*[LoadTask](LoadTask.md), error*
+
+**RETURNS:**
+
+A LoadTask that can be used to wait for the load operation to complete. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
-task, err := cli.LoadPartitions(ctx, milvusclient.NewLoadPartitionsOption("custom_quick_setup", "default", "partitionA"))
+import (
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
 if err != nil {
-        // handle error
+	// handle error
 }
 
-task.Await(ctx)
+defer cli.Close(ctx)
+
+task, err := cli.LoadPartitions(ctx, milvusclient.NewLoadPartitionsOption("quick_setup", "partitionA"))
+
+// sync wait collection to be loaded
+err = task.Await(ctx)
+if err != nil {
+	// handle error
+}
 ```

@@ -1,89 +1,74 @@
 # CreateResourceGroup()
 
-This method creates a resource group.
+This operation creates a new resource group for isolating compute resources.
 
 ```go
 func (c *Client) CreateResourceGroup(ctx context.Context, opt CreateResourceGroupOption, callOptions ...grpc.CallOption) error
 ```
 
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>A Milvus instance begins with a default resource group that includes all available query nodes.</p>
-<p>To optimize resource utilization, you can create additional resource groups, reassign specific query nodes from the default group, and load collections into these newly configured groups.</p>
-<p>This approach ensures that collections are allocated dedicated query nodes, enabling efficient and isolated search services.</p>
-<p>For details about resource groups, refer to <a href="https://milvus.io/docs/resource_group.md#Manage-Resource-Groups">Manage Resource Group</a>.</p>
-
-</div>
-
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-ResourceGroup-CreateResourceGroup#createresourcegroupoption"><code>CreateResourceGroupOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## CreateResourceGroupOption
-
-This is an interface type. The `createResourceGroupOption` struct type implements this interface type. 
-
-You can use the `NewCreateResourceGroupOption()` function to get the concrete implementation.
-
-### NewCreateResourceGroupOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewCreateResourceGroupOption(name string) *createResourceGroupOption
+option := milvusclient.NewCreateResourceGroupOption(name).
+    WithNodeRequest(nodeRequest).
+    WithNodeLimit(nodeLimit)
+
+err := client.CreateResourceGroup(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>name</code></p></td>
-     <td><p>Name of the target resource group.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **name** (*string*)
 
-Null
+      The name of the resource group.
+
+**OPTION METHODS:**
+
+- `WithNodeRequest(nodeRequest int)`
+
+      Sets the node request for the operation.
+
+- `WithNodeLimit(nodeLimit int)`
+
+      Sets the node limit for the operation.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle error
+}
+
+defer cli.Close(ctx)
 
 err = cli.CreateResourceGroup(ctx, milvusclient.NewCreateResourceGroupOption("my_rg"))
 if err != nil {
-    // handle error
+	// handle error
 }
 ```
-

@@ -72,11 +72,13 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
 
             const basePath = parentDir ? `${parentDir}/${localName}` : localName
 
+            const hasChildren = [...rawMap.values()].some(r => r.parent === record_id)
+
             let result
-            if (type === 'Class') {
+            if (type === 'Class' && hasChildren) {
                 // Has own overview file AND serves as a directory for its methods
                 result = { pageId: `${basePath}/${localName}.md`, dirPath: basePath }
-            } else if (type === 'Function' || type === 'Enum') {
+            } else if (type === 'Class' || type === 'Function' || type === 'Enum') {
                 // Leaf file only
                 result = { pageId: `${basePath}.md`, dirPath: basePath }
             } else {
@@ -222,6 +224,38 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         content = this.__filter_content(content, this.targets)
 
         return { front_matters: '', content, page_id }
+    }
+
+    /**
+     * Dry-run: fetch blocks for every .md source and scan for feishu /docx/ links
+     * that cannot be resolved to a known page_token in this bitable.
+     * Returns an array of { page_id, token, url } for each unresolvable link.
+     */
+    async scan_stale_links() {
+        const sources = this.records || await this.__list_sources()
+        const tokenSet = new Set(sources.map(s => s.page_token))
+        const issues = []
+        const feishuRe = /https?:\/\/[^"'\s)]*feishu\.cn\/docx\/([^"'#?\s)/]+)/g
+
+        for (const source of sources) {
+            if (!source.page_id.endsWith('.md')) continue
+
+            const blocks = await this.__fetch_doc_blocks(source.page_token)
+            if (!blocks) continue
+
+            const json = JSON.stringify(blocks)
+            let m
+            const seen = new Set()
+            while ((m = feishuRe.exec(json)) !== null) {
+                const token = m[1]
+                if (!tokenSet.has(token) && !seen.has(token)) {
+                    seen.add(token)
+                    issues.push({ page_id: source.page_id, token, url: m[0] })
+                }
+            }
+        }
+
+        return issues
     }
 
     async __convert_link(url) {

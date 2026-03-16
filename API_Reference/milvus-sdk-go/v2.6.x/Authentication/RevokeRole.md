@@ -1,100 +1,65 @@
 # RevokeRole()
 
-This method revokes the role of a specific user. In Milvus, you can allocate multiple privileges or privilege groups to a role and grant the role to a user so that the user gains the privileges allocated to the role.
+This operation removes a role from a user.
 
 ```go
 func (c *Client) RevokeRole(ctx context.Context, opt RevokeRoleOption, callOpts ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-RevokeRole#revokeroleoption"><code>Revoke&#93;(./v2-Authentication-RevokeRole#revokeroleoption)&#91;RoleOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## RevokeRoleOption
-
-This is an interface type. The `revokeRoleOption` struct type implements this interface type. 
-
-You can use the `NewRevokeRoleOption()` function to get the concrete implementation.
-
-### NewRevokeRoleOption
-
-The signature of the `NewRevokeRoleOption()` is as follows:
+## Request Syntax
 
 ```go
-func NewRevokeRoleOption(userName, roleName string) *revokeRoleOption
+option := milvusclient.NewRevokeRoleOption(userName, roleName)
+
+err := client.RevokeRole(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>userName</code></p></td>
-     <td><p>Name of the target user of this operation.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>roleName</code></p></td>
-     <td><p>Name of the role to revoke.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **userName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the user.
 
-## Return
+- **roleName** (*string*)
 
-Null
+      The name of the role.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-roleName := "my_role"
-userName := "my_user"
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
 
-opts := client.NewRevokeRoleOption(roleName, userName)
-
-onFinish := func(ctx context.Context, err error) {
-    if err != nil {
-        fmt.Printf("gRPC call finished with error: %v\n", err)
-    } else {
-        fmt.Printf("gRPC call finished successfully")
-    }
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
 }
+defer cli.Close(ctx)
 
-callOption := grpc.OnFinish(onFinish)
-
-err := mclient.RevokeRole(context.Background(), opts, callOpts)
+err = cli.RevokeRole(ctx, milvusclient.NewRevokeRoleOption("my_user", "my_role"))
+if err != nil {
+	// handle error
+}
 ```
-

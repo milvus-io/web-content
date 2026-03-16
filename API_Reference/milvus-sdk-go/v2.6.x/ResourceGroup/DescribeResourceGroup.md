@@ -1,140 +1,64 @@
 # DescribeResourceGroup()
 
-This method describes a resource group in detail.
+This operation returns detailed information about a resource group, including node capacity and replica distribution.
 
 ```go
 func (c *Client) DescribeResourceGroup(ctx context.Context, opt DescribeResourceGroupOption, callOptions ...grpc.CallOption) (*entity.ResourceGroup, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-ResourceGroup-DescribeResourceGroup#describeresourcegroupoption"><code>DescribeResourceGroupOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DescribeResourceGroupOption
-
-This is an interface type. The `describeResourceGroupOption` struct type implements this interface type. 
-
-You can use the `NewDescribeResourceGroupOption()` function to get the concrete implementation.
-
-### NewDescribeResourceGroupOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewDescribeResourceGroupOption(name string) *describeResourceGroupOption
+option := milvusclient.NewDescribeResourceGroupOption(name)
+
+result, err := client.DescribeResourceGroup(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>name</code></p></td>
-     <td><p>Name of the target resource group.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## entity.ResourceGroup
+- **name** (*string*)
 
-The `entity.ResourceGroup` struct type is as follows:
+      The name of the resource group.
 
-```go
-type ResourceGroup struct {
-    Name             string
-    Capacity         int32
-    NumAvailableNode int32
-    NumLoadedReplica map[string]int32
-    NumOutgoingNode  map[string]int32
-    NumIncomingNode  map[string]int32
-    Config           *ResourceGroupConfig
-    Nodes            []NodeInfo
-}
-```
+**RETURN TYPE:**
 
-## entity.ResourceGroupConfig
+**entity.ResourceGroup, error*
 
-The `entity.ResourceGroupConfig` struct type is as follows:
+**RETURNS:**
 
-```go
-type ResourceGroupConfig struct {
-    Requests     ResourceGroupLimit
-    Limits       ResourceGroupLimit
-    TransferFrom []*ResourceGroupTransfer
-    TransferTo   []*ResourceGroupTransfer
-    NodeFilter   ResourceGroupNodeFilter
-}
-```
+The resource group description including node configurations and capacity. Returns an error if the operation fails.
 
-## entity.ResourceGroupLimit
+**EXCEPTIONS:**
 
-The `entity.ResourceGroupLimit` struct type is as follows:
+- **error**
 
-```go
-type ResourceGroupLimit struct {
-    NodeNum int32
-}
-```
-
-## entity.ResourceGroupNodeFilter
-
-The `entity.ResourceGroupNodeFilter` struct type is as follows:
-
-```go
-type ResourceGroupNodeFilter struct {
-    NodeLabels map[string]string
-}
-```
-
-## entity.ResourceGroupTransfer
-
-The `entity.ResourceGroupTransfer` struct type is as follows:
-
-```go
-type ResourceGroupTransfer struct {
-    ResourceGroup string
-}
-```
-
-## Return
-
-`*entity.ResourceGroup`
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle error
+}
+
+defer cli.Close(ctx)
 
 rg, err := cli.DescribeResourceGroup(ctx, milvusclient.NewDescribeResourceGroupOption("my_rg"))
 if err != nil {
-    // handle error
+	// handle error
 }
 fmt.Println(rg)
 ```
-

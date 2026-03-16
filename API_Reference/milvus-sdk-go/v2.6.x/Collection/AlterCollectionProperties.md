@@ -1,72 +1,73 @@
 # AlterCollectionProperties()
 
-This method changes the specified properties of a collection.
+This operation modifies properties of an existing collection.
 
 ```go
 func (c *Client) AlterCollectionProperties(ctx context.Context, option AlterCollectionPropertiesOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Collection-AlterCollectionProperties#altercollectionpropertiesoption"><code>AlterCollectionFieldPropertiesOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## AlterCollectionPropertiesOption
-
-This is an interface type. The `alterCollectionPropertiesOption` struct type implements this interface type. 
-
-You can use the `NewAlterCollectionPropertiesOption()` function to get the concrete implementation.
-
-### NewAlterCollectionPropertiesOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewAlterCollectionPropertiesOption(collection string) *alterCollectionPropertiesOption
+option := milvusclient.NewAlterCollectionPropertiesOption(collection).
+    WithProperty(key, value)
+
+err := client.AlterCollectionProperties(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collection</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **collection** (*string*)
 
-Null
+      The collection.
+
+**OPTION METHODS:**
+
+- `WithProperty(key string, value any)`
+
+      Sets a custom property key-value pair on the resource.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
-```plaintext
+```go
+import (
+	"context"
+	"log"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+	"github.com/milvus-io/milvus/pkg/v2/common"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	log.Fatal("failed to connect to milvus server: ", err.Error())
+}
+
+defer cli.Close(ctx)
+
 err = cli.AlterCollectionProperties(ctx, milvusclient.NewAlterCollectionPropertiesOption("my_collection").WithProperty(common.CollectionTTLConfigKey, 60))
 if err != nil {
-    // handle error
+	// handle error
 }
 ```

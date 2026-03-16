@@ -1,42 +1,47 @@
 # Close()
 
-This method closes the currently connected Milvus deployment.
+This operation closes the client connection and releases associated resources.
 
 ```go
 func (c *Client) Close(ctx context.Context) error
 ```
 
-## Request Parameters
+**RETURN TYPE:**
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-</table>
+*error*
 
-## Return
+**RETURNS:**
 
-Null
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"log"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-mclient, err := client.NewClient(context.Background(), client.ClientConfig{
-   Address: "http://localhost:19530",
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
 })
+if err != nil {
+	log.Fatal("failed to create client:", err)
+}
 
-mclient.close()
+err = cli.Close(ctx)
+if err != nil {
+	log.Fatal("failed to close client:", err)
+}
 ```
-

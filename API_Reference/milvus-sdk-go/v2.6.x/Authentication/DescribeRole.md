@@ -1,93 +1,70 @@
 # DescribeRole()
 
-This method returns the detailed information about the specified role.
+This operation returns detailed information about a role, including its granted privileges.
 
 ```go
 func (c *Client) DescribeRole(ctx context.Context, option DescribeRoleOption, callOptions ...grpc.CallOption) (*entity.Role, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-DescribeRole#describeroleoption"><code>DescribeRoleOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DescribeRoleOption
-
-This is an interface type. The `describeRoleOption` struct type implements this interface type. 
-
-You can use the `NewDescribeRoleOption()` function to get the concrete implementation.
-
-### NewDescribeRoleOption
-
-The signature of `NewDescribeRoleOption()` is as follows:
+## Request Syntax
 
 ```go
-func NewDescribeRoleOption(roleName string) *describeRoleOption
+option := milvusclient.NewDescribeRoleOption(roleName).
+    WithDbName(dbName)
+
+result, err := client.DescribeRole(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>roleName</code></p></td>
-     <td><p>Name of the role to describe.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **roleName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the role.
 
-## entity.Role
+**OPTION METHODS:**
 
-The `entity.Role` struct type is as follows:
+- `WithDbName(dbName string)`
 
-```go
-type Role struct {
-    RoleName   string
-    Privileges []entity.GrantItem
-}
-```
+      Specifies the database to use for the operation.
 
-## Return
+**RETURN TYPE:**
 
-`*[entity.Role`](DescribeRole.md#entityRole)
+**[entity.Role](Role.md), error*
+
+**RETURNS:**
+
+The role details including granted privileges. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-roleName := "my_role"
-opts := client.NewDescribeRoleOption(roleName)
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
 
-err := mclient.DescribeRole(context.Background(), opts)
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+role, err := cli.DescribeRole(ctx, milvusclient.NewDescribeRoleOption("my_role"))
+if err != nil {
+	// handle error
+}
+fmt.Println(role)
 ```

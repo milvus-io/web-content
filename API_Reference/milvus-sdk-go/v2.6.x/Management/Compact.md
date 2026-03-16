@@ -1,87 +1,64 @@
 # Compact()
 
-This method compacts segments to improve search efficiency. 
+This operation triggers compaction to merge small data segments into larger ones for better performance.
 
 ```go
 func (c *Client) Compact(ctx context.Context, option CompactOption, callOptions ...grpc.CallOption) (int64, error)
 ```
 
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>Milvus automatically compacts segments at intervals. Unless you have set a clustering key in your collection, you should rely on automatic compactions.</p>
-
-</div>
-
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Management-Compact#compactoption"><code>GetLoadStateOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## CompactOption
-
-This is an interface type. The `compactOption` struct type implements this interface type. 
-
-You can use the `NewCompactOption()` function to get the concrete implementation.
-
-### NewCompactOption()
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewCompactOption(collectionName string) *compactOption
+option := milvusclient.NewCompactOption(collectionName)
+
+result, err := client.Compact(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **collectionName** (*string*)
 
-`int64` (A compaction ID)
+      The name of the target collection.
+
+**RETURN TYPE:**
+
+*int64, error*
+
+**RETURNS:**
+
+The numeric result value. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-compactID, err := cli.Compact(ctx, milvusclient.NewCompactOption("customized_setup_1"))
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+collectionName := `customized_setup_1`
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
 if err != nil {
-    // handle err
+	// handle err
+}
+
+compactID, err := cli.Compact(ctx, milvusclient.NewCompactOption(collectionName))
+if err != nil {
+	// handle err
 }
 fmt.Println(compactID)
-// or GetCompactState ...
 ```

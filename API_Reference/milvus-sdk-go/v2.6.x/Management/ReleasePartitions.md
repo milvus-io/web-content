@@ -1,82 +1,68 @@
 # ReleasePartitions()
 
-This method releases the specified collection.
+This operation releases specific partitions from memory.
 
 ```go
 func (c *Client) ReleasePartitions(ctx context.Context, option ReleasePartitionsOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Management-ReleasePartitions#releasecollectionoption"><code>ReleaseCollectionOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## ReleaseCollectionOption
-
-This is an interface type. The `releasePartitionsOption` struct type implements this interface type. 
-
-You can use the `NewReleasePartitionsOption()` function to get the concrete implementation.
-
-### NewReleaseCollectionOption()
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewReleasePartitionsOptions(collectionName string, partitionNames ...string) *releasePartitionsOption
+option := milvusclient.NewReleasePartitionsOption(collectionName, partitionNames)
+
+err := client.ReleasePartitions(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>partitionNames</code></p></td>
-     <td><p>Names of the target partitions.</p></td>
-     <td><p><code>...string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **collectionName** (*string*)
 
-Null
+      The name of the target collection.
+
+- **partitionNames** (*...string*)
+
+      The name(s) of the partition(s).
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-err = cli.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOption("custom_quick_setup", "default", "partitionA"))
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
 if err != nil {
-        // handle error
+	// handle error
+}
+
+defer cli.Close(ctx)
+
+err = cli.ReleasePartitions(ctx, milvusclient.NewReleasePartitionsOptions("quick_setup", "partitionA"))
+if err != nil {
+	// handle error
 }
 ```

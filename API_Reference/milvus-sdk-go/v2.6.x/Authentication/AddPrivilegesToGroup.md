@@ -1,76 +1,65 @@
 # AddPrivilegesToGroup()
 
-This operation adds privileges to the specified privilege group.
+This operation adds privileges to an existing privilege group.
 
 ```go
 func (c *Client) AddPrivilegesToGroup(ctx context.Context, option AddPrivilegeToGroupOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-AddPrivilegesToGroup#addprivilegetogroupoption"><code>AddPrivilegesToGroupOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## AddPrivilegeToGroupOption
-
-This is an interface type. The `addPrivilegesToGroupOption` struct type implements this interface type. You can use `NewAddPrivilegesToGroupOption` to get the concrete implementation.
-
-### NewAddPrivilegesToGroupOption
-
-The signature of the `NewAddPrivilegesToGroupOption` is as follows:
+## Request Syntax
 
 ```go
-func NewAddPrivilegesToGroupOption(groupName string, privileges ...string) *addPrivilegeToGroupOption
+option := milvusclient.NewAddPrivilegeToGroupOption(groupName, privileges)
+
+err := client.AddPrivilegesToGroup(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>groupName</code></p></td>
-     <td><p>The name of the target privilege group.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>privileges</code></p></td>
-     <td><p>The privileges to add into the above group.</p><p>For details, refer to <a href="https://milvus.io/docs/grant_privileges.md">Grant Privileges</a>.</p></td>
-     <td><p><code>...string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **groupName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the privilege group.
 
-## Return
+- **privileges** (*...string*)
 
-Null
+      The list of privileges to include.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
+import (
+	"context"
 
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+err = cli.AddPrivilegesToGroup(ctx, milvusclient.NewAddPrivilegesToGroupOption("my_priv_group", "Search", "Query"))
+if err != nil {
+	// handle error
+}
 ```
