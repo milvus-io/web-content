@@ -1,104 +1,67 @@
 # DescribeCollection()
 
-This method describes a collection by providing its detailed information.
+This operation returns detailed information about a collection, including its schema and properties.
 
 ```go
 func (c *Client) DescribeCollection(ctx context.Context, option DescribeCollectionOption, callOptions ...grpc.CallOption) (collection *entity.Collection, err error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Collection-DescribeCollection#describecollectionoption"><code>DescribeCollectionOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DescribeCollectionOption
-
-This is an interface type. The `describeCollectionOption` struct type implements this interface type. 
-
-You can use the `NewDescribeCollectionOption()` function to get the concrete implementation.
-
-### NewDescribeCollectionOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewDescribeCollectionOption(name string) *describeCollectionOption
+option := milvusclient.NewDescribeCollectionOption(name)
+
+result, err := client.DescribeCollection(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>name</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## entity.Collection
+- **name** (*string*)
 
-The `entity.Alias` struct type is as follows:
+      The name of the target collection.
 
-```go
-type Collection struct {
-    ID               int64           // collection id
-    Name             string          // collection name
-    Schema           *entity.Schema  // collection schema, with fields schema and primary key definition
-    PhysicalChannels []string
-    VirtualChannels  []string
-    Loaded           bool
-    ConsistencyLevel entity.ConsistencyLevel
-    ShardNum         int32
-    Properties       map[string]string
-}
-```
+**RETURN TYPE:**
 
-## entity.Schema
+*collection* entity.Collection, err error*
 
-For details about this struct type, refer to [entity.Schema](CreateCollection.md).
+**RETURNS:**
 
-## entity.ConsistencyLevel
+The collection description including schema, fields, and properties. Returns an error if the operation fails.
 
-For details about this enumeration, refer to [entity.ConsistencyLevel](CreateCollection.md).
+**EXCEPTIONS:**
 
-## Return
+- **error**
 
-`*entity.Collection`
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	log.Fatal("failed to connect to milvus server: ", err.Error())
+}
+
+defer cli.Close(ctx)
 
 collection, err := cli.DescribeCollection(ctx, milvusclient.NewDescribeCollectionOption("quick_setup"))
 if err != nil {
-        // handle error
+	// handle error
 }
 
 fmt.Println(collection)

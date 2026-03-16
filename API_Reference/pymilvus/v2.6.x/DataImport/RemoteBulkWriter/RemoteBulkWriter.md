@@ -43,7 +43,7 @@ writer = RemoteBulkWriter(
 
     The path to the directory that is to hold the rewritten data.
 
-- **connect_param** (*[ConnectParam](S3ConnectParam/S3ConnectParam.md)*) -
+- **connect_param** (*[ConnectParam](S3ConnectParam.md)*) -
 
     The parameters used to connect to a remote bucket.
 

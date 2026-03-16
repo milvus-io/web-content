@@ -1,66 +1,58 @@
 # ListResourceGroups()
 
-This method lists the names of all available resource groups.
+This operation lists all resource groups in the Milvus instance.
 
 ```go
 func (c *Client) ListResourceGroups(ctx context.Context, opt ListResourceGroupsOption, callOptions ...grpc.CallOption) ([]string, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-ResourceGroup-ListResourceGroups#listresourcegroupsoption"><code>ListResourceGroupsOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## ListResourceGroupsOption
-
-This is an interface type. The `listResourceGroupsOption` struct type implements this interface type. 
-
-You can use the `NewListResourceGroupsOption()` function to get the concrete implementation.
-
-### NewDescribeResourceGroupOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewListResourceGroupsOption() *listResourceGroupsOption
+option := milvusclient.NewListResourceGroupsOption()
+
+result, err := client.ListResourceGroups(ctx, option)
 ```
 
-## Return
+**RETURN TYPE:**
 
-`[]string`
+*[]string, error*
+
+**RETURNS:**
+
+A list of names. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle error
+}
+
+defer cli.Close(ctx)
 
 rgNames, err := cli.ListResourceGroups(ctx, milvusclient.NewListResourceGroupsOption())
 if err != nil {
-    // handle error
+	// handle error
 }
 fmt.Println(rgNames)
 ```
-

@@ -1,94 +1,61 @@
 # DropPrivilegeGroup()
 
-This method drops a privilege group.
+This operation drops a privilege group.
 
 ```go
 func (c *Client) DropPrivilegeGroup(ctx context.Context, option DropPrivilegeGroupOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-DropPrivilegeGroup#dropprivilegegroupoption"><code>DropPrivilegeGroupOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DropPrivilegeGroupOption
-
-This is an interface type. The `dropPrivilegeGroupOption` struct type implements this interface type. 
-
-You can use the `NewDropPrivilegeGroupOption()` function to get the concrete implementation.
-
-### NewDropPrivilegeGroupOption()
-
-The signature of the `NewDropPrivilegeGroupOption()` is as follows:
+## Request Syntax
 
 ```go
-func NewDropPrivilegeGroupOption(groupName) *dropPrivilegeGroupOption
+option := milvusclient.NewDropPrivilegeGroupOption(groupName)
+
+err := client.DropPrivilegeGroup(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>groupName</code></p></td>
-     <td><p>Name of the privilege group to drop.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **groupName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the privilege group.
 
-## Return
+**RETURN TYPE:**
 
-Null
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-privilegeGroupName := "my_privilege_group"
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
 
-opts := client.NewDropPrivilegeGroupOption(privilegeGroupName)
-
-onFinish := func(ctx context.Context, err error) {
-    if err != nil {
-        fmt.Printf("gRPC call finished with error: %v\n", err)
-    } else {
-        fmt.Printf("gRPC call finished successfully")
-    }
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
 }
+defer cli.Close(ctx)
 
-callOption := grpc.OnFinish(onFinish)
-
-err := mclient.DropPrivilegeGroup(context.Background(), opts, callOpts)
+err = cli.DropPrivilegeGroup(ctx, milvusclient.NewDropPrivilegeGroupOption("my_priv_group"))
+if err != nil {
+	// handle error
+}
 ```
-

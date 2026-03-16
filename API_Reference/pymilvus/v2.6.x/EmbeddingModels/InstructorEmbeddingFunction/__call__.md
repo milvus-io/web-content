@@ -1,6 +1,6 @@
 # \_\_call\_\_()
 
-This operation in [InstructorEmbeddingFunction](../InstructorEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [InstructorEmbeddingFunction](InstructorEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
 The **\_\_call\_\_()** method of InstructorEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 

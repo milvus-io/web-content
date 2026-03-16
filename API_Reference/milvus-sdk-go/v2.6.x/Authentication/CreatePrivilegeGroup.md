@@ -1,94 +1,61 @@
 # CreatePrivilegeGroup()
 
-This method creates a privilege group that contains several privileges. You can grant a privilege group to a role in the same way as you would grant a privilege.
+This operation creates a named group of privileges that can be granted together.
 
 ```go
 func (c *Client) CreatePrivilegeGroup(ctx context.Context, option CreatePrivilegeGroupOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-CreatePrivilegeGroup#createprivilegegroupoption"><code>CreatePrivilegeGroupOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## CreatePrivilegeGroupOption
-
-This is an interface type. The `createPrivilegeGroupOption` struct type implements this interface type. 
-
-You can use the `NewCreatePrivilegeGroupOption()` function to get the concrete implementation.
-
-### NewCreatePrivilegeGroupOption()
-
-The signature of the `NewCreatePrivilegeGroupOption()` is as follows:
+## Request Syntax
 
 ```go
-func NewCreatePrivilegeGroupOption(groupName) *createPrivilegeGroupOption
+option := milvusclient.NewCreatePrivilegeGroupOption(groupName)
+
+err := client.CreatePrivilegeGroup(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>groupName</code></p></td>
-     <td><p>Name of the privilege group to create.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **groupName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the privilege group.
 
-## Return
+**RETURN TYPE:**
 
-Null
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-privilegeGroupName := "my_privilege_group"
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
 
-opts := client.NewCreatePrivilegeGroupOption(privilegeGroupName)
-
-onFinish := func(ctx context.Context, err error) {
-    if err != nil {
-        fmt.Printf("gRPC call finished with error: %v\n", err)
-    } else {
-        fmt.Printf("gRPC call finished successfully")
-    }
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
 }
+defer cli.Close(ctx)
 
-callOption := grpc.OnFinish(onFinish)
-
-err := mclient.CreatePrivilegeGroup(context.Background(), opts, callOpts)
+err = cli.CreatePrivilegeGroup(ctx, milvusclient.NewCreatePrivilegeGroupOption("my_priv_group"))
+if err != nil {
+	// handle error
+}
 ```
-

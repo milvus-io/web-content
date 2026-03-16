@@ -1,73 +1,69 @@
 # ListIndexes()
 
-This method lists all indexes created within the specified collection.
+This operation lists all indexes built on a specified collection.
 
 ```go
 func (c *Client) ListIndexes(ctx context.Context, opt ListIndexOption, callOptions ...grpc.CallOption) ([]string, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Management-ListIndexes#listindexoption"><code>ListIndexOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## ListIndexOption
-
-This is an interface type. The `listIndexOption` struct type implements this interface type. 
-
-You can use the `NewListIndexOption()` function to get the concrete implementation.
-
-### NewListIndexOption()
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewListIndexOption(collectionName string) *listIndexOption
+option := milvusclient.NewListIndexOption(collectionName).
+    WithFieldName(fieldName)
+
+result, err := client.ListIndexes(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **collectionName** (*string*)
 
-`[]string`
+      The name of the target collection.
+
+**OPTION METHODS:**
+
+- `WithFieldName(fieldName string)`
+
+      Sets the field name for the operation.
+
+**RETURN TYPE:**
+
+*[]string, error*
+
+**RETURNS:**
+
+A list of names. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
-```plaintext
+```go
+import (
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle err
+}
+
 indexes, err := cli.ListIndexes(ctx, milvusclient.NewListIndexOption("my_collection").WithFieldName("my_vector"))
 if err != nil {
-    // handle err
+	// handle err
 }
 fmt.Println(indexes)
 ```

@@ -1,100 +1,66 @@
 # DescribeIndex()
 
-This method describes the specified index by providing its detailed information.
+This operation returns detailed information about an index, including its type and parameters.
 
 ```go
 func (c *Client) DescribeIndex(ctx context.Context, opt DescribeIndexOption, callOptions ...grpc.CallOption) (IndexDescription, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Management-DescribeIndex#describeindexoption"><code>DescribeIndexOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DescribeIndexOption
-
-This is an interface type. The `describeIndexOption` struct type implements this interface type. 
-
-You can use the `NewDescribeIndexOption()` function to get the concrete implementation.
-
-### NewDescribeIndexOption()
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewDescribeIndexOption(collectionName string, indexName string) *describeIndexOption
+option := milvusclient.NewDescribeIndexOption(collectionName, indexName)
+
+result, err := client.DescribeIndex(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>indexName</code></p></td>
-     <td><p>Name of the target index.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## IndexDescription
+- **collectionName** (*string*)
 
-The `IndexDescription` struct type is as follows:
+      The name of the target collection.
 
-```go
-type IndexDescription struct {
-    index.Index
-    State            index.IndexState
-    PendingIndexRows int64
-    TotalRows        int64
-    IndexedRows      int64
-}
-```
+- **indexName** (*string*)
 
-## index.Index
+      The name of the index.
 
-This is an interface type. For details, refer to [index.Index](CreateIndex.md#indexIndex).
+**RETURN TYPE:**
 
-## index.IndexState
+*[IndexDescription](IndexDescription.md), error*
 
-Possible values are as follows:
+**RETURNS:**
 
-## Return
+The index details including type, metric, and parameters. Returns an error if the operation fails.
 
-`IndexDescription`
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
-```plaintext
+```go
+import (
+	"context"
+	"fmt"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle err
+}
+
 indexInfo, err := cli.DescribeIndex(ctx, milvusclient.NewDescribeIndexOption("my_collection", "my_index"))
 if err != nil {
-    // handle err
+	// handle err
 }
 fmt.Println(indexInfo)
 ```

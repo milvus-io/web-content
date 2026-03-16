@@ -1,73 +1,70 @@
 # AlterDatabaseProperties()
 
-This method changes the specified properties of a database.
+This operation modifies properties of an existing database.
 
 ```go
-func (c *Client) AlterDatabaseProperies(ctx context.Context, option AlterDatabasePropertiesOption, callOptions ...grpc.CallOption) error
+func (c *Client) AlterDatabaseProperties(ctx context.Context, option AlterDatabasePropertiesOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Database-AlterDatabaseProperties#alterdatabasepropertiesoption"><code>AlterDatabasePropertiesOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## AlterDatabasePropertiesOption
-
-This is an interface type. The `alterDatabasePropertiesOption` struct type implements this interface type. 
-
-You can use the `NewAlterDatabasePropertiesOption()` function to get the concrete implementation.
-
-### NewAlterDatabasePropertiesOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewAlterDatabasePropertiesOption(dbName string) *alterDatabasePropertiesOption
+option := milvusclient.NewAlterDatabasePropertiesOption(dbName).
+    WithProperty(key, value)
+
+err := client.AlterDatabaseProperties(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>dbName</code></p></td>
-     <td><p>Name of the target database.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **dbName** (*string*)
 
-Null
+      The name of the database.
+
+**OPTION METHODS:**
+
+- `WithProperty(key string, value any)`
+
+      Sets a custom property key-value pair on the resource.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
-dbName := `test_db`
-err = cli.AlterDatabaseProperties(ctx, milvusclient.NewAlterDatabasePropertiesOption(dbName).WithProperty("database.replica.number", 2))
+import (
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+	"github.com/milvus-io/milvus/pkg/v2/common"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
 if err != nil {
-    // handle err
+	// handle err
+}
+defer cli.Close(ctx)
+
+err = cli.AlterDatabaseProperties(ctx, milvusclient.NewAlterDatabasePropertiesOption("my_database").
+	WithProperty(common.DatabaseReplicaNumber, 2))
+if err != nil {
+	// handle err
 }
 ```

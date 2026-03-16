@@ -1,69 +1,73 @@
 # AlterIndexProperties()
 
-This operation changes the values of the specified index properties.
+This operation modifies properties of an existing index.
 
 ```go
 func (c *Client) AlterIndexProperties(ctx context.Context, opt AlterIndexPropertiesOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameter
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Management-AlterIndexProperties#alterindexpropertiesoption"><code>AlterIndexPropertiesOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## AlterIndexPropertiesOption
-
-This is an interface type.  The `alterIndexPropertiesOption` struct type implements this interface. You can use `NewAlterIndexPropertiesOption()` to get its concrete implementation.
+## Request Syntax
 
 ```go
-func NewAlterIndexPropertiesOption(collectionName string, indexName string) *alterIndexPropertiesOption
+option := milvusclient.NewAlterIndexPropertiesOption(collectionName, indexName).
+    WithProperty(key, value)
+
+err := client.AlterIndexProperties(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection of this operation.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>indexName</code></p></td>
-     <td><p>Name of the index within the above-specified collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## Return
+- **collectionName** (*string*)
 
-Null
+      The name of the target collection.
+
+- **indexName** (*string*)
+
+      The name of the index.
+
+**OPTION METHODS:**
+
+- `WithProperty(key string, value any)`
+
+      Sets a custom property key-value pair on the resource.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
+import (
+	"context"
 
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle err
+}
+defer cli.Close(ctx)
+
+err = cli.AlterIndexProperties(ctx, milvusclient.NewAlterIndexPropertiesOption("my_collection", "my_index").
+	WithProperty("mmap.enabled", true))
+if err != nil {
+	// handle err
+}
 ```
-

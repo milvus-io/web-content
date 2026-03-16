@@ -1,63 +1,54 @@
 # RestoreRBAC()
 
-This operation restores your RBAC settings from a backup.
+This operation restores RBAC metadata from a previously created backup.
 
 ```go
 func (c *Client) RestoreRBAC(ctx context.Context, option RestoreRBACOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
+**RETURN TYPE:**
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-RestoreRBAC#restorerbacoption"><code>RestoreRBACOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
+*error*
 
-## RestoreRBACOption
+**RETURNS:**
 
-This is an interface type. You can use `NewRestoreRBACOption()` to get its concrete implementation
+Returns nil on success, or an error describing what went wrong.
 
-```go
-func NewRestoreRBACOption(meta *entity.RBACMeta) RestoreRBACOption
-```
+**EXCEPTIONS:**
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>meta</code></p></td>
-     <td><p>The RBAC settings to restore.</p></td>
-     <td><p><a href="./v2-Authentication-BackupRBAC#entityrbacmeta"><code>*entity.RBACMeta</code></a></p></td>
-   </tr>
-</table>
+- **error**
 
-## Return
-
-Null
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
+import (
+	"context"
 
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
+}
+defer cli.Close(ctx)
+
+// First back up the RBAC metadata
+backup, err := cli.BackupRBAC(ctx, milvusclient.NewBackupRBACOption())
+if err != nil {
+	// handle error
+}
+
+// Restore the RBAC metadata from backup
+err = cli.RestoreRBAC(ctx, milvusclient.NewRestoreRBACOption(backup))
+if err != nil {
+	// handle error
+}
 ```

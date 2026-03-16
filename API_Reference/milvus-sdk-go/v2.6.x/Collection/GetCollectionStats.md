@@ -1,74 +1,52 @@
 # GetCollectionStats()
 
-This method collects the statistics on the specified collections.
+This operation returns statistics about a collection, such as row count.
 
 ```go
 func (c *Client) GetCollectionStats(ctx context.Context, opt GetCollectionOption) (map[string]string, error)
 ```
 
-## Request Parameters
+**RETURN TYPE:**
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Collection-GetCollectionStats#getcollectionoption"><code>GetCollectionOption</code></a></p></td>
-   </tr>
-</table>
+*map[string]string, error*
 
-## GetCollectionOption
+**RETURNS:**
 
-This is an interface type. The `getCollectionStatsOption` struct type implements this interface type. 
+A map of statistics key-value pairs. Returns an error if the operation fails.
 
-You can use the `NewGetCollectionStatsOption()` function to get the concrete implementation.
+**EXCEPTIONS:**
 
-### NewGetCollectionStatsOption
+- **error**
 
-The signature of this method is as follows:
-
-```go
-func NewGetCollectionStatsOption(collectionName string) *getCollectionStatsOption
-```
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>collectionName</code></p></td>
-     <td><p>Name of the target collection.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
-
-## Return
-
-`map[string]string`
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-        "context"
-        "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+milvusAddr := "127.0.0.1:19530"
+
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	log.Fatal("failed to connect to milvus server: ", err.Error())
+}
+defer cli.Close(ctx)
 
 stats, err := cli.GetCollectionStats(ctx, milvusclient.NewGetCollectionStatsOption("quick_setup"))
 if err != nil {
-    // handle err
+	// handle error
 }
 fmt.Println(stats)
 ```
-

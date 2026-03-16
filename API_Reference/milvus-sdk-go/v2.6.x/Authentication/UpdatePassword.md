@@ -1,104 +1,69 @@
 # UpdatePassword()
 
-This method updates the password for an existing user.
+This operation updates the password for an existing user.
 
 ```go
 func (c *Client) UpdatePassword(ctx context.Context, opt UpdatePasswordOption, callOpts ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>opt</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-UpdatePassword#updatepasswordoption"><code>UpdatePasswordOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## UpdatePasswordOption
-
-This is an interface type. The `updatePasswordOption` struct type implements this interface type. 
-
-You can use the `NewUpdatePasswordOption()` function to get the concrete implementation.
-
-### NewUpdatePasswordOption
-
-The signature of the `NewUpdatePasswordOption()` is as follows:
+## Request Syntax
 
 ```go
-func NewUpdatePasswordOption(userName, oldPassword, newPassword string) *updatePasswordOption
+option := milvusclient.NewUpdatePasswordOption(userName, oldPassword, newPassword)
+
+err := client.UpdatePassword(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>userName</code></p></td>
-     <td><p>Name of the user whose password is to be updated.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>oldPassword</code></p></td>
-     <td><p>The old password of the user.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>newPassword</code></p></td>
-     <td><p>The new Password of the user to create.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **userName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the user.
 
-## Return
+- **oldPassword** (*string*)
 
-Null
+      The current password for verification.
+
+- **newPassword** (*string*)
+
+      The new password to set.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
 import (
-   "context"
-   "google.golang.org/grpc"
-   "github.com/milvus-io/milvus/client/v2/milvusclient"
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
 )
 
-userName := "my_user"
-oldpass := "p@ssw0rd"
-newpass := "p@ssw1rd"
-opts := client.NewUpdatePasswordOption(userName, oldpass, newpass)
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
 
-onFinish := func(ctx context.Context, err error) {
-    if err != nil {
-        fmt.Printf("gRPC call finished with error: %v\n", err)
-    } else {
-        fmt.Printf("gRPC call finished successfully")
-    }
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: "localhost:19530",
+})
+if err != nil {
+	// handle error
 }
+defer cli.Close(ctx)
 
-callOption := grpc.OnFinish(onFinish)
-
-err := mclient.UpdatePassword(context.Background(), opts, callOpts)
+err = cli.UpdatePassword(ctx, milvusclient.NewUpdatePasswordOption("my_user", "P@ssw0rd", "NewP@ssw0rd"))
+if err != nil {
+	// handle error
+}
 ```

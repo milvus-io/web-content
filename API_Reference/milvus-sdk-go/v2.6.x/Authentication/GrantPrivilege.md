@@ -1,112 +1,90 @@
 # GrantPrivilege()
 
-This method grants a privilege 
+This operation grants a specific privilege to a role on a resource.
 
 ```go
 func (c *Client) GrantPrivilege(ctx context.Context, option GrantPrivilegeOption, callOptions ...grpc.CallOption) error
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Authentication-GrantPrivilege#grantprivilegeoption"><code>GrantPrivilegeOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOptions</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## GrantPrivilegeOption
-
-This is an interface type. The `grantPrivilegeOption` struct type implements this interface type. 
-
-You can use the `NewGrantPrivilegeOption()` function to get the concrete implementation.
-
-### NewGrantPrivilegeOption
-
-The signature of the `NewGrantPrivilegeOption()` is as follows:
+## Request Syntax
 
 ```go
-func NewGrantPrivilegeOption(roleName, objectType, privilegeName, objectName string) *grantPrivilegeOption
+option := milvusclient.NewGrantPrivilegeOption(roleName, objectType, privilegeName, objectName).
+    WithDbName(dbName)
+
+err := client.GrantPrivilege(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>roleName</code></p></td>
-     <td><p>Name of the target role of this operation.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>objectType</code></p></td>
-     <td><p>Type of the object on which the specified role can perform operations. Possible values are as follows:</p><ul><li><p><strong>Global</strong></p><p>System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When <code>object_type</code> is set to <code>Global</code>, set <code>object_name</code> to the wildcard (*), indicating all objects of the specified type.</p></li><li><p><strong>Collection</strong></p><p>Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.</p></li><li><p>User</p><p>Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.</p></li></ul></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>privilegeName</code></p></td>
-     <td><p>Name of the privilege to assign.</p><p>For details, refer to the <strong>Privilege name</strong> column in the table on page Users and Roles.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>objectName</code></p></td>
-     <td><p>Name of the target object. For example, </p><ul><li><p>If the object type is <strong>Collection</strong>, the object name should be the name of an existing collection.</p></li><li><p>If the object type is <strong>User</strong>, the object name should be a database user.</p></li><li><p>If the object type is <strong>Global</strong>, set the object name to a wildcard (*), indicating all objects of the specified type.</p></li></ul></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## grpc.CallOption
+- **roleName** (*string*)
 
-This interface provided by the gRPC Go library allows you to specify additional options or configurations when making requests. For possible implementations of this interface, refer to [this file](https://github.com/grpc/grpc-go/blob/v1.69.4/rpc_util.go#L174).
+      The name of the role.
 
-## Return
+- **objectType** (*string*)
 
-Null
+      The type of object the privilege applies to (e.g., Global, Collection).
+
+- **privilegeName** (*string*)
+
+      The name of the privilege.
+
+- **objectName** (*string*)
+
+      The name of the object the privilege applies to.
+
+**OPTION METHODS:**
+
+- `WithDbName(dbName string)`
+
+      Specifies the database to use for the operation.
+
+**RETURN TYPE:**
+
+*error*
+
+**RETURNS:**
+
+Returns nil on success, or an error describing what went wrong.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
 ```go
+import (
+	"context"
+
+	"github.com/milvus-io/milvus/client/v2/entity"
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
 ctx, cancel := context.WithCancel(context.Background())
 defer cancel()
 
 cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
-    Address: milvusAddr,
+	Address: milvusAddr,
 })
 if err != nil {
-    // handle error
+	// handle error
 }
 
 defer cli.Close(ctx)
 
 readOnlyPrivileges := []*entity.RoleGrants{
-    {Object: "Global", ObjectName: "*", PrivilegeName: "DescribeCollection"},
-    {Object: "Global", ObjectName: "*", PrivilegeName: "ShowCollections"},
-    {Object: "Collection", ObjectName: "quick_setup", PrivilegeName: "Search"},
+	{Object: "Global", ObjectName: "*", PrivilegeName: "DescribeCollection"},
+	{Object: "Global", ObjectName: "*", PrivilegeName: "ShowCollections"},
+	{Object: "Collection", ObjectName: "quick_setup", PrivilegeName: "Search"},
 }
 
 for _, grantItem := range readOnlyPrivileges {
-    err := cli.GrantPrivilege(ctx, milvusclient.NewGrantPrivilegeOption("my_role", grantItem.Object, grantItem.PrivilegeName, grantItem.ObjectName))
-    if err != nil {
-        // handle error
-    }
+	err := cli.GrantPrivilege(ctx, milvusclient.NewGrantPrivilegeOption("my_role", grantItem.Object, grantItem.PrivilegeName, grantItem.ObjectName))
+	if err != nil {
+		// handle error
+	}
 }
 ```
-

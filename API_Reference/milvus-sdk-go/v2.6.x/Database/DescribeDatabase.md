@@ -1,84 +1,63 @@
 # DescribeDatabase()
 
-This method returns information about a specific database in detail.
+This operation returns detailed information about a database, including its properties.
 
 ```go
 func (c *Client) DescribeDatabase(ctx context.Context, option DescribeDatabaseOption, callOptions ...grpc.CallOption) (*entity.Database, error)
 ```
 
-## Request Parameters
-
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>ctx</code></p></td>
-     <td><p>Context for the current call to work.</p></td>
-     <td><p><code>context.Context</code></p></td>
-   </tr>
-   <tr>
-     <td><p><code>option</code></p></td>
-     <td><p>Optional parameters of the methods.</p></td>
-     <td><p><a href="./v2-Database-DescribeDatabase#describedatabaseoption"><code>DescribeDatabaseOption</code></a></p></td>
-   </tr>
-   <tr>
-     <td><p><code>callOpts</code></p></td>
-     <td><p>Optional parameters for calling the methods.</p></td>
-     <td><p><code>grpc.CallOption</code></p></td>
-   </tr>
-</table>
-
-## DescribeDatabaseOption
-
-This is an interface type. The `describeDatabaseOption` struct type implements this interface type. 
-
-You can use the `NewDescribeDatabaseOption()` function to get the concrete implementation.
-
-### NewDescribeDatabaseOption
-
-The signature of this method is as follows:
+## Request Syntax
 
 ```go
-func NewDescribeDatabaseOption(dbName string) *describeDatabaseOption
+option := milvusclient.NewDescribeDatabaseOption(dbName)
+
+result, err := client.DescribeDatabase(ctx, option)
 ```
 
-<table>
-   <tr>
-     <th><p>Parameter</p></th>
-     <th><p>Description</p></th>
-     <th><p>Type</p></th>
-   </tr>
-   <tr>
-     <td><p><code>dbName</code></p></td>
-     <td><p>Name of the database to describe.</p></td>
-     <td><p><code>string</code></p></td>
-   </tr>
-</table>
+**PARAMETERS:**
 
-## entity.Database
+- **dbName** (*string*)
 
-The `entity.Database` struct type is as follows:
+      The name of the database.
 
-```go
-type Database struct {
-    Name       string
-    Properties map[string]string
-}
-```
+**RETURN TYPE:**
 
-## Return
+**entity.Database, error*
 
-`*entity.Database`
+**RETURNS:**
+
+The database description including properties. Returns an error if the operation fails.
+
+**EXCEPTIONS:**
+
+- **error**
+
+      Check `err != nil` for failure details.
 
 ## Example
 
-```plaintext
+```go
+import (
+	"context"
+	"log"
+
+	"github.com/milvus-io/milvus/client/v2/milvusclient"
+)
+
+ctx, cancel := context.WithCancel(context.Background())
+defer cancel()
+
+dbName := `test_db`
+cli, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
+	Address: milvusAddr,
+})
+if err != nil {
+	// handle err
+}
+
 db, err := cli.DescribeDatabase(ctx, milvusclient.NewDescribeDatabaseOption(dbName))
 if err != nil {
-    // handle err
+	// handle err
 }
 log.Println(db)
 ```
