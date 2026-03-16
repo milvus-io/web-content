@@ -21,7 +21,7 @@ bulkImport.bulkImport(
 
     The endpoint of the connected Milvus instance.
 
-- **request** (*[BaseImportRequest](https://zilliverse.feishu.cn/docx/S0ITdsnpYoDpH9xKv9fcBhe5nWA#MAFldatEto4EcwxyW1vcFzaIn8e)*) -  
+- **request** (*[BaseImportRequest](bulkImport.md)*) -  
 
     A **BaseImportRequest** instance.
 

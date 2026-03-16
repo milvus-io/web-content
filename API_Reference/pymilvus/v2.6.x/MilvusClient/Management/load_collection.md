@@ -168,9 +168,9 @@ client.load_collection(
 
 ## Related methods
 
-- [get_load_state()](https://zilliverse.feishu.cn/docx/KEPYdKup1o3nHdxKbjvcQUzwnnd)
+- [get_load_state()](get_load_state.md)
 
-- [refresh_load()](https://zilliverse.feishu.cn/docx/X3NXdtC2koiAxyxhcUBcv38Wnsh)
+- [refresh_load()](refresh_load.md)
 
-- [release_collection()](https://zilliverse.feishu.cn/docx/PRR7dRfi8o1s61xFRovccAdRnHe)
+- [release_collection()](release_collection.md)
 

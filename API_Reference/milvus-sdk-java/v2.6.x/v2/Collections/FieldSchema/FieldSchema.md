@@ -37,7 +37,7 @@ CreateCollectionReq.FieldSchema.builder()
 
     The description of the field.
 
-- `dataType([DataType](https://zilliverse.feishu.cn/docx/QYPIdgWL7oDWrWxVUx0clo32nz4) dataType)`
+- `dataType(DataType dataType)`
 
     The data type of the field.
 

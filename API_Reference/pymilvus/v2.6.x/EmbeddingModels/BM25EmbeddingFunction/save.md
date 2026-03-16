@@ -26,7 +26,7 @@ save(path: str)
 
         A float defaulting to **0.25**. This is used to smooth idf values.
 
-    These parameters can be specified when initializing the BM25EmbeddingFunction class. For details, refer to [BM25EmbeddingFunction](https://zilliverse.feishu.cn/docx/SOSedRXpcoGr0sx8RF1caGdjnyb).
+    These parameters can be specified when initializing the BM25EmbeddingFunction class. For details, refer to [BM25EmbeddingFunction](BM25EmbeddingFunction.md).
 
 **RETURN TYPE:**
 

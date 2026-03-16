@@ -26,7 +26,7 @@ FieldSchema(
 
     Name of the field.
 
-- **dtype** (*[DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)*) -
+- **dtype** (*DataType*) -
 
     **[REQUIRED]**
 

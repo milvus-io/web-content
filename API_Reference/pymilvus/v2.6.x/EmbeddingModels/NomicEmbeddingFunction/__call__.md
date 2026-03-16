@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [NomicEmbeddingFunction](https://zilliverse.feishu.cn/docx/OOQvdXDqdoqKfmxEkTecfuVMnsb?from=from_copylink) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [NomicEmbeddingFunction](NomicEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of NomicEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/H8ncdzr6roh9G6xQm8BcJFamnhf?from=from_copylink) and [encode_queries()](https://zilliverse.feishu.cn/docx/KBujdxXhko2zJjx4hFmcsHGhn4g).
+The **\_\_call\_\_()** method of NomicEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 

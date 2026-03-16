@@ -58,11 +58,11 @@ This is a class method. You should call this method like this: `MilvusClient.cre
 
 **RETURN TYPE:**
 
-*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*
+*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*
 
 **RETURNS:**
 
-A **[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)** object.
+A **[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)** object.
 
 **EXCEPTIONS:**
 
@@ -125,21 +125,21 @@ schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 
 ## Related methods
 
-- [create_collection()](https://zilliverse.feishu.cn/docx/TziHdCu4VoURrfxAMsUcsRhQnub)
+- create_collection()
 
-- [describe_collection()](https://zilliverse.feishu.cn/docx/MCkjdiRNKo2HCCxzHReclrgAnbg)
+- describe_collection()
 
-- [drop_collection()](https://zilliverse.feishu.cn/docx/QNB4d2q2ZorIApxpnzqczW2HnL7)
+- drop_collection()
 
-- [get_collection_stats()](https://zilliverse.feishu.cn/docx/VVyNdx038oECxNxMQavc9vssnoh)
+- get_collection_stats()
 
-- [has_collection()](https://zilliverse.feishu.cn/docx/SSQ6dFGdxouy7hxRwCOcatnEn0e)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](https://zilliverse.feishu.cn/docx/BHyidrVcyoPwxexHLrnceOSAnRe)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](https://zilliverse.feishu.cn/docx/IeiIdJ71Pox2OjxMiOzczUTenud)
+- rename_collection()
 
-- [IndexType](https://zilliverse.feishu.cn/docx/FdLUdaL43oIuqTxJVnbcHxgqnkh)
+- IndexType
 
-- [DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)
+- DataType
 

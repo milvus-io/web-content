@@ -118,13 +118,13 @@ utility.transfer_node(
 
 The following operations are related to `transfer_replica()`:
 
-- [create_resource_group()](https://zilliverse.feishu.cn/docx/X5qsdhFQ5oOhkcxOprzcOZq4nMc)
+- [create_resource_group()](create_resource_group.md)
 
-- [describe_resource_group()](https://zilliverse.feishu.cn/docx/HScCdxLNJotPCcxb4AZcxsNJn9c)
+- [describe_resource_group()](describe_resource_group.md)
 
-- [drop_resource_group()](https://zilliverse.feishu.cn/docx/EofGdftYjoQ9E6x8mxLcpbG1nhc)
+- [drop_resource_group()](drop_resource_group.md)
 
-- [list_resource_groups()](https://zilliverse.feishu.cn/docx/FXTZd5FgNo9ta0xvjaIclEM1nPf)
+- [list_resource_groups()](list_resource_groups.md)
 
-- [transfer_node()](https://zilliverse.feishu.cn/docx/QHcpd1aJzo5aYbxJtMXc58een4f)
+- [transfer_node()](transfer_node.md)
 

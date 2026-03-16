@@ -24,7 +24,7 @@ LocalBulkWriter(LocalBulkWriterParam bulkWriterParam)
 
 - **bulkWriterParam** (*LocalBulkWriterParam*) -
 
-    A [LocalBulkWriterParam](https://zilliverse.feishu.cn/docx/G7F9dQ8DwoZsaVxExdnc7K6an3g#WCsndKZzDo7XxnxLLDFcswcqnKc) instance.
+    A [LocalBulkWriterParam](LocalBulkWriter.md) instance.
 
 ## LocalBulkWriterParam
 
@@ -44,7 +44,7 @@ LocalBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating **[CreateCollectionReq.CollectionSchema](https://zilliverse.feishu.cn/docx/FxUxdWGz2oUh1ixyquZcAndBnAf)**.
+    The schema of the target collection that is defined by instantiating **CreateCollectionReq.CollectionSchema**.
 
 - `withLocalPath(String localPath)`
 
@@ -66,7 +66,7 @@ LocalBulkWriterParam.newBuilder()
 
 - `withFileType(BulkFileType fileType)`
 
-    The type of the output file. Possible options are listed in [BulkFileType](https://zilliverse.feishu.cn/docx/FGZadH85KoLEhRxkbLxcc1zbn4c).
+    The type of the output file. Possible options are listed in [BulkFileType](../BulkFileType.md).
 
 - `withConfig(String key, Object val)`
 

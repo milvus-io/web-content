@@ -93,9 +93,9 @@ utility.list_aliases(collection_name="collection_1") # ['bob', 'tom']
 
 The following operations are related to `create_alias()`:
 
-- [alter_alias()](https://zilliverse.feishu.cn/docx/MfTsdrbGcoO9JqxjgPtcMZTvncc)
+- [alter_alias()](alter_alias.md)
 
-- [drop_alias()](https://zilliverse.feishu.cn/docx/V7BWdrC39oPAauxoWBzcaldwnVc)
+- [drop_alias()](drop_alias.md)
 
-- [list_aliases()](https://zilliverse.feishu.cn/docx/XBwxdP96Go8ITyx7UuNcL7EonPd)
+- [list_aliases()](list_aliases.md)
 

@@ -59,21 +59,21 @@ roles = utility.list_roles(include_user_info=True)
 
 The following operations are related to `drop()`:
 
-- [add_user()](https://zilliverse.feishu.cn/docx/W7GJdpYrYoYhSaxW6uzcVAZinYf)
+- [add_user()](add_user.md)
 
-- [create()](https://zilliverse.feishu.cn/docx/G3h4d3jx6oXFHBxFZlyc9jLKnTO)
+- [create()](create.md)
 
-- [get_users()](https://zilliverse.feishu.cn/docx/CCOhd671iog6rRxu8aOcaPncnLK)
+- [get_users()](get_users.md)
 
-- [grant()](https://zilliverse.feishu.cn/docx/BapSdVXjQoQXnbxnRYScCagAn1f)
+- [grant()](grant.md)
 
-- [is_exist()](https://zilliverse.feishu.cn/docx/F8WOdIoz4okn5OxMEymcXNuRnkb)
+- [is_exist()](is_exist.md)
 
-- [list_grant()](https://zilliverse.feishu.cn/docx/JXNXdQuwhoYmZQxSohNcdxtwnzh)
+- [list_grant()](list_grant.md)
 
-- [list_grants()](https://zilliverse.feishu.cn/docx/YRoGdgQmWoIEaJx84ICcHTILnMe)
+- [list_grants()](list_grants.md)
 
-- [remove_user()](https://zilliverse.feishu.cn/docx/SlmSdaD7rocMJsxThNHcOtEknVd)
+- [remove_user()](remove_user.md)
 
-- [revoke()](https://zilliverse.feishu.cn/docx/UUJWdoEnjoXx69xahsScdMVSnzf)
+- [revoke()](revoke.md)
 

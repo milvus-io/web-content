@@ -38,7 +38,7 @@ await milvusClient.createResourceGroup({
 
 - **configs** (*ResourceGroupConfig*) -
 
-    A **[ResourceGroupConfig](https://zilliverse.feishu.cn/docx/Q0aNdOtyYoQHFhxCdEacj2kdnah)** object.
+    A **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
 
 - **timeout** (*number*) -
 

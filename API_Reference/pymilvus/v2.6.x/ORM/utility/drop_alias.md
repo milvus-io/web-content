@@ -89,9 +89,9 @@ utility.list_aliases(collection_name="collection_1") # ['tom']
 
 The following operations are related to `drop_alias()`:
 
-- [alter_alias()](https://zilliverse.feishu.cn/docx/MfTsdrbGcoO9JqxjgPtcMZTvncc)
+- [alter_alias()](alter_alias.md)
 
-- [create_alias()](https://zilliverse.feishu.cn/docx/DthMdlg8Lozw89xNz4TcBv1LnOe)
+- [create_alias()](create_alias.md)
 
-- [list_aliases()](https://zilliverse.feishu.cn/docx/XBwxdP96Go8ITyx7UuNcL7EonPd)
+- [list_aliases()](list_aliases.md)
 

@@ -24,7 +24,7 @@ public RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam)
 
 - **bulkWriterParam** (*RemoteBulkWriterParam*) -
 
-    A [RemoteBulkWriterParam](https://zilliverse.feishu.cn/docx/XAIndF6XWoQzvRxDvpLcgEE1nEb#MgDJdcimqofWDDxAA7qcwdVNnAf) instance.
+    A [RemoteBulkWriterParam](RemoteBulkWriter.md) instance.
 
 ## RemoteBulkWriterParam
 
@@ -45,11 +45,11 @@ RemoteBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating [CreateCollectionReq.CollectionSchema](https://zilliverse.feishu.cn/docx/FxUxdWGz2oUh1ixyquZcAndBnAf).
+    The schema of the target collection that is defined by instantiating CreateCollectionReq.CollectionSchema.
 
 - `withConnectParam(StorageConnectParam connectParam)`
 
-    The parameters used to connect to a remote bucket, which is defined by instantiating [StorageConnectParam](https://zilliverse.feishu.cn/docx/XAIndF6XWoQzvRxDvpLcgEE1nEb#Qua0dbOEhoTqQIxAthncg0xqnyc).
+    The parameters used to connect to a remote bucket, which is defined by instantiating [StorageConnectParam](RemoteBulkWriter.md).
 
 - `withRemotePath(String remotePath)`
 
@@ -71,7 +71,7 @@ RemoteBulkWriterParam.newBuilder()
 
 - `withFileType(BulkFileType fileType)`
 
-    The type of the output file. Possible options are listed in [BulkFileType](https://zilliverse.feishu.cn/docx/FGZadH85KoLEhRxkbLxcc1zbn4c).
+    The type of the output file. Possible options are listed in [BulkFileType](../BulkFileType.md).
 
 - `withConfig(String key, Object val)`
 

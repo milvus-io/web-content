@@ -1,6 +1,6 @@
 # \_\_call\_\_()
 
-This operation in [VoyageRerankFunction](https://zilliverse.feishu.cn/docx/Smobd2lIho2yQPxtRhLcLcKznCf) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
+This operation in [VoyageRerankFunction](VoyageRerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
 ## Request syntax
 

@@ -21,7 +21,7 @@ await milvusClient.updateResourceGroup({
 
     **[REQUIRED]**
 
-    An object that contains the resource groups to update, with the resource group names as the keys and their updated configurations as the values, each of which is an [ResourceGroupConfig](https://zilliverse.feishu.cn/docx/Q0aNdOtyYoQHFhxCdEacj2kdnah) object.
+    An object that contains the resource groups to update, with the resource group names as the keys and their updated configurations as the values, each of which is an [ResourceGroupConfig](ResourceGroupConfig.md) object.
 
 - **timeout** (*number*) -
 

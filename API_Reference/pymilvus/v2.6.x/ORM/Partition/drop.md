@@ -60,9 +60,9 @@ partition.drop()
 
 The following operations are related to `drop()`:
 
-- [get_replicas()](https://zilliverse.feishu.cn/docx/YKwldu59qosZBsxdRdSc0l9Hnoe)
+- [get_replicas()](get_replicas.md)
 
-- [load()](https://zilliverse.feishu.cn/docx/TWxddf6iboyM15xK4Kzc8ASknRb)
+- [load()](load.md)
 
-- [release()](https://zilliverse.feishu.cn/docx/ZQ2RdE2AOoH9bfx4k3Sc3Ny0ngb)
+- [release()](release.md)
 

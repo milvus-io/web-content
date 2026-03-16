@@ -4,7 +4,7 @@ This operation returns the status of the specified compaction job.
 
 <div class="alert note">
 
-This method is deprecated. For the latest equivalent, refer to [get_compaction_state()](https://zilliverse.feishu.cn/docx/MSDVdu103obklexX8GvcW5cWnCf).
+This method is deprecated. For the latest equivalent, refer to [get_compaction_state()](get_compaction_state.md).
 
 </div>
 

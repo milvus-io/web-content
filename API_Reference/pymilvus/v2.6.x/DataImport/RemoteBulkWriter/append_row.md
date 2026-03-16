@@ -55,9 +55,9 @@ writer.append_row(
 
 ## Related classes and methods
 
-- [commit()](https://zilliverse.feishu.cn/docx/VccVd4MTgoPzCixDVtgcEoKWnPf)
+- [commit()](commit.md)
 
-- [AzureConnectParam](https://zilliverse.feishu.cn/docx/C2YSddNqZoDNmNxWqqEcuzhKn4f)
+- [AzureConnectParam](AzureConnectParam/AzureConnectParam.md)
 
-- [S3ConnectParam](https://zilliverse.feishu.cn/docx/CSpOd0XgWoVAhzx5xbVcpCVfnPg)
+- [S3ConnectParam](S3ConnectParam/S3ConnectParam.md)
 

@@ -57,5 +57,5 @@ server_version = utility.get_server_version()
 
 The following operations are related to `get_server_version()`:
 
-- [get_server_type()](https://zilliverse.feishu.cn/docx/UOIddRBUXotHvyx4Yyocer0mnId)
+- [get_server_type()](get_server_type.md)
 

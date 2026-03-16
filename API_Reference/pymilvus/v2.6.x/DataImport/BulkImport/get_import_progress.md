@@ -197,7 +197,7 @@ print(json.dumps(resp.json(), indent=4, sort_keys=True))
 
 ## Related methods
 
-- [bulk_import()](https://zilliverse.feishu.cn/docx/S9dyd4UwhoqOPux411KcbafDnde)
+- bulk_import()
 
-- [list_import_jobs()](https://zilliverse.feishu.cn/docx/P0vxdEVBPoTNKLxkKIzcznlYnNc)
+- [list_import_jobs()](list_import_jobs.md)
 

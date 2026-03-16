@@ -182,15 +182,15 @@ connections.connect(db_name="books")
 
 The following operations are related to `connect()`:
 
-- [add_connection()](https://zilliverse.feishu.cn/docx/C37ldNLbFog6ThxA23ScMldnnmb)
+- [add_connection()](add_connection.md)
 
-- [disconnect()](https://zilliverse.feishu.cn/docx/IpSBdcabbosobvxQkAEcv6CvnJd)
+- [disconnect()](disconnect.md)
 
-- [get_connection_addr()](https://zilliverse.feishu.cn/docx/H2zBdRHVtovNQGxvb0xcwpSKnBd)
+- [get_connection_addr()](get_connection_addr.md)
 
-- [has_connection()](https://zilliverse.feishu.cn/docx/XeZwdeK64oGD8rx9DA3ciqNinnh)
+- [has_connection()](has_connection.md)
 
-- [list_connections()](https://zilliverse.feishu.cn/docx/DyPldeRNXo4nMqxQeE0cMnd2nEf)
+- [list_connections()](list_connections.md)
 
-- [remove_connection()](https://zilliverse.feishu.cn/docx/L4KSdOVTEotaiyxjTddcVRDhn3E)
+- [remove_connection()](remove_connection.md)
 

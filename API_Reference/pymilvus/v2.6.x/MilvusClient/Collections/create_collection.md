@@ -44,7 +44,7 @@ create_collection(
 
     This parameter is designed for the quick setup of a collection and will ignored if the **schema** is not **None** and a field in the schema has its **is_primary** set to **True**.
 
-- **id_type** (*[DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)*) -
+- **id_type** (*DataType*) -
 
     The data type of the primary field in this collection.
 

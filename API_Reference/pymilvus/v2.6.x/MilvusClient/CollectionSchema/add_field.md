@@ -20,7 +20,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*[DataType](https://zilliverse.feishu.cn/docx/KvNsd3aV4ocRNJxrZN2cg1zenqb)*) - 
+- **datatype** (*[DataType](../Collections/DataType.md)*) - 
 
     **[REQUIRED]**
 
@@ -191,7 +191,7 @@ add_field(
 
 **RETURN TYPE:**
 
-*[CollectionSchema](https://zilliverse.feishu.cn/docx/BqR9dyTk6oOl8BxbZOOcW2Phnsn)*
+*CollectionSchema*
 
 **RETURNS:**
 

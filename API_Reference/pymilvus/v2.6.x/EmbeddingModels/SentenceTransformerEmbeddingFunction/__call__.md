@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [SentenceTransformerEmbeddingFunction](https://zilliverse.feishu.cn/docx/JOFedA4h8otTjHxsYQ7cnjsunHd?from=from_copylink) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-To prevent potential errors when directly using the **\_\_call()\_\_** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](https://zilliverse.feishu.cn/docx/JOFedA4h8otTjHxsYQ7cnjsunHd).
+To prevent potential errors when directly using the **\_\_call()\_\_** method, avoid using **query_instruction** or **doc_instruction** for SentenceTransformerEmbeddingFunction initialization. For more information, refer to [SentenceTransformerEmbeddingFunction](SentenceTransformerEmbeddingFunction.md).
 
 ## Request syntax
 

@@ -119,15 +119,15 @@ res = collection.delete("id in [ 0, 1 ]")
 
 The following operations are related to `delete()`:
 
-- [insert()](https://zilliverse.feishu.cn/docx/CbCodEGY9o6pKuxowNdctUppn7d)
+- [insert()](insert.md)
 
-- [search()](https://zilliverse.feishu.cn/docx/OaM5dkbPjohKhNxHvKNcfnYMnVb)
+- [search()](search.md)
 
-- [search_iterator()](https://zilliverse.feishu.cn/docx/HrnndnWtKoPuenxvsXBchF1wnnh)
+- [search_iterator()](search_iterator.md)
 
-- [query()](https://zilliverse.feishu.cn/docx/JzcYdBQ5zoU4KpxPqUHcPLQonKd)
+- [query()](query.md)
 
-- [query_iterator()](https://zilliverse.feishu.cn/docx/LffbdiHhzoHe08xivF9ccmoen5d)
+- [query_iterator()](query_iterator.md)
 
-- [upsert()](https://zilliverse.feishu.cn/docx/AQ1ydMXbOog5VJxITgUc4GFvnVe)
+- [upsert()](upsert.md)
 

@@ -115,9 +115,9 @@ utility.list_aliases(collection_name="collection_2") # ['bob']
 
 The following operations are related to `alter_alias()`:
 
-- [create_alias()](https://zilliverse.feishu.cn/docx/DthMdlg8Lozw89xNz4TcBv1LnOe)
+- [create_alias()](create_alias.md)
 
-- [drop_alias()](https://zilliverse.feishu.cn/docx/V7BWdrC39oPAauxoWBzcaldwnVc)
+- [drop_alias()](drop_alias.md)
 
-- [list_aliases()](https://zilliverse.feishu.cn/docx/XBwxdP96Go8ITyx7UuNcL7EonPd)
+- [list_aliases()](list_aliases.md)
 

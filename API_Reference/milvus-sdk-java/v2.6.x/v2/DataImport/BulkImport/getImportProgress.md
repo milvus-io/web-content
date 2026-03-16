@@ -21,7 +21,7 @@ bulkImport.getImportProgress(
 
     The endpoint of the connected Milvus instance.
 
-- **request** (*[BaseDescribeImportRequest](https://zilliverse.feishu.cn/docx/EjnFdC5EfoIkoExSBOxcEC2hnbg#HPp5dn5QIoDrYexQAhKcSfWPnjh)*) -  
+- **request** (*[BaseDescribeImportRequest](getImportProgress.md)*) -  
 
     A **BaseImportRequest** instance.
 

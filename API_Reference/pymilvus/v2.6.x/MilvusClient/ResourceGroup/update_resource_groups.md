@@ -15,7 +15,7 @@ update_resource_groups(
 
 - **configs** (*Dict[str, ResourceGroupConfig]*) - 
 
-    A dictionary containing the resource group name as the key and the configuration of the resource group after the update as the value. The value should be a **[ResourceGroupConfig](https://zilliverse.feishu.cn/docx/LrfjdgJXkoe90gxNR1YcrsJMnYg)** object.
+    A dictionary containing the resource group name as the key and the configuration of the resource group after the update as the value. The value should be a **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
 
 - **timeout** (*float* | *None*) - 
 

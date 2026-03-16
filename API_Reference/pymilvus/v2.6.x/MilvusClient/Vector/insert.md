@@ -164,13 +164,13 @@ res = client.insert(
 
 ## Related methods
 
-- [delete()](https://zilliverse.feishu.cn/docx/DWLXdSCYnoPT4ExktRKceEqLnAd)
+- [delete()](delete.md)
 
-- [get()](https://zilliverse.feishu.cn/docx/TEUDde2xbo0JT7xtVvtcF53Nnub)
+- [get()](get.md)
 
-- [query()](https://zilliverse.feishu.cn/docx/LkmSddW2NolgitxLhy9cx22Dnpe)
+- query()
 
-- [search()](https://zilliverse.feishu.cn/docx/D74JdcitKobd7cxNdDdcGAz6nuf)
+- search()
 
-- [upsert()](https://zilliverse.feishu.cn/docx/WRYFdoDe8ofrlDxxTxQcdoJjnAh)
+- upsert()
 

@@ -35,7 +35,7 @@ An **IndexParams** contains a list of **IndexParam** objects.
     │       └── add_index()
     ```
 
-    It offers the **[add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)** method to add indexes to the list.
+    It offers the **add_index()** method to add indexes to the list.
 
 **EXCEPTIONS:**
 
@@ -49,13 +49,13 @@ from pymilvus import MilvusClient
 index_params = MilvusClient.prepare_index_params()
 ```
 
-- [add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)
+- add_index()
 
-- [create_index()](https://zilliverse.feishu.cn/docx/B3n3db0idoia02xXxJfcONK8nRh)
+- [create_index()](create_index.md)
 
-- [describe_index()](https://zilliverse.feishu.cn/docx/WhsHdyIgyoFlsQxNJt9cFCTxnDe)
+- [describe_index()](describe_index.md)
 
-- [drop_index()](https://zilliverse.feishu.cn/docx/NPnQdZCJ7oF002xTntecdI2ini8)
+- [drop_index()](drop_index.md)
 
-- [list_indexes()](https://zilliverse.feishu.cn/docx/ZqmudJWyFonUKGxAxXncYrLZn2e)
+- [list_indexes()](list_indexes.md)
 

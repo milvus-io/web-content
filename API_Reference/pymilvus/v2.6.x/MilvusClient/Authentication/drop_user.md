@@ -63,11 +63,11 @@ client.drop_user(user_name="user_1")
 
 ## Related methods
 
-- [create_user()](https://zilliverse.feishu.cn/docx/BDupd28JqoNY9HxVOTfcv86enRe)
+- [create_user()](create_user.md)
 
-- [describe_user()](https://zilliverse.feishu.cn/docx/Wz3HdtvPCoEquvxFY7PcDHxcnEe)
+- [describe_user()](describe_user.md)
 
-- [list_users()](https://zilliverse.feishu.cn/docx/EZ2YdBHoDoRTlxx91tscffm1nSb)
+- [list_users()](list_users.md)
 
-- [update_password()](https://zilliverse.feishu.cn/docx/WGDod7Qehou4GWx4Co2cJ34VnKb)
+- [update_password()](update_password.md)
 

@@ -174,13 +174,13 @@ res.insert_count
 
 The following operations are related to `insert()`:
 
-- [delete()](https://zilliverse.feishu.cn/docx/V9BidASNqoWYrmxo11ecuN99neg)
+- [delete()](delete.md)
 
-- [flush()](https://zilliverse.feishu.cn/docx/VRGwdg75Ao7ZXQx7uANc9wzXnVb)
+- [flush()](flush.md)
 
-- [query()](https://zilliverse.feishu.cn/docx/N97pdfkjlo9j61xrtL2cbB79nKe)
+- [query()](query.md)
 
-- [search()](https://zilliverse.feishu.cn/docx/XW72dhBuNoqNWhxUQLtcfa6Fnwd)
+- [search()](search.md)
 
-- [upsert()](https://zilliverse.feishu.cn/docx/MQMzddDnao5Zz0xmSRncZM2nn5b)
+- [upsert()](upsert.md)
 

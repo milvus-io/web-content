@@ -26,7 +26,7 @@ Collection(
 
     The name of the collection to create.
 
-- **schema** (*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*) - 
+- **schema** (*[CollectionSchema](../CollectionSchema/CollectionSchema.md)*) - 
 
     The schema used to create the collection. 
 

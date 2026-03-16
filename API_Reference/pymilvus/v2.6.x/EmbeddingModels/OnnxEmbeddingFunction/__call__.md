@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [OnnxEmbeddingFunction](https://zilliverse.feishu.cn/docx/MVLRdU9nPonUeExs7ogctwZ1n4c) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [OnnxEmbeddingFunction](OnnxEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The `call` method of OnnxEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/XfxvdiIdOokuN1xiVBWct34Wnre) and [encode_queries()](https://zilliverse.feishu.cn/docx/ZkWBdbMZkoBjT1xe4qDcTBOHnGx).
+The `call` method of OnnxEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 

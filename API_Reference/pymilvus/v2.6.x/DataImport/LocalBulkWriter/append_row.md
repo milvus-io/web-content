@@ -45,5 +45,5 @@ writer.append_row(
 
 ## Related methods
 
-- [commit()](https://zilliverse.feishu.cn/docx/EtBDdoGaFo3bOExKxCHcKgpenib)
+- [commit()](commit.md)
 

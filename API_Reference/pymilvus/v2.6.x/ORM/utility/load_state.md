@@ -140,13 +140,13 @@ utility.load_state(
 
 The following operations are related to `load_state()`:
 
-- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
+- [Partition](../Partition/Partition.md)
 
-- [load()](https://zilliverse.feishu.cn/docx/HQDndiGwloWKIexgPCUcEZGenOh)
+- [load()](../Collection/load.md)
 
-- [release()](https://zilliverse.feishu.cn/docx/CBwkdDs7MoKkVKx0kJgcPUNxn6s)
+- [release()](../Collection/release.md)
 
-- [loading_progress()](https://zilliverse.feishu.cn/docx/HQiHd82orov0XvxAzLWcl5xRnzc)
+- [loading_progress()](loading_progress.md)
 
-- [wait_for_loading_complete()](https://zilliverse.feishu.cn/docx/PLKXdUB1EoNX8gxKHruc9GcEnsg)
+- [wait_for_loading_complete()](wait_for_loading_complete.md)
 

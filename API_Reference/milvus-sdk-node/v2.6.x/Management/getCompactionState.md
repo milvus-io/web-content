@@ -21,7 +21,7 @@ await milvusClient.getCompactionState({
 
     **[REQUIRED]**
 
-    The ID of a compaction job that is returned by a call to [`compact()`](https://zilliverse.feishu.cn/docx/DCK5d56UZop0kGxpQu8cLqlvndg).
+    The ID of a compaction job that is returned by a call to [`compact()`](compact.md).
 
 - **timeout** (*number*) -
 

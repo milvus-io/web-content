@@ -81,7 +81,7 @@
         "sourceType": "drive",
         "language": "java",
         "targets": {
-          "outputDir": "API_Reference/milvus-sdk-java/v2.6.x",
+          "outputDir": "API_Reference/milvus-sdk-java/v2.6.x/v2",
           "imageDir": "assets"
         },
         "images": {

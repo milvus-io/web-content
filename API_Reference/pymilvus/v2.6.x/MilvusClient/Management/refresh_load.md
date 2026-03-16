@@ -64,9 +64,9 @@ client.refresh_load(
 
 ## Related methods
 
-- [get_load_state()](https://zilliverse.feishu.cn/docx/KEPYdKup1o3nHdxKbjvcQUzwnnd)
+- [get_load_state()](get_load_state.md)
 
-- [load_collection()](https://zilliverse.feishu.cn/docx/FLmWdFP9Zo3JcixOEgucU8JMnLc)
+- load_collection()
 
-- [release_collection()](https://zilliverse.feishu.cn/docx/PRR7dRfi8o1s61xFRovccAdRnHe)
+- [release_collection()](release_collection.md)
 

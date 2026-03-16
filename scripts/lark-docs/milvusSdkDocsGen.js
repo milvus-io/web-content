@@ -1,6 +1,7 @@
 const MilvusDocsGen = require('./milvusDocsGen.js')
 const larkDocWriter = require('./larkDocWriter.js')
 const inquirer = require('inquirer')
+const path = require('node:path')
 
 class MilvusSdkDocsGen extends MilvusDocsGen {
     constructor(base, sourceType, menuStructure, imageDir, alt_texts, language) {
@@ -216,10 +217,24 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         }
 
         console.log(`Generating content...`)
+        this.current_page_id = page_id
         let content = await this.__markdown()
         content = this.__filter_content(content, this.targets)
 
         return { front_matters: '', content, page_id }
+    }
+
+    async __convert_link(url) {
+        const tokenMatch = url.match(/\/docx\/([^#?/]+)/)
+        if (!tokenMatch) return url
+
+        const token = tokenMatch[1]
+        const sources = this.records || await this.__list_sources()
+        const target = sources.find(s => s.page_token === token)
+        if (!target || !target.page_id.endsWith('.md')) return url
+
+        const currentDir = path.dirname(this.current_page_id || '')
+        return path.relative(currentDir, target.page_id)
     }
 }
 

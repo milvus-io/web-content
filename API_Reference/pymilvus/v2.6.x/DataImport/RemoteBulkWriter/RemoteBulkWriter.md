@@ -31,7 +31,7 @@ writer = RemoteBulkWriter(
 
 **PARAMETERS:**
 
-- **schema** (*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*) -
+- **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
 
     **[REQUIRED]**
 
@@ -43,7 +43,7 @@ writer = RemoteBulkWriter(
 
     The path to the directory that is to hold the rewritten data.
 
-- **connect_param** (*[ConnectParam](https://zilliverse.feishu.cn/docx/CSpOd0XgWoVAhzx5xbVcpCVfnPg)*) -
+- **connect_param** (*[ConnectParam](S3ConnectParam/S3ConnectParam.md)*) -
 
     The parameters used to connect to a remote bucket.
 

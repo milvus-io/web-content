@@ -72,15 +72,15 @@ collection.has_partition(
 
 The following operations are related to `has_partition()`:
 
-- [drop_collection()](https://zilliverse.feishu.cn/docx/FHcYdN4apoI5TIx0LxScISvtn0f)
+- [drop_collection()](drop_collection.md)
 
-- [flush_all()](https://zilliverse.feishu.cn/docx/Uwsfd443boKKgyx2zZTcYDqKnCe)
+- [flush_all()](flush_all.md)
 
-- [get_query_segment_info()](https://zilliverse.feishu.cn/docx/CB9edh2ySoJyWhxBoLcchPj9nxg)
+- [get_query_segment_info()](get_query_segment_info.md)
 
-- [has_collection()](https://zilliverse.feishu.cn/docx/TWOxdwDYRo4CCHxDdZbc7IOznCg)
+- [has_collection()](has_collection.md)
 
-- [list_collections()](https://zilliverse.feishu.cn/docx/QgxEdfBMSodYo6xCg24cH3hInr4)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](https://zilliverse.feishu.cn/docx/M0qRdF1cLokrxvxyrXScJ64FnEe)
+- [rename_collection()](rename_collection.md)
 

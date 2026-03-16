@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [BGEM3EmbeddingFunction](https://zilliverse.feishu.cn/docx/XYSVdCqCDoJ9Y5xqKEAceYkpnnh) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of BGEM3EmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/Q0rYdTPkEoRZgUx99LCcfMDUnvh) and [encode_queries()](https://zilliverse.feishu.cn/docx/UehMdosTGoZVzaxdTcUcpy1ynef).
+The **\_\_call\_\_()** method of BGEM3EmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 
@@ -30,7 +30,7 @@ bge_m3_ef(
 
 A dictionary containing the document embeddings.
 
-When initializing [BGEM3EmbeddingFunction](https://zilliverse.feishu.cn/docx/XYSVdCqCDoJ9Y5xqKEAceYkpnnh?from=from_copylink), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
+When initializing [BGEM3EmbeddingFunction](BGEM3EmbeddingFunction.md), if **return_dense**, **return_sparse**, and **return_colbert_vecs** are set to **True**, the returned dictionary will contain the keys **dense**, **sparse**, and **colbert_vecs**, with the corresponding dense embeddings, sparse word embeddings, and ColBERT vectors.
 
 **Exceptions:**
 

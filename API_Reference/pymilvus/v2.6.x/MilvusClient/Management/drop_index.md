@@ -146,13 +146,13 @@ client.drop_index(
 
 ## Related methods
 
-- [add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)
+- add_index()
 
-- [create_index()](https://zilliverse.feishu.cn/docx/B3n3db0idoia02xXxJfcONK8nRh)
+- [create_index()](create_index.md)
 
-- [describe_index()](https://zilliverse.feishu.cn/docx/WhsHdyIgyoFlsQxNJt9cFCTxnDe)
+- [describe_index()](describe_index.md)
 
-- [list_indexes()](https://zilliverse.feishu.cn/docx/ZqmudJWyFonUKGxAxXncYrLZn2e)
+- [list_indexes()](list_indexes.md)
 
-- [prepare_index_params()](https://zilliverse.feishu.cn/docx/CAzpdAw3wo4ZqrxhjTLcEGBBn1S)
+- [prepare_index_params()](prepare_index_params.md)
 

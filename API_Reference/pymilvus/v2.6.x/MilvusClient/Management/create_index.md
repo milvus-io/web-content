@@ -39,7 +39,7 @@ create_index(
 
         - `True` (default): The client waits until the index is fully built before it returns. This means you will not get a response until the process is complete.
 
-        - `False`: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the [`describe_index()`](https://zilliverse.feishu.cn/docx/WhsHdyIgyoFlsQxNJt9cFCTxnDe?from=from_copylink) method.
+        - `False`: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the [`describe_index()`](describe_index.md) method.
 
 **RETURN TYPE:**
 
@@ -151,13 +151,13 @@ client.list_indexes(collection_name="customized_setup")
 
 ## Related methods
 
-- [add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)
+- add_index()
 
-- [describe_index()](https://zilliverse.feishu.cn/docx/WhsHdyIgyoFlsQxNJt9cFCTxnDe)
+- [describe_index()](describe_index.md)
 
-- [drop_index()](https://zilliverse.feishu.cn/docx/NPnQdZCJ7oF002xTntecdI2ini8)
+- [drop_index()](drop_index.md)
 
-- [list_indexes()](https://zilliverse.feishu.cn/docx/ZqmudJWyFonUKGxAxXncYrLZn2e)
+- [list_indexes()](list_indexes.md)
 
-- [prepare_index_params()](https://zilliverse.feishu.cn/docx/CAzpdAw3wo4ZqrxhjTLcEGBBn1S)
+- [prepare_index_params()](prepare_index_params.md)
 

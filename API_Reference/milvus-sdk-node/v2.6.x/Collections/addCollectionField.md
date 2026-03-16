@@ -43,7 +43,7 @@ await milvusClient.addCollectionField({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see [DataType](https://zilliverse.feishu.cn/docx/AtLEdt0ZWoUbHoxkfvHcq1ZunUg).
+        The data type of the field. For an enumeration of all available data types, please see [DataType](DataType.md).
 
     - **description** (*string)* -
 
