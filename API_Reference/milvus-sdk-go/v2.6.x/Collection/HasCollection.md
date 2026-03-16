@@ -18,7 +18,7 @@ result, err := client.HasCollection(ctx, option)
 
 - **name** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ A boolean indicating whether the resource exists. Returns an error if the operat
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

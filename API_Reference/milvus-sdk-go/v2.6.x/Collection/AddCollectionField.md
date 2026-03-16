@@ -18,11 +18,11 @@ err := client.AddCollectionField(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **field** (**[entity.Field](Field.md)*)
 
-      The field.
+    The field.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -10,23 +10,23 @@ type ConsistencyLevel commonpb
 
 - **ClStrong** = ConsistencyLevel(commonpb.ConsistencyLevel_Strong)
 
-      Strong consistency. All operations are immediately visible.
+    Strong consistency. All operations are immediately visible.
 
 - **ClBounded** = ConsistencyLevel(commonpb.ConsistencyLevel_Bounded)
 
-      Bounded staleness with a default 5-second tolerance window.
+    Bounded staleness with a default 5-second tolerance window.
 
 - **ClSession** = ConsistencyLevel(commonpb.ConsistencyLevel_Session)
 
-      Session consistency. Reads see writes from the same session.
+    Session consistency. Reads see writes from the same session.
 
 - **ClEventually** = ConsistencyLevel(commonpb.ConsistencyLevel_Eventually)
 
-      Eventually consistent. Best query performance.
+    Eventually consistent. Best query performance.
 
 - **ClCustomized** = ConsistencyLevel(commonpb.ConsistencyLevel_Customized)
 
-      Custom consistency with a user-specified guarantee timestamp.
+    Custom consistency with a user-specified guarantee timestamp.
 
 ## Example
 

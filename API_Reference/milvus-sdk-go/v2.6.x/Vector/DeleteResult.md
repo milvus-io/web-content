@@ -12,4 +12,4 @@ type DeleteResult struct {
 
 - **DeleteCount** (*int64*)
 
-      The number of affected entities.
+    The number of affected entities.

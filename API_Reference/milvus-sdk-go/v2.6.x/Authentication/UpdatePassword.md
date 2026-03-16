@@ -18,15 +18,15 @@ err := client.UpdatePassword(ctx, option)
 
 - **userName** (*string*)
 
-      The name of the user.
+    The name of the user.
 
 - **oldPassword** (*string*)
 
-      The current password for verification.
+    The current password for verification.
 
 - **newPassword** (*string*)
 
-      The new password to set.
+    The new password to set.
 
 **RETURN TYPE:**
 
@@ -40,7 +40,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

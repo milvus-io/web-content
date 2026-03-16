@@ -24,33 +24,33 @@ result, err := client.RunAnalyzer(ctx, option)
 
 - **text** (*...string*)
 
-      The text.
+    The text.
 
 **OPTION METHODS:**
 
 - `WithAnalyzerParamsStr(params string)`
 
-      Sets the analyzer params str for the operation.
+    Sets the analyzer params str for the operation.
 
 - `WithAnalyzerParams(params map[string]any)`
 
-      Sets the analyzer params for the operation.
+    Sets the analyzer params for the operation.
 
 - `WithDetail()`
 
-      Sets the detail for the operation.
+    Sets the detail for the operation.
 
 - `WithHash()`
 
-      Sets the hash for the operation.
+    Sets the hash for the operation.
 
 - `WithField(collectionName, fieldName string)`
 
-      Sets the field for the operation.
+    Sets the field for the operation.
 
 - `WithAnalyzerName(names ...string)`
 
-      Sets the analyzer name for the operation.
+    Sets the analyzer name for the operation.
 
 **RETURN TYPE:**
 
@@ -64,7 +64,7 @@ The analyzer output showing how the input text is tokenized. Returns an error if
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

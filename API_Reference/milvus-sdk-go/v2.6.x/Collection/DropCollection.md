@@ -18,7 +18,7 @@ err := client.DropCollection(ctx, option)
 
 - **name** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

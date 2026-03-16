@@ -1,0 +1,65 @@
+name: Publish Reference Docs Weekly
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # 00:00 every Sunday
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "SDK version suffix (e.g. v2.6.x)"
+        required: false
+        default: "v2.6.x"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      SDK_VERSION: ${{ inputs.version || 'v2.6.x' }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Install scripts dependencies
+        working-directory: scripts
+        run: npm ci
+
+      - name: Configure git and credentials
+        run: |
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
+          touch scripts/.env
+          echo FEISHU_HOST=${{ secrets.FEISHU_HOST }} >> scripts/.env
+          echo APP_ID=${{ secrets.APP_ID }} >> scripts/.env
+          echo APP_SECRET=${{ secrets.APP_SECRET }} >> scripts/.env
+          echo IMAGE_BED_URL=${{ secrets.IMAGE_BED_URL }} >> scripts/.env
+
+      - name: Fetch pymilvus ${{ env.SDK_VERSION }}
+        working-directory: scripts
+        run: node lark-docs/index.js -c config.json -m pymilvus-${{ env.SDK_VERSION }} --all --skipImageDown
+
+      - name: Fetch Java SDK ${{ env.SDK_VERSION }}
+        working-directory: scripts
+        run: node lark-docs/index.js -c config.json -m java-${{ env.SDK_VERSION }} --all --skipImageDown
+
+      - name: Fetch Node SDK ${{ env.SDK_VERSION }}
+        working-directory: scripts
+        run: node lark-docs/index.js -c config.json -m node-${{ env.SDK_VERSION }} --all --skipImageDown
+
+      - name: Fetch Go SDK ${{ env.SDK_VERSION }}
+        working-directory: scripts
+        run: node lark-docs/index.js -c config.json -m go-${{ env.SDK_VERSION }} --all --skipImageDown
+
+      - name: Fetch C++ SDK ${{ env.SDK_VERSION }}
+        working-directory: scripts
+        run: node lark-docs/index.js -c config.json -m cpp-${{ env.SDK_VERSION }} --all --skipImageDown
+
+      - name: Commit and push
+        run: |
+          git add API_Reference/ scripts/config.json
+          git commit -m "Generate SDK reference docs (${{ env.SDK_VERSION }})"
+          git push origin master
+        continue-on-error: true

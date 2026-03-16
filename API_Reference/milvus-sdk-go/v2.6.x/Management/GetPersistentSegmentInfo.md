@@ -18,7 +18,7 @@ A list of persistent segment details. Returns an error if the operation fails.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

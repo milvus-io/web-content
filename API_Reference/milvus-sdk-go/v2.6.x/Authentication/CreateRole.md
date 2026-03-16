@@ -18,7 +18,7 @@ err := client.CreateRole(ctx, option)
 
 - **roleName** (*string*)
 
-      The name of the role.
+    The name of the role.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

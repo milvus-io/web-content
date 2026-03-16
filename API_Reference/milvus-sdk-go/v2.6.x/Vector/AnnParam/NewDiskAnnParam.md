@@ -10,7 +10,7 @@ func NewDiskAnnParam(searchList int) diskANNParam
 
 - **searchList** (*int*)
 
-      The size of the search list for DiskANN. Higher values improve recall at the cost of latency.
+    The size of the search list for DiskANN. Higher values improve recall at the cost of latency.
 
 **RETURNS:**
 

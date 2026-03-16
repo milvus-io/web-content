@@ -18,7 +18,7 @@ result, err := client.ListPartitions(ctx, option)
 
 - **collectionName** (*string*)
 
-  The name of the target collection.
+The name of the target collection.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ A list of names. Returns an error if the operation fails.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

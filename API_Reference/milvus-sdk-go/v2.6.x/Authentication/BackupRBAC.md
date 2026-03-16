@@ -18,7 +18,7 @@ The full RBAC metadata snapshot including users, roles, grants, and privilege gr
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

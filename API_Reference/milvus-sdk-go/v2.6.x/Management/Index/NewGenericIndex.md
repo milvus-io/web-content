@@ -10,11 +10,11 @@ func NewGenericIndex(name string, params map[string]string) GenericIndex
 
 - **name** (*string*)
 
-      The name of the index.
+    The name of the index.
 
 - **params** (*map[string]string*)
 
-      A map of custom index parameter key-value pairs.
+    A map of custom index parameter key-value pairs.
 
 **RETURNS:**
 

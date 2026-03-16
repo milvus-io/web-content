@@ -10,8 +10,8 @@ type CompactionState commonpb
 
 - **CompactionStateRunning** = CompactionState(commonpb.CompactionState_Executing)
 
-      The compaction operation is currently executing.
+    The compaction operation is currently executing.
 
 - **CompactionStateCompleted** = CompactionState(commonpb.CompactionState_Completed)
 
-      The compaction operation has completed.
+    The compaction operation has completed.

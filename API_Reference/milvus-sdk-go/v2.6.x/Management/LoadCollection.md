@@ -23,29 +23,29 @@ result, err := client.LoadCollection(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithReplica(num int)`
 
-      Sets the replica for the operation.
+    Sets the replica for the operation.
 
 - `WithResourceGroup(resourceGroups ...string)`
 
-      Sets the resource group for the operation.
+    Sets the resource group for the operation.
 
 - `WithLoadFields(loadFields ...string)`
 
-      Specifies which fields to load into memory.
+    Specifies which fields to load into memory.
 
 - `WithSkipLoadDynamicField(skipFlag bool)`
 
-      Sets the skip load dynamic field for the operation.
+    Sets the skip load dynamic field for the operation.
 
 - `WithRefresh(isRefresh bool)`
 
-      Enables refresh mode to reload newly inserted data.
+    Enables refresh mode to reload newly inserted data.
 
 **RETURN TYPE:**
 
@@ -59,7 +59,7 @@ A LoadTask that can be used to wait for the load operation to complete. Returns 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

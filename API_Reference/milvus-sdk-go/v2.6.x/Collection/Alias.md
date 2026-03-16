@@ -14,12 +14,12 @@ type Alias struct {
 
 - **DbName** (*string*)
 
-      The name of the associated database.
+    The name of the associated database.
 
 - **Alias** (*string*)
 
-      The alias name.
+    The alias name.
 
 - **CollectionName** (*string*)
 
-      The name of the associated collection.
+    The name of the associated collection.

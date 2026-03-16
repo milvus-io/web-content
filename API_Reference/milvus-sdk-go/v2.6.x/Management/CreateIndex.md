@@ -19,21 +19,21 @@ result, err := client.CreateIndex(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **fieldName** (*string*)
 
-      The name of the field.
+    The name of the field.
 
 - **index** (*[index.Index](Index/Index.md)*)
 
-      The index.
+    The index.
 
 **OPTION METHODS:**
 
 - `WithIndexName(indexName string)`
 
-      Sets the name of the index.
+    Sets the name of the index.
 
 **RETURN TYPE:**
 
@@ -47,7 +47,7 @@ A CreateIndexTask that can be used to wait for the index build to complete. Retu
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

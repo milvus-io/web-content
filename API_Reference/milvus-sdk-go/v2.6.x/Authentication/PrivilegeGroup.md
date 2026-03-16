@@ -13,8 +13,8 @@ type PrivilegeGroup struct {
 
 - **GroupName** (*string*)
 
-      The name of the privilege group.
+    The name of the privilege group.
 
 - **Privileges** (*[]string*)
 
-      The list of granted privileges.
+    The list of granted privileges.

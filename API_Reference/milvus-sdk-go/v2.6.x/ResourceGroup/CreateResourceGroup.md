@@ -20,17 +20,17 @@ err := client.CreateResourceGroup(ctx, option)
 
 - **name** (*string*)
 
-      The name of the resource group.
+    The name of the resource group.
 
 **OPTION METHODS:**
 
 - `WithNodeRequest(nodeRequest int)`
 
-      Sets the node request for the operation.
+    Sets the node request for the operation.
 
 - `WithNodeLimit(nodeLimit int)`
 
-      Sets the node limit for the operation.
+    Sets the node limit for the operation.
 
 **RETURN TYPE:**
 
@@ -44,7 +44,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

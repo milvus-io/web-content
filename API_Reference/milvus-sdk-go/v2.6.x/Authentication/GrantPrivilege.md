@@ -19,25 +19,25 @@ err := client.GrantPrivilege(ctx, option)
 
 - **roleName** (*string*)
 
-      The name of the role.
+    The name of the role.
 
 - **objectType** (*string*)
 
-      The type of object the privilege applies to (e.g., Global, Collection).
+    The type of object the privilege applies to (e.g., Global, Collection).
 
 - **privilegeName** (*string*)
 
-      The name of the privilege.
+    The name of the privilege.
 
 - **objectName** (*string*)
 
-      The name of the object the privilege applies to.
+    The name of the object the privilege applies to.
 
 **OPTION METHODS:**
 
 - `WithDbName(dbName string)`
 
-      Specifies the database to use for the operation.
+    Specifies the database to use for the operation.
 
 **RETURN TYPE:**
 
@@ -51,7 +51,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -16,23 +16,23 @@ type ResourceGroupConfig struct {
 
 - **Requests** (*ResourceGroupLimit*)
 
-      The requests.
+    The requests.
 
 - **Limits** (*ResourceGroupLimit*)
 
-      The limits.
+    The limits.
 
 - **TransferFrom** (*[]*ResourceGroupTransfer*)
 
-      The transfer from.
+    The transfer from.
 
 - **TransferTo** (*[]*ResourceGroupTransfer*)
 
-      The transfer to.
+    The transfer to.
 
 - **NodeFilter** (*ResourceGroupNodeFilter*)
 
-      The node filter.
+    The node filter.
 
 ## Example
 

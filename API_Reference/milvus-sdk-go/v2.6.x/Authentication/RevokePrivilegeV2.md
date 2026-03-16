@@ -19,21 +19,21 @@ err := client.RevokePrivilegeV2(ctx, option)
 
 - **roleName** (*string*)
 
-      The name of the role.
+    The name of the role.
 
 - **privilegeName** (*string*)
 
-      The name of the privilege.
+    The name of the privilege.
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithDbName(dbName string)`
 
-      Specifies the database to use for the operation.
+    Specifies the database to use for the operation.
 
 **RETURN TYPE:**
 
@@ -47,7 +47,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

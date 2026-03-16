@@ -18,11 +18,11 @@ err := client.AddPrivilegesToGroup(ctx, option)
 
 - **groupName** (*string*)
 
-      The name of the privilege group.
+    The name of the privilege group.
 
 - **privileges** (*...string*)
 
-      The list of privileges to include.
+    The list of privileges to include.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

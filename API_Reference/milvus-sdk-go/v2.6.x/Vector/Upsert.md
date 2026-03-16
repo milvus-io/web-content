@@ -28,65 +28,65 @@ result, err := client.Upsert(ctx, option)
 
 - **collName** (*string*)
 
-  The name of the target collection.
+The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithColumns(columns ...column.Column)`
 
-  Inserts arbitrary typed columns.
+Inserts arbitrary typed columns.
 
 - `WithBoolColumn(colName string, data []bool)`
 
-  Inserts a column of boolean values.
+Inserts a column of boolean values.
 
 - `WithInt8Column(colName string, data []int8)`
 
-  Inserts a column of int8 values.
+Inserts a column of int8 values.
 
 - `WithInt16Column(colName string, data []int16)`
 
-  Inserts a column of int16 values.
+Inserts a column of int16 values.
 
 - `WithInt32Column(colName string, data []int32)`
 
-  Inserts a column of int32 values.
+Inserts a column of int32 values.
 
 - `WithInt64Column(colName string, data []int64)`
 
-  Inserts a column of int64 values.
+Inserts a column of int64 values.
 
 - `WithVarcharColumn(colName string, data []string)`
 
-  Inserts a column of string values.
+Inserts a column of string values.
 
 - `WithFloatVectorColumn(colName string, dim int, data [][]float32)`
 
-  Inserts a column of float32 dense vectors.
+Inserts a column of float32 dense vectors.
 
 - `WithFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-  Inserts a column of float16 vectors (converted from float32).
+Inserts a column of float16 vectors (converted from float32).
 
 - `WithBFloat16VectorColumn(colName string, dim int, data [][]float32)`
 
-  Inserts a column of bfloat16 vectors (converted from float32).
+Inserts a column of bfloat16 vectors (converted from float32).
 
 - `WithBinaryVectorColumn(colName string, dim int, data [][]byte)`
 
-  Inserts a column of binary vectors.
+Inserts a column of binary vectors.
 
 - `WithInt8VectorColumn(colName string, dim int, data [][]int8)`
 
-  Inserts a column of int8 vectors.
+Inserts a column of int8 vectors.
 
 - `WithPartition(partitionName string)`
 
-  Targets a specific partition for the upsert operation.
+Targets a specific partition for the upsert operation.
 
 - `WithPartialUpdate(partialUpdate bool)`
 
-  Enables partial update mode so only provided fields are updated (existing fields not in the payload are preserved).
+Enables partial update mode so only provided fields are updated (existing fields not in the payload are preserved).
 
 **RETURN TYPE:**
 
@@ -100,7 +100,7 @@ The upsert result containing the IDs of the affected entities. Returns an error 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

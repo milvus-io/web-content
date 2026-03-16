@@ -18,7 +18,7 @@ A connected Client instance ready for use. Returns an error if the connection fa
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

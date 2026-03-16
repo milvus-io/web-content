@@ -18,7 +18,7 @@ result, err := client.DescribeAlias(ctx, option)
 
 - **alias** (*string*)
 
-      The alias name to assign.
+    The alias name to assign.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The alias details including the associated collection name. Returns an error if 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

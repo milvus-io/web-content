@@ -25,45 +25,45 @@ result, err := client.HybridSearch(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **limit** (*int*)
 
-      The maximum number of results to return.
+    The maximum number of results to return.
 
 - **annRequests** (*...*AnnRequest*)
 
-      The ann requests.
+    The ann requests.
 
 **OPTION METHODS:**
 
 - `WithConsistencyLevel(cl [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 
-      Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
 
 - `WithPartitons(partitions ...string)`
 
-      Deprecated: typo, use WithPartitions instead
+    Deprecated: typo, use WithPartitions instead
 
 - `WithPartitions(partitions ...string)`
 
-      Limits the operation to the specified partitions.
+    Limits the operation to the specified partitions.
 
 - `WithOutputFields(outputFields ...string)`
 
-      Specifies which fields to include in the returned results.
+    Specifies which fields to include in the returned results.
 
 - `WithReranker(reranker Reranker)`
 
-      Sets the reranker for the operation.
+    Sets the reranker for the operation.
 
 - `WithFunctionRerankers(functionReranker *[entity.Function](../Collection/Function.md))`
 
-      Sets the function rerankers for the operation.
+    Sets the function rerankers for the operation.
 
 - `WithOffset(offset int)`
 
-      Sets the number of results to skip before returning matches.
+    Sets the number of results to skip before returning matches.
 
 **RETURN TYPE:**
 
@@ -77,7 +77,7 @@ The search or query results containing matched entities with scores and fields. 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -18,11 +18,11 @@ err := client.RevokeRole(ctx, option)
 
 - **userName** (*string*)
 
-      The name of the user.
+    The name of the user.
 
 - **roleName** (*string*)
 
-      The name of the role.
+    The name of the role.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

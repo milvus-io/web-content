@@ -19,13 +19,13 @@ result, err := client.ListIndexes(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithFieldName(fieldName string)`
 
-      Sets the field name for the operation.
+    Sets the field name for the operation.
 
 **RETURN TYPE:**
 
@@ -39,7 +39,7 @@ A list of names. Returns an error if the operation fails.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

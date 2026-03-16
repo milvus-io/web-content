@@ -13,8 +13,8 @@ type Role struct {
 
 - **RoleName** (*string*)
 
-      The name of the role.
+    The name of the role.
 
 - **Privileges** (*[]GrantItem*)
 
-      The list of granted privileges.
+    The list of granted privileges.

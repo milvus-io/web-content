@@ -37,113 +37,113 @@ entity.NewField().
 
 - `WithName(name string)`
 
-      Sets the name of the field.
+    Sets the name of the field.
 
 - `WithDescription(desc string)`
 
-      Sets the description of the field.
+    Sets the description of the field.
 
 - `WithDataType(dataType [FieldType](FieldType.md))`
 
-      Sets the data type of the field (e.g., Int64, VarChar, FloatVector).
+    Sets the data type of the field (e.g., Int64, VarChar, FloatVector).
 
 - `WithIsPrimaryKey(isPrimaryKey bool)`
 
-      Sets whether this field is the primary key.
+    Sets whether this field is the primary key.
 
 - `WithIsAutoID(isAutoID bool)`
 
-      Enables auto ID generation for this field.
+    Enables auto ID generation for this field.
 
 - `WithIsDynamic(isDynamic bool)`
 
-      Marks this as a dynamic field.
+    Marks this as a dynamic field.
 
 - `WithIsPartitionKey(isPartitionKey bool)`
 
-      Sets this field as a partition key for data routing.
+    Sets this field as a partition key for data routing.
 
 - `WithIsClusteringKey(isClusteringKey bool)`
 
-      Sets this field as a clustering key for data organization.
+    Sets this field as a clustering key for data organization.
 
 - `WithNullable(nullable bool)`
 
-      Sets whether this field allows null values.
+    Sets whether this field allows null values.
 
 - `WithDefaultValueBool(defaultValue bool)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithDefaultValueInt(defaultValue int32)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithDefaultValueLong(defaultValue int64)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithDefaultValueFloat(defaultValue float32)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithDefaultValueDouble(defaultValue float64)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithDefaultValueTimestamptz(defaultValue int64)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithDefaultValueString(defaultValue string)`
 
-      Sets the default value for the field.
+    Sets the default value for the field.
 
 - `WithTypeParams(key string, value string)`
 
-      Sets a type parameter key-value pair for the field.
+    Sets a type parameter key-value pair for the field.
 
 - `WithDim(dim int64)`
 
-      Sets the vector dimension for this field.
+    Sets the vector dimension for this field.
 
 - `WithMaxLength(maxLen int64)`
 
-      Sets the maximum character length for varchar fields.
+    Sets the maximum character length for varchar fields.
 
 - `WithElementType(eleType [FieldType](FieldType.md))`
 
-      Sets the element type for array fields.
+    Sets the element type for array fields.
 
 - `WithMaxCapacity(maxCap int64)`
 
-      Sets the maximum capacity for array fields.
+    Sets the maximum capacity for array fields.
 
 - `WithEnableAnalyzer(enable bool)`
 
-      Enables the text analyzer for full-text search on this field.
+    Enables the text analyzer for full-text search on this field.
 
 - `WithAnalyzerParams(params map[string]any)`
 
-      Sets the analyzer parameters for text processing.
+    Sets the analyzer parameters for text processing.
 
 - `WithMultiAnalyzerParams(params map[string]any)`
 
-      Sets multiple analyzer configurations for the field.
+    Sets multiple analyzer configurations for the field.
 
 - `WithEnableMatch(enable bool)`
 
-      Enables text matching for this field.
+    Enables text matching for this field.
 
 - `WithStructSchema(schema *StructSchema)`
 
-      Sets the struct schema for struct-type fields.
+    Sets the struct schema for struct-type fields.
 
 **METHODS:**
 
 - `GetDim() int64, error`
 
-      Get dim.
+    Get dim.
 
 ## Example
 

@@ -10,15 +10,15 @@ func NewHNSWIndex(metricType MetricType, m int, efConstruction int) Index
 
 - **metricType** (*[MetricType](../MetricType.md)*)
 
-      The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
+    The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
 - **m** (*int*)
 
-      The number of bi-directional links for each element. Higher values improve recall but increase memory usage. Typical range: 4-64.
+    The number of bi-directional links for each element. Higher values improve recall but increase memory usage. Typical range: 4-64.
 
 - **efConstruction** (*int*)
 
-      The size of the dynamic candidate list during index construction. Higher values improve index quality but slow down build time. Typical range: 8-512.
+    The size of the dynamic candidate list during index construction. Higher values improve index quality but slow down build time. Typical range: 8-512.
 
 **RETURNS:**
 

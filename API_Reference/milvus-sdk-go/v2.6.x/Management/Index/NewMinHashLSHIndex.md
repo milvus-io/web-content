@@ -10,11 +10,11 @@ func NewMinHashLSHIndex(metricType entity.MetricType, lshBand int) *minhashLSHIn
 
 - **metricType** (*[entity.MetricType](../MetricType.md)*)
 
-      The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
+    The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
 - **lshBand** (*int*)
 
-      The number of LSH bands for MinHash-based similarity search.
+    The number of LSH bands for MinHash-based similarity search.
 
 **RETURNS:**
 

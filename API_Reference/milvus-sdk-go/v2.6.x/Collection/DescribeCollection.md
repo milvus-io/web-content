@@ -18,7 +18,7 @@ result, err := client.DescribeCollection(ctx, option)
 
 - **name** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The collection description including schema, fields, and properties. Returns an 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

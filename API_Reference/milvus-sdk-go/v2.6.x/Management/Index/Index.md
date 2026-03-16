@@ -14,12 +14,12 @@ type Index interface {
 
 - `Name() string`
 
-      Returns the name of the index.
+    Returns the name of the index.
 
 - `IndexType() IndexType`
 
-      Returns the index algorithm type.
+    Returns the index algorithm type.
 
 - `Params() map[string]string`
 
-      Returns the index parameters as a key-value map.
+    Returns the index parameters as a key-value map.

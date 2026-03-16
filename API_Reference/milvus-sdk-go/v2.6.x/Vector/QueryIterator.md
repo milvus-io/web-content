@@ -24,33 +24,33 @@ result, err := client.QueryIterator(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithBatchSize(batchSize int)`
 
-      Sets the number of entities to fetch per iteration batch.
+    Sets the number of entities to fetch per iteration batch.
 
 - `WithPartitions(partitionNames ...string)`
 
-      Limits the operation to the specified partitions.
+    Limits the operation to the specified partitions.
 
 - `WithFilter(expr string)`
 
-      Applies a boolean filter expression to narrow results.
+    Applies a boolean filter expression to narrow results.
 
 - `WithOutputFields(fieldNames ...string)`
 
-      Specifies which fields to include in the returned results.
+    Specifies which fields to include in the returned results.
 
 - `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 
-      Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
 
 - `WithIteratorLimit(limit int64)`
 
-      WithIteratorLimit sets the limit of entries to iterate if limit < 0, then it will be set to Unlimited
+    WithIteratorLimit sets the limit of entries to iterate if limit < 0, then it will be set to Unlimited
 
 **RETURN TYPE:**
 
@@ -64,7 +64,7 @@ A QueryIterator for paginating through query results. Returns an error if the op
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

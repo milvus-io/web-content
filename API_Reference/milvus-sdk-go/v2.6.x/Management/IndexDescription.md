@@ -16,20 +16,20 @@ type IndexDescription struct {
 
 - **index.Index** *(embedded)*
 
-      Inherits methods from index.Index.
+    Inherits methods from index.Index.
 
 - **State** (*index.IndexState*)
 
-      The current state.
+    The current state.
 
 - **PendingIndexRows** (*int64*)
 
-      The number of rows pending indexing.
+    The number of rows pending indexing.
 
 - **TotalRows** (*int64*)
 
-      The total number of rows.
+    The total number of rows.
 
 - **IndexedRows** (*int64*)
 
-      The number of indexed rows.
+    The number of indexed rows.

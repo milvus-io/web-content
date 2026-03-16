@@ -18,11 +18,11 @@ err := client.RenameCollection(ctx, option)
 
 - **oldName** (*string*)
 
-      The old name.
+    The old name.
 
 - **newName** (*string*)
 
-      The new name for the collection.
+    The new name for the collection.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

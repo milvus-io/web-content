@@ -19,25 +19,25 @@ err := client.TransferReplica(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **sourceGroup** (*string*)
 
-      The source group.
+    The source group.
 
 - **targetGroup** (*string*)
 
-      The target group.
+    The target group.
 
 - **replicaNum** (*int64*)
 
-      The replica num value.
+    The replica num value.
 
 **OPTION METHODS:**
 
 - `WithDBName(dbName string)`
 
-      Specifies the database to use for the operation.
+    Specifies the database to use for the operation.
 
 **RETURN TYPE:**
 
@@ -51,7 +51,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

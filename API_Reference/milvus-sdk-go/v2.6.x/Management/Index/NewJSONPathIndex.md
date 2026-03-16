@@ -10,15 +10,15 @@ func NewJSONPathIndex(indexType IndexType, jsonCastType string, jsonPath string)
 
 - **indexType** (*[IndexType](../IndexType.md)*)
 
-      The index algorithm type to use.
+    The index algorithm type to use.
 
 - **jsonCastType** (*string*)
 
-      The data type to cast the JSON path value to (e.g., "string", "double").
+    The data type to cast the JSON path value to (e.g., "string", "double").
 
 - **jsonPath** (*string*)
 
-      The JSON path expression to index (e.g., "$.field_name").
+    The JSON path expression to index (e.g., "$.field_name").
 
 **RETURNS:**
 
