@@ -404,13 +404,39 @@ class MilvusDocsGen extends larkDocWriter {
         return this.records;
     }
 
+    /**
+     * Feishu API fetch with automatic rate-limit retry.
+     * Handles HTTP 429 and legacy 400/99991400 responses.
+     * Reads x-ogw-ratelimit-reset header for wait duration (fallback: 10s).
+     * Retries up to maxRetries times, then returns the last error body.
+     */
+    async __feishu_fetch(url, options, maxRetries = 5) {
+        for (let attempt = 0; attempt <= maxRetries; attempt++) {
+            const res = await fetch(url, options)
+            const status = res.status
+            const resetSecs = parseInt(res.headers.get('x-ogw-ratelimit-reset') || '0', 10) || 10
+            const body = await res.json()
+
+            if (body.code === 0) return body
+
+            const isRateLimited = status === 429 || (status === 400 && body.code === 99991400)
+            if (isRateLimited && attempt < maxRetries) {
+                console.warn(`Rate limited (attempt ${attempt + 1}/${maxRetries}). Waiting ${resetSecs}s...`)
+                await this.__wait(resetSecs * 1000)
+                continue
+            }
+
+            return body
+        }
+    }
+
     async __getBase() {
         const [base_token, table_id] = this.base.split(":")
         const base_id = await this.__convert_wiki_token(base_token)
         const token = await this.tokenFetcher.token()
 
         const url = `${process.env.FEISHU_HOST}/open-apis/bitable/v1/apps/${base_id}/tables/${table_id}/records?page_size=500`
-        let response = await fetch(url, {
+        const data = await this.__feishu_fetch(url, {
             method: "get",
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
@@ -418,16 +444,10 @@ class MilvusDocsGen extends larkDocWriter {
             }
         })
 
-        let status = response.status;
-        let headers = response.headers;
-        response = await response.json();
-
-        if (response.code === 0) {
-            this.records = response.data.items;
-        } else if (status === 429) {
-            const timeout = headers['x-ogw-ratelimit-reset']
-            await this.__wait(timeout * 1000)
-            await this.__getBase()
+        if (data?.code === 0) {
+            this.records = data.data.items;
+        } else {
+            console.error(`Failed to fetch bitable records: code=${data?.code} msg=${data?.msg}`)
         }
     }
 
@@ -516,32 +536,23 @@ class MilvusDocsGen extends larkDocWriter {
             document_token = await this.__convert_wiki_token(document_token)
         }
 
-        let url = `${process.env.FEISHU_HOST}/open-apis/docx/v1/documents/${document_token}/blocks` + (page_token? `?page_token=${page_token}` : "")
-        let response = await fetch(url, {
+        const url = `${process.env.FEISHU_HOST}/open-apis/docx/v1/documents/${document_token}/blocks` + (page_token ? `?page_token=${page_token}` : "")
+        const data = await this.__feishu_fetch(url, {
             method: "get",
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
                 'Authorization': `Bearer ${token}`
             }
-        });
+        })
 
-        let status = response.status;
-        let headers = response.headers;
-        response = await response.json();
-
-        if (response.code === 0) {
-            blocks.push(...response.data.items);
-            if (response.data.has_more) {
-                await this.__fetch_doc_blocks(document_id, response.data.page_token, blocks);
+        if (data?.code === 0) {
+            blocks.push(...data.data.items)
+            if (data.data.has_more) {
+                return await this.__fetch_doc_blocks(document_id, data.data.page_token, blocks)
             }
-
-            return blocks;
-        } else if (status == 429) {
-            const timeout = headers['x-ogw-ratelimit-reset']
-            await this.__wait(timeout * 1000)
-            await this.__fetch_doc_blocks(document_id, page_token, blocks)
+            return blocks
         } else {
-            return null;
+            return null
         }
     }
 
@@ -550,31 +561,19 @@ class MilvusDocsGen extends larkDocWriter {
 
         if (!obj_token) {
             const token = await this.tokenFetcher.token()
-            let url = `${process.env.FEISHU_HOST}/open-apis/wiki/v2/spaces/get_node?token=${page_token}`
-            let response = await fetch(url, {
+            const url = `${process.env.FEISHU_HOST}/open-apis/wiki/v2/spaces/get_node?token=${page_token}`
+            const data = await this.__feishu_fetch(url, {
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
                     'Authorization': `Bearer ${token}`
                 }
-            });
+            })
 
-            let status = response.status;
-            let headers = response.headers;
-            response = await response.json();
-
-            if (response.code === 0) {
-                this.tokens.push({
-                    wiki: page_token,
-                    obj: response.data.node.obj_token
-                });
-
-                return response.data.node.obj_token;
-            } else if (status === 429) {
-                const timeout = headers['x-ogw-ratelimit-reset']
-                await this.__wait(timeout * 1000)
-                return await this.__convert_wiki_token(page_token)
+            if (data?.code === 0) {
+                this.tokens.push({ wiki: page_token, obj: data.data.node.obj_token })
+                return data.data.node.obj_token
             } else {
-                return page_token;
+                return page_token
             }
         } else {
             return obj_token;
