@@ -57,9 +57,21 @@ jobs:
         working-directory: scripts
         run: node lark-docs/index.js -c config.json -m cpp-${{ env.SDK_VERSION }} --all --skipImageDown
 
-      - name: Commit and push
+      - name: Create branch and open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          BRANCH="auto/ref-docs-$(date +%Y%m%d)"
+          git checkout -b "$BRANCH"
           git add API_Reference/ scripts/config.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
           git commit -m "Generate SDK reference docs (${{ env.SDK_VERSION }})"
-          git push origin master
-        continue-on-error: true
+          git push origin "$BRANCH"
+          gh pr create \
+            --title "Update SDK reference docs (${{ env.SDK_VERSION }})" \
+            --body "Auto-generated SDK reference docs update for ${{ env.SDK_VERSION }}." \
+            --base master \
+            --head "$BRANCH"
