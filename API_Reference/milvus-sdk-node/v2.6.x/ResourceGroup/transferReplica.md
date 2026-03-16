@@ -3,13 +3,13 @@
 This operation reassigns the specified number of replicas from the source resource group to the target resource group.
 
 ```javascript
-transferReplica(data): Promise<ResStatus>
+await milvusClient.transferReplica(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.transferReplica({
+await milvusClient.transferReplica({
     source_resource_group: string,
     target_resource_group: string,
     collection_name: string,
@@ -42,7 +42,7 @@ milvusClient.transferReplica({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -71,7 +71,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 
 const resStatus = await milvusClient.transferReplica({ 
     source_resource_group: DEFAULT_RESOURCE_GROUP,

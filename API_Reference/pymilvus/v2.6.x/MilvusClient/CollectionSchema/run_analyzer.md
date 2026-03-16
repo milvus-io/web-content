@@ -4,7 +4,7 @@ This operation processes the input data and generates tokenized output.
 
 ## Request Syntax
 
-```plaintext
+```python
 run_analyzer(
     texts: Union[str, List[str]],
     analyzer_params: Union[str, Dict, None] = None,
@@ -54,7 +54,7 @@ A tuple containing:
 
 ## Examples
 
-```plaintext
+```python
 from pymilvus import MilvusClient
 
 client = MilvusClient(

@@ -3,13 +3,13 @@
 This operation displays whether a specified collection or partition is loaded or not.
 
 ```javascript
-getLoadState(data): Promise<GetLoadStateResponse>
+await milvusClient.getLoadState(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getLoadState({
+await milvusClient.getLoadState({
    db_name: string,
    collection_name: string,
    partition_names?: string[],
@@ -25,11 +25,11 @@ milvusClient.getLoadState({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
-- **partition_names** (*string&#91;&#93;*) -
+- **partition_names** (*string[]*) -
 
     The names of one or more partitions.
 
@@ -37,7 +37,7 @@ milvusClient.getLoadState({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;GetLoadStateResponse&gt;*
+**RETURNS** *Promise\<GetLoadStateResponse>*
 
 This method returns a promise that resolves to a **GetLoadStateResponse** object.
 
@@ -78,8 +78,11 @@ This method returns a promise that resolves to a **GetLoadStateResponse** object
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.getLoadState({
    collection_name: 'my_collection',
  });

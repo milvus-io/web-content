@@ -3,13 +3,13 @@
 This operation drops the specified resource group.
 
 ```javascript
-dropResourceGroup(data): Promise<ResStatus>
+await milvusClient.dropResourceGroup(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropResourceGroup({
+await milvusClient.dropResourceGroup({
     resource_group: string,
     timeout?: number
 })
@@ -19,7 +19,7 @@ milvusClient.dropResourceGroup({
 
 - **resource_group** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the resource group to drop.
 
@@ -29,7 +29,7 @@ milvusClient.dropResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -57,17 +57,19 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
+Before dropping a resource group, ensure that the number of required nodes and the maximum number of required nodes in its configuration are zeros.
 
-<p>Before dropping a resource group, ensure that the number of required nodes and the maximum number of required nodes in its configuration are zeros.</p>
-<p>You can use <a href="./ResourceGroup-updateResourceGroups">updateResourceGroups()</a> to make the change.</p>
+You can use [updateResourceGroups()](https://zilliverse.feishu.cn/docx/JsQqdoEUNoWFCCxAMcUc0mtjncf) to make the change.
 
 </div>
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 
 const configs: ResourceGroupConfig = {
     requests: { node_num: 0 },

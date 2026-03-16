@@ -26,24 +26,26 @@ create_alias(
 
     The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.
 
-    <div class="admonition note">
-
-    <p><b>what is a collection alias?</b></p>
-
-    <p>A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. </p>
-    <p>In Milvus, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.</p>
-    <p>Below is an example of reassigning the alias of one collection to another:</p>
-    <p>Suppose there are two collections: <code>collection_1</code> and <code>collection_2</code>. There is also a collection alias named <code>bob</code>, which was originally assigned to <code>collection_1</code>:</p>
-    <ul>
-    <li><p><code>collection_1</code>'s alias = ["bob"]</p></li>
-    <li><p><code>collection_2</code>'s alias = []</p></li>
-    </ul>
-    <p>After calling <code>alter_alias("collection_2", "bob")</code>:</p>
-    <ul>
-    <li><p><code>collection_1</code>'s alias = []</p></li>
-    <li><p><code>collection_2</code>'s alias = ["bob"]</p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
+    
+    In Milvus, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
+    
+    Below is an example of reassigning the alias of one collection to another:
+    
+    Suppose there are two collections: `collection_1` and `collection_2`. There is also a collection alias named `bob`, which was originally assigned to `collection_1`:
+    
+    - `collection_1`'s alias = ["bob"]
+    
+    - `collection_2`'s alias = []
+    
+    After calling `alter_alias("collection_2", "bob")`:
+    
+    - `collection_1`'s alias = []
+    
+    - `collection_2`'s alias = ["bob"]
+    
     </div>
 
 - **timeout** (*float* | *None*)  
@@ -88,11 +90,11 @@ client.create_alias(collection_name="test_collection", alias="test")
 
 ## Related methods
 
-- [alter_alias()](alter_alias.md)
+- [alter_alias()](https://zilliverse.feishu.cn/docx/CBc3d1mrdoYqmDxe4Kcc9zxAnzh)
 
-- [describe_alias()](describe_alias.md)
+- [describe_alias()](https://zilliverse.feishu.cn/docx/HN7nddgueo3scIxmPXAcpjkFnDf)
 
-- [drop_alias()](drop_alias.md)
+- [drop_alias()](https://zilliverse.feishu.cn/docx/FpWXdmIuforYz9xUCsqclyCXnLe)
 
-- [list_aliases()](list_aliases.md)
+- [list_aliases()](https://zilliverse.feishu.cn/docx/Cpynd2OFJoIXhLx3dQNct7Wgn6f)
 

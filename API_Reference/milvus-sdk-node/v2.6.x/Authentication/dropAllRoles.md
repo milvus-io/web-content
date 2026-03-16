@@ -3,13 +3,13 @@
 This operation drops all roles in Milvus.
 
 ```javascript
-dropAllRoles(data?): Promise<ResStatus[]>
+await milvusClient.dropAllRoles(data?)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropAllRoles({
+await milvusClient.dropAllRoles({
    timeout?: number
 })
 ```
@@ -22,7 +22,7 @@ milvusClient.dropAllRoles({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&#91;&#93;&gt;*
+**RETURNS** *Promise\<ResStatus[]>*
 
 This method returns a list of promises, each of which resolves to a **ResStatus** object.
 
@@ -50,7 +50,7 @@ This method returns a list of promises, each of which resolves to a **ResStatus*
 
 ## Example
 
-```java
+```javascript
 milvusClient.dropAllRoles()
 ```
 

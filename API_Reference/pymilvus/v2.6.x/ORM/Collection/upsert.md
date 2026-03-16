@@ -2,11 +2,9 @@
 
 This operation inserts new records into the database or updates existing ones.  
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>An upsert is a data-level operation that will overwrite an existing entity if a specified field already exists in a collection, and insert a new entity if the specified value doesn’t already exist.</p>
+An upsert is a data-level operation that will overwrite an existing entity if a specified field already exists in a collection, and insert a new entity if the specified value doesn’t already exist.
 
 </div>
 
@@ -209,15 +207,15 @@ res = collection.upsert(
 
 The following operations are related to `insert()`:
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/TJMVdi4U2oBFnAxO95jctzVAnzg)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/CbCodEGY9o6pKuxowNdctUppn7d)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/OaM5dkbPjohKhNxHvKNcfnYMnVb)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](https://zilliverse.feishu.cn/docx/HrnndnWtKoPuenxvsXBchF1wnnh)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/JzcYdBQ5zoU4KpxPqUHcPLQonKd)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](https://zilliverse.feishu.cn/docx/LffbdiHhzoHe08xivF9ccmoen5d)
 

@@ -3,13 +3,13 @@
 This operation checks the compatibility of the SDK with the Milvus server.
 
 ```javascript
-checkCompatibility(data?): Promise<any>
+await milvusClient.checkCompatibility(data?)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.checkCompatibility({
+await milvusClient.checkCompatibility({
     checker?: Function,
     message?: string
 })
@@ -27,7 +27,7 @@ milvusClient.checkCompatibility({
 
 **RETURN TYPE:**
 
-*Promise*&lt;*any*&gt;
+*Promise*<*any*>
 
 **RETURNS:**
 
@@ -36,7 +36,7 @@ A promise that resolves to the result of the specified checker function.
 ## Examples
 
 ```javascript
-milvusClient.checkCompatibility({
+await milvusClient.checkCompatibility({
    checker: () => { console.log("compatible") },
    message: "incompatible"
 });

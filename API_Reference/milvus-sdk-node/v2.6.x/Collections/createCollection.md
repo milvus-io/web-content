@@ -3,7 +3,7 @@
 This operation creates a collection either with default or customized settings. 
 
 ```javascript
-createCollection(data): Promise<ResStatus>
+await milvusClient.createCollection(data)
 ```
 
 ## Request Syntax
@@ -15,7 +15,7 @@ This method has the following alternatives.
 Using this request body, you can create a collection by simply setting the collection name and dimension of the vector field.
 
 ```javascript
-milvusClient.createCollection({
+await milvusClient.createCollection({
     db_name?: string
     collection_name: string;
     dimension: number;
@@ -40,7 +40,7 @@ milvusClient.createCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to create.
 
@@ -62,13 +62,13 @@ milvusClient.createCollection({
 
     The value defaults to **Bounded** with options of **Strong**, **Bounded**, **Session**,  **Eventually**, and **Customized**.
 
-    <div class="admonition note">
-
-    <p><b>what is the consistency level?</b></p>
-
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    <div class="alert note">
+    
+    Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+    
+    Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is **Bounded Staleness**.
+    
+    You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
     </div>
 
@@ -111,7 +111,7 @@ milvusClient.createCollection({
 Using this request body, you can customize the schema settings of the collection.
 
 ```javascript
-milvusClient.createCollection({
+await milvusClient.createCollection({
    db_name?: string,
    collection_name: string,
    consistency_level: number | string,
@@ -169,7 +169,7 @@ milvusClient.createCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to create.
 
@@ -179,13 +179,13 @@ milvusClient.createCollection({
 
     The value defaults to **Bounded** with options of **Strong**, **Bounded**, **Session**,  **Eventually**, and **Customized**.
 
-    <div class="admonition note">
-
-    <p><b>what is the consistency level?</b></p>
-
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    <div class="alert note">
+    
+    Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+    
+    Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is **Bounded Staleness**.
+    
+    You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
     </div>
 
@@ -199,7 +199,7 @@ milvusClient.createCollection({
 
     The value defaults to **True**, indicating that the meta field is used.
 
-- **schema** (*FieldType&#91;&#93;*) -
+- **schema** (*FieldType[]*) -
 
     - **name** (*string)* -
 
@@ -207,7 +207,7 @@ milvusClient.createCollection({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see DataType.
+        The data type of the field. For an enumeration of all available data types, please see [DataType](https://zilliverse.feishu.cn/docx/AtLEdt0ZWoUbHoxkfvHcq1ZunUg).
 
     - **description** (*string)* -
 
@@ -351,17 +351,17 @@ milvusClient.createCollection({
 
         A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
-    - **type** (*[FunctionType](FunctionType.md)*)
+    - **type** (*[FunctionType](https://zilliverse.feishu.cn/docx/Vq2VdsWJaoufsGx5stJcTuyPnDb)*)
 
         The type of function for processing raw data. Possible values:
 
         - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
 
-    - **input_field_names** (*string&#91;&#93;*)
+    - **input_field_names** (*string[]*)
 
         The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
-    - **output_field_names** (*string&#91;&#93;*)
+    - **output_field_names** (*string[]*)
 
         The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
@@ -369,11 +369,9 @@ milvusClient.createCollection({
 
     The number of partitions to create in the collection.
 
-    <div class="admonition note">
-
-    <p><b>what is partitioning?</b></p>
-
-    <p>Data partitioning is a technique used to organize data based on certain criteria. With data partitioning, you can create, load, release, and drop partitions separately, as well as conduct searches and queries within them.</p>
+    <div class="alert note">
+    
+    Data partitioning is a technique used to organize data based on certain criteria. With data partitioning, you can create, load, release, and drop partitions separately, as well as conduct searches and queries within them.
 
     </div>
 
@@ -381,11 +379,9 @@ milvusClient.createCollection({
 
     The name of the field that serves as the partition key.
 
-    <div class="admonition note">
-
-    <p><b>what is a partition key?</b></p>
-
-    <p>Partition key are used to store entities into different partitions based on their key values. In other words, a partition key groups entities with the same key together and irrelevant partitions can avoid being scanned when you filter by the key field. Partition keys can greatly speed up query performance compared to traditional filtering methods.</p>
+    <div class="alert note">
+    
+    Partition key are used to store entities into different partitions based on their key values. In other words, a partition key groups entities with the same key together and irrelevant partitions can avoid being scanned when you filter by the key field. Partition keys can greatly speed up query performance compared to traditional filtering methods.
 
     </div>
 
@@ -393,11 +389,9 @@ milvusClient.createCollection({
 
     The name of the field that serves as the clustering key.
 
-    <div class="admonition note">
-
-    <p><b>what is clustering compaction?</b></p>
-
-    <p>Clustering Compaction is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the clustering key. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called PartitionStats, which records the mapping relationship between segments and clustering key values.</p>
+    <div class="alert note">
+    
+    Clustering Compaction is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the clustering key. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called PartitionStats, which records the mapping relationship between segments and clustering key values.
 
     </div>
 
@@ -407,16 +401,15 @@ milvusClient.createCollection({
 
     The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
-    <div class="admonition note">
-
-    <p><b>what is sharding?</b></p>
-
-    <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-    <p>By default, a collection contains one shard.</p>
+    <div class="alert note">
+    
+    Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.
+    
+    By default, a collection contains one shard.
 
     </div>
 
-- **properties** (Record&lt;string, string | number | boolean&gt;) 
+- **properties** (Record<string, string | number | boolean>) 
 
     The extra properties of the collection in key-value pairs. Possible values are:
 
@@ -449,7 +442,7 @@ milvusClient.createCollection({
 Using this request body, you can customize the schema and index settings of the collection. Upon creation, the collection is automatically loaded.
 
 ```javascript
-milvusClient.createCollection({
+await milvusClient.createCollection({
    db_name?: string,
    collection_name: string,
    consistency_level: number | string,
@@ -514,7 +507,7 @@ milvusClient.createCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to create.
 
@@ -524,13 +517,13 @@ milvusClient.createCollection({
 
     The value defaults to **Bounded** with options of **Strong**, **Bounded**, **Session**,  **Eventually**, and **Customized**.
 
-    <div class="admonition note">
-
-    <p><b>what is the consistency level?</b></p>
-
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    <div class="alert note">
+    
+    Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+    
+    Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is **Bounded Staleness**.
+    
+    You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
     </div>
 
@@ -544,7 +537,7 @@ milvusClient.createCollection({
 
     The value defaults to **True**, indicating that the meta field is used.
 
-- **schema** (*FieldType&#91;&#93;*) -
+- **schema** (*FieldType[]*) -
 
     - **name** (*string)* -
 
@@ -552,7 +545,7 @@ milvusClient.createCollection({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see DataType.
+        The data type of the field. For an enumeration of all available data types, please see [DataType](https://zilliverse.feishu.cn/docx/AtLEdt0ZWoUbHoxkfvHcq1ZunUg).
 
     - **description** (*string)* -
 
@@ -694,17 +687,17 @@ milvusClient.createCollection({
 
         A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
-    - **type** (*[FunctionType](FunctionType.md)*)
+    - **type** (*[FunctionType](https://zilliverse.feishu.cn/docx/Vq2VdsWJaoufsGx5stJcTuyPnDb)*)
 
         The type of function for processing raw data. Possible values:
 
         - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
 
-    - **input_field_names** (*string&#91;&#93;*)
+    - **input_field_names** (*string[]*)
 
         The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
-    - **output_field_names** (*string&#91;&#93;*)
+    - **output_field_names** (*string[]*)
 
         The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
@@ -712,11 +705,9 @@ milvusClient.createCollection({
 
     The number of partitions to create in the collection.
 
-    <div class="admonition note">
-
-    <p><b>what is partitioning?</b></p>
-
-    <p>Data partitioning is a technique used to organize data based on certain criteria. With data partitioning, you can create, load, release, and drop partitions separately, as well as conduct searches and queries within them.</p>
+    <div class="alert note">
+    
+    Data partitioning is a technique used to organize data based on certain criteria. With data partitioning, you can create, load, release, and drop partitions separately, as well as conduct searches and queries within them.
 
     </div>
 
@@ -724,11 +715,9 @@ milvusClient.createCollection({
 
     A boolean value indicating whether to enable partition key.
 
-    <div class="admonition note">
-
-    <p><b>what is a partition key?</b></p>
-
-    <p>Partition key are used to store entities into different partitions based on their key values. In other words, a partition key groups entities with the same key together and irrelevant partitions can avoid being scanned when you filter by the key field. Partition keys can greatly speed up query performance compared to traditional filtering methods.</p>
+    <div class="alert note">
+    
+    Partition key are used to store entities into different partitions based on their key values. In other words, a partition key groups entities with the same key together and irrelevant partitions can avoid being scanned when you filter by the key field. Partition keys can greatly speed up query performance compared to traditional filtering methods.
 
     </div>
 
@@ -736,11 +725,9 @@ milvusClient.createCollection({
 
     The name of the field that serves as the clustering key.
 
-    <div class="admonition note">
-
-    <p><b>what is clustering compaction?</b></p>
-
-    <p>Clustering Compaction is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the clustering key. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called PartitionStats, which records the mapping relationship between segments and clustering key values.</p>
+    <div class="alert note">
+    
+    Clustering Compaction is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the clustering key. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called PartitionStats, which records the mapping relationship between segments and clustering key values.
 
     </div>
 
@@ -750,16 +737,15 @@ milvusClient.createCollection({
 
     The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
-    <div class="admonition note">
-
-    <p><b>what is sharding?</b></p>
-
-    <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-    <p>By default, a collection contains one shard.</p>
+    <div class="alert note">
+    
+    Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.
+    
+    By default, a collection contains one shard.
 
     </div>
 
-- **properties** (Record&lt;string, string | number | boolean&gt;) 
+- **properties** (Record<string, string | number | boolean>) 
 
     The extra properties of the collection in key-value pairs. Possible values are:
 
@@ -783,7 +769,7 @@ milvusClient.createCollection({
 
         Whether to allow primary key insertion when autoID is enabled.
 
-- **index_params** (*CreateIndexSimpleReq&#91;&#93;* | *CreateIndexSimpleReq*)
+- **index_params** (*CreateIndexSimpleReq[]* | *CreateIndexSimpleReq*)
 
     The index parameters.
 
@@ -811,7 +797,7 @@ milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -839,8 +825,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.createCollection({
    collection_name: 'my_collection',
    fields: [

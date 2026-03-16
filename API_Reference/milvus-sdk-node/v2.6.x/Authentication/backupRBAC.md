@@ -3,13 +3,13 @@
 This operation backs up the current RBAC configurations.
 
 ```javascript
-backupRBAC(data?): Promise<BackupRBACResponse>
+await milvusClient.backupRBAC(data?)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.backupRBAC({
+await milvusClient.backupRBAC({
    timeout?: number
  })
 ```
@@ -22,7 +22,7 @@ milvusClient.backupRBAC({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;BackupRBACResponse&gt;*
+**RETURNS** *Promise\<BackupRBACResponse>*
 
 This method returns a promise that resolves to a **BackupRBACResponse** object.
 
@@ -46,7 +46,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
 - **RBAC_meta** (RBACMeta) -
 
-    - **users** (*User&#91;&#93;*) -
+    - **users** (*User[]*) -
 
         A list of user entities.
 
@@ -54,7 +54,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
             The name of a user.
 
-    - **roles** (*RoleEntity&#91;&#93;*) -
+    - **roles** (*RoleEntity[]*) -
 
         A list of role entities.
 
@@ -62,7 +62,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
             The name of a role.
 
-    - **grants** (*GrantEntity&#91;&#93;*) -
+    - **grants** (*GrantEntity[]*) -
 
         A list of grant entities.
 
@@ -108,7 +108,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
                 The name of the affected role.
 
-    - **privilege_groups** (*PrivelegeGroup&#91;&#93;*) - 
+    - **privilege_groups** (*PrivelegeGroup[]*) - 
 
         A list of privilege-group entities.
 
@@ -116,7 +116,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
             The name of a privilege group.
 
-        - **privileges** (*PrivilegeEntity&#91;&#93;*) -
+        - **privileges** (*PrivilegeEntity[]*) -
 
             A list of privileges.
 
@@ -140,7 +140,7 @@ This method returns a promise that resolves to a **BackupRBACResponse** object.
 
 ## Example
 
-```java
+```javascript
 milvusClient.backupRBAC();
 ```
 

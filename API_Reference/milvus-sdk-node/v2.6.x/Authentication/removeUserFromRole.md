@@ -3,13 +3,13 @@
 This operation removes a user from a specific role.
 
 ```javascript
-removeUserFromRole(data): Promise<ResStatus>
+await milvusClient.removeUserFromRole(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.removeUserFromRole({
+await milvusClient.removeUserFromRole({
    username: string,
    rolename: string,
    timeout?: number
@@ -20,13 +20,13 @@ milvusClient.removeUserFromRole({
 
 - **username** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a user.
 
 - **rolename** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a role
 
@@ -36,7 +36,7 @@ milvusClient.removeUserFromRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -64,8 +64,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.removeUserFromRole({
+```javascript
+await milvusClient.removeUserFromRole({
    username: 'my',
    roleName: 'myrole'
  });

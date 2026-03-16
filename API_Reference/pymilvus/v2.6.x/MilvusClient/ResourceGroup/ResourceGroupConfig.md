@@ -60,11 +60,9 @@ ResourceGroupConfig(
 
         Node labels in key-value pairs, as in `[{ "key": "QUERYNODE_LOCATION", "value": "dc1" }]`.
 
-        <div class="admonition note">
-
-        <p><b>how can i label a query node?</b></p>
-
-        <p>You can set an environment variable for Milvus to label the query node during its startup. For example, to add the <code>QUERYNODE_LOCATION</code> label, you need to create an environment variable named after the label, prefixed by <code>MILVUS_SERVER_LABEL_</code>, and set the value for the label, as in <code>MILVUS_SERVER_LABEL_QUERYNODE_LOCATION=dc1</code>.</p>
+        <div class="alert note">
+        
+        You can set an environment variable for Milvus to label the query node during its startup. For example, to add the `QUERYNODE_LOCATION` label, you need to create an environment variable named after the label, prefixed by `MILVUS_SERVER_LABEL_`, and set the value for the label, as in `MILVUS_SERVER_LABEL_QUERYNODE_LOCATION=dc1`.
 
         </div>
 

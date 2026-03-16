@@ -8,11 +8,9 @@ This operation creates a collection schema.
 MilvusClient.create_schema(**kwargs) -> CollectionSchema
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This is a class method. You should call this method like this: <code>MilvusClient.create_schema()</code>.</p>
+This is a class method. You should call this method like this: `MilvusClient.create_schema()`.
 
 </div>
 
@@ -32,11 +30,9 @@ MilvusClient.create_schema(**kwargs) -> CollectionSchema
 
         When you set this to **True**, Milvus  will create a field called **&#36;meta** to store any undefined fields and their values from the data that is inserted.
 
-        <div class="admonition note">
-
-        <p><b>what is a dynamic field?</b></p>
-
-        <p>If the data being inserted into the target collection includes fields that are not defined in the collection's schema, those fields will be saved in a reserved dynamic field named <strong>&#36;meta</strong> as key-value pairs.</p>
+        <div class="alert note">
+        
+        If the data being inserted into the target collection includes fields that are not defined in the collection's schema, those fields will be saved in a reserved dynamic field named **&#36;meta** as key-value pairs.
 
         </div>
 
@@ -52,22 +48,21 @@ MilvusClient.create_schema(**kwargs) -> CollectionSchema
 
         This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-        <div class="admonition note">
-
-        <p><b>what is a partition key?</b></p>
-
-        <p>Once a field is designated as the partition key, Milvus calculates a hash based on the partition key value of each inserted entity and saves entities in the partitions of the target collection accordingly.</p>
-        <p>This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.</p>
+        <div class="alert note">
+        
+        Once a field is designated as the partition key, Milvus calculates a hash based on the partition key value of each inserted entity and saves entities in the partitions of the target collection accordingly.
+        
+        This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
 
         </div>
 
 **RETURN TYPE:**
 
-*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*
+*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*
 
 **RETURNS:**
 
-A **[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)** object.
+A **[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)** object.
 
 **EXCEPTIONS:**
 
@@ -130,21 +125,21 @@ schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 
 ## Related methods
 
-- [create_collection()](create_collection.md)
+- [create_collection()](https://zilliverse.feishu.cn/docx/TziHdCu4VoURrfxAMsUcsRhQnub)
 
-- [describe_collection()](describe_collection.md)
+- [describe_collection()](https://zilliverse.feishu.cn/docx/MCkjdiRNKo2HCCxzHReclrgAnbg)
 
-- [drop_collection()](drop_collection.md)
+- [drop_collection()](https://zilliverse.feishu.cn/docx/QNB4d2q2ZorIApxpnzqczW2HnL7)
 
-- [get_collection_stats()](get_collection_stats.md)
+- [get_collection_stats()](https://zilliverse.feishu.cn/docx/VVyNdx038oECxNxMQavc9vssnoh)
 
-- [has_collection()](has_collection.md)
+- [has_collection()](https://zilliverse.feishu.cn/docx/SSQ6dFGdxouy7hxRwCOcatnEn0e)
 
-- [list_collections()](list_collections.md)
+- [list_collections()](https://zilliverse.feishu.cn/docx/BHyidrVcyoPwxexHLrnceOSAnRe)
 
-- [rename_collection()](rename_collection.md)
+- [rename_collection()](https://zilliverse.feishu.cn/docx/IeiIdJ71Pox2OjxMiOzczUTenud)
 
-- [IndexType](IndexType.md)
+- [IndexType](https://zilliverse.feishu.cn/docx/FdLUdaL43oIuqTxJVnbcHxgqnkh)
 
-- [DataType](DataType.md)
+- [DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)
 

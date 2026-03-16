@@ -121,15 +121,15 @@ while True:
 
 The following operations are related to `query_iterator()`:
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/TJMVdi4U2oBFnAxO95jctzVAnzg)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/CbCodEGY9o6pKuxowNdctUppn7d)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/OaM5dkbPjohKhNxHvKNcfnYMnVb)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](https://zilliverse.feishu.cn/docx/HrnndnWtKoPuenxvsXBchF1wnnh)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/JzcYdBQ5zoU4KpxPqUHcPLQonKd)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/AQ1ydMXbOog5VJxITgUc4GFvnVe)
 

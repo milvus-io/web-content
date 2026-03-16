@@ -2,11 +2,9 @@
 
 This operation prepares index parameters to build indexes for a specific collection.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This is a class method. You should call this method like this: <code>MilvusClient.prepare_index_params()</code>.</p>
+This is a class method. You should call this method like this: `MilvusClient.prepare_index_params()`.
 
 </div>
 
@@ -37,7 +35,7 @@ An **IndexParams** contains a list of **IndexParam** objects.
     │       └── add_index()
     ```
 
-    It offers the **[add_index()](add_index.md)** method to add indexes to the list.
+    It offers the **[add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)** method to add indexes to the list.
 
 **EXCEPTIONS:**
 
@@ -51,13 +49,13 @@ from pymilvus import MilvusClient
 index_params = MilvusClient.prepare_index_params()
 ```
 
-- [add_index()](add_index.md)
+- [add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)
 
-- [create_index()](create_index.md)
+- [create_index()](https://zilliverse.feishu.cn/docx/B3n3db0idoia02xXxJfcONK8nRh)
 
-- [describe_index()](describe_index.md)
+- [describe_index()](https://zilliverse.feishu.cn/docx/WhsHdyIgyoFlsQxNJt9cFCTxnDe)
 
-- [drop_index()](drop_index.md)
+- [drop_index()](https://zilliverse.feishu.cn/docx/NPnQdZCJ7oF002xTntecdI2ini8)
 
-- [list_indexes()](list_indexes.md)
+- [list_indexes()](https://zilliverse.feishu.cn/docx/ZqmudJWyFonUKGxAxXncYrLZn2e)
 

@@ -66,21 +66,21 @@ client.has_collection(collection_name="test_collection_2")
 
 ## Related methods
 
-- [create_collection()](create_collection.md)
+- [create_collection()](https://zilliverse.feishu.cn/docx/TziHdCu4VoURrfxAMsUcsRhQnub)
 
-- [create_schema()](create_schema.md)
+- [create_schema()](https://zilliverse.feishu.cn/docx/RxU7dBjGlop0e1xZShYcZ4qCnnh)
 
-- [describe_collection()](describe_collection.md)
+- [describe_collection()](https://zilliverse.feishu.cn/docx/MCkjdiRNKo2HCCxzHReclrgAnbg)
 
-- [drop_collection()](drop_collection.md)
+- [drop_collection()](https://zilliverse.feishu.cn/docx/QNB4d2q2ZorIApxpnzqczW2HnL7)
 
-- [get_collection_stats()](get_collection_stats.md)
+- [get_collection_stats()](https://zilliverse.feishu.cn/docx/VVyNdx038oECxNxMQavc9vssnoh)
 
-- [list_collections()](list_collections.md)
+- [list_collections()](https://zilliverse.feishu.cn/docx/BHyidrVcyoPwxexHLrnceOSAnRe)
 
-- [rename_collection()](rename_collection.md)
+- [rename_collection()](https://zilliverse.feishu.cn/docx/IeiIdJ71Pox2OjxMiOzczUTenud)
 
-- [IndexType](IndexType.md)
+- [IndexType](https://zilliverse.feishu.cn/docx/FdLUdaL43oIuqTxJVnbcHxgqnkh)
 
-- [DataType](DataType.md)
+- [DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)
 

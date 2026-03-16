@@ -3,24 +3,25 @@
 This operation creates a resource group. This operation always succeeds no matter whether the resource group exists.
 
 ```javascript
-createResourceGroup(data): Promise<ResStatus>
+await milvusClient.createResourceGroup(data)
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
+A Milvus instance begins with a default resource group that includes all available query nodes. 
 
-<p>A Milvus instance begins with a default resource group that includes all available query nodes. </p>
-<p>To optimize resource utilization, you can create additional resource groups, reassign specific query nodes from the default group, and load collections into these newly configured groups. </p>
-<p>This approach ensures that collections are allocated dedicated query nodes, enabling efficient and isolated search services.</p>
-<p>For details about resource groups, refer to <a href="https://milvus.io/docs/resource_group.md#Manage-Resource-Groups">Manage Resource Group</a>.</p>
+To optimize resource utilization, you can create additional resource groups, reassign specific query nodes from the default group, and load collections into these newly configured groups. 
+
+This approach ensures that collections are allocated dedicated query nodes, enabling efficient and isolated search services.
+
+For details about resource groups, refer to [Manage Resource Group](https://milvus.io/docs/resource_group.md#Manage-Resource-Groups).
 
 </div>
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createResourceGroup({
+await milvusClient.createResourceGroup({
     resource_group: string,
     config?: ResourceGroupConfig,
     timeout?: number
@@ -31,13 +32,13 @@ milvusClient.createResourceGroup({
 
 - **resource_group** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the resource group to create.
 
 - **configs** (*ResourceGroupConfig*) -
 
-    A **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
+    A **[ResourceGroupConfig](https://zilliverse.feishu.cn/docx/Q0aNdOtyYoQHFhxCdEacj2kdnah)** object.
 
 - **timeout** (*number*) -
 
@@ -45,7 +46,7 @@ milvusClient.createResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -74,7 +75,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const configs = ResourceGroupConfig = {
     requests: { node_num: 1 },
     limits: { node_num: 10000 },

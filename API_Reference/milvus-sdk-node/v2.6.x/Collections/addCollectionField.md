@@ -3,21 +3,19 @@
 This operation adds a new scalar field to an existing collection without recreating it. The field becomes available almost immediately with minimal delay due to internal schema synchronization.
 
 ```javascript
-addCollectionField(data: AddCollectionFieldReq): Promise<ResStatus>
+await milvusClient.addCollectionField(data: AddCollectionFieldReq)
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>If the collection has the dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via the <code>#meta&#91;'field_name'&#93;</code> syntax.</p>
+If the collection has the dynamic field enabled and you add a static field with the same name as an existing dynamic field key, the static field will mask the dynamic field key. The original dynamic values remain accessible via the `$meta['field_name']` syntax.
 
 </div>
 
 ## Request Syntax
 
 ```javascript
-milvusClient.addCollectionField({
+await milvusClient.addCollectionField({
     collection_name: string,
     db_name?: string,
     field: FieldType,
@@ -45,7 +43,7 @@ milvusClient.addCollectionField({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see DataType.
+        The data type of the field. For an enumeration of all available data types, please see [DataType](https://zilliverse.feishu.cn/docx/AtLEdt0ZWoUbHoxkfvHcq1ZunUg).
 
     - **description** (*string)* -
 
@@ -160,7 +158,7 @@ milvusClient.addCollectionField({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 

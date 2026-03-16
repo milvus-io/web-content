@@ -36,7 +36,7 @@ EmbeddingList(
 
     If provided, all specified vector embeddings must adhere to the dimensionality restriction.
 
-- **dtype** (*np.dtype, str, [DataType](../Collections/DataType.md)*) -  
+- **dtype** (*np.dtype, str, [DataType](https://zilliverse.feishu.cn/docx/KvNsd3aV4ocRNJxrZN2cg1zenqb)*) -  
 
     - **np.dtype**, such as `np.float32`, `np.float16`, or `np.unit8`
 

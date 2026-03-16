@@ -10,11 +10,9 @@ class pymilvus.RemoteBulkWriter
 
 Constructs a **RemoteBulkWriter** object with a set of parameters, such as **schema**, **remote_path**, **connect_param** etc.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>A <strong>RemoteBulkWriter</strong> object intends to rewrite your raw data in a format that Milvus understands into an AWS-S3-compatible bucket.</p>
+A **RemoteBulkWriter** object intends to rewrite your raw data in a format that Milvus understands into an AWS-S3-compatible bucket.
 
 </div>
 
@@ -33,7 +31,7 @@ writer = RemoteBulkWriter(
 
 **PARAMETERS:**
 
-- **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
+- **schema** (*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*) -
 
     **[REQUIRED]**
 
@@ -45,7 +43,7 @@ writer = RemoteBulkWriter(
 
     The path to the directory that is to hold the rewritten data.
 
-- **connect_param** (*[ConnectParam](S3ConnectParam.md)*) -
+- **connect_param** (*[ConnectParam](https://zilliverse.feishu.cn/docx/CSpOd0XgWoVAhzx5xbVcpCVfnPg)*) -
 
     The parameters used to connect to a remote bucket.
 
@@ -57,12 +55,11 @@ writer = RemoteBulkWriter(
 
     The value defaults to 536,870,912 in bytes, which is 512 MB.
 
-    <div class="admonition note">
-
-    <p><b>how does bulkwriter segment my data?</b></p>
-
-    <p>The way <strong>BulkWriter</strong> segments your data varies with the target file type.</p>
-    <p>If the generated file exceeds the specified segment size, <strong>BulkWriter</strong> creates multiple files and names them in sequence numbers, each no larger than the segment size.</p>
+    <div class="alert note">
+    
+    The way **BulkWriter** segments your data varies with the target file type.
+    
+    If the generated file exceeds the specified segment size, **BulkWriter** creates multiple files and names them in sequence numbers, each no larger than the segment size.
 
     </div>
 

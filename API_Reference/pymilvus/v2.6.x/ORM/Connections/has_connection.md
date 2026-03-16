@@ -24,12 +24,11 @@ has_connection(alias: str)
 
 A Boolean value indicating whether the connection exists.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
+An existing connection alias does not necessarily indicates that the corresponding connection has been established.
 
-<p>An existing connection alias does not necessarily indicates that the corresponding connection has been established.</p>
-<p>This operation evaluates to <strong>True</strong> only if the connection alias exists and the corresponding connection has been established.</p>
+This operation evaluates to **True** only if the connection alias exists and the corresponding connection has been established.
 
 </div>
 
@@ -54,15 +53,15 @@ connections.has_connection(alias="default")
 
 The following operations are related to `has_connection()`:
 
-- [add_connection()](add_connection.md)
+- [add_connection()](https://zilliverse.feishu.cn/docx/C37ldNLbFog6ThxA23ScMldnnmb)
 
-- [connect()](connect.md)
+- [connect()](https://zilliverse.feishu.cn/docx/KzCXdTVVSoOmkbxuFjsccDlXnff)
 
-- [disconnect()](disconnect.md)
+- [disconnect()](https://zilliverse.feishu.cn/docx/IpSBdcabbosobvxQkAEcv6CvnJd)
 
-- [get_connection_addr()](get_connection_addr.md)
+- [get_connection_addr()](https://zilliverse.feishu.cn/docx/H2zBdRHVtovNQGxvb0xcwpSKnBd)
 
-- [list_connections()](list_connections.md)
+- [list_connections()](https://zilliverse.feishu.cn/docx/DyPldeRNXo4nMqxQeE0cMnd2nEf)
 
-- [remove_connection()](remove_connection.md)
+- [remove_connection()](https://zilliverse.feishu.cn/docx/L4KSdOVTEotaiyxjTddcVRDhn3E)
 

@@ -3,7 +3,7 @@
 This operation closes the current connection to the Milvus server.
 
 ```javascript
-closeConnection(): Promise<CONNECT_STATUS>
+await milvusClient.closeConnection()
 ```
 
 ## Request Syntax
@@ -14,7 +14,7 @@ milvusClient.closeConnection()
 
 **RETURN TYPE:**
 
-*Promise*&lt;*CONNECT_STATUS*&gt;
+*Promise*<*CONNECT_STATUS*>
 
 **RETURNS:**
 

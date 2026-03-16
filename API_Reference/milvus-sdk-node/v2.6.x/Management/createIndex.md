@@ -3,13 +3,13 @@
 This operation creates an index for a specific collection.
 
 ```javascript
-createIndex(data): Promise<ResStatus>
+await milvusClient.createIndex(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createIndex([
+await milvusClient.createIndex([
     {
        db_name?: string,
        collection_name: string,
@@ -40,13 +40,13 @@ milvusClient.createIndex([
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **field_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the field in which to create an index.
 
@@ -72,7 +72,7 @@ milvusClient.createIndex([
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -100,8 +100,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient._createIndex({
+```javascript
+await milvusClient._createIndex({
    collection_name: "my_collection",
    field_name: "vector_field",
    index_name: "vector_index"

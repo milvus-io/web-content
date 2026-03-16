@@ -56,13 +56,13 @@ partition = collection.partition(partition_name="test_partition")
 
 The following operations are related to `partition()`:
 
-- [Collection](Collection.md)
+- [Collection](https://zilliverse.feishu.cn/docx/OSehdj15Ao3AUvxOIJucXzU8nWW)
 
-- [Partition](../Partition/Partition.md)
+- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
 
-- [create_partition()](create_partition.md)
+- [create_partition()](https://zilliverse.feishu.cn/docx/Sh7HdgJOIoJipXx5AoNcicjMnyd)
 
-- [drop_partition()](drop_partition.md)
+- [drop_partition()](https://zilliverse.feishu.cn/docx/Aym2dpBuIo81mExCqyLcSWhunBe)
 
-- [has_partition()](has_partition.md)
+- [has_partition()](https://zilliverse.feishu.cn/docx/QsOsda2lRoJP32xNSLWcbgMOnKI)
 

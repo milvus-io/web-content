@@ -3,13 +3,13 @@
 This operation describes a specific role.
 
 ```javascript
-describeRole(data): Promise<SelectRoleResponse>
+await milvusClient.describeRole(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.describeRole({
+await milvusClient.describeRole({
     includeUserInfo?: boolean,
     roleName: string,
     timeout?: number
@@ -20,7 +20,7 @@ milvusClient.describeRole({
 
 - **roleName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to describe.
 
@@ -34,7 +34,7 @@ milvusClient.describeRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns** *Promise\&lt;SelectRoleResponse&gt;*
+**Returns** *Promise\<SelectRoleResponse>*
 
 This method returns a promise that resolves to a **SelectRoleResponse** object.
 
@@ -47,9 +47,9 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 **PARAMETERS:**
 
-- **RoleResult** *(RoleResult&#91;&#93;) -*
+- **RoleResult** *(RoleResult[]) -*
 
-    - **entities** (*GrantEntity&#91;&#93;*) -
+    - **entities** (*GrantEntity[]*) -
 
         - **db_name** (*string*) -
 
@@ -87,7 +87,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
             The name of the current role.
 
-    - **users** (*User&#91;&#93;*) -
+    - **users** (*User[]*) -
 
         - **name** (*string*) -
 
@@ -111,7 +111,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 ## Example
 
-```java
+```javascript
 milvusClient.describeRole({roleName: 'myrole'});
 ```
 

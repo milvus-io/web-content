@@ -1,0 +1,118 @@
+Unstructured Data
+vector database
+IVF
+knn
+Image Search
+LLMs
+Machine Learning
+RAG
+NLP
+Neural Network
+Deep Learning 
+Knowledge base
+natural language processing
+AI chatbots
+cosine distance
+what is a vector database
+vectordb
+multimodal vector database retrieval
+Retrieval Augmented Generation 
+Large language model
+Vectorization
+k nearest neighbor algorithm
+ANNS
+Vector search
+knn algorithm
+HNSW
+What is unstructured data 
+Vector embeddings
+Vector store
+open source vector database
+Vector index
+vector database open source
+open source vector db
+vector database example
+rag vector database
+what is vector db
+what are vector databases
+vector databases comparison
+Faiss 
+Video search
+AI Hallucination 
+AI Agent
+semantic search
+Anomaly Detection 
+sentence transformers
+Recommender systems
+information retrieval
+dimension reduction
+hnsw algorithm
+vector similarity search
+approximate nearest neighbor search
+DiskANN
+Sparse vector
+Vector Dimension
+ANN Search
+What are vector embeddings
+vector database tutorial
+how do vector databases work
+vector db comparison
+openai vector db
+natural language processing database
+cheap vector database
+Managed vector database
+Pinecone vector database
+Audio search
+what is semantic search
+Embedding model
+image similarity search
+Context Window
+Natural language search
+Similarity Search
+multimodal RAG
+llm hallucinations
+hybrid search
+lexical search
+nearest neighbor search
+Agentic RAG
+rag llm architecture
+private llms
+nn search
+llm eval
+Sparse vs Dense
+Dense vector 
+Hierarchical Navigable Small Worlds 
+Dense embedding
+Faiss vector database
+Chroma vector database
+nlp search
+hallucinations llm
+Multimodal search
+vector search algorithms
+Question answering system
+llm-as-a-judge
+hybrid vector search
+Video deduplication
+Video similarity search
+Vector retrieval 
+Audio similarity search
+Elastic vector database
+Pinecone vs Milvus 
+Chroma vs Milvus
+Annoy vector search
+milvus
+Zilliz
+milvus vector database
+milvus db
+milvus vector db
+Zilliz Cloud
+what is milvus
+milvus database
+milvus lite
+milvus benchmark
+managed milvus
+Serverless vector database
+milvus open source
+how does milvus work
+Zilliz vector database
+Zilliz database

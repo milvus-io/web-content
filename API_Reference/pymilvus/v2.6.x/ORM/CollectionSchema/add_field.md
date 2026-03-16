@@ -7,8 +7,7 @@ This operation adds a field to the schema of a collection.
 ```python
 add_field(
     field_name: str,
-    datatype: DataType,
-    **kwargs
+    datatype: DataType
 )
 ```
 
@@ -20,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) - 
+- **datatype** (*[DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)*) - 
 
     **[REQUIRED]**
 
@@ -66,15 +65,12 @@ add_field(
 
     Whether the current field is the primary field in a collection.
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <ul>
-    <li><p>Each collection has only one primary field.</p></li>
-    <li><p>A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    - Each collection has only one primary field.
+    
+    - A primary field should be of either the **DataType.INT64** type or the **DataType.VARCHAR** type.
+    
     </div>
 
 - **max_length** (*int*) -
@@ -107,13 +103,13 @@ add_field(
 
     This parameter is not applicable to Milvus Lite. For more information on Milvus Lite limits, refer to [Run Milvus Lite](https://milvus.io/docs/milvus_lite.md).
 
-    <div class="admonition note">
-
-    <p><b>what is the partition key?</b></p>
-
-    <p>To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.</p>
-    <p>When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.</p>
-    <p>For details, refer to <a href="https://milvus.io/docs/use-partition-key">Use Partition Key</a> and <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenancy</a>.</p>
+    <div class="alert note">
+    
+    To facilitate partition-oriented multi-tenancy, you can set a field as the partition key field so that Milvus hashes the field values and distributes entities among the specified number of partitions accordingly.
+    
+    When retrieving entities, ensure that the partition key field is used in the boolean expression to filter out entities of a specific field value.
+    
+    For details, refer to [Use Partition Key](https://milvus.io/docs/use-partition-key) and [Multi-tenancy](https://milvus.io/docs/multi_tenancy.md).
 
     </div>
 
@@ -125,64 +121,9 @@ add_field(
 
     Whether Milvus maps the field data into memory instead of fully loading it. For details settings, refer to MMap-enabled Data Storage.
 
-- **nullable** (*bool*) -
-
-    A Boolean parameter that specifies whether the field can accept null values. Valid values:
-
-    - **True**: The field can contain null values, indicating that the field is optional, and missing data is permitted for entries.
-
-    - **False** (default): The field must contain a valid value for each entity; missing data is not allowed, making the field mandatory.
-
-    For more information, refer to [Nullable & Default](https://milvus.io/docs/nullable-and-default.md).
-
-- **default_value** (*DataType*)
-
-    Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
-
-- **analyzer_params** (*dict*) -
-
-    Configures the analyzer for text processing, specifically for `DataType.VARCHAR` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
-
-    - Built-in analyzer
-
-        ```python
-        analyzer_params = {
-            "type": "standard" # Uses the standard built-in analyzer
-        }
-        ```
-
-        - `type` (*str*) -
-
-            Pre-configured analyzer type built into Milvus, which can be used out-of-the-box by specifying its name. Possible values: `standard`, `english`, `chinese`. For more information, refer to [Standard Analyzer](https://milvus.io/docs/standard-analyzer.md), [English Analyzer](https://milvus.io/docs/english-analyzer.md), and [Chinese Analyzer](https://milvus.io/docs/chinese-analyzer.md).
-
-    - Custom analyzer
-
-        ```python
-        analyzer_params = {
-            "tokenizer": "standard",
-            "filter": ["lowercase"],
-        }
-        ```
-
-        - `tokenizer` (*str*) -
-
-            Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
-
-        - `filter` (*Union[List[str], List[dict]*]) -
-
-            - Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
-
-- **enable_analyzer** (*bool*)
-
-    Whether to enable text analysis for the specified `VARCHAR` field. When set to `True`, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
-
-- **enable_match** (*bool*)
-
-    Whether to enable keyword matching for the specified `VARCHAR` field. When set to `True`, Milvus creates an inverted index for the field, allowing for quick and efficient keyword lookups. `enable_match` works in conjunction with `enable_analyzer` to provide structured keyword-based text search, with `enable_analyzer` handling tokenization and `enable_match` handling the search operations on these tokens.
-
 **RETURN TYPE:**
 
-*[CollectionSchema](CollectionSchema.md)*
+*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*
 
 **RETURNS:**
 
@@ -248,3 +189,4 @@ schema.add_field(
 #     ]
 # }
 ```
+

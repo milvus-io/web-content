@@ -2,11 +2,9 @@
 
 This operation optimizes a collection by adjusting segment sizes to improve query performance. This method performs a sequence of operations: waiting for index building, triggering force-merge compaction, waiting for completion, rebuilding indexes, and refreshing the collection load.
 
-<div class="admonition note">
+<div class="alert warning">
 
-<p><b>warning</b></p>
-
-<p>This is a Preview version feature for non-production use only (Benchmark, POC).</p>
+This is a Preview version feature for non-production use only (Benchmark, POC).
 
 </div>
 

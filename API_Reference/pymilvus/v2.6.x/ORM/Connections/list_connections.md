@@ -43,15 +43,15 @@ connections.list_connections()
 
 The following operations are related to `list_connections()`:
 
-- [add_connection()](add_connection.md)
+- [add_connection()](https://zilliverse.feishu.cn/docx/C37ldNLbFog6ThxA23ScMldnnmb)
 
-- [connect()](connect.md)
+- [connect()](https://zilliverse.feishu.cn/docx/KzCXdTVVSoOmkbxuFjsccDlXnff)
 
-- [disconnect()](disconnect.md)
+- [disconnect()](https://zilliverse.feishu.cn/docx/IpSBdcabbosobvxQkAEcv6CvnJd)
 
-- [get_connection_addr()](get_connection_addr.md)
+- [get_connection_addr()](https://zilliverse.feishu.cn/docx/H2zBdRHVtovNQGxvb0xcwpSKnBd)
 
-- [has_connection()](has_connection.md)
+- [has_connection()](https://zilliverse.feishu.cn/docx/XeZwdeK64oGD8rx9DA3ciqNinnh)
 
-- [remove_connection()](remove_connection.md)
+- [remove_connection()](https://zilliverse.feishu.cn/docx/L4KSdOVTEotaiyxjTddcVRDhn3E)
 

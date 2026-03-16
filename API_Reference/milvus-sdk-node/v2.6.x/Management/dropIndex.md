@@ -3,13 +3,13 @@
 This operation drops an index from a specific collection.
 
 ```javascript
-dropIndex(data): Promise<ResStatus>
+await milvusClient.dropIndex(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropPartition({
+await milvusClient.dropPartition({
     db_name: string,
     collection_name: string,
     field_name?: string,
@@ -26,7 +26,7 @@ milvusClient.dropPartition({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -42,7 +42,7 @@ milvusClient.dropPartition({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -70,7 +70,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const dropIndexReq = {
   collection_name: 'my_collection',

@@ -2,11 +2,9 @@
 
 This operation drops a specified partition from the current collection.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Before dropping a partition, you must first release it.</p>
+Before dropping a partition, you must first release it.
 
 </div>
 

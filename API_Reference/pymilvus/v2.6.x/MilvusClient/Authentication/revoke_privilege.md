@@ -2,11 +2,9 @@
 
 This operation revokes a privilege previously granted to a role on a specific object. Use this method to restrict a role's access to a particular resource.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This method replaces the previous <code>revoke_privileges()</code> (plural). The behavior is identical.</p>
+This method replaces the previous `revoke_privileges()` (plural). The behavior is identical.
 
 </div>
 

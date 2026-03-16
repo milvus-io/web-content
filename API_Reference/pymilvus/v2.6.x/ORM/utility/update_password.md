@@ -86,19 +86,19 @@ update_password(
 
 The following operations are related to `update_password()`
 
-- [Role](../Role/Role.md)
+- [Role](https://zilliverse.feishu.cn/docx/LZL1d0kckouPXNxJLCmcwbCTnkG)
 
-- [create_user()](create_user.md)
+- [create_user()](https://zilliverse.feishu.cn/docx/N44ndTSrgoEBx7xCID5cXRS7n1c)
 
-- [delete_user()](delete_user.md)
+- [delete_user()](https://zilliverse.feishu.cn/docx/E7zOdU2JpoqaU5xNYXvcAjgPnNh)
 
-- [list_roles()](list_roles.md)
+- [list_roles()](https://zilliverse.feishu.cn/docx/ClLXdDs64oixJBxlIrCcEB2dngb)
 
-- [list_user()](list_user.md)
+- [list_user()](https://zilliverse.feishu.cn/docx/JeG6d5Sg2oPmXPxEhnyciq4snNd)
 
-- [list_users()](list_users.md)
+- [list_users()](https://zilliverse.feishu.cn/docx/MtF2dkZcso4XduxM194cUaiinqb)
 
-- [list_usernames()](list_usernames.md)
+- [list_usernames()](https://zilliverse.feishu.cn/docx/RXi3dgtNYogU0cxmTsgcdT72nsc)
 
-- [reset_password()](reset_password.md)
+- [reset_password()](https://zilliverse.feishu.cn/docx/K1Npdj5Ddod6UWxRN2ecf6K4nxf)
 

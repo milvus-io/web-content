@@ -3,13 +3,13 @@
 This operation modifies the settings of specific index properties.
 
 ```javascript
-alterIndexProperties(data): Promise<ResStatus>
+await milvusClient.alterIndexProperties(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.alterIndexProperties({
+await milvusClient.alterIndexProperties({
      db_name?: string,
      collection_name: string,
      index_name: string,
@@ -26,19 +26,19 @@ milvusClient.alterIndexProperties({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **index_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target index.
 
-- **params** (*Record*&lt;*string*, *string* | *number* | *boolean*&gt;) -
+- **params** (*Record*<*string*, *string* | *number* | *boolean*>) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The index properties to modify and their expected values. Possible properties are as follows:
 
@@ -50,7 +50,7 @@ milvusClient.alterIndexProperties({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -78,7 +78,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 const milvusClient = new MilvusClient(MILUVS_ADDRESS);
 const alterIndexReq = {
     collection_name: 'my_collection',

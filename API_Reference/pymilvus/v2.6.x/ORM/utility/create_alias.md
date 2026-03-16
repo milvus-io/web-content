@@ -27,13 +27,13 @@ create_alias(
 
     The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.
 
-    <div class="admonition note">
-
-    <p><b>what is a collection alias?</b></p>
-
-    <p>A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. </p>
-    <p>In MilvusZilliz Cloud, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.</p>
-    <p>Suppose there is one collection: <code>collection_1</code>. You can assign two different aliases (<code>bob</code> and <code>tom</code>) to this collection by calling <code>create_alias("collection_1", "bob")</code> and <code>create_alias("collection_1", "tom")</code>.</p>
+    <div class="alert note">
+    
+    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
+    
+    In MilvusZilliz Cloud, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
+    
+    Suppose there is one collection: `collection_1`. You can assign two different aliases (`bob` and `tom`) to this collection by calling `create_alias("collection_1", "bob")` and `create_alias("collection_1", "tom")`.
 
     </div>
 
@@ -93,9 +93,9 @@ utility.list_aliases(collection_name="collection_1") # ['bob', 'tom']
 
 The following operations are related to `create_alias()`:
 
-- [alter_alias()](alter_alias.md)
+- [alter_alias()](https://zilliverse.feishu.cn/docx/MfTsdrbGcoO9JqxjgPtcMZTvncc)
 
-- [drop_alias()](drop_alias.md)
+- [drop_alias()](https://zilliverse.feishu.cn/docx/V7BWdrC39oPAauxoWBzcaldwnVc)
 
-- [list_aliases()](list_aliases.md)
+- [list_aliases()](https://zilliverse.feishu.cn/docx/XBwxdP96Go8ITyx7UuNcL7EonPd)
 

@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [OpenAIEmbeddingFunction](OpenAIEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [OpenAIEmbeddingFunction](https://zilliverse.feishu.cn/docx/QPcodlsnAoSMvIxEFmlcMNPbntd) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of OpenAIEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
+The **\_\_call\_\_()** method of OpenAIEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/UrG5delwyok3RPx0UBlcdBQ5nZd) and [encode_queries()](https://zilliverse.feishu.cn/docx/Sf9UdzL3rolQNAxDm8Ecga3snhg).
 
 ## Request syntax
 

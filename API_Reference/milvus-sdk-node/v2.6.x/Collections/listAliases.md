@@ -3,7 +3,7 @@
 This is a method template.
 
 ```javascript
-listAliases(data): Promise<ResStatus>
+await milvusClient.listAliases(data)
 ```
 
 ## Request Syntax
@@ -26,7 +26,7 @@ listAliases({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -36,7 +36,7 @@ listAliases({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -64,8 +64,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const res = await milvusClient.listAliases({ collection_name: 'my_collection' });
 ```
 

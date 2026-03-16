@@ -3,13 +3,13 @@
 This operation refreshes the loading status of a specific collection.
 
 ```javascript
-refreshLoad(data): Promise<ResStatus>
+await milvusClient.refreshLoad(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.refreshLoad({
+await milvusClient.refreshLoad({
    db_name?: string,
    collection_name: string,
    timeout?: number
@@ -24,7 +24,7 @@ milvusClient.refreshLoad({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
@@ -32,7 +32,7 @@ milvusClient.refreshLoad({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -60,8 +60,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.refreshLoad({ collection_name: 'my_collection' });
 ```
 

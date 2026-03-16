@@ -2,11 +2,9 @@
 
 This operation returns the current state of a compaction job. Use this after calling `compact()` to verify that compaction has completed.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This method was previously named <code>get_compact_state()</code>. The behavior is identical.</p>
+This method was previously named `get_compact_state()`. The behavior is identical.
 
 </div>
 

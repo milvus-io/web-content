@@ -110,13 +110,13 @@ utility.loading_progress(
 
 The following operations are related to `loading_progress()`:
 
-- [Partition](../Partition/Partition.md)
+- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
 
-- [load()](../Collection/load.md)
+- [load()](https://zilliverse.feishu.cn/docx/HQDndiGwloWKIexgPCUcEZGenOh)
 
-- [release()](../Collection/release.md)
+- [release()](https://zilliverse.feishu.cn/docx/CBwkdDs7MoKkVKx0kJgcPUNxn6s)
 
-- [load_state()](load_state.md)
+- [load_state()](https://zilliverse.feishu.cn/docx/BJysdlj1MoksHZxNRxicHn9fnSh)
 
-- [wait_for_loading_complete()](wait_for_loading_complete.md)
+- [wait_for_loading_complete()](https://zilliverse.feishu.cn/docx/PLKXdUB1EoNX8gxKHruc9GcEnsg)
 

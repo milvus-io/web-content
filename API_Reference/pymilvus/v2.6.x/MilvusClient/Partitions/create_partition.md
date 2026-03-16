@@ -69,15 +69,15 @@ client.create_partition(
 
 ## Related methods
 
-- [drop_partition()](drop_partition.md)
+- [drop_partition()](https://zilliverse.feishu.cn/docx/EMI8dM8uooIAFPxVfffcoqRwnZf)
 
-- [get_partition_stats()](get_partition_stats.md)
+- [get_partition_stats()](https://zilliverse.feishu.cn/docx/Jjbsd2I8doQ9pBxBp57ckRdZnZd)
 
-- [has_partition()](has_partition.md)
+- [has_partition()](https://zilliverse.feishu.cn/docx/MxTAd0haboKnRrxQvoOckGghn1T)
 
-- [list_partitions()](list_partitions.md)
+- [list_partitions()](https://zilliverse.feishu.cn/docx/Dxgqdvlk5o2VScxqmL1ctc1Inqb)
 
-- [load_partitions()](load_partitions.md)
+- [load_partitions()](https://zilliverse.feishu.cn/docx/DdQ1dBNagoBa08xhEiucxZrHnzc)
 
-- [release_partitions()](release_partitions.md)
+- [release_partitions()](https://zilliverse.feishu.cn/docx/VblKdUEU4o4t31xcFiicIGtjn9g)
 

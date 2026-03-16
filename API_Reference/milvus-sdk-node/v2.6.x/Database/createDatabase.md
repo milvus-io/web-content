@@ -3,13 +3,13 @@
 This operation creates a database.
 
 ```javascript
-createDatabase(data): Promise<ResStatus>
+await milvusClient.createDatabase(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.createDatabase({
+await milvusClient.createDatabase({
     db_name: string,
     properties?: Object
     timeout?: number
@@ -32,7 +32,7 @@ milvusClient.createDatabase({
 
         Number of replicas for the database.
 
-    - **database.resource_groups** (*&#91;&#93;str*) -
+    - **database.resource_groups** (*[]str*) -
 
         Resource groups dedicated to the database.
 
@@ -58,7 +58,7 @@ milvusClient.createDatabase({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ResStatus&gt;*
+**RETURNS** *Promise |<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -87,6 +87,9 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.createDatabase({ db_name: 'new_db' });
 ```

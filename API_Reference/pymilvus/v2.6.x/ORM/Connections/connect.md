@@ -23,15 +23,12 @@ connect(
 
     A connection alias.
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <ul>
-    <li><p>If the specified connection alias does not exist, a new one will be added, and the parameters specified below are added as the parameters of the connection alias.</p></li>
-    <li><p>If the specified connection alias has already been added by calling <strong>add_connection()</strong>, the parameters specified below overwrite those of the connection alias.</p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    - If the specified connection alias does not exist, a new one will be added, and the parameters specified below are added as the parameters of the connection alias.
+    
+    - If the specified connection alias has already been added by calling **add_connection()**, the parameters specified below overwrite those of the connection alias.
+    
     </div>
 
 - **user** (*string*) -
@@ -185,15 +182,15 @@ connections.connect(db_name="books")
 
 The following operations are related to `connect()`:
 
-- [add_connection()](add_connection.md)
+- [add_connection()](https://zilliverse.feishu.cn/docx/C37ldNLbFog6ThxA23ScMldnnmb)
 
-- [disconnect()](disconnect.md)
+- [disconnect()](https://zilliverse.feishu.cn/docx/IpSBdcabbosobvxQkAEcv6CvnJd)
 
-- [get_connection_addr()](get_connection_addr.md)
+- [get_connection_addr()](https://zilliverse.feishu.cn/docx/H2zBdRHVtovNQGxvb0xcwpSKnBd)
 
-- [has_connection()](has_connection.md)
+- [has_connection()](https://zilliverse.feishu.cn/docx/XeZwdeK64oGD8rx9DA3ciqNinnh)
 
-- [list_connections()](list_connections.md)
+- [list_connections()](https://zilliverse.feishu.cn/docx/DyPldeRNXo4nMqxQeE0cMnd2nEf)
 
-- [remove_connection()](remove_connection.md)
+- [remove_connection()](https://zilliverse.feishu.cn/docx/L4KSdOVTEotaiyxjTddcVRDhn3E)
 

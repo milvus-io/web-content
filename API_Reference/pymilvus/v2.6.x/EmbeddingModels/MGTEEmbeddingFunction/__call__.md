@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [MGTEEmbeddingFunction](MGTEEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [MGTEEmbeddingFunction](https://zilliverse.feishu.cn/docx/OF1mdh4tSo8ZQQxxVgEcdITRndb) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of MGTEEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
+The **\_\_call\_\_()** method of MGTEEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/GyrmdRjGZoOFKdxsYyCcvNG7npg?from=from_copylink) and [encode_queries()](https://zilliverse.feishu.cn/docx/HEWIdid9BoFMyNxN8Bbc0P3nn6g?from=from_copylink).
 
 ## Request syntax
 

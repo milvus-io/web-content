@@ -10,11 +10,9 @@ class pymilvus.Connections
 
 Constructs a singleton instance to manage all connections. 
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Instead of creating a new instance of this class on your own, import the existing singleton instance as shown in the following example.</p>
+Instead of creating a new instance of this class on your own, import the existing singleton instance as shown in the following example.
 
 </div>
 

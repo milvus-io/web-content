@@ -21,11 +21,9 @@ drop_alias(
 
     The alias to drop.
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>When dropping an alias, you do not need to provide the collection name because one alias can only be assigned to exactly one collection. Therefore, the server knows which collection the specified alias belongs to.</p>
+    <div class="alert note">
+    
+    When dropping an alias, you do not need to provide the collection name because one alias can only be assigned to exactly one collection. Therefore, the server knows which collection the specified alias belongs to.
 
     </div>
 
@@ -91,9 +89,9 @@ utility.list_aliases(collection_name="collection_1") # ['tom']
 
 The following operations are related to `drop_alias()`:
 
-- [alter_alias()](alter_alias.md)
+- [alter_alias()](https://zilliverse.feishu.cn/docx/MfTsdrbGcoO9JqxjgPtcMZTvncc)
 
-- [create_alias()](create_alias.md)
+- [create_alias()](https://zilliverse.feishu.cn/docx/DthMdlg8Lozw89xNz4TcBv1LnOe)
 
-- [list_aliases()](list_aliases.md)
+- [list_aliases()](https://zilliverse.feishu.cn/docx/XBwxdP96Go8ITyx7UuNcL7EonPd)
 

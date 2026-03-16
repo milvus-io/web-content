@@ -1,6 +1,6 @@
 # \_\_call\_\_()
 
-This operation in [BGERerankFunction](BGERerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
+This operation in [BGERerankFunction](https://zilliverse.feishu.cn/docx/GxAZd9O9gozzhExhMHWcMnXPngh) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
 ## Request syntax
 
@@ -38,7 +38,7 @@ bge_rf(
 
 A list of `RerankResult` objects.
 
-```plaintext
+```python
 ├── RerankResult
 |    └── text
 |    └── score

@@ -42,7 +42,7 @@ hybrid_search(
 
         - **anns_field** (*str*): The vector field to use in the request.
 
-        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to the settings in [search()](search.md).
+        - **param** (*dict*): A dictionary of search parameters for the request. For details, refer to the settings in [search()](https://zilliverse.feishu.cn/docx/T1npdvcRMoIjezxK021cPvfpn7c).
 
         - **limit** (*int*): The maximum number of results to return in the request. When performing a hybrid search with multiple ANN search requests, the top results defined by **limit** from each request will be combined and re-ranked before returning the final search results.
 
@@ -122,16 +122,15 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
 - Response structure
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>A <strong>SearchResult</strong> object contains a list of <strong>Hits</strong> objects, each corresponding to a query vector in the search request. </p>
-    <p>A <strong>Hits</strong> object contains a list of <strong>Hit</strong> objects, each corresponding to an entity hit by the search.</p>
+    <div class="alert note">
+    
+    A **SearchResult** object contains a list of **Hits** objects, each corresponding to a query vector in the search request. 
+    
+    A **Hits** object contains a list of **Hit** objects, each corresponding to an entity hit by the search.
 
     </div>
 
-    ```plaintext
+    ```python
     ├── SearchResult
     │   └── Hits  
     │       ├── ids

@@ -3,13 +3,13 @@
 This operation restores RBAC configurations from a backup.
 
 ```javascript
-restoreRBAC(data): Promise<ResStatus>
+await milvusClient.restoreRBAC(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.backupRBAC({
+await milvusClient.backupRBAC({
     RBAC_meta: RBACMeta,
     timeout?: number
 })
@@ -19,7 +19,7 @@ milvusClient.backupRBAC({
 
 - **RBAC_meta** (*RBACMeta*) -
 
-    - **users** (*User&#91;&#93;*) -
+    - **users** (*User[]*) -
 
         A list of user entities.
 
@@ -27,7 +27,7 @@ milvusClient.backupRBAC({
 
             The name of a user.
 
-    - **roles** (*RoleEntity&#91;&#93;*) -
+    - **roles** (*RoleEntity[]*) -
 
         A list of role entities.
 
@@ -35,7 +35,7 @@ milvusClient.backupRBAC({
 
             The name of a role.
 
-    - **grants** (*GrantEntity&#91;&#93;*) -
+    - **grants** (*GrantEntity[]*) -
 
         A list of grant entities.
 
@@ -81,7 +81,7 @@ milvusClient.backupRBAC({
 
                 The name of the affected role.
 
-    - **privilege_groups** (*PrivelegeGroup&#91;&#93;*) - 
+    - **privilege_groups** (*PrivelegeGroup[]*) - 
 
         A list of privilege-group entities.
 
@@ -89,7 +89,7 @@ milvusClient.backupRBAC({
 
             The name of a privilege group.
 
-        - **privileges** (*PrivilegeEntity&#91;&#93;*) -
+        - **privileges** (*PrivilegeEntity[]*) -
 
             A list of privileges.
 
@@ -103,7 +103,7 @@ milvusClient.backupRBAC({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -131,7 +131,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
+```javascript
 const rbacMeta = {
     users: [],
     roles: [],

@@ -3,13 +3,13 @@
 This operation updates the password of a specific user.
 
 ```javascript
-updateUser(data): Promise<ResStatus>
+await milvusClient.updateUser(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.updateUser({
+await milvusClient.updateUser({
    username: string,
    newPassword: string,
    oldPassword: string,
@@ -21,19 +21,19 @@ milvusClient.updateUser({
 
 - **username** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing user.
 
 - **oldPassword** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The original password of the user.
 
 - **newPassword** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The new password of the user.
 
@@ -43,7 +43,7 @@ milvusClient.updateUser({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -71,8 +71,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.updateUser({
+```javascript
+await milvusClient.updateUser({
    username: 'exampleUser',
    newPassword: 'newPassword',
    oldPassword: 'oldPassword',

@@ -3,13 +3,13 @@
 This operation lists the partitions in a specified collection.
 
 ```javascript
-listPartitions(data): Promise<ShowPartitionsResponse>
+await milvusClient.listPartitions(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.listPartitions({
+await milvusClient.listPartitions({
     db_name: string,
     collection_name: string,
     timeout?: number,
@@ -25,7 +25,7 @@ milvusClient.listPartitions({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -45,7 +45,7 @@ milvusClient.listPartitions({
 
         Indicates that only the loaded partitions are to be listed.
 
-**RETURNS** *Promise\&lt;ShowPartitionsResponse&gt;*
+**RETURNS** *Promise\<ShowPartitionsResponse>*
 
 This method returns a promise that resolves to a **ShowPartitionsResponse** object.
 
@@ -61,19 +61,19 @@ This method returns a promise that resolves to a **ShowPartitionsResponse** obje
 
 **PARAMETERS:**
 
-- **created_timestamps** (*string* | *list&#91;string&#93;*) -
+- **created_timestamps** (*string* | *list[string]*) -
 
     The timestamp indicating the creation time of the partition.
 
-- **created_utc_timestamps** (*string* | *list&#91;string&#93;*) -
+- **created_utc_timestamps** (*string* | *list[string]*) -
 
     The timestamp in UTC indicating the creation time of the partition.
 
-- **partitionIDs** (*number* | *list&#91;number&#93;*) -
+- **partitionIDs** (*number* | *list[number]*) -
 
     A list of the IDs of the partitions.
 
-- **partition_names** (*string* | *list&#91;string&#93;*) -
+- **partition_names** (*string* | *list[string]*) -
 
     A list of the names of the partitions.
 
@@ -93,8 +93,11 @@ This method returns a promise that resolves to a **ShowPartitionsResponse** obje
 
 ## Example
 
-```java
-new milvusClient(MILUVS_ADDRESS).listPartitions({
+```javascript
+new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+}).listPartitions({
     collection_name: 'my_collection',
  });
 ```

@@ -2,14 +2,15 @@
 
 This operation creates a resource group. This operation always succeeds no matter whether the resource group exists.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
+A Milvus instance begins with a default resource group that includes all available query nodes. 
 
-<p>A Milvus instance begins with a default resource group that includes all available query nodes. </p>
-<p>To optimize resource utilization, you can create additional resource groups, reassign specific query nodes from the default group, and load collections into these newly configured groups. </p>
-<p>This approach ensures that collections are allocated dedicated query nodes, enabling efficient and isolated search services.</p>
-<p>For details about resource groups, refer to <a href="https://milvus.io/docs/resource_group.md#Manage-Resource-Groups">Manage Resource Group</a>.</p>
+To optimize resource utilization, you can create additional resource groups, reassign specific query nodes from the default group, and load collections into these newly configured groups. 
+
+This approach ensures that collections are allocated dedicated query nodes, enabling efficient and isolated search services.
+
+For details about resource groups, refer to [Manage Resource Group](https://milvus.io/docs/resource_group.md#Manage-Resource-Groups).
 
 </div>
 
@@ -31,7 +32,7 @@ create_resource_group(
 
 - **configs** (*ResourceGroupConfig*) - 
 
-    A **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
+    A **[ResourceGroupConfig](https://zilliverse.feishu.cn/docx/LrfjdgJXkoe90gxNR1YcrsJMnYg)** object.
 
 - **timeout** (*float* | *None*) - 
 

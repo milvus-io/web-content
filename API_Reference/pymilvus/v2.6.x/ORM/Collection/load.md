@@ -12,11 +12,9 @@ load(
 )
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This operation is non-blocking. You can call <code>utility.wait_for_loading_complete()</code> to block the current process.</p>
+This operation is non-blocking. You can call `utility.wait_for_loading_complete()` to block the current process.
 
 </div>
 
@@ -34,12 +32,11 @@ load(
 
     The number of replicas to create. The value defaults to 1 and ranges from 1 to the number of query nodes available. Setting this to `1` indicates that segments in the current collection or any specified partitions are to be loaded onto one query node.
 
-    <div class="admonition note">
-
-    <p><b>what are the differences between partitions and replicas?</b></p>
-
-    <p>Partitioning allows you to further split a collection into multiple partitions, store different data in them, and load or release each of them individually. A collection can have up to 64 partitions. </p>
-    <p>Replication is a mechanism for Milvus to load the same segments on multiple query nodes. It is very useful if you have a relatively small dataset but want to increase read-throughput with extra hardware resources.</p>
+    <div class="alert note">
+    
+    Partitioning allows you to further split a collection into multiple partitions, store different data in them, and load or release each of them individually. A collection can have up to 64 partitions. 
+    
+    Replication is a mechanism for Milvus to load the same segments on multiple query nodes. It is very useful if you have a relatively small dataset but want to increase read-throughput with extra hardware resources.
 
     </div>
 
@@ -49,12 +46,11 @@ load(
 
     If left unspecified, the default resource group applies.
 
-    <div class="admonition note">
-
-    <p><b>what is a resource group?</b></p>
-
-    <p>A resource group can hold several or all of the query nodes in a Milvus instance.</p>
-    <p>Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.</p>
+    <div class="alert note">
+    
+    A resource group can hold several or all of the query nodes in a Milvus instance.
+    
+    Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.
 
     </div>
 
@@ -82,11 +78,9 @@ load(
 
     This exception is to be raised when any error occurs during this operation.
 
-<div class="admonition note">
+<div class="alert warning">
 
-<p><b>warning</b></p>
-
-<p>If you try to load a collection that is not indexed, you will receive a <strong>MilvusException</strong>.</p>
+If you try to load a collection that is not indexed, you will receive a **MilvusException**.
 
 </div>
 
@@ -141,13 +135,13 @@ collection.load(
 
 The following operations are related to `load()`:
 
-- [Partition](../Partition/Partition.md)
+- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
 
-- [release()](release.md)
+- [release()](https://zilliverse.feishu.cn/docx/CBwkdDs7MoKkVKx0kJgcPUNxn6s)
 
-- [load_state()](../utility/load_state.md)
+- [load_state()](https://zilliverse.feishu.cn/docx/BJysdlj1MoksHZxNRxicHn9fnSh)
 
-- [loading_progress()](../utility/loading_progress.md)
+- [loading_progress()](https://zilliverse.feishu.cn/docx/HQiHd82orov0XvxAzLWcl5xRnzc)
 
-- [wait_for_loading_complete()](../utility/wait_for_loading_complete.md)
+- [wait_for_loading_complete()](https://zilliverse.feishu.cn/docx/PLKXdUB1EoNX8gxKHruc9GcEnsg)
 

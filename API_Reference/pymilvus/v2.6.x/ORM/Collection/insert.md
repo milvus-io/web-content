@@ -201,15 +201,15 @@ res = collection.insert(
 
 The following operations are related to `insert()`:
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/TJMVdi4U2oBFnAxO95jctzVAnzg)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/OaM5dkbPjohKhNxHvKNcfnYMnVb)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](https://zilliverse.feishu.cn/docx/HrnndnWtKoPuenxvsXBchF1wnnh)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/JzcYdBQ5zoU4KpxPqUHcPLQonKd)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](https://zilliverse.feishu.cn/docx/LffbdiHhzoHe08xivF9ccmoen5d)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/AQ1ydMXbOog5VJxITgUc4GFvnVe)
 

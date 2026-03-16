@@ -29,30 +29,30 @@ do_bulk_insert(
 
     A list of paths to the files that contain the source data. 
 
-    <div class="admonition note">
-
-    <p><b>how can i prepare the source data files?</b></p>
-
-    <ul>
-    <li><p>You can include a JSON file (<em>.json</em>) or a set of NumPy files (<em>.npy</em>) as the source data files.</p></li>
-    <li><p>A valid JSON file has a root key named <strong>rows</strong>, which is a list of dictionaries with each representing an entity that matches the schema of the target collection.</p></li>
-    </ul>
-    <p>If the target collection allows dynamic fields, include the dynamic fields and their values in each entity dictionary.</p>
-    <ul>
-    <li>A valid set of NumPy files should be named after the fields in the schema of the target collection, and the data in them should match the corresponding field definitions. </li>
-    </ul>
-    <p>If the target collection allows dynamic fields, create an extra file named <strong>&#36;meta.npy</strong> to include the dynamic fields and their values.</p>
-    <p>For details on preparing the source data files, refer to <a href="https://milvus.io/docs/bulk_insert.md">Insert Entities from Files</a>.</p>
-    <ul>
-    <li>You have to upload the source data files to the bucket defined by <code>minio.bucketname</code> in your Milvus configuration before running this operation. </li>
-    </ul>
-    <p>Let's take a Milvus instance set up using Docker Compose as an example, and the bucket name is <code>a-bucket</code>.</p>
-    <ul>
-    <li><p>If you upload the source data files to this bucket, you should include only the file names with extensions in the <strong>files</strong> list. For example, <code>files=["id.npy", "vector.npy"]</code> or <code>files=["data.json"]</code>.</p></li>
-    <li><p>If you upload the source data files to a sub-directory in this bucket, you should include the file paths relative to the bucket. For example, if the sub-directory is <code>data</code>, the parameter settings should be <code>files=["data/id.npy", "data/vector.py"]</code> or <code>files=["data.json"]</code>.</p></li>
-    <li><p>To find the name of the MinIO bucket your Milvus instance uses, simply log into the MinIO server and find out. </p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    - You can include a JSON file (*.json*) or a set of NumPy files (*.npy*) as the source data files.
+    
+    - A valid JSON file has a root key named **rows**, which is a list of dictionaries with each representing an entity that matches the schema of the target collection.
+    
+    If the target collection allows dynamic fields, include the dynamic fields and their values in each entity dictionary.
+    
+    - A valid set of NumPy files should be named after the fields in the schema of the target collection, and the data in them should match the corresponding field definitions. 
+    
+    If the target collection allows dynamic fields, create an extra file named **&#36;meta.npy** to include the dynamic fields and their values.
+    
+    For details on preparing the source data files, refer to [Insert Entities from Files](https://milvus.io/docs/bulk_insert.md).
+    
+    - You have to upload the source data files to the bucket defined by `minio.bucketname` in your Milvus configuration before running this operation. 
+    
+    Let's take a Milvus instance set up using Docker Compose as an example, and the bucket name is `a-bucket`.
+    
+    - If you upload the source data files to this bucket, you should include only the file names with extensions in the **files** list. For example, `files=["id.npy", "vector.npy"]` or `files=["data.json"]`.
+    
+    - If you upload the source data files to a sub-directory in this bucket, you should include the file paths relative to the bucket. For example, if the sub-directory is `data`, the parameter settings should be `files=["data/id.npy", "data/vector.py"]` or `files=["data.json"]`.
+    
+    - To find the name of the MinIO bucket your Milvus instance uses, simply log into the MinIO server and find out.
+    
     </div>
 
 - **partition_name** (*str*) -
@@ -115,9 +115,9 @@ utility.do_bulk_insert(
 
 The following operations are related to `do_bulk_insert()`:
 
-- [BulkInsertState](BulkInsertState.md)
+- [BulkInsertState](https://zilliverse.feishu.cn/docx/Arn1dIKgwoISFoxT7xVc3UrBnAf)
 
-- [get_bulk_insert_state()](get_bulk_insert_state.md)
+- [get_bulk_insert_state()](https://zilliverse.feishu.cn/docx/XzHhd3AdCo9DCsxawYycr69CnAb)
 
-- [list_bulk_insert_tasks()](list_bulk_insert_tasks.md)
+- [list_bulk_insert_tasks()](https://zilliverse.feishu.cn/docx/T1CGdXeVkoG2yAxkualc1jVonRb)
 

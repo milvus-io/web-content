@@ -3,13 +3,13 @@
 This operation lists all existing databases.
 
 ```javascript
-listDatabases(data?): Promise<ListDatabasesResponse>
+await milvusClient.listDatabases(data?)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.listDatabases({
+await milvusClient.listDatabases({
     timeout?: number
 })
 ```
@@ -22,7 +22,7 @@ milvusClient.listDatabases({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;ListDatabaseResponse&gt;*
+**RETURNS** *Promise |<ListDatabaseResponse>*
 
 This method returns a promise that resolves to a **ListDatabaseResponse** object.
 
@@ -39,7 +39,7 @@ This method returns a promise that resolves to a **ListDatabaseResponse** object
 
 **PARAMETERS:**
 
-- **db_names** (*string&#91;&#93;*) -
+- **db_names** (*string[]*) -
 
     A list of database names.
 
@@ -62,6 +62,9 @@ This method returns a promise that resolves to a **ListDatabaseResponse** object
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const res = await milvusClient.listDatabases();
 ```

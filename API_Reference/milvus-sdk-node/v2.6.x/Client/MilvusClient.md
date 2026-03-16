@@ -16,11 +16,11 @@ new MilvusClient(config: ClientConfig)
 
 - **configOrAddress** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The address of the Milvus instance. For example:
 
-    ```plaintext
+    ```javascript
     http://localhost:19530
     ```
 
@@ -28,11 +28,11 @@ new MilvusClient(config: ClientConfig)
 
     - **address** (*string*) -
 
-        **&#91;REQUIRED&#93;**
+        **[REQUIRED]**
 
         The cluster endpoint. For example:
 
-        ```plaintext
+        ```javascript
         http://localhost:19530
         ```
 

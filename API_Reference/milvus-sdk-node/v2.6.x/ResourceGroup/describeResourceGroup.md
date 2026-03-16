@@ -3,13 +3,13 @@
 This operation lists detailed information about the specified resource group.
 
 ```javascript
-describeResourceGroup(data): Promise<DescribeResourceGroupResponse>
+await milvusClient.describeResourceGroup(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.describeResourceGroup({
+await milvusClient.describeResourceGroup({
     resource_group: string,
     timeout?: number
 })
@@ -19,7 +19,7 @@ milvusClient.describeResourceGroup({
 
 - **resource_group** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     Name of the resource group to describe.
 
@@ -29,7 +29,7 @@ milvusClient.describeResourceGroup({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise |&lt;DescribeResourceGroupResponse&gt;*
+**RETURNS** *Promise |<DescribeResourceGroupResponse>*
 
 This method returns a promise that resolves to a **DescribeResourceGroupResponse** object.
 
@@ -84,12 +84,15 @@ This method returns a promise that resolves to a **DescribeResourceGroupResponse
 
     - **config** (*ResourceGroupConfig*) -
 
-        The configurations of the specified resource group in a [ResourceGroupConfig](ResourceGroupConfig.md) instance.
+        The configurations of the specified resource group in a [ResourceGroupConfig](https://zilliverse.feishu.cn/docx/Q0aNdOtyYoQHFhxCdEacj2kdnah) instance.
 
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 
 const res = await milvusClient.describeResourceGroup({ 
     resource_group: 'my_rg'

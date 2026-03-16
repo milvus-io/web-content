@@ -68,11 +68,11 @@ client.drop_alias(alias="test")
 
 ## Related methods
 
-- [alter_alias()](alter_alias.md)
+- [alter_alias()](https://zilliverse.feishu.cn/docx/CBc3d1mrdoYqmDxe4Kcc9zxAnzh)
 
-- [create_alias()](create_alias.md)
+- [create_alias()](https://zilliverse.feishu.cn/docx/Kqlodu0AWoefKvxczcxc1c36nlf)
 
-- [describe_alias()](describe_alias.md)
+- [describe_alias()](https://zilliverse.feishu.cn/docx/HN7nddgueo3scIxmPXAcpjkFnDf)
 
-- [list_aliases()](list_aliases.md)
+- [list_aliases()](https://zilliverse.feishu.cn/docx/Cpynd2OFJoIXhLx3dQNct7Wgn6f)
 

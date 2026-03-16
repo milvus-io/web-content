@@ -68,15 +68,15 @@ print(res)
 
 ## Related operations
 
-- [drop_collection()](drop_collection.md)
+- [drop_collection()](https://zilliverse.feishu.cn/docx/FHcYdN4apoI5TIx0LxScISvtn0f)
 
-- [flush_all()](flush_all.md)
+- [flush_all()](https://zilliverse.feishu.cn/docx/Uwsfd443boKKgyx2zZTcYDqKnCe)
 
-- [has_collection()](has_collection.md)
+- [has_collection()](https://zilliverse.feishu.cn/docx/TWOxdwDYRo4CCHxDdZbc7IOznCg)
 
-- [has_partition()](has_partition.md)
+- [has_partition()](https://zilliverse.feishu.cn/docx/KsmadNcXRoElO2xJi5HcJO57nwb)
 
-- [list_collections()](list_collections.md)
+- [list_collections()](https://zilliverse.feishu.cn/docx/QgxEdfBMSodYo6xCg24cH3hInr4)
 
-- [rename_collection()](rename_collection.md)
+- [rename_collection()](https://zilliverse.feishu.cn/docx/M0qRdF1cLokrxvxyrXScJ64FnEe)
 

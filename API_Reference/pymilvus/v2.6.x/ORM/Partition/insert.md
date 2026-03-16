@@ -2,11 +2,9 @@
 
 This operation inserts data into the current partition.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Using the <strong>partition_name</strong> parameter in the <strong>insert()</strong> method of a <strong>Collection</strong> object is equivalent to using the <strong>insert()</strong> method of a <strong>Partition</strong> object.</p>
+Using the **partition_name** parameter in the **insert()** method of a **Collection** object is equivalent to using the **insert()** method of a **Partition** object.
 
 </div>
 
@@ -176,13 +174,13 @@ res.insert_count
 
 The following operations are related to `insert()`:
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/V9BidASNqoWYrmxo11ecuN99neg)
 
-- [flush()](flush.md)
+- [flush()](https://zilliverse.feishu.cn/docx/VRGwdg75Ao7ZXQx7uANc9wzXnVb)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/N97pdfkjlo9j61xrtL2cbB79nKe)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/XW72dhBuNoqNWhxUQLtcfa6Fnwd)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/MQMzddDnao5Zz0xmSRncZM2nn5b)
 

@@ -3,13 +3,13 @@
 This operation grants a role to a user.
 
 ```javascript
-grantRole(data): Promise<ResStatus>
+await milvusClient.grantRole(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.grantRole({
+await milvusClient.grantRole({
    username: string,
    roleName: string,
    timeout?: number
@@ -20,13 +20,13 @@ milvusClient.grantRole({
 
 - **username** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing user.
 
 - **roleName** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to assign.
 
@@ -36,7 +36,7 @@ milvusClient.grantRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -64,8 +64,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.grantRole({
+```javascript
+await milvusClient.grantRole({
    username: 'my',
    roleName: 'myrole'
  })

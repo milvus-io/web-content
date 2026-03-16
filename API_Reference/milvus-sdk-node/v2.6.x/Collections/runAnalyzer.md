@@ -3,7 +3,7 @@
 This operation runs an analyzer on the provided text for test purposes.
 
 ```javascript
-runAnalyzer(data): Promise<RunAnalyzerResponse>
+await milvusClient.runAnalyzer(data)
 ```
 
 ## Request Syntax
@@ -19,11 +19,11 @@ milvusClient({
 
 **PARAMETERS:**
 
-- **analyzer_params** (*Record&lt;string, any&gt;*) -
+- **analyzer_params** (*Record<string, any>*) -
 
     The parameter for the analyzer.
 
-- **text** (*string* | *string&#91;&#93;*) -
+- **text** (*string* | *string[]*) -
 
     The input text or a list of texts to be analyzed.
 
@@ -35,7 +35,7 @@ milvusClient({
 
     Optional flag indicating whether to include hash-based processing.
 
-**RETURNS** *Promise*&lt;*RunAnalyzerResponse*&gt;
+**RETURNS** *Promise*<*RunAnalyzerResponse*>
 
 This method returns a promise that resolves to a **RunAnalyzerResponse** object.
 
@@ -48,11 +48,11 @@ This method returns a promise that resolves to a **RunAnalyzerResponse** object.
 
 **PARAMETERS:**
 
-- **results** (*AnalyzerResult&#91;&#93;*) -
+- **results** (*AnalyzerResult[]*) -
 
     The results of this operation, containing a set of tokens generated based on the specified analyzer parameters.
 
-    - **tokens** (*AnalyzerToken&#91;&#93;*) -
+    - **tokens** (*AnalyzerToken[]*) -
 
         A list of analyzed tokens. 
 

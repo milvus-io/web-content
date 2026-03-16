@@ -188,9 +188,9 @@ res = utility.list_bulk_insert_tasks()
 
 The following operations are related to `list_bulk_insert_state()`:
 
-- [BulkInsertState](BulkInsertState.md)
+- [BulkInsertState](https://zilliverse.feishu.cn/docx/Arn1dIKgwoISFoxT7xVc3UrBnAf)
 
-- [do_bulk_insert()](do_bulk_insert.md)
+- [do_bulk_insert()](https://zilliverse.feishu.cn/docx/BpqpdBWdyoxbmzx0GGCcQxksnBc)
 
-- [get_bulk_insert_state()](get_bulk_insert_state.md)
+- [get_bulk_insert_state()](https://zilliverse.feishu.cn/docx/XzHhd3AdCo9DCsxawYycr69CnAb)
 

@@ -3,13 +3,13 @@
 This operation drops a custom role.
 
 ```javascript
-dropRole(data): Promise<ResStatus>
+await milvusClient.dropRole(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropRole({
+await milvusClient.dropRole({
    roleName: string,
    timeout?: number
  })
@@ -19,7 +19,7 @@ milvusClient.dropRole({
 
 - **roleName** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the role to drop.
 
@@ -29,7 +29,7 @@ milvusClient.dropRole({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -57,8 +57,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-milvusClient.dropRole({
+```javascript
+await milvusClient.dropRole({
    roleName: 'exampleRole',
  })
 ```

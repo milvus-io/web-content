@@ -3,13 +3,13 @@
 This operation describes a specific alias.
 
 ```javascript
-describeAlias(data): Promise<DescribeAliasResponse>
+await milvusClient.describeAlias(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.describeAlias({
+await milvusClient.describeAlias({
     db_name: string,
     alias: string,
     collection_name: string
@@ -24,37 +24,39 @@ milvusClient.describeAlias({
 
 - **alias** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The alias of a collection. Note that the alias should exist beforehand.
 
-    <div class="admonition note">
-
-    <p><b>what is a collection alias?</b></p>
-
-    <p>A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. </p>
-    <p>In Milvus, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.</p>
-    <p>Below is an example of reassigning the alias of one collection to another:</p>
-    <p>Suppose there are two collections: <code>collection_1</code> and <code>collection_2</code>. There is also a collection alias named <code>bob</code>, which was originally assigned to <code>collection_1</code>:</p>
-    <ul>
-    <li><p><code>collection_1</code>'s alias = &#91;"bob"&#93;</p></li>
-    <li><p><code>collection_2</code>'s alias = &#91;&#93;</p></li>
-    </ul>
-    <p>After calling <code>alter_alias("collection_2", "bob")</code>:</p>
-    <ul>
-    <li><p><code>collection_1</code>'s alias = &#91;&#93;</p></li>
-    <li><p><code>collection_2</code>'s alias = &#91;"bob"&#93;</p></li>
-    </ul>
-
+    <div class="alert note">
+    
+    A collection alias is an additional name for a collection. Collection aliases are useful when you want to switch your application to a new collection without any changes to your code. 
+    
+    In Milvus, a collection alias is a globally unique identifier. One alias can only be assigned to exactly one collection. Conversely, a collection can have multiple aliases.
+    
+    Below is an example of reassigning the alias of one collection to another:
+    
+    Suppose there are two collections: `collection_1` and `collection_2`. There is also a collection alias named `bob`, which was originally assigned to `collection_1`:
+    
+    - `collection_1`'s alias = ["bob"]
+    
+    - `collection_2`'s alias = []
+    
+    After calling `alter_alias("collection_2", "bob")`:
+    
+    - `collection_1`'s alias = []
+    
+    - `collection_2`'s alias = ["bob"]
+    
     </div>
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection that has the specified alias.
 
-**RETURNS** *Promise\&lt;DescribeAliasResponse&gt;*
+**RETURNS** *Promise\<DescribeAliasResponse>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -98,7 +100,10 @@ This method returns a promise that resolves to a **ResStatus** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const res = await milvusClient.describeAlias({
    alias: 'my_collection_alias',
    collection_name: 'my_collection',

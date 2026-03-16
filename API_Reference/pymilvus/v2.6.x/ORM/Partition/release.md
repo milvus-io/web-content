@@ -60,9 +60,9 @@ partition.release()
 
 The following operations are related to `release()`:
 
-- [drop()](drop.md)
+- [drop()](https://zilliverse.feishu.cn/docx/D3sndK8DgoqDkUxaNGcctwcSnuE)
 
-- [get_replicas()](get_replicas.md)
+- [get_replicas()](https://zilliverse.feishu.cn/docx/YKwldu59qosZBsxdRdSc0l9Hnoe)
 
-- [load()](load.md)
+- [load()](https://zilliverse.feishu.cn/docx/TWxddf6iboyM15xK4Kzc8ASknRb)
 

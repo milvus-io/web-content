@@ -39,13 +39,13 @@ query(
 
         The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
-        <div class="admonition note">
-
-        <p><b>what is the consistency level?</b></p>
-
-        <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-        <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is bounded staleness.</p>
-        <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+        <div class="alert note">
+        
+        Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+        
+        Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is bounded staleness.
+        
+        You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
         </div>
 
@@ -55,11 +55,9 @@ query(
 
         If this parameter is set, Milvus executes the query only if all entities inserted before this timestamp are visible to query nodes. 
 
-        <div class="admonition note">
-
-        <p><b>notes</b></p>
-
-        <p>This parameter is valid when the default consistency level applies.</p>
+        <div class="alert note">
+        
+        This parameter is valid when the default consistency level applies.
 
         </div>
 
@@ -69,11 +67,9 @@ query(
 
         The value defaults to **5**. If this parameter is set, Milvus calculates the guarantee timestamp by subtracting this from the current timestamp.
 
-        <div class="admonition note">
-
-        <p><b>notes</b></p>
-
-        <p>This parameter is valid when a consistency level other than the default one applies.</p>
+        <div class="alert note">
+        
+        This parameter is valid when a consistency level other than the default one applies.
 
         </div>
 
@@ -183,13 +179,13 @@ res = partition.query(
 
 The following operations are related to `query()`:
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/V9BidASNqoWYrmxo11ecuN99neg)
 
-- [flush()](flush.md)
+- [flush()](https://zilliverse.feishu.cn/docx/VRGwdg75Ao7ZXQx7uANc9wzXnVb)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/QXDxdv36FoVgjcxDV1gcDwWXnsd)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/XW72dhBuNoqNWhxUQLtcfa6Fnwd)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/MQMzddDnao5Zz0xmSRncZM2nn5b)
 

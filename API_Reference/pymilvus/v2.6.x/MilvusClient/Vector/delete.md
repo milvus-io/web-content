@@ -45,11 +45,9 @@ delete(
 
     You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>When using filter expressions to delete entities, ensure the collection has been loaded. Otherwise, Milvus will return an error.</p>
+    <div class="alert note">
+    
+    When using filter expressions to delete entities, ensure the collection has been loaded. Otherwise, Milvus will return an error.
 
     </div>
 
@@ -143,13 +141,13 @@ client.delete(
 
 ## Related methods
 
-- [get()](get.md)
+- [get()](https://zilliverse.feishu.cn/docx/TEUDde2xbo0JT7xtVvtcF53Nnub)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/QI87dhVnioL9JLxnNKxcM8jWnkh)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/LkmSddW2NolgitxLhy9cx22Dnpe)
 
-- [search()](search.md)
+- [search()](https://zilliverse.feishu.cn/docx/D74JdcitKobd7cxNdDdcGAz6nuf)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/WRYFdoDe8ofrlDxxTxQcdoJjnAh)
 

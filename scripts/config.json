@@ -1,0 +1,153 @@
+{
+  "apifox": {
+    "specifications": "scripts/apifox-docs/meta/openapi.json"
+  },
+  "milvus": {
+    "manuals": {
+      "guides": {
+        "base": "QrNlwhfIeiKqL7k04mlc9kPendg:tblDEFqgQwxiyVvB",
+        "sourceType": "wiki",
+        "targets": {
+          "menuStructure": "site/en/menuStructure/en.json",
+          "outputDir": "site/en",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "pymilvus-v2.4.x": {
+        "base": "D1VabelmAansLwsNTvLc2Wxxn1g:tblTloLQfysBKvWs",
+        "sourceType": "drive",
+        "language": "python",
+        "targets": {
+          "outputDir": "API_Reference/pymilvus/v2.4.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "pymilvus-v2.5.x": {
+        "base": "B8X9bJjJta2q4NskclYcxT7lngG:tbl2FUyHSseQ2URE",
+        "sourceType": "drive",
+        "language": "python",
+        "targets": {
+          "outputDir": "API_Reference/pymilvus/v2.5.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "pymilvus-v2.6.x": {
+        "base": "J3Qzbv7AWazzivsv7vqcqlGCnFc:tblhRix4IMkGVpfn",
+        "sourceType": "drive",
+        "language": "python",
+        "targets": {
+          "outputDir": "API_Reference/pymilvus/v2.6.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "java-v2.4.x": {
+        "base": "WqHJb3zimaxXjssk4Kic4GEDnte:tbl5bsj6PQ0uDIyn",
+        "sourceType": "drive",
+        "language": "java",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-java/v2.4.x/v2",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "java-v2.5.x": {
+        "base": "Hsq1bRcqraeQW0sGFJbcI3YIn3d:tblYj1XOkxhXMBEh",
+        "sourceType": "drive",
+        "language": "java",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-java/v2.5.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "java-v2.6.x": {
+        "base": "Sbtcbm660abngWsXryKct5nOn2e:tblCwLhDHim25o",
+        "sourceType": "drive",
+        "language": "java",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-java/v2.6.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "node-v2.4.x": {
+        "base": "DVVobtXQMamuLqsQij5c29nVn3c:tblhllHqJLAmHwFs",
+        "sourceType": "drive",
+        "language": "javascript",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-node/v2.4.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "node-v2.5.x": {
+        "base": "JTBebezMDaV8ZhsHF5wc7lJSnuh:tblolxGDDVfhXYv0",
+        "sourceType": "drive",
+        "language": "javascript",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-node/v2.5.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "node-v2.6.x": {
+        "base": "R9i8bww4faNsR6smwQwcAtHGnkb:tblEjNXH8WGzO1BR",
+        "sourceType": "drive",
+        "language": "javascript",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-node/v2.6.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "go-v2.6.x": {
+        "base": "Yc7gbtmgSal2ewsdqlhcLWVanbh:tblM12OyAwhSeXiC",
+        "sourceType": "drive",
+        "language": "go",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-go/v2.6.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      },
+      "cpp-v2.6.x": {
+        "base": "XmndbkxkQaigA8soRiCcTT41nMd:tbln9XaZjW6RuEhu",
+        "sourceType": "drive",
+        "language": "cpp",
+        "targets": {
+          "outputDir": "API_Reference/milvus-sdk-cpp/v2.6.x",
+          "imageDir": "assets"
+        },
+        "images": {
+          "alt_texts": []
+        }
+      }
+    }
+  }
+}

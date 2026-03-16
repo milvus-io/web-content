@@ -3,18 +3,18 @@
 This operation inserts data into a specific collection.
 
 ```javascript
-insert(data): Promise<MutationResult>
+await milvusClient.insert(data: InsertReq)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.insert({
-    db_name: string,
+await milvusClient.insert({
     collection_name: string,
-    data?: RowData[],
+    data: RowData | RowData[],
     partition_name?: string,
-    timeout?: number
+    db_name?: string,
+    timeout?: number,
 })
 ```
 
@@ -26,11 +26,11 @@ milvusClient.insert({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **data** (*RowData&#91;&#93;*) -
+- **data** (*RowData[]*) -
 
     The data to insert into the current collection.
 
@@ -88,7 +88,7 @@ milvusClient.insert({
 
     If specified, the data is to be inserted into the specified partition.
 
-**RETURNS** *Promise\&lt;MutationResult&gt;*
+**RETURNS** *Promise\<MutationResult>*
 
 This method returns a promise that resolves to a **MutationResult** object.
 
@@ -120,7 +120,7 @@ This method returns a promise that resolves to a **MutationResult** object.
 
     The deleted entities. The value stays `0` in this operation.
 
-- **err_index** (Number&#91;&#93;) -
+- **err_index** (Number[]) -
 
     The number of entities involved in the insert operation that fails.
 
@@ -128,7 +128,7 @@ This method returns a promise that resolves to a **MutationResult** object.
 
     The new entities that are inserted. 
 
-- **succ_index** (*list&#91;number&#93;*) -
+- **succ_index** (*list[number]*) -
 
     The number of entities involved in the insert operation that have been successfully indexed.
 
@@ -157,9 +157,21 @@ This method returns a promise that resolves to a **MutationResult** object.
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
-const res = await milvusClient.listAliases({
-   collection_name: 'my_collection',
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
+
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
 });
+
+const res = await milvusClient.insert({
+    collection_name: 'my_collection',
+    data: [
+        { id: 1, vector: [0.1, 0.2, 0.3, 0.4, 0.5], text: 'Hello' },
+        { id: 2, vector: [0.6, 0.7, 0.8, 0.9, 1.0], text: 'World' },
+    ],
+});
+
+console.log(res.insert_cnt); // '2'
 ```
 

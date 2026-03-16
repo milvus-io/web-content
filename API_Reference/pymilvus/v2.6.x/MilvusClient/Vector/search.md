@@ -4,7 +4,7 @@ This operation conducts a vector similarity search with an optional scalar filte
 
 ## Request syntax
 
-```plaintext
+```python
 search(
     self,
     collection_name: str,
@@ -109,11 +109,9 @@ search(
 
         Additional parameters.
 
-        <div class="admonition note">
-
-        <p><b>notes</b></p>
-
-        <p>All additional parameters are moved to the upper <code>search_params</code>, and the <code>params</code> argument will be deprecated soon.</p>
+        <div class="alert note">
+        
+        All additional parameters are moved to the upper `search_params`, and the `params` argument will be deprecated soon.
 
         </div>
 

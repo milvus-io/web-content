@@ -2,11 +2,9 @@
 
 This creates a named index for a target field, which can either be a vector field or a scalar field.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>This operation is non-blocking. You can call <code>utility.wait_for_index_building_complete()</code> to block the current process.</p>
+This operation is non-blocking. You can call `utility.wait_for_index_building_complete()` to block the current process.
 
 </div>
 
@@ -111,15 +109,15 @@ collection.has_index() # True
 
 The following operations are related to `create_index()`
 
-- [drop_index()](drop_index.md)
+- [drop_index()](https://zilliverse.feishu.cn/docx/AtkDdtMAWodFzExARxnco5xLnsg)
 
-- [has_index()](has_index.md)
+- [has_index()](https://zilliverse.feishu.cn/docx/WDk4dXY8IoV3SJxp9e7c3aq1nBh)
 
-- [index()](index.md)
+- [index()](https://zilliverse.feishu.cn/docx/RkQ8dnWDHo3DiDxiCVRcP1xPnob)
 
-- [index_building_progress()](../utility/index_building_progress.md)
+- [index_building_progress()](https://zilliverse.feishu.cn/docx/OVfodiKa6o3qTGxadYicI975nhh)
 
-- [wait_for_index_building_complete()](../utility/wait_for_index_building_complete.md)
+- [wait_for_index_building_complete()](https://zilliverse.feishu.cn/docx/MfR8dw5TioPvw3xvrstcgYixnUb)
 
-- [list_indexes()](../utility/list_indexes.md)
+- [list_indexes()](https://zilliverse.feishu.cn/docx/XLepdUCcTow6rpx5vxxcbLXZnyb)
 

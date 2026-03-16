@@ -50,11 +50,9 @@ Function(
 
     The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. This parameter accepts only one field name.
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>This applies only when you set <code>function_type</code> to <code>FunctionType.BM25</code> and <code>FunctionType.TEXTEMBEDDING</code>.</p>
+    <div class="alert note">
+    
+    This applies only when you set `function_type` to `FunctionType.BM25` and `FunctionType.TEXTEMBEDDING`.
 
     </div>
 
@@ -106,11 +104,9 @@ Function(
 
             The number of dimensions for the output embeddings. For OpenAI's third-generation models, you can shorten the full vector to reduce cost and latency without a significant loss of semantic information. For more information, refer to [OpenAI announcement blog post](https://openai.com/blog/new-embedding-models-and-api-updates).
 
-            <div class="admonition note">
-
-            <p><b>notes</b></p>
-
-            <p>If you shorten the vector dimension, ensure the <code>dim</code> value specified in the schema's <code>add_field</code> method for the vector field matches the final output dimension of your embedding function.</p>
+            <div class="alert note">
+            
+            If you shorten the vector dimension, ensure the `dim` value specified in the schema's `add_field` method for the vector field matches the final output dimension of your embedding function.
 
             </div>
 

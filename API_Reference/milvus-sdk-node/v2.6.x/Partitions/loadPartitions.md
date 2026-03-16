@@ -3,13 +3,13 @@
 This operation loads a specific set of partitions in a specified collection into memory.
 
 ```javascript
-loadPartitions(data): Promise<ResStatus>
+await milvusClient.loadPartitions(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.loadPartitions({
+await milvusClient.loadPartitions({
     db_name: string,
     collection_name: string,
     partition_names: string[],
@@ -27,13 +27,13 @@ milvusClient.loadPartitions({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **partition_names** (string&#91;&#93;) -
+- **partition_names** (string[]) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     A list of the names of the partitions to load.
 
@@ -41,7 +41,7 @@ milvusClient.loadPartitions({
 
     The number of replicas of the partition.
 
-- **resource_groups** (*string&#91;&#93;*) -
+- **resource_groups** (*string[]*) -
 
     A list of the resource groups in the partition.
 
@@ -49,7 +49,7 @@ milvusClient.loadPartitions({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -77,8 +77,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-new milvusClient(MILUVS_ADDRESS).loadPartitions({
+```javascript
+new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+}).loadPartitions({
     collection_name: 'my_collection',
     partition_names: ['my_partition'],
  });

@@ -3,13 +3,13 @@
 This operation lists all custom roles.
 
 ```javascript
-listRoles(data): Promise<SelectRoleResponse>
+await milvusClient.listRoles(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.listRoles(
+await milvusClient.listRoles(
     includeUserInfo?: boolean,
     timeout?: number
 )
@@ -27,7 +27,7 @@ milvusClient.listRoles(
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**Returns** *Promise\&lt;SelectRoleResponse&gt;*
+**Returns** *Promise\<SelectRoleResponse>*
 
 This method returns a promise that resolves to a **SelectRoleResponse** object.
 
@@ -42,9 +42,9 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 - **results** 
 
-    - **RoleResult** *(RoleResult&#91;&#93;) -*
+    - **RoleResult** *(RoleResult[]) -*
 
-        - **entities** (*GrantEntity&#91;&#93;*) -
+        - **entities** (*GrantEntity[]*) -
 
             - **db_name** (*string*) -
 
@@ -82,7 +82,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
                 The name of the current role.
 
-        - **users** (*User&#91;&#93;*) -
+        - **users** (*User[]*) -
 
             - **name** (*string*) -
 
@@ -106,7 +106,7 @@ This method returns a promise that resolves to a **SelectRoleResponse** object.
 
 ## Example
 
-```java
+```javascript
 
 ```
 

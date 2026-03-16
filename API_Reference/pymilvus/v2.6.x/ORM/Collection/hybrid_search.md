@@ -81,18 +81,6 @@ hybrid_search(
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
 
-- **group_by_field** (*str*)
-
-    Groups search results by a specified field to ensure diversity and avoid returning multiple results from the same group. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
-
-- **group_size** (*int*)
-
-    The target number of entities to return within each group in a grouping search. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
-
-- **strict_group_size** (*bool*)
-
-    Controls whether **group_size** should be strictly enforced. For details, refer to [Grouping Search](https://milvus.io/docs/grouping-search.md#Grouping-Search).
-
 **RETURN TYPE:**
 
 *SearchResult*
@@ -103,16 +91,15 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
 - Response structure
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>A <strong>SearchResult</strong> object contains a list of <strong>Hits</strong> objects, each corresponding to a query vector in the search request. </p>
-    <p>A <strong>Hits</strong> object contains a list of <strong>Hit</strong> objects, each corresponding to an entity hit by the search.</p>
+    <div class="alert note">
+    
+    A **SearchResult** object contains a list of **Hits** objects, each corresponding to a query vector in the search request. 
+    
+    A **Hits** object contains a list of **Hit** objects, each corresponding to an entity hit by the search.
 
     </div>
 
-    ```plaintext
+    ```python
     ├── SearchResult
     │   └── Hits  
     │       ├── ids

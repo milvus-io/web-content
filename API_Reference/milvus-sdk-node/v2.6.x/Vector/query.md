@@ -3,7 +3,7 @@
 This operation conducts a scalar filtering with a specified boolean expression.
 
 ```javascript
-query(data): Promise<ResStatus>
+await milvusClient.query(data)
 ```
 
 ## Request Syntax
@@ -31,21 +31,21 @@ query(data): Promise<ResStatus>
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
-- **partition_names** (*string&#91;&#93;*) -
+- **partition_names** (*string[]*) -
 
     The name of the partitions to query.
 
-- **output_fields** (*string&#91;&#93;*) -
+- **output_fields** (*string[]*) -
 
     A list of field names to include in each entity in return.
 
     The value defaults to **None**. If left unspecified, all fields are selected as the output fields.
 
-- **ids** (*string&#91;&#93;* | *number&#91;&#93;*) - 
+- **ids** (*string[]* | *number[]*) - 
 
     The IDs of the entities to query.
 
@@ -77,13 +77,13 @@ query(data): Promise<ResStatus>
 
     The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
 
-    <div class="admonition note">
-
-    <p><b>what is the consistency level?</b></p>
-
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    <div class="alert note">
+    
+    Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.
+    
+    Milvus supports four consistency levels: **Strong**, **Bounded Staleness**, **Session**, and **Eventually**. The default consistency level in Milvus is **Bounded Staleness**.
+    
+    You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.
 
     </div>
 
@@ -91,7 +91,7 @@ query(data): Promise<ResStatus>
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;QueryResults&gt;*
+**RETURNS** *Promise\<QueryResults>*
 
 This method returns a promise that resolves to a **QueryResults** object.
 
@@ -126,8 +126,11 @@ This method returns a promise that resolves to a **QueryResults** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const queryResults = await milvusClient.query({
    collection_name: 'my_collection',
    filter: "age in [1,2,3,4,5,6,7,8]",

@@ -3,7 +3,7 @@
 This operation compacts and merges small segments into a larger one to save memory usage and improve search performance.
 
 ```javascript
-compact(data): Promise<CompactionResponse>
+await milvusClient.compact(data)
 ```
 
 ## Request Syntax
@@ -16,7 +16,7 @@ milvusClient.compact()
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target collection to reassign an alias to.
 
@@ -26,7 +26,7 @@ milvusClient.compact()
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;CompactionResponse&gt;*
+**RETURNS** *Promise\<CompactionResponse>*
 
 This method returns a promise that resolves to a *CompactionResponse* object.
 
@@ -63,8 +63,11 @@ This method returns a promise that resolves to a *CompactionResponse* object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.compact({
       collection_name: 'my_collection',
  });

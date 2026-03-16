@@ -1,143 +1,100 @@
 # queryIterator()
 
-This operation conducts a scalar filtering with a specified boolean expression.
+This operation conducts a scalar filtering query iteratively and returns results in batches. Use this instead of a single `query()` call when you need to process large result sets incrementally or when the total result count exceeds what a single query can return.
 
 ```javascript
-queryIterator(data): Promise<any>
+await milvusClient.queryIterator(data: QueryIteratorReq)
 ```
 
 ## Request Syntax
 
 ```javascript
- milvusClient.query({
-   db_name: string,
-   collection_name: string,
-   consistency_level?: ConsistencyLevelEnum,
-   filter: string,
-   ids?: string[] | number[],
-   limit?: number,
-   offset?: number,
-   output_fields?: string[],
-   partition_names?: string[],
-   timeout?: number
- })
+await milvusClient.queryIterator({
+    collection_name: string,
+    batchSize: number,
+    filter?: string,
+    limit?: number,
+    output_fields?: string[],
+    partition_names?: string[],
+    consistency_level?: ConsistencyLevelEnum,
+    db_name?: string,
+    timeout?: number,
+})
 ```
 
 **PARAMETERS:**
 
-- **db_name** (*string*) -
-
-    The name of the database that holds the target collection.
-
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
 - **batchSize** (*number*) -
 
-    The number of entities to return per iteration.
+    **[REQUIRED]**
+
+    The number of entities to return per iteration. Cannot exceed 16,384.
 
 - **filter** (*string*) -
 
-    A scalar filtering condition to filter matching entities. 
-
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
-
-- **output_fields** (*string&#91;&#93;*) -
-
-    A list of field names to include in each entity in return.
-
-    The value defaults to **None**. If left unspecified, all fields are selected as the output fields.
-
-- **timeout** (*number*) -
-
-    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
-
-- **consistency_level** (*ConsistencyLevelEnum*) -
-
-    The consistency level of the target collection.
-
-    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
-
-    <div class="admonition note">
-
-    <p><b>what is the consistency level?</b></p>
-
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
-
-    </div>
-
-- **offset** (*number*) -
-
-    The number of records to skip in the query result. 
-
-    You can use this parameter in combination with `limit` to enable pagination.
-
-    The sum of this value and `limit` should be less than 16,384. 
+    A scalar filtering condition to filter matching entities. Set to an empty string to return all entities. To build a scalar filtering condition, refer to Boolean Expression Rules.
 
 - **limit** (*number*) -
 
-    The number of records to return in the query result.
+    The maximum total number of entities to return across all iterations. Defaults to the total count of matching entities (no limit).
 
-    You can use this parameter in combination with `offset` to enable pagination.
+- **output_fields** (*string[]*) -
 
-    The sum of this value and `offset` should be less than 16,384. 
+    A list of field names to include in each returned entity. All fields are returned by default.
 
-- **partition_names** (*string&#91;&#93;*) -
+- **partition_names** (*string[]*) -
 
-    The name of the partitions to query.
+    The names of the partitions to query.
 
-**RETURNS** *Promise\&lt;any&gt;*
+- **consistency_level** (*ConsistencyLevelEnum*) -
 
-This method returns a promise that resolves to an asynchronous iterator that yields batches of query results.
+    The consistency level for this operation. Options: Strong (0), Bounded (1), Session (2), Eventually (3). Defaults to the consistency level set when the collection was created.
 
-```javascript
-{
-    data: {
-        [x: string]: any
-    },
-    status: object
-}
-```
+- **db_name** (*string*) -
 
-**PARAMETERS:**
+    The name of the database containing the collection.
 
-- **data** (*object*) -
+- **timeout** (*number*) -
 
-    The query results.
+    The timeout duration for this operation in milliseconds.
 
-- **status** (*object*) -
+**RETURNS:**
 
-    - **code** (*number*) -
+*Promise\<AsyncIterable\<object[]\>\>*
 
-        A code that indicates the operation result. It remains **0** if this operation succeeds.
+Returns an async iterable. Each iteration yields an array of entities for that batch. Iteration ends when the total result count reaches `limit` or all matching entities are exhausted.
 
-    - **error_code** (*string* | *number*) -
+**EXCEPTIONS:**
 
-        An error code that indicates an occurred error. It remains **Success** if this operation succeeds. 
+- **MilvusError**
 
-    - **reason** (*string*) - 
-
-        The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
+    This exception will be raised when any error occurs during this operation.
 
 ## Example
 
-```java
-const queryData = {
-  collection_name: 'my_collection',
-  expr: 'age > 30',
-  limit: 100,
-  pageSize: 10
-};
+```javascript
+import { MilvusClient } from '@zilliz/milvus2-sdk-node';
 
-const iterator = await queryIterator(queryData);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
+
+const iterator = await milvusClient.queryIterator({
+    collection_name: 'my_collection',
+    filter: 'age > 30',
+    batchSize: 100,
+    limit: 500,
+    output_fields: ['id', 'age', 'text'],
+});
 
 for await (const batch of iterator) {
-  console.log(batch); // Process each batch of query results
+    console.log(`Batch of ${batch.length} entities:`, batch);
 }
 ```
-

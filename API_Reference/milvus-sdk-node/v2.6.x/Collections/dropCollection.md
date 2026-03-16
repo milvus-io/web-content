@@ -3,13 +3,13 @@
 This operation drops a collection.
 
 ```javascript
-dropCollection(data): Promise<ResStatus>
+await milvusClient.dropCollection(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.dropCollection({ 
+await milvusClient.dropCollection({ 
     db_name: string,
     collection_name: string,
     timeout?: number
@@ -24,7 +24,7 @@ milvusClient.dropCollection({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of an existing collection.
 
@@ -34,7 +34,7 @@ milvusClient.dropCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -62,8 +62,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
  const resStatus = await milvusClient.dropCollection({ collection_name: 'my_collection' });
 ```
 

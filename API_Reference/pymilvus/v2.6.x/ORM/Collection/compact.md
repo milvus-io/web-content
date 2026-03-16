@@ -54,9 +54,9 @@ collection.compact()
 
 The following operations are related to `compact()`:
 
-- [get_compaction_plans()](get_compaction_plans.md)
+- [get_compaction_plans()](https://zilliverse.feishu.cn/docx/D6Q7dq4USotLS3xxMP0cFiGLnsf)
 
-- [get_compaction_state()](get_compaction_state.md)
+- [get_compaction_state()](https://zilliverse.feishu.cn/docx/AXcMd0xiOovIX6xR4ZrcKA15nwh)
 
-- [wait_for_compaction_completed()](wait_for_compaction_completed.md)
+- [wait_for_compaction_completed()](https://zilliverse.feishu.cn/docx/VFKIdx0tDoeAzSx4Ud6c3u5Snsf)
 

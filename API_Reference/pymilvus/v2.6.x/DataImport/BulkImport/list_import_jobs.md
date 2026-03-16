@@ -113,7 +113,7 @@ print(json.dumps(resp.json(), indent=4, sort_keys=True))
 
 ## Related methods
 
-- [bulk_import()](bulk_import.md)
+- [bulk_import()](https://zilliverse.feishu.cn/docx/S9dyd4UwhoqOPux411KcbafDnde)
 
-- [get_import_progress()](get_import_progress.md)
+- [get_import_progress()](https://zilliverse.feishu.cn/docx/MkWNdU1tvoqlBRxI05Rcu09cnEc)
 

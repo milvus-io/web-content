@@ -87,11 +87,11 @@ client.update_password(
 
 ## Related methods
 
-- [create_user()](create_user.md)
+- [create_user()](https://zilliverse.feishu.cn/docx/BDupd28JqoNY9HxVOTfcv86enRe)
 
-- [describe_user()](describe_user.md)
+- [describe_user()](https://zilliverse.feishu.cn/docx/Wz3HdtvPCoEquvxFY7PcDHxcnEe)
 
-- [drop_user()](drop_user.md)
+- [drop_user()](https://zilliverse.feishu.cn/docx/WtyZdeFKMoSv5exaYRxcPLCSndg)
 
-- [list_users()](list_users.md)
+- [list_users()](https://zilliverse.feishu.cn/docx/EZ2YdBHoDoRTlxx91tscffm1nSb)
 

@@ -2,11 +2,9 @@
 
 This operation loads the data of the current partition into memory.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>Using the <strong>partition_names</strong> parameter in the <strong>load()</strong> method of a <strong>Collection</strong> object is equivalent to using the <strong>load()</strong> method of corresponding <strong>Partition</strong> objects.</p>
+Using the **partition_names** parameter in the **load()** method of a **Collection** object is equivalent to using the **load()** method of corresponding **Partition** objects.
 
 </div>
 
@@ -35,12 +33,11 @@ load(
 
     If left unspecified, the default resource group applies.
 
-    <div class="admonition note">
-
-    <p><b>what is a resource group?</b></p>
-
-    <p>A resource group can hold several or all of the query nodes in a Milvus instance.</p>
-    <p>Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.</p>
+    <div class="alert note">
+    
+    A resource group can hold several or all of the query nodes in a Milvus instance.
+    
+    Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.
 
     </div>
 
@@ -103,9 +100,9 @@ partition.load(
 
 The following operations are related to `load()`:
 
-- [drop()](drop.md)
+- [drop()](https://zilliverse.feishu.cn/docx/D3sndK8DgoqDkUxaNGcctwcSnuE)
 
-- [get_replicas()](get_replicas.md)
+- [get_replicas()](https://zilliverse.feishu.cn/docx/YKwldu59qosZBsxdRdSc0l9Hnoe)
 
-- [release()](release.md)
+- [release()](https://zilliverse.feishu.cn/docx/ZQ2RdE2AOoH9bfx4k3Sc3Ny0ngb)
 

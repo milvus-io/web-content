@@ -3,13 +3,13 @@
 This operation conducts a vector similarity search with an optional scalar filtering expression.
 
 ```javascript
-search(data): Promise<ResStatus>
+await milvusClient.search(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.search({
+await milvusClient.search({
   db_name?: string,
   collection_name: string,
   partition_names?: string[];
@@ -42,11 +42,11 @@ milvusClient.search({
 
 - **collection_name** (*string*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to search
 
-- **partition_names** (*string&#91;&#93;*) -
+- **partition_names** (*string[]*) -
 
     A list of the names of the partitions to search.
 
@@ -54,13 +54,13 @@ milvusClient.search({
 
     The name of the target vector field for this operation. It is mandatory if you are searching in a collection with multiple vector fields.
 
-- **data** (*number&#91;&#93;* | *number&#91;&#93;&#91;&#93;*) -
+- **data** (*number[]* | *number[][]*) -
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
 
-- **output_fields** (*string&#91;&#93;*) -
+- **output_fields** (*string[]*) -
 
     A list of field names to include in each entity in return.
 
@@ -157,7 +157,7 @@ milvusClient.search({
        </tr>
        <tr>
          <td><p><code>BINARY_VECTOR</code></p></td>
-         <td><p>8-32,768*8</p></td>
+         <td><p>8-32,768&ast;8</p></td>
          <td><p><code>HAMMING</code>, <code>JACCARD</code>, <code>MHJACCARD</code></p></td>
          <td><p><code>HAMMING</code></p></td>
        </tr>
@@ -225,7 +225,7 @@ milvusClient.search({
 
         - When using the RRFRanker strategy, you need to input the parameter value `k` into the RRFRanker. The default value of `k` is 60. This parameter helps to determine how the ranks are combined from different ANN searches, aiming to balance and blend the importance across all searches.
 
-        - When using the WeightedRanker strategy, you need to input weight values into the `WeightedRanker` function. The number of basic ANN searches in a Hybrid Search corresponds to the number of values that need to be inputted. The input values should be in the range &#91;0,1&#93;, with values closer to 1 indicating greater importance.
+        - When using the WeightedRanker strategy, you need to input weight values into the `WeightedRanker` function. The number of basic ANN searches in a Hybrid Search corresponds to the number of values that need to be inputted. The input values should be in the range [0,1], with values closer to 1 indicating greater importance.
 
     A **FunctionObject** has the following structure.
 
@@ -237,17 +237,17 @@ milvusClient.search({
 
         A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
-    - **type** (*[FunctionType](../Collections/FunctionType.md)*)
+    - **type** (*[FunctionType](https://zilliverse.feishu.cn/docx/L4H0dyzS1o6XlmxMQzDca6Pdnjd?from=from_copylink)*)
 
         The type of function for processing raw data. Possible values for this parameter is`FunctionType.RERANK`.
 
-    - **input_field_names** (*string&#91;&#93;*)
+    - **input_field_names** (*string[]*)
 
         Leave this parameter value as an empty array.
 
     A **FunctionScore** has the following structure.
 
-    - **functions** (*FunctionObject&#91;&#93;*) -
+    - **functions** (*FunctionObject[]*) -
 
         A list of **FunctionObject** objects.
 
@@ -283,7 +283,7 @@ milvusClient.search({
 
                 Indicates that the final score of a matching entity is equal to the sum of the weighted values from all Boost Rankers.
 
-**RETURNS** *Promise\&lt;SearchResults&gt;*
+**RETURNS** *Promise\<SearchResults>*
 
 This method returns a promise that resolves to a **SearchResults** object.
 
@@ -311,7 +311,7 @@ This method returns a promise that resolves to a **SearchResults** object.
 
         The reason that indicates the reason for the reported error. It remains an empty string if this operation succeeds.
 
-- **results** (*list&#91;object&#93;*) -
+- **results** (*list[object]*) -
 
     Each result object has the following keys:
 
@@ -325,14 +325,17 @@ This method returns a promise that resolves to a **SearchResults** object.
 
     - Plus output fields and their values.
 
-- **recalls** (*list&#91;number&#93;*) -
+- **recalls** (*list[number]*) -
 
     Each number indicates the recall rate of a search against a query vector.
 
 ## Example
 
-```plaintext
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const searchResults = await milvusClient.search({
    collection_name: 'my_collection',
    vector: [1, 2, 3, 4],

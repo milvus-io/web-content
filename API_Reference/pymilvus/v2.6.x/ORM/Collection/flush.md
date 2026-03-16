@@ -10,13 +10,13 @@ flush(
 )   
 ```
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>can i call `flush()` after every data insertion?</b></p>
+When new data is inserted, it is written into a growing segment. Once the size of a growing segment reaches its upper limit, Milvus automatically seals the segment. 
 
-<p>When new data is inserted, it is written into a growing segment. Once the size of a growing segment reaches its upper limit, Milvus automatically seals the segment. </p>
-<p>Continuously calling this operation results in many sealed segments of small sizes, which can gradually degrade search performance. </p>
-<p>It is recommended that you wait for Milvus to seal all segments before conducting any searches.</p>
+Continuously calling this operation results in many sealed segments of small sizes, which can gradually degrade search performance. 
+
+It is recommended that you wait for Milvus to seal all segments before conducting any searches.
 
 </div>
 
@@ -83,11 +83,11 @@ collection.num_entities # 5
 
 The following operations are related to `flush()`:
 
-- [describe()](describe.md)
+- [describe()](https://zilliverse.feishu.cn/docx/EZwsd887JojFjLxbMByckhW0nxg)
 
-- [drop()](drop.md)
+- [drop()](https://zilliverse.feishu.cn/docx/L8UTdDNkPoeew0x6LoDcfHx4nof)
 
-- [get_replicas()](get_replicas.md)
+- [get_replicas()](https://zilliverse.feishu.cn/docx/BQKPdDd5xo8OPgxoXorcMxk0nVb)
 
-- [set_properties()](set_properties.md)
+- [set_properties()](https://zilliverse.feishu.cn/docx/ECmAdaYKboPTNlxqkLxcUEZ4nrh)
 

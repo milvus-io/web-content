@@ -3,7 +3,7 @@
 This operation checks the health status of the Milvus server.
 
 ```javascript
-checkHealth(): Promise<CheckHealthResponse>
+await milvusClient.checkHealth()
 ```
 
 ## Request Syntax
@@ -14,7 +14,7 @@ milvusClient.checkHealth()
 
 **RETURN TYPE:**
 
-*Promise*&lt;*CheckHealthResponse*&gt;
+*Promise*<*CheckHealthResponse*>
 
 **RETURNS:**
 
@@ -33,7 +33,7 @@ A promise that resolves to a **CheckHealthResponse** object.
 
     Whether the currently connected Milvus server is healthy.
 
-- **reasons** (*&#91;&#93;*) - 
+- **reasons** (*[]*) - 
 
     The reasons for the currently connected Milvus server is unhealthy.
 

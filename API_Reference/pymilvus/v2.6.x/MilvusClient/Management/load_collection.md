@@ -28,12 +28,11 @@ load_collection(
 
     - For a Milvus Cluster deployment, the maximum value should be no greater than the `queryNode.replicas` in your Milvus configurations. For details on how to change Milvus configurations, refer to our configuration guides.
 
-    <div class="admonition note">
-
-    <p><b>what is a replica?</b></p>
-
-    <p>In-memory replicas are replications of the same segment on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment.</p>
-    <p>For details, refer to <a href="https://milvus.io/docs/replica.md#In-Memory-Replica">In-Memory Replica</a>.</p>
+    <div class="alert note">
+    
+    In-memory replicas are replications of the same segment on multiple query nodes. If one query node has failed or is busy with a current search request when another arrives, the system can send new requests to an idle query node that has a replication of the same segment.
+    
+    For details, refer to [In-Memory Replica](https://milvus.io/docs/replica.md#In-Memory-Replica).
 
     </div>
 
@@ -169,9 +168,9 @@ client.load_collection(
 
 ## Related methods
 
-- [get_load_state()](get_load_state.md)
+- [get_load_state()](https://zilliverse.feishu.cn/docx/KEPYdKup1o3nHdxKbjvcQUzwnnd)
 
-- [refresh_load()](refresh_load.md)
+- [refresh_load()](https://zilliverse.feishu.cn/docx/X3NXdtC2koiAxyxhcUBcv38Wnsh)
 
-- [release_collection()](release_collection.md)
+- [release_collection()](https://zilliverse.feishu.cn/docx/PRR7dRfi8o1s61xFRovccAdRnHe)
 

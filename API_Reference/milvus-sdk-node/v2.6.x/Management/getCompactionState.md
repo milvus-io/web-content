@@ -3,13 +3,13 @@
 This operation lists the statistics collected on a specific collection.
 
 ```javascript
-getCompactionState(data): Promise<GetCompactionStateResponse>
+await milvusClient.getCompactionState(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.getCompactionState({ 
+await milvusClient.getCompactionState({ 
     compactionID: string | number,
     timeout?: number 
 })
@@ -19,9 +19,9 @@ milvusClient.getCompactionState({
 
 - **compactionID** (*string | number*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
-    The ID of a compaction job that is returned by a call to [`compact()`](compact.md).
+    The ID of a compaction job that is returned by a call to [`compact()`](https://zilliverse.feishu.cn/docx/DCK5d56UZop0kGxpQu8cLqlvndg).
 
 - **timeout** (*number*) -
 
@@ -29,7 +29,7 @@ milvusClient.getCompactionState({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;GetCompactionStateResponse&gt;*
+**RETURNS** *Promise\<GetCompactionStateResponse>*
 
 This method returns a promise that resolves to a **GetCompactionStateResponse** object.
 
@@ -84,7 +84,10 @@ This method returns a promise that resolves to a **GetCompactionStateResponse** 
 ## Example
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.getCompactionState({
     compactionID: 'your_compaction_id',
 });

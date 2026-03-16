@@ -134,16 +134,15 @@ A **SearchResult** object that contains a list of **Hits** objects.
 
 - Response structure
 
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>A <strong>SearchResult</strong> object contains a list of <strong>Hits</strong> objects, each corresponding to a query vector in the search request. </p>
-    <p>A <strong>Hits</strong> object contains a list of <strong>Hit</strong> objects, each corresponding to an entity hit by the search.</p>
+    <div class="alert note">
+    
+    A **SearchResult** object contains a list of **Hits** objects, each corresponding to a query vector in the search request. 
+    
+    A **Hits** object contains a list of **Hit** objects, each corresponding to an entity hit by the search.
 
     </div>
 
-    ```plaintext
+    ```python
     ├── SearchResult
     │   └── Hits  
     │       ├── ids
@@ -278,15 +277,15 @@ for hits in res:
 
 ## Related operations
 
-- [delete()](delete.md)
+- [delete()](https://zilliverse.feishu.cn/docx/TJMVdi4U2oBFnAxO95jctzVAnzg)
 
-- [insert()](insert.md)
+- [insert()](https://zilliverse.feishu.cn/docx/CbCodEGY9o6pKuxowNdctUppn7d)
 
-- [search_iterator()](search_iterator.md)
+- [search_iterator()](https://zilliverse.feishu.cn/docx/HrnndnWtKoPuenxvsXBchF1wnnh)
 
-- [query()](query.md)
+- [query()](https://zilliverse.feishu.cn/docx/JzcYdBQ5zoU4KpxPqUHcPLQonKd)
 
-- [query_iterator()](query_iterator.md)
+- [query_iterator()](https://zilliverse.feishu.cn/docx/LffbdiHhzoHe08xivF9ccmoen5d)
 
-- [upsert()](upsert.md)
+- [upsert()](https://zilliverse.feishu.cn/docx/AQ1ydMXbOog5VJxITgUc4GFvnVe)
 

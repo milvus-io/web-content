@@ -1,6 +1,6 @@
 # \_\_call\_\_()
 
-This operation in [CohereRerankFunction](CohereRerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
+This operation in [CohereRerankFunction](https://zilliverse.feishu.cn/docx/GAWOdft83oZPvHxtxzZcjrQunGg) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
 ## Request syntax
 
@@ -38,7 +38,7 @@ cohere_rf(
 
 A list of `RerankResult` objects.
 
-```plaintext
+```python
 ├── RerankResult
 |    └── text
 |    └── score

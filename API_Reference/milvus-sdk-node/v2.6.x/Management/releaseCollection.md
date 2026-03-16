@@ -3,13 +3,13 @@
 This operation releases the data of a specific collection from memory.
 
 ```javascript
-releaseCollection(data): Promise<ResStatus>
+await milvusClient.releaseCollection(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.releaseCollection({ 
+await milvusClient.releaseCollection({ 
     db_name: string,
     collection_name: 'my_collection',
     timeout?: number 
@@ -24,7 +24,7 @@ milvusClient.releaseCollection({
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of a collection.
 
@@ -34,7 +34,7 @@ milvusClient.releaseCollection({
 
     Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
-**RETURNS** *Promise\&lt;ResStatus&gt;*
+**RETURNS** *Promise\<ResStatus>*
 
 This method returns a promise that resolves to a **ResStatus** object.
 
@@ -62,8 +62,11 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 ## Example
 
-```java
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+```javascript
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const resStatus = await milvusClient.releaseCollection({ collection_name: 'my_collection' });
 ```
 

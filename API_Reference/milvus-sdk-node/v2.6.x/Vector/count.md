@@ -3,13 +3,13 @@
 This operation counts the number of entities that match the specified filtering expression.
 
 ```javascript
-count(data): Promise<CountResult>
+await milvusClient.count(data)
 ```
 
 ## Request Syntax
 
 ```javascript
-milvusClient.count({
+await milvusClient.count({
     db_name?: string,
     collection_name: string,
     expr?: string,
@@ -25,7 +25,7 @@ milvusClient.count({
 
 - **collection_name** (*str*) -
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the collection to create an alias for.
 
@@ -39,7 +39,7 @@ milvusClient.count({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-**RETURNS** *Promise*&lt;*CountResult*&gt;
+**RETURNS** *Promise*<*CountResult*>
 
 This method returns a promise that resolves to a **CountResult** object.
 
@@ -77,7 +77,10 @@ This method returns a promise that resolves to a **CountResult** object.
 ## Examples
 
 ```javascript
-const milvusClient = new milvusClient(MILUVS_ADDRESS);
+const milvusClient = new MilvusClient({
+    address: 'localhost:19530',
+    token: 'root:Milvus',
+});
 const num_entities = await milvusClient.count({
    collection_name: 'my_collection',
    expr: "age in [1,2,3,4,5,6,7,8]",

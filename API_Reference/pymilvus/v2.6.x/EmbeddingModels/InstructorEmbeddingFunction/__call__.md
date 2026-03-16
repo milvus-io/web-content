@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [InstructorEmbeddingFunction](InstructorEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [InstructorEmbeddingFunction](https://zilliverse.feishu.cn/docx/YmnmdEeHFoctZexccqNcr8xXn8c?from=from_copylink) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of InstructorEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
+The **\_\_call\_\_()** method of InstructorEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/Mp7CdNfJnoBF2DxscRNc6RO0n7d) and [encode_queries()](https://zilliverse.feishu.cn/docx/LrvhdFR5Vo1ZnExohgicdi58njc).
 
 ## Request syntax
 

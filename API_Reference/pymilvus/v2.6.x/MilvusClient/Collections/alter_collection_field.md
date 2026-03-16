@@ -39,14 +39,6 @@ alter_collection_field(
 
     Setting this to None indicates that this operation timeouts when any response arrives or any error occurs.
 
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>You must alter field settings before loading the collection. Altering a field on a loaded collection returns an error. To change settings on a loaded collection, release the collection first, alter the field, then reload.</p>
-
-</div>
-
 **RETURN TYPE:**
 
 *NoneType*

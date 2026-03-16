@@ -80,7 +80,7 @@ transfer_to {
 
 - **config** (*ResourceGroupConfig*) -
 
-    The configurations of the specified resource group in a [ResourceGroupConfig](ResourceGroupConfig.md) instance.
+    The configurations of the specified resource group in a [ResourceGroupConfig](https://zilliverse.feishu.cn/docx/LrfjdgJXkoe90gxNR1YcrsJMnYg) instance.
 
 **EXCEPTIONS:**
 
