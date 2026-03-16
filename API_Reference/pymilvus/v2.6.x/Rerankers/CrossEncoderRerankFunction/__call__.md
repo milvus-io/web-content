@@ -1,6 +1,6 @@
 # \_\_call\_\_()
 
-This operation in [CrossEncoderRerankFunction](https://zilliverse.feishu.cn/docx/HVGNdMYOvojQoXxvDmEcnHYanMh) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
+This operation in [CrossEncoderRerankFunction](CrossEncoderRerankFunction.md) takes in a query and document strings and returns a list of `RerankResult` objects with the top k documents ranked by score.
 
 ## Request syntax
 

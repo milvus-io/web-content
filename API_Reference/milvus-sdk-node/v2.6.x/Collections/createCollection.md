@@ -207,7 +207,7 @@ await milvusClient.createCollection({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see [DataType](https://zilliverse.feishu.cn/docx/AtLEdt0ZWoUbHoxkfvHcq1ZunUg).
+        The data type of the field. For an enumeration of all available data types, please see [DataType](DataType.md).
 
     - **description** (*string)* -
 
@@ -351,7 +351,7 @@ await milvusClient.createCollection({
 
         A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
-    - **type** (*[FunctionType](https://zilliverse.feishu.cn/docx/Vq2VdsWJaoufsGx5stJcTuyPnDb)*)
+    - **type** (*[FunctionType](FunctionType.md)*)
 
         The type of function for processing raw data. Possible values:
 
@@ -545,7 +545,7 @@ await milvusClient.createCollection({
 
     - **data_type** (*string)* -
 
-        The data type of the field. For an enumeration of all available data types, please see [DataType](https://zilliverse.feishu.cn/docx/AtLEdt0ZWoUbHoxkfvHcq1ZunUg).
+        The data type of the field. For an enumeration of all available data types, please see [DataType](DataType.md).
 
     - **description** (*string)* -
 
@@ -687,7 +687,7 @@ await milvusClient.createCollection({
 
         A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
-    - **type** (*[FunctionType](https://zilliverse.feishu.cn/docx/Vq2VdsWJaoufsGx5stJcTuyPnDb)*)
+    - **type** (*[FunctionType](FunctionType.md)*)
 
         The type of function for processing raw data. Possible values:
 

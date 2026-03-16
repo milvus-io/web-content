@@ -33,7 +33,7 @@ listIndexes(ListIndexesReq.builder()
 
 **RETURNS:**
 
-*List&lt;String&gt;*
+*List<String>*
 
 **EXCEPTIONS:**
 

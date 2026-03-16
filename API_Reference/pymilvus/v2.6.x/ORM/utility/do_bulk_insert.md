@@ -115,9 +115,9 @@ utility.do_bulk_insert(
 
 The following operations are related to `do_bulk_insert()`:
 
-- [BulkInsertState](https://zilliverse.feishu.cn/docx/Arn1dIKgwoISFoxT7xVc3UrBnAf)
+- [BulkInsertState](BulkInsertState.md)
 
-- [get_bulk_insert_state()](https://zilliverse.feishu.cn/docx/XzHhd3AdCo9DCsxawYycr69CnAb)
+- [get_bulk_insert_state()](get_bulk_insert_state.md)
 
-- [list_bulk_insert_tasks()](https://zilliverse.feishu.cn/docx/T1CGdXeVkoG2yAxkualc1jVonRb)
+- [list_bulk_insert_tasks()](list_bulk_insert_tasks.md)
 

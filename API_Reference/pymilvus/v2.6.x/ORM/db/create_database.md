@@ -57,9 +57,9 @@ db.create_database(db_name="test")
 
 The following operations are related to `create_database()`:
 
-- [drop_database()](https://zilliverse.feishu.cn/docx/Y7pOdKR4MoqmvVxcS1TcjqUynMc)
+- [drop_database()](drop_database.md)
 
-- [list_database()](https://zilliverse.feishu.cn/docx/PV1PdliWZooAB8xAE5scZO2Nn6K)
+- [list_database()](list_database.md)
 
-- [using_database()](https://zilliverse.feishu.cn/docx/GXXTd7JIgoUKhzxiI6ncWtwjnVc)
+- [using_database()](using_database.md)
 

@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [MistralAIEmbeddingFunction](https://zilliverse.feishu.cn/docx/CvxodXz8OoWXrlxD7OVcqqJLn8e?from=from_copylink) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [MistralAIEmbeddingFunction](MistralAIEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of MistralAIEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/SeFLdfKVjoGX8Xx11e3cmkY4n7g?from=from_copylink) and [encode_queries()](https://zilliverse.feishu.cn/docx/SptWdOyFqoGM5VxVS16cofqfnDg?from=from_copylink).
+The **\_\_call\_\_()** method of MistralAIEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 

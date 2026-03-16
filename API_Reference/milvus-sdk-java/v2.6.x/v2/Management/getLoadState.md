@@ -39,11 +39,9 @@ getLoadState(GetLoadStateReq.builder()
 
 A Boolean value that indicates the status of the specified collection or partition. 
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>A collection is in the loaded state if any or all of its partitions are loaded.</p>
+A collection is in the loaded state if any or all of its partitions are loaded.
 
 </div>
 

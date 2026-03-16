@@ -1,8 +1,8 @@
 # \_\_call()\_\_
 
-This operation in [CohereEmbeddingFunction](https://zilliverse.feishu.cn/docx/JzDLdkv3QoCY8OxKpBjc5zsmnId) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [CohereEmbeddingFunction](CohereEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of CohereEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/FIyedc51So0onWxtPAjcHFkmnHe) and [encode_queries()](https://zilliverse.feishu.cn/docx/BqtYdPHHPoNhyKxhSnEcVOKenFb).
+The **\_\_call\_\_()** method of CohereEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 

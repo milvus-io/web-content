@@ -122,13 +122,13 @@ res = partition.delete("id in [ 0, 1 ]")
 
 The following operations are related to `delete()`:
 
-- [flush()](https://zilliverse.feishu.cn/docx/VRGwdg75Ao7ZXQx7uANc9wzXnVb)
+- [flush()](flush.md)
 
-- [insert()](https://zilliverse.feishu.cn/docx/QXDxdv36FoVgjcxDV1gcDwWXnsd)
+- [insert()](insert.md)
 
-- [query()](https://zilliverse.feishu.cn/docx/N97pdfkjlo9j61xrtL2cbB79nKe)
+- [query()](query.md)
 
-- [search()](https://zilliverse.feishu.cn/docx/XW72dhBuNoqNWhxUQLtcfa6Fnwd)
+- [search()](search.md)
 
-- [upsert()](https://zilliverse.feishu.cn/docx/MQMzddDnao5Zz0xmSRncZM2nn5b)
+- [upsert()](upsert.md)
 

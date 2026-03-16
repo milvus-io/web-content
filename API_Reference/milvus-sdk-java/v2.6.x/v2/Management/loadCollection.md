@@ -6,14 +6,6 @@ This operation loads the data of a specific collection into memory.
 public void loadCollection(LoadCollectionReq request)
 ```
 
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>This operation is required only if the target collection is not loaded. A collection is in the <strong>NotLoad</strong> state only if you have released it or created it without any index parameters.</p>
-
-</div>
-
 ## Request Syntax
 
 ```java
@@ -22,60 +14,57 @@ loadCollection(LoadCollectionReq.builder()
     .collectionName(String collectionName)
     .numReplicas(Integer numReplicas)
     .async(Boolean async)
+    .sync(Boolean sync)
     .timeout(Long timeout)
     .refresh(Boolean refresh)
     .loadFields(List<String> loadFields)
     .skipLoadDynamicField(Boolean skipLoadDynamicField)
     .resourceGroups(List<String> resourceGroups)
     .build()
-)
+);
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)`
+- `databaseName(String databaseName)` -
 
-    The name of the database.
+    The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)`
+- `collectionName(String collectionName)` -
 
-    The name of a collection.
+    The name of the target collection.
 
-- `numReplicas(Integer numReplicas)`
+- `numReplicas(Integer numReplicas)` -
 
-    The number of replicas to create upon collection load.
+    The number of replicas to load. Defaults to `1`.
 
-    The value defaults to **1**, indicating that one replica is to be created upon collection load.
+- `async(Boolean async)` -
 
-- `async(Boolean async)`
+    Whether to run the operation asynchronously. Defaults to `Boolean.FALSE`.
 
-    Whether this operation is asynchronous.
+- `sync(Boolean sync)` -
 
-    The value defaults to `Boolean.True`, indicating immediate return while the process may still run in the background.
+    Whether to wait synchronously until the operation completes. Defaults to `Boolean.TRUE`.
 
-- `timeout(Long timeout)`
+- `timeout(Long timeout)` -
 
-    The timeout duration of the process. The process terminates after the specified duration expires.
+    The timeout duration in milliseconds. Defaults to `60000L`.
 
-    The value defaults to `60000L`, indicating the timeout duration is one minute.
+- `refresh(Boolean refresh)` -
 
-- `refresh(Boolean refresh)`
+    Whether to refresh load to include new fields. Defaults to `Boolean.FALSE`.
 
-    Whether to refresh after load.
+- `loadFields(List<String> loadFields)` -
 
-- `loadFields(List<String> loadFields)`
+    A list of specific field names to load. Defaults to `new ArrayList<>()`.
 
-    The names of the fields to load.
+- `skipLoadDynamicField(Boolean skipLoadDynamicField)` -
 
-    If this parameter is left unspecified, Milvus loads all vector field indexes plus all scalar field data into memory. Setting this parameter makes Milvus load the data of the specified fields into memory, reducing memory usage and improving search performance.
+    Whether to skip loading the dynamic field. Defaults to `Boolean.FALSE`.
 
-- `skipLoadDynamicField(Boolean skipLoadDynamicField)`
+- `resourceGroups(List<String> resourceGroups)` -
 
-    Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
-
-- `resourceGroups(List<String> resourceGroups)`
-
-    The target resource groups of this operation.
+    A list of resource group names for load balancing. Defaults to `new ArrayList<>()`.
 
 **RETURNS:**
 
@@ -83,7 +72,7 @@ loadCollection(LoadCollectionReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -108,4 +97,3 @@ LoadCollectionReq loadCollectionReq = LoadCollectionReq.builder()
         .build();
 client.loadCollection(loadCollectionReq);
 ```
-

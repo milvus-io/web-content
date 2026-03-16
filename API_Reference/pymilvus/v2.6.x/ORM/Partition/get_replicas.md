@@ -82,9 +82,9 @@ partition.get_replicas()
 
 The following operations are related to `get_replicas()`:
 
-- [drop()](https://zilliverse.feishu.cn/docx/D3sndK8DgoqDkUxaNGcctwcSnuE)
+- [drop()](drop.md)
 
-- [load()](https://zilliverse.feishu.cn/docx/TWxddf6iboyM15xK4Kzc8ASknRb)
+- [load()](load.md)
 
-- [release()](https://zilliverse.feishu.cn/docx/ZQ2RdE2AOoH9bfx4k3Sc3Ny0ngb)
+- [release()](release.md)
 

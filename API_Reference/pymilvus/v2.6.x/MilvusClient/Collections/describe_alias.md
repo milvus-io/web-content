@@ -96,11 +96,11 @@ client.describe_alias(alias="test")
 
 ## Related methods
 
-- [alter_alias()](https://zilliverse.feishu.cn/docx/CBc3d1mrdoYqmDxe4Kcc9zxAnzh)
+- [alter_alias()](alter_alias.md)
 
-- [create_alias()](https://zilliverse.feishu.cn/docx/Kqlodu0AWoefKvxczcxc1c36nlf)
+- [create_alias()](create_alias.md)
 
-- [drop_alias()](https://zilliverse.feishu.cn/docx/FpWXdmIuforYz9xUCsqclyCXnLe)
+- [drop_alias()](drop_alias.md)
 
-- [list_aliases()](https://zilliverse.feishu.cn/docx/Cpynd2OFJoIXhLx3dQNct7Wgn6f)
+- [list_aliases()](list_aliases.md)
 

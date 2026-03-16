@@ -21,7 +21,7 @@ bulkImport.listImportJobs(
 
     The endpoint of the connected Milvus instance.
 
-- **request** (*[BaseListImportRequest](listImportJobs.md#BaseListImportRequest)*) -  
+- **request** (*[BaseListImportRequest](listImportJobs.md)*) -  
 
     A **BaseImportRequest** instance.
 

@@ -99,9 +99,9 @@ client.get_load_state(
 
 ## Related methods
 
-- [load_collection()](https://zilliverse.feishu.cn/docx/FLmWdFP9Zo3JcixOEgucU8JMnLc)
+- load_collection()
 
-- [refresh_load()](https://zilliverse.feishu.cn/docx/X3NXdtC2koiAxyxhcUBcv38Wnsh)
+- [refresh_load()](refresh_load.md)
 
-- [release_collection()](https://zilliverse.feishu.cn/docx/PRR7dRfi8o1s61xFRovccAdRnHe)
+- [release_collection()](release_collection.md)
 

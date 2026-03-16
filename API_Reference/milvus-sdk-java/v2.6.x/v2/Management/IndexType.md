@@ -4,111 +4,118 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- FLAT(1)
+### FLAT
 
-    Sets the index type to **FLAT**.
+Sets the index type to FLAT.
 
-- IVF_FLAT(2)
+### IVF_FLAT
 
-    Sets the index type to **IVF_FLAT**.
+Sets the index type to IVF_FLAT.
 
-- IVF_SQ8(3)
+### IVF_SQ8
 
-    Sets the index type to **IVF_SQ8**.
+Sets the index type to IVF_SQ8.
 
-- IVF_PQ(4)
+### IVF_PQ
 
-    Sets the index type to **IVF_PQ**.
+Sets the index type to IVF_PQ.
 
-- HNSW(5)
+### HNSW
 
-    Sets the index type to **HNSW**.
+Sets the index type to HNSW.
 
-- HNSW_SQ(6)
+### HNSW_SQ
 
-    Sets the index type to **HNSW**.
+Sets the index type to HNSW.
 
-- HNSW_PQ
+### HNSW_PQ
 
-    Sets the index type to **HNSW_PQ**.
+Sets the index type to HNSW_PQ.
 
-- HNSW_PRQ
+### HNSW_PRQ
 
-    Sets the index type to **HNSW_PRQ**.
+Sets the index type to HNSW_PRQ.
 
-- DISKANN(10)
+### DISKANN
 
-    Sets the index type to **DISKANN**.
+Sets the index type to DISKANN.
 
-- AUTOINDEX(11)
+### AUTOINDEX
 
-    Sets the index type to **AUTOINDEX**.
+Sets the index type to AUTOINDEX.
 
-- SCANN(12)
+### SCANN
 
-    Sets the index type to **SCANN**.
+Sets the index type to SCANN.
 
-- GPU_IVF_FLAT(50)
+### IVF_RABITQ
 
-    Sets the index type to **GPU_IVF_FLAT**. This applies to GPU indexes only.
+Sets the index type to IVF_RABITQ. This applies to dense float vectors.
 
-- GPU_IVF_PQ(51)
+### AISAQ
 
-    Sets the index type to **GPU_IVF_PQ**. This applies to GPU indexes only.
+Sets the index type to AISAQ. This applies to dense float vectors on GPU.
 
-- GPU_BRUTE_FORCE(52)
+### GPU_IVF_FLAT
 
-    Sets the index type to **GPU_BRUTE_FORCE**. This applies to GPU indexes only.
+Sets the index type to GPU_IVF_FLAT. This applies to GPU indexes only.
 
-- GPU_CAGRA(53)
+### GPU_IVF_PQ
 
-    Sets the index type to **GPU_CAGRA**. This applies to GPU indexes only.
+Sets the index type to GPU_IVF_PQ. This applies to GPU indexes only.
 
-- BIN_FLAT(80)
+### GPU_BRUTE_FORCE
 
-    Sets the index type to **BIN_FLAT**. This applies to binary vectors only.
+Sets the index type to GPU_BRUTE_FORCE. This applies to GPU indexes only.
 
-- BIN_IVF_FLAT(81)
+### GPU_CAGRA
 
-    Sets the index type to **BIN_IVF_FLAT**. This applies to binary vectors only.
+Sets the index type to GPU_CAGRA. This applies to GPU indexes only.
 
-- MINHASH_LSH(82)
+### BIN_FLAT
 
-    Sets the index type to **MINHASH_LSH**. This applies to binary vectors only.
+Sets the index type to BIN_FLAT. This applies to binary vectors only.
 
-- TRIE("Trie", 100)
+### BIN_IVF_FLAT
 
-    Sets the index type to **TRIE**. This applies to VarChar fields only.
+Sets the index type to BIN_IVF_FLAT. This applies to binary vectors only.
 
-- NGRAM(101)
+### MINHASH_LSH
 
-    Sets the index type to **NGRAM**. This applies to VarChar fields and JSON Path indexes.
+Sets the index type to MINHASH_LSH. This applies to binary vectors only.
 
-- RTREE(120)
+### TRIE("Trie")
 
-    Sets the index type to **RTREE**. This applies to geometry fields only.
+Sets the index type to TRIE. This applies to VarChar fields only.
 
-- STL_SORT(200)
+### NGRAM
 
-    Sets the index type to **SLT_SORT**. This applies to fields of numeric types only.
+Sets the index type to NGRAM. This applies to VarChar fields and JSON Path indexes.
 
-- INVERTED(201)
+### RTREE
 
-    Sets the index type to **INVERTED**. This applies to all scalar fields except JSON fields.
+Sets the index type to RTREE. This applies to geometry fields only.
 
-- BITMAP(202)
+### STL_SORT
 
-    Sets the index type to **BITMAP**. This applies to all scalar fields except JSON, FLOAT, and DOUBLE fields.
+Sets the index type to SLT_SORT. This applies to fields of numeric types only.
 
-- SPARSE_INVERTED_INDEX
+### INVERTED
 
-    Sets the index type to **SPARSE_INVERTED_INDEX**. This applies to sparse vectors only.
+Sets the index type to INVERTED. This applies to all scalar fields except JSON fields.
 
-- SPARSE_WAND
+### BITMAP
 
-    Sets the index type to **SPARSE_WAND**. This applies to sparse vectors only.
+Sets the index type to BITMAP. This applies to all scalar fields except JSON, FLOAT, and DOUBLE fields.
 
-- EMB_LIST_HNSW
+### SPARSE_INVERTED_INDEX
 
-    Sets the index type to **EMB_LIST_HNSW**. This applies to an Array of Structs field.
+Sets the index type to SPARSE_INVERTED_INDEX. This applies to sparse vectors only.
 
+### SPARSE_WAND
+
+Sets the index type to SPARSE_WAND. This applies to sparse vectors only.
+
+### EMB_LIST_HNSW
+
+Sets the index type to EMB_LIST_HNSW. This applies to an Array of Structs field.

@@ -10,11 +10,9 @@ io.milvus.bulkwriter.RemoteBulkWriter
 
 Constructs a **RemoteBulkWriter** instance with a set of parameters, such as **schema**, **remote_path**, **connect_param,** etc.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>A <strong>RemoteBulkWriter</strong> object intends to rewrite your raw data in a format that Milvus understands into an AWS-S3-compatible or a Microsoft Azure Blob Storage bucket.</p>
+A **RemoteBulkWriter** object intends to rewrite your raw data in a format that Milvus understands into an AWS-S3-compatible or a Microsoft Azure Blob Storage bucket.
 
 </div>
 
@@ -26,7 +24,7 @@ public RemoteBulkWriter(RemoteBulkWriterParam bulkWriterParam)
 
 - **bulkWriterParam** (*RemoteBulkWriterParam*) -
 
-    A [RemoteBulkWriterParam](RemoteBulkWriter.md#RemoteBulkWriterParam) instance.
+    A [RemoteBulkWriterParam](RemoteBulkWriter.md) instance.
 
 ## RemoteBulkWriterParam
 
@@ -47,11 +45,11 @@ RemoteBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating [CreateCollectionReq.CollectionSchema](../../Collections/CollectionSchema/CollectionSchema.md).
+    The schema of the target collection that is defined by instantiating CreateCollectionReq.CollectionSchema.
 
 - `withConnectParam(StorageConnectParam connectParam)`
 
-    The parameters used to connect to a remote bucket, which is defined by instantiating [StorageConnectParam](RemoteBulkWriter.md#StorageConnectParam).
+    The parameters used to connect to a remote bucket, which is defined by instantiating [StorageConnectParam](RemoteBulkWriter.md).
 
 - `withRemotePath(String remotePath)`
 
@@ -63,12 +61,11 @@ RemoteBulkWriterParam.newBuilder()
 
     The value defaults to **536,870,912** in bytes, which is **512 MB**.
 
-    <div class="admonition note">
-
-    <p><b>**how does bulkwriter segment my data?**</b></p>
-
-    <p>The way BulkWriter segments your data varies with the target file type.</p>
-    <p>If the generated file exceeds the specified segment size, BulkWriter creates multiple files and names them in sequence numbers, each no larger than the segment size.</p>
+    <div class="alert note">
+    
+    The way BulkWriter segments your data varies with the target file type.
+    
+    If the generated file exceeds the specified segment size, BulkWriter creates multiple files and names them in sequence numbers, each no larger than the segment size.
 
     </div>
 
@@ -117,7 +114,7 @@ AzureConnectParam.newBuilder()
 
 - `withAccountUrl(String accountUrl)`
 
-    A string in format like `<i>http</i>s://<storage-account>.blob.core.windows.net`. Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) for more info.
+    A string in format like `https://<storage-account>.blob.core.windows.net`. Read [this link](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) for more info.
 
 - `withCredential(TokenCrendtial credential)`
 

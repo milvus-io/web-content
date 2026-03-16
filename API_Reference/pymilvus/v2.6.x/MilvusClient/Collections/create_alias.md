@@ -90,11 +90,11 @@ client.create_alias(collection_name="test_collection", alias="test")
 
 ## Related methods
 
-- [alter_alias()](https://zilliverse.feishu.cn/docx/CBc3d1mrdoYqmDxe4Kcc9zxAnzh)
+- [alter_alias()](alter_alias.md)
 
-- [describe_alias()](https://zilliverse.feishu.cn/docx/HN7nddgueo3scIxmPXAcpjkFnDf)
+- [describe_alias()](describe_alias.md)
 
-- [drop_alias()](https://zilliverse.feishu.cn/docx/FpWXdmIuforYz9xUCsqclyCXnLe)
+- [drop_alias()](drop_alias.md)
 
-- [list_aliases()](https://zilliverse.feishu.cn/docx/Cpynd2OFJoIXhLx3dQNct7Wgn6f)
+- [list_aliases()](list_aliases.md)
 

@@ -28,7 +28,7 @@ batchDescribeCollection(BatchDescribeCollectionReq.builder()
 
 **RETURN TYPE:**
 
-*List&lt;DescribeCollectionResp&gt;*
+*List<DescribeCollectionResp>*
 
 **RETURNS:**
 
@@ -48,9 +48,9 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **numOfPartitions** (*long*)
 
-- **fieldNames** (*List\&lt;String\&gt;*)
+- **fieldNames** (*List\<String\>*)
 
-- **vectorFieldName** (*List\&lt;String\&gt;*)
+- **vectorFieldName** (*List\<String\>*)
 
 - **primaryFieldName** (*String*)
 
@@ -68,7 +68,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **shardsNum** (*Integer*) -
 
-- **properties** (*Map&lt;String, String&gt;*) -
+- **properties** (*Map<String, String>*) -
 
 **EXCEPTIONS:**
 

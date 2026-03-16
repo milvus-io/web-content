@@ -31,9 +31,9 @@ A **ListCollectionsResp** object containing a list of collection names. If there
 
 **PARAMETERS:**
 
-- **collectionNames** (*List&lt;String&gt;*)
+- **collectionNames** (*List<String>*)
 
-- **collectionInfos** (*List&lt;CollectionInfo&gt;*)
+- **collectionInfos** (*List<CollectionInfo>*)
 
 **EXCEPTIONS:**
 

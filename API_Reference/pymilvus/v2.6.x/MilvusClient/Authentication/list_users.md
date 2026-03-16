@@ -58,11 +58,11 @@ client.list_users()
 
 ## Related methods
 
-- [create_user()](https://zilliverse.feishu.cn/docx/BDupd28JqoNY9HxVOTfcv86enRe)
+- [create_user()](create_user.md)
 
-- [describe_user()](https://zilliverse.feishu.cn/docx/Wz3HdtvPCoEquvxFY7PcDHxcnEe)
+- [describe_user()](describe_user.md)
 
-- [drop_user()](https://zilliverse.feishu.cn/docx/WtyZdeFKMoSv5exaYRxcPLCSndg)
+- [drop_user()](drop_user.md)
 
-- [update_password()](https://zilliverse.feishu.cn/docx/WGDod7Qehou4GWx4Co2cJ34VnKb)
+- [update_password()](update_password.md)
 

@@ -30,7 +30,7 @@ grantPrivilege(GrantPrivilegeReq.builder()
 
     Possible values:
 
-    - **Global**: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When **objectType** is set to **Global**, set **objectName** to the wildcard (*****), indicating all objects of the specified type.
+    - **Global**: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When **objectType** is set to **Global**, set **objectName** to the wildcard (**&ast;**), indicating all objects of the specified type.
 
     - **Collection**: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
 
@@ -46,7 +46,7 @@ grantPrivilege(GrantPrivilegeReq.builder()
 
     The name of the object to control access for. For example, if the object type is **Collection**, the object name is the name of a collection. If the object type is **User**, the object name is the name of a database user.
 
-    When **object_type** is set to **Global**, set **object_name** to the wildcard (*****), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+    When **object_type** is set to **Global**, set **object_name** to the wildcard (**&ast;**), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
 **RETURNS:**
 

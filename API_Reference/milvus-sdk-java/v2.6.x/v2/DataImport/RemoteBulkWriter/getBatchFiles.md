@@ -1,5 +1,3 @@
-
-
 # getBatchFiles()
 
 This operation returns a list of files passed to the current LocalBulkWriter instance.
@@ -20,7 +18,7 @@ remoteBulkWriter.getBatchFiles()
 
 **RETURNS TYPE:**
 
-*List\&lt;List\&lt;String&gt;&gt;*
+*List\<List\<String>>*
 
 ## Example
 

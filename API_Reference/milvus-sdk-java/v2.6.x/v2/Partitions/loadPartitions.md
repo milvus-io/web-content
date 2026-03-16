@@ -13,58 +13,68 @@ loadPartitions(LoadPartitionsReq.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
-    .numReplicas(Interger numReplicas)
+    .numReplicas(Integer numReplicas)
     .sync(Boolean sync)
     .timeout(Long timeout)
     .refresh(Boolean refresh)
     .loadFields(List<String> loadFields)
+    .skipLoadDynamicField(Boolean skipLoadDynamicField)
+    .resourceGroups(List<String> resourceGroups)
     .build()
-)
+);
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)`
+- `databaseName(String databaseName)` -
 
-    The name of the database to which the target collection belongs.
+    The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)`
+- `collectionName(String collectionName)` -
 
-    The name of an existing collection.
+    The name of the target collection.
 
-- `partitionNames(List<String> partitionNames)`
+- `partitionNames(List<String> partitionNames)` -
 
-    A list of the names of the partitions to load.
+    A list of partition names to target.
 
-- `numReplicas(Interger numReplicas)`
+- `numReplicas(Integer numReplicas)` -
 
-    The number of replicas to create during the load process.
+    The number of replicas to load.
 
-- `sync(Boolean sync)`
+- `sync(Boolean sync)` -
 
-    Whether the current operation is synchronous.
+    Whether to wait synchronously until the operation completes.
 
-    The value defaults to `Boolean.True`, indicating that the operation returns only after the specified partitions are fully loaded.
+- `timeout(Long timeout)` -
 
-- `timeout(Long timeout)`
+    The timeout duration in milliseconds.
 
-    The timeout duration for this operation. The value defaults to `60000L`, indicating the operation times out after 1000 hours.
+- `refresh(Boolean refresh)` -
 
-- `refresh(Boolean refresh)`
+    Whether to refresh load to include new fields.
 
-    Whether to refresh the data after load.
+- `loadFields(List<String> loadFields)` -
 
-- `loadFields(List<String> loadFields)`
+    A list of specific field names to load.
 
-    A name list of the fields to load during the process.
+- `skipLoadDynamicField(Boolean skipLoadDynamicField)` -
+
+    Whether to skip loading the dynamic field.
+
+- `resourceGroups(List<String> resourceGroups)` -
+
+    A list of resource group names for load balancing.
 
 **RETURNS:**
 
 *void*
 
+*void*
+
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -90,4 +100,3 @@ LoadPartitionsReq loadPartitionsReq = LoadPartitionsReq.builder()
         .build();
 client.loadPartitions(loadPartitionsReq);
 ```
-

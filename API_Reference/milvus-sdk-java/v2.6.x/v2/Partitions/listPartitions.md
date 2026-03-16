@@ -28,7 +28,7 @@ listPartitions(ListPartitionsReq.builder()
 
 **RETURN TYPE:**
 
-*List\&lt;String\&gt;*
+*List\<String\>*
 
 **RETURNS:**
 

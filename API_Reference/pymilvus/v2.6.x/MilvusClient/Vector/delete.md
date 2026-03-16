@@ -141,13 +141,13 @@ client.delete(
 
 ## Related methods
 
-- [get()](https://zilliverse.feishu.cn/docx/TEUDde2xbo0JT7xtVvtcF53Nnub)
+- [get()](get.md)
 
-- [insert()](https://zilliverse.feishu.cn/docx/QI87dhVnioL9JLxnNKxcM8jWnkh)
+- [insert()](insert.md)
 
-- [query()](https://zilliverse.feishu.cn/docx/LkmSddW2NolgitxLhy9cx22Dnpe)
+- query()
 
-- [search()](https://zilliverse.feishu.cn/docx/D74JdcitKobd7cxNdDdcGAz6nuf)
+- search()
 
-- [upsert()](https://zilliverse.feishu.cn/docx/WRYFdoDe8ofrlDxxTxQcdoJjnAh)
+- upsert()
 

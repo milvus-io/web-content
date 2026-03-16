@@ -61,7 +61,7 @@ This method returns a promise that resolves to a **ResStatus** object.
 
 Before dropping a resource group, ensure that the number of required nodes and the maximum number of required nodes in its configuration are zeros.
 
-You can use [updateResourceGroups()](https://zilliverse.feishu.cn/docx/JsQqdoEUNoWFCCxAMcUc0mtjncf) to make the change.
+You can use [updateResourceGroups()](updateResourceGroups.md) to make the change.
 
 </div>
 

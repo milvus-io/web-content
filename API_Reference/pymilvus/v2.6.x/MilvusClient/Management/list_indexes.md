@@ -133,13 +133,13 @@ client.list_indexes(collection_name="customized_setup")
 
 ## Related methods
 
-- [add_index()](https://zilliverse.feishu.cn/docx/ZplAdphtooqHJkxo8GCcOFecngd)
+- add_index()
 
-- [create_index()](https://zilliverse.feishu.cn/docx/B3n3db0idoia02xXxJfcONK8nRh)
+- [create_index()](create_index.md)
 
-- [describe_index()](https://zilliverse.feishu.cn/docx/WhsHdyIgyoFlsQxNJt9cFCTxnDe)
+- [describe_index()](describe_index.md)
 
-- [drop_index()](https://zilliverse.feishu.cn/docx/NPnQdZCJ7oF002xTntecdI2ini8)
+- [drop_index()](drop_index.md)
 
-- [prepare_index_params()](https://zilliverse.feishu.cn/docx/CAzpdAw3wo4ZqrxhjTLcEGBBn1S)
+- [prepare_index_params()](prepare_index_params.md)
 

@@ -22,11 +22,11 @@ A **ListCollectionsResp** object containing a list of collection names. If there
 
 **PARAMETERS:**
 
-- **collectionNames** (*List&lt;String&gt;*)
+- **collectionNames** (*List<String>*)
 
     A list of strings containing the names of all existing collections.
 
-- **collectionInfos** (*List&lt;CollectionInfo&gt;*)
+- **collectionInfos** (*List<CollectionInfo>*)
 
     A list of **CollectionInfo** objects. A **CollectionInfo** object has the following fields:
 

@@ -10,147 +10,96 @@ public SearchIterator searchIterator(SearchIteratorReq request)
 
 ```java
 searchIterator(SearchIteratorReq.builder()
-        .collectionName(String collectionName)
-        .databaseName(String databaseName)
-        .outputFields(List<String> outputFields)
-        .expr(String expr)
-        .batchSize(long size)
-        .vectorFieldName(String vectorFieldName)
-        .vectors(List<BaseVector> vectors)
-        .params(String params)
-        .topK(int topk)
-        .metricType(IndexParam.MetricType metricType)
-        .consistencyLevel(ConsistencyLevel consistencyLevel)
-        .roundDecimal(int decimal)
-        .ignoreGrowing(boolean ignoreGrwing)
-        .groupByFieldName(String fieldName)
-        .build());
+    .databaseName(String databaseName)
+    .collectionName(String collectionName)
+    .partitionNames(List<String> partitionNames)
+    .vectorFieldName(String vectorFieldName)
+    .topK(int topK)
+    .limit(long limit)
+    .expr(String expr)
+    .outputFields(List<String> outputFields)
+    .vectors(List<BaseVector> vectors)
+    .roundDecimal(int roundDecimal)
+    .params(String params)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .ignoreGrowing(boolean ignoreGrowing)
+    .groupByFieldName(String groupByFieldName)
+    .batchSize(long batchSize)
+    .build()
+);
 ```
 
 **BUILDER METHODS:**
 
-- `collectionName(String collectionName)`
+- `databaseName(String databaseName)` -
 
-    The name of an existing collection.
+    The name of the database. Defaults to the current database if not specified.
 
-- `databaseName(String databaseName)`
+- `collectionName(String collectionName)` -
 
-    The database to which the collection belongs. You can ignore it if the database is the default.
+    The name of the target collection.
 
-- `outputFields(List<String> outputFields)`
+- `partitionNames(List<String> partitionNames)` -
 
-    A list of field names to include in each entity in return.
+    A list of partition names to target.
 
-    The value defaults to **None**. If left unspecified, all fields in the collection are selected as the output fields.
+- `vectorFieldName(String vectorFieldName)` -
 
-- `expr(String expr)`
+    The name of the vector field.
 
-    A scalar filtering condition to filter matching entities. 
+- `topK(int topK)` -
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+    The number of top results to return.
 
-- `batchSize(long size)`
+- `limit(long limit)` -
 
-    A value to define the number of entities returned per batch.
+    The maximum number of results to return.
 
-- `vectorFieldName(String vectorFieldName)`
+- `expr(String expr)` -
 
-    The target vector field name for which an ANN search will be conducted.
+    A boolean expression to filter results.
 
-- `vectors(List<BaseVector> vectors)`
+- `outputFields(List<String> outputFields)` -
 
-    Set the target vectors to do ANN search.
+    A list of field names to include in the output.
 
-    BaseVector is a base class for abstract vector classes. The following classes are derived from BaseVector. Choose the correct class as input according to DataType of the vector field.
+- `vectors(List<BaseVector> vectors)` -
 
-    <table>
-       <tr>
-         <th><p><strong>Class Name</strong></p></th>
-         <th><p><strong>Constructors</strong></p></th>
-         <th><p><strong>Description</strong></p></th>
-       </tr>
-       <tr>
-         <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List&lt;Float&gt; data)</p><p>FloatVec(float&#91;&#93; data)</p></td>
-         <td><p>For DataType.FloatVector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>BinaryVec</p></td>
-         <td><p>BinaryVec(ByteBuffer data)</p><p>BinaryVec(byte&#91;&#93; data)</p></td>
-         <td><p>For DataType.BinaryVector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>Float16Vec</p></td>
-         <td><p>Float16Vec(ByteBuffer data)</p><p>Float16Vec(byte&#91;&#93; data)</p><p>Float16Vec(List&lt;Float&gt; data)</p></td>
-         <td><p>For DataType.Float16Vector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>BFloat16Vec</p></td>
-         <td><p>BFloat16Vec(ByteBuffer data)</p><p>BFloat16Vec(byte&#91;&#93; data)</p><p>BFloat16Vec(List&lt;Float&gt; data)</p></td>
-         <td><p>For DataType.BFloat16Vector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>SparseFloatVec</p></td>
-         <td><p>SparseFloatVec(SortedMap&lt;Long, Float&gt; data)</p></td>
-         <td><p>For DataType.SparseFloatVector type field.</p></td>
-       </tr>
-    </table>
+    A list of vectors to search with.
 
-- `params(String params)`
+- `roundDecimal(int roundDecimal)` -
 
-    A JSON format string for extra parameters.
+    The number of decimal places for distance/score rounding.
 
-- `topK(int topk)`
+- `params(String params)` -
 
-    The topk value.
+    Additional search parameters as a JSON string.
 
-- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
+- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level of the target collection.
+    The consistency level for the operation.
 
-    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+- `ignoreGrowing(boolean ignoreGrowing)` -
 
-    <div class="admonition note">
+    Whether to ignore growing segments during the operation.
 
-    <p><b>what is the consistency level?</b></p>
+- `groupByFieldName(String groupByFieldName)` -
 
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    The field name to group search results by.
 
-    </div>
+- `batchSize(long batchSize)` -
 
-- `roundDecimal(int decimal)`
-
-    How many digits are reserved after the decimal point.
-
-- `ignoreGrowing(boolean ignoreGrwing)`
-
-    Ignore growing segments or not.
-
-- `groupByFieldName(String fieldName)`
-
-    Sets the field name to do grouping for results.
-
-**RETURN TYPE:**
-
-*SearchIterator*
+    The batch size for iterator operations.
 
 **RETURNS:**
 
+*SearchIterator*
+
 A *SearchIterator* object to iterate search results, which offers the following methods:
-
-- `List<QueryResultsWrapper.RowRecord> next()`
-
-    Return a batch of results.
-
-- `close()`
-
-    Release the cache results.
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -203,4 +152,3 @@ while (true) {
     }
 }
 ```
-

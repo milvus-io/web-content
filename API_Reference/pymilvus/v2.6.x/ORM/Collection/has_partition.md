@@ -68,13 +68,13 @@ collection.has_partition("test_partition") # False
 
 The following operations are related to `has_collection()`:
 
-- [Collection](https://zilliverse.feishu.cn/docx/OSehdj15Ao3AUvxOIJucXzU8nWW)
+- [Collection](Collection.md)
 
-- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
+- [Partition](../Partition/Partition.md)
 
-- [create_partition()](https://zilliverse.feishu.cn/docx/Sh7HdgJOIoJipXx5AoNcicjMnyd)
+- [create_partition()](create_partition.md)
 
-- [partition()](https://zilliverse.feishu.cn/docx/SvCrdEJIdosGQYxQZhrc2OAXnpd)
+- [partition()](partition.md)
 
-- [drop_partition()](https://zilliverse.feishu.cn/docx/Aym2dpBuIo81mExCqyLcSWhunBe)
+- [drop_partition()](drop_partition.md)
 

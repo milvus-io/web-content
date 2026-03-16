@@ -30,7 +30,7 @@ writer = LocalBulkWriter(
 
 **PARAMETERS:**
 
-- **schema** (*[CollectionSchema](https://zilliverse.feishu.cn/docx/WToudUwm4oVXeKxLg3jcj3IAnjh)*) -
+- **schema** (*[CollectionSchema](../../ORM/CollectionSchema/CollectionSchema.md)*) -
 
     **[REQUIRED]**
 
@@ -58,7 +58,7 @@ writer = LocalBulkWriter(
 
     </div>
 
-- **file_type** (*[BulkFileType](https://zilliverse.feishu.cn/docx/CROadSmHNoV2CuxREnccTkaen0e)*) -
+- **file_type** (*BulkFileType*) -
 
     The type of the output file.
 

@@ -12,7 +12,7 @@ add_function(
 
 **PARAMETERS:**
 
-- `function` (*[Function](https://zilliverse.feishu.cn/docx/Xcl2dbLC6osEskxx87Wc1Q3rn4f)*)
+- `function` (*Function*)
 
     **[REQUIRED]**
 

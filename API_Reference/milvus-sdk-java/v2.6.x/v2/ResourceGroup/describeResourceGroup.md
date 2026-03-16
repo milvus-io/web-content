@@ -19,7 +19,7 @@ describeResourceGroup(DescribeResourceGroupReq.builder()
 
 - `groupName(String collectionName)`
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The name of the target resource group to describe.
 
@@ -43,15 +43,15 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
     The number of available query nodes.
 
-- **numberOfLoadedReplica** (*Map&lt;String, Integer&gt;*) -
+- **numberOfLoadedReplica** (*Map<String, Integer>*) -
 
     The number of loaded replicas per query node.
 
-- **numberOfOutgoingNode** (*Map&lt;String, Integer&gt;*) -
+- **numberOfOutgoingNode** (*Map<String, Integer>*) -
 
     The number of outgoing nodes.
 
-- **numberOfInComingNode** (*Map&lt;String, Integer&gt;*) -
+- **numberOfInComingNode** (*Map<String, Integer>*) -
 
     The number of incoming nodes.
 
@@ -67,11 +67,11 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
         The maximum number of nodes required by a resource group.
 
-    - **from** (*List\&lt;ResourceGroupTransfer&gt;*) -
+    - **from** (*List\<ResourceGroupTransfer>*) -
 
         The source resource groups for necessary transfers. 
 
-    - **to** (*List\&lt;ResourceGroupTransfer&gt;*) -
+    - **to** (*List\<ResourceGroupTransfer>*) -
 
         The target resource groups for necessary transfers. 
 
@@ -79,7 +79,7 @@ A **DescribeResourceGroupResp** object contains the following fields:
 
         A filter used to filter the query nodes with specified node labels.
 
-- **nodes** (*List\&lt;NodeInfo&gt;*) -  
+- **nodes** (*List\<NodeInfo>*) -  
 
     A list of nodes, each of which is a **NodeInfo** object.
 

@@ -66,21 +66,21 @@ client.has_collection(collection_name="test_collection_2")
 
 ## Related methods
 
-- [create_collection()](https://zilliverse.feishu.cn/docx/TziHdCu4VoURrfxAMsUcsRhQnub)
+- create_collection()
 
-- [create_schema()](https://zilliverse.feishu.cn/docx/RxU7dBjGlop0e1xZShYcZ4qCnnh)
+- [create_schema()](create_schema.md)
 
-- [describe_collection()](https://zilliverse.feishu.cn/docx/MCkjdiRNKo2HCCxzHReclrgAnbg)
+- describe_collection()
 
-- [drop_collection()](https://zilliverse.feishu.cn/docx/QNB4d2q2ZorIApxpnzqczW2HnL7)
+- drop_collection()
 
-- [get_collection_stats()](https://zilliverse.feishu.cn/docx/VVyNdx038oECxNxMQavc9vssnoh)
+- get_collection_stats()
 
-- [list_collections()](https://zilliverse.feishu.cn/docx/BHyidrVcyoPwxexHLrnceOSAnRe)
+- [list_collections()](list_collections.md)
 
-- [rename_collection()](https://zilliverse.feishu.cn/docx/IeiIdJ71Pox2OjxMiOzczUTenud)
+- rename_collection()
 
-- [IndexType](https://zilliverse.feishu.cn/docx/FdLUdaL43oIuqTxJVnbcHxgqnkh)
+- IndexType
 
-- [DataType](https://zilliverse.feishu.cn/docx/JiN3dU8zwoPdgBxxpw6c0JkUnze)
+- DataType
 

@@ -10,11 +10,9 @@ io.milvus.bulkwriter.LocalBulkWriter
 
 Constructs a **LocalBulkWriter** instance by schema, output path, segment size, and file type.
 
-<div class="admonition note">
+<div class="alert note">
 
-<p><b>notes</b></p>
-
-<p>A <strong>LocalBulkWriter</strong> object intends to rewrite your raw data locally in a format that Milvus understands.</p>
+A **LocalBulkWriter** object intends to rewrite your raw data locally in a format that Milvus understands.
 
 </div>
 
@@ -26,7 +24,7 @@ LocalBulkWriter(LocalBulkWriterParam bulkWriterParam)
 
 - **bulkWriterParam** (*LocalBulkWriterParam*) -
 
-    A [LocalBulkWriterParam](LocalBulkWriter.md#LocalBulkWriterParam) instance.
+    A [LocalBulkWriterParam](LocalBulkWriter.md) instance.
 
 ## LocalBulkWriterParam
 
@@ -46,7 +44,7 @@ LocalBulkWriterParam.newBuilder()
 
 - `withCollectionSchema(CreateCollectionReq.CollectionSchema collectionSchema)`
 
-    The schema of the target collection that is defined by instantiating **[CreateCollectionReq.CollectionSchema](../../Collections/CollectionSchema/CollectionSchema.md)**.
+    The schema of the target collection that is defined by instantiating **CreateCollectionReq.CollectionSchema**.
 
 - `withLocalPath(String localPath)`
 
@@ -58,12 +56,11 @@ LocalBulkWriterParam.newBuilder()
 
     The value defaults to **536,870,912** in bytes, which is **512 MB**.
 
-    <div class="admonition note">
-
-    <p><b>**how does bulkwriter segment my data?**</b></p>
-
-    <p>The way BulkWriter segments your data varies with the target file type.</p>
-    <p>If the generated file exceeds the specified segment size, BulkWriter creates multiple files and names them in sequence numbers, each no larger than the segment size.</p>
+    <div class="alert note">
+    
+    The way BulkWriter segments your data varies with the target file type.
+    
+    If the generated file exceeds the specified segment size, BulkWriter creates multiple files and names them in sequence numbers, each no larger than the segment size.
 
     </div>
 

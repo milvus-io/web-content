@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [VoyageEmbeddingFunction](https://zilliverse.feishu.cn/docx/HEyLd2lxzo3bl4xqVBOco8vWn1c) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [VoyageEmbeddingFunction](VoyageEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-The **\_\_call\_\_()** method of VoyageEmbeddingFunction shares the same functionality as [encode_documents()](https://zilliverse.feishu.cn/docx/S9zrdw1etovCFKx0gcic6AiVn0e) and [encode_queries()](https://zilliverse.feishu.cn/docx/CHnGdE7XlosONPxsVDDc6Fv5n8c).
+The **\_\_call\_\_()** method of VoyageEmbeddingFunction shares the same functionality as [encode_documents()](encode_documents.md) and [encode_queries()](encode_queries.md).
 
 ## Request syntax
 

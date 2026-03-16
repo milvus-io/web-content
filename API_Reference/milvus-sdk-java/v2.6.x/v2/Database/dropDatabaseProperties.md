@@ -3,7 +3,7 @@
 This operation resets the database properties to their default values.
 
 ```java
-public Void dropDatabaseProperties(DropDatabasePropertiesReq request)
+public void dropDatabaseProperties(DropDatabasePropertiesReq request)
 ```
 
 ## Request Syntax
@@ -13,50 +13,28 @@ dropDatabaseProperties(DropDatabasePropertiesReq.builder()
     .databaseName(String databaseName)
     .propertyKeys(List<String> propertyKeys)
     .build()
-)
+);
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)`
+- `databaseName(String databaseName)` -
 
-    The name of the database.
+    The name of the database. Defaults to the current database if not specified.
 
-- `propertyKeys(List<String propertyKeys>)`
+- `propertyKeys(List<String> propertyKeys)` -
 
-    The properties of the database, such as replica number, resource groups. Possible database properties are as follows:
-
-    - **database.replica.number** -
-
-        Number of replicas for the database.
-
-    - **database.resource_groups**  -
-
-        Resource groups dedicated to the database.
-
-    - **database.diskQuota.mb** -
-
-        Disk quota allocated to the database in megabytes (**MB**).
-
-    - **database.max.collections** -
-
-        Maximum number of collections allowed in the database.
-
-    - **database.force.deny.writing** -
-
-        Whether to deny all write operations in the database.
-
-    - **database.force.deny.reading** -
-
-        Whether to deny all read operations in the database.
+    A list of property key names to drop.
 
 **RETURNS:**
 
 *void*
 
+*void*
+
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -85,4 +63,3 @@ DropDatabasePropertiesReq dropDatabasePropertiesReq = DropDatabasePropertiesReq.
         .build();
 client.dropDatabaseProperties(alterDatabaseReq);
 ```
-

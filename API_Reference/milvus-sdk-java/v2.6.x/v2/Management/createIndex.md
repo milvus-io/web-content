@@ -10,26 +10,36 @@ public void createIndex(CreateIndexReq request)
 
 ```java
 createIndex(CreateIndexReq.builder()
+    .databaseName(String databaseName)
     .collectionName(String collectionName)
     .indexParams(List<IndexParam> indexParams)
     .sync(Boolean sync)
+    .timeout(Long timeout)
     .build()
-)
+);
 ```
 
 **BUILDER METHODS:**
 
-- `collectionName(String collectionName)`
+- `databaseName(String databaseName)` -
 
-    The name of an existing collection.
+    The name of the database. Defaults to the current database if not specified.
 
-- `indexParams(List<[IndexParam](IndexParam.md)> indexParams)`
+- `collectionName(String collectionName)` -
 
-    A list of **IndexParam** objects.
+    The name of the target collection.
 
-- `sync(Boolean sync)`
+- `indexParams(List<IndexParam> indexParams)` -
 
-    Whether the current operation is synchronous. The default value is `True`.
+    A list of IndexParam objects defining the index configuration.
+
+- `sync(Boolean sync)` -
+
+    Whether to wait synchronously until the operation completes. Defaults to `Boolean.TRUE`.
+
+- `timeout(Long timeout)` -
+
+    The timeout duration in milliseconds. Defaults to `60000L`.
 
 **RETURNS:**
 
@@ -37,7 +47,7 @@ createIndex(CreateIndexReq.builder()
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -69,4 +79,3 @@ CreateIndexReq createIndexReq = CreateIndexReq.builder()
         .build();
 client.createIndex(createIndexReq);
 ```
-

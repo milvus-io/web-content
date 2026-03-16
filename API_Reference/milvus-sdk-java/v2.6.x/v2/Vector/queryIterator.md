@@ -10,91 +10,86 @@ public QueryIterator queryIterator(QueryIteratorReq request)
 
 ```java
 queryIterator(QueryIteratorReq.builder()
-        .collectionName(String collectionName)
-        .outputFields(List<String> outputFields)
-        .expr(String expr)
-        .batchSize(long size)
-        .consistencyLevel(ConsistencyLevel consistencyLevel)
-        .offset(long offset)
-        .limit(long limit)
-        .build());
+    .databaseName(String databaseName)
+    .collectionName(String collectionName)
+    .partitionNames(List<String> partitionNames)
+    .outputFields(List<String> outputFields)
+    .expr(String expr)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
+    .offset(long offset)
+    .limit(long limit)
+    .ignoreGrowing(boolean ignoreGrowing)
+    .timezone(String timezone)
+    .batchSize(long batchSize)
+    .reduceStopForBest(boolean reduceStopForBest)
+    .filterTemplateValues(Map<String, Object> filterTemplateValues)
+    .build()
+);
 ```
 
 **BUILDER METHODS:**
 
-- `collectionName(String collectionName)`
+- `databaseName(String databaseName)` -
 
-    The name of an existing collection.
+    The name of the database. Defaults to the current database if not specified.
 
-- `outputFields(List<String> outputFields)`
+- `collectionName(String collectionName)` -
 
-    A list of field names to include in each entity in return.
+    The name of the target collection.
 
-    The value defaults to **None**. If left unspecified, all fields in the collection are selected as the output fields.
+- `partitionNames(List<String> partitionNames)` -
 
-- `expr(String expr)`
+    A list of partition names to target.
 
-    A scalar filtering condition to filter matching entities. 
+- `outputFields(List<String> outputFields)` -
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Boolean Expression Rules](https://milvus.io/docs/boolean.md). 
+    A list of field names to include in the output.
 
-- `batchSize(long size)`
+- `expr(String expr)` -
 
-A value to define the number of entities returned per batch.
+    A boolean expression to filter results.
 
-- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
+- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-    The consistency level of the target collection.
+    The consistency level for the operation.
 
-    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+- `offset(long offset)` -
 
-    <div class="admonition note">
+    The number of results to skip before returning.
 
-    <p><b>what is the consistency level?</b></p>
+- `limit(long limit)` -
 
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    The maximum number of results to return.
 
-    </div>
+- `ignoreGrowing(boolean ignoreGrowing)` -
 
-- `offset(long offset)`
+    Whether to ignore growing segments during the operation.
 
-    The number of records to skip in the query result. 
+- `timezone(String timezone)` -
 
-    You can use this parameter in combination with `limit` to enable pagination.
+    The timezone string for time-related filters.
 
-    The sum of this value and `limit` should be less than 16,384. 
+- `batchSize(long batchSize)` -
 
-- `limit(long limit)`
+    The batch size for iterator operations.
 
-    The number of records to return in the query result.
+- `reduceStopForBest(boolean reduceStopForBest)` -
 
-    You can use this parameter in combination with `offset` to enable pagination.
+    Whether to stop iteration when the best result is found.
 
-    The sum of this value and `offset` should be less than 16,384. 
+- `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
-**RETURN TYPE:**
-
-*QueryIterator*
+    A map of template variable values for parameterized filters.
 
 **RETURNS:**
 
-A *QueryIterator* object to iterate data.
+*QueryIterator*
 
-**METHODS:**
-
-- List&lt;QueryResultsWrapper.RowRecord&gt; next()
-
-Return a batch of results.
-
-- close()
-
-Release the cache results.
+*QueryIterator*
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -103,41 +98,35 @@ Release the cache results.
 ```java
 import io.milvus.orm.iterator.QueryIterator;
 import io.milvus.response.QueryResultsWrapper;
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.common.ConsistencyLevel;
 import io.milvus.v2.service.vector.request.QueryIteratorReq;
+import io.milvus.v2.common.ConsistencyLevel;
 
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
+import java.util.Arrays;
+import java.util.List;
 
-// 2. Iterator data
+// Create a query iterator to retrieve results in batches
 QueryIterator queryIterator = client.queryIterator(QueryIteratorReq.builder()
-        .collectionName("test")
-        .expr("id < 300")
-        .outputFields(Lists.newArrayList("id", "vector"))
-        .batchSize(50L)
-        .offset(5)
-        .limit(400)
+        .collectionName("my_collection")
+        .expr("userID < 3000")
+        .outputFields(Arrays.asList("userID", "userAge"))
+        .batchSize(100)
+        .offset(0)
+        .limit(10000)
         .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build());
 
+// Iterate through all results
+int counter = 0;
 while (true) {
     List<QueryResultsWrapper.RowRecord> res = queryIterator.next();
     if (res.isEmpty()) {
-        System.out.println("query iteration finished, close");
         queryIterator.close();
         break;
     }
-
     for (QueryResultsWrapper.RowRecord record : res) {
         System.out.println(record);
+        counter++;
     }
 }
+System.out.printf("%d query results returned%n", counter);
 ```
-

@@ -237,7 +237,7 @@ await milvusClient.search({
 
         A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
 
-    - **type** (*[FunctionType](https://zilliverse.feishu.cn/docx/L4H0dyzS1o6XlmxMQzDca6Pdnjd?from=from_copylink)*)
+    - **type** (*FunctionType*)
 
         The type of function for processing raw data. Possible values for this parameter is`FunctionType.RERANK`.
 

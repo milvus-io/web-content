@@ -19,7 +19,7 @@ FunctionScore(
 
 **PARAMETERS:**
 
-- **functions** (*[Function](https://zilliverse.feishu.cn/docx/RrW9dOM8do7d3ixXIP9clJJUnVg)*, *List[[Function](https://zilliverse.feishu.cn/docx/RrW9dOM8do7d3ixXIP9clJJUnVg)]*) -
+- **functions** (*[Function](../Function/Function.md)*, *List[[Function](../Function/Function.md)]*) -
 
     A Function instance or a list of Function instances that are to be combined in the current FunctionScore instance.
 

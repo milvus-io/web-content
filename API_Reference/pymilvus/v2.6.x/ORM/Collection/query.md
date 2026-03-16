@@ -197,15 +197,15 @@ res = collection.query(
 
 The following operations are related to `query()`:
 
-- [delete()](https://zilliverse.feishu.cn/docx/TJMVdi4U2oBFnAxO95jctzVAnzg)
+- [delete()](delete.md)
 
-- [insert()](https://zilliverse.feishu.cn/docx/CbCodEGY9o6pKuxowNdctUppn7d)
+- [insert()](insert.md)
 
-- [search()](https://zilliverse.feishu.cn/docx/OaM5dkbPjohKhNxHvKNcfnYMnVb)
+- [search()](search.md)
 
-- [search_iterator()](https://zilliverse.feishu.cn/docx/HrnndnWtKoPuenxvsXBchF1wnnh)
+- [search_iterator()](search_iterator.md)
 
-- [query_iterator()](https://zilliverse.feishu.cn/docx/LffbdiHhzoHe08xivF9ccmoen5d)
+- [query_iterator()](query_iterator.md)
 
-- [upsert()](https://zilliverse.feishu.cn/docx/AQ1ydMXbOog5VJxITgUc4GFvnVe)
+- [upsert()](upsert.md)
 

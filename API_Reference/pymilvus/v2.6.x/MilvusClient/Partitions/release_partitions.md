@@ -115,15 +115,15 @@ res = client.get_load_state(
 
 ## Related methods
 
-- [create_partition()](https://zilliverse.feishu.cn/docx/I6hvdlYUuoUaw3xWqSnce4Fin9g)
+- [create_partition()](create_partition.md)
 
-- [drop_partition()](https://zilliverse.feishu.cn/docx/EMI8dM8uooIAFPxVfffcoqRwnZf)
+- drop_partition()
 
-- [get_partition_stats()](https://zilliverse.feishu.cn/docx/Jjbsd2I8doQ9pBxBp57ckRdZnZd)
+- [get_partition_stats()](get_partition_stats.md)
 
-- [has_partition()](https://zilliverse.feishu.cn/docx/MxTAd0haboKnRrxQvoOckGghn1T)
+- [has_partition()](has_partition.md)
 
-- [list_partitions()](https://zilliverse.feishu.cn/docx/Dxgqdvlk5o2VScxqmL1ctc1Inqb)
+- [list_partitions()](list_partitions.md)
 
-- [load_partitions()](https://zilliverse.feishu.cn/docx/DdQ1dBNagoBa08xhEiucxZrHnzc)
+- load_partitions()
 

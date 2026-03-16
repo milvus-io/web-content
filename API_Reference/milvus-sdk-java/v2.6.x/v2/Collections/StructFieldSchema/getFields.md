@@ -14,7 +14,7 @@ getFields()
 
 **RETURN TYPE:**
 
-*List&lt;CreateCollectionReq.FieldSchema&gt;*
+*List<CreateCollectionReq.FieldSchema>*
 
 **RETURNS:**
 

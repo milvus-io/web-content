@@ -34,7 +34,7 @@ getQuerySegmentInfo(GetQuerySegmentInfoReq.builder()
 
 A **GetQuerySegmentInfoResp** object that contains detailed information about the persisted segments in the specified collection, including the number of entities in each of these segments. The object has the following parameters:
 
-- **segmentInfos** (*List&lt;PersistentSegmentInfo&gt;*) -
+- **segmentInfos** (*List<PersistentSegmentInfo>*) -
 
     A list of segments, each represented by a **PersistentSegmentInfo** object, which has the following fields
 
@@ -74,7 +74,7 @@ A **GetQuerySegmentInfoResp** object that contains detailed information about th
 
         The compaction level of the current segment. Possible values are : "Legacy", "L0", "L1", "L2".
 
-    - **nodeIDs** (*List&lt;Long&gt;*) -
+    - **nodeIDs** (*List<Long>*) -
 
         A list of query node IDs.
 

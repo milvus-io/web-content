@@ -84,7 +84,7 @@ This method returns a promise that resolves to a **DescribeResourceGroupResponse
 
     - **config** (*ResourceGroupConfig*) -
 
-        The configurations of the specified resource group in a [ResourceGroupConfig](https://zilliverse.feishu.cn/docx/Q0aNdOtyYoQHFhxCdEacj2kdnah) instance.
+        The configurations of the specified resource group in a [ResourceGroupConfig](ResourceGroupConfig.md) instance.
 
 ## Example
 

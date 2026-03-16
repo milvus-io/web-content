@@ -19,7 +19,7 @@ updateResourceGroups(UpdateResourceGroupsReq.builder()
 
 - `resourceGroups(Map<String, ResourceGroupConfig> resourceGroups)`
 
-    **&#91;REQUIRED&#93;**
+    **[REQUIRED]**
 
     The resource groups and their configurations after the operation.
 

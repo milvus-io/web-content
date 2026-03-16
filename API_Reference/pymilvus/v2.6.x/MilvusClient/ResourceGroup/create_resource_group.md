@@ -32,7 +32,7 @@ create_resource_group(
 
 - **configs** (*ResourceGroupConfig*) - 
 
-    A **[ResourceGroupConfig](https://zilliverse.feishu.cn/docx/LrfjdgJXkoe90gxNR1YcrsJMnYg)** object.
+    A **[ResourceGroupConfig](ResourceGroupConfig.md)** object.
 
 - **timeout** (*float* | *None*) - 
 

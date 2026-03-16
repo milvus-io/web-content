@@ -58,11 +58,11 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The number of partitions in the current collection.
 
-- **fieldNames** (*List\&lt;String\&gt;*)
+- **fieldNames** (*List\<String\>*)
 
     A list of fields in the current collection.
 
-- **vectorFieldName** (*List\&lt;String\&gt;*)
+- **vectorFieldName** (*List\<String\>*)
 
     The name of the vector field.
 
@@ -98,7 +98,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The number of shards in the collection.
 
-- **properties** (*Map&lt;String, String&gt;*) -
+- **properties** (*Map<String, String>*) -
 
     The properties of the current collection. 
 

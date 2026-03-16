@@ -18,7 +18,7 @@ localBulkWriter.getBatchFiles()
 
 **RETURNS TYPE:**
 
-*List\&lt;List\&lt;String&gt;&gt;*
+*List\<List\<String>>*
 
 ## Example
 

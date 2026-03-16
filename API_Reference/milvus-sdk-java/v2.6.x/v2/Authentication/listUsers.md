@@ -14,7 +14,7 @@ listUsers();
 
 **RETURN TYPE:**
 
-*List\&lt;String\&gt;*
+*List\<String\>*
 
 **RETURNS:**
 

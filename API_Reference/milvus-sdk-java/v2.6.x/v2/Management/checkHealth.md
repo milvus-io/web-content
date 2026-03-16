@@ -28,11 +28,11 @@ A **CheckHealthResp** object that contains detailed information about the curren
 
     Whether the current Milvus instance is in a healthy state.
 
-- **reasons** (*List&lt;String&gt;*) -
+- **reasons** (*List<String>*) -
 
     Return the unhealthy reasons if the server is in an unhealthy state.
 
-- **quotaStates** (*List&lt;String&gt;*) - 
+- **quotaStates** (*List<String>*) - 
 
     The names of unhealthy states. The following names could be in the list: "*ReadLimited*", "*WriteLimited*", "*DenyToRead*", "*DenyToWrite*", "*DenyToDDL*".
 

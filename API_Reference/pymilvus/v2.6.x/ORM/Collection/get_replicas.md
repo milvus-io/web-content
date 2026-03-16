@@ -90,11 +90,11 @@ collection.get_replicas()
 
 The following operations are related to `get_replicas()`:
 
-- [describe()](https://zilliverse.feishu.cn/docx/EZwsd887JojFjLxbMByckhW0nxg)
+- [describe()](describe.md)
 
-- [drop()](https://zilliverse.feishu.cn/docx/L8UTdDNkPoeew0x6LoDcfHx4nof)
+- [drop()](drop.md)
 
-- [flush()](https://zilliverse.feishu.cn/docx/VdiwdqQ9iofbkoxcc8Kcqk5gnhZ)
+- [flush()](flush.md)
 
-- [set_properties()](https://zilliverse.feishu.cn/docx/ECmAdaYKboPTNlxqkLxcUEZ4nrh)
+- [set_properties()](set_properties.md)
 

@@ -135,13 +135,13 @@ collection.load(
 
 The following operations are related to `load()`:
 
-- [Partition](https://zilliverse.feishu.cn/docx/X9scdVMmxoBTuUxlKhecJXEunHd)
+- [Partition](../Partition/Partition.md)
 
-- [release()](https://zilliverse.feishu.cn/docx/CBwkdDs7MoKkVKx0kJgcPUNxn6s)
+- [release()](release.md)
 
-- [load_state()](https://zilliverse.feishu.cn/docx/BJysdlj1MoksHZxNRxicHn9fnSh)
+- [load_state()](../utility/load_state.md)
 
-- [loading_progress()](https://zilliverse.feishu.cn/docx/HQiHd82orov0XvxAzLWcl5xRnzc)
+- [loading_progress()](../utility/loading_progress.md)
 
-- [wait_for_loading_complete()](https://zilliverse.feishu.cn/docx/PLKXdUB1EoNX8gxKHruc9GcEnsg)
+- [wait_for_loading_complete()](../utility/wait_for_loading_complete.md)
 

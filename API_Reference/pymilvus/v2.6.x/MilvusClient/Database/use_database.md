@@ -4,7 +4,7 @@ This operation switches the client to use a different database. Future operation
 
 <div class="alert note">
 
-This is an alias method for [`using_database()`](https://zilliverse.feishu.cn/docx/OCfid8DdPo1ga1x24JZcV92xnwd).
+This is an alias method for [`using_database()`](using_database.md).
 
 </div>
 

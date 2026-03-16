@@ -1,8 +1,8 @@
 # \_\_call\_\_()
 
-This operation in [SpladeEmbeddingFunction](https://zilliverse.feishu.cn/docx/UdeRd0YVhoDBeVxrQaBcoikVnAI) takes a list of text strings and directly encodes them into vector embeddings.
+This operation in [SpladeEmbeddingFunction](SpladeEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
-Unlike [encode_documents()](https://zilliverse.feishu.cn/docx/PwL1dndmVoxP98xp0pXcOci4nSe?from=from_copylink) or [encode_queries()](https://zilliverse.feishu.cn/docx/S9zPdiLkpokjfkxfZ68cWIFynnd), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **\_\_call\_\_()** method directly returns embeddings without offering the option to prepend instructions or prune results.
+Unlike [encode_documents()](encode_documents.md) or [encode_queries()](encode_queries.md), which enable you to prepend **doc_instruction** or **query_instruction** and utilize **k_tokens_document** or **k_tokens_query** for result pruning, the **\_\_call\_\_()** method directly returns embeddings without offering the option to prepend instructions or prune results.
 
 ## Request syntax
 

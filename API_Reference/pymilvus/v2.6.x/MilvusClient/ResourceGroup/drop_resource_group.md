@@ -39,7 +39,7 @@ None
 
 Before dropping a resource group, ensure that the number of required nodes and the maximum number of required nodes in its configuration are zeros.
 
-You can use [update_resource_groups()](https://zilliverse.feishu.cn/docx/TJmCdUvGRoOLFAx55qVcqbWGnRs) to make the change.
+You can use [update_resource_groups()](update_resource_groups.md) to make the change.
 
 </div>
 

@@ -187,13 +187,13 @@ res.upsert_count
 
 The following operations are related to `upsert()`:
 
-- [delete()](https://zilliverse.feishu.cn/docx/V9BidASNqoWYrmxo11ecuN99neg)
+- [delete()](delete.md)
 
-- [flush()](https://zilliverse.feishu.cn/docx/VRGwdg75Ao7ZXQx7uANc9wzXnVb)
+- [flush()](flush.md)
 
-- [insert()](https://zilliverse.feishu.cn/docx/QXDxdv36FoVgjcxDV1gcDwWXnsd)
+- [insert()](insert.md)
 
-- [query()](https://zilliverse.feishu.cn/docx/N97pdfkjlo9j61xrtL2cbB79nKe)
+- [query()](query.md)
 
-- [search()](https://zilliverse.feishu.cn/docx/XW72dhBuNoqNWhxUQLtcfa6Fnwd)
+- [search()](search.md)
 

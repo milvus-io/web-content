@@ -13,159 +13,103 @@ searchIteratorV2(SearchIteratorReqV2.builder()
     .databaseName(String databaseName)
     .collectionName(String collectionName)
     .partitionNames(List<String> partitionNames)
-    .metricType(IndexParam.MetricType)
     .vectorFieldName(String vectorFieldName)
     .topK(int topK)
+    .limit(long limit)
     .filter(String filter)
     .outputFields(List<String> outputFields)
     .vectors(List<BaseVector> vectors)
     .roundDecimal(int roundDecimal)
     .searchParams(Map<String, Object> searchParams)
-    .consistencyLevel(ConsistencyLevel)
+    .consistencyLevel(ConsistencyLevel consistencyLevel)
     .ignoreGrowing(boolean ignoreGrowing)
-    .groupByFieldName(String groupbyFieldName)
+    .timezone(String timezone)
+    .groupByFieldName(String groupByFieldName)
     .batchSize(long batchSize)
-    .externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)
+    .filterTemplateValues(Map<String, Object> filterTemplateValues)
     .build()
-)
+);
 ```
 
 **BUILDER METHODS:**
 
-- `databaseName(String databaseName)`
+- `databaseName(String databaseName)` -
 
-    The database to which the collection belongs. You can ignore it if the database is the default.
+    The name of the database. Defaults to the current database if not specified.
 
-- `collectionName(String collectionName)`
+- `collectionName(String collectionName)` -
 
-    The name of an existing collection.
+    The name of the target collection.
 
-- `partitionNames(List<String> partitionNames)`
+- `partitionNames(List<String> partitionNames)` -
 
-    A list of target partition names. The search scope is limited to the designated partitions if specified.
+    A list of partition names to target.
 
-- `metricType(IndexParam.MetricType)`
+- `vectorFieldName(String vectorFieldName)` -
 
-    The metric type used during the vector search. For more information, refer to [Metric Types](https://milvus.io/docs/metric.md).
+    The name of the vector field to search.
 
-- `vectorFieldName(String vectorFieldName)`
+- `topK(int topK)` -
 
-    The name of the target vector field.
+    The number of top results to return.
 
-- `topK(int topk)`
+- `limit(long limit)` -
 
-    The top-K value, which indicates the number of entities to return.
+    The maximum number of results to return.
 
-- `filter(String filter)`
+- `filter(String filter)` -
 
-    A scalar filtering condition to filter matching entities. 
+    A boolean expression to filter results.
 
-    You can set this parameter to an empty string to skip scalar filtering. To build a scalar filtering condition, refer to [Filtering](https://milvus.io/docs/boolean.md). 
+- `outputFields(List<String> outputFields)` -
 
-- `outputFields(List<String> outputFields)`
+    A list of field names to include in the output.
 
-    A list of field names to include in each entity in return.
+- `vectors(List<BaseVector> vectors)` -
 
-    The value defaults to **None**. If left unspecified, all fields in the collection are selected as the output fields.
+    A list of vectors to search with.
 
-- `vectors(List<BaseVector> vectors)`
+- `roundDecimal(int roundDecimal)` -
 
-    Set the target vectors to do ANN search.
+    The number of decimal places for distance/score rounding.
 
-    BaseVector is a base class for abstract vector classes. The following classes are derived from BaseVector. Choose the correct class as input according to DataType of the vector field.
+- `searchParams(Map<String, Object> searchParams)` -
 
-    <table>
-       <tr>
-         <th><p><strong>Class Name</strong></p></th>
-         <th><p><strong>Constructors</strong></p></th>
-         <th><p><strong>Description</strong></p></th>
-       </tr>
-       <tr>
-         <td><p>FloatVec</p></td>
-         <td><p>FloatVec(List&lt;Float&gt; data)</p><p>FloatVec(float&#91;&#93; data)</p></td>
-         <td><p>For DataType.FloatVector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>BinaryVec</p></td>
-         <td><p>BinaryVec(ByteBuffer data)</p><p>BinaryVec(byte&#91;&#93; data)</p></td>
-         <td><p>For DataType.BinaryVector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>Float16Vec</p></td>
-         <td><p>Float16Vec(ByteBuffer data)</p><p>Float16Vec(byte&#91;&#93; data)</p><p>Float16Vec(List&lt;Float&gt; data)</p></td>
-         <td><p>For DataType.Float16Vector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>BFloat16Vec</p></td>
-         <td><p>BFloat16Vec(ByteBuffer data)</p><p>BFloat16Vec(byte&#91;&#93; data)</p><p>BFloat16Vec(List&lt;Float&gt; data)</p></td>
-         <td><p>For DataType.BFloat16Vector type field.</p></td>
-       </tr>
-       <tr>
-         <td><p>SparseFloatVec</p></td>
-         <td><p>SparseFloatVec(SortedMap&lt;Long, Float&gt; data)</p></td>
-         <td><p>For DataType.SparseFloatVector type field.</p></td>
-       </tr>
-    </table>
+    Additional search parameters as key-value pairs.
 
-- `roundDecimal(int decimal)`
+- `consistencyLevel(ConsistencyLevel consistencyLevel)` -
 
-How many digits are reserved after the decimal point.
+    The consistency level for the operation.
 
-- `searchParams(Map<String, Object> searchParams)`
+- `ignoreGrowing(boolean ignoreGrowing)` -
 
-A JSON format string for extra serach parameters.
+    Whether to ignore growing segments during the operation.
 
-- `consistencyLevel([ConsistencyLevel](../Collections/ConsistencyLevel.md) consistencyLevel)`
+- `timezone(String timezone)` -
 
-    The consistency level of the target collection.
+    The timezone string for time-related filters.
 
-    The value defaults to the one specified when you create the current collection, with options of **Strong** (**0**), **Bounded** (**1**), **Session** (**2**), and **Eventually** (**3**).
+- `groupByFieldName(String groupByFieldName)` -
 
-    <div class="admonition note">
+    The field name to group search results by.
 
-    <p><b>what is the consistency level?</b></p>
+- `batchSize(long batchSize)` -
 
-    <p>Consistency in a distributed database specifically refers to the property that ensures every node or replica has the same view of data when writing or reading data at a given time.</p>
-    <p>Milvus supports four consistency levels: <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>. The default consistency level in Milvus is <strong>Bounded Staleness</strong>.</p>
-    <p>You can easily tune the consistency level when conducting a vector similarity search or query to make it best suit your application.</p>
+    The batch size for iterator operations.
 
-    </div>
+- `filterTemplateValues(Map<String, Object> filterTemplateValues)` -
 
-- `ignoreGrowing(boolean ignoreGrwing)`
-
-Ignore growing segments or not.
-
-- `groupByFieldName(String fieldName)`
-
-Sets the field name to do grouping for results.
-
-- `batchSize(long size)`
-
-A value to define the number of entities returned per batch.
-
-- `externalFilterFunc(Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc)`
-
-    A list of external filter functions, used to further filter the search results.
-
-**RETURN TYPE:**
-
-*SearchIteratorV2*
+    A map of template variable values for parameterized filters.
 
 **RETURNS:**
 
-A *SearchIteratorV2* object to iterate search results, which offers the following methods:
+*SearchIteratorV2*
 
-- `List<QueryResultsWrapper.RowRecord> next()`
-
-    Returns a batch of results.
-
-- `close()`
-
-    Releases the cache results.
+*SearchIteratorV2*
 
 **EXCEPTIONS:**
 
-- **MilvusClientExceptions**
+- **MilvusClientException**
 
     This exception will be raised when any error occurs during this operation.
 
@@ -173,68 +117,44 @@ A *SearchIteratorV2* object to iterate search results, which offers the followin
 
 ```java
 import io.milvus.orm.iterator.SearchIteratorV2;
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.common.ConsistencyLevel;
-import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.vector.request.SearchIteratorReqV2;
 import io.milvus.v2.service.vector.request.data.FloatVec;
 import io.milvus.v2.service.vector.response.SearchResp;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.common.IndexParam;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
-// 1. Set up a client
-ConnectConfig connectConfig = ConnectConfig.builder()
-        .uri("http://localhost:19530")
-        .token("root:Milvus")
-        .build();
-        
-MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
-// 2. Prepare inputs
-List<Float> vector = generateFloatVector();
-
-Map<String,Object> extraParams = new HashMap<>();
-extraParams.put("radius",15.0);
-
-Function<List<SearchResp.SearchResult>, List<SearchResp.SearchResult>> externalFilterFunc = (List<SearchResp.SearchResult> src)->{
-    List<SearchResp.SearchResult> newRes = new ArrayList<>();
-    for (SearchResp.SearchResult res : src) {
-        long id = (long)res.getId();
-        if (id%2 == 0) {
-            newRes.add(res);
-        }
-    }
-    return newRes;
-};
-
-// 3. Iterator search
+// Create a SearchIteratorV2 for paginated vector search.
+// V2 is recommended over V1: 20-30% faster with better recall.
 SearchIteratorV2 searchIterator = client.searchIteratorV2(SearchIteratorReqV2.builder()
-        .collectionName("test")
-        .outputFields(Lists.newArrayList("vector"))
-        .batchSize(50L)
-        .vectorFieldName("vector")
-        .vectors(Collections.singletonList(new FloatVec(vector)))
-        .filter("id > 100")
-        .searchParams(extraParams)
-        .topK(300)
+        .collectionName("my_collection")
+        .outputFields(Arrays.asList("userAge"))
+        .batchSize(50)
+        .vectorFieldName("userFace")
+        .vectors(Collections.singletonList(new FloatVec(queryVector)))
+        .filter("userAge > 10 && userAge < 20")
+        .searchParams(new HashMap<>())
+        .limit(120)
         .metricType(IndexParam.MetricType.L2)
         .consistencyLevel(ConsistencyLevel.BOUNDED)
-        .externalFilterFunc(externalFilterFunc)
         .build());
 
-System.out.println("SearchIteratorV2 results:");
+// Iterate through search results
+int counter = 0;
 while (true) {
     List<SearchResp.SearchResult> res = searchIterator.next();
     if (res.isEmpty()) {
-        System.out.println("Search iteration finished, close");
         searchIterator.close();
         break;
     }
-
-    for (SearchResp.SearchResult record : res) {
-        System.out.println(record);
+    for (SearchResp.SearchResult result : res) {
+        System.out.println(result);
+        counter++;
     }
 }
+System.out.printf("%d search results returned%n", counter);
 ```

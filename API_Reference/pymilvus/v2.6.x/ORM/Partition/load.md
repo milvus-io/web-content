@@ -100,9 +100,9 @@ partition.load(
 
 The following operations are related to `load()`:
 
-- [drop()](https://zilliverse.feishu.cn/docx/D3sndK8DgoqDkUxaNGcctwcSnuE)
+- [drop()](drop.md)
 
-- [get_replicas()](https://zilliverse.feishu.cn/docx/YKwldu59qosZBsxdRdSc0l9Hnoe)
+- [get_replicas()](get_replicas.md)
 
-- [release()](https://zilliverse.feishu.cn/docx/ZQ2RdE2AOoH9bfx4k3Sc3Ny0ngb)
+- [release()](release.md)
 

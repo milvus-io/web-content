@@ -53,5 +53,5 @@ writer.commit(call_back=callback)
 
 ## Related methods
 
-- [append_row()](https://zilliverse.feishu.cn/docx/WCxIdVwCpoIaMUxbabWcSRCkn2g)
+- [append_row()](append_row.md)
 

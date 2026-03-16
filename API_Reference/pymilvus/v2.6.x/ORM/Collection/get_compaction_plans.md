@@ -62,9 +62,9 @@ collection.get_compaction_plans()
 
 The following operations are related to `get_compaction_plans()`:
 
-- [compact()](https://zilliverse.feishu.cn/docx/BHx6dnSmPoaqHAxKCvncbuk9nWb)
+- [compact()](compact.md)
 
-- [get_compaction_state()](https://zilliverse.feishu.cn/docx/AXcMd0xiOovIX6xR4ZrcKA15nwh)
+- [get_compaction_state()](get_compaction_state.md)
 
-- [wait_for_compaction_completed()](https://zilliverse.feishu.cn/docx/VFKIdx0tDoeAzSx4Ud6c3u5Snsf)
+- [wait_for_compaction_completed()](wait_for_compaction_completed.md)
 
