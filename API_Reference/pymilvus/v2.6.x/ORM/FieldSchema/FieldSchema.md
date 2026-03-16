@@ -26,7 +26,7 @@ FieldSchema(
 
     Name of the field.
 
-- **dtype** (*DataType*) -
+- **dtype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) -
 
     **[REQUIRED]**
 

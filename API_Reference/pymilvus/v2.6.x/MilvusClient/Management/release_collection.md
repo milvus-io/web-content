@@ -153,7 +153,7 @@ client.get_load_state(
 
 - [get_load_state()](get_load_state.md)
 
-- load_collection()
+- [load_collection()](load_collection.md)
 
 - [refresh_load()](refresh_load.md)
 

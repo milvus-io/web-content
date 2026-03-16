@@ -162,15 +162,3 @@ res = client.insert(
 # {'insert_count': 2}
 ```
 
-## Related methods
-
-- [delete()](delete.md)
-
-- [get()](get.md)
-
-- query()
-
-- search()
-
-- upsert()
-

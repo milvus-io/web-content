@@ -56,19 +56,3 @@ client.list_roles()
 # ['admin', 'public', 'read_only']
 ```
 
-## Related methods
-
-- [create_role()](create_role.md)
-
-- [describe_role()](describe_role.md)
-
-- drop_role()
-
-- [grant_privilege()](grant_privilege.md)
-
-- [grant_role()](grant_role.md)
-
-- [revoke_privileges()](revoke_privileges.md)
-
-- [revoke_role()](revoke_role.md)
-

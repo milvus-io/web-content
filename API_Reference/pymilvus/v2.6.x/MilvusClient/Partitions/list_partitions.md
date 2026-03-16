@@ -69,13 +69,13 @@ client.list_partitions(
 
 - [create_partition()](create_partition.md)
 
-- drop_partition()
+- [drop_partition()](drop_partition.md)
 
 - [get_partition_stats()](get_partition_stats.md)
 
 - [has_partition()](has_partition.md)
 
-- load_partitions()
+- [load_partitions()](load_partitions.md)
 
 - [release_partitions()](release_partitions.md)
 

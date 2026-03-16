@@ -19,7 +19,7 @@ add_field(
 
     The name of the field.
 
-- **datatype** (*DataType*) - 
+- **datatype** (*[DataType](../../MilvusClient/Collections/DataType.md)*) - 
 
     **[REQUIRED]**
 

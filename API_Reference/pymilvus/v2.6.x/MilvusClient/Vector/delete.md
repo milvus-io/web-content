@@ -139,15 +139,3 @@ client.delete(
 # {'delete_count': 2}
 ```
 
-## Related methods
-
-- [get()](get.md)
-
-- [insert()](insert.md)
-
-- query()
-
-- search()
-
-- upsert()
-

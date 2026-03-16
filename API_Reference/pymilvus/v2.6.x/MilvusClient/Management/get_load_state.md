@@ -99,7 +99,7 @@ client.get_load_state(
 
 ## Related methods
 
-- load_collection()
+- [load_collection()](load_collection.md)
 
 - [refresh_load()](refresh_load.md)
 

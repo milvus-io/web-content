@@ -124,19 +124,3 @@ client.describe_role(role_name="read_only")
 # }
 ```
 
-## Related methods
-
-- [create_role()](create_role.md)
-
-- drop_role()
-
-- [grant_privilege()](grant_privilege.md)
-
-- [grant_role()](grant_role.md)
-
-- [list_roles()](list_roles.md)
-
-- [revoke_privileges()](revoke_privileges.md)
-
-- [revoke_role()](revoke_role.md)
-

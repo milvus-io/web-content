@@ -133,7 +133,7 @@ client.list_indexes(collection_name="customized_setup")
 
 ## Related methods
 
-- add_index()
+- [add_index()](add_index.md)
 
 - [create_index()](create_index.md)
 

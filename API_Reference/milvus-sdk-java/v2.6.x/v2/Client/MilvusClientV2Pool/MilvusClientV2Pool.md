@@ -120,7 +120,7 @@ PoolConfig poolConfig = PoolConfig.builder()
 
 ## ConnectConfig
 
-Read the description on the **MilvusClientV2** page.
+Read the description on the **[MilvusClientV2](../MilvusClientV2/MilvusClientV2.md)** page.
 
 ## Examples
 

@@ -126,7 +126,7 @@ add_field(
 
     For more information, refer to [Nullable & Default](https://milvus.io/docs/nullable-and-default.md).
 
-- **default_value** (*DataType*)
+- **default_value** (*[DataType](../Collections/DataType.md)*)
 
     Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
 
@@ -191,7 +191,7 @@ add_field(
 
 **RETURN TYPE:**
 
-*CollectionSchema*
+*[CollectionSchema](CollectionSchema.md)*
 
 **RETURNS:**
 

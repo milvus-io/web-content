@@ -69,7 +69,7 @@ client.create_partition(
 
 ## Related methods
 
-- drop_partition()
+- [drop_partition()](drop_partition.md)
 
 - [get_partition_stats()](get_partition_stats.md)
 
@@ -77,7 +77,7 @@ client.create_partition(
 
 - [list_partitions()](list_partitions.md)
 
-- load_partitions()
+- [load_partitions()](load_partitions.md)
 
 - [release_partitions()](release_partitions.md)
 

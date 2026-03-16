@@ -71,19 +71,3 @@ client.create_user(user_name="user_1", password="P@ssw0rd")
 client.grant_role(user_name="user_1", role_name="read_only")
 ```
 
-## Related methods
-
-- [create_role()](create_role.md)
-
-- [describe_role()](describe_role.md)
-
-- drop_role()
-
-- [grant_privilege()](grant_privilege.md)
-
-- [list_roles()](list_roles.md)
-
-- [revoke_privileges()](revoke_privileges.md)
-
-- [revoke_role()](revoke_role.md)
-

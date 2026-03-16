@@ -66,7 +66,7 @@ client.refresh_load(
 
 - [get_load_state()](get_load_state.md)
 
-- load_collection()
+- [load_collection()](load_collection.md)
 
 - [release_collection()](release_collection.md)
 
