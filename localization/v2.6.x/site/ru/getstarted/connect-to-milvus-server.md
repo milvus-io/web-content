@@ -39,7 +39,7 @@ summary: >-
     </button></h2><ul>
 <li><p>Установлен SDK вашего языка. Подробнее см. в <a href="/docs/ru/install-pymilvus.md">Python SDK</a>, <a href="/docs/ru/install-java.md">Java SDK</a>, <a href="/docs/ru/install-go.md">Go SDK</a> или <a href="/docs/ru/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>Адрес сервера Milvus (для локального по умолчанию: <code translate="no">http://localhost:19530</code>, прокси-порт <strong>19530</strong>).</p></li>
-<li><p>Если <a href="/docs/ru/authenticate.md">включена аутентификация</a>, укажите либо <strong>токен</strong>, либо <strong>имя пользователя + пароль</strong>. Токен может быть <code translate="no">username:password</code> (например, <code translate="no">root:Milvus</code>). Подробнее см. в разделах <a href="/docs/ru/authenticate.md">Аутентификация доступа пользователей</a> и <a href="/docs/ru/users_and_roles.md">Создание пользователей и ролей</a>.</p></li>
+<li><p>Если <a href="/docs/ru/authenticate.md?tab=docker">включена аутентификация</a>, укажите либо <strong>токен</strong>, либо <strong>имя пользователя + пароль</strong>. Токен может быть <code translate="no">username:password</code> (например, <code translate="no">root:Milvus</code>). Подробнее см. в разделах <a href="/docs/ru/authenticate.md">Аутентификация доступа пользователей</a> и <a href="/docs/ru/users_and_roles.md">Создание пользователей и ролей</a>.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Подключение по URI (аутентификация отключена)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"

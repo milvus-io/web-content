@@ -37,7 +37,7 @@ summary: 本主题介绍如何建立客户端与 Milvus 服务器的连接，并
     </button></h2><ul>
 <li><p>已安装所使用语言的 SDK。有关详情，请参阅<a href="/docs/zh/install-pymilvus.md">Python SDK</a>、<a href="/docs/zh/install-java.md">Java SDK</a>、<a href="/docs/zh/install-go.md">Go SDK</a> 或<a href="/docs/zh/install-node.md">Nodejs SDK</a>。</p></li>
 <li><p>Milvus 服务器地址（本地默认地址：<code translate="no">http://localhost:19530</code> ，代理端口<strong>19530</strong>）。</p></li>
-<li><p>如果<a href="/docs/zh/authenticate.md">启用了身份验证</a>，请提供<strong>令牌</strong>或<strong>用户名 + 密码</strong>。令牌可以是<code translate="no">username:password</code> （如<code translate="no">root:Milvus</code> ）。有关详情，请参阅 "<a href="/docs/zh/authenticate.md">验证用户访问</a>"和 "<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>"。</p></li>
+<li><p>如果<a href="/docs/zh/authenticate.md?tab=docker">启用了身份验证</a>，请提供<strong>令牌</strong>或<strong>用户名+密码</strong>。令牌可以是<code translate="no">username:password</code> （如<code translate="no">root:Milvus</code> ）。有关详情，请参阅 "<a href="/docs/zh/authenticate.md">验证用户访问</a>"和 "<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>"。</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">通过 URI 连接（禁用身份验证）<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -145,7 +145,7 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>令牌格式为<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。文档明确指出<code translate="no">root:Milvus</code> 为默认凭证，《<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>》指南涵盖了用户管理。</p>
+<p>令牌格式为<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。文档明确指出<code translate="no">root:Milvus</code> 为默认凭据，而《<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>》指南则涉及用户管理。</p>
 </div>
 <h2 id="Configure-a-timeout" class="common-anchor-header">配置超时<button data-href="#Configure-a-timeout" class="anchor-icon" translate="no">
       <svg translate="no"

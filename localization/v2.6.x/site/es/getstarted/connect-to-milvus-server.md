@@ -39,7 +39,7 @@ summary: >-
     </button></h2><ul>
 <li><p>El SDK de su lenguaje instalado. Para más detalles, consulte <a href="/docs/es/install-pymilvus.md">Python SDK</a>, <a href="/docs/es/install-java.md">Java SDK</a>, <a href="/docs/es/install-go.md">Go SDK</a>, o <a href="/docs/es/install-node.md">Nodejs SDK</a>.</p></li>
 <li><p>Una dirección de servidor Milvus (para local por defecto: <code translate="no">http://localhost:19530</code>, puerto proxy <strong>19530</strong>).</p></li>
-<li><p>Si <a href="/docs/es/authenticate.md">la autenticación está activada</a>, proporcione un <strong>token</strong> o un <strong>nombre de usuario + contraseña</strong>. Un token puede ser <code translate="no">username:password</code> (por ejemplo, <code translate="no">root:Milvus</code>). Consulte <a href="/docs/es/authenticate.md">Autenticar el acceso de usuarios</a> y <a href="/docs/es/users_and_roles.md">Crear usuarios y funciones</a> para obtener más información.</p></li>
+<li><p>Si <a href="/docs/es/authenticate.md?tab=docker">la autenticación está activada</a>, proporcione un <strong>token</strong> o un <strong>nombre de usuario + contraseña</strong>. Un token puede ser <code translate="no">username:password</code> (por ejemplo, <code translate="no">root:Milvus</code>). Consulte <a href="/docs/es/authenticate.md">Autenticar el acceso de usuarios</a> y <a href="/docs/es/users_and_roles.md">Crear usuarios y funciones</a> para obtener más información.</p></li>
 </ul>
 <h2 id="Connect-by-URI-authentication-disabled" class="common-anchor-header">Conectar por URI (autenticación desactivada)<button data-href="#Connect-by-URI-authentication-disabled" class="anchor-icon" translate="no">
       <svg translate="no"
