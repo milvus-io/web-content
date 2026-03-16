@@ -28,6 +28,10 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         }
 
         // First pass: collect raw data keyed by record_id
+        if (!Array.isArray(this.records)) {
+            console.error('Failed to fetch bitable records — check base token and permissions')
+            return []
+        }
         const rawMap = new Map()
         for (const record of this.records) {
             if (!record.fields.Docs) continue
@@ -54,7 +58,9 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
             if (!rec) return { pageId: '', dirPath: '' }
 
             const slug = rec.slug
-            const hyphenIdx = slug.indexOf('-')
+            // Use lastIndexOf so slugs with a version prefix (e.g. "v2-Category-method")
+            // correctly extract just the trailing local name segment.
+            const hyphenIdx = slug.lastIndexOf('-')
             const localName = hyphenIdx === -1 ? slug : slug.slice(hyphenIdx + 1)
             const type = rec.type
 
