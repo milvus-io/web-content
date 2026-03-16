@@ -146,7 +146,7 @@ client.drop_index(
 
 ## Related methods
 
-- add_index()
+- [add_index()](add_index.md)
 
 - [create_index()](create_index.md)
 

@@ -197,7 +197,7 @@ print(json.dumps(resp.json(), indent=4, sort_keys=True))
 
 ## Related methods
 
-- bulk_import()
+- [bulk_import()](bulk_import.md)
 
 - [list_import_jobs()](list_import_jobs.md)
 

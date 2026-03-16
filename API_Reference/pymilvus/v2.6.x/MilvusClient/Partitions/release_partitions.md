@@ -117,7 +117,7 @@ res = client.get_load_state(
 
 - [create_partition()](create_partition.md)
 
-- drop_partition()
+- [drop_partition()](drop_partition.md)
 
 - [get_partition_stats()](get_partition_stats.md)
 
@@ -125,5 +125,5 @@ res = client.get_load_state(
 
 - [list_partitions()](list_partitions.md)
 
-- load_partitions()
+- [load_partitions()](load_partitions.md)
 

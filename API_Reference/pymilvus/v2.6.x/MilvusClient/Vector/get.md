@@ -141,15 +141,3 @@ res = client.get(
 # ]
 ```
 
-## Related methods
-
-- [delete()](delete.md)
-
-- [insert()](insert.md)
-
-- query()
-
-- search()
-
-- upsert()
-

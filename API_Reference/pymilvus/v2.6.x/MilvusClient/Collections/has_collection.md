@@ -64,23 +64,3 @@ client.has_collection(collection_name="test_collection_2")
 # False
 ```
 
-## Related methods
-
-- create_collection()
-
-- [create_schema()](create_schema.md)
-
-- describe_collection()
-
-- drop_collection()
-
-- get_collection_stats()
-
-- [list_collections()](list_collections.md)
-
-- rename_collection()
-
-- IndexType
-
-- DataType
-

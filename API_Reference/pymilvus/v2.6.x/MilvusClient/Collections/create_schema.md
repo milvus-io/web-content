@@ -123,23 +123,3 @@ schema.add_field(field_name="my_vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 # }
 ```
 
-## Related methods
-
-- create_collection()
-
-- describe_collection()
-
-- drop_collection()
-
-- get_collection_stats()
-
-- [has_collection()](has_collection.md)
-
-- [list_collections()](list_collections.md)
-
-- rename_collection()
-
-- IndexType
-
-- DataType
-

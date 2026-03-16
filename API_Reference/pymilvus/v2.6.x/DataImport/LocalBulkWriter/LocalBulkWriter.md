@@ -58,7 +58,7 @@ writer = LocalBulkWriter(
 
     </div>
 
-- **file_type** (*BulkFileType*) -
+- **file_type** (*[BulkFileType](../BulkFileType.md)*) -
 
     The type of the output file.
 

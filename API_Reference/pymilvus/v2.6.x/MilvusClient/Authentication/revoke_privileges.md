@@ -163,20 +163,3 @@ client.revoke_privilege(
     object_name="*"
 )
 ```
-
-## Related methods
-
-- [create_role()](create_role.md)
-
-- [describe_role()](describe_role.md)
-
-- drop_role()
-
-- [grant_privilege()](grant_privilege.md)
-
-- [grant_role()](grant_role.md)
-
-- [list_roles()](list_roles.md)
-
-- [revoke_role()](revoke_role.md)
-

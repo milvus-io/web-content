@@ -52,23 +52,3 @@ client.list_collections()
 # ['test_collection']
 ```
 
-## Related methods
-
-- create_collection()
-
-- [create_schema()](create_schema.md)
-
-- describe_collection()
-
-- drop_collection()
-
-- get_collection_stats()
-
-- [has_collection()](has_collection.md)
-
-- rename_collection()
-
-- IndexType
-
-- DataType
-

@@ -12,7 +12,7 @@ add_function(
 
 **PARAMETERS:**
 
-- `function` (*Function*)
+- `function` (*[Function](Function.md)*)
 
     **[REQUIRED]**
 

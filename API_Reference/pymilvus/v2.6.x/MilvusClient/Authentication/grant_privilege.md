@@ -117,20 +117,3 @@ for item in read_only_privileges:
         object_name=item["object_name"]
     )
 ```
-
-## Related methods
-
-- [create_role()](create_role.md)
-
-- [describe_role()](describe_role.md)
-
-- drop_role()
-
-- [grant_role()](grant_role.md)
-
-- [list_roles()](list_roles.md)
-
-- [revoke_privileges()](revoke_privileges.md)
-
-- [revoke_role()](revoke_role.md)
-
