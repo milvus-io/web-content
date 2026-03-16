@@ -18,7 +18,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -10,19 +10,19 @@ func NewIvfPQIndex(metricType MetricType, nlist int, m int, nbits int) Index
 
 - **metricType** (*[MetricType](../MetricType.md)*)
 
-      The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
+    The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
 - **nlist** (*int*)
 
-      The number of cluster units (inverted lists). Higher values speed up search but reduce recall. Typical range: 1-65536.
+    The number of cluster units (inverted lists). Higher values speed up search but reduce recall. Typical range: 1-65536.
 
 - **m** (*int*)
 
-      The m.
+    The m.
 
 - **nbits** (*int*)
 
-      The number of bits for product quantization encoding. Typically 8.
+    The number of bits for product quantization encoding. Typically 8.
 
 **RETURNS:**
 

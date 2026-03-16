@@ -19,13 +19,13 @@ result, err := client.DescribeRole(ctx, option)
 
 - **roleName** (*string*)
 
-      The name of the role.
+    The name of the role.
 
 **OPTION METHODS:**
 
 - `WithDbName(dbName string)`
 
-      Specifies the database to use for the operation.
+    Specifies the database to use for the operation.
 
 **RETURN TYPE:**
 
@@ -39,7 +39,7 @@ The role details including granted privileges. Returns an error if the operation
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

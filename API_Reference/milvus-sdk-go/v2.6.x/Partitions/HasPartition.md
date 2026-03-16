@@ -18,11 +18,11 @@ result, err := client.HasPartition(ctx, option)
 
 - **collectionName** (*string*)
 
-  The name of the target collection.
+The name of the target collection.
 
 - **partitionName** (*string*)
 
-  The name of the partition to check.
+The name of the partition to check.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ A boolean indicating whether the resource exists. Returns an error if the operat
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

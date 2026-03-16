@@ -18,11 +18,11 @@ err := client.ReleasePartitions(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **partitionNames** (*...string*)
 
-      The name(s) of the partition(s).
+    The name(s) of the partition(s).
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

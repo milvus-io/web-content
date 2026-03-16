@@ -10,7 +10,7 @@ func NewIvfRabitQAnnParam(nprobe int) *ivfRabitQAnnParam
 
 - **nprobe** (*int*)
 
-      The number of clusters to search. Higher values improve recall but increase latency.
+    The number of clusters to search. Higher values improve recall but increase latency.
 
 **RETURNS:**
 

@@ -28,23 +28,23 @@ entity.NewFunction().
 
 - `WithName(name string)`
 
-      Sets the name of the function.
+    Sets the name of the function.
 
 - `WithInputFields(inputFields ...string)`
 
-      Sets the input field names for the function.
+    Sets the input field names for the function.
 
 - `WithOutputFields(outputFields ...string)`
 
-      Sets the output field names for the function.
+    Sets the output field names for the function.
 
 - `WithType(funcType FunctionType)`
 
-      Sets the function type (BM25, TextEmbedding, Rerank).
+    Sets the function type (BM25, TextEmbedding, Rerank).
 
 - `WithParam(key string, value any)`
 
-      Sets a function parameter key-value pair.
+    Sets a function parameter key-value pair.
 
 ## Example
 

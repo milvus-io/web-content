@@ -22,25 +22,25 @@ result, err := client.Delete(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithExpr(expr string)`
 
-      Sets the expr for the operation.
+    Sets the expr for the operation.
 
 - `WithInt64IDs(fieldName string, ids []int64)`
 
-      Sets the int64 i ds for the operation.
+    Sets the int64 i ds for the operation.
 
 - `WithStringIDs(fieldName string, ids []string)`
 
-      Sets the string i ds for the operation.
+    Sets the string i ds for the operation.
 
 - `WithPartition(partitionName string)`
 
-      Sets the partition for the operation.
+    Sets the partition for the operation.
 
 **RETURN TYPE:**
 
@@ -54,7 +54,7 @@ The delete result. Returns an error if the operation fails.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

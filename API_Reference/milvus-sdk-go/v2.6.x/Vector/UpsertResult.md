@@ -13,8 +13,8 @@ type UpsertResult struct {
 
 - **UpsertCount** (*int64*)
 
-      The number of affected entities.
+    The number of affected entities.
 
 - **IDs** (*column.Column*)
 
-      The IDs of the affected entities.
+    The IDs of the affected entities.

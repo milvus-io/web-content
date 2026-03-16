@@ -33,73 +33,73 @@ result, err := client.SearchIterator(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **vector** (*entity.Vector*)
 
-      The query vectors for similarity search.
+    The query vectors for similarity search.
 
 **OPTION METHODS:**
 
 - `WithBatchSize(batchSize int)`
 
-      Sets the number of entities to fetch per iteration batch.
+    Sets the number of entities to fetch per iteration batch.
 
 - `WithPartitions(partitionNames ...string)`
 
-      Limits the operation to the specified partitions.
+    Limits the operation to the specified partitions.
 
 - `WithFilter(expr string)`
 
-      Applies a boolean filter expression to narrow results.
+    Applies a boolean filter expression to narrow results.
 
 - `WithTemplateParam(key string, val any)`
 
-      Sets a template parameter for expression evaluation.
+    Sets a template parameter for expression evaluation.
 
 - `WithOffset(offset int)`
 
-      Sets the number of results to skip before returning matches.
+    Sets the number of results to skip before returning matches.
 
 - `WithOutputFields(fieldNames ...string)`
 
-      Specifies which fields to include in the returned results.
+    Specifies which fields to include in the returned results.
 
 - `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 
-      Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
 
 - `WithANNSField(annsField string)`
 
-      Specifies which vector field to search against.
+    Specifies which vector field to search against.
 
 - `WithGroupByField(groupByField string)`
 
-      Groups search results by a scalar field value.
+    Groups search results by a scalar field value.
 
 - `WithGroupSize(groupSize int)`
 
-      Sets the number of results to return per group.
+    Sets the number of results to return per group.
 
 - `WithStrictGroupSize(strictGroupSize bool)`
 
-      Enforces exact group size for each group in results.
+    Enforces exact group size for each group in results.
 
 - `WithIgnoreGrowing(ignoreGrowing bool)`
 
-      Skips searching in growing segments for faster but potentially incomplete results.
+    Skips searching in growing segments for faster but potentially incomplete results.
 
 - `WithAnnParam(ap [index.AnnParam](AnnParam/AnnParam.md))`
 
-      Sets the approximate nearest neighbor search parameters (e.g., nprobe, ef).
+    Sets the approximate nearest neighbor search parameters (e.g., nprobe, ef).
 
 - `WithSearchParam(key, value string)`
 
-      Sets a custom search parameter key-value pair.
+    Sets a custom search parameter key-value pair.
 
 - `WithIteratorLimit(limit int64)`
 
-      WithIteratorLimit sets the limit of entries to iterate if limit < 0, then it will be set to Unlimited
+    WithIteratorLimit sets the limit of entries to iterate if limit < 0, then it will be set to Unlimited
 
 **RETURN TYPE:**
 
@@ -113,7 +113,7 @@ A SearchIterator for paginating through search results. Returns an error if the 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

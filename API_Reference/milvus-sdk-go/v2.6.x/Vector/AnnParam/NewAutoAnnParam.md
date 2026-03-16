@@ -10,7 +10,7 @@ func NewAutoAnnParam(level int) autoAnnParam
 
 - **level** (*int*)
 
-      The search precision level (1-5). Higher values increase recall at the cost of latency.
+    The search precision level (1-5). Higher values increase recall at the cost of latency.
 
 **RETURNS:**
 

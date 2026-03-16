@@ -18,7 +18,7 @@ result, err := client.DescribeResourceGroup(ctx, option)
 
 - **name** (*string*)
 
-      The name of the resource group.
+    The name of the resource group.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The resource group description including node configurations and capacity. Retur
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

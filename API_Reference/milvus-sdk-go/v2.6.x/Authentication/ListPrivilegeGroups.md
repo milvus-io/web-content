@@ -18,7 +18,7 @@ A list of privilege groups with their included privileges. Returns an error if t
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

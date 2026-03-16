@@ -18,7 +18,7 @@ result, err := client.GetCompactionState(ctx, option)
 
 - **compactionID** (*int64*)
 
-      The compaction i d value.
+    The compaction i d value.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The current state of the compaction operation. Returns an error if the operation
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

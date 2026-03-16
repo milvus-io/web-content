@@ -10,15 +10,15 @@ func NewGPUCagraIndex(metricType MetricType, intermediateGraphDegree, graphDegre
 
 - **metricType** (*[MetricType](../MetricType.md)*)
 
-      The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
+    The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
 - **intermediateGraphDegree** (*int*)
 
-      The degree of the intermediate graph during CAGRA construction.
+    The degree of the intermediate graph during CAGRA construction.
 
 - **graphDegree** (*int*)
 
-      The degree of the final graph. Lower values use less memory; higher values improve recall.
+    The degree of the final graph. Lower values use less memory; higher values improve recall.
 
 **RETURNS:**
 

@@ -18,11 +18,11 @@ result, err := client.DescribeIndex(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **indexName** (*string*)
 
-      The name of the index.
+    The name of the index.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ The index details including type, metric, and parameters. Returns an error if th
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

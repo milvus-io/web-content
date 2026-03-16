@@ -12,7 +12,7 @@ type AnnParam interface {
 
 - `Params() map[string]any`
 
-      Returns the search parameters as a key-value map.
+    Returns the search parameters as a key-value map.
 
 ## Example
 

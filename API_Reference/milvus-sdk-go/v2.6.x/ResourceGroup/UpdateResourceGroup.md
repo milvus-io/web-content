@@ -18,11 +18,11 @@ err := client.UpdateResourceGroup(ctx, option)
 
 - **name** (*string*)
 
-      The name of the resource group.
+    The name of the resource group.
 
 - **resourceGroupConfig** (**[entity.ResourceGroupConfig](ResourceGroupConfig.md)*)
 
-      The resource group config.
+    The resource group config.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

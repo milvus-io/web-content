@@ -28,37 +28,37 @@ entity.NewSchema().
 
 - `WithName(name string)`
 
-      WithName sets the name value of schema, returns schema itself.
+    WithName sets the name value of schema, returns schema itself.
 
 - `WithDescription(desc string)`
 
-      WithDescription sets the description value of schema, returns schema itself.
+    WithDescription sets the description value of schema, returns schema itself.
 
 - `WithAutoID(autoID bool)`
 
-      Enables or disables auto ID generation for the collection.
+    Enables or disables auto ID generation for the collection.
 
 - `WithDynamicFieldEnabled(dynamicEnabled bool)`
 
-      Enables or disables dynamic field support for flexible data insertion.
+    Enables or disables dynamic field support for flexible data insertion.
 
 - `WithField(f *[Field](Field.md))`
 
-      WithField adds a field into schema and returns schema itself.
+    WithField adds a field into schema and returns schema itself.
 
 - `WithFunction(f *[Function](Function.md))`
 
-      Adds a function definition (e.g., BM25, text embedding) to the schema.
+    Adds a function definition (e.g., BM25, text embedding) to the schema.
 
 **METHODS:**
 
 - `PKFieldName() string`
 
-      PKFieldName returns pk field name for this schemapb.
+    PKFieldName returns pk field name for this schemapb.
 
 - `PKField() *[Field`](Field.md)
 
-      PKField returns PK Field schema for this schema.
+    PKField returns PK Field schema for this schema.
 
 ## Example
 

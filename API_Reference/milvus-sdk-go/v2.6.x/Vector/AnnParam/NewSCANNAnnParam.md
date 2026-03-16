@@ -10,11 +10,11 @@ func NewSCANNAnnParam(nprobe int, reorderK int) scannAnnParam
 
 - **nprobe** (*int*)
 
-      The number of clusters to search. Higher values improve recall but increase latency.
+    The number of clusters to search. Higher values improve recall but increase latency.
 
 - **reorderK** (*int*)
 
-      The number of candidates to reorder using the original vectors. Must be >= topK.
+    The number of candidates to reorder using the original vectors. Must be >= topK.
 
 **RETURNS:**
 

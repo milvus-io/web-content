@@ -26,7 +26,7 @@ A list of names. Returns an error if the operation fails.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -18,7 +18,7 @@ result, err := client.DescribeReplica(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ A list of replica details including shard distribution. Returns an error if the 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

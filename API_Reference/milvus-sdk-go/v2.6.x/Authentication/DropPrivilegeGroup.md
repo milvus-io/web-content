@@ -18,7 +18,7 @@ err := client.DropPrivilegeGroup(ctx, option)
 
 - **groupName** (*string*)
 
-      The name of the privilege group.
+    The name of the privilege group.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

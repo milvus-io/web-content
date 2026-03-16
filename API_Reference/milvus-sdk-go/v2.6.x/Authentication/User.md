@@ -13,8 +13,8 @@ type User struct {
 
 - **UserName** (*string*)
 
-      The name of the user.
+    The name of the user.
 
 - **Roles** (*[]string*)
 
-      The list of assigned roles.
+    The list of assigned roles.

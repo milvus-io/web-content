@@ -10,7 +10,7 @@ func NewHNSWAnnParam(ef int) hsnwAnnParam
 
 - **ef** (*int*)
 
-      The size of the dynamic candidate list during search. Higher values improve recall but increase latency. Must be >= topK.
+    The size of the dynamic candidate list during search. Higher values improve recall but increase latency. Must be >= topK.
 
 **RETURNS:**
 

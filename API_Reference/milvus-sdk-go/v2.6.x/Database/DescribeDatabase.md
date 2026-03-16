@@ -18,7 +18,7 @@ result, err := client.DescribeDatabase(ctx, option)
 
 - **dbName** (*string*)
 
-      The name of the database.
+    The name of the database.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The database description including properties. Returns an error if the operation
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

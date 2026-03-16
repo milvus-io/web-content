@@ -18,15 +18,15 @@ err := client.DropIndexProperties(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **indexName** (*string*)
 
-      The name of the index.
+    The name of the index.
 
 - **keys** (*...string*)
 
-      The keys.
+    The keys.
 
 **RETURN TYPE:**
 
@@ -40,7 +40,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

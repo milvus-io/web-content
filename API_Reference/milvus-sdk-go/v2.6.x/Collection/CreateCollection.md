@@ -32,57 +32,57 @@ err := client.CreateCollection(ctx, option)
 
 - **name** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **collectionSchema** (**[entity.Schema](Schema.md)*)
 
-      The schema defining the collection fields and their data types.
+    The schema defining the collection fields and their data types.
 
 **OPTION METHODS:**
 
 - `WithAutoID(autoID bool)`
 
-      Sets whether to automatically generate IDs for inserted entities.
+    Sets whether to automatically generate IDs for inserted entities.
 
 - `WithShardNum(shardNum int32)`
 
-      Sets the number of shards for data distribution across nodes.
+    Sets the number of shards for data distribution across nodes.
 
 - `WithDynamicSchema(dynamicSchema bool)`
 
-      Enables or disables the dynamic schema feature for flexible field insertion.
+    Enables or disables the dynamic schema feature for flexible field insertion.
 
 - `WithVarcharPK(varcharPK bool, maxLen int)`
 
-      Configures the collection to use varchar as the primary key type with a maximum length.
+    Configures the collection to use varchar as the primary key type with a maximum length.
 
 - `WithIndexOptions(indexOpts ...[CreateIndexOption](../Management/CreateIndex.md))`
 
-      Specifies the index options to apply when creating the collection.
+    Specifies the index options to apply when creating the collection.
 
 - `WithProperty(key string, value any)`
 
-      Sets a custom property key-value pair on the resource.
+    Sets a custom property key-value pair on the resource.
 
 - `WithConsistencyLevel(cl [entity.ConsistencyLevel](ConsistencyLevel.md))`
 
-      Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
 
 - `WithMetricType(metricType [entity.MetricType](../Management/MetricType.md))`
 
-      Sets the distance metric type for vector similarity search (e.g., COSINE, L2, IP).
+    Sets the distance metric type for vector similarity search (e.g., COSINE, L2, IP).
 
 - `WithPKFieldName(name string)`
 
-      Sets the name of the primary key field.
+    Sets the name of the primary key field.
 
 - `WithVectorFieldName(name string)`
 
-      Sets the name of the vector field.
+    Sets the name of the vector field.
 
 - `WithNumPartitions(numPartitions int64)`
 
-      Sets the number of partitions for the collection.
+    Sets the number of partitions for the collection.
 
 **RETURN TYPE:**
 
@@ -96,7 +96,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

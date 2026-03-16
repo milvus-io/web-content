@@ -18,11 +18,11 @@ err := client.DropDatabaseProperties(ctx, option)
 
 - **dbName** (*string*)
 
-      The name of the database.
+    The name of the database.
 
 - **propertyKeys** (*...string*)
 
-      The property keys.
+    The property keys.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -10,67 +10,67 @@ type MetricType string
 
 - **L2** = "L2"
 
-      Euclidean (L2) distance. Smaller values indicate greater similarity.
+    Euclidean (L2) distance. Smaller values indicate greater similarity.
 
 - **IP** = "IP"
 
-      Inner product distance. Larger values indicate greater similarity.
+    Inner product distance. Larger values indicate greater similarity.
 
 - **COSINE** = "COSINE"
 
-      Cosine similarity. Values range from -1 to 1, with 1 being most similar.
+    Cosine similarity. Values range from -1 to 1, with 1 being most similar.
 
 - **HAMMING** = "HAMMING"
 
-      Hamming distance for binary vectors.
+    Hamming distance for binary vectors.
 
 - **JACCARD** = "JACCARD"
 
-      Jaccard distance for binary vectors.
+    Jaccard distance for binary vectors.
 
 - **TANIMOTO** = "TANIMOTO"
 
-      Tanimoto distance for binary vectors.
+    Tanimoto distance for binary vectors.
 
 - **SUBSTRUCTURE** = "SUBSTRUCTURE"
 
-      Substructure distance for binary vectors.
+    Substructure distance for binary vectors.
 
 - **SUPERSTRUCTURE** = "SUPERSTRUCTURE"
 
-      Superstructure distance for binary vectors.
+    Superstructure distance for binary vectors.
 
 - **BM25** = "BM25"
 
-      BM25 relevance scoring for full-text search.
+    BM25 relevance scoring for full-text search.
 
 - **MHJACCARD** = "MHJACCARD"
 
-      MHJACCARD.
+    MHJACCARD.
 
 - **MaxSim** = "MAX_SIM"
 
-      MaxSim.
+    MaxSim.
 
 - **MaxSimCosine** = "MAX_SIM_COSINE"
 
-      MaxSimCosine.
+    MaxSimCosine.
 
 - **MaxSimL2** = "MAX_SIM_L2"
 
-      MaxSimL2.
+    MaxSimL2.
 
 - **MaxSimIP** = "MAX_SIM_IP"
 
-      MaxSimIP.
+    MaxSimIP.
 
 - **MaxSimHamming** = "MAX_SIM_HAMMING"
 
-      MaxSimHamming.
+    MaxSimHamming.
 
 - **MaxSimJaccard** = "MAX_SIM_JACCARD"
 
-      MaxSimJaccard.
+    MaxSimJaccard.
 
 ## Example
 

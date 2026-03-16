@@ -18,7 +18,7 @@ result, err := client.Flush(ctx, option)
 
 - **collName** (*string*)
 
-      The coll name.
+    The coll name.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ A FlushTask that can be used to wait for the flush to complete. Returns an error
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

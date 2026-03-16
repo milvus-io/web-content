@@ -13,8 +13,8 @@ type LoadState struct {
 
 - **State** (*LoadStateCode*)
 
-      The current state.
+    The current state.
 
 - **Progress** (*int64*)
 
-      The progress percentage.
+    The progress percentage.

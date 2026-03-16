@@ -10,87 +10,87 @@ type FieldType int32
 
 - **FieldTypeNone** = 0
 
-      No type specified.
+    No type specified.
 
 - **FieldTypeBool** = 1
 
-      Boolean type.
+    Boolean type.
 
 - **FieldTypeInt8** = 2
 
-      8-bit integer type.
+    8-bit integer type.
 
 - **FieldTypeInt16** = 3
 
-      16-bit integer type.
+    16-bit integer type.
 
 - **FieldTypeInt32** = 4
 
-      32-bit integer type.
+    32-bit integer type.
 
 - **FieldTypeInt64** = 5
 
-      64-bit integer type.
+    64-bit integer type.
 
 - **FieldTypeFloat** = 10
 
-      32-bit floating point type.
+    32-bit floating point type.
 
 - **FieldTypeDouble** = 11
 
-      64-bit floating point type.
+    64-bit floating point type.
 
 - **FieldTypeTimestamptz** = 15
 
-      Timezone-aware timestamp type.
+    Timezone-aware timestamp type.
 
 - **FieldTypeString** = 20
 
-      String type (alias for VarChar).
+    String type (alias for VarChar).
 
 - **FieldTypeVarChar** = 21
 
-      Variable-length string type.
+    Variable-length string type.
 
 - **FieldTypeArray** = 22
 
-      Array type with a fixed element type.
+    Array type with a fixed element type.
 
 - **FieldTypeJSON** = 23
 
-      JSON document type.
+    JSON document type.
 
 - **FieldTypeGeometry** = 24
 
-      Geometry spatial type.
+    Geometry spatial type.
 
 - **FieldTypeBinaryVector** = 100
 
-      Binary vector type.
+    Binary vector type.
 
 - **FieldTypeFloatVector** = 101
 
-      32-bit float vector type.
+    32-bit float vector type.
 
 - **FieldTypeFloat16Vector** = 102
 
-      16-bit float vector type.
+    16-bit float vector type.
 
 - **FieldTypeBFloat16Vector** = 103
 
-      Brain floating-point 16-bit vector type.
+    Brain floating-point 16-bit vector type.
 
 - **FieldTypeSparseVector** = 104
 
-      Sparse vector type.
+    Sparse vector type.
 
 - **FieldTypeInt8Vector** = 105
 
-      8-bit integer vector type.
+    8-bit integer vector type.
 
 - **FieldTypeStruct** = 201
 
-      Struct type with nested fields.
+    Struct type with nested fields.
 
 ## Example
 

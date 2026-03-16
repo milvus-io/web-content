@@ -18,11 +18,11 @@ err := client.DropCollectionProperties(ctx, option)
 
 - **collection** (*string*)
 
-      The collection.
+    The collection.
 
 - **propertyKeys** (*...string*)
 
-      The property keys.
+    The property keys.
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

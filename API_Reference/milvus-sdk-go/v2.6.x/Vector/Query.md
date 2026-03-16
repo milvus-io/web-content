@@ -26,41 +26,41 @@ result, err := client.Query(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **OPTION METHODS:**
 
 - `WithFilter(expr string)`
 
-      Applies a boolean filter expression to narrow results.
+    Applies a boolean filter expression to narrow results.
 
 - `WithTemplateParam(key string, val any)`
 
-      Sets a template parameter for expression evaluation.
+    Sets a template parameter for expression evaluation.
 
 - `WithOffset(offset int)`
 
-      Sets the number of results to skip before returning matches.
+    Sets the number of results to skip before returning matches.
 
 - `WithLimit(limit int)`
 
-      Sets the maximum number of results to return.
+    Sets the maximum number of results to return.
 
 - `WithOutputFields(fieldNames ...string)`
 
-      Specifies which fields to include in the returned results.
+    Specifies which fields to include in the returned results.
 
 - `WithConsistencyLevel(consistencyLevel [entity.ConsistencyLevel](../Collection/ConsistencyLevel.md))`
 
-      Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
+    Sets the consistency level for the operation (Strong, Bounded, Session, or Eventually).
 
 - `WithPartitions(partitionNames ...string)`
 
-      Limits the operation to the specified partitions.
+    Limits the operation to the specified partitions.
 
 - `WithIDs(ids column.Column)`
 
-      Sets the i ds for the operation.
+    Sets the i ds for the operation.
 
 **RETURN TYPE:**
 
@@ -74,7 +74,7 @@ The search or query results containing matched entities with scores and fields. 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

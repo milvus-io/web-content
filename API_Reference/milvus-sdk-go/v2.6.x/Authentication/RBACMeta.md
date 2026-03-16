@@ -15,16 +15,16 @@ type RBACMeta struct {
 
 - **Users** (*[]*UserInfo*)
 
-      The users.
+    The users.
 
 - **Roles** (*[]*Role*)
 
-      The list of assigned roles.
+    The list of assigned roles.
 
 - **RoleGrants** (*[]*RoleGrants*)
 
-      The role grants.
+    The role grants.
 
 - **PrivilegeGroups** (*[]*PrivilegeGroup*)
 
-      The privilege groups.
+    The privilege groups.

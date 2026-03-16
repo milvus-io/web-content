@@ -18,7 +18,7 @@ result, err := client.Compact(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The numeric result value. Returns an error if the operation fails.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

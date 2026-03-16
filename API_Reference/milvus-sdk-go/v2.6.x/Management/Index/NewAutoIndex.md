@@ -10,7 +10,7 @@ func NewAutoIndex(metricType MetricType) Index
 
 - **metricType** (*[MetricType](../MetricType.md)*)
 
-      The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
+    The distance metric type for similarity search (e.g., index.COSINE, index.L2, index.IP).
 
 **RETURNS:**
 

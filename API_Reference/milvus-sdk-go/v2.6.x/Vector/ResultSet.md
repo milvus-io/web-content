@@ -18,42 +18,42 @@ type ResultSet struct {
 
 - **ResultCount** (*int*)
 
-      the returning entry count
+    the returning entry count
 
 - **GroupByValue** (*column.Column*)
 
-      The group-by column used for grouped results.
+    The group-by column used for grouped results.
 
 - **IDs** (*column.Column*)
 
-      auto generated id, can be mapped to the columns from `Insert` API
+    auto generated id, can be mapped to the columns from `Insert` API
 
 - **Fields** (*DataSet*)
 
-      output field data
+    output field data
 
 - **Scores** (*[]float32*)
 
-      distance to the target vector
+    distance to the target vector
 
 - **Recall** (*float32*)
 
-      recall of the query vector's search result (estimated by zilliz cloud)
+    recall of the query vector's search result (estimated by zilliz cloud)
 
 - **Err** (*error*)
 
-      search error if any
+    search error if any
 
 **METHODS:**
 
 - `GetColumn(fieldName string) column.Column`
 
-      GetColumn returns column with provided field name.
+    GetColumn returns column with provided field name.
 
 - `Len() int`
 
-      Returns the number of results.
+    Returns the number of results.
 
 - `Slice(start, end int) ResultSet`
 
-      Returns a subset of the results within the specified range.
+    Returns a subset of the results within the specified range.

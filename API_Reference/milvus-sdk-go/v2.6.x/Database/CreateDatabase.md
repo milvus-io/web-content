@@ -19,13 +19,13 @@ err := client.CreateDatabase(ctx, option)
 
 - **dbName** (*string*)
 
-      The name of the database.
+    The name of the database.
 
 **OPTION METHODS:**
 
 - `WithProperty(key string, val any)`
 
-      Sets a custom property key-value pair on the resource.
+    Sets a custom property key-value pair on the resource.
 
 **RETURN TYPE:**
 
@@ -39,7 +39,7 @@ Returns nil on success, or an error describing what went wrong.
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

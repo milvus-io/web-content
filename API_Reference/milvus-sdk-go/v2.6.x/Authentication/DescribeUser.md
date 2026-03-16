@@ -18,7 +18,7 @@ result, err := client.DescribeUser(ctx, option)
 
 - **userName** (*string*)
 
-      The name of the user.
+    The name of the user.
 
 **RETURN TYPE:**
 
@@ -32,7 +32,7 @@ The user description including assigned roles. Returns an error if the operation
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 

@@ -18,11 +18,11 @@ result, err := client.GetLoadState(ctx, option)
 
 - **collectionName** (*string*)
 
-      The name of the target collection.
+    The name of the target collection.
 
 - **partitionNames** (*...string*)
 
-      The name(s) of the partition(s).
+    The name(s) of the partition(s).
 
 **RETURN TYPE:**
 
@@ -36,7 +36,7 @@ The current load state of the collection or partitions. Returns an error if the 
 
 - **error**
 
-      Check `err != nil` for failure details.
+    Check `err != nil` for failure details.
 
 ## Example
 
