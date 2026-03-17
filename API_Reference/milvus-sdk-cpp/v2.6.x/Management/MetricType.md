@@ -2,6 +2,25 @@
 
 This enum specifies the distance metric used to compare vectors. Pass a `MetricType` value to `IndexDesc` when creating an index, and to search request arguments when running a search. The valid choices depend on the vector field's data type.
 
+```cpp
+enum class MetricType {
+    INVALID = 0,   // synonym: DEFAULT
+    DEFAULT = 0,
+    L2 = 1,
+    IP = 2,
+    COSINE = 3,
+    HAMMING = 101,
+    JACCARD = 102,
+    MHJACCARD = 103,
+    BM25 = 201,
+    MAX_SIM_COSINE = 301,
+    MAX_SIM_IP = 302,
+    MAX_SIM_L2 = 303,
+    MAX_SIM_JACCARD = 401,
+    MAX_SIM_HAMMING = 402,
+};
+```
+
 **VALUES:**
 
 *Dense float vectors (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`):*
@@ -42,3 +61,32 @@ This enum specifies the distance metric used to compare vectors. Pass a `MetricT
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <milvus/MilvusClientV2.h>
+#include <milvus/types/MetricType.h>
+using namespace milvus;
+
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+// Float vector: cosine similarity (recommended for unnormalized embeddings)
+IndexDesc idx_float("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
+idx_float.AddExtraParam("M", "16");
+idx_float.AddExtraParam("efConstruction", "200");
+
+// Binary vector: Hamming distance
+IndexDesc idx_bin("bin_vec", "bin_idx", IndexType::BIN_FLAT, MetricType::HAMMING);
+
+// Sparse vector: BM25 for full-text search
+IndexDesc idx_sparse("sparse_vec", "sparse_idx",
+                     IndexType::SPARSE_INVERTED_INDEX, MetricType::BM25);
+
+client->CreateIndex(
+    CreateIndexRequest()
+        .WithCollectionName("my_collection")
+        .WithSync(true)
+        .AddIndex(std::move(idx_float))
+        .AddIndex(std::move(idx_bin))
+        .AddIndex(std::move(idx_sparse)));
+```

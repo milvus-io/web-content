@@ -2,6 +2,26 @@
 
 This enum selects the index algorithm. Pass an `IndexType` value to `IndexDesc` when calling `CreateIndex()`. The valid choices depend on the field's data type.
 
+```cpp
+enum class IndexType {
+    INVALID = 0,
+    // Dense float — CPU
+    FLAT = 1, IVF_FLAT = 2, IVF_SQ8 = 3, IVF_PQ = 4,
+    HNSW = 5, DISKANN = 6, AUTOINDEX = 7, SCANN = 8,
+    HNSW_SQ = 9, HNSW_PQ = 10, HNSW_PRQ = 11, IVF_RABITQ = 12,
+    // Dense float — GPU
+    GPU_IVF_FLAT = 201, GPU_IVF_PQ = 202,
+    GPU_BRUTE_FORCE = 203, GPU_CAGRA = 204,
+    // Binary vectors
+    BIN_FLAT = 1001, BIN_IVF_FLAT = 1002, MINHASH_LSH = 1003,
+    // Scalar fields
+    TRIE = 1101, STL_SORT = 1102, INVERTED = 1103,
+    BITMAP = 1104, NGRAM = 1105,
+    // Sparse vectors
+    SPARSE_INVERTED_INDEX = 1201, SPARSE_WAND = 1202,
+};
+```
+
 **VALUES:**
 
 *Dense float vectors — CPU (`FLOAT_VECTOR`, `FLOAT16_VECTOR`, `BFLOAT16_VECTOR`, `INT8_VECTOR`):*
@@ -72,3 +92,32 @@ This enum selects the index algorithm. Pass an `IndexType` value to `IndexDesc` 
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <milvus/MilvusClientV2.h>
+#include <milvus/types/IndexType.h>
+using namespace milvus;
+
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+
+// HNSW for float vector (most common choice)
+IndexDesc idx_hnsw("vec", "vec_idx", IndexType::HNSW, MetricType::COSINE);
+idx_hnsw.AddExtraParam("M", "16");
+idx_hnsw.AddExtraParam("efConstruction", "200");
+
+// INVERTED for a VARCHAR scalar field
+IndexDesc idx_inv("name", "name_idx", IndexType::INVERTED);
+
+// SPARSE_INVERTED_INDEX for full-text search
+IndexDesc idx_sparse("sparse_vec", "sparse_idx",
+                     IndexType::SPARSE_INVERTED_INDEX, MetricType::BM25);
+
+client->CreateIndex(
+    CreateIndexRequest()
+        .WithCollectionName("my_collection")
+        .WithSync(true)
+        .AddIndex(std::move(idx_hnsw))
+        .AddIndex(std::move(idx_inv))
+        .AddIndex(std::move(idx_sparse)));
+```

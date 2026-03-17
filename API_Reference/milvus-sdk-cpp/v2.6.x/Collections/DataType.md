@@ -2,6 +2,31 @@
 
 This Enum specifies the data type of a collection field. Pass a `DataType` value when constructing a `FieldSchema` or calling `FieldSchema::WithDataType()`.
 
+```cpp
+enum class DataType {
+    UNKNOWN = 0,
+    BOOL = 1,
+    INT8 = 2,
+    INT16 = 3,
+    INT32 = 4,
+    INT64 = 5,
+    FLOAT = 10,
+    DOUBLE = 11,
+    VARCHAR = 21,
+    ARRAY = 22,
+    JSON = 23,
+    GEOMETRY = 24,
+    TIMESTAMPTZ = 26,
+    BINARY_VECTOR = 100,
+    FLOAT_VECTOR = 101,
+    FLOAT16_VECTOR = 102,
+    BFLOAT16_VECTOR = 103,
+    SPARSE_FLOAT_VECTOR = 104,
+    INT8_VECTOR = 105,
+    STRUCT = 201,
+};
+```
+
 **VALUES:**
 
 *Scalar types:*
@@ -54,3 +79,29 @@ This Enum specifies the data type of a collection field. Pass a `DataType` value
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <milvus/MilvusClientV2.h>
+#include <milvus/types/DataType.h>
+using namespace milvus;
+
+CollectionSchemaPtr schema = std::make_shared<CollectionSchema>();
+
+// Scalar fields
+schema->AddField(FieldSchema("id",   DataType::INT64,   "primary key").WithPrimaryKey(true));
+schema->AddField(FieldSchema("name", DataType::VARCHAR, "user name").WithMaxLength(200));
+schema->AddField(FieldSchema("age",  DataType::INT8,    "user age"));
+schema->AddField(FieldSchema("tags", DataType::ARRAY,   "tag list")
+                    .WithElementType(DataType::VARCHAR).WithMaxCapacity(10));
+schema->AddField(FieldSchema("meta", DataType::JSON,    "extra metadata"));
+
+// Vector field
+schema->AddField(FieldSchema("vec", DataType::FLOAT_VECTOR, "embedding").WithDimension(128));
+
+auto client = MilvusClientV2::Create();
+client->Connect(ConnectParam("http://localhost:19530").WithToken("root:Milvus"));
+client->CreateCollection(
+    CreateCollectionRequest()
+        .WithCollectionName("my_collection")
+        .WithCollectionSchema(schema));
+```

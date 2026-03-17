@@ -2,6 +2,19 @@
 
 This class holds the connection parameters passed to `MilvusClient::Connect()`. Use the constructor overloads for quick setup, then chain `With*()` methods to configure advanced settings such as TLS, keepalive, and timeouts.
 
+```cpp
+// Recommended: URI only (no authentication)
+explicit ConnectParam(const std::string& uri);
+
+// Recommended: URI + token
+ConnectParam(const std::string& uri, const std::string& token);
+
+// Deprecated: host/port constructors (replaced by URI-based constructors above)
+ConnectParam(std::string host, uint16_t port);
+ConnectParam(std::string host, uint16_t port, const std::string& token);
+ConnectParam(std::string host, uint16_t port, std::string username, std::string password);
+```
+
 **PARAMETERS:**
 
 - **uri** (*const std::string&*)
@@ -30,55 +43,85 @@ This class holds the connection parameters passed to `MilvusClient::Connect()`. 
 
 ## Request Syntax
 
+```cpp
+ConnectParam param(uri, token)
+    .WithConnectTimeout(connect_timeout_ms)
+    .WithKeepaliveTimeMs(keepalive_time_ms)
+    .WithKeepaliveTimeoutMs(keepalive_timeout_ms)
+    .WithKeepaliveWithoutCalls(keepalive_without_calls)
+    .WithRpcDeadlineMs(rpc_deadline_ms)
+    .WithTls()
+    .WithDbName(db_name);
+```
+
 **REQUEST METHODS:**
 
 - `WithUri(const std::string& uri)`
 
-      Sets the server URI. Overrides the value supplied in the constructor. Default: `"http://localhost:19530"`.
+    Sets the server URI. Overrides the value supplied in the constructor. Default: `"http://localhost:19530"`.
 
 - `WithToken(const std::string& token)`
 
-      Sets the authorization token. Calling this resets any username/password previously set via `WithAuthorizations()`.
+    Sets the authorization token. Calling this resets any username/password previously set via `WithAuthorizations()`.
 
 - `WithAuthorizations(std::string username, std::string password)`
 
-      Sets the username and password for authentication. Calling this resets any token previously set via `WithToken()`.
+    Sets the username and password for authentication. Calling this resets any token previously set via `WithToken()`.
 
 - `WithConnectTimeout(uint64_t connect_timeout_ms)`
 
-      Timeout in milliseconds to wait for the gRPC channel to reach the `READY` state. Default: `10000`.
+    Timeout in milliseconds to wait for the gRPC channel to reach the `READY` state. Default: `10000`.
 
 - `WithKeepaliveTimeMs(uint64_t keepalive_time_ms)`
 
-      Interval in milliseconds between keepalive pings. Default: `10000`.
+    Interval in milliseconds between keepalive pings. Default: `10000`.
 
 - `WithKeepaliveTimeoutMs(uint64_t keepalive_timeout_ms)`
 
-      Timeout in milliseconds to wait for a keepalive ping acknowledgement before closing the connection. Default: `5000`.
+    Timeout in milliseconds to wait for a keepalive ping acknowledgement before closing the connection. Default: `5000`.
 
 - `WithKeepaliveWithoutCalls(bool keepalive_without_calls)`
 
-      When `true`, keepalive pings are sent even when there are no active RPCs. Default: `true`.
+    When `true`, keepalive pings are sent even when there are no active RPCs. Default: `true`.
 
 - `WithRpcDeadlineMs(uint64_t rpc_deadline_ms)`
 
-      Maximum duration in milliseconds allowed for a single RPC call. A value of `0` means no deadline is enforced. Default: `0`.
+    Maximum duration in milliseconds allowed for a single RPC call. A value of `0` means no deadline is enforced. Default: `0`.
 
 - `WithTls()`
 
-      Enables TLS encryption without certificate verification.
+    Enables TLS encryption without certificate verification.
 
 - `WithTls(const std::string& server_name, const std::string& ca_cert)`
 
-      Enables TLS with server certificate verification using the given CA certificate file path.
+    Enables TLS with server certificate verification using the given CA certificate file path.
 
 - `WithTls(const std::string& server_name, const std::string& cert, const std::string& key, const std::string& ca_cert)`
 
-      Enables mutual TLS (mTLS). Provide the client certificate file, client key file, and CA certificate file paths.
+    Enables mutual TLS (mTLS). Provide the client certificate file, client key file, and CA certificate file paths.
 
 - `WithDbName(const std::string& db_name)`
 
-      Sets the default database to use after connecting. Default: `"default"`.
+    Sets the default database to use after connecting. Default: `"default"`.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+#include <milvus/MilvusClientV2.h>
+using namespace milvus;
+
+// Connect to a local Milvus instance
+ConnectParam param("http://localhost:19530");
+param.WithAuthorizations("root", "Milvus");
+
+// Connect to Zilliz Cloud
+// ConnectParam param("https://your-instance.zilliz.com", "your-api-key");
+
+auto client = MilvusClientV2::Create();
+auto status = client->Connect(param);
+if (!status.IsOk()) {
+    std::cerr << "Connect failed: " << status.Message() << std::endl;
+    return 1;
+}
+```

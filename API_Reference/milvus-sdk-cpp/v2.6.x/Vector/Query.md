@@ -2,7 +2,26 @@
 
 This operation issues a query with a set of criteria and returns a list of records that exactly match the query.
 
+```cpp
+Status Query(const QueryRequest& request, QueryResponse& response)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = QueryRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithPartitionNames(partition_names)
+    .WithOutputFields(output_field_names)
+    .WithConsistencyLevel(consistency_level)
+    .WithFilter(filter)
+    .WithFilterTemplates(value)
+    .WithLimit(limit)
+    .WithOffset(offset)
+    .WithIgnoreGrowing(ignore_growing)
+    .WithTimezone(timezone);
+```
 
 **REQUEST METHODS:**
 
@@ -76,7 +95,45 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto request = milvus::QueryRequest()
+                   .WithCollectionName(collection_name)
+                   .AddPartitionName(partition_name)
+                   .WithFilter(field_id + " in [1, 5, 10]")
+                   .AddOutputField(field_id)
+                   .AddOutputField(field_name)
+                   .AddOutputField(field_age)
+                   // set to EVENTUALLY level since the last query uses STRONG level and no data changed
+                   .WithConsistencyLevel(milvus::ConsistencyLevel::EVENTUALLY);
+
+std::cout << "\nQuery with expression: " << request.Filter() << std::endl;
+milvus::QueryResponse response;
+status = client->Query(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+auto query_results = response.Results();
+milvus::EntityRows output_rows;
+status = query_results.OutputRows(output_rows);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << "Query results:" << std::endl;
+for (const auto& row : output_rows) {
+    std::cout << "\t" << row << std::endl;
+}
+```

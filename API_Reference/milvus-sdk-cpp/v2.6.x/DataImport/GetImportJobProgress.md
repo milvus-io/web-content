@@ -2,7 +2,23 @@
 
 This operation retrieves the current progress and status of a bulk import job by its job ID. Poll this method after calling `CreateImportJobs()` to determine when the import is complete.
 
+```cpp
+static nlohmann::json BulkImport::GetImportJobProgress(
+    const std::string& url,
+    const std::string& job_id,
+    const std::string& db_name = "default",
+    const std::string& api_key = "")
+```
+
 ## Request Syntax
+
+```cpp
+auto resp = milvus::BulkImport::GetImportJobProgress(
+    url,
+    job_id,
+    db_name,
+    api_key);
+```
 
 **PARAMETERS:**
 
@@ -40,3 +56,45 @@ A JSON object describing job progress, or `nullptr` on failure. Includes fields 
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root", "Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Create a job first
+auto create_resp = milvus::BulkImport::CreateImportJobs(
+    "http://localhost:19530",
+    "my_collection",
+    {"parquet-folder/1.parquet"},
+    "default",
+    "root:Milvus"
+);
+
+std::string job_id = create_resp["data"]["jobId"];
+
+// Poll for progress
+while (true) {
+    auto progress_resp = milvus::BulkImport::GetImportJobProgress(
+        "http://localhost:19530",
+        job_id,
+        "default",
+        "root:Milvus"
+    );
+
+    if (progress_resp.is_null()) {
+        std::cout << "Failed to get progress" << std::endl;
+        break;
+    }
+
+    std::string state = progress_resp["data"]["state"];
+    int progress = progress_resp["data"]["progress"];
+    std::cout << "State: " << state << "  Progress: " << progress << "%" << std::endl;
+
+    if (state == "Completed" || state == "Failed") break;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+}
+```
