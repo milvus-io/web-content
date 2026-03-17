@@ -2,7 +2,29 @@
 
 This operation conducts a hybrid search within a collection based on the given parameters and returns the search results.
 
+```cpp
+Status HybridSearch(const HybridSearchRequest& request, HybridSearchResponse& response)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = HybridSearchRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithPartitionNames(partition_names)
+    .WithOutputFields(output_field_names)
+    .WithConsistencyLevel(consistency_level)
+    .WithSubRequests(requests)
+    .WithRerank(rerank)
+    .WithLimit(limit)
+    .WithOffset(offset)
+    .WithRoundDecimal(round_decimal)
+    .WithIgnoreGrowing(ignore_growing)
+    .WithGroupByField(field_name)
+    .WithGroupSize(group_size)
+    .WithStrictGroupSize(strict_group_size);
+```
 
 **REQUEST METHODS:**
 
@@ -84,7 +106,74 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// generate query vectors
+std::mt19937 rng(std::random_device{}());
+std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+std::vector<float> dense_vec(dimension);
+std::generate(dense_vec.begin(), dense_vec.end(), [&]() { return dist(rng); });
+
+std::uniform_int_distribution<uint32_t> idx_dist(0, 49);
+std::map<uint32_t, float> sparse_vec;
+for (int d = 0; d < 5; ++d) {
+    sparse_vec[idx_dist(rng)] = dist(rng);
+}
+
+// do hybrid search
+auto sub_req1 = milvus::SubSearchRequest()
+                    .WithLimit(5)
+                    .WithAnnsField(field_dense)
+                    .WithFilter(field_flag + " == 5")
+                    .AddFloatVector(dense_vec);
+
+auto sub_req2 = milvus::SubSearchRequest()
+                    .WithLimit(15)
+                    .WithAnnsField(field_sparse)
+                    .WithFilter(field_flag + " in [1, 3]")
+                    .AddSparseVector(sparse_vec);
+
+auto reranker = std::make_shared<milvus::WeightedRerank>(std::vector<float>{0.5, 0.5});
+
+auto request =
+    milvus::HybridSearchRequest()
+        .WithCollectionName(collection_name)
+        .WithLimit(10)
+        .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req1)))
+        .AddSubRequest(std::make_shared<milvus::SubSearchRequest>(std::move(sub_req2)))
+        .WithRerank(reranker)
+        .AddOutputField(field_flag)
+        .AddOutputField(field_text)
+        // set to BOUNDED level to accept data inconsistency within a time window (default is 5 seconds)
+        .WithConsistencyLevel(milvus::ConsistencyLevel::BOUNDED);
+
+milvus::SearchResponse response;
+status = client->HybridSearch(request, response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (auto& result : response.Results().Results()) {
+    std::cout << "Result of one target vector:" << std::endl;
+    milvus::EntityRows output_rows;
+    status = result.OutputRows(output_rows);
+    if (!status.IsOk()) {
+        std::cout << status.Message() << std::endl;
+    }
+    for (const auto& row : output_rows) {
+        std::cout << "\t" << row << std::endl;
+    }
+}
+```

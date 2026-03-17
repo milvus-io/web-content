@@ -2,21 +2,38 @@
 
 This operation loads collection data into the query node's CPU and memory. If the request is in sync mode, this operation checks the collection's loading progress and waits until the collection is completely loaded into the query node. Otherwise, it will return immediately.
 
+```cpp
+Status LoadCollection(const LoadCollectionRequest& request)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = LoadCollectionRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithSync(sync)
+    .WithReplicaNum(replica_num)
+    .WithTimeoutMs(timeout_ms)
+    .WithRefresh(refresh)
+    .WithLoadFields(load_fields)
+    .WithSkipDynamicField(skip_dynamic_field)
+    .WithTargetResourceGroups(target_resource_groups);
+```
 
 **REQUEST METHODS:**
 
 - `WithDatabaseName(const std::string& db_name)`
 
-     Sets the target database name. The default database applies if it is empty.
+    Sets the target database name. The default database applies if it is empty.
 
 - `WithCollectionName(const std::string& collection_name)`
 
-     Sets the name of the target collection.
+    Sets the name of the target collection.
 
 - `WithSync(bool sync)`
 
-     Sets the sync mode. The default value is **True**. 
+    Sets the sync mode. The default value is **True**. 
 
     - **True**: wait the collection to be fully loaded.
 
@@ -24,7 +41,7 @@ This operation loads collection data into the query node's CPU and memory. If th
 
 - `WithReplicaNum(int64_t replica_num)`
 
-     Sets the number of replicas.
+    Sets the number of replicas.
 
 - `WithTimeoutMs(int64_t timeout_ms)`
 
@@ -54,7 +71,7 @@ This operation loads collection data into the query node's CPU and memory. If th
 
 - `WithTargetResourceGroups(const std::set<std::string>& target_resource_groups)`
 
-     Sets the target resource groups.
+    Sets the target resource groups.
 
 **RETURNS:**
 
@@ -66,7 +83,25 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->LoadCollection(
+    milvus::LoadCollectionRequest()
+        .WithCollectionName(collection_name)
+);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```

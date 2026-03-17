@@ -2,7 +2,20 @@
 
 This operation gets descriptions and parameters of the specified index.
 
+```cpp
+Status DescribeIndex(const DescribeIndexRequest& request, DescribeIndexResponse& response)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = DescribeIndexRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithFieldName(field_name)
+    .WithIndexName(index_name)
+    .WithTimestamp(ts);
+```
 
 **REQUEST METHODS:**
 
@@ -42,7 +55,36 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::DescribeIndexResponse desc_response;
+status = client->DescribeIndex(milvus::DescribeIndexRequest()
+                                        .WithDatabaseName(db_name)
+                                        .WithCollectionName(collection_name)
+                                        .WithIndexName(index_name),
+                                    desc_response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+for (const auto& desc : desc_response.Descs()) {
+    std::cout << "\tIndexName: " << desc.IndexName() << std::endl;
+    std::cout << "\tIndexType: " << std::to_string(desc.IndexType()) << std::endl;
+    std::cout << "\tMetricType: " << std::to_string(desc.MetricType()) << std::endl;
+    std::cout << "\tTotalRows: " << std::to_string(desc.TotalRows()) << std::endl;
+    std::cout << "\tIndexedRows: " << std::to_string(desc.IndexedRows()) << std::endl;
+    std::cout << "\tPendingRows: " << std::to_string(desc.PendingRows()) << std::endl;
+}
+```
