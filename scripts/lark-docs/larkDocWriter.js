@@ -1003,7 +1003,6 @@ class larkDocWriter {
             return content
         }))).join('') 
 
-        if (lang === 'C++') return; // to be removed once c++ is supported
 
         if (valid_langs.includes(lang)) {
             const prev_type = prev ? this.block_types[prev['block_type']-1] : null;
@@ -1017,8 +1016,7 @@ class larkDocWriter {
                 (next && next_type === 'code' && valid_langs.includes(next_lang) && next_lang !== lang)
             ) {
                 console.log('first block')
-                const values = this.__code_tabs(code, prev, next, blocks)
-                    .filter(tab => tab.value !== 'c++'); // to be removed once c++ is supported
+                const values = this.__code_tabs(code, prev, next, blocks);
 
                 return this.__code_block_split(elements, indent, lang, 'first', values);
             }
