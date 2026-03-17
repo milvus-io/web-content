@@ -2,7 +2,17 @@
 
 This operation returns a list of all collections, including brief information for each.
 
+```cpp
+Status ListCollections(const ListCollectionsRequest& request, ListCollectionsResponse& response)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = ListCollectionsRequest()
+    .WithDatabaseName(db_name)
+    .WithOnlyShowLoaded(only_show_loaded);
+```
 
 **REQUEST METHODS:**
 
@@ -24,7 +34,32 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListCollectionsResponse resp_list_coll;
+status = client->ListCollections(
+    milvus::ListCollectionsRequest()
+        .WithDatabaseName(db_name), 
+    resp_list_coll
+);
+
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << "\nCollections:" << std::endl;
+for (auto& name : resp_list_coll.CollectionNames()) {
+    std::cout << "\t" << name << std::endl;
+}
+```

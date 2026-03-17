@@ -2,7 +2,19 @@
 
 This operation drops the index from a field.
 
+```cpp
+Status DropIndex(const DropIndexRequest& request)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = DropIndexRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithFieldName(field_name)
+    .WithIndexName(index_name);
+```
 
 **REQUEST METHODS:**
 
@@ -38,7 +50,26 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->DropIndex(
+    milvus::DropIndexRequest()
+        .WithCollectionName(collection_name)
+        .WithFieldName(field_face)
+);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```

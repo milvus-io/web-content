@@ -32,7 +32,10 @@ program
         }
 
         const { base, sourceType, language, targets, images } = manualConfig
-        const { menuStructure, outputDir, imageDir } = targets
+        const configDir = path.dirname(path.resolve(opts.config))
+        const repoRoot = path.resolve(configDir, '..')
+        const { menuStructure, imageDir } = targets
+        const outputDir = path.resolve(repoRoot, targets.outputDir)
         const GenClass = sourceType === 'wiki' ? MilvusDocsGen : MilvusSdkDocsGen
         const gen = new GenClass(base, sourceType, menuStructure, imageDir, images.alt_texts, language)
         gen.skip_image_download = !!opts.skipImageDown

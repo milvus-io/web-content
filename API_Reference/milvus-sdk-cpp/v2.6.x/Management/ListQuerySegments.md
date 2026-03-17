@@ -2,7 +2,17 @@
 
 This operation retrieves information about loaded segments from query nodes.
 
+```cpp
+Status ListQuerySegments(const ListQuerySegmentsRequest& request, ListQuerySegmentsResponse& response)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = ListQuerySegmentsRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(name);
+```
 
 **REQUEST METHODS:**
 
@@ -24,7 +34,27 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::ListQuerySegmentsResponse response;
+status = client->ListQuerySegments(
+    milvus::ListQuerySegmentsRequest()
+        .WithCollectionName("my_collection"),
+    response);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+std::cout << "Segment count: " << response.Segments().size() << std::endl;
+```

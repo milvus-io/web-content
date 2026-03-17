@@ -2,7 +2,29 @@
 
 This operation creates a bulk import job to load data from files stored in object storage into a Milvus collection. It communicates directly with the Milvus server via its RESTful import API and returns a JSON object containing the assigned job ID. Use `GetImportJobProgress()` to monitor progress.
 
+```cpp
+static nlohmann::json BulkImport::CreateImportJobs(
+    const std::string& url,
+    const std::string& collection_name,
+    const std::vector<std::string>& files,
+    const std::string& db_name = "default",
+    const std::string& api_key = "",
+    const std::string& partition_name = "",
+    const nlohmann::json& options = nlohmann::json{})
+```
+
 ## Request Syntax
+
+```cpp
+auto resp = milvus::BulkImport::CreateImportJobs(
+    url,
+    collection_name,
+    files,
+    db_name,
+    api_key,
+    partition_name,
+    options);
+```
 
 **PARAMETERS:**
 
@@ -54,3 +76,30 @@ A JSON object containing the job ID on success, or `nullptr` on failure. The `jo
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+milvus::ConnectParam connect_param{"http://localhost:19530", "root", "Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+// Create an import job using local Milvus
+auto resp = milvus::BulkImport::CreateImportJobs(
+    "http://localhost:19530",               // Milvus server URL
+    "my_collection",                         // Target collection
+    {"parquet-folder/1.parquet",            // Files to import
+     "parquet-folder/2.parquet"},
+    "default",                              // Database name
+    "root:Milvus",                          // API key (user:password)
+    ""                                      // Partition name (optional)
+);
+
+if (!resp.is_null()) {
+    std::string job_id = resp["data"]["jobId"];
+    std::cout << "Import job created: " << job_id << std::endl;
+} else {
+    std::cout << "Failed to create import job" << std::endl;
+}
+```

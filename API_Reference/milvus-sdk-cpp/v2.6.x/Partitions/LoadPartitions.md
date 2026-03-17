@@ -2,7 +2,25 @@
 
 This operation loads the data of specific partitions in one collection into query nodes.
 
+```cpp
+Status LoadPartitions(const LoadPartitionsRequest& request)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = LoadPartitionsRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithPartitionNames(partition_names)
+    .WithSync(sync)
+    .WithReplicaNum(replica_num)
+    .WithTimeoutMs(timeout_ms)
+    .WithRefresh(refresh)
+    .WithLoadFields(load_fields)
+    .WithSkipDynamicField(skip_dynamic_field)
+    .WithTargetResourceGroups(target_resource_groups);
+```
 
 **REQUEST METHODS:**
 
@@ -66,7 +84,7 @@ This operation loads the data of specific partitions in one collection into quer
 
 - `AddTargetResourceGroups(const std::string& target_resource_group)`
 
-     Adds a target resource group.
+    Adds a target resource group.
 
 **RETURNS:**
 
@@ -78,7 +96,27 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->LoadPartitions(
+    milvus::LoadPartitionsRequest()
+        .WithCollectionName("my_collection")
+        .AddPartitionName("partition_1")
+        .AddPartitionName("partition_2")
+        .WithSync(true));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```

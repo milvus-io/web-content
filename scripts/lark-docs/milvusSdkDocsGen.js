@@ -166,7 +166,7 @@ class MilvusSdkDocsGen extends MilvusDocsGen {
         if (!code || !code.style) return ''
         const result = await larkDocWriter.prototype.__code.call(this, code, indent, prev, next, blocks)
         if (!result || !this.forcedLanguage) return result
-        return result.replace(/(`{3})\w*/m, `$1${this.forcedLanguage}`)
+        return result.replace(/(`{3})[^\n]*/m, `$1${this.forcedLanguage}`)
     }
 
     async write_doc(doc_title, doc_id=null) {

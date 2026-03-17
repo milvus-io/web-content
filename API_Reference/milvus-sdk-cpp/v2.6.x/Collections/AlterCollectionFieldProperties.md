@@ -2,7 +2,19 @@
 
 This operation alters a field's properties.
 
+```cpp
+Status AlterCollectionFieldProperties(const AlterCollectionFieldPropertiesRequest& request)
+```
+
 ## Request Syntax
+
+```cpp
+auto request = AlterCollectionFieldPropertiesRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithFieldName(field_name)
+    .WithProperties(properties);
+```
 
 **REQUEST METHODS:**
 
@@ -32,7 +44,26 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+status = client->AlterCollectionFieldProperties(
+    milvus::AlterCollectionFieldPropertiesRequest()
+        .WithCollectionName("my_collection")
+        .WithFieldName("my_field")
+        .AddProperty("max_length", "512"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+```

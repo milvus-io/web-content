@@ -1,6 +1,10 @@
 # QueryIterator()
 
-This operation returns a QueryIterator object based on scalar field(s) by filtering expression.
+This operation returns a QueryIterator object based on scalar field(s) by filtering expression. 
+
+```cpp
+Status QueryIterator(QueryIteratorRequest& request, QueryIteratorPtr& response)
+```
 
 <div class="alert note">
 
@@ -9,6 +13,22 @@ Do not disconnect the MilvusClientV2 when the iterator is in use. The order of t
 </div>
 
 ## Request Syntax
+
+```cpp
+auto request = QueryIteratorRequest()
+    .WithDatabaseName(db_name)
+    .WithCollectionName(collection_name)
+    .WithPartitionNames(partition_names)
+    .WithOutputFields(output_field_names)
+    .WithConsistencyLevel(consistency_level)
+    .WithFilter(filter)
+    .WithFilterTemplates(value)
+    .WithLimit(limit)
+    .WithOffset(offset)
+    .WithIgnoreGrowing(ignore_growing)
+    .WithTimezone(timezone)
+    .WithReduceStopForBest(reduce_stop_for_best);
+```
 
 **REQUEST METHODS:**
 
@@ -86,7 +106,65 @@ Check `status.IsOk()` to confirm success.
 
 - **StatusCode**
 
-      Check `status.Code()` and `status.Message()` for error details.
+    Check `status.Code()` and `status.Message()` for error details.
 
 ## Example
 
+```cpp
+#include "milvus/MilvusClientV2.h"
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+milvus::QueryIteratorRequest request;
+request.SetCollectionName(collection_name);
+request.SetBatchSize(batch);
+request.SetOffset(offset);
+request.SetLimit(limit);
+request.SetFilter(filter);
+request.AddOutputField(field_name);
+request.AddOutputField(field_age);
+request.AddOutputField("a");  // dynamic field
+
+milvus::QueryIteratorPtr iterator;
+status = client->QueryIterator(request, iterator);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+
+std::set<int64_t> ids;
+int pages = 0;
+uint64_t total_count = 0;
+while (true) {
+    milvus::QueryResults batch_results;
+    status = iterator->Next(batch_results);
+    if (!status.IsOk()) {
+        std::cout << status.Message() << std::endl;
+    }
+    auto batch_count = batch_results.GetRowCount();
+    if (batch_count == 0) {
+        std::cout << "query iteration finished" << std::endl;
+        break;
+    }
+    pages++;
+    total_count += batch_count;
+
+    milvus::EntityRows rows;
+    status = batch_results.OutputRows(rows);
+    if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
+    std::cout << "No." << std::to_string(pages) << " page " << std::to_string(rows.size()) << " rows fetched"
+              << std::endl;
+    std::cout << "\tthe first row: " << (*rows.begin()).dump() << std::endl;
+    std::cout << "\tthe last row: " << (*rows.rbegin()).dump() << std::endl;
+    for (const auto& row : rows) {
+        // std::cout << row.dump() << std::endl;
+        ids.insert(row[field_id].get<int64_t>());
+    }
+}
+```
