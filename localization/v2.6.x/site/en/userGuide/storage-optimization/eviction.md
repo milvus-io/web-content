@@ -149,7 +149,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>Low watermark</strong>: Eviction continues until usage falls below this value.</p></li>
 </ul>
 <div class="alert note">
-<p>This configuration takes effect only when <a href="/docs/v2.6.x/eviction.md#Enable-eviction">eviction is enabled</a>.</p>
+<p>This configuration takes effect only when <a href="/docs/eviction.md#Enable-eviction">eviction is enabled</a>.</p>
 </div>
 <p><strong>Example YAML</strong>:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">queryNode:</span>

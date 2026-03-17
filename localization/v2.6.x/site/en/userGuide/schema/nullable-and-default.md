@@ -45,9 +45,9 @@ summary: >-
 <li><p>Only scalar fields, excluding the primary field, support default values and the nullable attribute.</p></li>
 <li><p>JSON and Array fields do not support default values.</p></li>
 <li><p>Default values or the nullable attribute can only be configured during collection creation and cannot be modified afterward.</p></li>
-<li><p>Fields marked as nullable cannot be used as partition keys. For more information about partition keys, refer to <a href="/docs/v2.6.x/use-partition-key.md">Use Partition Key</a>.</p></li>
+<li><p>Fields marked as nullable cannot be used as partition keys. For more information about partition keys, refer to <a href="/docs/use-partition-key.md">Use Partition Key</a>.</p></li>
 <li><p>When creating an index on a scalar field with the nullable attribute enabled, null values will be excluded from the index.</p></li>
-<li><p><strong>JSON and ARRAY fields</strong>: When using <code translate="no">IS NULL</code> or <code translate="no">IS NOT NULL</code> operators to filter on JSON or ARRAY fields, these operators work at the column level, which indicates they only evaluate whether the entire JSON object or array is null. For instance, if a key inside a JSON object is null, it will not be recognized by the <code translate="no">IS NULL</code> filter. For more information, refer to <a href="/docs/v2.6.x/basic-operators.md">Basic Operators</a>.</p></li>
+<li><p><strong>JSON and ARRAY fields</strong>: When using <code translate="no">IS NULL</code> or <code translate="no">IS NOT NULL</code> operators to filter on JSON or ARRAY fields, these operators work at the column level, which indicates they only evaluate whether the entire JSON object or array is null. For instance, if a key inside a JSON object is null, it will not be recognized by the <code translate="no">IS NULL</code> filter. For more information, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">Nullable attribute<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -958,7 +958,7 @@ _, err = client.Insert(ctx, milvusclient.NewColumnBasedInsertOption(<span class=
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For more information on how nullable and default value settings take effect, refer to <a href="/docs/v2.6.x/nullable-and-default.md#Applicable-rules">Applicable rules</a>.</p>
+<p>For more information on how nullable and default value settings take effect, refer to <a href="/docs/nullable-and-default.md#Applicable-rules">Applicable rules</a>.</p>
 </div>
 <h3 id="Search-and-query-with-default-values" class="common-anchor-header">Search and query with default values<button data-href="#Search-and-query-with-default-values" class="anchor-icon" translate="no">
       <svg translate="no"

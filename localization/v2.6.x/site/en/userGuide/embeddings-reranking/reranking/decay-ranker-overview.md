@@ -117,7 +117,7 @@ beta: Milvus 2.6.x
 <li><p>Each decay ranker transforms raw numeric values into normalized relevance scores between 0-1</p></li>
 <li><p>The decay score represents how relevant an item is based on its “distance” from the ideal point</p></li>
 </ul>
-<p>The specific calculation formula varies depending on the decay ranker type. For details on how to calculate a decay score, refer to the dedicated pages for <a href="/docs/v2.6.x/gaussian-decay.md#Formula">Gaussian Decay</a>, <a href="/docs/v2.6.x/exponential-decay.md#Formula">Exponential Decay</a>, <a href="/docs/v2.6.x/linear-decay.md#Formula">Linear Decay</a>.</p>
+<p>The specific calculation formula varies depending on the decay ranker type. For details on how to calculate a decay score, refer to the dedicated pages for <a href="/docs/gaussian-decay.md#Formula">Gaussian Decay</a>, <a href="/docs/exponential-decay.md#Formula">Exponential Decay</a>, <a href="/docs/linear-decay.md#Formula">Linear Decay</a>.</p>
 <h3 id="Stage-3-Compute-final-scores" class="common-anchor-header">Stage 3: Compute final scores<button data-href="#Stage-3-Compute-final-scores" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -157,7 +157,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h3><p>Let’s see decay ranking in a practical scenario—searching for <strong>“AI research papers”</strong> with time-based decay:</p>
 <div class="alert note">
-<p>In this example, decay scores reflect how relevance diminishes with time—newer papers receive scores closer to 1.0, older papers receive lower scores. These values are calculated using a specific decay ranker. For details, refer to <a href="/docs/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>.</p>
+<p>In this example, decay scores reflect how relevance diminishes with time—newer papers receive scores closer to 1.0, older papers receive lower scores. These values are calculated using a specific decay ranker. For details, refer to <a href="/docs/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a>.</p>
 </div>
 <table>
    <tr>
@@ -256,9 +256,9 @@ beta: Milvus 2.6.x
 </table>
 <p>For detailed information about how each decay ranker calculates scores and specific decline patterns, refer to the dedicated documentation:</p>
 <ul>
-<li><p><a href="/docs/v2.6.x/gaussian-decay.md">Gaussian Decay</a></p></li>
-<li><p><a href="/docs/v2.6.x/exponential-decay.md">Exponential Decay</a></p></li>
-<li><p><a href="/docs/v2.6.x/linear-decay.md">Linear Decay</a></p></li>
+<li><p><a href="/docs/gaussian-decay.md">Gaussian Decay</a></p></li>
+<li><p><a href="/docs/exponential-decay.md">Exponential Decay</a></p></li>
+<li><p><a href="/docs/linear-decay.md">Linear Decay</a></p></li>
 </ul>
 <h2 id="Implementation-example" class="common-anchor-header">Implementation example<button data-href="#Implementation-example" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ beta: Milvus 2.6.x
       </svg>
     </button></h2><p>Decay rankers can be applied to both standard vector search and hybrid search operations in Milvus. Below are the key code snippets for implementing this feature.</p>
 <div class="alert note">
-<p>Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to <a href="/docs/v2.6.x/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implement Time-based Ranking in Milvus</a>.</p>
+<p>Before using decay functions, you must first create a collection with appropriate numeric fields (like timestamps, distances, etc.) that will be used for decay calculations. For complete working examples including collection setup, schema definition, and data insertion, refer to <a href="/docs/tutorial-implement-a-time-based-ranking-in-milvus.md">Tutorial: Implement Time-based Ranking in Milvus</a>.</p>
 </div>
 <h3 id="Create-a-decay-ranker" class="common-anchor-header">Create a decay ranker<button data-href="#Create-a-decay-ranker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -394,7 +394,7 @@ decay_ranker = Function(
    <tr>
      <td><p><code translate="no">params.function</code></p></td>
      <td><p>Yes</p></td>
-     <td><p>Specifies which mathematical decay ranker to apply. Determines the curve shape of relevance decline.</p><p>See <a href="/docs/v2.6.x/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a> section for guidance on selecting the appropriate function.</p></td>
+     <td><p>Specifies which mathematical decay ranker to apply. Determines the curve shape of relevance decline.</p><p>See <a href="/docs/decay-ranker-overview.md#Choose-the-right-decay-ranker">Choose the right decay ranker</a> section for guidance on selecting the appropriate function.</p></td>
      <td><p><code translate="no">"gauss"</code>, <code translate="no">"exp"</code>, or <code translate="no">"linear"</code></p></td>
    </tr>
    <tr>

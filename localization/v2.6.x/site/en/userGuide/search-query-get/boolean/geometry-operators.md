@@ -47,12 +47,12 @@ beta: Milvus 2.6.4+
 </ul>
 <p>Where:</p>
 <ul>
-<li><p><code translate="no">operator</code> is one of the supported geometry operators (e.g., <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to <a href="/docs/v2.6.x/geometry-operators.md#Supported-geometry-operators">Supported geometry operators</a>.</p></li>
+<li><p><code translate="no">operator</code> is one of the supported geometry operators (e.g., <code translate="no">ST_CONTAINS</code>, <code translate="no">ST_INTERSECTS</code>). Operator names must be all uppercase or all lowercase. For a list of supported operators, refer to <a href="/docs/geometry-operators.md#Supported-geometry-operators">Supported geometry operators</a>.</p></li>
 <li><p><code translate="no">geo_field</code> is the name of your <code translate="no">GEOMETRY</code> field.</p></li>
 <li><p><code translate="no">'{wkt}'</code> is the WKT representation of the geometry to query.</p></li>
 <li><p><code translate="no">distance</code> is the threshold specifically for <code translate="no">ST_DWITHIN</code>.</p></li>
 </ul>
-<p>To learn more about <code translate="no">GEOMETRY</code> fields in Milvus, refer to <a href="/docs/v2.6.x/geometry-field.md">Geometry Field</a>.</p>
+<p>To learn more about <code translate="no">GEOMETRY</code> fields in Milvus, refer to <a href="/docs/geometry-field.md">Geometry Field</a>.</p>
 <h2 id="Supported-geometry-operators" class="common-anchor-header">Supported geometry operators<button data-href="#Supported-geometry-operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -266,7 +266,7 @@ beta: Milvus 2.6.4+
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># The filter expression to find geometries that are completely within a larger polygon.</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;ST_WITHIN(geo_field, &#x27;POLYGON((110 38, 115 38, 115 42, 110 42, 110 38))&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on how to use a <code translate="no">GEOMETRY</code> field, refer to <a href="/docs/v2.6.x/geometry-field.md">Geometry Field</a>.</p>
+<p>For more information on how to use a <code translate="no">GEOMETRY</code> field, refer to <a href="/docs/geometry-field.md">Geometry Field</a>.</p>
 <h2 id="STDWITHIN--stdwithin" class="common-anchor-header">ST_DWITHIN / st_dwithin<button data-href="#STDWITHIN--stdwithin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

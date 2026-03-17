@@ -196,7 +196,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    </tr>
 </table>
 <div class="alert note">
-<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
+<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

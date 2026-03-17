@@ -24,7 +24,7 @@ beta: Milvus 2.6.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The <strong>IVF_RABITQ</strong> index is a <strong>binary quantization-based</strong> indexing algorithm that quantizes FP32 vectors into binary representations. This index offers exceptional storage efficiency with a 1-to-32 compression ratio while maintaining relatively good recall rates. It supports optional refinement to achieve higher recall at the cost of additional storage, making it a versatile replacement for <a href="/docs/v2.6.x/ivf-sq8.md">IVF_SQ8</a> and <a href="/docs/v2.6.x/ivf-flat.md">IVF_FLAT</a> in memory-constrained scenarios.</p>
+    </button></h1><p>The <strong>IVF_RABITQ</strong> index is a <strong>binary quantization-based</strong> indexing algorithm that quantizes FP32 vectors into binary representations. This index offers exceptional storage efficiency with a 1-to-32 compression ratio while maintaining relatively good recall rates. It supports optional refinement to achieve higher recall at the cost of additional storage, making it a versatile replacement for <a href="/docs/ivf-sq8.md">IVF_SQ8</a> and <a href="/docs/ivf-flat.md">IVF_FLAT</a> in memory-constrained scenarios.</p>
 <h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ beta: Milvus 2.6.x
         ></path>
       </svg>
     </button></h3><p><strong>Inverted File (IVF)</strong> organizes the vector space into manageable regions using <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a>. Each cluster is represented by a centroid, serving as a reference point for the vectors within that cluster. This clustering approach reduces the search space by allowing the algorithm to focus only on the most relevant clusters during query processing.</p>
-<p>To learn more about IVF technical details, refer to <a href="/docs/v2.6.x/ivf-flat.md">IVF_FLAT</a>.</p>
+<p>To learn more about IVF technical details, refer to <a href="/docs/ivf-flat.md">IVF_FLAT</a>.</p>
 <h3 id="RaBitQ" class="common-anchor-header">RaBitQ<button data-href="#RaBitQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -151,10 +151,10 @@ index_params.add_index(
 <p>In this configuration:</p>
 <ul>
 <li><p><code translate="no">index_type</code>: The type of index to be built. In this example, set the value to <code translate="no">IVF_RABITQ</code>.</p></li>
-<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/v2.6.x/metric.md">Metric Types</a>.</p></li>
-<li><p><code translate="no">params</code>: Additional configuration options for building the index. For details, refer to <a href="/docs/v2.6.x/ivf-rabitq.md#Index-building-params">Index building params</a>.</p></li>
+<li><p><code translate="no">metric_type</code>: The method used to calculate the distance between vectors. Supported values include <code translate="no">COSINE</code>, <code translate="no">L2</code>, and <code translate="no">IP</code>. For details, refer to <a href="/docs/metric.md">Metric Types</a>.</p></li>
+<li><p><code translate="no">params</code>: Additional configuration options for building the index. For details, refer to <a href="/docs/ivf-rabitq.md#Index-building-params">Index building params</a>.</p></li>
 </ul>
-<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/v2.6.x/create-collection.md">Create Collection</a>.</p>
+<p>Once the index parameters are configured, you can create the index by using the <code translate="no">create_index()</code> method directly or passing the index params in the <code translate="no">create_collection</code> method. For details, refer to <a href="/docs/create-collection.md">Create Collection</a>.</p>
 <h2 id="Search-on-index" class="common-anchor-header">Search on index<button data-href="#Search-on-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -189,7 +189,7 @@ res = MilvusClient.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>In this configuration:</p>
 <ul>
-<li><code translate="no">params</code>: Additional configuration options for searching on the index. For details, refer to <a href="/docs/v2.6.x/ivf-rabitq.md#Index-specific-search-params">Index-specific search params</a>.</li>
+<li><code translate="no">params</code>: Additional configuration options for searching on the index. For details, refer to <a href="/docs/ivf-rabitq.md#Index-specific-search-params">Index-specific search params</a>.</li>
 </ul>
 <div class="alert note">
 <p>The IVF_RABITQ index heavily relies on the <code translate="no">popcount</code> hardware instruction for optimal performance. Modern CPU architectures such as Intel IceLake+ or AMD Zen 4+ with <code translate="no">AVX512VPOPCNTDQ</code> instruction sets provide significant performance improvements for RaBitQ operations.</p>
@@ -225,7 +225,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/v2.6.x/ivf-rabitq.md#Build-index">building an index</a>.</p>
+    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">params</code> when <a href="/docs/ivf-rabitq.md#Build-index">building an index</a>.</p>
 <table>
    <tr>
      <th></th>
@@ -270,7 +270,7 @@ res = MilvusClient.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/v2.6.x/ivf-rabitq.md#Search-on-index">searching on the index</a>.</p>
+    </button></h3><p>The following table lists the parameters that can be configured in <code translate="no">search_params.params</code> when <a href="/docs/ivf-rabitq.md#Search-on-index">searching on the index</a>.</p>
 <table>
    <tr>
      <th></th>
