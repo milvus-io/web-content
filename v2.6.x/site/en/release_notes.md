@@ -8,6 +8,53 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.12
+
+Release date: March 17, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
+| 2.6.12         | 2.6.10             | 2.6.11               | 2.6.15           | 2.6.1          |
+
+We are pleased to announce the release of Milvus v2.6.12! This release introduces replication topology inspection and configurable TLS minimum version for object storage. It also delivers significant memory optimizations in segment loading and compaction, along with numerous bug fixes addressing memory leaks, RBAC alias resolution, collection-level rate limiting, and streaming node stability.
+
+### Features
+
+- Added `GetReplicateConfiguration` API for viewing replication topology with redacted tokens ([#47543](https://github.com/milvus-io/milvus/pull/47543))
+- Added configurable TLS minimum version (`minio.ssl.tlsMinVersion`) for object storage connections across all supported backends ([#48000](https://github.com/milvus-io/milvus/pull/48000), [#48030](https://github.com/milvus-io/milvus/pull/48030))
+- Supported configuring different replica numbers on secondary CDC cluster independently from the primary ([#47914](https://github.com/milvus-io/milvus/pull/47914))
+- Allowed pchannel count increase in CDC ReplicateConfiguration to support heterogeneous cluster topologies ([#47917](https://github.com/milvus-io/milvus/pull/47917))
+- Added automatic warmup for large tenant collections to reduce cold-start query latency ([#47631](https://github.com/milvus-io/milvus/pull/47631))
+- Added user-specified warmup support for RESTful API ([#47825](https://github.com/milvus-io/milvus/pull/47825))
+
+### Improvements
+
+- Added caching layer resource management for streaming node with automatic memory/disk accounting during segment operations ([#47165](https://github.com/milvus-io/milvus/pull/47165))
+- Optimized query node segment load speed ([#47424](https://github.com/milvus-io/milvus/pull/47424))
+- Optimized MixCoord CPU usage to reduce coordinator overhead ([#47619](https://github.com/milvus-io/milvus/pull/47619))
+- Added phase-level timing logs and metrics for sort compaction ([#47674](https://github.com/milvus-io/milvus/pull/47674))
+- Refactored cluster-level broadcast mechanism to decouple message package from channel registration lifecycle ([#47807](https://github.com/milvus-io/milvus/pull/47807))
+- Added configurable skip list for replicate message types in CDC ([#47910](https://github.com/milvus-io/milvus/pull/47910))
+- Included text index memory cost in segment loading memory estimation ([#47963](https://github.com/milvus-io/milvus/pull/47963))
+- Added per-cluster TLS configuration support for CDC outbound mTLS connections ([#48023](https://github.com/milvus-io/milvus/pull/48023))
+- Bypassed broadcaster for resource group DDL operations on non-primary clusters in streaming replication ([#48034](https://github.com/milvus-io/milvus/pull/48034))
+- Bumped OpenTelemetry to v1.40.0 to address CWE-426 untrusted search path vulnerability ([#48059](https://github.com/milvus-io/milvus/pull/48059))
+
+### Bug fixes
+
+- Fixed an issue where collection-level rate limits were not delivered to proxies when set via collection properties ([#46714](https://github.com/milvus-io/milvus/pull/46714), [#48018](https://github.com/milvus-io/milvus/pull/48018))
+- Fixed memory accumulation during segment loading by switching to streaming cell-based loading ([#47859](https://github.com/milvus-io/milvus/pull/47859))
+- Fixed streaming node crash-loop during WAL replay for dropped collections ([#47887](https://github.com/milvus-io/milvus/pull/47887))
+- Fixed memory accumulation in compaction by streaming row groups one at a time ([#47904](https://github.com/milvus-io/milvus/pull/47904))
+- Fixed memory leak in broadcaster caused by uncanceled context ([#47912](https://github.com/milvus-io/milvus/pull/47912))
+- Fixed an issue where CreateCollection could cause schema loss on crash ([#47972](https://github.com/milvus-io/milvus/pull/47972))
+- Fixed crash when inserting non-nullable fields with default values ([#48016](https://github.com/milvus-io/milvus/pull/48016))
+- Fixed deadlock when loading V1 segments with more than 16 system field binlog files ([#48037](https://github.com/milvus-io/milvus/pull/48037))
+- Fixed partial update failure when dynamic field is enabled but upsert data contains only static fields ([#48044](https://github.com/milvus-io/milvus/pull/48044))
+- Fixed RBAC permission checks to resolve collection aliases and added automatic grant cleanup on collection drop/rename ([#48052](https://github.com/milvus-io/milvus/pull/48052), [#48151](https://github.com/milvus-io/milvus/pull/48151))
+- Fixed BulkInsert failure by removing interactive coordination between import and L0 compaction ([#48114](https://github.com/milvus-io/milvus/pull/48114))
+- Fixed Azure buffered output stream issue ([#48041](https://github.com/milvus-io/milvus/pull/48041))
+
 ## v2.6.11
 
 Release date: February 12, 2026
