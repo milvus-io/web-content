@@ -1,0 +1,40 @@
+# StructFieldSchema
+
+This class describes a struct-type field (multi-vector type) in a collection schema. Pass a `StructFieldSchema` instance to `CollectionSchema::AddStructField()` when building a multi-vector schema. `StructFieldSchema` provides a fluent With*/Add* builder API.
+
+**PARAMETERS:**
+
+- **name** (*std::string*)
+
+      Name of the struct field. Must be unique within the collection.
+
+- **description** (*std::string*)
+
+      Optional human-readable description. Default: `""`.
+
+## Request Syntax
+
+**REQUEST METHODS:**
+
+- `StructFieldSchema& WithName(std::string name)`
+
+      Sets the field name and returns the schema for chaining.
+
+- `StructFieldSchema& WithDescription(std::string description)`
+
+      Sets the description and returns the schema for chaining.
+
+- `StructFieldSchema& WithMaxCapacity(int64_t capacity)`
+
+      Sets the maximum number of elements the struct field can hold. Returns the schema for chaining.
+
+- `StructFieldSchema& AddField(const FieldSchema& field_schema)`
+
+      Appends a sub-field (vector field within the struct) and returns the schema for chaining. For FieldSchema details see FieldSchema.
+
+- `const std::vector<FieldSchema>& Fields() const`
+
+      Returns the list of sub-fields added so far.
+
+## Example
+
