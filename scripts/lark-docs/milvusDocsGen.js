@@ -168,7 +168,6 @@ class MilvusDocsGen extends larkDocWriter {
         const first_code_block_in_groups = code_block_groups.map(group => group[0]);
 
         let lang = code.style.language ? this.code_langs[code['style']['language']] : 'plaintext';
-        if (lang === 'C++') return ''; // to be removed when C++ is supported
         let elements = (await Promise.all(code['elements'].map( async x => {
             return await this.__text_run(x, code['elements'], true)
         }))).join('').split('\n')
@@ -209,7 +208,6 @@ class MilvusDocsGen extends larkDocWriter {
         }
 
         return current_group.map(id => this.__retrieve_block_by_id(id).code.style.language)
-            .filter(lang => lang !== 9) // to be removed when C++ is supported
             .map(lang => {
                 lang = this.code_langs[lang] || 'plaintext';
                 return `    <a href="#${lang.replace(/\s+/g, '').toLowerCase()}">${get_label(lang)}</a>`
