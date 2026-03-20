@@ -9,7 +9,7 @@ beta: Milvus 2.6.4+
 
 In Milvus, the traditional *full-load* mode requires each QueryNode to load all data fields and indexes of a [segment](glossary.md#Segment) at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets.
 
-*Tiered Storage* addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, Milvus introduces a caching layer that distinguishes between hot data (cached locally) and cold data (stored remotely). The QueryNode now loads only lightweight *metadata* initially and dynamically pulls or evicts field data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.
+*Tiered Storage* addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, the QueryNode now loads only lightweight *metadata* initially and dynamically pulls or evicts field data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.
 
 Consider enabling Tiered Storage in scenarios such as:
 
@@ -45,7 +45,7 @@ The diagram below shows these differences.
 
 ### QueryNode loading workflow
 
-Under Tiered Storage, the workflow has these phases:
+Under Tiered Storage, the workflow of Tiered Storage has these phases:
 
 ![Querynode Load Workflow](../../../../assets/querynode-load-workflow.png)
 
@@ -71,7 +71,15 @@ During warmup, fields will be preloaded at the chunk level, while indexes will b
 
 **Configuration**
 
-Warm Up settings are defined in the Tiered Storage section of `milvus.yaml`. You can enable or disable preloading for each field or index type and specify the preferred strategy. See [Warm Up](warm-up.md) for detailed configurations.
+Warmup can be configured at three levels:
+
+- **Cluster level**: Define defaults in `milvus.yaml` that apply to all collections.
+
+- **Collection level**: Override cluster defaults for a specific collection using SDK methods (`create_collection`, `alter_collection_properties`).
+
+- **Field/Index level**: Fine-tune individual fields or indexes using SDK methods (`add_field`, `alter_collection_field`, `add_index`, `alter_index_properties`).
+
+Higher-level settings override lower-level ones (Field/Index > Collection > Cluster). See [Warm Up](warm-up.md) for detailed configurations.
 
 #### Phase 3: Partial load
 
@@ -119,7 +127,7 @@ QueryNode resources should not be shared with other workloads. Shared resources 
 
 ### Basic configuration template
 
-Edit the Milvus configuration file (`milvus.yaml`) to configure Tiered Storage settings:
+Edit the Milvus configuration file (`milvus.yaml`) to configure cluster-level Tiered Storage settings:
 
 ```yaml
 # milvus.yaml
@@ -149,6 +157,12 @@ queryNode:
       cacheTtl: 604800
 ```
 
+<div class="alert note">
+
+This template defines cluster-level defaults. You can override warmup settings for specific collections or individual fields/indexes using the SDK. See [Warm Up](warm-up.md) for details.
+
+</div>
+
 ### Next steps
 
 1. **Configure Warm Up** - Optimize preloading for your access patterns. See [Warm Up](warm-up.md).
@@ -163,7 +177,11 @@ queryNode:
 
 ### Can I change Tiered Storage parameters at runtime?
 
-No. All parameters must be set in `milvus.yaml` before starting Milvus. Changes require a restart to take effect.
+It depends on the parameter type:
+
+- **Warmup settings**: Collection-level and field/index-level warmup can be configured via SDK before loading the collection. Once the collection is loaded, you must release it first, alter the settings, then reload.
+
+- **Eviction and watermark settings**: These must be set in `milvus.yaml` before starting Milvus. Changes require a restart to take effect.
 
 ### Does Tiered Storage affect data durability?
 
