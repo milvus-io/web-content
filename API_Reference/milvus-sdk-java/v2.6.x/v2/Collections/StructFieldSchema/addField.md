@@ -14,7 +14,7 @@ public StructFieldSchema addField(AddFieldReq addFieldReq)
 
 **RETURNS:**
 
-*StructFieldSchema*
+*[StructFieldSchema](StructFieldSchema.md)*
 
 **EXCEPTIONS:**
 

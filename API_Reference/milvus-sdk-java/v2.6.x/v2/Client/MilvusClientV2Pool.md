@@ -118,7 +118,7 @@ PoolConfig poolConfig = PoolConfig.builder()
 
     If this flag is set to true, the pool will check if the grpc connection of a client is terminated or closed each time the returnClient() is called.
 
-## ConnectConfig
+## [ConnectConfig](ConnectConfig.md)
 
 Read the description on the **[MilvusClientV2](MilvusClientV2.md)** page.
 

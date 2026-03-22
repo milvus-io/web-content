@@ -70,3 +70,33 @@ None
 
 ## Example
 
+```python
+from pymilvus import MilvusClient
+
+# 1. Create a milvus client
+client = MilvusClient(
+    uri="http://localhost:19530",
+    token="root:Milvus"
+)
+
+# 1. Prepare a privilege group
+client.create_privilege_group(
+    group_name="my_privilege_group"
+)
+
+client.add_privileges_to_group(
+    group_name="my_privilege_group",
+    privileges=["ListDatabases", "DescribeDatabase"]
+) 
+
+# 2. Create a role
+client.create_role(role_name="read_only")
+
+# 3. Grant privileges
+client.grant_privilege_v2(
+    role_name="db_read_only",
+    privilege="my_privilege_group",
+    collection_name="*"
+)
+```
+

@@ -26,7 +26,7 @@ addFunction(
 
 **RETURNS**
 
-A **FunctionScore** builder for chaining up multiple `addFunction()` methods.
+A **[FunctionScore](FunctionScore.md)** builder for chaining up multiple `addFunction()` methods.
 
 ## Example
 

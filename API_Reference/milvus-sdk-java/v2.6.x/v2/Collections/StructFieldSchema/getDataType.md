@@ -14,7 +14,7 @@ getDataType()
 
 **RETURN TYPE:**
 
-*DataType*
+*[DataType](../DataType.md)*
 
 **RETURNS:**
 
