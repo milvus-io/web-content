@@ -1,6 +1,6 @@
 # add()
 
-This operation adds vector embeddings to an **EmbeddingList** instance.
+This operation adds vector embeddings to an **[EmbeddingList](EmbeddingList.md)** instance.
 
 ```java
 public void add(BaseVector vector)
@@ -14,7 +14,7 @@ public void add(BaseVector vector)
 
 **RETURN TYPE:**
 
-*EmbeddingList*
+*[EmbeddingList](EmbeddingList.md)*
 
 **RETURNS:**
 

@@ -1,9 +1,9 @@
-# createSchema()
+# CreateSchema()
 
 This operation creates a collection schema.
 
 ```java
-public CreateCollectionReq.CollectionSchema createSchema()
+public static CreateCollectionReq.CollectionSchema CreateSchema()
 ```
 
 ## Request Syntax
@@ -42,7 +42,8 @@ ConnectConfig connectConfig = ConnectConfig.builder()
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2 Quickly create a collectionSchema
-CreateCollectionReq.CollectionSchema collectionSchema = client.createSchema();
+CreateCollectionReq.CollectionSchema collectionSchema = client.CreateSchema();
 collectionSchema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(Boolean.TRUE).autoID(Boolean.FALSE).description("id").build());
 collectionSchema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.FloatVector).dimension(dim).build());
 ```
+

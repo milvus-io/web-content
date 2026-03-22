@@ -20,9 +20,9 @@ This client serves as an easy-to-use alternative for the current set of APIs tha
 MilvusClientV2(ConnectConfig connectConfig);
 ```
 
-## ConnectConfig
+## [ConnectConfig](ConnectConfig.md)
 
-**ConnectConfig** allows you to configure the connection properties in one place so that **MilvusClientV2** can reference it to create and manage the connection pool.
+**[ConnectConfig](ConnectConfig.md)** allows you to configure the connection properties in one place so that **MilvusClientV2** can reference it to create and manage the connection pool.
 
 ```java
 // use either token or username/password
@@ -186,7 +186,7 @@ ConnectConfig.builder()
 
 - `getProxyAddress()`
 
-    Returns the proxy server's address specified in **ConnectConfig**.
+    Returns the proxy server's address specified in **[ConnectConfig](ConnectConfig.md)**.
 
 ## Examples
 

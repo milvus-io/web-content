@@ -90,7 +90,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The time when the collection was created in UTC.
 
-- **consistencyLevel** (*ConsistencyLevel*) -
+- **[consistencyLevel](ConsistencyLevel.md)** (*[ConsistencyLevel](ConsistencyLevel.md)*) -
 
     The consistency level of the collection.
 

@@ -53,13 +53,13 @@ CreateCollectionReq.FieldSchema.builder()
 
     The maximum number of characters a value should contain.
 
-    This is required if **dataType** of this field is set to **DataType.VarChar.**
+    This is required if **[dataType](DataType.md)** of this field is set to **DataType.VarChar.**
 
 - `dimension(int dimension)`
 
     The number of dimensions a value should have.
 
-    This is required if **dataType** of this field is set to **DataType.FloatVector**.
+    This is required if **[dataType](DataType.md)** of this field is set to **DataType.FloatVector**.
 
 - `isPrimaryKey(boolean isPrimaryKey)`
 
@@ -85,13 +85,13 @@ CreateCollectionReq.FieldSchema.builder()
 
     The data type of elements in array fields.
 
-    This is required if **dataType** of this field is set to **DataType.Array**.
+    This is required if **[dataType](DataType.md)** of this field is set to **DataType.Array**.
 
 - `maxCapacity(int maxCapacity)`
 
     The maximum number of elements that an array field can contain.
 
-    This is required if **dataType** of this field is set to **DataType.Array**.
+    This is required if **[dataType](DataType.md)** of this field is set to **DataType.Array**.
 
 **RETURN TYPE:**
 

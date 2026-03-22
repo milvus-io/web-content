@@ -64,7 +64,7 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
 - **createUtcTime** (*Long*) -
 
-- **consistencyLevel** (*ConsistencyLevel*) -
+- **[consistencyLevel](ConsistencyLevel.md)** (*[ConsistencyLevel](ConsistencyLevel.md)*) -
 
 - **shardsNum** (*Integer*) -
 

@@ -23,21 +23,13 @@ client.revoke_privilege(
 
 **PARAMETERS:**
 
-- **role_name** (str) –
-
-[REQUIRED]
-
-The name of the role from which to revoke the privilege.
+- **role_name** (*str*) –
 
     **[REQUIRED]**
 
     The name of the role to revoke privileges from.
 
-- **object_type** (str) –
-
-[REQUIRED]
-
-The type of the object on which the privilege was granted. Valid values include `"Collection"`, `"Global"`, and `"User"`.
+- **object_type** (*str*) –
 
     **[REQUIRED]**
 
@@ -51,23 +43,15 @@ The type of the object on which the privilege was granted. Valid values include 
 
     - **User**: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.
 
-- **privilege** (str) –
+- **privilege** (*str*) –
 
-[REQUIRED]
-
-The name of the privilege to revoke. Refer to the Milvus documentation for a full list of supported privileges.
-
-    **[REQUIRED]**
+**[REQUIRED]**
 
     The name of the privilege to revoke. 
 
     For details, refer to the **Privilege name** column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
-- **object_name** (str) –
-
-[REQUIRED]
-
-The name of the object on which the privilege was granted. Use `"*"` to denote all objects of the specified type.
+- **object_name** (*str*) –
 
     **[REQUIRED]**
 
@@ -75,47 +59,23 @@ The name of the object on which the privilege was granted. Use `"*"` to denote a
 
     When **object_type** is set to **Global**, set **object_name** to the wildcard (**&ast;**), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
-- **db_name** (str) –
-
-The name of the database. Defaults to the current database if not specified.
+- **db_name** (*str*) –
 
     The name of a database. 
 
     This parameter is optional. Setting this parameter restricts the privilege revocation within the specified database.
 
-- **timeout** (float) –
-
-An optional duration of time in seconds to allow for the RPC. When timeout is set to None, the client waits until the server responds or an error occurs.
+- **timeout** (*float*) –
 
     The timeout duration for this operation. 
 
-    Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+    Setting this to **None** indicates that this operation times out when any response arrives or any error occurs.
 
 **RETURN TYPE:**
 
-None
+*None*
 
 **EXCEPTIONS:**
-
-MilvusException
-
-If the role does not exist, the privilege is invalid, or the server encounters an error.
-
-Examples
-
-- from pymilvus import MilvusClient
-
-client = MilvusClient(uri="http://localhost:19530")
-
-# Revoke insert privilege on a collection from a role
-client.revoke_privilege(
-    role_name="readOnly",
-    object_type="Collection",
-    privilege="Insert",
-    object_name="my_collection"
-)
-
-    This exception will be raised when any error occurs during this operation.
 
 - **BaseException**
 
