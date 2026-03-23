@@ -1131,6 +1131,12 @@
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "Google Zwillinge",
+                "id": "google-gemini.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -1731,7 +1737,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac",
             "order": 1,
             "isMenu": true,

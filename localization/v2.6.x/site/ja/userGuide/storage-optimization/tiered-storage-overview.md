@@ -21,7 +21,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>Milvusでは、従来の<em>フルロードモードでは</em>、各QueryNodeが初期化時に<a href="/docs/ja/glossary.md#Segment">セグメントの</a>全てのデータフィールドとインデックスをロードする必要があります。これにより、即座にデータを利用できるようになりますが、特に大規模なデータセットを扱う場合、高いメモリ使用量、重いディスクアクティビティ、大きなI/Oオーバーヘッドなど、リソースの浪費につながることがよくあります。</p>
-<p><em>ティアード・ストレージは</em>、データ・キャッシングをセグメントのロードから切り離すことで、この課題に対処します。Milvusは全てのデータを一度にロードする代わりに、ホットデータ（ローカルにキャッシュされたデータ）とコールドデータ（リモートで保存されたデータ）を区別するキャッシュレイヤーを導入します。QueryNodeは軽量な<em>メタデータのみを</em>最初にロードし、必要に応じてフィールドデータを動的にプルまたはエヴィッシュします。これにより、ロード時間が大幅に短縮され、ローカルリソースの利用が最適化され、QueryNodeは物理メモリやディスク容量をはるかに超えるデータセットを処理できるようになります。</p>
+<p><em>ティアード・ストレージは</em>、データ・キャッシングをセグメントのロードから切り離すことで、この課題に対処します。すべてのデータを一度にロードする代わりに、QueryNodeは軽量な<em>メタデータのみを</em>最初にロードし、必要に応じてフィールドデータを動的にプルまたはエヴィッシュします。これにより、ロード時間が大幅に短縮され、ローカルリソースの利用が最適化され、QueryNodeは物理メモリやディスク容量をはるかに超えるデータセットを処理できるようになります。</p>
 <p>以下のようなシナリオでは、Tiered Storageを有効にすることを検討してください：</p>
 <ul>
 <li><p>単一のQueryNodeで利用可能なメモリまたはNVMe容量を超えるコレクション</p></li>
@@ -90,12 +90,12 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Tiered Storageモードでは、ワークフローは以下のフェーズに分かれます：</p>
+    </button></h3><p>Tiered Storageのワークフローには以下のフェーズがあります：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
    </span> <span class="img-wrapper"> <span>クエリノード・ロード・ワークフロー</span> </span></p>
-<h4 id="Phase-1-Lazy-load" class="common-anchor-header">フェーズ1: 遅延ロード</h4><p>初期化時、Milvusは遅延ロードを実行し、スキーマ定義、インデックス情報、チャンクマッピングなどのセグメントレベルのメタデータのみをキャッシュします。</p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">フェーズ1: 遅延ロード</h4><p>Milvusは初期化時に遅延ロードを実行し、スキーマ定義、インデックス情報、チャンクマッピングなどのセグメントレベルのメタデータのみをキャッシュします。</p>
 <p>この段階では実際のフィールドデータやインデックスファイルはキャッシュされません。これにより、メモリとディスクの消費を最小限に抑えながら、起動後すぐにコレクションをクエリ可能にすることができます。</p>
 <p>フィールドデータとインデックスファイルは最初にアクセスされるまでリモートストレージに残るため、<em>最初のクエリは</em>必要なデータをオンデマンドでフェッチする必要があり、さらに待ち時間が発生する可能性があります。クリティカルなフィールドやインデックスに対してこの影響を軽減するには、<a href="/docs/ja/tiered-storage-overview.md#Phase-2-Warm-up">ウォームアップ</a>戦略を使用して、セグメントがクエリ可能になる前にそれらを事前にロードすることができます。</p>
 <p><strong>構成</strong></p>
@@ -103,9 +103,15 @@ beta: Milvus 2.6.4+
 <h4 id="Phase-2-Warm-up" class="common-anchor-header">フェーズ2：ウォームアップ</h4><p><a href="/docs/ja/tiered-storage-overview.md#Phase-1-Lazy-load">遅延ロードによって</a>もたらされるファーストヒットレイテンシを削減するために、Milvusは<em>Warm Up</em>メカニズムを提供します。</p>
 <p>セグメントがクエリ可能になる前に、Milvusはオブジェクトストレージから特定のフィールドまたはインデックスをプロアクティブにフェッチしてキャッシュし、最初のクエリがオンデマンドロードをトリガするのではなく、キャッシュされたデータに直接ヒットするようにします。</p>
 <p>ウォームアップ中、フィールドはチャンクレベルで、インデックスはセグメントレベルでプリロードされます。</p>
-<p><strong>設定</strong></p>
-<p>ウォームアップ設定は、<code translate="no">milvus.yaml</code> の「Tiered Storage」セクションで定義されます。 フィールドやインデックス・タイプごとにプリロードを有効または無効にし、優先するストラテジーを指定できます。詳細な構成については「<a href="/docs/ja/warm-up.md">ウォームアップ</a>」を参照。</p>
-<h4 id="Phase-3-Partial-load" class="common-anchor-header">フェーズ3：部分ロード</h4><p>クエリまたは検索が開始すると、QueryNode は<em>パーシャル・ロードを</em>実行し、必要なデータ塊またはインデックス・ファイルのみをオブジェクト・ストレージからフェッチします。</p>
+<p><strong>構成</strong></p>
+<p>ウォームアップは3つのレベルで設定できます：</p>
+<ul>
+<li><p><strong>クラスタ・レベル</strong>：<code translate="no">milvus.yaml</code> 、すべてのコレクションに適用されるデフォルトを定義します。</p></li>
+<li><p><strong>コレクション・レベル</strong>：SDK メソッド (<code translate="no">create_collection</code>,<code translate="no">alter_collection_properties</code>) を使用して、特定のコレクションのクラスタ・デフォルトをオーバーライドします。</p></li>
+<li><p><strong>フィールド/インデックス・レベル</strong>：SDK メソッド (<code translate="no">add_field</code>,<code translate="no">alter_collection_field</code>,<code translate="no">add_index</code>,<code translate="no">alter_index_properties</code>) を使用して、個々のフィールドまたはインデックスを微調整します。</p></li>
+</ul>
+<p>上位の設定は下位の設定より優先されます (Field/Index &gt; Collection &gt; Cluster)。詳細な設定については、<a href="/docs/ja/warm-up.md">ウォームアップを</a>参照してください。</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">フェーズ3: 部分ロード</h4><p>クエリまたは検索が始まると、QueryNode は<em>部分ロードを</em>実行し、必要なデータチャンクまたはインデックスファイルのみをオブジェクトストレージからフェッチします。</p>
 <ul>
 <li><p><strong>フィールド</strong>：<strong>チャンクレベルで</strong>オンデマンドにロードされます。現在のクエリ条件に一致するデータチャンクのみがフェッチされ、I/Oとメモリの使用を最小限に抑えます。</p></li>
 <li><p><strong>インデックス</strong>：<strong>セグメント・</strong>レベルでオンデマンドでロードされます。インデックス・ファイルは完全な単位としてフェッチされる必要があり、チャンク間で分割することはできません。</p></li>
@@ -174,7 +180,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus設定ファイル(<code translate="no">milvus.yaml</code>)を編集して、Tiered Storage設定を行います：</p>
+    </button></h3><p>Milvus設定ファイル(<code translate="no">milvus.yaml</code>)を編集して、クラスタレベルのTiered Storage設定を行います：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">segcore:</span>
@@ -201,6 +207,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>このテンプレートはクラスタレベルのデフォルトを定義します。SDKを使用して、特定のコレクションまたは個々のフィールド/インデックスに対するウォームアップ設定をオーバーライドできます。詳細については、<a href="/docs/ja/warm-up.md">ウォームアップを</a>参照してください。</p>
+</div>
 <h3 id="Next-steps" class="common-anchor-header">次のステップ<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -217,8 +226,8 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ol>
-<li><p><strong>ウォームアップの設定</strong>- アクセスパターンに合わせてプリロードを最適化します。<a href="/docs/ja/warm-up.md">ウォームアップを</a>参照してください。</p></li>
-<li><p><strong>Tune Eviction</strong>- リソースの制約に合わせて適切な透かしとTTLを設定します。<a href="/docs/ja/eviction.md">立ち退き</a>」を参照してください。</p></li>
+<li><p><strong>ウォームアップの構成</strong>- アクセス・パターンに合わせてプリロードを最適化します。<a href="/docs/ja/warm-up.md">ウォームアップを</a>参照してください。</p></li>
+<li><p><strong>Eviction の調整</strong>- リソースの制約に合わせて適切な透かしと TTL を設定します。<a href="/docs/ja/eviction.md">立ち退き</a>」を参照してください。</p></li>
 <li><p><strong>パフォーマンスを監視する</strong>- キャッシュ・ヒット率、退避頻度、およびクエリ・レイテンシのパターンを追跡します。</p></li>
 <li><p><strong>設定の反復</strong>- 観察されたワークロード特性に基づいて設定を調整します。</p></li>
 </ol>
@@ -252,7 +261,11 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>全てのパラメータはmilvusを起動する前に<code translate="no">milvus.yaml</code> 。変更を有効にするには再起動が必要です。</p>
+    </button></h3><p>パラメータの種類によって異なります：</p>
+<ul>
+<li><p><strong>ウォームアップ設定</strong>：ウォームアップ設定：コレクション・レベルおよびフィールド/インデックス・レベルのウォームアップは、コレクションをロードする前にSDKを介して構成できます。コレクションがロードされると、最初にそれをリリースし、設定を変更し、再ロードする必要があります。</p></li>
+<li><p><strong>立ち退きと透かしの設定</strong>：これらはmilvusを起動する前に<code translate="no">milvus.yaml</code> 。変更を有効にするには再起動が必要です。</p></li>
+</ul>
 <h3 id="Does-Tiered-Storage-affect-data-durability" class="common-anchor-header">Tiered Storageはデータの耐久性に影響しますか?<button data-href="#Does-Tiered-Storage-affect-data-durability" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

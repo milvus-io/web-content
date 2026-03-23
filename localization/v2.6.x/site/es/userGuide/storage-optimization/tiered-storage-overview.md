@@ -27,7 +27,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>En Milvus, el modo tradicional <em>de carga completa</em> requiere que cada QueryNode cargue todos los campos de datos e índices de un <a href="/docs/es/glossary.md#Segment">segmento</a> en la inicialización, incluso los datos a los que puede que nunca se acceda. Esto garantiza la disponibilidad inmediata de los datos, pero a menudo conduce a un desperdicio de recursos, incluyendo un alto uso de memoria, una gran actividad de disco y una sobrecarga significativa de E/S, especialmente cuando se manejan conjuntos de datos a gran escala.</p>
-<p><em>El almacenamiento por niveles</em> resuelve este problema desvinculando la caché de datos de la carga de segmentos. En lugar de cargar todos los datos a la vez, Milvus introduce una capa de almacenamiento en caché que distingue entre datos calientes (almacenados localmente) y datos fríos (almacenados remotamente). El QueryNode carga ahora sólo <em>metadatos</em> ligeros inicialmente y extrae o desaloja dinámicamente los datos de campo bajo demanda. Esto reduce significativamente el tiempo de carga, optimiza la utilización de los recursos locales y permite a los QueryNodes procesar conjuntos de datos que superan con creces su memoria física o su capacidad de disco.</p>
+<p><em>El almacenamiento por niveles</em> resuelve este problema desvinculando la caché de datos de la carga de segmentos. En lugar de cargar todos los datos a la vez, el QueryNode ahora sólo carga <em>metadatos</em> ligeros inicialmente y extrae o desaloja dinámicamente los datos de campo bajo demanda. Esto reduce significativamente el tiempo de carga, optimiza la utilización de los recursos locales y permite a los QueryNodes procesar conjuntos de datos que superan con creces su capacidad física de memoria o disco.</p>
 <p>Considere la posibilidad de habilitar el almacenamiento por niveles en escenarios como:</p>
 <ul>
 <li><p>Colecciones que superan la memoria disponible o la capacidad NVMe de un único QueryNode.</p></li>
@@ -55,7 +55,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>El almacenamiento por niveles cambia la forma en que QueryNode gestiona los datos de segmentos. En lugar de almacenar en caché cada campo e índice en el momento de la carga, QueryNode carga ahora sólo los metadatos y utiliza una capa de almacenamiento en caché para obtener y desalojar los datos dinámicamente.</p>
+    </button></h2><p>El almacenamiento por niveles cambia la forma en que QueryNode gestiona los datos de los segmentos. En lugar de almacenar en caché cada campo e índice en el momento de la carga, QueryNode carga ahora sólo los metadatos y utiliza una capa de almacenamiento en caché para obtener y desalojar los datos dinámicamente.</p>
 <h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">Modo de carga completa frente a modo de almacenamiento por niveles<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +96,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bajo Almacenamiento por niveles, el flujo de trabajo tiene estas fases:</p>
+    </button></h3><p>Bajo Almacenamiento por niveles, el flujo de trabajo de Almacenamiento por niveles tiene estas fases:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
@@ -110,8 +110,14 @@ beta: Milvus 2.6.4+
 <p>Antes de que un segmento sea consultable, Milvus puede recuperar y almacenar en caché de forma proactiva campos o índices específicos del almacenamiento de objetos, asegurando que la primera consulta alcance directamente los datos almacenados en caché en lugar de activar la carga bajo demanda.</p>
 <p>Durante el calentamiento, los campos se precargarán a nivel de trozo, mientras que los índices se precargarán a nivel de segmento.</p>
 <p><strong>Configuración</strong></p>
-<p>La configuración del calentamiento se define en la sección Almacenamiento por niveles de <code translate="no">milvus.yaml</code>. Puede activar o desactivar la precarga para cada tipo de campo o índice y especificar la estrategia preferida. Consulte <a href="/docs/es/warm-up.md">Warm Up</a> para obtener configuraciones detalladas.</p>
-<h4 id="Phase-3-Partial-load" class="common-anchor-header">Fase 3: Carga parcial</h4><p>Una vez que comienzan las consultas o búsquedas, el QueryNode realiza una <em>carga parcial</em>, obteniendo sólo los fragmentos de datos o archivos de índice necesarios del almacenamiento de objetos.</p>
+<p>El calentamiento puede configurarse en tres niveles:</p>
+<ul>
+<li><p><strong>Nivel de cluster</strong>: Definir valores por defecto en <code translate="no">milvus.yaml</code> que se aplican a todas las colecciones.</p></li>
+<li><p><strong>Nivel</strong> de<strong>colección</strong>: Anule los valores predeterminados del cluster para una colección específica utilizando los métodos del SDK (<code translate="no">create_collection</code>, <code translate="no">alter_collection_properties</code>).</p></li>
+<li><p><strong>Nivel de campo/índice</strong>: Ajuste campos o índices individuales mediante los métodos del SDK (<code translate="no">add_field</code>, <code translate="no">alter_collection_field</code>, <code translate="no">add_index</code>, <code translate="no">alter_index_properties</code>).</p></li>
+</ul>
+<p>Las configuraciones de nivel superior anulan las de nivel inferior (Campo/Índice &gt; Colección &gt; Grupo). Consulte <a href="/docs/es/warm-up.md">Calentamiento</a> para obtener configuraciones detalladas.</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">Fase 3: Carga parcial</h4><p>Una vez que comienzan las consultas o búsquedas, el QueryNode realiza una <em>carga</em> parcial, obteniendo sólo los trozos de datos o archivos de índice necesarios del almacenamiento de objetos.</p>
 <ul>
 <li><p><strong>Campos</strong>: Cargados bajo demanda a <strong>nivel de chunk</strong>. Sólo se obtienen los trozos de datos que coinciden con las condiciones de consulta actuales, minimizando el uso de E/S y memoria.</p></li>
 <li><p><strong>Índices</strong>: Se cargan bajo demanda a nivel de <strong>segmento</strong>. Los archivos de índices deben obtenerse como unidades completas y no pueden dividirse en trozos.</p></li>
@@ -126,7 +132,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>TTL</strong> de la caché: elimina los datos obsoletos de la caché tras un periodo de inactividad definido.</p></li>
 </ul>
 <p><strong>Configuración</strong></p>
-<p>Habilite y ajuste los parámetros de desalojo en <strong>milvus.yaml</strong>. Consulte <a href="/docs/es/eviction.md">Evicción</a> para una configuración detallada.</p>
+<p>Habilite y ajuste los parámetros de desalojo en <strong>milvus.yaml</strong>. Consulte <a href="/docs/es/eviction.md">Desalojo</a> para una configuración detallada.</p>
 <h2 id="Getting-started" class="common-anchor-header">Primeros pasos<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -180,7 +186,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Edite el archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>) para configurar los ajustes de Tiered Storage:</p>
+    </button></h3><p>Edite el archivo de configuración de Milvus (<code translate="no">milvus.yaml</code>) para configurar los parámetros de almacenamiento por niveles a nivel de clúster:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">segcore:</span>
@@ -207,6 +213,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Esta plantilla define los valores predeterminados a nivel de clúster. Puede anular los ajustes de calentamiento para colecciones específicas o campos/índices individuales utilizando el SDK. Consulte <a href="/docs/es/warm-up.md">Calentamiento</a> para obtener más detalles.</p>
+</div>
 <h3 id="Next-steps" class="common-anchor-header">Pasos siguientes<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -223,8 +232,8 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ol>
-<li><p><strong>Configure Warm Up</strong> - Optimice la precarga para sus patrones de acceso. Consulte <a href="/docs/es/warm-up.md">Warm Up</a>.</p></li>
-<li><p><strong>Configure</strong> el<strong>desalojo</strong> - Establezca marcas de agua y TTL apropiados para sus limitaciones de recursos. Consulte <a href="/docs/es/eviction.md">Desalojo</a>.</p></li>
+<li><p><strong>Configurar Warm Up</strong> - Optimizar la precarga para sus patrones de acceso. Consulte <a href="/docs/es/warm-up.md">Calentamiento</a>.</p></li>
+<li><p><strong>Ajuste el desalojo</strong>: establezca marcas de agua y TTL adecuados para sus limitaciones de recursos. Consulte <a href="/docs/es/eviction.md">Desalojo</a>.</p></li>
 <li><p><strong>Supervisar el rendimiento</strong>: realice un seguimiento de los índices de aciertos de la caché, la frecuencia de desalojo y los patrones de latencia de las consultas.</p></li>
 <li><p><strong>Iterar la configuración</strong>: ajuste la configuración en función de las características observadas de la carga de trabajo.</p></li>
 </ol>
@@ -258,7 +267,11 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>No. Todos los parámetros deben configurarse en <code translate="no">milvus.yaml</code> antes de iniciar Milvus. Los cambios requieren un reinicio para que surtan efecto.</p>
+    </button></h3><p>Depende del tipo de parámetro:</p>
+<ul>
+<li><p><strong>Parámetros de calentamiento</strong>: El calentamiento a nivel de colección y a nivel de campo/índice puede configurarse a través del SDK antes de cargar la colección. Una vez cargada la colección, primero debe liberarla, modificar los ajustes y, a continuación, volver a cargarla.</p></li>
+<li><p><strong>Ajustes de desalojo y marca de agua</strong>: Deben configurarse en <code translate="no">milvus.yaml</code> antes de iniciar Milvus. Los cambios requieren un reinicio para surtir efecto.</p></li>
+</ul>
 <h3 id="Does-Tiered-Storage-affect-data-durability" class="common-anchor-header">¿Afecta el almacenamiento por niveles a la durabilidad de los datos?<button data-href="#Does-Tiered-Storage-affect-data-durability" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

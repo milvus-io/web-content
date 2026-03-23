@@ -1131,6 +1131,12 @@
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "Google 雙子星",
+                "id": "google-gemini.md",
+                "order": 10,
+                "children": []
               }
             ]
           },

@@ -1131,6 +1131,12 @@
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "Google Géminis",
+                "id": "google-gemini.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -1467,7 +1473,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []

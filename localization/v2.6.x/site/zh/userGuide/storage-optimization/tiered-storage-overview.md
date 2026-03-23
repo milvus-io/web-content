@@ -22,8 +22,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，传统的<em>满载</em>模式要求每个查询节点在初始化时加载<a href="/docs/zh/glossary.md#Segment">段</a>的所有数据字段和索引，甚至包括可能永远不会被访问的数据。这可确保数据的即时可用性，但往往会导致资源浪费，包括内存使用率高、磁盘活动频繁和 I/O 开销大，尤其是在处理大规模数据集时。</p>
-<p><em>分层存储</em>通过将数据<em>缓存</em>与分段加载解耦来应对这一挑战。Milvus 引入了一个缓存层，区分热数据（本地缓存）和冷数据（远程存储），而不是一次性加载所有数据。现在，QueryNode 最初只加载轻量级<em>元数据</em>，并根据需求动态拉取或驱逐字段数据。这大大缩短了加载时间，优化了本地资源利用率，并使查询节点能够处理远远超出其物理内存或磁盘容量的数据集。</p>
+    </button></h1><p>在 Milvus 中，传统的<em>满载</em>模式要求每个查询节点在初始化时加载<a href="/docs/zh/glossary.md#Segment">段</a>的所有数据字段和索引，甚至包括可能永远不会被访问的数据。这可确保数据的即时可用性，但往往会导致资源浪费，包括内存使用率高、磁盘活动频繁以及 I/O 开销大，尤其是在处理大规模数据集时。</p>
+<p><em>分层存储</em>通过将数据<em>缓存</em>与分段加载解耦来应对这一挑战。现在，QueryNode 不再一次性加载所有数据，而是最初只加载轻量级<em>元</em>数据，并根据需求动态提取或驱逐 Field 数据。这大大缩短了加载时间，优化了本地资源利用率，并使查询节点能够处理远远超出其物理内存或磁盘容量的数据集。</p>
 <p>在以下情况下，请考虑启用分层存储：</p>
 <ul>
 <li><p>超过单个 QueryNode 可用内存或 NVMe 容量的集合</p></li>
@@ -77,7 +77,7 @@ beta: Milvus 2.6.4+
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/full-load-mode-vs-tiered-storage-mode.png" alt="Full Load Mode Vs Tiered Storage Mode" class="doc-image" id="full-load-mode-vs-tiered-storage-mode" />
    </span> <span class="img-wrapper"> <span>全加载模式与分层存储模式</span> </span></p>
-<h3 id="QueryNode-loading-workflow" class="common-anchor-header">查询节点加载工作流<button data-href="#QueryNode-loading-workflow" class="anchor-icon" translate="no">
+<h3 id="QueryNode-loading-workflow" class="common-anchor-header">查询节点加载工作流程<button data-href="#QueryNode-loading-workflow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,22 +92,28 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在分层存储模式下，工作流程分为以下几个阶段：</p>
+    </button></h3><p>在分层存储模式下，分层存储的工作流程分为以下几个阶段：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
    </span> <span class="img-wrapper"> <span>查询节点加载工作流程</span> </span></p>
 <h4 id="Phase-1-Lazy-load" class="common-anchor-header">阶段 1：懒加载</h4><p>初始化时，Milvus 执行懒加载，只缓存段级元数据，如 Schema 定义、索引信息和块映射。</p>
 <p>在此阶段不会缓存实际字段数据或索引文件。这样，Collections 几乎可以在启动后立即开始查询，同时将内存和磁盘消耗降到最低。</p>
-<p>由于字段数据和索引文件在首次访问前一直保存在远程存储中，因此<em>首次查询</em>可能会出现额外的延迟，因为必须按需获取所需数据。为减轻关键字段或索引的这种影响，可以使用<a href="/docs/zh/tiered-storage-overview.md#Phase-2-Warm-up">预热</a>策略，在段可查询前主动预加载它们。</p>
+<p>由于字段数据和索引文件在首次访问前一直保存在远程存储中，因此<em>首次查询</em>可能会出现额外的延迟，因为必须按需获取所需的数据。为减轻关键字段或索引的这种影响，可以使用<a href="/docs/zh/tiered-storage-overview.md#Phase-2-Warm-up">预热</a>策略，在段可查询前主动预加载它们。</p>
 <p><strong>配置</strong></p>
 <p>启用分层存储时自动应用。无需手动设置。</p>
 <h4 id="Phase-2-Warm-up" class="common-anchor-header">第 2 阶段：预热</h4><p>为减少<a href="/docs/zh/tiered-storage-overview.md#Phase-1-Lazy-load">懒加载</a>带来的首次命中延迟，Milvus 提供了<em>预热</em>机制。</p>
 <p>在段可查询之前，Milvus 可以主动从对象存储中获取并缓存特定字段或索引，确保首次查询直接命中缓存数据，而不是触发按需加载。</p>
 <p>预热期间，字段将在块级别预加载，而索引将在段级别预加载。</p>
 <p><strong>配置</strong></p>
-<p>预热设置在<code translate="no">milvus.yaml</code> 的 "分层存储 "部分中定义。可以为每个字段或索引类型启用或禁用预加载，并指定首选策略。有关详细配置，请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p>
-<h4 id="Phase-3-Partial-load" class="common-anchor-header">第 3 阶段：部分加载</h4><p>查询或搜索开始后，查询节点会执行<em>部分加载</em>，仅从对象存储中获取所需的数据块或索引文件。</p>
+<p>预热可在三个级别进行配置：</p>
+<ul>
+<li><p><strong>群集级</strong>：在<code translate="no">milvus.yaml</code> 中定义适用于所有 Collections 的默认值。</p></li>
+<li><p><strong>Collections 级别</strong>：使用 SDK 方法（<code translate="no">create_collection</code>,<code translate="no">alter_collection_properties</code> ）覆盖特定 Collection 的集群默认值。</p></li>
+<li><p><strong>字段/索引级别</strong>：使用 SDK 方法微调单个字段或索引 (<code translate="no">add_field</code>,<code translate="no">alter_collection_field</code>,<code translate="no">add_index</code>,<code translate="no">alter_index_properties</code>)。</p></li>
+</ul>
+<p>高级设置覆盖低级设置（字段/索引 &gt; Collections &gt; 群集）。有关详细配置，请参见<a href="/docs/zh/warm-up.md">预热</a>。</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">第 3 阶段：部分加载</h4><p>一旦开始查询或搜索，查询节点就会执行<em>部分加载</em>，只从对象存储中获取所需的数据块或索引文件。</p>
 <ul>
 <li><p><strong>字段</strong>：按需加载数据<strong>块</strong>。只获取符合当前查询条件的数据块，从而最大限度地减少 I/O 和内存使用。</p></li>
 <li><p><strong>索引</strong>：在<strong>段级别</strong>按需加载。索引文件必须作为完整单元获取，不能分割成块。</p></li>
@@ -176,7 +182,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>编辑 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 以配置 Tiered Storage 设置：</p>
+    </button></h3><p>编辑 Milvus 配置文件 (<code translate="no">milvus.yaml</code>) 配置群集级 Tiered Storage 设置：</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">segcore:</span>
@@ -203,6 +209,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>此模板定义群集级默认设置。您可以使用 SDK 覆盖特定 Collections 或单个字段/索引的预热设置。有关详细信息，请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p>
+</div>
 <h3 id="Next-steps" class="common-anchor-header">下一步<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -219,7 +228,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ol>
-<li><p><strong>配置预热</strong>- 针对访问模式优化预加载。请参阅 "<a href="/docs/zh/warm-up.md">预热</a>"。</p></li>
+<li><p><strong>配置</strong>预热 - 针对访问模式优化预加载。请参阅<a href="/docs/zh/warm-up.md">预热</a>。</p></li>
 <li><p><strong>调整驱逐</strong>- 针对资源限制设置适当的水印和 TTL。请参阅 "<a href="/docs/zh/eviction.md">驱逐</a>"。</p></li>
 <li><p><strong>监控性能</strong>- 跟踪缓存命中率、驱逐频率和查询延迟模式。</p></li>
 <li><p><strong>迭代配置</strong>- 根据观察到的工作负载特征调整设置。</p></li>
@@ -254,7 +263,11 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>所有参数都必须在启动 Milvus 之前在<code translate="no">milvus.yaml</code> 中设置。更改需要重新启动才能生效。</p>
+    </button></h3><p>这取决于参数类型：</p>
+<ul>
+<li><p><strong>预热设置</strong>：可以在加载 Collections 之前通过 SDK 配置 Collection 级和字段/索引级预热。一旦加载了 Collections，必须先释放它，更改设置，然后重新加载。</p></li>
+<li><p><strong>驱逐和水印设置</strong>：这些必须在启动 Milvus 之前在<code translate="no">milvus.yaml</code> 中设置。更改需要重新启动才能生效。</p></li>
+</ul>
 <h3 id="Does-Tiered-Storage-affect-data-durability" class="common-anchor-header">分层存储会影响数据持久性吗？<button data-href="#Does-Tiered-Storage-affect-data-durability" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -286,8 +299,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>不一定。分层存储减少了加载时间和资源使用量，但接触未缓存（冷）数据的查询可能会出现更高的延迟。对于对延迟敏感的工作负载，建议使用满载模式。</p>
-<h3 id="Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="common-anchor-header">为什么即使启用了分层存储，查询节点仍然会耗尽资源？<button data-href="#Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="anchor-icon" translate="no">
+    </button></h3><p>不一定。分层存储缩短了加载时间并减少了资源使用量，但接触未缓存（冷）数据的查询可能会出现更高的延迟。对于对延迟敏感的工作负载，建议使用满载模式。</p>
+<h3 id="Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="common-anchor-header">为什么即使启用了分层存储，查询节点仍然会出现资源耗尽的情况？<button data-href="#Why-does-a-QueryNode-still-run-out-of-resources-even-with-Tiered-Storage-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

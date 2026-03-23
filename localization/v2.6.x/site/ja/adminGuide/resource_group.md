@@ -37,7 +37,7 @@ title: リソースグループの管理
       </svg>
     </button></h2><p>リソースグループは、Milvusクラスタ内のクエリノードの一部またはすべてを保持することができます。リソースグループ間でクエリノードをどのように割り当てるかは、最も合理的な方法に基づいて決定します。例えば、マルチコレクションシナリオでは、各リソースグループに適切な数のクエリノードを割り当て、各コレクション内の操作が他のコレクション内の操作から物理的に独立するように、異なるリソースグループにコレクションをロードすることができます。</p>
 <p>Milvusインスタンスは、起動時にすべてのクエリノードを保持するデフォルトのリソースグループを保持し、それを<strong>__default_resource_groupと</strong>命名することに注意してください。</p>
-<p>バージョン2.4.1から、Milvusは宣言型リソースグループAPIを提供し、従来のリソースグループAPIは廃止されました。新しい宣言型APIにより、ユーザはidempotencyを実現し、クラウドネイティブ環境での二次開発を容易に行うことができるようになります。</p>
+<p>バージョン2.4.1から、Milvusは宣言型リソースグループAPIを提供し、従来のリソースグループAPIは廃止されました。新しい宣言型APIにより、ユーザはidempotencyを実現することができ、クラウドネイティブ環境での二次開発をより容易に行うことができます。</p>
 <h2 id="Concepts-of-resource-group" class="common-anchor-header">リソースグループの概念<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -90,11 +90,11 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.6.9 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.6.10 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
-<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行します。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
+<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行してください。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -232,7 +232,7 @@ except Exception:
     </button></h2><p>現在のところ、Milvusはクラウドネイティブ環境において独立してスケールイン/スケールアウトすることができません。しかし、<strong>Declarative Resource Group APIと</strong>コンテナオーケストレーションを併用することで、Milvusはリソースの分離とQueryNodeの管理を容易に実現することができます。 ここでは、クラウド環境でQueryNodeを管理するためのグッドプラクティスを紹介します：</p>
 <ol>
 <li><p>Milvusはデフォルトで<strong>__default_resource_groupを</strong>作成します。このリソースグループは削除できず、すべてのコレクションのデフォルトのロードリソースグループとしても機能し、冗長なQueryNodeは常に割り当てられます。したがって、使用中のQueryNodeリソースを保持する保留リソースグループを作成し、QueryNodeリソースが<strong>__default_resource_groupによって</strong>占有されるのを防ぐことができます。</p>
-<p>さらに、制約<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> を厳密に適用すれば、クラスタ内のQueryNodeの割り当てを正確に制御することができます。現在クラスタ内にQueryNodeが1つしかないと仮定してクラスタを初期化してみましょう。 セットアップの例を示します：</p>
+<p>さらに、制約<code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> を厳密に適用すれば、クラスタ内のQueryNodeの割り当てを正確に制御することができます。現在クラスタにQueryNodeが1つしかないと仮定してクラスタを初期化してみましょう。 セットアップの例を示します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
 _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&quot;</span>

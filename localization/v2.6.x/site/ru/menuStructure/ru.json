@@ -1131,6 +1131,12 @@
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "Близнецы Google",
+                "id": "google-gemini.md",
+                "order": 10,
+                "children": []
               }
             ]
           },
@@ -2535,7 +2541,7 @@
         ]
       },
       {
-        "label": "Knowledge Engineering",
+        "label": "Инженерия знаний",
         "id": "knowledge-engineering",
         "order": 5,
         "children": [

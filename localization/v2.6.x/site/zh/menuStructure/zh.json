@@ -436,7 +436,7 @@
                 "children": []
               },
               {
-                "label": "JSON 碎纸",
+                "label": "JSON 粉碎",
                 "id": "json-shredding.md",
                 "order": 2,
                 "children": []
@@ -1130,6 +1130,12 @@
                 "label": "拥抱脸 TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
+                "children": []
+              },
+              {
+                "label": "谷歌双子座",
+                "id": "google-gemini.md",
+                "order": 10,
                 "children": []
               }
             ]
@@ -1835,7 +1841,7 @@
         "children": []
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1864,7 +1870,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "在一个实例中进行备份和还原",
+                "label": "在一个实例中进行备份和恢复",
                 "id": "single-instance-backup-and-restore.md",
                 "order": 0,
                 "children": []

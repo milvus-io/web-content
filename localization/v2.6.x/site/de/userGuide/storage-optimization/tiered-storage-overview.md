@@ -27,7 +27,7 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h1><p>In Milvus erfordert der traditionelle <em>Full-Load-Modus</em>, dass jeder QueryNode alle Datenfelder und Indizes eines <a href="/docs/de/glossary.md#Segment">Segments</a> bei der Initialisierung lädt, selbst Daten, auf die möglicherweise nie zugegriffen wird. Dies gewährleistet die sofortige Datenverfügbarkeit, führt jedoch häufig zu einer Verschwendung von Ressourcen, einschließlich hoher Speicherauslastung, starker Festplattenaktivität und erheblichem E/A-Overhead, insbesondere bei der Verarbeitung großer Datensätze.</p>
-<p><em>Tiered Storage</em> löst dieses Problem durch die Entkopplung des Daten-Cachings vom Laden der Segmente. Anstatt alle Daten auf einmal zu laden, führt Milvus eine Caching-Schicht ein, die zwischen heißen Daten (lokal zwischengespeichert) und kalten Daten (remote gespeichert) unterscheidet. Der QueryNode lädt nun zunächst nur leichtgewichtige <em>Metadaten</em> und holt bei Bedarf dynamisch Felddaten ab oder verdrängt sie. Dadurch wird die Ladezeit erheblich verkürzt, die lokale Ressourcennutzung optimiert und der QueryNode in die Lage versetzt, Datensätze zu verarbeiten, die seine physische Speicher- oder Festplattenkapazität weit übersteigen.</p>
+<p><em>Tiered Storage</em> löst dieses Problem durch die Entkopplung des Daten-Cachings vom Laden der Segmente. Anstatt alle Daten auf einmal zu laden, lädt der QueryNode jetzt zunächst nur leichtgewichtige <em>Metadaten</em> und ruft bei Bedarf dynamisch Felddaten ab oder entfernt sie. Dadurch wird die Ladezeit erheblich verkürzt, die lokale Ressourcennutzung optimiert und QueryNodes in die Lage versetzt, Datensätze zu verarbeiten, die ihre physische Speicher- oder Festplattenkapazität bei weitem übersteigen.</p>
 <p>Erwägen Sie die Aktivierung von Tiered Storage in Szenarien wie:</p>
 <ul>
 <li><p>Sammlungen, die die verfügbare Speicher- oder NVMe-Kapazität eines einzelnen QueryNodes übersteigen</p></li>
@@ -55,7 +55,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Tiered Storage ändert die Art und Weise, wie QueryNode Segmentdaten verwaltet. Anstatt jedes Feld und jeden Index zum Zeitpunkt des Ladens zwischenzuspeichern, lädt QueryNode jetzt nur noch Metadaten und verwendet eine Zwischenspeicherschicht, um Daten dynamisch abzurufen und zu verdrängen.</p>
+    </button></h2><p>Tiered Storage ändert, wie QueryNode Segmentdaten verwaltet. Anstatt jedes Feld und jeden Index zum Zeitpunkt des Ladens zwischenzuspeichern, lädt QueryNode jetzt nur noch Metadaten und verwendet eine Zwischenspeicherschicht, um Daten dynamisch abzurufen und zu verdrängen.</p>
 <h3 id="Full-load-mode-vs-Tiered-Storage-mode" class="common-anchor-header">Volllastmodus vs. Tiered Storage-Modus<button data-href="#Full-load-mode-vs-Tiered-Storage-mode" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,22 +96,28 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bei Tiered Storage besteht der Arbeitsablauf aus diesen Phasen:</p>
+    </button></h3><p>Unter Tiered Storage hat der Workflow von Tiered Storage diese Phasen:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
    </span> <span class="img-wrapper"> <span>QueryNode-Lade-Workflow</span> </span></p>
-<h4 id="Phase-1-Lazy-load" class="common-anchor-header">Phase 1: Faule Ladung</h4><p>Bei der Initialisierung führt Milvus ein "Lazy Load" durch, wobei nur Metadaten auf Segmentebene wie Schemadefinitionen, Indexinformationen und Chunk-Mappings zwischengespeichert werden.</p>
+<h4 id="Phase-1-Lazy-load" class="common-anchor-header">Phase 1: Lazy Load</h4><p>Bei der Initialisierung führt Milvus ein "Lazy Load" durch, wobei nur Metadaten auf Segmentebene wie Schemadefinitionen, Indexinformationen und Chunk-Mappings zwischengespeichert werden.</p>
 <p>In diesem Stadium werden keine tatsächlichen Felddaten oder Indexdateien zwischengespeichert. Dadurch können Sammlungen fast sofort nach dem Start abgefragt werden, während der Speicher- und Festplattenverbrauch minimal bleibt.</p>
-<p>Da die Felddaten und Indexdateien bis zum ersten Zugriff im entfernten Speicher verbleiben, kann es bei der <em>ersten Abfrage</em> zu einer zusätzlichen Latenzzeit kommen, da die erforderlichen Daten bei Bedarf abgerufen werden müssen. Um diesen Effekt für kritische Felder oder Indizes abzuschwächen, können Sie die <a href="/docs/de/tiered-storage-overview.md#Phase-2-Warm-up">Warm-Up-Strategie</a> verwenden, um sie proaktiv vorzuladen, bevor das Segment abfragbar wird.</p>
+<p>Da die Felddaten und Indexdateien bis zum ersten Zugriff im entfernten Speicher verbleiben, kann es bei der <em>ersten Abfrage</em> zu einer zusätzlichen Latenzzeit kommen, da die erforderlichen Daten bei Bedarf abgerufen werden müssen. Um diesen Effekt für kritische Felder oder Indizes abzuschwächen, können Sie die <a href="/docs/de/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up-Strategie</a> verwenden, um sie proaktiv vorzuladen, bevor das Segment abfragbar wird.</p>
 <p><strong>Konfiguration</strong></p>
 <p>Wird automatisch angewendet, wenn Tiered Storage aktiviert ist. Eine manuelle Einstellung ist nicht erforderlich.</p>
 <h4 id="Phase-2-Warm-up" class="common-anchor-header">Phase 2: Aufwärmen</h4><p>Um die durch <a href="/docs/de/tiered-storage-overview.md#Phase-1-Lazy-load">Lazy Load</a> verursachte First-Hit-Latenz zu reduzieren, bietet Milvus einen <em>Warm Up-Mechanismus</em>.</p>
 <p>Bevor ein Segment abfragbar wird, kann Milvus proaktiv bestimmte Felder oder Indizes aus dem Objektspeicher abrufen und zwischenspeichern, um sicherzustellen, dass die erste Abfrage direkt auf zwischengespeicherte Daten trifft, anstatt ein bedarfsgesteuertes Laden auszulösen.</p>
 <p>Während der Aufwärmphase werden Felder auf Chunk-Ebene vorgeladen, während Indizes auf Segmentebene vorgeladen werden.</p>
 <p><strong>Konfiguration</strong></p>
-<p>Die Einstellungen für das Aufwärmen werden im Abschnitt "Tiered Storage" auf <code translate="no">milvus.yaml</code> definiert. Sie können das Vorladen für jeden Feld- oder Indextyp aktivieren oder deaktivieren und die bevorzugte Strategie angeben. Detaillierte Konfigurationen finden Sie unter <a href="/docs/de/warm-up.md">Warm Up</a>.</p>
-<h4 id="Phase-3-Partial-load" class="common-anchor-header">Phase 3: Teilweises Laden</h4><p>Sobald Abfragen oder Suchvorgänge beginnen, führt der QueryNode eine <em>Teilladung</em> durch und holt nur die erforderlichen Datenchunks oder Indexdateien aus dem Objektspeicher.</p>
+<p>Warmup kann auf drei Ebenen konfiguriert werden:</p>
+<ul>
+<li><p><strong>Cluster-Ebene</strong>: Definieren Sie Standardwerte in <code translate="no">milvus.yaml</code>, die für alle Sammlungen gelten.</p></li>
+<li><p><strong>Sammlungsebene</strong>: Überschreiben Sie die Cluster-Vorgaben für eine bestimmte Sammlung mithilfe von SDK-Methoden (<code translate="no">create_collection</code>, <code translate="no">alter_collection_properties</code>).</p></li>
+<li><p><strong>Feld/Index-Ebene</strong>: Feinabstimmung einzelner Felder oder Indizes mit SDK-Methoden (<code translate="no">add_field</code>, <code translate="no">alter_collection_field</code>, <code translate="no">add_index</code>, <code translate="no">alter_index_properties</code>).</p></li>
+</ul>
+<p>Einstellungen auf höherer Ebene haben Vorrang vor Einstellungen auf niedrigerer Ebene (Feld/Index &gt; Sammlung &gt; Cluster). Siehe <a href="/docs/de/warm-up.md">Warm Up</a> für detaillierte Konfigurationen.</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">Phase 3: Teilweise Belastung</h4><p>Sobald Abfragen oder Suchvorgänge beginnen, führt der QueryNode eine <em>Teilladung</em> durch, wobei er nur die erforderlichen Datenchunks oder Indexdateien aus dem Objektspeicher abruft.</p>
 <ul>
 <li><p><strong>Felder</strong>: Werden bei Bedarf auf der <strong>Chunk-Ebene</strong> geladen. Es werden nur Datenchunks abgerufen, die den aktuellen Abfragebedingungen entsprechen, wodurch die E/A- und Speichernutzung minimiert wird.</p></li>
 <li><p><strong>Indizes</strong>: Werden bei Bedarf auf <strong>Segmentebene</strong> geladen. Indexdateien müssen als komplette Einheiten abgerufen werden und können nicht auf Chunks aufgeteilt werden.</p></li>
@@ -120,7 +126,7 @@ beta: Milvus 2.6.4+
 <p>Die Teillast wird automatisch angewendet, wenn Tiered Storage aktiviert ist. Eine manuelle Einstellung ist nicht erforderlich. Um die First-Hit-Latenz für kritische Daten zu minimieren, kombinieren Sie diese Option mit <a href="/docs/de/warm-up.md">Warm Up</a>.</p>
 <h4 id="Phase-4-Eviction" class="common-anchor-header">Phase 4: Auslagerung</h4><p>Um eine gesunde Ressourcennutzung aufrechtzuerhalten, gibt Milvus automatisch ungenutzte Daten im Cache frei, wenn bestimmte Schwellenwerte erreicht werden.</p>
 <p>Die Freigabe erfolgt nach einer <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">LRU-Richtlinie (Least Recently Used)</a>, die sicherstellt, dass Daten, auf die nur selten zugegriffen wird, zuerst entfernt werden, während aktive Daten im Cache verbleiben.</p>
-<p>Die Auslagerung wird durch die folgenden konfigurierbaren Elemente gesteuert:</p>
+<p>Die Räumung wird durch die folgenden konfigurierbaren Elemente gesteuert:</p>
 <ul>
 <li><p><strong>Wasserzeichen</strong>: Definieren Sie Speicher- oder Festplattenschwellenwerte, die die Auslagerung auslösen und stoppen.</p></li>
 <li><p><strong>Cache-TTL</strong>: Entfernt veraltete Daten aus dem Cache nach einer bestimmten Dauer der Inaktivität.</p></li>
@@ -180,7 +186,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Bearbeiten Sie die Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>), um Tiered Storage-Einstellungen zu konfigurieren:</p>
+    </button></h3><p>Bearbeiten Sie die Milvus-Konfigurationsdatei (<code translate="no">milvus.yaml</code>), um Tiered Storage-Einstellungen auf Clusterebene zu konfigurieren:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">segcore:</span>
@@ -207,6 +213,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Diese Vorlage definiert die Standardwerte auf Clusterebene. Sie können die Aufwärmeinstellungen für bestimmte Sammlungen oder einzelne Felder/Indizes mithilfe des SDK außer Kraft setzen. Weitere Informationen finden Sie unter <a href="/docs/de/warm-up.md">Aufwärmen</a>.</p>
+</div>
 <h3 id="Next-steps" class="common-anchor-header">Nächste Schritte<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -223,8 +232,8 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ol>
-<li><p><strong>Konfigurieren Sie Warm Up</strong> - Optimieren Sie das Vorladen für Ihre Zugriffsmuster. Siehe <a href="/docs/de/warm-up.md">Warm Up</a>.</p></li>
-<li><p><strong>Tune Eviction</strong> - Stellen Sie geeignete Wasserzeichen und TTL für Ihre Ressourcenbeschränkungen ein. Siehe <a href="/docs/de/eviction.md">Eviction</a>.</p></li>
+<li><p><strong>Konfigurieren Sie Warm Up</strong> - Optimieren Sie das Vorladen für Ihre Zugriffsmuster. Siehe <a href="/docs/de/warm-up.md">Aufwärmen</a>.</p></li>
+<li><p><strong>Tune Eviction</strong> - Legen Sie geeignete Wasserzeichen und TTL für Ihre Ressourcenbeschränkungen fest. Siehe <a href="/docs/de/eviction.md">Eviction</a>.</p></li>
 <li><p><strong>Leistung überwachen</strong> - Verfolgen Sie Cache-Trefferraten, Auslagerungshäufigkeit und Abfragelatenzmuster.</p></li>
 <li><p><strong>Konfiguration iterieren</strong> - Passen Sie die Einstellungen auf der Grundlage der beobachteten Arbeitslastmerkmale an.</p></li>
 </ol>
@@ -258,7 +267,11 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nein. Alle Parameter müssen vor dem Start von Milvus unter <code translate="no">milvus.yaml</code> eingestellt werden. Änderungen erfordern einen Neustart, um wirksam zu werden.</p>
+    </button></h3><p>Das hängt vom Parametertyp ab:</p>
+<ul>
+<li><p><strong>Warmup-Einstellungen</strong>: Warmup auf Sammlungs- und Feld-/Indexebene kann über das SDK konfiguriert werden, bevor die Sammlung geladen wird. Sobald die Sammlung geladen ist, müssen Sie sie zuerst freigeben, die Einstellungen ändern und dann erneut laden.</p></li>
+<li><p><strong>Einstellungen für Ausschluss und Wasserzeichen</strong>: Diese müssen vor dem Start von Milvus unter <code translate="no">milvus.yaml</code> eingestellt werden. Änderungen erfordern einen Neustart, um wirksam zu werden.</p></li>
+</ul>
 <h3 id="Does-Tiered-Storage-affect-data-durability" class="common-anchor-header">Beeinflusst Tiered Storage die Haltbarkeit der Daten?<button data-href="#Does-Tiered-Storage-affect-data-durability" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,7 +287,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Nein. Die Datenpersistenz wird nach wie vor durch den entfernten Objektspeicher gewährleistet. Tiered Storage verwaltet nur das Caching auf QueryNodes.</p>
+    </button></h3><p>Nein. Die Dauerhaftigkeit der Daten wird nach wie vor von Remote Object Storage verwaltet. Tiered Storage verwaltet nur das Caching auf QueryNodes.</p>
 <h3 id="Will-queries-always-be-faster-with-Tiered-Storage" class="common-anchor-header">Werden Abfragen mit Tiered Storage immer schneller sein?<button data-href="#Will-queries-always-be-faster-with-Tiered-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

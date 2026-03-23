@@ -22,8 +22,8 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>기존의 <em>풀로드</em> 모드에서는 각 쿼리 노드가 초기화 시 <a href="/docs/ko/glossary.md#Segment">세그먼트의</a> 모든 데이터 필드와 인덱스를 로드해야 하며, 심지어 액세스하지 않을 수도 있는 데이터도 로드해야 합니다. 이는 즉각적인 데이터 가용성을 보장하지만, 특히 대규모 데이터 세트를 처리할 때 높은 메모리 사용량, 디스크 활동량 증가, 상당한 I/O 오버헤드 등 리소스 낭비를 초래하는 경우가 많습니다.</p>
-<p><em>계층형 스토리지는</em> 데이터 캐싱과 세그먼트 로딩을 분리하여 이러한 문제를 해결합니다. 밀버스는 모든 데이터를 한 번에 로드하는 대신 핫 데이터(로컬에 캐시)와 콜드 데이터(원격에 저장)를 구분하는 캐싱 계층을 도입합니다. 이제 쿼리 노드는 초기에 가벼운 <em>메타데이터만</em> 로드하고 필요에 따라 필드 데이터를 동적으로 가져오거나 내보냅니다. 이렇게 하면 로드 시간이 크게 단축되고, 로컬 리소스 활용도가 최적화되며, 쿼리 노드가 물리적 메모리나 디스크 용량을 훨씬 초과하는 데이터 세트를 처리할 수 있습니다.</p>
+    </button></h1><p>기존의 <em>풀로드</em> 모드에서는 각 쿼리 노드가 초기화 시 <a href="/docs/ko/glossary.md#Segment">세그먼트의</a> 모든 데이터 필드와 인덱스를 로드해야 하며, 심지어 액세스하지 않을 수도 있는 데이터도 로드해야 합니다. 이는 즉각적인 데이터 가용성을 보장하지만, 특히 대규모 데이터 세트를 처리할 때 높은 메모리 사용량, 과도한 디스크 활동, 상당한 I/O 오버헤드 등 리소스 낭비를 초래하는 경우가 많습니다.</p>
+<p><em>계층형 스토리지는</em> 데이터 캐싱과 세그먼트 로딩을 분리하여 이러한 문제를 해결합니다. 이제 쿼리 노드는 모든 데이터를 한 번에 로드하는 대신 가벼운 <em>메타데이터만</em> 처음에 로드하고 필요에 따라 필드 데이터를 동적으로 가져오거나 내보냅니다. 이렇게 하면 로드 시간이 크게 단축되고, 로컬 리소스 사용률이 최적화되며, 쿼리 노드가 물리적 메모리나 디스크 용량을 훨씬 초과하는 데이터 집합을 처리할 수 있습니다.</p>
 <p>다음과 같은 시나리오에서 계층형 스토리지를 활성화하는 것을 고려하세요:</p>
 <ul>
 <li><p>단일 쿼리 노드의 사용 가능한 메모리 또는 NVMe 용량을 초과하는 컬렉션</p></li>
@@ -92,7 +92,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>계층형 스토리지의 워크플로에는 다음과 같은 단계가 있습니다:</p>
+    </button></h3><p>계층형 스토리지의 워크플로는 다음과 같은 단계로 구성됩니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/querynode-load-workflow.png" alt="Querynode Load Workflow" class="doc-image" id="querynode-load-workflow" />
@@ -106,8 +106,14 @@ beta: Milvus 2.6.4+
 <p>세그먼트를 쿼리할 수 있게 되기 전에 Milvus는 오브젝트 스토리지에서 특정 필드 또는 인덱스를 사전에 가져와 캐시하여 첫 번째 쿼리가 온디맨드 로드를 트리거하는 대신 캐시된 데이터에 직접 닿도록 할 수 있습니다.</p>
 <p>워밍업 중에 필드는 청크 수준에서 미리 로드되고 인덱스는 세그먼트 수준에서 미리 로드됩니다.</p>
 <p><strong>구성</strong></p>
-<p>워밍업 설정은 <code translate="no">milvus.yaml</code> 의 계층형 스토리지 섹션에 정의되어 있습니다. 각 필드 또는 인덱스 유형에 대해 사전 로드를 사용하거나 사용하지 않도록 설정하고 선호하는 전략을 지정할 수 있습니다. 자세한 구성은 <a href="/docs/ko/warm-up.md">워밍업을</a> 참조하세요.</p>
-<h4 id="Phase-3-Partial-load" class="common-anchor-header">3단계: 부분 로드</h4><p>쿼리 또는 검색이 시작되면, 쿼리 노드는 <em>부분 로드를</em> 수행하여 필요한 데이터 청크 또는 인덱스 파일만 개체 스토리지에서 가져옵니다.</p>
+<p>워밍업은 세 가지 수준에서 구성할 수 있습니다:</p>
+<ul>
+<li><p><strong>클러스터 수준</strong>: <code translate="no">milvus.yaml</code> 에서 모든 컬렉션에 적용되는 기본값을 정의합니다.</p></li>
+<li><p><strong>컬렉션 수준</strong>: SDK 메서드(<code translate="no">create_collection</code>, <code translate="no">alter_collection_properties</code>)를 사용하여 특정 컬렉션에 대한 클러스터 기본값을 재정의합니다.</p></li>
+<li><p><strong>필드/색인 수준</strong>: SDK 메서드를 사용하여 개별 필드 또는 인덱스를 미세 조정합니다(<code translate="no">add_field</code>, <code translate="no">alter_collection_field</code>, <code translate="no">add_index</code>, <code translate="no">alter_index_properties</code>).</p></li>
+</ul>
+<p>상위 수준 설정은 하위 수준 설정을 재정의합니다(필드/색인 &gt; 컬렉션 &gt; 클러스터). 자세한 구성은 <a href="/docs/ko/warm-up.md">워밍업을</a> 참조하세요.</p>
+<h4 id="Phase-3-Partial-load" class="common-anchor-header">3단계: 부분 로드</h4><p>쿼리 또는 검색이 시작되면, 쿼리 노드는 <em>부분 로드를</em> 수행하여 필요한 데이터 청크 또는 인덱스 파일만 객체 저장소에서 가져옵니다.</p>
 <ul>
 <li><p><strong>필드</strong>: <strong>청크 수준에서</strong> 온디맨드 방식으로 로드됩니다. 현재 쿼리 조건과 일치하는 데이터 청크만 가져오기 때문에 I/O 및 메모리 사용을 최소화합니다.</p></li>
 <li><p><strong>인덱스</strong>: <strong>세그먼트 수준에서</strong> 온디맨드 방식으로 로드됩니다. 인덱스 파일은 완전한 단위로 가져와야 하며 청크로 분할할 수 없습니다.</p></li>
@@ -176,7 +182,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 편집하여 계층형 스토리지 설정을 구성합니다:</p>
+    </button></h3><p>Milvus 구성 파일(<code translate="no">milvus.yaml</code>)을 편집하여 클러스터 수준의 계층형 스토리지 설정을 구성합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># milvus.yaml</span>
 <span class="hljs-attr">queryNode:</span>
   <span class="hljs-attr">segcore:</span>
@@ -203,6 +209,9 @@ beta: Milvus 2.6.4+
       <span class="hljs-comment"># Cache TTL (7 days)</span>
       <span class="hljs-attr">cacheTtl:</span> <span class="hljs-number">604800</span>
 <button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>이 템플릿은 클러스터 수준의 기본값을 정의합니다. SDK를 사용하여 특정 컬렉션 또는 개별 필드/색인에 대한 워밍업 설정을 재정의할 수 있습니다. 자세한 내용은 <a href="/docs/ko/warm-up.md">워밍업을</a> 참조하세요.</p>
+</div>
 <h3 id="Next-steps" class="common-anchor-header">다음 단계<button data-href="#Next-steps" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -254,7 +263,11 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>아니요. 모든 매개변수는 Milvus를 시작하기 전에 <code translate="no">milvus.yaml</code> 에서 설정해야 합니다. 변경 사항을 적용하려면 다시 시작해야 합니다.</p>
+    </button></h3><p>매개변수 유형에 따라 다릅니다:</p>
+<ul>
+<li><p><strong>워밍업 설정</strong>: 컬렉션 수준 및 필드/색인 수준 워밍업은 컬렉션을 로드하기 전에 SDK를 통해 구성할 수 있습니다. 컬렉션이 로드된 후에는 먼저 컬렉션을 해제하고 설정을 변경한 다음 다시 로드해야 합니다.</p></li>
+<li><p><strong>퇴거 및 워터마크 설정</strong>: Milvus를 시작하기 전에 <code translate="no">milvus.yaml</code> 에서 설정해야 합니다. 변경 사항을 적용하려면 다시 시작해야 합니다.</p></li>
+</ul>
 <h3 id="Does-Tiered-Storage-affect-data-durability" class="common-anchor-header">계층형 스토리지가 데이터 지속성에 영향을 주나요?<button data-href="#Does-Tiered-Storage-affect-data-durability" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "インメモリーレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -1041,7 +1041,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchからmilvusへのクエリ",
+            "label": "Elasticsearchクエリからmilvusへ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "エンベッディングとリランキング",
+        "label": "エンベッディングと再ランキング",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1130,6 +1130,12 @@
                 "label": "ハグする顔 TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
+                "children": []
+              },
+              {
+                "label": "グーグル双子座",
+                "id": "google-gemini.md",
+                "order": 10,
                 "children": []
               }
             ]
@@ -2816,7 +2822,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

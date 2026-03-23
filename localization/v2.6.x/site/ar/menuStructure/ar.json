@@ -1131,6 +1131,12 @@
                 "id": "hugging-face-tei.md",
                 "order": 9,
                 "children": []
+              },
+              {
+                "label": "جوجل الجوزاء",
+                "id": "google-gemini.md",
+                "order": 10,
+                "children": []
               }
             ]
           },

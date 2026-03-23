@@ -63,10 +63,10 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Softwareanforderungen</a>.</p></li>
-<li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardware-Anforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
+<li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
 </ul>
 <div class="alert note">
-<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen den nötigen Support bieten können.</p>
+<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen die notwendige Unterstützung bieten können.</p>
 </div>
 <h2 id="Install-Milvus-Operator" class="common-anchor-header">Milvus Operator installieren<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus Operator-Pod läuft, können Sie einen Milvus-Cluster wie folgt einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.11) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
+<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.13) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
 <p><strong>Highlights der Architektur in diesem Einsatz:</strong></p>
 <ul>
 <li><strong>Nachrichten-Warteschlange</strong>: <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a> (reduziert die Wartung der Infrastruktur)</li>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Führen Sie den folgenden Befehl aus, um den Status des Milvus-Clusters zu überprüfen</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, ist Ihr Milvus-Cluster noch in der Erstellung.</p>
+<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, befindet sich Ihr Milvus-Cluster noch in der Erstellung.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -287,7 +287,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Jetzt können Sie sich mit Milvus über den weitergeleiteten Port verbinden.</p>
+<p>Nun können Sie sich mit Milvus über den weitergeleiteten Port verbinden.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

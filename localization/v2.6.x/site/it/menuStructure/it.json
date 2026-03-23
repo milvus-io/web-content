@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Stop",
+                    "label": "Fermarsi",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -717,7 +717,7 @@
             "children": []
           },
           {
-            "label": "Indici vettoriali fluttuanti",
+            "label": "Indici vettoriali flottanti",
             "id": "floating-vector-indexes",
             "order": 1,
             "isMenu": true,
@@ -1130,6 +1130,12 @@
                 "label": "Viso abbracciato TEI",
                 "id": "hugging-face-tei.md",
                 "order": 9,
+                "children": []
+              },
+              {
+                "label": "Google Gemini",
+                "id": "google-gemini.md",
+                "order": 10,
                 "children": []
               }
             ]
@@ -2775,7 +2781,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2828,7 +2834,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
