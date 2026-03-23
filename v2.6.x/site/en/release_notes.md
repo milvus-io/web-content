@@ -8,13 +8,54 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.13
+
+Release date: March 23, 2026
+
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.13         | 2.6.10             | 2.6.11              | 2.6.16           | 2.6.1          |
+
+### Features
+
+#### Gemini embedding model support ([#48223](https://github.com/milvus-io/milvus/pull/48223))
+
+Added Google Gemini as a built-in text embedding function. Users can now use Gemini embedding models directly in Milvus by configuring a Gemini API key, including the recently released [Gemini Embedding 2](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-embedding-2/).
+
+For detailed usage, refer to [Google Gemini](google-gemini.md).
+
+### Improvements
+
+- Unified KV path/key conventions across etcd, tikv, and catalog layers with consistent path joining ([#48133](https://github.com/milvus-io/milvus/pull/48133))
+- Added query metrics for JSON-related filter expressions to improve observability of JSON field query performance ([#48147](https://github.com/milvus-io/milvus/pull/48147))
+- Reduced transient memory allocations in BM25Stats deserialization by eliminating temporary slices ([#48178](https://github.com/milvus-io/milvus/pull/48178))
+- Added TruncateCollection method to the Go SDK client for clearing all data in a collection without dropping it ([#48361](https://github.com/milvus-io/milvus/pull/48361))
+
+### Bug fixes
+
+- Fixed an issue where search/query requests with strong consistency timed out during compaction due to tsafe advancement being blocked ([#47987](https://github.com/milvus-io/milvus/pull/47987))
+- Fixed an issue where partial upsert with dynamic fields failed with `the length of valid_data of field($meta) is wrong` when the batch contained both existing and new rows ([#48085](https://github.com/milvus-io/milvus/pull/48085))
+- Fixed TLS connection failures during internal proxy-to-proxy request forwarding ([#48226](https://github.com/milvus-io/milvus/pull/48226))
+- Fixed query failures when using IN combined with != filter expressions that form tautologies ([#48261](https://github.com/milvus-io/milvus/pull/48261))
+- Fixed high system load caused by mass concurrent client disconnections during HTTP request handling ([#48270](https://github.com/milvus-io/milvus/pull/48270))
+- Fixed an issue where queries could become unavailable during replica scale-up/down due to non-deterministic node-to-replica assignment ([#48277](https://github.com/milvus-io/milvus/pull/48277))
+- Fixed HTTP proxy crashes caused by concurrent write race condition in timeout middleware ([#48296](https://github.com/milvus-io/milvus/pull/48296), [#48317](https://github.com/milvus-io/milvus/pull/48317), [#48356](https://github.com/milvus-io/milvus/pull/48356))
+- Fixed potential query node crash caused by assertion failure in delete record snapshot handling ([#48302](https://github.com/milvus-io/milvus/pull/48302))
+- Fixed storage operation failures when using AK/SK authentication on Aliyun OSS ([#48311](https://github.com/milvus-io/milvus/pull/48311))
+- Fixed degraded search performance caused by permanent parameter cache failure leading to goroutine contention on proxy hot paths ([#48313](https://github.com/milvus-io/milvus/pull/48313), [#48326](https://github.com/milvus-io/milvus/pull/48326))
+- Fixed QueryCoord deadlock during upgrades when hundreds of channels needed rebalancing by splitting the executor into separate channel and non-channel task pools ([#48351](https://github.com/milvus-io/milvus/pull/48351))
+- Fixed an issue where search requests could timeout for 14+ minutes after WAL ownership changes due to unbounded message replay during scanner catchup ([#48391](https://github.com/milvus-io/milvus/pull/48391))
+
 ## v2.6.12
 
 Release date: March 17, 2026
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.12         | 2.6.10             | 2.6.11               | 2.6.15           | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.12         | 2.6.10             | 2.6.11              | 2.6.15           | 2.6.1          |
+
 
 We are pleased to announce the release of Milvus v2.6.12! This release introduces replication topology inspection and configurable TLS minimum version for object storage. It also delivers significant memory optimizations in segment loading and compaction, along with numerous bug fixes addressing memory leaks, RBAC alias resolution, collection-level rate limiting, and streaming node stability.
 
@@ -59,9 +100,11 @@ We are pleased to announce the release of Milvus v2.6.12! This release introduce
 
 Release date: February 12, 2026
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.11         | 2.6.9             | 2.6.9               | 2.6.13           | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.11         | 2.6.9              | 2.6.9               | 2.6.13           | 2.6.1          |
+
 
 We are pleased to announce the release of Milvus 2.6.11! This update continues to enhance query performance and system stability with improvements to filtering execution, segment loading, and Storage V2 I/O pipelining. It also refines geo indexing, reduces memory usage in default-value chunks, and improves developer and build tooling through dependency and test-suite cleanups. This release further fixes several correctness issues across control-channel handling, index building, nullable-expression semantics, and WAL recovery workflows. We recommend all users on the 2.6 branch upgrade to this version for improved reliability and performance.
 
@@ -94,7 +137,7 @@ We are pleased to announce the release of Milvus 2.6.11! This update continues t
 - Fixed an issue where collection metadata could contain an invalid database name ([#47721](https://github.com/milvus-io/milvus/pull/47721))
 - Ensured exclusive control-channel messages acquire a global lock in the lock interceptor ([#47678](https://github.com/milvus-io/milvus/pull/47678))
 - Fixed channel exclusive mode state loss and vchannel list handling issues ([#47702](https://github.com/milvus-io/milvus/pull/47702))
-- Fixed index building to use the correct global offset for `null_offset_` in `BuildIndexFromFieldData` ([#47708](https://github.com/milvus-io/milvus/pull/47708))
+- Fixed index building to use the correct global offset for `null_offset` in `BuildIndexFromFieldData` ([#47708](https://github.com/milvus-io/milvus/pull/47708))
 - Improved v2.5/v2.6 compatibility handling in `SyncTargetVersion` (QueryNode) ([#47693](https://github.com/milvus-io/milvus/pull/47693))
 - Handled `broadcastToAll` messages on the control channel in recovery storage ([#47640](https://github.com/milvus-io/milvus/pull/47640))
 - Added `warmupKey` to the `CheckParams` filter to make `CreateIndex` idempotent ([#47607](https://github.com/milvus-io/milvus/pull/47607))
@@ -113,9 +156,11 @@ We are pleased to announce the release of Milvus 2.6.11! This update continues t
 
 Release date: February 5, 2026
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.10        | 2.6.8                | 2.6.9                 | 2.6.13              | 2.6.1            |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.10         | 2.6.8              | 2.6.9               | 2.6.13           | 2.6.1          |
+
 
 We are pleased to announce the release of Milvus 2.6.10! This update strengthens security controls around KMS key revocation and improves search and storage performance through automatic FP32-to-FP16/BF16 conversion, optimized segment loading, and updated auto-index configurations. This release also fixes a number of stability issues across compaction, query pagination, and recovery workflows. We recommend all users on the 2.6 branch upgrade to this version for improved reliability and performance.
 
@@ -163,9 +208,11 @@ We are pleased to announce the release of Milvus 2.6.10! This update strengthens
 
 Release date: January 16, 2026
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.9          | 2.6.6             | 2.6.9               | 2.6.13           | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.9          | 2.6.6              | 2.6.9               | 2.6.13           | 2.6.1          |
+
 
 We are pleased to announce the release of Milvus 2.6.9! This update introduces highlight scores for search results, enhances segment management with support for reopening segments when data or schema changes occur, and improves storage version handling. Key improvements include better logging performance, enhanced security controls for expression endpoints, and optimizations for text analyzers and index building. This release also resolves critical issues including memory estimation accuracy, geometry data conversions, and various stability fixes. We recommend all users on the 2.6 branch upgrade to this version for improved system reliability and performance.
 
@@ -226,9 +273,11 @@ We are pleased to announce the release of Milvus 2.6.9! This update introduces h
 
 Release date: January 4, 2026
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.8          | 2.6.6             | 2.6.9               | 2.6.11            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.8          | 2.6.6              | 2.6.9               | 2.6.11           | 2.6.1          |
+
 
 We are excited to announce the release of Milvus 2.6.8! This version introduces search result highlighting, significantly enhancing the retrieval experience. Under the hood, we have optimized query processing, resource scheduling, and caching mechanisms to deliver superior performance and stability. Additionally, this release addresses critical bugs related to data security, storage handling, and concurrency. We highly recommend all users upgrade to this version for a more efficient and reliable production environment.
 
@@ -310,9 +359,11 @@ We are excited to announce the release of Milvus 2.6.8! This version introduces 
 
 Release date: December 4, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.7          | 2.6.4             | 2.6.5               | 2.6.10            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.7          | 2.6.4              | 2.6.5               | 2.6.10           | 2.6.1          |
+
 
 Milvus 2.6.7 is a critical stabilization update for the 2.6.x series. This release focuses on hardening the system against distributed failures and optimizing resource utilization under high load. With significant improvements in I/O handling, memory management, and Kubernetes integration, we strongly recommend all production users upgrade to this version to ensure greater reliability and smoother operation at scale.
 
@@ -358,9 +409,11 @@ Milvus 2.6.7 is a critical stabilization update for the 2.6.x series. This relea
 
 Release date: November 21, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.6          | 2.6.3             | 2.6.4               | 2.6.8            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.6          | 2.6.3              | 2.6.4               | 2.6.8            | 2.6.1          |
+
 
 We are excited to announce the release of Milvus 2.6.6, featuring a range of powerful new capabilities, performance enhancements, and essential bug fixes. This update introduces important features such as Geospatial and Timestampz data type, Boost ranker for rescoring, etc. This release also has many crucial scalar filtering performance improvements. Several critical bugs have also been addressed to ensure greater stability and reliability. With this release, Milvus continues to provide a more robust and efficient experience for all users. Below are the key highlights of this release.
 
@@ -491,9 +544,11 @@ We are excited to announce the release of Milvus 2.6.6, featuring a range of pow
 
 Release date: November 11, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.5          | 2.6.3             | 2.6.4               | 2.6.7            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.5          | 2.6.3              | 2.6.4               | 2.6.7            | 2.6.1          |
+
 
 We are excited to announce the release of Milvus 2.6.5, which addresses a **critical security vulnerability** [CVE-2025-64513](https://github.com/milvus-io/milvus/security/advisories/GHSA-mhjq-8c7m-3f7p) and upgraded to Go 1.24.9. We strongly encourage **all Milvus 2.6.x users to upgrade to 2.6.5** as soon as possible. This update also includes several other improvements and bug fixes, and provides the users a more robust and efficient experience.
 
@@ -518,9 +573,11 @@ We are excited to announce the release of Milvus 2.6.5, which addresses a **crit
 
 Release date: October 21, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.4          | 2.6.3             | 2.6.1               | 2.6.6            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.4          | 2.6.3              | 2.6.1               | 2.6.6            | 2.6.1          |
+
 
 We are excited to announce the release of Milvus 2.6.4, featuring a range of powerful new capabilities, performance enhancements, and essential bug fixes. This update introduces important features such as Struct in ARRAY for advanced data modeling. Additionally, we have enabled JSON Shredding by default, further improving query performance and efficiency. Several critical bugs have also been addressed to ensure greater stability and reliability. With this release, Milvus continues to provide a more robust and efficient experience for all users. Below are the key highlights of this release.
 
@@ -583,9 +640,11 @@ We are excited to announce the release of Milvus 2.6.4, featuring a range of pow
 
 Release date: October 11, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.3          | 2.6.2             | 2.6.1               | 2.6.5            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.3          | 2.6.2              | 2.6.1               | 2.6.5            | 2.6.1          |
+
 
 We are pleased to announce the release of Milvus 2.6.3, which introduces a variety of exciting new features, improvements, and critical bug fixes. This version enhances system performance, expands functionality, and fixes key issues, providing a more stable experience for all users. Below are the highlights of this release:
 
@@ -630,7 +689,7 @@ We are pleased to announce the release of Milvus 2.6.3, which introduces a varie
 - Fixed compaction task blocking due to executor loop exit. ([#44543](https://github.com/milvus-io/milvus/pull/44543))
 - Refunded loaded resource usage in the `insert/deleterecord` destructor. ([#44555](https://github.com/milvus-io/milvus/pull/44555))
 - Fixed an issue where the replicator could not stop and enhanced the replicate config validator. ([#44531](https://github.com/milvus-io/milvus/pull/44531))
-- Set `mmap_file_raii_` to `nullptr` when mmap is disabled. ([#44516](https://github.com/milvus-io/milvus/pull/44516))
+- Set `mmap_file_raii`_ to `nullptr` when mmap is disabled. ([#44516](https://github.com/milvus-io/milvus/pull/44516))
 - Made `diskfilemanager` use the file system from the context. ([#44535](https://github.com/milvus-io/milvus/pull/44535))
 - Forced virtual host for OSS and COS in storage V2. ([#44484](https://github.com/milvus-io/milvus/pull/44484))
 - Set `report_value` default value when `extrainfo` is not `nil` for compatibility. ([#44529](https://github.com/milvus-io/milvus/pull/44529))
@@ -643,9 +702,11 @@ We are pleased to announce the release of Milvus 2.6.3, which introduces a varie
 
 Release date: September 19, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.2          | 2.6.2             | 2.6.0               | 2.6.4            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.2          | 2.6.2              | 2.6.0               | 2.6.4            | 2.6.1          |
+
 
 We’re excited to announce the release of Milvus 2.6.2! This update introduces powerful new features, significant performance enhancements, and critical fixes that make the system more stable and production-ready. Highlights include partial field updates with upsert, JSON Shredding to accelerate dynamic field filtering, NGram indexing for faster LIKE queries, and more flexible schema evolution on existing collections. Built on community feedback, this release delivers a stronger foundation for real-world deployments, and we encourage all users to upgrade to take advantage of these improvements.
 
@@ -725,9 +786,11 @@ We’re excited to announce the release of Milvus 2.6.2! This update introduces 
 
 Release date: September 3, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.1          | 2.6.1             | 2.6.0               | 2.6.3            | 2.6.1          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.1          | 2.6.1              | 2.6.0               | 2.6.3            | 2.6.1          |
+
 
 We are excited to announce the release of Milvus 2.6.1! This version builds upon the major architectural advancements of previous releases, delivering critical enhancements focused on production stability, performance, and operational robustness. This release addresses key community feedback and strengthens the system for large-scale deployments. We strongly encourage all users to upgrade to benefit from a more stable, performant, and reliable system.
 
@@ -785,17 +848,15 @@ We are excited to announce the release of Milvus 2.6.1! This version builds upon
 
 Release date: August 6, 2025
 
+
 | Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
-|:-------------- |:------------------|:--------------------|:-----------------|:---------------|
-| 2.6.0          | 2.6.0             | 2.6.0               | 2.6.1            | 2.6.0          |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.0          | 2.6.0              | 2.6.0               | 2.6.1            | 2.6.0          |
+
 
 Milvus 2.6.0 is officially released! Building upon the architectural foundation laid in [2.6.0-rc1](#v260-rc1), this production-ready version addresses numerous stability and performance issues while introducing powerful new capabilities including Storage Format V2, advanced JSON processing, and enhanced search features. With extensive bug fixes and optimizations based on community feedback during the RC phase, Milvus 2.6.0 is ready for you to explore and adopt.
 
-<div class="alert warning">
-
-Direct upgrade from pre-2.6.0 versions is not supported due to architectural changes. Please follow our <a href="upgrade_milvus_cluster-operator.md">upgrade guide</a>.
-
-</div>
+Direct upgrade from pre-2.6.0 versions is not supported due to architectural changes. Please follow our [upgrade guide](upgrade_milvus_cluster-operator.md).
 
 ### What's new in 2.6.0 (since RC)
 
@@ -812,11 +873,7 @@ This automatic flattening makes JSON Flat Index ideal for evolving schemas where
 
 ### Core 2.6.0 features recall
 
-<div class="alert note">
-
-For detailed information about architecture changes and features introduced in 2.6.0-RC, see <a href="#v260-rc1">2.6.0-rc1 Release Note</a>.
-
-</div>
+For detailed information about architecture changes and features introduced in 2.6.0-RC, see [2.6.0-rc1 Release Note](#v260-rc1).
 
 #### Architecture simplification
 
@@ -839,22 +896,19 @@ For detailed information about architecture changes and features introduced in 2
 - Enhanced tokenizers for global language support
 - Cache layer with lazy loading - Process datasets larger than memory
 
-
 ## v2.6.0-rc1
 
 Release date: June 18, 2025
 
-| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version  |
-|:--------------:|:-----------------:|:-------------------:|:----------------:|:---------------:|
-|   2.6.0-rc1    |     2.6.0b0       |     2.6.0-rc1       |     2.6.0        |   2.6.0-rc.1    |
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.0-rc1      | 2.6.0b0            | 2.6.0-rc1           | 2.6.0            | 2.6.0-rc.1     |
+
 
 Milvus 2.6.0-rc1 introduces a simplified, cloud-native architecture designed to improve operational efficiency, resource utilization, and total cost of ownership by reducing deployment complexity. This release adds new functionalities focused on performance, search, and development. Key features include high-precision 1-bit quantization (RaBitQ) and a dynamic cache layer for performance gains, near-duplicate detection with MinHash and precise phrase matching for advanced search, and automated embedding functions with online schema modification to enhance the developer's experience.
 
-<div class="alert note">
-
 This is a pre-release version of Milvus 2.6.0. To try out the latest features, install this version as a fresh deployment. Upgrading from Milvus v2.5.x or earlier to 2.6.0-rc1 is not supported.
-
-</div>
 
 ### Architecture Changes
 
@@ -874,7 +928,7 @@ Milvus previously relied on external systems like Kafka or Pulsar for its WAL. W
 
 In Milvus 2.6, tasks such as compaction, bulk import, statistics collection, and index building are now managed by a unified scheduler. The data persistence function previously handled by the DataNode has been moved to the Streaming Node. To simplify deployment and maintenance, the IndexNode and DataNode have been merged into a single DataNode component. This consolidated node now executes all these critical tasks, reducing operational complexity and optimizing resource utilization.
 
-#### Coordinator Merge into MixCoord 
+#### Coordinator Merge into MixCoord
 
 The previous design with separate RootCoord, QueryCoord, and DataCoord modules introduced complexity in inter-module communication. To simplify the system design, these components have been merged into a single, unified coordinator called MixCoord. This consolidation reduces the complexity of distributed programming by replacing network-based communication with internal function calls, resulting in more efficient system operation and simplified development and maintenance.
 
@@ -902,13 +956,13 @@ This release significantly enhances text processing capabilities with several up
 - The [Lindera tokenizer](lindera-tokenizer.md) is integrated for improved support of Asian languages such as Japanese and Korean.
 - Row-level tokenizer selection is now supported, with the general-purpose [ICU tokenizer](icu-tokenizer.md) available as a fallback for multilingual scenarios.
 
-#### Data-in, Data-Out with Embedding Functions 
+#### Data-in, Data-Out with Embedding Functions
 
 Milvus 2.6 introduces a "Data-in, Data-Out" capability that simplifies AI application development by integrating directly with third-party embedding models (e.g., from OpenAI, AWS Bedrock, Google Vertex AI, Hugging Face). Users can now insert and query using raw text data, and Milvus will automatically call the specified model service to convert the text into vectors in real-time. This removes the need for a separate vector conversion pipeline.   
 
 For more information, refer to [Embedding Function Overview](embedding-function-overview.md).
 
-#### Phrase Match 
+#### Phrase Match
 
 Phrase Match is a text search feature that returns results only when the exact sequence of words in a query appears consecutively and in the correct order within a document.
 
@@ -930,7 +984,7 @@ Milvus 2.6 introduces time-aware decay functions to address scenarios where info
 
 For more information, refer to [Decay Ranker Overview](decay-ranker-overview.md).
 
-#### Add Field for Online Schema Evolution 
+#### Add Field for Online Schema Evolution
 
 To provide greater schema flexibility, Milvus 2.6 now supports adding a new scalar field to an existing collection's schema online. This avoids the need to create a new collection and perform a disruptive data migration when application requirements change.   
 
