@@ -60,7 +60,7 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
   <span class="hljs-attr">useSSL:</span> <span class="hljs-string">&lt;true/false&gt;</span>
   <span class="hljs-attr">bucketName:</span> <span class="hljs-string">&quot;&lt;your_bucket_name&gt;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="/docs/v2.6.x/configure_minio.md">MinIO/S3 Configurations</a> for more information.</p>
+<p>See <a href="/docs/configure_minio.md">MinIO/S3 Configurations</a> for more information.</p>
 <h3 id="2-Refine-docker-composeyaml" class="common-anchor-header">2. Refine docker-compose.yaml<button data-href="#2-Refine-docker-composeyaml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -202,6 +202,6 @@ summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
       </svg>
     </button></h2><p>Learn how to configure other Milvus dependencies with Docker Compose or Helm:</p>
 <ul>
-<li><a href="/docs/v2.6.x/deploy_etcd.md">Configure Meta Storage with Docker Compose or Helm</a></li>
-<li><a href="/docs/v2.6.x/deploy_pulsar.md">Configure Message Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/deploy_etcd.md">Configure Meta Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/deploy_pulsar.md">Configure Message Storage with Docker Compose or Helm</a></li>
 </ul>

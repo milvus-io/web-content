@@ -147,7 +147,7 @@ client.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to <a href="/docs/v2.6.x/json-indexing.md">JSON Indexing</a>.</p>
+<p>For detailed information about JSON field indexing, including supported paths, data types, and limitations, refer to <a href="/docs/json-indexing.md">JSON Indexing</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Drop an index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -212,6 +212,6 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Learn about <a href="/docs/v2.6.x/index-explained.md">other index types</a></p></li>
-<li><p>See <a href="/docs/v2.6.x/json-indexing.md">JSON Indexing</a> for advanced JSON indexing scenarios</p></li>
+<li><p>Learn about <a href="/docs/index-explained.md">other index types</a></p></li>
+<li><p>See <a href="/docs/json-indexing.md">JSON Indexing</a> for advanced JSON indexing scenarios</p></li>
 </ul>

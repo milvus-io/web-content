@@ -142,7 +142,7 @@ client.create_index(
         ></path>
       </svg>
     </button></h2><p>You filter with geometry operators in the <code translate="no">filter</code> expression. When an <code translate="no">RTREE</code> exists on the target <code translate="no">GEOMETRY</code> field, Milvus uses it to prune candidates automatically. Without the index, the filter falls back to a full scan.</p>
-<p>For a full list of available geometry-specific operators, refer to <a href="/docs/v2.6.x/geometry-operators.md">Geometry Operators</a>.</p>
+<p>For a full list of available geometry-specific operators, refer to <a href="/docs/geometry-operators.md">Geometry Operators</a>.</p>
 <h3 id="Example-1-Filter-only" class="common-anchor-header">Example 1: Filter only<button data-href="#Example-1-Filter-only" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -198,7 +198,7 @@ hits = client.search(
 )
 <span class="hljs-built_in">print</span>(hits)  <span class="hljs-comment"># Expected: top-k by vector similarity among rows whose geo intersects the line</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on how to use a <code translate="no">GEOMETRY</code> field, refer to <a href="/docs/v2.6.x/geometry-field.md">Geometry Field</a>.</p>
+<p>For more information on how to use a <code translate="no">GEOMETRY</code> field, refer to <a href="/docs/geometry-field.md">Geometry Field</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Drop an index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

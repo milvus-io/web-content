@@ -374,7 +374,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    <tr>
      <td><p><code translate="no">params.k</code></p></td>
      <td><p>No</p></td>
-     <td><p>Smoothing parameter that controls the impact of document ranks; higher <code translate="no">k</code> reduces sensitivity to top ranks. Range: (0, 16384); default: <code translate="no">60</code>.</p><p>For details, refer to <a href="/docs/v2.6.x/rrf-ranker.md#Mechanism-of-RRF-Ranker">Mechanism of RRF Ranker</a>.</p></td>
+     <td><p>Smoothing parameter that controls the impact of document ranks; higher <code translate="no">k</code> reduces sensitivity to top ranks. Range: (0, 16384); default: <code translate="no">60</code>.</p><p>For details, refer to <a href="/docs/rrf-ranker.md#Mechanism-of-RRF-Ranker">Mechanism of RRF Ranker</a>.</p></td>
      <td><p><code translate="no">100</code></p></td>
    </tr>
 </table>
@@ -508,4 +508,4 @@ searchRequests.add(AnnSearchReq.builder()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on hybrid search, refer to <a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>
+<p>For more information on hybrid search, refer to <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a>.</p>

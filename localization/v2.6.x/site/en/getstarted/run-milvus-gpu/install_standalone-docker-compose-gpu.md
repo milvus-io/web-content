@@ -38,7 +38,7 @@ title: Run Milvus with GPU Support Using Docker Compose
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Install Docker</a>.</li>
-<li><a href="/docs/v2.6.x/prerequisite-gpu.md">Check the requirements for hardware and software</a> prior to your installation.</li>
+<li><a href="/docs/prerequisite-gpu.md">Check the requirements for hardware and software</a> prior to your installation.</li>
 </ul>
 <div class="alert note">
 <p>If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we’ll provide you with the necessary support.</p>
@@ -150,7 +150,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also access Milvus WebUI at <code translate="no">http://127.0.0.1:9091/webui/</code> to learn more about the your Milvus instance. For details, refer to <a href="/docs/v2.6.x/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>You can also access Milvus WebUI at <code translate="no">http://127.0.0.1:9091/webui/</code> to learn more about the your Milvus instance. For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>If you have assigned multiple GPU devices to Milvus in docker-compose.yml, you can specify which GPU device is visible or available for use.</p>
 <p>Make GPU device <code translate="no">0</code> visible to Milvus:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>
@@ -228,28 +228,28 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Having installed Milvus in Docker, you can:</p>
 <ul>
-<li><p>Check <a href="/docs/v2.6.x/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
-<li><p>Check <a href="/docs/v2.6.x/milvus-webui.md">Milvus WebUI</a> to learn more about the Milvus instance.</p></li>
+<li><p>Check <a href="/docs/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
+<li><p>Check <a href="/docs/milvus-webui.md">Milvus WebUI</a> to learn more about the Milvus instance.</p></li>
 <li><p>Learn the basic operations of Milvus:</p>
 <ul>
-<li><a href="/docs/v2.6.x/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/v2.6.x/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/v2.6.x/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/v2.6.x/insert-update-delete.md">Insert, Upsert & Delete</a></li>
-<li><a href="/docs/v2.6.x/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/v2.6.x/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
+<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
+<li><a href="/docs/insert-update-delete.md">Insert, Upsert & Delete</a></li>
+<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
 </ul></li>
-<li><p><a href="/docs/v2.6.x/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/v2.6.x/scaleout.md">Scale your Milvus cluster</a>.</p></li>
+<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
+<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
 <li><p>Deploy your Milvu cluster on clouds:</p>
 <ul>
-<li><a href="/docs/v2.6.x/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/v2.6.x/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/v2.6.x/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/v2.6.x/milvus-webui.md">Milvus WebUI</a>, an intuitive web interface for Milvus observability and management.</p></li>
-<li><p>Explore <a href="/docs/v2.6.x/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/v2.6.x/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
+<li><p>Explore <a href="/docs/milvus-webui.md">Milvus WebUI</a>, an intuitive web interface for Milvus observability and management.</p></li>
+<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
+<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
 <li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/v2.6.x/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
 </ul>

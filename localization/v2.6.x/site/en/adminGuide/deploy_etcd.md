@@ -74,7 +74,7 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-attr">dir:</span> <span class="hljs-string">default.etcd</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="/docs/v2.6.x/configure_etcd.md">etcd-related Configurations</a> for more information.</p>
+<p>See <a href="/docs/configure_etcd.md">etcd-related Configurations</a> for more information.</p>
 <h3 id="2-Run-Milvus" class="common-anchor-header">2. Run Milvus<button data-href="#2-Run-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,6 +191,6 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
       </svg>
     </button></h2><p>Learn how to configure other Milvus dependencies with Docker Compose or Helm:</p>
 <ul>
-<li><a href="/docs/v2.6.x/deploy_s3.md">Configure Object Storage with Docker Compose or Helm</a></li>
-<li><a href="/docs/v2.6.x/deploy_pulsar.md">Configure Message Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/deploy_s3.md">Configure Object Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/deploy_pulsar.md">Configure Message Storage with Docker Compose or Helm</a></li>
 </ul>

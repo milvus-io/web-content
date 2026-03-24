@@ -307,7 +307,7 @@ curl --request POST \
     <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
 <span class="hljs-punctuation">]</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on the operators you can use in metadata filtering, refer to <a href="/docs/v2.6.x/filtering">Filtering</a>.</p>
+<p>For more information on the operators you can use in metadata filtering, refer to <a href="/docs/filtering">Filtering</a>.</p>
 <h3 id="Search-with-iterative-filtering" class="common-anchor-header">Search with iterative filtering<button data-href="#Search-with-iterative-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

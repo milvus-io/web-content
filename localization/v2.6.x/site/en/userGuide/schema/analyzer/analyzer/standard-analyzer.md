@@ -23,7 +23,7 @@ summary: >-
       </svg>
     </button></h1><p>The <code translate="no">standard</code> analyzer is the default analyzer in Milvus, which is automatically applied to text fields if no analyzer is specified. It uses grammar-based tokenization, making it effective for most languages.</p>
 <div class="alert note">
-<p>The <code translate="no">standard</code> analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Japanese, and Korean require dictionary-based tokenizations. In such cases, using a language-specific analyzer like <a href="/docs/v2.6.x/chinese-analyzer.md"><code translate="no">chinese</code></a> or custom analyzers with specialized tokenizers (such as <a href="/docs/v2.6.x/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/v2.6.x/icu-tokenizer.md"><code translate="no">icu</code></a>) and filters is highly recommended to ensure accurate tokenization and better search results.</p>
+<p>The <code translate="no">standard</code> analyzer is suitable for languages that rely on separators (such as spaces, punctuation) for word boundaries. However, languages like Chinese, Japanese, and Korean require dictionary-based tokenizations. In such cases, using a language-specific analyzer like <a href="/docs/chinese-analyzer.md"><code translate="no">chinese</code></a> or custom analyzers with specialized tokenizers (such as <a href="/docs/lindera-tokenizer.md"><code translate="no">lindera</code></a>, <a href="/docs/icu-tokenizer.md"><code translate="no">icu</code></a>) and filters is highly recommended to ensure accurate tokenization and better search results.</p>
 </div>
 <h2 id="Definition" class="common-anchor-header">Definition<button data-href="#Definition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -42,8 +42,8 @@ summary: >-
       </svg>
     </button></h2><p>The <code translate="no">standard</code> analyzer consists of:</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code> tokenizer to split text into discrete word units based on grammar rules. For more information, refer to <a href="/docs/v2.6.x/standard-tokenizer.md">Standard Tokenizer</a>.</p></li>
-<li><p><strong>Filter</strong>: Uses the <code translate="no">lowercase</code> filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to <a href="/docs/v2.6.x/lowercase-filter.md">Lowercase</a>.</p></li>
+<li><p><strong>Tokenizer</strong>: Uses the <code translate="no">standard</code> tokenizer to split text into discrete word units based on grammar rules. For more information, refer to <a href="/docs/standard-tokenizer.md">Standard Tokenizer</a>.</p></li>
+<li><p><strong>Filter</strong>: Uses the <code translate="no">lowercase</code> filter to convert all tokens to lowercase, enabling case-insensitive searches. For more information, refer to <a href="/docs/lowercase-filter.md">Lowercase</a>.</p></li>
 </ul>
 <p>The functionality of the <code translate="no">standard</code> analyzer is equivalent to the following custom analyzer configuration:</p>
 <div class="multipleCode">
@@ -155,7 +155,7 @@ analyzerParams.put(<span class="hljs-string">&quot;stop_words&quot;</span>, Coll
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For more information, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For more information, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
