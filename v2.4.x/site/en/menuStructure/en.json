@@ -641,6 +641,78 @@
     ]
   },
   {
+    "label": "AI Tools",
+    "id": "aiTools",
+    "isMenu": true,
+    "order": 5,
+    "children": [
+      {
+        "label": "AI Prompts",
+        "id": "ai_prompts",
+        "isMenu": true,
+        "order": 0,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "ai_prompts_landing.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "AGENTS.md for Milvus",
+            "id": "agents_overview.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Python SDK",
+            "id": "python_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Schema Design",
+            "id": "schema_design.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Search Patterns",
+            "id": "search_patterns.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Index Selection",
+            "id": "index_selection.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "RAG Pipeline",
+            "id": "rag_pipeline.md",
+            "order": 6,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus MCP Server",
+        "id": "mcp_server_milvus",
+        "order": 1,
+        "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
+        "children": []
+      },
+      {
+        "label": "MCP Server for Claude Code",
+        "id": "mcp_claude_context",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/claude-context",
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Administration Guide",
     "id": "admin_guide",
     "isMenu": true,
@@ -1265,7 +1337,7 @@
             "children": []
           }
         ]
-      }, 
+      },
       {
         "label": "LLMs",
         "id": "integrate-llms",
@@ -1320,7 +1392,7 @@
             "children": []
           }
         ]
-      }, 
+      },
       {
         "label": "Orchestration",
         "id": "orchestrate-with-milvus",
@@ -1348,7 +1420,7 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
-              }              
+              }
             ]
           },
           {
@@ -1392,7 +1464,7 @@
             "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
-            "children": []            
+            "children": []
           },
           {
             "label": "Langflow",
@@ -1419,7 +1491,7 @@
             "children": []
           }
         ]
-      }, 
+      },
       {
         "label": "Agents",
         "id": "integrate-agents",
@@ -1442,9 +1514,9 @@
             "id": "quickstart_mem0_with_milvus.md",
             "order": 2,
             "children": []
-          }       
+          }
         ]
-      }, 
+      },
       {
         "label": "Knowledge Engineering",
         "id": "knowledge-engineering",
@@ -1475,7 +1547,7 @@
             "children": []
           }
         ]
-      },  
+      },
       {
         "label": "Evaluation & Observability",
         "id": "evaluation-observability",
@@ -1534,22 +1606,22 @@
             "label": "Apify",
             "id": "apify_milvus_rag.md",
             "order": 2,
-            "children": []            
+            "children": []
           },
           {
             "label": "Unstructured",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
-            "children": []            
+            "children": []
           },
           {
             "label": "PII Masker",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
-            "children": []            
+            "children": []
           }
         ]
-      },  
+      },
       {
         "label": "Others",
         "id": "other-integrations",
@@ -1566,7 +1638,7 @@
             "id": "build_rag_on_arm.md",
             "order": 1,
             "children": []
-          }          
+          }
         ]
       }
     ]
@@ -1593,7 +1665,7 @@
         "label": "Advanced RAG",
         "id": "how_to_enhance_your_rag.md",
         "order": 2,
-        "children": []        
+        "children": []
       },
       {
         "label": "Full-Text Search with Milvus",
