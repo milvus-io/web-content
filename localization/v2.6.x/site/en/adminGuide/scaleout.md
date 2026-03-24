@@ -22,7 +22,7 @@ title: Scale a Milvus Cluster
         ></path>
       </svg>
     </button></h1><p>Milvus supports horizontal scaling of its components. This means you can either increase or decrease  the number of worker nodes of each type according to your own need.</p>
-<p>This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already <a href="/docs/install_cluster-helm.md">installed a Milvus cluster</a> before scaling. Also, we recommend familiarizing yourself with the <a href="/docs/architecture_overview.md">Milvus architecture</a> before you begin.</p>
+<p>This topic describes how to scale out and scale in a Milvus cluster. We assume that you have already <a href="/docs/v2.6.x/install_cluster-helm.md">installed a Milvus cluster</a> before scaling. Also, we recommend familiarizing yourself with the <a href="/docs/v2.6.x/architecture_overview.md">Milvus architecture</a> before you begin.</p>
 <p>This tutorial takes scaling out three query nodes as an example. To scale out other types of nodes, replace <code translate="no">queryNode</code> with the corresponding node type in the command line.</p>
 <div class="alert note">
 <p>For information on how to scale a cluster with Milvus Operator, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md">Scale a Cluster with Milvus Operator</a>.</p>
@@ -71,7 +71,7 @@ title: Scale a Milvus Cluster
     <span>Scaleup</span>
   </span>
 </p>
-<p>According to the <a href="/docs/architecture_overview.md">Milvus architecture</a>, stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.</p>
+<p>According to the <a href="/docs/v2.6.x/architecture_overview.md">Milvus architecture</a>, stateless worker nodes include query node, data node, index node, and proxy. Therefore, you can scale out these type of nodes to suit your business needs and application scenarios. You can either scale out the Milvus cluster manually or automatically.</p>
 <p>Generally, you will need to scale out the Milvus cluster you created if it is over-utilized. Below are some typical situations where you may need to scale out the Milvus cluster:</p>
 <ul>
 <li>The CPU and memory utilization is high for a period of time.</li>
@@ -152,7 +152,7 @@ Milvus only supports adding the worker nodes and does not support adding the coo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can scale in your Milvus cluster either manually or automatically. For automatic scaling with Horizontal Pod Autoscaling (HPA), see <a href="/docs/hpa.md">Configure HPA for Milvus</a>. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.</p>
+    </button></h2><p>You can scale in your Milvus cluster either manually or automatically. For automatic scaling with Horizontal Pod Autoscaling (HPA), see <a href="/docs/v2.6.x/hpa.md">Configure HPA for Milvus</a>. If autoscaling is enabled, the Milvus cluster will shrink or expand automatically when CPU and memory resources consumption reaches the value you have set.</p>
 <p>Currently, Milvus 2.1.0 only supports scaling in and out manually.</p>
 <h4 id="Scaling-out" class="common-anchor-header">Scaling out</h4><p>Run <code translate="no">helm upgrade my-release milvus/milvus --set queryNode.replicas=3 --reuse-values</code> to manually scale out the query node.</p>
 <p>If successful, three running pods on the query node are added as shown in the following example.</p>
@@ -204,16 +204,16 @@ my<span class="hljs-operator">-</span><span class="hljs-keyword">release</span><
     </button></h2><ul>
 <li><p>If you want to learn how to monitor the Milvus services and create alerts:</p>
 <ul>
-<li>Learn <a href="/docs/monitor.md">Monitor Milvus with Prometheus Operator on Kubernetes</a></li>
+<li>Learn <a href="/docs/v2.6.x/monitor.md">Monitor Milvus with Prometheus Operator on Kubernetes</a></li>
 </ul></li>
 <li><p>If you are ready to deploy your cluster on clouds:</p>
 <ul>
-<li>Learn how to <a href="/docs/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
-<li>Learn how to <a href="/docs/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
-<li>Learn how to <a href="/docs/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.6.x/eks.md">Deploy Milvus on Amazon EKS with Terraform</a></li>
+<li>Learn how to <a href="/docs/v2.6.x/gcp.md">Deploy Milvus Cluster on GCP with Kubernetes</a></li>
+<li>Learn how to <a href="/docs/v2.6.x/azure.md">Deploy Milvus on Microsoft Azure With Kubernetes</a></li>
 </ul></li>
 <li><p>If you are looking for instructions on how to allocate resources:</p>
 <ul>
-<li><a href="/docs/allocate.md#standalone">Allocate Resources on Kubernetes</a></li>
+<li><a href="/docs/v2.6.x/allocate.md#standalone">Allocate Resources on Kubernetes</a></li>
 </ul></li>
 </ul>

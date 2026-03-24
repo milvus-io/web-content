@@ -35,7 +35,7 @@ beta: Milvus v2.6.2+
 <li><p><code translate="no">path LIKE &quot;%json&quot;</code></p></li>
 </ul>
 <div class="alert note">
-<p>For details on filter expression syntax, refer to <a href="/docs/basic-operators.md#Range-operators">Basic Operators</a>.</p>
+<p>For details on filter expression syntax, refer to <a href="/docs/v2.6.x/basic-operators.md#Range-operators">Basic Operators</a>.</p>
 </div>
 <h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -115,7 +115,7 @@ Example: with <code translate="no">[2,4]</code> and the word <code translate="no
   </span>
 </p>
 <div class="alert note">
-<p>A wider <code translate="no">[min_gram, max_gram]</code> range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to <a href="/docs/mmap.md">Use mmap</a>.</p>
+<p>A wider <code translate="no">[min_gram, max_gram]</code> range creates more grams and larger mapping lists. If memory is tight, consider mmap mode for very large posting lists. For details, refer to <a href="/docs/v2.6.x/mmap.md">Use mmap</a>.</p>
 </div>
 <h3 id="Phase-2-Accelerate-queries" class="common-anchor-header">Phase 2: Accelerate queries<button data-href="#Phase-2-Accelerate-queries" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -258,7 +258,7 @@ client.create_index(
 <li><p>The value is cast to <code translate="no">VARCHAR</code> before n-gram tokenization.</p></li>
 <li><p>Milvus generates substrings of length 2 to 4 and stores them in the inverted index.</p></li>
 </ul>
-<p>For more information on how to index a JSON field, refer to <a href="/docs/json-indexing.md">JSON Indexing</a>.</p>
+<p>For more information on how to index a JSON field, refer to <a href="/docs/v2.6.x/json-indexing.md">JSON Indexing</a>.</p>
 <h2 id="Queries-accelerated-by-NGRAM" class="common-anchor-header">Queries accelerated by NGRAM<button data-href="#Queries-accelerated-by-NGRAM" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -303,7 +303,7 @@ client.create_index(
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;json_field[&quot;body&quot;] LIKE &quot;%database%&quot;&#x27;</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>For more information on filter expression syntax, refer to <a href="/docs/basic-operators.md">Basic Operators</a>.</p>
+<p>For more information on filter expression syntax, refer to <a href="/docs/v2.6.x/basic-operators.md">Basic Operators</a>.</p>
 <h2 id="Drop-an-index" class="common-anchor-header">Drop an index<button data-href="#Drop-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -349,7 +349,7 @@ client.create_index(
     </button></h2><ul>
 <li><p><strong>Field types</strong>: Supported on <code translate="no">VARCHAR</code> and <code translate="no">JSON</code> fields. For JSON, provide both <code translate="no">params.json_path</code> and <code translate="no">params.json_cast_type=&quot;varchar&quot;</code>.</p></li>
 <li><p><strong>Unicode</strong>: NGRAM decomposition is character-based and language-agnostic and includes whitespace and punctuation.</p></li>
-<li><p><strong>Space–time trade-off</strong>: Wider gram ranges <code translate="no">[min_gram, max_gram]</code> produce more grams and larger indexes. If memory is tight, consider <code translate="no">mmap</code> mode for large posting lists. For more information, refer to <a href="/docs/mmap.md">Use mmap</a>.</p></li>
+<li><p><strong>Space–time trade-off</strong>: Wider gram ranges <code translate="no">[min_gram, max_gram]</code> produce more grams and larger indexes. If memory is tight, consider <code translate="no">mmap</code> mode for large posting lists. For more information, refer to <a href="/docs/v2.6.x/mmap.md">Use mmap</a>.</p></li>
 <li><p><strong>Immutability</strong>: <code translate="no">min_gram</code> and <code translate="no">max_gram</code> cannot be changed in place—rebuild the index to adjust them.</p></li>
 </ul>
 <h2 id="Best-practices" class="common-anchor-header">Best practices<button data-href="#Best-practices" class="anchor-icon" translate="no">

@@ -142,5 +142,5 @@ Additionally, in standalone mode, simpler WAL implementation, such as woodpecker
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/four_layers.md">Computing/Storage Disaggregation</a> to understand the mechanism and design principle of Milvus.</li>
+<li>Read <a href="/docs/v2.6.x/four_layers.md">Computing/Storage Disaggregation</a> to understand the mechanism and design principle of Milvus.</li>
 </ul>

@@ -24,7 +24,7 @@ beta: Milvus 2.6.4+
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, the traditional <em>full-load</em> mode requires each QueryNode to load all data fields and indexes of a <a href="/docs/glossary.md#Segment">segment</a> at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets.</p>
+    </button></h1><p>In Milvus, the traditional <em>full-load</em> mode requires each QueryNode to load all data fields and indexes of a <a href="/docs/v2.6.x/glossary.md#Segment">segment</a> at initialization, even data that may never be accessed. This ensures immediate data availability but often leads to wasted resources, including high memory usage, heavy disk activity, and significant I/O overhead, especially when handling large-scale datasets.</p>
 <p><em>Tiered Storage</em> addresses this challenge by decoupling data caching from segment loading. Instead of loading all data at once, Milvus introduces a caching layer that distinguishes between hot data (cached locally) and cold data (stored remotely). The QueryNode now loads only lightweight <em>metadata</em> initially and dynamically pulls or evicts field data on demand. This significantly reduces load time, optimizes local resource utilization, and enables QueryNodes to process datasets that far exceed their physical memory or disk capacity.</p>
 <p>Consider enabling Tiered Storage in scenarios such as:</p>
 <ul>
@@ -35,7 +35,7 @@ beta: Milvus 2.6.4+
 <div class="alert note">
 <ul>
 <li><p><em>Metadata</em> includes schema, index definitions, chunk maps, row counts, and references to remote objects. This type of data is small, always cached, and never evicted.</p></li>
-<li><p>For more details on segments and chunks, refer to <a href="/docs/glossary.md#Segment">Segment</a>.</p></li>
+<li><p>For more details on segments and chunks, refer to <a href="/docs/v2.6.x/glossary.md#Segment">Segment</a>.</p></li>
 </ul>
 </div>
 <h2 id="How-it-works" class="common-anchor-header">How it works<button data-href="#How-it-works" class="anchor-icon" translate="no">
@@ -105,21 +105,21 @@ beta: Milvus 2.6.4+
 </p>
 <h4 id="Phase-1-Lazy-load" class="common-anchor-header">Phase 1: Lazy load</h4><p>At initialization, Milvus performs a lazy load, caching only segment-level metadata such as schema definitions, index information, and chunk mappings.</p>
 <p>No actual field data or index files are cached at this stage. This allows collections to become queryable almost immediately after startup while keeping memory and disk consumption minimal.</p>
-<p>Because field data and index files remain in remote storage until first accessed, the <em>first query</em> may experience additional latency as required data must be fetched on demand. To mitigate this effect for critical fields or indexes, you can use the <a href="/docs/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> strategy to proactively preload them before the segment becomes queryable.</p>
+<p>Because field data and index files remain in remote storage until first accessed, the <em>first query</em> may experience additional latency as required data must be fetched on demand. To mitigate this effect for critical fields or indexes, you can use the <a href="/docs/v2.6.x/tiered-storage-overview.md#Phase-2-Warm-up">Warm Up</a> strategy to proactively preload them before the segment becomes queryable.</p>
 <p><strong>Configuration</strong></p>
 <p>Automatically applied when Tiered Storage is enabled. No manual setting is required.</p>
-<h4 id="Phase-2-Warm-up" class="common-anchor-header">Phase 2: Warm up</h4><p>To reduce the first-hit latency introduced by <a href="/docs/tiered-storage-overview.md#Phase-1-Lazy-load">lazy load</a>, Milvus provides a <em>Warm Up</em> mechanism.</p>
+<h4 id="Phase-2-Warm-up" class="common-anchor-header">Phase 2: Warm up</h4><p>To reduce the first-hit latency introduced by <a href="/docs/v2.6.x/tiered-storage-overview.md#Phase-1-Lazy-load">lazy load</a>, Milvus provides a <em>Warm Up</em> mechanism.</p>
 <p>Before a segment becomes queryable, Milvus can proactively fetch and cache specific fields or indexes from object storage, ensuring that the first query directly hits cached data instead of triggering on-demand loading.</p>
 <p>During warmup, fields will be preloaded at the chunk level, while indexes will be preloaded at the segment level.</p>
 <p><strong>Configuration</strong></p>
-<p>Warm Up settings are defined in the Tiered Storage section of <code translate="no">milvus.yaml</code>. You can enable or disable preloading for each field or index type and specify the preferred strategy. See <a href="/docs/warm-up.md">Warm Up</a> for detailed configurations.</p>
+<p>Warm Up settings are defined in the Tiered Storage section of <code translate="no">milvus.yaml</code>. You can enable or disable preloading for each field or index type and specify the preferred strategy. See <a href="/docs/v2.6.x/warm-up.md">Warm Up</a> for detailed configurations.</p>
 <h4 id="Phase-3-Partial-load" class="common-anchor-header">Phase 3: Partial load</h4><p>Once queries or searches begin, the QueryNode performs a <em>partial load</em>, fetching only the required data chunks or index files from object storage.</p>
 <ul>
 <li><p><strong>Fields</strong>: Loaded on demand at the <strong>chunk level</strong>. Only data chunks that match the current query conditions are fetched, minimizing I/O and memory use.</p></li>
 <li><p><strong>Indexes</strong>: Loaded on demand at the <strong>segment level</strong>. Index files must be fetched as complete units and cannot be split across chunks.</p></li>
 </ul>
 <p><strong>Configuration</strong></p>
-<p>Partial load is automatically applied when Tiered Storage is enabled. No manual setting is required. To minimize first-hit latency for critical data, combine with <a href="/docs/warm-up.md">Warm Up</a>.</p>
+<p>Partial load is automatically applied when Tiered Storage is enabled. No manual setting is required. To minimize first-hit latency for critical data, combine with <a href="/docs/v2.6.x/warm-up.md">Warm Up</a>.</p>
 <h4 id="Phase-4-Eviction" class="common-anchor-header">Phase 4: Eviction</h4><p>To maintain healthy resource usage, Milvus automatically releases unused cached data when specific thresholds are reached.</p>
 <p>Eviction follows a <a href="https://en.wikipedia.org/wiki/Cache_replacement_policies">Least Recently Used (LRU)</a> policy, ensuring that infrequently accessed data is removed first while active data remains in cache.</p>
 <p>Eviction is governed by the following configurable items:</p>
@@ -128,7 +128,7 @@ beta: Milvus 2.6.4+
 <li><p><strong>Cache TTL</strong>: Removes stale cached data after a defined duration of inactivity.</p></li>
 </ul>
 <p><strong>Configuration</strong></p>
-<p>Enable and tune eviction parameters in <strong>milvus.yaml</strong>. See <a href="/docs/eviction.md">Eviction</a> for detailed configuration.</p>
+<p>Enable and tune eviction parameters in <strong>milvus.yaml</strong>. See <a href="/docs/v2.6.x/eviction.md">Eviction</a> for detailed configuration.</p>
 <h2 id="Getting-started" class="common-anchor-header">Getting started<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,8 +225,8 @@ beta: Milvus 2.6.4+
         ></path>
       </svg>
     </button></h3><ol>
-<li><p><strong>Configure Warm Up</strong> - Optimize preloading for your access patterns. See <a href="/docs/warm-up.md">Warm Up</a>.</p></li>
-<li><p><strong>Tune Eviction</strong> - Set appropriate watermarks and TTL for your resource constraints. See <a href="/docs/eviction.md">Eviction</a>.</p></li>
+<li><p><strong>Configure Warm Up</strong> - Optimize preloading for your access patterns. See <a href="/docs/v2.6.x/warm-up.md">Warm Up</a>.</p></li>
+<li><p><strong>Tune Eviction</strong> - Set appropriate watermarks and TTL for your resource constraints. See <a href="/docs/v2.6.x/eviction.md">Eviction</a>.</p></li>
 <li><p><strong>Monitor Performance</strong> - Track cache hit rates, eviction frequency, and query latency patterns.</p></li>
 <li><p><strong>Iterate Configuration</strong> - Adjust settings based on observed workload characteristics.</p></li>
 </ol>

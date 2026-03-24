@@ -416,7 +416,7 @@ client.create_index(
 <div class="alert note">
 <ul>
 <li><code translate="no">INT8_VECTOR</code> currently supports only the <strong>HNSW</strong> index.</li>
-<li>Alternatively, you can also set a custom index type. For a list of index types available for dense vectors, refer to <a href="/docs/index-explained.md">Index Explained</a>.</li>
+<li>Alternatively, you can also set a custom index type. For a list of index types available for dense vectors, refer to <a href="/docs/v2.6.x/index-explained.md">Index Explained</a>.</li>
 </ul>
 </div>
 <h3 id="4-Semantic-search-on-dense-vectors" class="common-anchor-header">4. Semantic search on dense vectors<button data-href="#4-Semantic-search-on-dense-vectors" class="anchor-icon" translate="no">
@@ -592,9 +592,9 @@ results = client.search(
     </button></h2><p>Once you can store and search dense vectors, you can:</p>
 <ul>
 <li><p><strong>Combine vector and scalar filters</strong></p>
-<p>Add filter conditions on other fields along with vector similarity. For details, refer to <a href="/docs/filtered-search.md">Filtered Search</a>.</p></li>
+<p>Add filter conditions on other fields along with vector similarity. For details, refer to <a href="/docs/v2.6.x/filtered-search.md">Filtered Search</a>.</p></li>
 <li><p><strong>Run hybrid search</strong></p>
-<p>Combine multiple vector fields (for example, text + image embeddings) or mix sparse and dense vectors. See <a href="/docs/multi-vector-search.md">Multi-Vector Hybrid Search</a> for details.</p></li>
+<p>Combine multiple vector fields (for example, text + image embeddings) or mix sparse and dense vectors. See <a href="/docs/v2.6.x/multi-vector-search.md">Multi-Vector Hybrid Search</a> for details.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

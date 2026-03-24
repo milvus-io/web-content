@@ -24,7 +24,7 @@ beta: Milvus 2.5.11+
       </svg>
     </button></h1><p>The <code translate="no">lindera</code> tokenizer performs dictionary-based morphological analysis. It is a good choice for languages—such as Japanese, Korean, and Chinese—whose words are not separated by spaces.</p>
 <div class="alert note">
-<p>The <code translate="no">lindera</code> tokenizer preserves punctuation marks as separate tokens in the output. For example, <code translate="no">&quot;こんにちは！&quot;</code> becomes <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. To remove these standalone punctuation tokens, use the <a href="/docs/removepunct-filter.md"><code translate="no">removepunct</code></a> filter.</p>
+<p>The <code translate="no">lindera</code> tokenizer preserves punctuation marks as separate tokens in the output. For example, <code translate="no">&quot;こんにちは！&quot;</code> becomes <code translate="no">[&quot;こんにちは&quot;, &quot;！&quot;]</code>. To remove these standalone punctuation tokens, use the <a href="/docs/v2.6.x/removepunct-filter.md"><code translate="no">removepunct</code></a> filter.</p>
 </div>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -108,7 +108,7 @@ analyzerParams.put(<span class="hljs-string">&quot;tokenizer&quot;</span>,
 </ul></td>
    </tr>
 </table>
-<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/analyzer-overview.md#Example-use">Example use</a>.</p>
+<p>After defining <code translate="no">analyzer_params</code>, you can apply them to a <code translate="no">VARCHAR</code> field when defining a collection schema. This allows Milvus to process the text in that field using the specified analyzer for efficient tokenization and filtering. For details, refer to <a href="/docs/v2.6.x/analyzer-overview.md#Example-use">Example use</a>.</p>
 <h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
