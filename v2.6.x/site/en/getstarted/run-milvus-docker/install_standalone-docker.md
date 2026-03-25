@@ -31,15 +31,6 @@ $ bash standalone_embed.sh start
 
 <div class="alert note">
 
-**What's new in v2.6.5:**
-- **Streaming Node**: Enhanced data processing capabilities
-- **Woodpecker MQ**: Improved message queue with reduced maintenance overhead, see [Use Woodpecker](use-woodpecker.md) for detail
-- **Optimized Architecture**: Consolidated components for better performance
-
-Always download the latest script to ensure you get the most recent configurations and architecture improvements.
-
-If you want to use [Backup](https://milvus.io/docs/milvus_backup_overview.md) in standalone deployment mode, it is recommended to use the [Docker Compose](https://milvus.io/docs/install_standalone-docker-compose.md) deployment method.
-
 If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we'll provide you with the necessary support.
 
 </div>
@@ -51,51 +42,6 @@ After running the installation script:
 - To change the default Milvus configuration, add your settings to the **user.yaml** file in the current folder and then restart the service.
 - The Milvus data volume is mapped to **volumes/milvus** in the current folder.
 
-You can access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
-
-## (Optional) Update Milvus configurations
-
-You can modify the Milvus configurations in the **user.yaml** file in the current folder. For example, to change the `proxy.healthCheckTimeout` to `1000` ms, you can modify the file as follows:
-
-```shell
-cat << EOF > user.yaml
-# Extra config to override default milvus.yaml
-proxy:
-  healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
-EOF
-```
-
-Then restart the service as follows:
-
-```shell
-$ bash standalone_embed.sh restart
-```
-
-For applicable configuration items, refer to [System Configuration](system_configuration.md).
-
-## Upgrade Milvus
-
-You can upgrade to the latest version of Milvus using the built-in upgrade command. This automatically downloads the latest configuration and Milvus image:
-
-```shell
-# Upgrade Milvus to the latest version
-$ bash standalone_embed.sh upgrade
-```
-
-<div class="alert note">
-
-The upgrade command automatically:
-- Downloads the latest installation script with updated configurations
-- Pulls the latest Milvus Docker image
-- Restarts the container with the new version
-- Preserves your existing data and configurations
-
-This is the recommended way to upgrade your Milvus standalone deployment.
-
-</div>
-
-## Stop and delete Milvus
-
 You can stop and delete this container as follows
 
 ```shell
@@ -104,6 +50,12 @@ $ bash standalone_embed.sh stop
 
 # Delete Milvus data
 $ bash standalone_embed.sh delete
+```
+You can upgrade the latest version Milvus as follows
+
+```shell
+# upgrade Milvus
+$ bash standalone_embed.sh upgrade
 ```
 
 ## What's next
@@ -126,8 +78,7 @@ Having installed Milvus in Docker, you can:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)
-- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).

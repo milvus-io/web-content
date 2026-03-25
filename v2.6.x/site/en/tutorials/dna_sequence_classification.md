@@ -23,5 +23,5 @@ In this tutorial, you will learn how to build a DNA sequence classification mode
 
 <br/>
 
-![dna](../../../assets/dna.png "Workflow of a DNA sequence classification model.")
+![dna](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/dna.png)
 

@@ -1,15 +1,15 @@
 ---
 id: vector_visualization.md
-summary: In this example, we will show how to visualize the embeddings(vectors) in Milvus using t-SNE.
+summary: In this example, we will show how to visualize the embeddings(vectors) in Milvus using t-SN.
 title: Vector Visualization
 ---
 
 # Vector Visualization
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/vector_visualization.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/vector_visualization.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
@@ -140,7 +140,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type="IP",  # Inner product distance
-    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Strong",  # Strong consistency level
 )
 ```
 
@@ -240,7 +240,7 @@ print(json.dumps(retrieved_lines_with_distances, indent=4))
             0.5655910968780518
         ],
         [
-            "Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.\n\n###",
+            "Does Milvus support inserting and searching data simultaneously?\n\nYes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client\u2019s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.\n\n###",
             0.5618637204170227
         ],
         [
@@ -430,7 +430,7 @@ plt.show()
 
 
     
-![png](../../../assets/vector_visualization_33_0.png)
+![png](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/vector_visualization_33_0.png)
     
 
 

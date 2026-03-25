@@ -59,13 +59,13 @@ Default username / password are: `admin` / `admin`
 
 ### 1. Add your AI models
 
-![](../../../assets/kotaemon_1.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png)
 
 In the `Resources` tab, you can add and set your LLMs and embedding models. You can add multiple models and set them as active or inactive. You only need to provide at least one. You can also provide multiple models to allow switching between them.
 
 ### 2. Upload your documents
 
-![](../../../assets/kotaemon_2.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png)
 
 In order to do QA on your documents, you need to upload them to the application first.
 Navigate to the `File Index` tab, and you can upload and manage your custom documents.
@@ -74,7 +74,7 @@ By default, all application data are stored in `./ktem_app_data` folder. The Mil
 
 ### 3. Chat with your documents
 
-![](../../../assets/kotaemon_3.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png)
 
 Now navigate back to the `Chat` tab. The Chat tab consists of 3 regions: the Conversation Settings Panel, where you manage conversations and file references; the Chat Panel for interacting with the chatbot; and the Information Panel, which displays supporting evidence, confidence scores, and relevance ratings for answers.
 

@@ -48,7 +48,7 @@ $ docker compose down
 
 The frontend can be accessed at `http://localhost:3000`, and the backend can be accessed at `http://localhost:8000`.
 
-![](../../../assets/knowlege_table.png)
+![](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/knowlege_table.png)
 
 You can play around with the UI and try with your own documents.
 

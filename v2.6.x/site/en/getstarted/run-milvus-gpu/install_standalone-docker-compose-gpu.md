@@ -27,10 +27,10 @@ To install Milvus with GPU support using Docker Compose, follow these steps.
 
 ### 1. Download and configure the YAML file
 
-Download [`milvus-standalone-docker-compose-gpu.yml`](https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose-gpu.yml) and save it as docker-compose.yml manually, or with the following command.
+Download [`milvus-standalone-docker-compose-gpu.yml`](https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml) and save it as docker-compose.yml manually, or with the following command.
 
 ```shell
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 ```
 
 You need to make some changes to the environment variables of the standalone service in the YAML file as follows:
@@ -105,8 +105,6 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
 ```
-
-You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
 
 If you have assigned multiple GPU devices to Milvus in docker-compose.yml, you can specify which GPU device is visible or available for use.
 
@@ -188,8 +186,6 @@ Having installed Milvus in Docker, you can:
 
 - Check [Quickstart](quickstart.md) to see what Milvus can do.
 
-- Check [Milvus WebUI](milvus-webui.md) to learn more about the Milvus instance.
-
 - Learn the basic operations of Milvus:
   - [Manage Databases](manage_databases.md)
   - [Manage Collections](manage-collections.md)
@@ -204,10 +200,9 @@ Having installed Milvus in Docker, you can:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)
-- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).
 
  

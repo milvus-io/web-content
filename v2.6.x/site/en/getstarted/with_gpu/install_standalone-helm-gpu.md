@@ -170,7 +170,7 @@ Milvus allows you to assign one or more GPU devices to Milvus.
   ```
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
   ```
 
 - Assign multiple GPU devices
@@ -222,7 +222,7 @@ Milvus allows you to assign one or more GPU devices to Milvus.
   ```
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
   ```
 
   <div class="alert note">
@@ -320,7 +320,7 @@ Having installed Milvus, you can:
 - [Upgrade Milvus Using Helm Chart](upgrade_milvus_standalone-helm.md).
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).
 
 

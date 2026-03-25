@@ -35,7 +35,7 @@ Here we present three examples that illustrate how bitsets are used in Milvus, w
 - Entities whose `primary_key`s are [7, 8] are deleted when the timestamp ``ts`` equals 300.  
 - Only entities, whose `primary_key`s are [1, 3, 5, 7], satisfy the conditions of attribute filtering.
 
-![Order of DML events](../../../assets/bitset_0.svg "Order of DML events.")
+![Order of DML events](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_0.svg)
 
 ### Case one
 
@@ -51,7 +51,7 @@ As for the deletion bitset `del_bitset`, the initial value should be `[0, 0, 0, 
 
 Now we have two bitsets after Time Travel and attribute filtering: `filter_bitset` `[0, 1, 0, 1, 1, 1, 1, 1]` and `del_bitset` `[0, 0, 0, 0, 0, 0, 0, 0]`.  Combine these two bitsets with the `OR` binary logic operator. The ultimate value of result_bitset is `[0, 1, 0, 1, 1, 1, 1, 1]`, meaning only entities 1 and 3 will be computed in the following search or query stage.
 
-![Figure 1. Search with Time Travel = 150.](../../../assets/bitset_1.jpg "Figure 1. Search with Time Travel = 150.")
+![Figure 1. Search with Time Travel = 150.](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_1.jpg)
 
 ### Case two
 
@@ -65,7 +65,7 @@ As for the deletion bitset `del_bitset`, the initial value is `[0, 0, 0, 0, 0, 0
 
 Now we have two bitsets after Time Travel and attribute filtering: `filter_bitset` `[0, 1, 0, 1, 0, 1, 0, 1]` and `del_bitset` `[0, 0, 0, 0, 0, 0, 0, 0]`. Combine these two bitsets with the `OR` binary logic operator. The result_bitset is `[0, 1, 0, 1, 0, 1, 0, 1]`. That is to say, only entites [1, 3, 5, 7] will be computed in the following search or query stage.
 
-![Figure 2. Search with Time Travel = 250.](../../../assets/bitset_2.jpg "Figure 2. Search with Time Travel = 250.")
+![Figure 2. Search with Time Travel = 250.](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_2.jpg)
 
 ### Case three
 
@@ -79,7 +79,7 @@ As for the deletion bitset `del_bitset`, since entities 7 and 8 have already bee
 
 Now we have two bitsets after Time Travel and attribute filtering: `filter_bitset` `[0, 1, 0, 1, 0, 1, 0, 1]` and `del_bitset` `[0, 0, 0, 0, 0, 0, 1, 1]`.  Combine these two bitsets with the `OR` binary logic operator. The ultimate `result_bitset` is `[0, 1, 0, 1, 0, 1, 1, 1]`. That is to say, only entities [1, 3, 5] will be computed in the following search or query stage.
 
-![Figure 3. Search with Time Travel = 350.](../../../assets/bitset_3.jpg "Figure 3. Search with Time Travel = 350.")
+![Figure 3. Search with Time Travel = 350.](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/bitset_3.jpg)
 
 ## What's next
 

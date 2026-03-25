@@ -21,7 +21,7 @@ Milvus provides a Docker Compose configuration file in the Milvus repository. To
 
 ```shell
 # Download the configuration file
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.23/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 # Start Milvus
 $ sudo docker compose up -d
@@ -32,13 +32,6 @@ Creating milvus-standalone ... done
 ```
 
 <div class="alert note">
-
-**What's new in v2.6.5:**
-- **Enhanced Architecture**: Features the new Streaming Node and optimized components
-- **Updated Dependencies**: Includes the latest MinIO and etcd versions
-- **Improved Configuration**: Optimized settings for better performance
-
-Always download the latest Docker Compose configuration to ensure compatibility with v2.6.5 features.
 
 - If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on [this page](https://docs.docker.com/compose/).
 
@@ -64,37 +57,6 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530->19530/tcp, 0.0.0.0:9091->9091/tcp
 ```
-
-You can also access Milvus WebUI at `http://127.0.0.1:9091/webui/` to learn more about the your Milvus instance. For details, refer to [Milvus WebUI](milvus-webui.md).
-
-## (Optional) Update Milvus configurations
-
-To update Milvus configuration to suit your needs, you need to modify the `/milvus/configs/user.yaml` file within the `milvus-standalone` container.
-
-1. Access the `milvus-standalone` container.
-
-    ```shell
-    docker exec -it milvus-standalone bash
-    ```
-
-1. Add extra configurations to override the default ones. 
-  The following assumes that you need to override the default `proxy.healthCheckTimeout`. For applicable configuration items, refer to [System Configuration](system_configuration.md).
-
-    ```shell
-    cat << EOF > /milvus/configs/user.yaml
-    # Extra config to override default milvus.yaml
-    proxy:
-      healthCheckTimeout: 1000 # ms, the interval that to do component healthy check
-    EOF
-    ```
-
-1. Restart the `milvus-standalone` container to apply the changes.
-
-    ```shell
-    docker restart milvus-standalone
-    ```
-
-## Stop and delete Milvus
 
 You can stop and delete this container as follows
 
@@ -126,7 +88,6 @@ Having installed Milvus in Docker, you can:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)
-- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.

@@ -13,7 +13,7 @@ This page discusses something you should consider before you start bulk-insertin
 
 The target collection requires mapping the source data to its schema. The diagram below shows how acceptable source data is mapped to the schema of a target collection.
 
-![Map data to schema](../../../../assets/map-data-to-schema.png)
+![Map data to schema](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/map-data-to-schema.png)
 
 You should carefully examine your data and design the schema of the target collection accordingly.
 
@@ -27,7 +27,7 @@ There are two more things to consider when designing the schema:
 
 - **Whether to enable dynamic fields**
 
-    The target collection can also store fields not included in its pre-defined schema if the schema enables dynamic fields. The **&#36;meta** field is a reserved JSON field to hold dynamic fields and their values in key-value pairs. In the above diagram, the fields **dynamic_field_1** and **dynamic_field_2** and the values will be saved as key-value pairs in the **&#36;meta** field.
+    The target collection can also store fields not included in its pre-defined schema if the schema enables dynamic fields. The **$meta** field is a reserved JSON field to hold dynamic fields and their values in key-value pairs. In the above diagram, the fields **dynamic_field_1** and **dynamic_field_2** and the values will be saved as key-value pairs in the **$meta** field.
 
 The following code shows how to set up the schema for the collection illustrated in the above diagram.
 
@@ -645,7 +645,7 @@ try {
 
 Possible folder structures are as follows:
 
-```
+```bash
 # JSON
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b

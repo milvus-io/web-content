@@ -23,7 +23,7 @@ Additionally, we are planning to expand our capabilities to include support for 
 
 Milvus-CDC adopts an architecture with two main components - an HTTP server that manages tasks and metadata, and __corelib__ that synchronizes task execution with a reader that obtains data from the source Milvus instance and a writer that sends processed data to the target Milvus instance.
 
-![milvus-cdc-architecture](../../../../../assets/milvus-cdc-architecture.png)
+![milvus-cdc-architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-architecture.png)
 
 In the preceding diagram,
 
@@ -43,7 +43,7 @@ The Milvus-CDC data processing flow involves the following steps:
 
 1. __Data processing__: Data from MQ is read, parsed, and either passed on using the Go SDK or processed to replicate operations performed in the source Milvus.
 
-![milvus-cdc-workflow](../../../../../assets/milvus-cdc-workflow.png)
+![milvus-cdc-workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-cdc-workflow.png)
 
 ## Limits
 

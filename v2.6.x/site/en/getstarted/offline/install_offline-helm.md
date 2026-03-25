@@ -27,7 +27,7 @@ helm repo update
 - For Milvus standalone:
 
 ```
-helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false milvus/milvus > milvus_manifest.yaml
+helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus > milvus_manifest.yaml
 ```
 
 - For Milvus cluster:
@@ -98,4 +98,5 @@ Having installed Milvus, you can:
 
 - [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
 - [Scale your Milvus cluster](scaleout.md).
+- Explore [VTS](https://github.com/zilliztech/vts), an open-source tool designed for importing and exporting data in Milvus.
 - [Monitor Milvus with Prometheus](monitor.md).

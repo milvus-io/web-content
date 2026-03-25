@@ -16,7 +16,7 @@ MilvusDM does not support migrating data from Milvus 2.0 standalone to Milvus 2.
 
 ## Prerequisites
 
-You need to install MilvusDM before migrating Milvus data.
+You need to [VTS](https://github.com/zilliztech/vts) before migrating Milvus data.
 
 ## 1. Download YAML file
 
@@ -95,4 +95,4 @@ $ milvusdm --yaml M2M.yaml
   - Learn how to Migrate Data from Faiss to Milvus.
   - Learn how to Migrate from HDF5 to Milvus.
 - If you are interested in learning more about the data migration tool,
-  - Read the overview of [VTS](mhttps://github.com/zilliztech/vts).
+  - Read the overview of MilvusDM.

@@ -13,7 +13,7 @@ In Milvus, a scalar index is used to speed up metafiltering by a specific non-ve
 
 - __[Auto indexing](https://milvus.io/docs/index-scalar-fields.md#Auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.
 
-- __[Custom indexing](https://milvus.io/docs/index-scalar-fields.md#Custom-indexing)__: You specify the exact index type, such as an inverted index or [bitmap index](bitmap.md). This provides more control over the index type selection.
+- __[Custom indexing](https://milvus.io/docs/index-scalar-fields.md#Custom-indexing)__: You specify the exact index type, such as an inverted index. This provides more control over the index type selection.
 
 ## Auto indexing
 
@@ -190,8 +190,6 @@ __Methods and Parameters__
 
         - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to [Scalar Index](scalar_index.md).
 
-        - __BITMAP__: An index type that stores a bitmap of all unique values in a field. For details, refer to [BITMAP](bitmap.md).
-
         - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
 
         - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
@@ -327,3 +325,7 @@ console.log(res.indexes)
 //     "inverted_index"
 // ]   
 ```
+
+## Limits
+
+- Currently, scalar indexing supports INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR, and ARRAY data types, but not the JSON data type.

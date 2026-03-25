@@ -20,4 +20,4 @@ Recent years witness an exponential explosion of user-generated content. People 
 
 In this tutorial, you will learn how to build an image deduplication system. This tutorial uses the ResNet-50 model to extract features of images and convert them into vectors. Then these image vectors are stored in the Milvus vector database and a vector similarity search is also conducted in Milvus as well.
 
-![Image_deduplication_workflow](../../../assets/image_deduplication.png "Workflow of an image deduplication system.")
+![Image_deduplication_workflow](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/image_deduplication.png)

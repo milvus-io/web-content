@@ -17,9 +17,9 @@ Zilliz, the company behind Milvus, also offers a fully managed cloud version of 
 
 #### Does Milvus support non-x86 architectures?
 
-Yes, Milvus supports both x86 and ARM architectures. ARM64 support is available through multiple deployment options including Docker images, RPM/DEB packages, and Milvus Lite.
+Milvus cannot be installed or run on non-x86 platforms.
 
-For x86 platforms, your CPU should support one of the following instruction sets for optimal performance: SSE4.2, AVX, AVX2, AVX512. For ARM platforms, Milvus can run on ARM64-based processors including Apple M1/M2 chips and other ARM64 systems.
+Your CPU must support one of the following instruction sets to run Milvus: SSE4.2, AVX, AVX2, AVX512. These are all x86-dedicated SIMD instruction sets.
 
 ####  Where does Milvus store data?
 
@@ -35,7 +35,7 @@ etcd stores Milvus module metadata; MinIO stores entities.
 
 #### Does Milvus support inserting and searching data simultaneously?
 
-Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client's perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. For growing segments with incremental data, Milvus automatically builds interim indexes to ensure efficient search performance, even when the segment size does not reach the index-building threshold, calculated as `dataCoord.segment.maxSize` × `dataCoord.segment.sealProportion`. You can control this behavior through the configuration parameter `queryNode.segcore.interimIndex.enableIndex` in the [Milvus configuration file](https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L440) - setting it to `true` enables temporary indexing (default) while setting it to `false` disables it.
+Yes. Insert operations and query operations are handled by two separate modules that are mutually independent. From the client’s perspective, an insert operation is complete when the inserted data enters the message queue. However, inserted data are unsearchable until they are loaded to the query node. If the segment size does not reach the index-building threshold (512 MB by default), Milvus resorts to brute-force search and query performance may be diminished.
 
 #### Can vectors with duplicate primary keys be inserted into Milvus?
 
@@ -119,7 +119,7 @@ Milvus can manage vectors with up to 32,768 dimensions by default. You can incre
 
 #### Does Milvus support Apple M1 CPU?
 
-Yes, Milvus supports Apple M1/M2 CPUs and other Apple Silicon processors. ARM64 support is available through Docker images, RPM/DEB packages, and Milvus Lite, making it compatible with Apple Silicon chips including M1, M2, and newer processors.
+Current Milvus release does not support Apple M1 CPU directly. After Milvus 2.3, Milvus provides Docker images for the ARM64 architecture.
 
 #### What data types does Milvus support on the primary key field?
 
@@ -165,88 +165,10 @@ Milvus supports Binary, Float32, Float16, and BFloat16 vector types.
 
 Currently, Milvus 2.4.x does not support specifying default values for scalar or vector fields. This feature is planned for future releases.
 
-#### Is storage space released right after data deletion in Milvus?
-
-No, storage space will not be immediately released when you delete data in Milvus. Although deleting data marks entities as "logically deleted," the actual space might not be freed instantly. Here's why:
-
-- **Compaction**: Milvus automatically compacts data in the background. This process merges smaller data segments into larger ones and removes logically deleted data (entities marked for deletion) or data that has exceeded its Time-To-Live (TTL). However, compaction creates new segments while marking old ones as "Dropped."
-- **Garbage Collection**: A separate process called Garbage Collection (GC) periodically removes these "Dropped" segments, freeing up the storage space they occupied. This ensures efficient use of storage but can introduce a slight delay between deletion and space reclamation.
-
-#### Can I see inserted, deleted, or upserted data immediately after the operation without waiting for a flush?
-
-Yes, in Milvus, data visibility is not directly tied to flush operations due to its storage-compute disaggregation architecture. You can manage data readability using consistency levels.
-
-When selecting a consistency level, consider the trade-offs between consistency and performance. For operations requiring immediate visibility, use a "Strong" consistency level. For faster writes, prioritize weaker consistency (data might not be immediately visible). For more information, refer to [Consistency](consistency.md).
-
-#### After enabling the partition key feature, what is the default value of `num_partitions` in Milvus, and why?
-
-When the partition key feature is enabled, the default value of `num_partitions` in Milvus is set to `16`. This default is chosen for stability and performance reasons. You can adjust the `num_partitions` value as needed by specifying it in the `create_collection` function.
-
-#### Is there a maximum length limit for scalar filtering expressions?
-
-Yes, the maximum length of a scalar filtering expression is constrained by the RPC transfer limit, which is defined in the `milvus.yaml` configuration file. Specifically, the limit is set by the `serverMaxRecvSize` parameter under the proxy section:
-
-```yaml
-proxy:
-  grpc:
-    serverMaxRecvSize: 67108864 # The maximum size of each RPC request that the proxy can receive, unit: byte
-```
-
-By default, the maximum size of each RPC request is 64MB. Therefore, the length of the filtering expression must be less than this limit to ensure successful processing.
-
-#### When performing a bulk vector search, how many vectors can be specified at once? Is there a limit?
-
-Yes, the number of vectors that can be specified in a bulk vector search is limited by the RPC transfer size, as defined in the `milvus.yaml` configuration file. This limit is determined by the `serverMaxRecvSize` parameter under the proxy section:
-
-```yaml
-proxy:
-  grpc:
-    serverMaxRecvSize: 67108864 # The maximum size of each RPC request that the proxy can receive, unit: byte
-```
-
-By default, the maximum size of each RPC request is 64MB. Therefore, the total size of the input vectors, including their dimensional data and metadata, must be less than this limit to ensure successful execution.
-
-#### How can I get all the unique value of a given scalar field from a collection？
-
-Currently, there is no direct method to achieve this. As a workaround, we recommend using a query_iterator to retrieve all values for a specific field, and then perform deduplication manually. We plan to add direct support for this feature in Milvus 2.6. Example use of query_iterator:
-
-```python
-# set up iterator
-iterator = client.query_iterator(
-    collection_name="demo_collection",
-    output_fields=["target"]
-)
-# do iteration and store target values into value_set 
-value_set = set()
-while True:
-    res = iterator.next()
-    if len(res) == 0:
-        print("query iteration finished, close")
-        iterator.close()
-        break
-    for i in range(len(res)):
-        value_set.add(res[i]["target"])
-
-# value_set will contain unique values for target column    
-```
-
-#### What are the limitations of using dynamic fields? For example, are there size limits, modification methods, or indexing restrictions?
-
-Dynamic fields are represented internally using JSON fields, with a size limit of 65,536 bytes. They support upsert modifications, allowing you to add or update fields. However, as of Milvus 2.5.1, dynamic fields do not support indexing. Support for adding indexes for JSON will be introduced in future releases.
-
-#### Does Milvus support schema changes?
-
-As of Milvus version 2.5.0, schema changes are limited to specific modifications, such as adjusting properties like the `mmap` parameter. Users can also modify the `max_length` for varchar fields and `max_capacity` for array fields. However, the ability to add or remove fields in schemas is planned for future releases, enhancing the flexibility of schema management within Milvus.
-
-#### Does modifying max_length for VarChar require data reorganization?
-
-No, modifying the `max_length` for a VarChar field does not necessitate data reorganization, such as compaction or reorganization. This adjustment primarily updates the validation criteria for any new data being inserted into the field, leaving existing data unaffected. As a result, this change is considered lightweight and does not impose significant overhead on the system.
-
-
 #### Still have questions?
 
 You can:
 
 - Check out [Milvus](https://github.com/milvus-io/milvus/issues) on GitHub. You're welcome to raise questions, share ideas, and help others.
-- Join our [Discord channel](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.
+- Join our [Discord Server](https://discord.com/invite/8uyFbECzPX) to find support and engage with our open-source community.
 

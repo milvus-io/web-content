@@ -19,19 +19,20 @@ Milvus is committed to providing the best vector databases to power AI applicati
 
 ## Naming rules
 
-The name of a resource such the collection name, partition name, or index name can contain numbers, letters, and underscores (\_\). A resource name must start with a letter or an underscore (\_\).
+The name of a resource can contain numbers, letters, and underscores (\_\). A resource name must start with a letter or an underscore (\_\).
 
 ## Number of resources
 
 | Resource      | Limit |
 | ----------- | ----------- |
 | Collection     | 65,536       |
+| Connection / proxy   | 65,536        |
 
 ## Number of resources in a collection
 
 | Resource     | Limit|
 | ----------- | ----------- |
-| Partition      | 1,024       |
+| Partition      | 4,096       |
 | Shard   | 16        |
 | Field   | 64        |
 | Index   | 1        |
@@ -69,16 +70,16 @@ In current release, data to be load must be under 90% of the total memory resour
 
 The following table provides an overview of the support for various search behaviors across different index types.
 
-|                                      | HNSW | DISKANN | FLAT | IVF_FLAT | IVF_SQ8 | IVF_PQ | SCANN | GPU_IFV_FLAT | GPU_IVF_PQ | GPU_CAGRA | GPU_BRUTE_FORCE | SPARSE_INVERTED_INDEX | BIN_FLAT | BIN_IVF_FLAT |
-|--------------------------------------|------|---------|------|----------|---------|--------|-------|--------------|------------|-----------|-----------------|-----------------------|----------|--------------|
-| Basic search                         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes      | Yes          |
-| Partition search                     | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes      | Yes          |
-| Basic search with raw data retrieved | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes      | Yes          |
-| Basic search with pagination         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes      | Yes          |
-| Filtered search                      | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes      | Yes          |
-| Range search                         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | Yes                   | Yes      | Yes          |
-| Grouping search                      | Yes  | Yes     | Yes  | Yes      | Yes     | No     | Yes   | No           | No         | No        | No              | Yes                   | No       | No           |
-| Search with iterator                 | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | Yes                   | Yes      | Yes          |
-| Hybrid search                        | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes(Only RRFRanker)   | Yes      | Yes          |
-| Query/Get                            | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes      | Yes          |
-| Query with iterator                  | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | Yes                   | Yes      | Yes          |
+|                                      | HNSW | DISKANN | FLAT | IVF_FLAT | IVF_SQ8 | IVF_PQ | SCANN | GPU_IFV_FLAT | GPU_IVF_PQ | GPU_CAGRA | GPU_BRUTE_FORCE | SPARSE_INVERTED_INDEX | SPARSE_WAND         | BIN_FLAT | BIN_IVF_FLAT |
+|--------------------------------------|------|---------|------|----------|---------|--------|-------|--------------|------------|-----------|-----------------|-----------------------|---------------------|----------|--------------|
+| Basic search                         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Partition search                     | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Basic search with raw data retrieved | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Basic search with pagination         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Filtered search                      | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Range search                         | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | No                    | No                  | Yes      | Yes          |
+| Grouping search                      | Yes  | No      | Yes  | Yes      | No      | No     | No    | No           | No         | No        | No              | No                    | No                  | No       | No           |
+| Search with iterator                 | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | No                    | No                  | No       | No           |
+| Hybrid search                        | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes(Only RRFRanker)   | Yes(Only RRFRanker) | Yes      | Yes          |
+| Query/Get                            | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | Yes          | Yes        | Yes       | Yes             | Yes                   | Yes                 | Yes      | Yes          |
+| Query with iterator                  | Yes  | Yes     | Yes  | Yes      | Yes     | Yes    | Yes   | No           | No         | No        | No              | Yes                   | Yes                 | Yes      | Yes          |

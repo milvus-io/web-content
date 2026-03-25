@@ -10,12 +10,9 @@ This guide provides instructions on how to configure Loki to collect logs and Gr
 
 In this guide, you will learn how to:
 
-- Deploy [Loki](https://grafana.com/docs/loki/latest/get-started/overview/) and [Alloy](https://grafana.com/docs/alloy/latest/) on a Milvus cluster using Helm.
+- Deploy [Loki](https://grafana.com/docs/loki/latest/get-started/overview/) and [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/) on a Milvus cluster using Helm.
 - Configure object storage for Loki.
 - Query logs using Grafana.
-
-For reference, [Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/#promtail-agent) will be deprecated.
-So we introduce Alloy, which has been officially suggested by Grafana Labs as the new agent to collect Kubernetes logs and forward them to Loki.
 
 ## Prerequisites
 
@@ -82,100 +79,26 @@ kubectl create ns loki
 helm install --values loki.yaml loki grafana/loki -n loki
 ```
 
-## Deploy Alloy
+## Deploy Promtail
 
+Promtail is a log collection agent for Loki. It reads logs from Milvus pods and sends them to Loki.
 
-We will show you Alloy [Configuration](https://grafana.com/docs/alloy/latest/configure/).
+### 1. Create Promtail Configuration
 
-### 1. Create Alloy Configuration
-
-We will use the following `alloy.yaml` to collect logs of all Kubernetes pods & send them to Loki via loki-gateway:
+Create a `promtail.yaml` configuration file:
 
 ```yaml
-alloy:
-  enableReporting: false
-  resources: {}
-  configMap:
-    create: true
-    content: |-
-      loki.write "default" {
-        endpoint {
-          url = "http://loki-gateway/loki/api/v1/push"
-        }
-      }
-
-      discovery.kubernetes "pod" {
-        role = "pod"
-      }
-
-      loki.source.kubernetes "pod_logs" {
-        targets    = discovery.relabel.pod_logs.output
-        forward_to = [loki.write.default.receiver]
-      }
-
-      // Rewrite the label set to make log query easier
-      discovery.relabel "pod_logs" {
-        targets = discovery.kubernetes.pod.targets
-        rule {
-          source_labels = ["__meta_kubernetes_namespace"]
-          action = "replace"
-          target_label = "namespace"
-        }
-
-        // "pod" <- "__meta_kubernetes_pod_name"
-        rule {
-          source_labels = ["__meta_kubernetes_pod_name"]
-          action = "replace"
-          target_label = "pod"
-        }
-
-        // "container" <- "__meta_kubernetes_pod_container_name"
-        rule {
-          source_labels = ["__meta_kubernetes_pod_container_name"]
-          action = "replace"
-          target_label = "container"
-        }
-
-        // "app" <- "__meta_kubernetes_pod_label_app_kubernetes_io_name"
-        rule {
-          source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
-          action = "replace"
-          target_label = "app"
-        }
-
-        // "job" <- "__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"
-        rule {
-          source_labels = ["__meta_kubernetes_namespace", "__meta_kubernetes_pod_container_name"]
-          action = "replace"
-          target_label = "job"
-          separator = "/"
-          replacement = "$1"
-        }
-
-        // L"__path__" <- "__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"
-        rule {
-          source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
-          action = "replace"
-          target_label = "__path__"
-          separator = "/"
-          replacement = "/var/log/pods/*$1/*.log"
-        }
-
-        // "container_runtime" <- "__meta_kubernetes_pod_container_id"
-        rule {
-          source_labels = ["__meta_kubernetes_pod_container_id"]
-          action = "replace"
-          target_label = "container_runtime"
-          regex = "^(\\S+):\\/\\/.+$"
-          replacement = "$1"
-        }
-      }
+config:
+  clients:
+    - url: http://loki-gateway/loki/api/v1/push
 ```
 
-### 2. Install Alloy
+### 2. Install Promtail
+
+Install Promtail using Helm:
 
 ```shell
-helm install --values alloy.yaml alloy grafana/alloy -n loki
+helm install  --values promtail.yaml promtail grafana/promtail -n loki
 ```
 
 ## Query Logs with Grafana
@@ -213,7 +136,7 @@ Once Grafana is running, you need to add Loki as a data source to query logs.
 3. On the page that appears, choose __Loki__ as the data source type. You can enter __loki__ in the search bar to find the data source.
 4. In the Loki data source settings, specify the __Name__ and __URL__, and then click __Save & test__.
 
-![DataSource](../../../../assets/datasource.jpg "The data source config.")
+![DataSource](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/datasource.jpg)
 
 ### 3. Query Milvus Logs
 
@@ -223,4 +146,4 @@ After adding Loki as a data source, query Milvus logs in Grafana:
 2. In the upper-left corner of the page, choose the loki data source.
 3. Use __Label browser__ to select labels and query logs.
 
-![Query](../../../../assets/milvuslog.jpg "Query Milvus logs in Grafana.")
+![Query](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvuslog.jpg)

@@ -40,12 +40,12 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 
 Milvus Operator defines a Milvus cluster custom resources on top of [Kubernetes Custom Resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/). When custom resources are defined, you can use K8s APIs in a declarative way and manage the Milvus deployment stack to ensure its scalability and high availability.
 
-<div class="filter">
-  <a href="#helm">Helm</a>
-  <a href="#kubectl">Kubectl</a>
-</div>
+You can install Milvus Operator in either of the following ways:
 
-<div class="filter-helm">
+- [With Helm](#Install-with-Helm)
+- [With kubectl](#Install-with-kubectl)
+
+### Install with Helm
 
 Run the following command to install Milvus Operator with Helm.
 
@@ -53,7 +53,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.1.9/milvus-operator-1.1.9.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -74,18 +74,7 @@ More samples can be found in https://github.com/zilliztech/milvus-operator/tree/
 CRD Documentation can be found in https://github.com/zilliztech/milvus-operator/tree/main/docs/CRD
 ```
 
-If you have installed Milvus Operator before, upgrade it using the following command:
-
-```shell
-helm upgrade milvus-operator \
-  -n milvus-operator --create-namespace \
-  --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.3.0/milvus-operator-1.3.0.tgz
-```
-
-</div>
-
-<div class="filter-kubectl">
+### Install with kubectl
 
 Run the following command to install Milvus Operator with `kubectl`.
 
@@ -121,8 +110,6 @@ NAME                               READY   STATUS    RESTARTS   AGE
 milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 ```
 
-</div>
-
 ## Deploy Milvus
 
 ### 1. Deploy a Milvus cluster
@@ -130,17 +117,10 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
 Once the Milvus Operator pod is running, you can deploy a Milvus cluster as follows.
 
 ```shell
-$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml
 ```
 
-The command above deploys a Milvus cluster with **Woodpecker** as the message queue (recommended for v2.6.5) and all new architectural components including the Streaming Node. 
-
-**Architecture highlights in this deployment:**
-- **Message Queue**: [Uses Woodpecker](use-woodpecker.md) (reduces infrastructure maintenance)
-- **Streaming Node**: Enabled for enhanced data processing
-- **Mix Coordinator**: Consolidated coordinator components for improved efficiency
-
-To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
+The command above deploys a Milvus cluster with its components and dependencies in separate pods using default configurations. To customize these settings, we recommend you use the [Milvus Sizing Tool](https://milvus.io/tools/sizing) to adjust the configurations based on your actual data size and then download the corresponding YAML file. To learn more about configuration parameters, refer to [Milvus System Configurations Checklist](https://milvus.io/docs/system_configuration.md).
 
 <div class="alert note">
 
@@ -149,7 +129,7 @@ To customize these settings, we recommend you use the [Milvus Sizing Tool](https
 
 </div>
 
-### 2. Check Milvus cluster status
+#### 2. Check Milvus cluster status
 
 Run the following command to check Milvus cluster status
 
@@ -166,21 +146,21 @@ metadata:
 ...
 status:
   conditions:
-  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
+  - lastTransitionTime: "2021-11-02T05:59:41Z"
     reason: StorageReady
     status: "True"
     type: StorageReady
-  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
+  - lastTransitionTime: "2021-11-02T06:06:23Z"
     message: Pulsar is ready
     reason: PulsarReady
     status: "True"
     type: PulsarReady
-  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
+  - lastTransitionTime: "2021-11-02T05:59:41Z"
     message: Etcd endpoints is healthy
     reason: EtcdReady
     status: "True"
     type: EtcdReady
-  - lastTransitionTime: "xxxx-xx-xxTxx:xx:xxZ"
+  - lastTransitionTime: "2021-11-02T06:12:36Z"
     message: All Milvus components are healthy
     reason: MilvusClusterHealthy
     status: "True"
@@ -196,19 +176,32 @@ Once your Milvus cluster is ready, the status of all pods in the Milvus cluster 
 ```shell
 $ kubectl get pods
 
-NAME                                             READY   STATUS    RESTARTS   AGE
-my-release-etcd-0                                1/1     Running   0          2m36s
-my-release-etcd-1                                1/1     Running   0          2m36s
-my-release-etcd-2                                1/1     Running   0          2m36s
-my-release-milvus-datanode-58955c65b9-j4j7s      1/1     Running   0          92s
-my-release-milvus-mixcoord-686f84968f-jcv5d      1/1     Running   0          92s
-my-release-milvus-proxy-646f48fc7c-4lctb         1/1     Running   0          92s
-my-release-milvus-querynode-0-d89d7677b-x7j7q    1/1     Running   0          91s
-my-release-milvus-streamingnode-556bdcc87c-2qwcc 1/1     Running   0          92s
-my-release-minio-0                               1/1     Running   0          2m36s
-my-release-minio-1                               1/1     Running   0          2m36s
-my-release-minio-2                               1/1     Running   0          2m35s
-my-release-minio-3                               1/1     Running   0          2m35s
+NAME                                            READY   STATUS      RESTARTS   AGE
+my-release-etcd-0                               1/1     Running     0          14m
+my-release-etcd-1                               1/1     Running     0          14m
+my-release-etcd-2                               1/1     Running     0          14m
+my-release-milvus-datanode-5c686bd65-wxtmf      1/1     Running     0          6m
+my-release-milvus-indexnode-5b9787b54-xclbx     1/1     Running     0          6m
+my-release-milvus-proxy-84f67cdb7f-pg6wf        1/1     Running     0          6m
+my-release-milvus-querynode-5bcb59f6-nhqqw      1/1     Running     0          6m
+my-release-milvus-mixcoord-fdcccfc84-9964g      1/1     Running     0          6m
+my-release-minio-0                              1/1     Running     0          14m
+my-release-minio-1                              1/1     Running     0          14m
+my-release-minio-2                              1/1     Running     0          14m
+my-release-minio-3                              1/1     Running     0          14m
+my-release-pulsar-bookie-0                      1/1     Running     0          14m
+my-release-pulsar-bookie-1                      1/1     Running     0          14m
+my-release-pulsar-bookie-init-h6tfz             0/1     Completed   0          14m
+my-release-pulsar-broker-0                      1/1     Running     0          14m
+my-release-pulsar-broker-1                      1/1     Running     0          14m
+my-release-pulsar-proxy-0                       1/1     Running     0          14m
+my-release-pulsar-proxy-1                       1/1     Running     0          14m
+my-release-pulsar-pulsar-init-d2t56             0/1     Completed   0          14m
+my-release-pulsar-recovery-0                    1/1     Running     0          14m
+my-release-pulsar-toolset-0                     1/1     Running     0          14m
+my-release-pulsar-zookeeper-0                   1/1     Running     0          14m
+my-release-pulsar-zookeeper-1                   1/1     Running     0          13m
+my-release-pulsar-zookeeper-2                   1/1     Running     0          13m
 ```
 
 ### 3. Forward a local port to Milvus
@@ -245,44 +238,6 @@ $ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 Forwarding from 0.0.0.0:27017 -> 19530
 ```
 
-Now, you can connect to Milvus using the forwarded port.
-
-## (Optional) Update Milvus configurations
-
-You can view and update the configurations of your Milvus cluster by calling the `patch` command as follows:
-
-1. Run the following command to preview the would-be configurations.
-
-    The following asummes that you want to update the `spec.components.disableMetric` parameter to `false` ms.
-
-    ```shell
-    $ kubectl patch milvus my-release --type='merge'\
-      -p '{"spec":{"components":{"disableMetric":false}}}' \
-      --dry-run=client -o yaml
-    ```
-
-    For applicable configuration items, refer to [System Configuration](system_configuration.md).
-
-1. Update the configurations.
-
-    ```shell
-    $ kubectl patch milvus my-release --type='merge'\
-      -p '{"spec":{"components":{"disableMetric":false}}}' 
-    ```
-
-## Access Milvus WebUI
-
-Milvus ships with a built-in GUI tool called Milvus WebUI that you can access through your browser. Milvus Web UI enhances system observability with a simple and intuitive interface. You can use Milvus Web UI to observe the statistics and metrics of the components and dependencies of Milvus, check database and collection details, and list detailed Milvus configurations. For details about Milvus Web UI, see [Milvus WebUI](milvus-webui.md)
-
-To enable the access to the Milvus Web UI, you need to port-forward the proxy pod to a local port.
-
-```shell
-$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091
-Forwarding from 0.0.0.0:27018 -> 9091
-```
-
-Now, you can access Milvus Web UI at `http://localhost:27018`.
-
 ## Uninstall Milvus
 
 Run the following command to uninstall the Milvus cluster.
@@ -294,7 +249,7 @@ $ kubectl delete milvus my-release
 <div class="alert note">
 
 - When you delete the Milvus cluster using the default configuration, dependencies like etcd, Pulsar, and MinIO are not deleted. Therefore, next time when you install the same Milvus cluster instance, these dependencies will be used again.
-- To delete the dependencies and persistent volume claims (PVCs) along with the Milvus cluster, see [configuration file](https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml).
+- To delete the dependencies and private virtual clouds (PVCs) along with the Milvus cluster, see [configuration file](https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml).
 
 </div>
 
@@ -314,7 +269,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 #### Uninstall with kubectl
 
 ```shell
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.3.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.1.9/deploy/manifests/deployment.yaml
 ```
 
 ## What's next
@@ -337,8 +292,7 @@ Having installed Milvus in Docker, you can:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)
-- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).

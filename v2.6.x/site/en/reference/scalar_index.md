@@ -15,7 +15,7 @@ Once conducting vector similarity searches in Milvus, you can use logical operat
 
 When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a [bitset](bitset.md) as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.
 
-![Attribute filtering in a segment](../../../assets/scalar_index.png)
+![Attribute filtering in a segment](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index.png)
 
 Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval.
 
@@ -47,7 +47,7 @@ The inverted indexes implemented in Milvus are powered by [Tantivy](https://gith
 
 An inverted index has two main components: a term dictionary and an inverted list. The term dictionary includes all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This setup makes point queries and range queries much faster and more efficient than brute-force searches.
 
-![Inverted index diagram](../../../assets/scalar_index_inverted.png)
+![Inverted index diagram](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/scalar_index_inverted.png)
 
 The advantages of using an inverted index are particularly evident in the following operations:
 

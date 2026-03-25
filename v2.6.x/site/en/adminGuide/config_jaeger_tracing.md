@@ -107,7 +107,7 @@ Once the ingress is available, you can access the Jaeger UI by navigating to `ht
 
 The following screenshot shows the Jaeger UI with the traces of Milvus during a search operation and a load-collection operation:
 
-![Trace Search Request](../../../assets/jaeger-trace-search.PNG)
+![Trace Search Request](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-search.PNG)
 
-![Trace Load Collection Request](../../../assets/jaeger-trace-load.png)
+![Trace Load Collection Request](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaeger-trace-load.png)
 

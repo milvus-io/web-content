@@ -4,10 +4,10 @@ summary: In this tutorial, we’ll explore how to seamlessly use Dynamiq with Mi
 title: Getting Started with Dynamiq and Milvus
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_rag_with_dynamiq.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
@@ -33,7 +33,7 @@ By the end of this tutorial, you’ll gain a solid understanding of how Milvus a
 
 
 ```shell
-$ pip install dynamiq pymilvus milvus-lite
+$ pip install dynamiq pymilvus
 ```
 
 <div class="alert note">

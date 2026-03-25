@@ -11,7 +11,7 @@ If you want to enable kafka, needs to comment the pulsar configs
 
 kafka:
 
-  brokerList: localhost:9092
+  brokerList: 
 
   saslUsername: 
 

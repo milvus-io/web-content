@@ -12,129 +12,158 @@ title: Upgrade Milvus Cluster with Milvus Operator
 
 # Upgrade Milvus Cluster with Milvus Operator
 
-This guide describes how to upgrade your Milvus cluster from v2.5.x to v2.6.5 using Milvus Operator.
+This guide describes how to upgrade your Milvus cluster with Milvus operator. 
 
-## Before you start
+## Upgrade your Milvus operator
 
-### What's new in v2.6.5
+Run the following command to upgrade the version of your Milvus Operator to v1.1.9.
 
-Upgrading from Milvus 2.5.x to 2.6.5 involves significant architectural changes:
-
-- **Coordinator consolidation**: Legacy separate coordinators (`dataCoord`, `queryCoord`, `indexCoord`) have been consolidated into a single `mixCoord`
-- **New components**: Introduction of Streaming Node for enhanced data processing
-- **Component removal**: `indexNode` removed and consolidated
-
-This upgrade process ensures proper migration to the new architecture. For more information on architecture changes, refer to [Milvus Architecture Overview](architecture_overview.md).
-
-### Requirements
-
-**System requirements:**
-- Kubernetes cluster with Milvus deployed via Milvus Operator
-- `kubectl` configured to access your cluster  
-- Helm 3.x installed
-
-**Compatibility requirements:**
-- Milvus v2.6.0-rc1 is **not compatible** with v2.6.5. Direct upgrades from release candidates are not supported.
-- If you are currently running v2.6.0-rc1 and need to preserve your data, please refer to [this community guide](https://github.com/milvus-io/milvus/issues/43538#issuecomment-3112808997) for migration assistance.
-- You **must** upgrade to v2.5.16 or later with `mixCoord` enabled before upgrading to v2.6.5.
-
-**Message Queue limitations**: When upgrading to Milvus v2.6.5, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
-
-
-## Upgrade process
-
-### Step 1: Upgrade Milvus Operator
-
-First, upgrade your Milvus Operator to v1.3.0:
-
-```bash
+```
 helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
 helm repo update zilliztech-milvus-operator
 helm -n milvus-operator upgrade milvus-operator zilliztech-milvus-operator/milvus-operator
 ```
 
-Verify the operator upgrade:
+Once you have upgraded your Milvus operator to the latest version, you have the following choices:
 
-```bash
-kubectl -n milvus-operator get pods
-```
+- To upgrade Milvus from v2.2.3 or later releases to 2.4.23, you can [conduct a rolling upgrade](#Conduct-a-rolling-upgrade).
+- To upgrade Milvus from a minor release before v2.2.3 to 2.4.23, you are advised to [upgrade Milvus by changing its image version](#Upgrade-Milvus-by-changing-its-image).
+- To upgrade Milvus from v2.1.x to 2.4.23, you need to [migrate the metadata](#Migrate-the-metadata) before the actual upgrade.
 
-### Step 2: Upgrade your Milvus cluster
+## Conduct a rolling upgrade
 
-#### 2.1 Check current coordinator configuration
+Since Milvus 2.2.3, you can configure Milvus coordinators to work in active-standby mode and enable the rolling upgrade feature for them, so that Milvus can respond to incoming requests during the coordinator upgrades. In previous releases, coordinators are to be removed and then created during an upgrade, which may introduce certain downtime of the service.
 
-Check if your cluster already uses `mixCoord`:
+Based on the rolling update capabilities provided by Kubernetes, the Milvus operator enforces an ordered update of the deployments according to their dependencies. In addition, Milvus implements a mechanism to ensure that its components remain compatible with those depending on them during the upgrade, significantly reducing potential service downtime.
 
-```bash
-kubectl get pods
-```
-
-If you see separate coordinator pods (`datacoord`, `querycoord`, `indexcoord`) instead, you need to enable `mixCoord` in the next step.
-
-#### 2.2 Upgrade to v2.5.16 with mixCoord
-
-<div class="alert-note">
-
-Skip this step if your cluster is already running v2.5.16 or higher with `mixCoord` enabled.
-
-</div>
-
-Create a configuration file `milvusupgrade.yaml` to enable `mixCoord` and upgrade to v2.5.16:
+The rolling upgrade feature is disabled by default. You need to explicitly enable it through a configuration file.
 
 ```yaml
 apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
-  name: my-release  # Replace with your actual release name
+  name: my-release
 spec:
   components:
-    mixCoord:
-      replicas: 1
-    image: milvusdb/milvus:v2.5.16
+    enableRollingUpdate: true
+    imageUpdateMode: rollingUpgrade # Default value, can be omitted
+    image: milvusdb/milvus:v2.4.23
 ```
 
-Apply the configuration:
+In this above configuration file, set `spec.components.enableRollingUpdate` to `true` and set `spec.components.image` to the desired Milvus version.
 
-```bash
-kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
-```
-
-Wait for completion:
-
-```bash
-# Verify all pods are ready
-kubectl get pods
-```
-
-#### 2.3 Upgrade to v2.6.5
-
-Once v2.5.16 is running successfully with `mixCoord`, upgrade to v2.6.5:
-
-Update your configuration file (`milvusupgrade.yaml` in this example):
+By default, Milvus performs rolling upgrade for coordinators in an ordered way, in which it replaces the coordinator pod images one after another. To reduce the upgrade time, consider setting `spec.components.imageUpdateMode` to `all` so that Milvus replaces all pod images at the same time.
 
 ```yaml
 apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
-  name: my-release  # Replace with your actual release name
+  name: my-release
 spec:
   components:
-    image: milvusdb/milvus:v2.6.5
+    enableRollingUpdate: true
+    imageUpdateMode: all
+    image: milvusdb/milvus:v2.4.23
 ```
 
-Apply the final upgrade:
+You can set `spec.components.imageUpdateMode` to `rollingDowngrade` to have Milvus replace coordinator pod images with a lower version.
 
-```bash
-kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge
+```yaml
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: my-release
+spec:
+  components:
+    enableRollingUpdate: true
+    imageUpdateMode: rollingDowngrade
+    image: milvusdb/milvus:<some-old-version>
 ```
 
-## Verify the upgrade
+Then save your configuration as a YAML file (for example, `milvusupgrade.yaml`) and patch this configuration file to your Milvus instance as follows:
 
-Confirm your cluster is running the new version:
-
-```bash
-# Check pod status
-kubectl get pods
+```shell
+kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
 ```
 
-For additional support, consult the [Milvus documentation](https://milvus.io/docs) or [community forum](https://github.com/milvus-io/milvus/discussions).
+
+## Upgrade Milvus by changing its image
+
+In normal cases, you can simply update your Milvus to the latest by changing its image. However, note that there will be a certain downtime when upgrading Milvus in this way.
+
+Compose a configuration file as follows and save it as **milvusupgrade.yaml**:
+
+```yaml
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: my-release
+spec:
+  # Omit other fields ...
+  components:
+   image: milvusdb/milvus:v2.4.23
+```
+
+Then run the following to perform the upgrade:
+
+```shell
+kubectl patch -f milvusupgrade.yaml --patch-file milvusupgrade.yaml --type merge 
+```
+
+## Migrate the metadata
+
+Since Milvus 2.2.0, the metadata is incompatible with that in previous releases. The following example snippets assume an upgrade from Milvus 2.1.4 to Milvus 2.4.23.
+
+### 1. Create a `.yaml` file for metadata migration
+
+Create a metadata migration file. The following is an example. You need to specify the `name`, `sourceVersion`, and `targetVersion` in the configuration file. The following example sets the `name` to `my-release-upgrade`, `sourceVersion` to `v2.1.4`, and `targetVersion` to `v2.4.23`. This means that your Milvus cluster will be upgraded from v2.1.4 to v2.4.23.
+
+```
+apiVersion: milvus.io/v1beta1
+kind: MilvusUpgrade
+metadata:
+  name: my-release-upgrade
+spec:
+  milvus:
+    namespace: default
+    name: my-release
+  sourceVersion: "v2.1.4"
+  targetVersion: "v2.4.23"
+  # below are some omit default values:
+  # targetImage: "milvusdb/milvus:v2.4.23"
+  # toolImage: "milvusdb/meta-migration:v2.2.0"
+  # operation: upgrade
+  # rollbackIfFailed: true
+  # backupPVC: ""
+  # maxRetry: 3
+```
+
+
+
+### 2. Apply the new configuration
+
+Run the following command to create the new configuration.
+
+```
+$ kubectl create -f https://github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
+```
+
+
+
+### 3. Check the status of metadata migration
+
+Run the following command to check the status of your metadata migration.
+
+```
+kubectl describe milvus release-name
+```
+
+The status of `ready` in the output means that the metadata migration is successful.
+
+Or, you can also run `kubectl get pod` to check all the pods. If all the pods are `ready`, the metadata migration is successful.
+
+
+
+### 4. Delete `my-release-upgrade`
+
+When the upgrade is successful, delete `my-release-upgrade` in the YAML file.

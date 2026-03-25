@@ -71,22 +71,10 @@ Milvus provides several index types and metrics to sort field values for efficie
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
-
-<div class="alert note">
-
-From Milvus 2.5.4 onward, `SPARSE_WAND` is being deprecated. Instead, it is recommended to use `"inverted_index_algo": "DAAT_WAND"` for equivalency while maintaining compatibility. For more information, refer to [Sparse Vector](sparse_vector.md#Set-index-params-for-vector-field).
-
-</div>
 
 </div>
 

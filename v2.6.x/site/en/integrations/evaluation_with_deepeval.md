@@ -7,8 +7,8 @@ title: Evaluation with DeepEval
 
 # Evaluation with DeepEval
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/evaluation_with_deepeval.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
 
 This guide demonstrates how to use [DeepEval](https://docs.confident-ai.com/) to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon [Milvus](https://milvus.io/).
 
@@ -22,7 +22,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-$ pip install --upgrade pymilvus milvus-lite openai requests tqdm pandas deepeval
+$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
 ```
 
 <div class="alert note">
@@ -103,7 +103,7 @@ class RAG:
             collection_name=self.collection_name,
             dimension=embedding_dim,
             metric_type="IP",
-            consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+            consistency_level="Strong",
         )
 
     def load(self, texts: List[str]):

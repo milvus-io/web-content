@@ -82,7 +82,7 @@ Milvus with GPU support allows you to assign one or more GPU devices.
 
   ```bash
   cat <<EOF > custom-values.yaml
-  dataNode:
+  indexNode:
     resources:
       requests:
         nvidia.com/gpu: "1"
@@ -115,7 +115,7 @@ Milvus with GPU support allows you to assign one or more GPU devices.
   ```
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
   ```
 
 ### 2. Assign multiple GPU devices
@@ -126,7 +126,7 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
 
   ```bash
   cat <<EOF > custom-values.yaml
-  dataNode:
+  indexNode:
     resources:
       requests:
         nvidia.com/gpu: "2"
@@ -141,11 +141,11 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
   EOF
   ```
 
-  In the configuration above, there are four CPUs available, and each dataNode and queryNode uses two GPUs. To assign different GPUs to the dataNode and the queryNode, you can modify the configuration accordingly by setting `extraEnv` in the configuration file as follows:
+  In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting `extraEnv` in the configuration file as follows:
 
   ```bash
   cat <<EOF > custom-values.yaml
-  dataNode:
+  indexNode:
     resources:
       requests:
         nvidia.com/gpu: "1"
@@ -184,7 +184,7 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
 
   ```bash
   cat <<EOF > custom-values.yaml
-  dataNode:
+  indexNode:
     resources:
       requests:
         nvidia.com/gpu: "2"
@@ -199,11 +199,11 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
   EOF
   ```
 
-  In the configuration above, there are four CPUs available, and each dataNode and queryNode uses two GPUs. To assign different GPUs to the dataNode and the queryNode, you can modify the configuration accordingly by setting extraEnv in the configuration file as follows:
+  In the configuration above, the indexNode and queryNode share two GPUs. To assign different GPUs to the indexNode and the queryNode, you can modify the configuration accordingly by setting extraEnv in the configuration file as follows:
 
   ```bash
   cat <<EOF > custom-values.yaml
-  dataNode:
+  indexNode:
     resources:
       requests:
         nvidia.com/gpu: "1"
@@ -225,7 +225,7 @@ In addition to a single GPU device, you can also assign multiple GPU devices to 
   ```  
 
   ```bash
-  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsarv3.enabled=false -f custom-values.yaml
+  $ helm install my-release milvus/milvus --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false -f custom-values.yaml
   ```
 
 ### 2. Check Milvus status
@@ -242,31 +242,28 @@ After Milvus starts, the `READY` column displays `1/1` for all pods.
 
   ```shell
   NAME                                             READY  STATUS   RESTARTS  AGE
-  my-release-etcd-0                                  1/1     Running     0             3m24s
-  my-release-etcd-1                                  1/1     Running     0             3m24s
-  my-release-etcd-2                                  1/1     Running     0             3m24s
-  my-release-milvus-datanode-698dbf7d77-rjkkq        1/1     Running     0             3m24s
-  my-release-milvus-mixcoord-856d666559-rpj8z        1/1     Running     0             3m24s
-  my-release-milvus-proxy-7f7cf47689-pzltw           1/1     Running     0             3m24s
-  my-release-milvus-querynode-7fb6d5b5f8-92phj       1/1     Running     0             3m24s
-  my-release-milvus-streamingnode-5867bfbcbf-cg9xx   1/1     Running     0             3m24s
-  my-release-minio-0                                 1/1     Running     0             3m24s
-  my-release-minio-1                                 1/1     Running     0             3m24s
-  my-release-minio-2                                 1/1     Running     0             3m24s
-  my-release-minio-3                                 1/1     Running     0             3m24s
-  my-release-pulsarv3-bookie-0                       1/1     Running     0             3m24s
-  my-release-pulsarv3-bookie-1                       1/1     Running     0             3m24s
-  my-release-pulsarv3-bookie-2                       1/1     Running     0             3m24s
-  my-release-pulsarv3-bookie-init-p8hcq              0/1     Completed   0             3m24s
-  my-release-pulsarv3-broker-0                       1/1     Running     0             3m24s
-  my-release-pulsarv3-broker-1                       1/1     Running     0             3m24s
-  my-release-pulsarv3-proxy-0                        1/1     Running     0             3m24s
-  my-release-pulsarv3-proxy-1                        1/1     Running     0             3m24s
-  my-release-pulsarv3-pulsar-init-8kjsj              0/1     Completed   0             3m24s
-  my-release-pulsarv3-recovery-0                     1/1     Running     0             3m24s
-  my-release-pulsarv3-zookeeper-0                    1/1     Running     0             3m24s
-  my-release-pulsarv3-zookeeper-1                    1/1     Running     0             3m24s
-  my-release-pulsarv3-zookeeper-2                    1/1     Running     0             3m24s
+  my-release-etcd-0                                1/1    Running   0        3m23s
+  my-release-etcd-1                                1/1    Running   0        3m23s
+  my-release-etcd-2                                1/1    Running   0        3m23s
+  my-release-milvus-datacoord-6fd4bd885c-gkzwx     1/1    Running   0        3m23s
+  my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
+  my-release-milvus-indexcoord-5bfcf6bdd8-nmh5l    1/1    Running   0        3m23s
+  my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
+  my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
+  my-release-milvus-querycoord-579cd79455-xht5n    1/1    Running   0        3m24s
+  my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
+  my-release-milvus-rootcoord-7fb9488465-dmbbj     1/1    Running   0        3m23s
+  my-release-minio-0                               1/1    Running   0        3m23s
+  my-release-minio-1                               1/1    Running   0        3m23s
+  my-release-minio-2                               1/1    Running   0        3m23s
+  my-release-minio-3                               1/1    Running   0        3m23s
+  my-release-pulsar-autorecovery-86f5dbdf77-lchpc  1/1    Running   0        3m24s
+  my-release-pulsar-bookkeeper-0                   1/1    Running   0        3m23s
+  my-release-pulsar-bookkeeper-1                   1/1    Running   0        98s
+  my-release-pulsar-broker-556ff89d4c-2m29m        1/1    Running   0        3m23s
+  my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
+  my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
+  my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
   ```
 
 - Milvus standalone
@@ -304,21 +301,6 @@ $ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530
 Forwarding from 0.0.0.0:27017 -> 19530
 ```
 
-Now, you can connect to Milvus using the forwarded port.
-
-## Access Milvus WebUI
-
-Milvus ships with a built-in GUI tool called Milvus WebUI that you can access through your browser. Milvus Web UI enhances system observability with a simple and intuitive interface. You can use Milvus Web UI to observe the statistics and metrics of the components and dependencies of Milvus, check database and collection details, and list detailed Milvus configurations. For details about Milvus Web UI, see [Milvus WebUI](milvus-webui.md)
-
-To enable the access to the Milvus Web UI, you need to port-forward the proxy pod to a local port.
-
-```shell
-$ kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27018:9091
-Forwarding from 0.0.0.0:27018 -> 9091
-```
-
-Now, you can access Milvus Web UI at `http://localhost:27018`.
-
 ## Uninstall Milvus
 
 Run the following command to uninstall Milvus.
@@ -347,8 +329,7 @@ Having installed Milvus, you can:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)
-- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
+- Explore [Attu](https://milvus.io/docs/attu.md), an open-source GUI tool for intuitive Milvus management.
 - [Monitor Milvus with Prometheus](monitor.md).

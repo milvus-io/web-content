@@ -36,8 +36,6 @@ There are also other limitations for specifying the message storage:
   - Nats introduced in 2.3 do not participate in these priority rules for backward compatibility.
 - The message storage cannot be changed while the Milvus system is running. 
 - Only Kafka 2.x or 3.x verison is supported.
-- **Upgrade limitations**: **Message Queue limitations**: When upgrading to Milvus v2.6.5, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
-
 
 ## Configure RocksMQ
 RocksMQ is the default message storage in Milvus standalone. 
@@ -53,37 +51,15 @@ Currently, you can only configure RocksMQ as the message storage for Milvus stan
 The following example configures a RocksMQ service. 
 
 ```YAML
-apiVersion: milvus.io/v1beta1
+apiVersion: milvus.io/v1alpha1
 kind: Milvus
 metadata:
   name: milvus
 spec:
-  mode: standalone
-  dependencies:
-    msgStreamType: rocksmq
-    rocksmq:
-      persistence:
-        enabled: true
-        pvcDeletion: true
-        persistentVolumeClaim:
-          spec:
-            accessModes: ["ReadWriteOnce"]
-            storageClassName: "local-path"  # Specify your storage class
-            resources:
-              requests:
-                storage: 10Gi  # Specify your desired storage size
+  dependencies: {}
   components: {}
   config: {}
 ```
-
-##### Key configuration options:
-* `msgStreamType`: rocksmq: Explicitly sets RocksMQ as the message queue
-* `persistence.enabled`: Enables persistent storage for RocksMQ data
-* `persistence.pvcDeletion`: When true, the PVC will be deleted when the Milvus instance is deleted
-* `persistentVolumeClaim.spec`: Standard Kubernetes PVC specification
-* `accessModes`: Typically `ReadWriteOnce` for block storage
-* `storageClassName`: Your cluster's storage class
-* `storage`: Size of the persistent volume
 
 ## Configure NATS
 

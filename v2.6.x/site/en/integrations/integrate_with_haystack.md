@@ -4,14 +4,10 @@ summary: This guide demonstrates how to build a Retrieval-Augmented Generation (
 title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_parent">
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/haystack/rag_with_milvus_and_haystack.ipynb" target="_blank">
-    <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
-</a>
-
 # Retrieval-Augmented Generation (RAG) with Milvus and Haystack
+
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
 
 This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using Haystack and Milvus.
 
@@ -27,7 +23,7 @@ Before running this notebook, make sure you have the following dependencies inst
 
 
 ```python
-! pip install --upgrade --quiet pymilvus milvus-lite milvus-haystack markdown-it-py mdit_plain
+! pip install --upgrade --quiet pymilvus milvus-haystack markdown-it-py mdit_plain
 ```
 
 <div class="alert note">
@@ -84,7 +80,7 @@ document_store = MilvusDocumentStore(
     connection_args={"uri": "./milvus.db"},
     # connection_args={"uri": "http://localhost:19530"},
     # connection_args={"uri": YOUR_ZILLIZ_CLOUD_URI, "token": Secret.from_env_var("ZILLIZ_CLOUD_API_KEY")},
-    drop_old=False,
+    drop_old=True,
 )
 ```
 

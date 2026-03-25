@@ -4,14 +4,14 @@ summary: Hybrid Search with Milvus
 title: Hybrid Search with Milvus
 ---
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
-
 # Hybrid Search with Milvus
 
-If you want to experience the final effect of this tutorial, you can go directly to https://demos.milvus.io/hybrid-search/
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a>
 
-<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/>
+
+<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/>
+
 
 In this tutorial, we will demonstrate how to conduct hybrid search with [Milvus](https://milvus.io/docs/multi-vector-search.md) and [BGE-M3 model](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3). BGE-M3 model can convert text into dense and sparse vectors. Milvus supports storing both types of vectors in one collection, allowing for hybrid search that enhances the result relevance.
 
@@ -75,7 +75,7 @@ The BGE-M3 model can embed texts as dense and sparse vectors.
 
 
 ```python
-from pymilvus.model.hybrid import BGEM3EmbeddingFunction
+from milvus_model.hybrid import BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=False, device="cpu")
 dense_dim = ef.dim["dense"]
@@ -92,14 +92,13 @@ docs_embeddings = ef(docs)
 
 We will set up the Milvus collection and create indices for the vector fields.
 
-<div class="alert alert-info">
+<div class="note alert">
 
 - Setting the uri as a local file, e.g. "./milvus.db", is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
 - If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on [Docker or Kubernetes](https://milvus.io/docs/quickstart.md). In this setup, please use the server uri, e.g.http://localhost:19530, as your uri.
 - If you want to use [Zilliz Cloud](https://zilliz.com/cloud), the fully managed cloud service for Milvus, adjust the uri and token, which correspond to the [Public Endpoint and API key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details) in Zilliz Cloud.
 
 </div>
-
 
 ```python
 from pymilvus import (
@@ -133,7 +132,7 @@ schema = CollectionSchema(fields)
 col_name = "hybrid_demo"
 if utility.has_collection(col_name):
     Collection(col_name).drop()
-col = Collection(col_name, schema, consistency_level="Bounded")
+col = Collection(col_name, schema, consistency_level="Strong")
 
 # To make vector search efficient, we need to create indices for the vector fields
 sparse_index = {"index_type": "SPARSE_INVERTED_INDEX", "metric_type": "IP"}
@@ -250,11 +249,11 @@ Let's run three different searches with defined functions:
 
 ```python
 dense_results = dense_search(col, query_embeddings["dense"][0])
-sparse_results = sparse_search(col, query_embeddings["sparse"][[0]])
+sparse_results = sparse_search(col, query_embeddings["sparse"]._getrow(0))
 hybrid_results = hybrid_search(
     col,
     query_embeddings["dense"][0],
-    query_embeddings["sparse"][[0]],
+    query_embeddings["sparse"]._getrow(0),
     sparse_weight=0.7,
     dense_weight=1.0,
 )
@@ -493,5 +492,4 @@ What math does a complete newbie need<span style='color:red'> to</span> understa
 
 ### Quick Deploy
 
-To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/tutorials/quickstart/apps/hybrid_demo_with_milvus).
-
+To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus).

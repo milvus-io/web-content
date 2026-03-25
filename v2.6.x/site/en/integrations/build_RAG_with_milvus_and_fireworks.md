@@ -6,10 +6,10 @@ title: Build RAG with Milvus and Fireworks AI
 
 # Build RAG with Milvus and Fireworks AI
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_parent">
    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_fireworks.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
@@ -25,7 +25,7 @@ In this tutorial, we will show you how to build a RAG (Retrieval-Augmented Gener
 
 
 ```shell
-$ pip install --upgrade pymilvus milvus-lite openai requests tqdm
+$ pip install --upgrade pymilvus openai requests tqdm
 ```
 <div class="alert note">
 
@@ -151,7 +151,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type="IP",  # Inner product distance
-    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Strong",  # Strong consistency level
 )
 ```
 

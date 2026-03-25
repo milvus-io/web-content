@@ -27,11 +27,11 @@ Cert Manager is required for managing TLS certificates for Milvus Operator.
 
     1. In your openshift console, navigate to **Workloads** > **Pods**. Select the project **cert-manager**.
 
-        ![cert-manager-1](../../../../../assets/openshift-cert-manager-1.png)
+        ![cert-manager-1](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-1.png)
 
     2. Ensure all the pods are ready. For example, the image below suggests that the pods are still starting. Wait until all these pods are ready.
 
-        ![cert-manager-2](../../../../../assets/openshift-cert-manager-2.png)
+        ![cert-manager-2](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/openshift-cert-manager-2.png)
 
 ## Step 2: Issue a Self-Signed Certificate for Milvus Operator
 

@@ -17,11 +17,12 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Try Managed Milvus For Free!</h2>
-    <p class="promotion-desc">Zilliz Cloud is hassle-free, powered by Milvus and 10x faster.</p>
+    <p class="promotion-desc">Try Zilliz Cloud for free! The easiest way to experience Milvus!</p>
   </div>
 
   <div class="cta-wrapper">
-    <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a>
+    <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>
+    <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud China</a>
   </div>
 </div>
 
@@ -31,7 +32,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="install_standalone-docker.md">
-    <img src="../../../assets/home_install.svg" alt="icon" />
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
     <p class="link-btn">Install Milvus</p>
   </a>
   <p>Learn how to install Milvus using either Docker Compose or on Kubernetes.</p>
@@ -39,7 +40,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="quickstart.md">
-    <img src="../../../assets/home_quick_start.svg" alt="icon" />
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">Quick Start</p>
   </a>
   <p>Learn how to quickly run Milvus with sample code.</p>
@@ -47,7 +48,7 @@ id: home.md
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img src="../../../assets/home_bootcamp.svg" alt="icon" />
+    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_bootcamp.svg" alt="icon" />
     <p class="link-btn">Bootcamp</p>
   </a>
   <p>
@@ -66,8 +67,8 @@ id: home.md
 
 - [Manage Collections](manage-collections.md)
 - [Insert, Upsert, and Delete](insert-update-delete.md)
+- [Index Vector Fields](index-vector-fields.md)
 - [Single-Vector Search](single-vector-search.md)
-- [Hybrid Search](multi-vector-search.md)
 - [Get & Scalar Query](get-and-scalar-query.md)
 </div>
 
@@ -86,7 +87,7 @@ id: home.md
 
 - [System Configuration](system_configuration.md)
 - [Architecture Overview](architecture_overview.md)
-- [Index Explained](index-explained.md)
+- [Vector Index](index.md)
 - [Similarity Metrics](metric.md)
 - [Glossary](glossary.md)
 </div>
@@ -97,12 +98,11 @@ id: home.md
 
 ## What's new in docs
 
-_June 2025 - Milvus 2.6.0 release_
+_Mar 2024 - Milvus 2.4.0 release_
 
-- Added guidance on how to [use embedding function](embedding-function-overview.md).
-- Added guidance on how to [use decay ranker](decay-ranker-overview.md).
-- Added guidance on how to [add fields to an existing collection](add-fields-to-an-existing-collection.md).
-- Added guidance on how to [perform phrase match](phrase-match.md).
-- Added descriptions of [IVF_RABITQ index](ivf-rabitq.md).
+- Added guidance on how to [conduct hybrid search](multi-vector-search.md).
+- Added description of [GPU index](gpu_index.md).
+- Added guidance on how to [embed your data using PyMilvus](embeddings.md).
+- Added descriptions of [Milvus CDC](milvus-cdc-overview.md).
 
 </div>

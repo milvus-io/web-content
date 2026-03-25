@@ -70,6 +70,6 @@ This page lists common issues that may occur when running Milvus, as well as pos
 
   If you need help solving a problem, feel free to:
 
-  - Join our [Discord channel](https://discord.com/invite/8uyFbECzPX) and reach out for support from the Milvus team.
+  - Join our [Discord Server](https://discord.com/invite/8uyFbECzPX) and reach out for support from the Milvus team.
   - [File an Issue](https://github.com/milvus-io/milvus/issues/new/choose) on GitHub that includes details about your problem.
 

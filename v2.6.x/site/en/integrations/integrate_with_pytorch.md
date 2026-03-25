@@ -1,14 +1,14 @@
 ---
 id: integrate_with_pytorch.md
-summary: This page demostrates how to build image search with PyTorch and Milvus
-title: Image Search with PyTorch and Milvus
+summary: This page discusses image search using Milvus
+title: Image Search with Milvus - Integration
 ---
 
-# Image Search with PyTorch and Milvus
+# Image Search with Milvus
 
-This guide introduces an example of integrating PyTorch and Milvus to perform image search using embeddings. PyTorch is a powerful open-source deep learning framework widely used for building and deploying machine learning models. In this example, we’ll leverage its Torchvision library and a pre-trained ResNet50 model to generate feature vectors (embeddings) that represent image content. These embeddings will be stored in Milvus, a high-performance vector database, to enable efficient similarity search. The dataset used is the Impressionist-Classifier Dataset from [Kaggle](https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data). By combining the deep learning capabilities of PyTorch with the scalable search functionality of Milvus, this example demonstrates how to build a robust and efficient image retrieval system.
+On this page, we are going to be going over a simple image search example using Milvus. The dataset we are searching through is the Impressionist-Classifier Dataset found on [Kaggle](https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data). For this example, we have rehosted the data in a public google drive.
 
-Let’s get started!
+For this example, we are just using the Torchvision pre-trained Resnet50 model for embeddings. Let's get started!
 
 ## Installing the requirements
 
@@ -247,4 +247,4 @@ plt.savefig('search_result.png')
 
 The search result image should be similar to the following:
 
-![Image search output](../../../assets/integrate_with_pytorch.png)
+![Image search output](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/integrate_with_pytorch.png)

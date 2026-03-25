@@ -24,5 +24,5 @@ In this tutorial, you will learn how to build a text search engine. This tutoria
 
 <br/>
 
-![text_search_engine](../../../assets/text_search_engine.png "Workflow of a text search engine.")
-![text_search_engine](../../../assets/text_search_engine_demo.png "Demo of text search engine.")
+![text_search_engine](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine.png)
+![text_search_engine](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/text_search_engine_demo.png)

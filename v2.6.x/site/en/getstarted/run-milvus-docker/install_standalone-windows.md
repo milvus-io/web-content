@@ -31,7 +31,7 @@ If you are more familiar with PowerShell or Windows Command Prompt, the command 
 2. Download the installation script and save it as `standalone.bat`.​
 
     ```powershell
-    C:\>Invoke-WebRequest https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/scripts/standalone_embed.bat -OutFile standalone.bat​
+    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/blob/master/scripts/standalone_embed.bat -OutFile standalone.bat​
 
     ```
 
@@ -127,7 +127,7 @@ Once you have installed Docker Desktop on Microsoft Windows, you can access the 
 
     ```powershell
     # Download the configuration file and rename it as docker-compose.yml​
-    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+    C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
     ​
     # Start Milvus​
     C:\>docker compose up -d​
@@ -163,7 +163,7 @@ The procedure is similar to using Docker Compose to install Milvus in Linux syst
 2. Download the Milvus configuration file.​
 
     ```shell
-    $ wget https://github.com/milvus-io/milvus/releases/download/v2.6.5/milvus-standalone-docker-compose.yml -O docker-compose.yml​
+    $ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml​
 
     ```
 
@@ -188,7 +188,7 @@ Once you install Docker Desktop in Windows, you may encounter the `Docker Engine
 
     You can check whether virtualization is enabled by looking at the **Performance** tab in the **Task Manager**.​
 
-    ![Virtualization in Task Manager](../../../../assets/task-manager.png)
+    ![Virtualization in Task Manager](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/task-manager.png)
 
     If virtualization is disabled, you may need to check the BIOS settings of your motherboard firmware. The way to enable virtualization in BIOS settings varies with motherboard vendors. For the ASUS motherboard, for example, you can refer to [this article](https://www.asus.com/support/faq/1043786/) on enabling virtualization.​
 
@@ -231,7 +231,7 @@ Once you install Docker Desktop in Windows, you may encounter the `Docker Engine
 
     Ensure that you have started Docker Desktop in administrator mode. To do so, right-click on **Docker Desktop** and choose **Run as administrator**.​
 
-    ![Start Docker Desktop as Administrator](../../../../assets/docker-desktop.png)
+    ![Start Docker Desktop as Administrator](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop.png)
 
 ### How can I deal with WSL-related issues while deploying Milvus?​
 
@@ -239,44 +239,19 @@ If you have encountered WSL-related issues while running Milvus from WSL 2, you 
 
 1. Ensure that "Use the WSL 2 based engine" is checked in **Settings** > **General**. ​
 
-    ![Use the WSL 2 based engine in Docker Desktop Settings](../../../../assets/docker-desktop-wsl-01.png)
+    ![Use the WSL 2 based engine in Docker Desktop Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-01.png)
 
 2. Select from your installed WSL 2 distributions which you want to enable Docker integration on by going to: **Settings** > **Resources** > **WSL Integration**.​
 
-    ![Select WSL 2 distributions in Docker Desktop Settings](../../../../assets/docker-desktop-wsl-02.png)
+    ![Select WSL 2 distributions in Docker Desktop Settings](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/docker-desktop-wsl-02.png)
 
 ### How can I deal with the volume-related errors prompted during Milvus startup that reads `Read config failed`?​
 
-![Read config failed error prompt in Milvus startup](../../../../assets/milvus-read-config-fails-01.png)
+![Read config failed error prompt in Milvus startup](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-01.png)
 
 To deal with the error prompted during Milvus startup that reads "Read config failed," you need to check whether the volume mounted into the Milvus container is correct. If the volume is correctly mounted into the container, you can use the `docker exec` command to go into the container and list the **/milvus/configs** folder as follows:​
 
-![List Milvus config files](../../../../assets/milvus-read-config-fails-02.png)
+![List Milvus config files](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus-read-config-fails-02.png)
 
 ​
-## What's next
-
-Having installed Milvus in Docker, you can:
-
-- Check [Quickstart](quickstart.md) to see what Milvus can do.
-
-- Learn the basic operations of Milvus:
-  - [Manage Databases](manage_databases.md)
-  - [Manage Collections](manage-collections.md)
-  - [Manage Partitions](manage-partitions.md)
-  - [Insert, Upsert & Delete](insert-update-delete.md)
-  - [Single-Vector Search](single-vector-search.md)
-  - [Hybrid Search](multi-vector-search.md)
-
-- [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
-- [Scale your Milvus cluster](scaleout.md).
-- Deploy your Milvu cluster on clouds:
-  - [Amazon EKS](eks.md)
-  - [Google Cloud](gcp.md)
-  - [Microsoft Azure](azure.md)
-- Explore [Milvus WebUI](milvus-webui.md), an intuitive web interface for Milvus observability and management.
-- Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
-- Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
-- Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.
-- [Monitor Milvus with Prometheus](monitor.md).
 

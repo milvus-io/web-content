@@ -170,7 +170,7 @@ milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type="IP",  # Inner product distance
-    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Strong",  # Strong consistency level
 )
 ```
 

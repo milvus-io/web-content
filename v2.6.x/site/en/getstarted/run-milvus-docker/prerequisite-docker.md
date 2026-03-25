@@ -1,14 +1,14 @@
 ---
 id: prerequisite-docker.md
-label: Standalone requirements
-related_key: Standalone
-summary: Learn the necessary preparations before installing Milvus Standalone.
-title: Requirements for Installing Milvus Standalone
+label: Docker requirements
+related_key: Docker
+summary: Learn the necessary preparations before installing Milvus with Docker Compose.
+title: Requirements for Installing Milvus with Docker Compose
 ---
 
-# Requirements for Installing Milvus Standalone
+# Requirements for Installing Milvus with Docker Compose
 
-Before installing a Milvus Standalone instance, check your hardware and software to see if they meet the requirements.
+Before installing a Milvus instance, check your hardware and software to see if they meet the requirements.
 
 ## Hardware requirements
 
@@ -31,7 +31,7 @@ The following dependencies will be obtained and configured automatically when Mi
 | Software | Version                       | Note |
 | -------- | ----------------------------- | ---- |
 | etcd     | 3.5.0                         |  See [additional disk requirements](#Additional-disk-requirements). |
-| MinIO    |  RELEASE.2024-12-18T13-15-44Z | |
+| MinIO    |  RELEASE.2023-03-20T20-16-18Z | |
 | Pulsar   | 2.8.2                         | |
 
 ### Additional disk requirements
@@ -45,7 +45,7 @@ mkdir test-data
 fio --rw=write --ioengine=sync --fdatasync=1 --directory=test-data --size=2200m --bs=2300 --name=mytest
 ```
 
-Ideally, your disk dedicated to etcd should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd [Docs](https://etcd.io/docs/v3.5/op-guide/hardware/#disks) for more detailed requirements.
+Ideally, your disk should reach over 500  IOPS and below 10ms for the 99th percentile fsync latency. Read the etcd [Docs](https://etcd.io/docs/v3.5/op-guide/hardware/#disks) for more detailed requirements.
 
 ## What's next
 

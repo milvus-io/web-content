@@ -6,41 +6,41 @@ title: Main Components
 
 # Main Components
 
-A Milvus cluster comprises five core components and three third-party dependencies. Each component can be deployed independently on Kubernetes: 
+There are two modes for running Milvus: Standalone and Cluster. These two modes share the same features. You can choose a mode that best fits your dataset size, traffic data, and more. For now, Milvus standalone cannot be upgraded "online" to Milvus cluster. 
 
-## Milvus components
+## Milvus standalone
 
-- Coordinator: master-slave mode can be enabled to provide high availability.
-- Proxy: one or more per cluster
-- Streaming Node: one or more per cluster
-- Query Node: one or more per cluster
-- Data Node: one or more per cluster
+ Milvus standalone includes three components:
 
-## Third-party dependencies
+- **Milvus:** The core functional component. 
 
-- **Meta Store:** Stores metadata for various components in the milvus, e.g. etcd.
-- **Object Storage:**  Responsible for data persistence of large files in the milvus, such as index and binary log files, e.g. S3
-- **WAL Storage:** Provides Write-Ahead Log (WAL) service for the milvus, e.g. woodpecker. 
-    - Under the woodpecker zero-disk mode, **WAL** directly use object storage and meta storage without other deployment, reducing third-party dependencies.
+- **Meta Store:** The metadata engine, which accesses and stores metadata of Milvus' internal components, including proxies, index nodes, and more. 
 
-## Milvus deployment modes
+- **Object Storage:** The storage engine, which is responsible for data persistence for Milvus.
 
-There are two modes for running Milvus: 
+![Standalone_architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/standalone_architecture.jpg)
 
-### Standalone 
+## Milvus cluster
 
-A single instance of Milvus that runs all components in one process, which is suitable for small datasets and low workload.
-Additionally, in standalone mode, simpler WAL implementation, such as woodpecker and rocksmq, can be chosen to eliminate the requirement for third-party WAL Storage dependencies.
+**Milvus cluster** includes seven microservice components and three third-party dependencies. All microservices can be deployed on Kubernetes, independently from each other. 
 
-![Standalone_architecture](../../../../assets/standalone_architecture.png "Milvus standalone architecture.")
+### Microservice components
 
-Currently, you cannot perform an online upgrade from a standalone Milvus instance to a Milvus cluster, even if the WAL storage backend supports cluster mode.
+- Root coord
+- Proxy 
+- Query coord 
+- Query node 
+- Data coord
+- Index node 
+- Data node
 
-### Cluster
+### Third-party dependencies
 
-A distributed deployment mode of Milvus where each component runs independently and can be scaled out for elasticity. This setup is suitable for large datasets and high-load scenarios.
+- **Meta Store:** Stores metadata for various components in the cluster, e.g. etcd.
+- **Object Storage:**  Responsible for data persistence of large files in the cluster, such as index and binary log files, e.g. S3
+- **Log Broker:** Manages logs of recent mutation operations, outputs streaming log, and provides log publish-subscribe services, e.g. Pulsar.
 
-![Distributed_architecture](../../../../assets/distributed_architecture.png "Milvus cluster architecture.")
+![Distributed_architecture](https://milvus-docs.s3.us-west-2.amazonaws.com/assets/distributed_architecture.jpg)
 
 ## What's next
 
