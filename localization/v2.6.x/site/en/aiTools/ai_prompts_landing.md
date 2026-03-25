@@ -41,7 +41,7 @@ summary: >-
 <li><strong>Save</strong> it to the file your AI tool expects (see <a href="#use-in-different-environments">environments table</a> below).</li>
 <li>Your AI assistant will automatically apply the rules when it generates or reviews Milvus code.</li>
 </ol>
-<h2 id="Prompts" class="common-anchor-header">Prompts<button data-href="#Prompts" class="anchor-icon" translate="no">
+<h2 id="Prompt-pages" class="common-anchor-header">Prompt pages<button data-href="#Prompt-pages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,38 +60,40 @@ summary: >-
 <div class="start_card_container">
   <a href="/docs/agents_overview.md">
     <p class="link-btn">🤖 AGENTS.md for Milvus</p>
+    <p>Top-level rules for any AI coding agent. Start here if you only want one file.</p>
   </a>
-  <p>Top-level rules for any AI coding agent. Start here if you only want one file.</p>
 </div>
 <div class="start_card_container">
   <a href="/docs/python_sdk.md">
     <p class="link-btn">🐍 Milvus Python SDK</p>
+    <p>Correct connection patterns, MilvusClient usage, and ORM API prohibition.</p>
   </a>
-  <p>Correct connection patterns, MilvusClient usage, and ORM API prohibition.</p>
 </div>
 <div class="start_card_container">
   <a href="/docs/schema_design.md">
     <p class="link-btn">📐 Schema Design</p>
+    <p>Field types, primary keys, schema immutability, and BM25 configuration.</p>
   </a>
-  <p>Field types, primary keys, schema immutability, and BM25 configuration.</p>
 </div>
+</div>
+<div class="card-wrapper">
 <div class="start_card_container">
   <a href="/docs/search_patterns.md">
     <p class="link-btn">🔍 Search Patterns</p>
+    <p>ANN, hybrid, and full-text search with critical constraint rules.</p>
   </a>
-  <p>ANN, hybrid, and full-text search with critical constraint rules.</p>
 </div>
 <div class="start_card_container">
   <a href="/docs/index_selection.md">
     <p class="link-btn">🗂️ Index Selection</p>
+    <p>Decision tree for AUTOINDEX, HNSW, DiskANN, and IVF_FLAT.</p>
   </a>
-  <p>Decision tree for AUTOINDEX, HNSW, DiskANN, and IVF_FLAT.</p>
 </div>
 <div class="start_card_container">
   <a href="/docs/rag_pipeline.md">
     <p class="link-btn">🔗 RAG Pipeline</p>
+    <p>End-to-end retrieval-augmented generation flow with Milvus.</p>
   </a>
-  <p>End-to-end retrieval-augmented generation flow with Milvus.</p>
 </div>
 </div>
 <h2 id="Use-in-different-environments" class="common-anchor-header">Use in different environments<button data-href="#Use-in-different-environments" class="anchor-icon" translate="no">
