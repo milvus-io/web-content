@@ -122,7 +122,9 @@ async function bootstrap() {
   /**
    * step 7: translate en docs to other languages if new files added
    */
-  if (newFilesFound) {
+  if (process.env.SKIP_TRANSLATE === "true") {
+    console.log("SKIP_TRANSLATE is set, skip translation.");
+  } else if (newFilesFound) {
     import("./translate.js");
   } else {
     console.log("No new files found, skip translation.");

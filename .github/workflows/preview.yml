@@ -34,7 +34,7 @@ jobs:
           touch .env
           echo DEEPL_API_KEY=${{secrets.DEEPL_API_KEY}} >> .env
           echo GITHUB_TOKEN=${{secrets.GH_TOKEN}} >> .env
-          yarn generate:en
+          SKIP_TRANSLATE=true yarn generate:en
 
       - name: Commit and push
         run: |
