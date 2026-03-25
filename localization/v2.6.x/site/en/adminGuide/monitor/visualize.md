@@ -73,11 +73,11 @@ summary: Learn how to visualize Milvus metrics in Grafana.
         ></path>
       </svg>
     </button></h3><p>Download and import Milvus dashboard from the JSON file.</p>
-<pre><code translate="no"><span class="hljs-attribute">wget</span> https://raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json
+<pre><code translate="no">wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
 <button class="copy-code-btn"></button></code></pre>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/import_dashboard.png" alt="Download_and_import" class="doc-image" id="download_and_import" />
     <span>Download_and_import</span>
   </span>
 </p>
@@ -99,13 +99,13 @@ summary: Learn how to visualize Milvus metrics in Grafana.
     </button></h3><p>Select the Milvus instance you want to monitor. Then you can see the Milvus components panel.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_select.png" alt="Select_instance" class="doc-image" id="select_instance" />
     <span>Select_instance</span>
   </span>
 </p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/grafana_panel.png" alt="Grafana_panel" class="doc-image" id="grafana_panel" />
     <span>Grafana_panel</span>
   </span>
 </p>

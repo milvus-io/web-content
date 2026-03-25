@@ -61,7 +61,6 @@ summary: Learn how to configure message storage with Milvus Operator.
 </ul></li>
 <li>The message storage cannot be changed while the Milvus system is running.</li>
 <li>Only Kafka 2.x or 3.x verison is supported.</li>
-<li><strong>Upgrade limitations</strong>: <strong>Message Queue limitations</strong>: When upgrading to Milvus v2.6.5, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configure RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,37 +82,15 @@ summary: Learn how to configure message storage with Milvus Operator.
 <p>Currently, you can only configure RocksMQ as the message storage for Milvus standalone with Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Example</h4><p>The following example configures a RocksMQ service.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Key configuration options:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Explicitly sets RocksMQ as the message queue</li>
-<li><code translate="no">persistence.enabled</code>: Enables persistent storage for RocksMQ data</li>
-<li><code translate="no">persistence.pvcDeletion</code>: When true, the PVC will be deleted when the Milvus instance is deleted</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Standard Kubernetes PVC specification</li>
-<li><code translate="no">accessModes</code>: Typically <code translate="no">ReadWriteOnce</code> for block storage</li>
-<li><code translate="no">storageClassName</code>: Your cluster’s storage class</li>
-<li><code translate="no">storage</code>: Size of the persistent volume</li>
-</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Configure NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

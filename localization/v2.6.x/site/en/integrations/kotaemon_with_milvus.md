@@ -150,7 +150,7 @@ pip install -e &quot;libs/ktem&quot;
       </svg>
     </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_1.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -172,7 +172,7 @@ pip install -e &quot;libs/ktem&quot;
       </svg>
     </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -196,7 +196,7 @@ Navigate to the <code translate="no">File Index</code> tab, and you can upload a
       </svg>
     </button></h3><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/kotaemon_3.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

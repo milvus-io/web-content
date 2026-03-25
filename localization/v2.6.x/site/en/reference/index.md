@@ -80,7 +80,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
-<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
+<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indexes for binary embeddings<button data-href="#Indexes-for-binary-embeddings" class="anchor-icon" translate="no">
@@ -117,11 +117,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>Indexes for sparse embeddings support the <code translate="no">IP</code> and <code translate="no">BM25</code> (for full-text search) metrics only.</p>
-<p>Index type supported for sparse embeddings: <code translate="no">SPARSE_INVERTED_INDEX</code>.</p>
-<div class="alert note">
-<p>From Milvus 2.5.4 onward, <code translate="no">SPARSE_WAND</code> is being deprecated. Instead, it is recommended to use <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> for equivalency while maintaining compatibility. For more information, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
-</div>
+    </button></h3><p>The distance metric supported for sparse embeddings is <code translate="no">IP</code> only.</p>
+<p>The types of indexes include <code translate="no">SPARSE_INVERTED_INDEX</code> and <code translate="no">SPARSE_WAND</code>.</p>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -145,7 +142,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>N/A</td>
+    <td>Quantization-based index</td>
     <td>
       <ul>
         <li>High-speed query</li>
@@ -158,7 +155,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
     <td>Quantization-based index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
+        <li>High-speed query</li>
         <li>Limited memory resources</li>
         <li>Accepts minor compromise in recall rate</li>
       </ul>
@@ -169,9 +166,9 @@ Currently, a vector field only supports one index type. Milvus automatically del
     <td>Quantization-based index</td>
     <td>
       <ul>
-        <li>High-speed query</li>
+        <li>Very high-speed query</li>
         <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
+        <li>Accepts substantial compromise in recall rate</li>
       </ul>
     </td>
   </tr>
@@ -183,40 +180,6 @@ Currently, a vector field only supports one index type. Milvus automatically del
         <li>Very high-speed query</li>
         <li>Requires a recall rate as high as possible</li>
         <li>Large memory resources</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>HNSW_SQ</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>Very high-speed query</li>
-        <li>Limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
-      </ul>
-    </td>
-  </tr>
-    <tr>
-    <td>HNSW_PQ</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
-      </ul>
-    </td>
-  </tr>
-    </tr>
-    <tr>
-    <td>HNSW_PRQ</td>
-    <td>Quantization-based index</td>
-    <td>
-      <ul>
-        <li>Medium speed query</li>
-        <li>Very limited memory resources</li>
-        <li>Accepts minor compromise in recall rate</li>
       </ul>
     </td>
   </tr>
@@ -283,6 +246,14 @@ Currently, a vector field only supports one index type. Milvus automatically del
       <li>Requires a 100% recall rate.</li>
     </ul></td>
   </tr>
+  <tr>
+    <td>SPARSE_WAND</td>
+    <td>Inverted index</td>
+    <td><ul>
+      <li><a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm accelerated</li>
+      <li>Can get a significant speed improvement while only sacrificing a small amount of recall.</li>
+    </ul></td>
+  </tr>
 </tbody>
 </table>
 </div>
@@ -303,7 +274,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
         ></path>
       </svg>
     </button></h3><p>For vector similarity search applications that require perfect accuracy and depend on relatively small (million-scale) datasets, the FLAT index is a good choice. FLAT does not compress vectors, and is the only index that can guarantee exact search results. Results from FLAT can also be used as a point of comparison for results produced by other indexes that have less than 100% recall.</p>
-<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need extra index buidling.</p>
+<p>FLAT is accurate because it takes an exhaustive approach to search, which means for each query the target input is compared to every set of vectors in a dataset. This makes FLAT the slowest index on our list, and poorly suited for querying massive vector data. There are no parameters required for the FLAT index in Milvus, and using it does not need data training.</p>
 <ul>
 <li><p>Search parameters</p>
 <table>
@@ -555,156 +526,21 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <li><p>Index building parameters</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Search parameters</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ<button data-href="#HNSWSQ" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>Scalar Quantization (SQ) is a technique used to discretize floating-point data into a finite set of values based on their magnitude. For example, <strong>SQ6</strong> represents quantization into (2^6 = 64) discrete values, where each floating-point number is encoded using 6 bits. Similarly, <strong>SQ8</strong> quantizes the data into (2^8 = 256) discrete values, with each floating-point number represented by 8 bits. This quantization reduces the memory footprint while preserving the essential structure of the data for efficient processing.</p>
-<p>Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and accuracy, while maintaining high query-per-second (QPS) performance. Compared to standard HNSW, it results in a modest increase in index construction time.</p>
-<ul>
-<li><p>Index building parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">sq_type</code></td><td>Scalar quantizer type.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Search parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ<button data-href="#HNSWPQ" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>The basic idea of PQ is to split the vector into <code translate="no">m</code> sub-vectors, each of which will find 2^{<em>nbits</em>} centroids based on kmeans, and each sub-vector will select the nearest centroid as its approximate sub-vector. Then we record all the centriods, so each subvector can be encoded as <code translate="no">nbits</code>, and a floating vector of length <code translate="no">dim</code> can be encoded as <em>m ⋅ nbits</em> bits.</p>
-<p>Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and accuracy, but it has a lower QPS value and a higher recall rate than HNSW_SQ for the same compression rate. Compared with HNSW_SQ, it takes longer to build the index.</p>
-<ul>
-<li><p>Index building parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Search parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-</tbody>
-</table>
-</li>
-</ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ<button data-href="#HNSWPRQ" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h3><p>PRQ is similar to PQ, and also divides the vector into <code translate="no">m</code> groups. Each sub-vector will be encoded as <code translate="no">nbits</code>. After completing a pq quantization, it will calculate the residual between the vector and the pq quantized vector, and apply pq quantization to the residual vector. A total of <code translate="no">nrq</code> complete pq quantizations will be performed, so a floating vector of length <code translate="no">dim</code> will be encoded as <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
-<p>Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher controllable tradeoff between index size and accuracy. It has almost equivalent QPS value and a higher recall rate than HNSW_PQ for the same compression rate. Compared with HNSW_PQ, the time to build the index may increase several times.</p>
-<ul>
-<li><p>Index building parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
-<tr><td><code translate="no">nrq</code></td><td>The number of residual subquantizers.</td><td>[1, 16]</td><td>2</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
-</tbody>
-</table>
-</li>
-<li><p>Search parameters</p>
-<table>
-<thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
-</thead>
-<tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
 </tbody>
 </table>
 </li>
@@ -820,14 +656,48 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">inverted_index_algo</code></td><td>The algorithm used for building and querying the index. For details, refer to <a href="/docs/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</td><td><code translate="no">DAAT_MAXSCORE</code> (default), <code translate="no">DAAT_WAND</code>, <code translate="no">TAAT_NAIVE</code></td></tr>
-<tr><td><code translate="no">bm25_k1</code></td><td>Controls the term frequency saturation. Higher values increase the importance of term frequencies in document ranking.</td><td>[1.2, 2.0]</td></tr>
-<tr><td><code translate="no">bm25_b</code></td><td>Controls the extent to which document length is normalized. Defaults to 0.75.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_build</code></td><td>The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
-  <div class="alert note">
-<p>The <code translate="no">drop_ratio_build</code> parameter is deprecated since Milvus v2.5.4, which can still be accepted during index building, but will no longer have actual effect on the index.</p>
-  </div>
+</li>
+<li><p>Search parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>The proportion of small vector values that are excluded during the search process. This option allows fine-tuning of the search process by specifying the ratio of the smallest values in the query vector to ignore. It helps balance search precision and performance. The smaller the value set for <code translate="no">drop_ratio_search</code>, the less these small values contribute to the final score. By ignoring some small values, search performance can be improved with minimal impact on accuracy.</td><td>[0, 1]</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND<button data-href="#SPARSEWAND" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>This index shares similarities with <code translate="no">SPARSE_INVERTED_INDEX</code>, while it utilizes the <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm to further reduce the number of full IP distance evaluations during the search process.</p>
+<p>Based on our testing, <code translate="no">SPARSE_WAND</code> generally outperforms other methods in terms of speed. However, its performance can deteriorate rapidly as the density of the vectors increases. To address this issue, introducing a non-zero <code translate="no">drop_ratio_search</code> can significantly enhance performance while only incurring minimal accuracy loss. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vector</a>.</p>
+<ul>
+<li><p>Index building parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">drop_ratio_build</code></td><td>The proportion of small vector values that are excluded during the indexing process. This option allows fine-tuning of the indexing process, making a trade-off between efficiency and accuracy by disregarding small values when building the index.</td><td>[0, 1]</td></tr>
+</tbody>
+</table>
 </li>
 <li><p>Search parameters</p>
 <table>

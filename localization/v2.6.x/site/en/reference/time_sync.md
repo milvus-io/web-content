@@ -89,7 +89,7 @@ summary: Learn about the time synchronization system in Milvus.
 <p>A TSO timestamp is a type of <code translate="no">uint64</code> value that is made up of a physical part and a logical part. The figure below demonstrates the format of a timestamp.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/TSO_Timestamp.png" alt="TSO_Timestamp" class="doc-image" id="tso_timestamp" />
     <span>TSO_Timestamp</span>
   </span>
 .</p>
@@ -117,7 +117,7 @@ summary: Learn about the time synchronization system in Milvus.
 </div>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
     <span>timesync_proxy_insert_msg</span>
   </span>
 </p>
@@ -125,7 +125,7 @@ summary: Learn about the time synchronization system in Milvus.
 <p>The following figure is an example of <code translate="no">InsertMsgs</code> in a <code translate="no">MsgStream</code>. The snippet contains five <code translate="no">InsertMsgs</code>, three of which are from <code translate="no">Proxy1</code> and the rest from <code translate="no">Proxy2</code>.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
     <span>msgstream</span>
   </span>
 </p>
@@ -133,7 +133,7 @@ summary: Learn about the time synchronization system in Milvus.
 <p>One possible scenario is that when reading a message with timestamp <code translate="no">110</code> from <code translate="no">Proxy2</code>, Milvus finds that the message with timestamp <code translate="no">80</code> from <code translate="no">Proxy1</code> is still in the <code translate="no">MsgStream</code>. Therefore, Milvus introduces a time synchronization system, timetick, to ensure that when reading a message from <code translate="no">MsgStream</code>, all messages with smaller timestamp values must be consumed.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
     <span>time_synchronization</span>
   </span>
 </p>
@@ -146,11 +146,11 @@ summary: Learn about the time synchronization system in Milvus.
 <p>The following figure is an example of the <code translate="no">Msgstream</code> with a timetick inserted.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
     <span>timetick</span>
   </span>
 </p>
-<p><code translate="no">MsgStream</code> processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp. In the above example, it will consume all records excepting <code translate="no">InsertMsgs</code> from <code translate="no">Proxy2</code> at <code translate="no">Timestamp: 120</code> as it’s after the latest TimeTick.</p>
+<p><code translate="no">MsgStream</code> processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp.</p>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
