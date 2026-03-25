@@ -48,7 +48,7 @@ title: 認證用戶訪問
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>

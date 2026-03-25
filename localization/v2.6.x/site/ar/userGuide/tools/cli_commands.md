@@ -20,35 +20,6 @@ title: مرجع أوامر Milvus_CLI
       </svg>
     </button></h1><p>واجهة سطر الأوامر Milvus (CLI) هي أداة سطر أوامر تدعم الاتصال بقاعدة البيانات وعمليات البيانات واستيراد البيانات وتصديرها.</p>
 <p>يقدم هذا الموضوع جميع الأوامر المدعومة والخيارات المقابلة لها. كما يتم تضمين بعض الأمثلة للرجوع إليها.</p>
-<h2 id="Command-Groups" class="common-anchor-header">مجموعات الأوامر<button data-href="#Command-Groups" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يتم تنظيم أوامر Milvus CLI في المجموعات التالية:</p>
-<ul>
-<li><code translate="no">create</code>: إنشاء مجموعة أو قاعدة بيانات أو قسم أو مستخدم أو دور أو فهرس</li>
-<li><code translate="no">delete</code>: حذف المجموعة أو قاعدة البيانات أو القسم أو الاسم المستعار أو المستخدم أو الدور أو الفهرس</li>
-<li><code translate="no">list</code>: قائمة بالمجموعات أو قواعد البيانات أو الأقسام أو المستخدمين أو الأدوار أو المنح أو الفهارس</li>
-<li><code translate="no">show</code>: إظهار الاتصال أو قاعدة البيانات أو المجموعة أو التحميل_التقدم أو تقدم الفهرس</li>
-<li><code translate="no">grant</code>: منح دور أو امتياز</li>
-<li><code translate="no">revoke</code>: إبطال الدور أو الامتياز</li>
-<li><code translate="no">load</code>: تحميل مجموعة أو قسم</li>
-<li><code translate="no">release</code>: تحرير المجموعة أو القسم</li>
-<li><code translate="no">use</code>: استخدام قاعدة البيانات</li>
-<li><code translate="no">rename</code>: إعادة تسمية المجموعة</li>
-<li><code translate="no">insert</code>: إدراج كيانات (ملف أو صف)</li>
-</ul>
 <h2 id="clear" class="common-anchor-header">مسح<button data-href="#clear" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,7 +39,7 @@ title: مرجع أوامر Milvus_CLI
 <p><h3 id="clear">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">clear
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="clear">خيارات</h3></p>
+<p><h3 id="clear">الخيارات</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
@@ -95,7 +66,6 @@ title: مرجع أوامر Milvus_CLI
     </button></h2><p>يتصل بميلفوس.</p>
 <p><h3 id="connect">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
-connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">خيارات</h3></p>
 <table>
@@ -105,9 +75,7 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(اختياري) اسم uri. الافتراضي هو "http://127.0.0.1:19530".</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-الرمز المميز</td><td style="text-align:left">(اختياري) الرمز المميز ل zilliz cloud apikey أو <code translate="no">username:password</code>. الافتراضي هو لا شيء.</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(اختياري) تعيين وضع TLS: 0 (لا يوجد تشفير)، 1 (تشفير أحادي الاتجاه)، 2 (التشفير ثنائي الاتجاه غير مدعوم بعد). الافتراضي هو 0</td></tr>
-<tr><td style="text-align:left">-شهادة</td><td style="text-align:left">-Cert</td><td style="text-align:left">(اختياري) المسار إلى ملف شهادة العميل. العمل مع التشفير أحادي الاتجاه</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">عرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">مثال</h3></p>
@@ -132,16 +100,46 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="create-database">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-db_name</td><td style="text-align:left">[مطلوب] اسم قاعدة البيانات في ميلفوس.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-database</td><td style="text-align:left">[مطلوب] اسم قاعدة البيانات في ميلفوس.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>يقوم المثال التالي بإنشاء قاعدة البيانات <code translate="no">testdb</code> في ميلفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>يقوم المثال التالي بإنشاء قاعدة البيانات <code translate="no">testdb</code> في ميلفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="use-Database" class="common-anchor-header">استخدام قاعدة البيانات<button data-href="#use-Database" class="anchor-icon" translate="no">
@@ -163,16 +161,46 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="use-database">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">use database -db (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-db_name</td><td style="text-align:left">[مطلوب] اسم قاعدة البيانات في ميلفوس.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-database</td><td style="text-align:left">[مطلوب] اسم قاعدة البيانات في ميلفوس.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>يستخدم المثال التالي قاعدة البيانات <code translate="no">testdb</code> في ميلفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>يستخدم المثال التالي قاعدة البيانات <code translate="no">testdb</code> في ميلفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-Databases" class="common-anchor-header">قائمة قواعد البيانات<button data-href="#list-Databases" class="anchor-icon" translate="no">
@@ -194,7 +222,22 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="list-database">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">list databases
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><h4 id="Example-1" class="common-anchor-header">المثال 1</h4><p>يسرد المثال التالي قائمة قواعد البيانات في ملفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">المثال 1</h4><p>يسرد المثال التالي قائمة قواعد البيانات في ملفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-Database" class="common-anchor-header">حذف قاعدة البيانات<button data-href="#delete-Database" class="anchor-icon" translate="no">
@@ -216,20 +259,47 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="delete-database">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">delete database -db (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-db_name</td><td style="text-align:left">[مطلوب] اسم قاعدة البيانات في ميلفوس.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-database</td><td style="text-align:left">[مطلوب] اسم قاعدة البيانات في ميلفوس.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>يقوم المثال التالي بحذف قاعدة البيانات <code translate="no">testdb</code> في ميلفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>يقوم المثال التالي بحذف قاعدة البيانات <code translate="no">testdb</code> في ميلفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete database -db testdb
-
-Warning! You are trying to delete the database. This action cannot be undone!
-Do you want to continue? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-user" class="common-anchor-header">إنشاء مستخدم<button data-href="#create-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -250,7 +320,22 @@ Do you want to continue? [y/N]: y
 <p><h3 id="create-user">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">create user -u (text) -p (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
@@ -260,7 +345,22 @@ Do you want to continue? [y/N]: y
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>ينشئ المثال التالي المستخدم <code translate="no">zilliz</code> وكلمة المرور <code translate="no">zilliz</code> في ميلفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>ينشئ المثال التالي المستخدم <code translate="no">zilliz</code> وكلمة المرور <code translate="no">zilliz</code> في ميلفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-role" class="common-anchor-header">إنشاء دور<button data-href="#create-role" class="anchor-icon" translate="no">
@@ -282,7 +382,22 @@ Do you want to continue? [y/N]: y
 <p><h3 id="create-role">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">create role -r (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
@@ -291,7 +406,22 @@ Do you want to continue? [y/N]: y
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>المثال التالي إنشاء الدور <code translate="no">role1</code> في ميلفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">مثال 1</h4><p>المثال التالي إنشاء الدور <code translate="no">role1</code> في ميلفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">إنشاء اسم مستعار<button data-href="#create-alias" class="anchor-icon" translate="no">
@@ -322,7 +452,7 @@ Do you want to continue? [y/N]: y
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة.</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-الاسم المستعار</td><td style="text-align:left">الاسم المستعار.</td></tr>
-<tr><td style="text-align:left">-A</td><td style="text-align:left">-تغيير</td><td style="text-align:left">(اختياري) علامة لنقل الاسم المستعار إلى مجموعة محددة.</td></tr>
+<tr><td style="text-align:left">-A</td><td style="text-align:left">-تغيير</td><td style="text-align:left">(اختياري) علم لنقل الاسم المستعار إلى مجموعة محددة.</td></tr>
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
@@ -353,35 +483,29 @@ Do you want to continue? [y/N]: y
       </svg>
     </button></h2><p>إنشاء مجموعة.</p>
 <p><h3 id="create-collection">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">create collection
+<pre><code translate="no" class="language-shell">create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="create-collection">مثال تفاعلي</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; create collection
+<p><h3 id="create-collection">الخيارات</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة.</td></tr>
+<tr><td style="text-align:left">-f</td><td style="text-align:left">-الحقل -Sschema-field</td><td style="text-align:left">(متعدد) مخطط الحقل بتنسيق <code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code>.</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-Sschema-المجال الأساسي</td><td style="text-align:left">اسم حقل المفتاح الأساسي.</td></tr>
+<tr><td style="text-align:left">-a</td><td style="text-align:left">-المعرف التلقائي للمخطط</td><td style="text-align:left">(اختياري) علم لإنشاء المعرفات تلقائيًا.</td></tr>
+<tr><td style="text-align:left">-desc</td><td style="text-align:left">-وصف-نظرية-وصف</td><td style="text-align:left">(اختياري) وصف المجموعة.</td></tr>
+<tr><td style="text-align:left">-مستوى</td><td style="text-align:left">-مستوى الاتساق</td><td style="text-align:left">(اختياري) مستوى الاتساق: محدود، جلسة عمل، قوي، نهائي.</td></tr>
+<tr><td style="text-align:left">-d</td><td style="text-align:left">-هو ديناميكي</td><td style="text-align:left">(اختياري) يدعم مخطط المجموعة الحقول الديناميكية أم لا.</td></tr>
+<tr><td style="text-align:left">-s</td><td style="text-align:left">-عدد الأجزاء</td><td style="text-align:left">(اختياري) عدد الأجزاء</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+</tbody>
+</table>
+<p><h3 id="create-collection">مثال</h3></p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># For array field: --schema-field support &lt;fieldName&gt;:&lt;dataType&gt;:&lt;maxCapacity&gt;:&lt;elementDataType&gt;(:&lt;maxLength&gt;if Varchar)</span></span>
 
-Please input collection name: car
-Please input auto id [False]: False
-Please input description []: car collection
-Is support dynamic field [False]: False
-Please input consistency level(Strong(0),Bounded(1), Session(2), and Eventually(3)) [1]: 1
-Please input shards number [1]: 1
-
-Field name: id
-Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): INT64
-Field description []: primary key
-Is id the primary key? [y/N]: y
-
-Field name: vector
-Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): FLOAT_VECTOR
-Field description []: vector field
-Dimension: 128
-
-Field name: color
-Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): INT64
-Field description []: color field
-Nullable [False]: False
-Default value (type: INT64) [Not set]: 0
-
-Do you want to add embedding function? [y/N]: n
+milvus_cli &gt; create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:ARRAY:64:VARCHAR:128 -p id -A -d &#x27;car_collection&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-partition" class="common-anchor-header">إنشاء قسم<button data-href="#create-partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -402,7 +526,7 @@ Do you want to add embedding function? [y/N]: n
 <p><h3 id="creat-partition">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">create partition -c (text) -p (text) [-d (text)]
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="creat-partition">خيارات</h3></p>
+<p><h3 id="creat-partition">الخيارات</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
@@ -437,15 +561,31 @@ Do you want to add embedding function? [y/N]: n
 <p><h3 id="creat-index">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">create index
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="creat-index">مثال تفاعلي</h3></p>
+<p><h3 id="creat-index">خيارات</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+</tbody>
+</table>
+<p><h3 id="creat-index">مثال</h3></p>
+<p>لإنشاء فهرس لحقل ومطالبته بالإدخال المطلوب:</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create index
 
 Collection name (car, car2): car2
+
 The name of the field to create an index for (vector): vector
+
 Index name: vectorIndex
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED): IVF_FLAT
-Vector Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE): L2
-Index params nlist: 2
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Default is <span class="hljs-string">&#x27;&#x27;</span></span>
+Index type FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Default is <span class="hljs-string">&#x27;&#x27;</span></span>
+Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
+
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-user" class="common-anchor-header">حذف مستخدم<button data-href="#delete-user" class="anchor-icon" translate="no">
@@ -464,9 +604,39 @@ Timeout []:
         ></path>
       </svg>
     </button></h2><p>حذف مستخدم</p>
-<h3 id="Syntax" class="common-anchor-header">بناء الجملة</h3><pre><code translate="no" class="language-shell">delete user -u (text)
+<h3 id="Syntax" class="common-anchor-header">بناء الجملة<button data-href="#Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">delete user -u (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">خيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
@@ -475,10 +645,22 @@ Timeout []:
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Example" class="common-anchor-header">مثال</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; delete user -u zilliz
-
-Warning! You are trying to delete the user in milvus. This action cannot be undone!
-Do you want to continue? [y/N]: y
+<h3 id="Example" class="common-anchor-header">مثال<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">milvus_cli &gt; delete user -u zilliz
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-role" class="common-anchor-header">حذف الدور<button data-href="#delete-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -499,7 +681,22 @@ Do you want to continue? [y/N]: y
 <p><h3 id="delete-role">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">delete role -r (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
@@ -508,7 +705,22 @@ Do you want to continue? [y/N]: y
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><p>يقوم المثال التالي بحذف الدور <code translate="no">role1</code> في ميلفوس.</p>
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يقوم المثال التالي بحذف الدور <code translate="no">role1</code> في ميلفوس.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-alias" class="common-anchor-header">حذف الاسم المستعار<button data-href="#delete-alias" class="anchor-icon" translate="no">
@@ -538,6 +750,7 @@ Do you want to continue? [y/N]: y
 <tbody>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-الاسم المستعار-الاسم المستعار</td><td style="text-align:left">الاسم المستعار.</td></tr>
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
+<tr><td style="text-align:left"></td></tr>
 </tbody>
 </table>
 <h2 id="delete-collection" class="common-anchor-header">حذف مجموعة<button data-href="#delete-collection" class="anchor-icon" translate="no">
@@ -571,9 +784,6 @@ Do you want to continue? [y/N]: y
 </table>
 <p><h3 id="delete-collection">مثال</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete collection -c car
-
-Warning! You are trying to delete the collection. This action cannot be undone!
-Do you want to continue? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-entities" class="common-anchor-header">حذف الكيانات<button data-href="#delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -610,7 +820,8 @@ Do you want to continue? [y/N]: y
 
 The expression <span class="hljs-keyword">to</span> specify entities <span class="hljs-keyword">to</span> be deleted, such <span class="hljs-keyword">as</span> <span class="hljs-string">&quot;film_id in [ 0, 1 ]&quot;</span>: film_id <span class="hljs-keyword">in</span> [ <span class="hljs-number">0</span>, <span class="hljs-number">1</span> ]
 
-Warning! You are trying <span class="hljs-keyword">to</span> delete the entities <span class="hljs-keyword">of</span> collection. This action cannot be undone!
+You are trying <span class="hljs-keyword">to</span> delete the entities <span class="hljs-keyword">of</span> collection. This action cannot be undone!
+
 <span class="hljs-keyword">Do</span> you want <span class="hljs-keyword">to</span> <span class="hljs-keyword">continue</span>? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-partition" class="common-anchor-header">حذف قسم<button data-href="#delete-partition" class="anchor-icon" translate="no">
@@ -679,9 +890,6 @@ Warning! You are trying <span class="hljs-keyword">to</span> delete the entities
 </table>
 <p><h3 >مثال</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete index -c car -in indexName
-
-Warning! You are trying to delete the index of collection. This action cannot be undone!
-Do you want to continue? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="grant-role" class="common-anchor-header">منح دور<button data-href="#grant-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -700,8 +908,6 @@ Do you want to continue? [y/N]: y
       </svg>
     </button></h2><p>منح دور للمستخدم</p>
 <p><h3 id="grant-user">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">grant role -r (text) -u (text)
-<button class="copy-code-btn"></button></code></pre>
 <p><h3 >خيارات</h3></p>
 <table>
 <thead>
@@ -714,7 +920,7 @@ Do you want to continue? [y/N]: y
 </tbody>
 </table>
 <p><h3 >مثال</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; grant role -r role1 -u user1
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="grant-privilege" class="common-anchor-header">منح امتياز<button data-href="#grant-privilege" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -733,16 +939,17 @@ Do you want to continue? [y/N]: y
       </svg>
     </button></h2><p>تعيين امتياز لدور ما.</p>
 <p><h3 id="assign-privilege">بناء الجملة</h3></p>
+<p><h3 >الخيارات</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+</tbody>
+</table>
+<p><h3 >مثال</h3></p>
 <pre><code translate="no" class="language-shell">grant privilege
-<button class="copy-code-btn"></button></code></pre>
-<p><h3 id="assign-privilege">مثال تفاعلي</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; grant privilege
-
-Role name: role1
-The type of object for which the privilege is to be assigned. (Global, Collection, User): Collection
-The name of the object to control access for: object1
-The name of the privilege to assign. (CreateCollection, DropCollection, etc.): CreateCollection
-The name of the database to which the object belongs. [default]: default
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="revoke-role" class="common-anchor-header">إبطال الدور<button data-href="#revoke-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -761,8 +968,6 @@ The name of the database to which the object belongs. [default]: default
       </svg>
     </button></h2><p>إبطال الدور المعين لمستخدم.</p>
 <p><h3 id="grant-user">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">revoke role -r (text) -u (text)
-<button class="copy-code-btn"></button></code></pre>
 <p><h3 >الخيارات</h3></p>
 <table>
 <thead>
@@ -775,7 +980,7 @@ The name of the database to which the object belongs. [default]: default
 </tbody>
 </table>
 <p><h3 >مثال</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; revoke role -r role1 -u user1
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="revoke-privilege" class="common-anchor-header">إبطال امتياز<button data-href="#revoke-privilege" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -794,16 +999,17 @@ The name of the database to which the object belongs. [default]: default
       </svg>
     </button></h2><p>إبطال امتياز تم تعيينه مسبقاً لدور ما.</p>
 <p><h3 id="revoke-privilege">بناء الجملة</h3></p>
+<p><h3 >الخيارات</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+</tbody>
+</table>
+<p><h3 >مثال</h3></p>
 <pre><code translate="no" class="language-shell">revoke privilege
-<button class="copy-code-btn"></button></code></pre>
-<p><h3 id="revoke-privilege">مثال تفاعلي</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; revoke privilege
-
-Role name: role1
-The type of object for which the privilege is to be assigned. (Global, Collection, User): Collection
-The name of the object to control access for: object1
-The name of the privilege to assign. (CreateCollection, DropCollection, etc.): CreateCollection
-The name of the database to which the object belongs. [default]: default
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="show-collection" class="common-anchor-header">إظهار المجموعة<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -820,7 +1026,7 @@ The name of the database to which the object belongs. [default]: default
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>إظهار المعلومات التفصيلية للمجموعة.</p>
+    </button></h2><p>يعرض المعلومات التفصيلية للمجموعة.</p>
 <p><h3 id="show-collection">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">show collection -c (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -976,7 +1182,7 @@ The name of the database to which the object belongs. [default]: default
 <tr><td style="text-align:left">الإصدار</td><td style="text-align:left">يعرض إصدار Milvus_CLI.</td></tr>
 </tbody>
 </table>
-<h2 id="insert" class="common-anchor-header">إدراج<button data-href="#insert" class="anchor-icon" translate="no">
+<h2 id="import" class="common-anchor-header">استيراد<button data-href="#import" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -992,10 +1198,10 @@ The name of the database to which the object belongs. [default]: default
         ></path>
       </svg>
     </button></h2><p>يستورد البيانات المحلية أو البعيدة إلى قسم.</p>
-<p><h3 id="insert">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">insert file -c (text) [-p (text)] [-t (text)] &lt;file_path&gt;
+<p><h3 id="import">بناء الجملة</h3></p>
+<pre><code translate="no" class="language-shell">import -c (text)[-p (text)] &lt;file_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="insert">خيارات</h3></p>
+<p><h3 id="import">خيارات</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
@@ -1003,13 +1209,12 @@ The name of the database to which the object belongs. [default]: default
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة التي يتم إدراج البيانات فيها.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-قسم</td><td style="text-align:left">(اختياري) اسم القسم الذي يتم إدراج البيانات فيه. يشير عدم تمرير خيار القسم هذا إلى اختيار القسم "_default".</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-مهلة</td><td style="text-align:left">(اختياري) مدة زمنية اختيارية بالثواني للسماح بإدخال طلب استدعاء الطلبات المتكررة. إذا لم يتم تعيين المهلة، يستمر العميل في الانتظار حتى يستجيب الخادم أو يحدث خطأ.</td></tr>
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<p><h3 id="insert">مثال 1</h3>
-يقوم المثال التالي باستيراد ملف CSV محلي.</p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; insert file -c car &#x27;examples/import_csv/vectors.csv&#x27;
+<p><h3 id="import">مثال 1</h3>
+يستورد المثال التالي ملف CSV محلي.</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car &#x27;examples/import_csv/vectors.csv&#x27;
 
 Reading csv file...  [####################################]  100%
 
@@ -1026,9 +1231,9 @@ Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="insert">المثال 2</h3>
-يستورد المثال التالي ملف CSV بعيد.</p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; insert file -c car &#x27;https://raw.githubusercontent.com/milvus-
+<p><h3 id="import">المثال 2</h3>
+يستورد المثال التالي ملف CSV عن بعد.</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car &#x27;https://raw.githubusercontent.com/milvus-
 io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;
 
 Reading file from remote URL.
@@ -1049,37 +1254,6 @@ Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="insert-row" class="common-anchor-header">إدراج صف<button data-href="#insert-row" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>إدراج صف من البيانات في مجموعة.</p>
-<p><h3 id="insert-row">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">insert row
-<button class="copy-code-btn"></button></code></pre>
-<p><h3 id="insert-row">مثال تفاعلي</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; insert row
-
-Collection name: car
-Partition name [_default]: _default
-Enter value for id (INT64): 1
-Enter value for vector (FLOAT_VECTOR): [1.0, 2.0, 3.0]
-Enter value for color (INT64): 100
-Enter value for brand (VARCHAR): Toyota
-
-Inserted successfully.
-<button class="copy-code-btn"></button></code></pre>
 <h2 id="list-users" class="common-anchor-header">قائمة المستخدمين<button data-href="#list-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1095,10 +1269,40 @@ Inserted successfully.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يسرد جميع المستخدمين.</p>
-<h3 id="Syntax" class="common-anchor-header">بناء الجملة</h3><pre><code translate="no" class="language-shell">list users
+    </button></h2><p>سرد كافة المستخدمين.</p>
+<h3 id="Syntax" class="common-anchor-header">بناء الجملة<button data-href="#Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">list users
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">خيارات</h3><p>|الخيار |الاسم الكامل |الوصف |-المساعدة |عرض التعليمات الخاصة باستخدام الأمر. |</p>
+<h3 id="Options" class="common-anchor-header">خيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>|الخيار |الاسم الكامل |الوصف |-المساعدة |عرض التعليمات الخاصة باستخدام الأمر. |</p>
 <h2 id="List-roles" class="common-anchor-header">سرد الأدوار<button data-href="#List-roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1118,7 +1322,22 @@ Inserted successfully.
 <p><h3 id="list-role">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">list roles
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">خيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">خيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
@@ -1126,7 +1345,22 @@ Inserted successfully.
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="List-grants" class="common-anchor-header">سرد المنح<button data-href="#List-grants" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1144,7 +1378,22 @@ Inserted successfully.
         ></path>
       </svg>
     </button></h2><p>سرد المنح في ميلفوس</p>
-<h3 id="Options" class="common-anchor-header">الخيارات</h3><table>
+<h3 id="Options" class="common-anchor-header">الخيارات<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
 </thead>
@@ -1155,7 +1404,22 @@ Inserted successfully.
 <tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متاح</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">أمثلة</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
+<h3 id="Examples" class="common-anchor-header">أمثلة<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-collections" class="common-anchor-header">سرد المجموعات<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1261,7 +1525,7 @@ Inserted successfully.
       </svg>
     </button></h2><p>تحميل مجموعة أو قسم من مساحة القرص الصلب إلى ذاكرة الوصول العشوائي.</p>
 <p><h3 id="load">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">load collection -c (text) [-p (text)]
+<pre><code translate="no" class="language-shell">load -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="load">الخيارات</h3></p>
 <table>
@@ -1289,28 +1553,59 @@ Inserted successfully.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعرض نتائج الاستعلام التي تطابق كافة المعايير التي تقوم بإدخالها.</p>
+    </button></h2><p>يعرض نتائج الاستعلام التي تطابق جميع المعايير التي تقوم بإدخالها.</p>
 <p><h3 id="query">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">query
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="query">مثال تفاعلي</h3></p>
+<p><h3 id="query">خيارات</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+</tbody>
+</table>
+<p><h3 id="query">مثال</h3>
+<h4 id="query">مثال 1</h4></p>
+<p>لإجراء استعلام والمطالبة بالإدخال المطلوب:</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; query
 
 Collection name: car
 
-The query expression: id in [ 428960801420883491, 428960801420883492, 428960801420883493 ]
+The query expression: id in [ 428960801420883491, 428960801420883492,
+428960801420883493 ]
 
-Name of partitions that contain entities(split by &quot;,&quot; if multiple) []: default
+Name of partitions that contain entities(split by &quot;,&quot; if multiple) []:
+default
 
 A list of fields to return(split by &quot;,&quot; if multiple) []: color, brand
 
 timeout []:
 
 Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
-
 Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="release" class="common-anchor-header">الإصدار<button data-href="#release" class="anchor-icon" translate="no">
+<p><h4 id="query">مثال 2</h4></p>
+<p>لإجراء استعلام ومطالبتك بالإدخال المطلوب:</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; query
+
+Collection name: car
+
+The query expression: id &gt; 428960801420883491
+
+Name of partitions that contain entities(split by &quot;,&quot; if multiple) []:
+default
+
+A list of fields to return(split by &quot;,&quot; if multiple) []: id, color,
+brand
+
+timeout []:
+
+Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
+Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="release" class="common-anchor-header">تحرير<button data-href="#release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1327,7 +1622,7 @@ Graceful time. Only used in bounded consistency level. If graceful_time is set, 
       </svg>
     </button></h2><p>تحرير مجموعة أو قسم من ذاكرة الوصول العشوائي.</p>
 <p><h3 id="release">بناء الجملة</h3></p>
-<pre><code translate="no" class="language-shell">release collection -c (text) [-p (text)]
+<pre><code translate="no" class="language-shell">release -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="release">خيارات</h3></p>
 <table>
@@ -1359,12 +1654,24 @@ Graceful time. Only used in bounded consistency level. If graceful_time is set, 
 <p><h3 id="search">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">search
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="search">مثال تفاعلي</h3></p>
+<p><h3 id="search">الخيارات</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+</tbody>
+</table>
+<p><h3 id="search">أمثلة</h3>
+<h4 id="search">مثال 1</h4></p>
+<p>لإجراء بحث في ملف csv ومطالبتك بالإدخال المطلوب:</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
 Collection name (car, test_collection): car
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field&#x27;s of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file
+out headers): examples/import_csv/search_vectors.csv
 
 The vector field used to search of collection (vector): vector
 
@@ -1379,6 +1686,56 @@ The names of partitions to search (split by &quot;,&quot; if multiple) [&#x27;_d
 timeout []:
 
 Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
+
+<button class="copy-code-btn"></button></code></pre>
+<p><h4 id="search">مثال 2</h4></p>
+<p>لإجراء بحث على مجموعة مفهرسة ومطالبتك بالإدخال المطلوب:</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; search
+
+Collection name (car, test_collection): car
+
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers):
+    [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
+
+The vector field used to search of collection (vector): vector
+
+Search parameter nprobe&#x27;s value: 10
+
+The specified number of decimal places of returned distance [-1]: 5
+
+The max number of returned record, also known as topk: 2
+
+The boolean expression used to filter attribute []: id &gt; 0
+
+The names of partitions to search (split by &quot;,&quot; if multiple) [&#x27;_default&#x27;] []: _default
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
+
+<button class="copy-code-btn"></button></code></pre>
+<p><h4 id="search">مثال 3</h4></p>
+<p>لإجراء بحث على مجموعة غير مفهرسة ومطالبتك بالإدخال المطلوب: مثال 3:</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; search
+
+Collection name (car, car2): car
+
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
+
+The vector field used to search of collection (vector): vector
+
+The specified number of decimal places of returned distance [-1]: 5
+
+The max number of returned record, also known as topk: 2
+
+The boolean expression used to filter attribute []:
+
+The names of partitions to search (split by &quot;,&quot; if multiple) [&#x27;_default&#x27;] []:
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
+
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-connection" class="common-anchor-header">سرد الاتصالات<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1399,7 +1756,7 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 <p><h3 id="show-connection">بناء الجملة</h3></p>
 <pre><code translate="no" class="language-shell">list connections
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="show-connection">الخيارات</h3></p>
+<p><h3 id="show-connection">خيارات</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">الخيار</th><th style="text-align:left">الاسم الكامل</th><th style="text-align:left">الوصف</th></tr>
@@ -1435,7 +1792,7 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-اسم المجموعة</td><td style="text-align:left">اسم المجموعة التي تنتمي إليها الكيانات.</td></tr>
 <tr><td style="text-align:left">-i</td><td style="text-align:left">-الفهرس</td><td style="text-align:left">(اختياري) اسم الفهرس.</td></tr>
-<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض التعليمات الخاصة باستخدام الأمر.</td></tr>
+<tr><td style="text-align:left">-مساعدة</td><td style="text-align:left">غير متوفر</td><td style="text-align:left">يعرض تعليمات استخدام الأمر.</td></tr>
 </tbody>
 </table>
 <h2 id="show-loadingprogress" class="common-anchor-header">إظهار تقدم التحميل<button data-href="#show-loadingprogress" class="anchor-icon" translate="no">

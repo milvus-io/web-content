@@ -306,7 +306,7 @@ summary: Milvusのnatsmqの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        milvusバイナリの...への相対パスを使用する場合のログファイルのパス      </td>
+      <td>        相対パスを使用する場合、milvusバイナリの...への相対ログファイルパス      </td>
       <td>/tmp/milvus/logs/nats.log。</td>
     </tr>
   </tbody>
@@ -364,7 +364,7 @@ summary: Milvusのnatsmqの設定方法について説明します。
   </thead>
   <tbody>
     <tr>
-      <td>        Pチャンネル内のメッセージの最大年齢      </td>
+      <td>        Pチャネルのメッセージの最大年齢      </td>
       <td>4320</td>
     </tr>
   </tbody>

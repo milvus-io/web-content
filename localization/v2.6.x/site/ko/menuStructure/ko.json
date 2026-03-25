@@ -86,27 +86,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker(Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose(Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker 데스크톱(Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -195,12 +189,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus 서버에 연결",
-        "id": "connect-to-milvus-server.md",
-        "order": 3,
-        "children": []
       }
     ]
   },
@@ -223,14 +211,14 @@
             "children": []
           },
           {
-            "label": "주요 구성 요소",
-            "id": "main_components.md",
+            "label": "스토리지/컴퓨팅",
+            "id": "four_layers.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "스트리밍 서비스",
-            "id": "streaming_service.md",
+            "label": "주요 구성 요소",
+            "id": "main_components.md",
             "order": 2,
             "children": []
           },
@@ -238,12 +226,6 @@
             "label": "데이터 처리",
             "id": "data_processing.md",
             "order": 3,
-            "children": []
-          },
-          {
-            "label": "딱따구리",
-            "id": "woodpecker_architecture.md",
-            "order": 4,
             "children": []
           },
           {
@@ -261,6 +243,12 @@
         "children": []
       },
       {
+        "label": "일관성",
+        "id": "consistency.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "멀티 테넌시",
         "id": "multi_tenancy.md",
         "order": 3,
@@ -273,27 +261,65 @@
         "children": []
       },
       {
+        "label": "유사성 메트릭",
+        "id": "metric.md",
+        "order": 5,
+        "children": []
+      },
+      {
         "label": "시간 동기화",
         "id": "time_sync.md",
         "order": 6,
         "children": []
       },
       {
-        "label": "메트릭 유형",
-        "id": "metric.md",
+        "label": "벡터 인덱스",
+        "id": "vector_index",
         "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "인메모리 인덱스",
+            "id": "index.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "디스크 색인",
+            "id": "disk_index.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "GPU 색인",
+            "id": "gpu_index.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "스칼라 인덱스",
+        "id": "scalar_index.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "순위 재조정",
+        "id": "reranking.md",
+        "order": 9,
         "children": []
       },
       {
         "label": "인메모리 복제본",
         "id": "replica.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "용어",
         "id": "glossary.md",
-        "order": 9,
+        "order": 12,
         "children": []
       }
     ]
@@ -305,104 +331,140 @@
     "order": 3,
     "children": [
       {
-        "label": "데이터베이스",
+        "label": "데이터베이스 관리",
         "id": "manage_databases.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "컬렉션",
-        "id": "collections",
+        "label": "스키마 관리",
+        "id": "schema.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "컬렉션 관리",
+        "id": "manage-collections.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "인덱스 관리",
+        "id": "manage_indexes",
+        "order": 3,
+        "isMenu": true,
         "children": [
           {
-            "label": "컬렉션 설명",
-            "id": "manage-collections.md",
+            "label": "인덱스 벡터 필드",
+            "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "컬렉션 만들기",
-            "id": "create-collection.md",
+            "label": "인덱스 스칼라 필드",
+            "id": "index-scalar-fields.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "컬렉션 보기",
-            "id": "view-collections.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "컬렉션 수정",
-            "id": "modify-collection.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "로드 및 릴리스",
-            "id": "load-and-release.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "세트 컬렉션 TTL",
-            "id": "set-collection-ttl.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "일관성 수준 설정",
-            "id": "tune_consistency.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "파티션 관리",
-            "id": "manage-partitions.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "별칭 관리",
-            "id": "manage-aliases.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "드롭 컬렉션",
-            "id": "drop-collection.md",
-            "order": 10,
+            "label": "GPU를 사용한 색인",
+            "id": "index-with-gpu.md",
+            "order": 2,
             "children": []
           }
         ]
       },
       {
-        "label": "스키마 및 데이터 필드",
-        "id": "schema",
-        "order": 2,
+        "label": "파티션 관리",
+        "id": "manage-partitions.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "삽입, 업서트 및 삭제",
+        "id": "insert-update-delete.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "데이터 가져오기",
+        "id": "data_import",
+        "order": 6,
+        "isMenu": true,
         "children": [
           {
-            "label": "스키마 설명",
-            "id": "schema.md",
+            "label": "소스 데이터 준비",
+            "id": "prepare-source-data.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "기본 필드 및 자동 ID",
-            "id": "primary-field.md",
+            "label": "데이터 가져오기",
+            "id": "import-data.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "검색, 쿼리 및 가져오기",
+        "id": "search_query_get",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "단일 벡터 검색",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "하이브리드 검색",
+            "id": "multi-vector-search.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "고밀도 벡터",
-            "id": "dense-vector.md",
+            "label": "가져오기 및 스칼라 쿼리",
+            "id": "get-and-scalar-query.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "바이너리 벡터",
-            "id": "binary-vector.md",
+            "label": "이터레이터 사용",
+            "id": "with-iterators.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "고급 기능",
+        "id": "advanced_features",
+        "order": 8,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "다이내믹 필드",
+            "id": "enable-dynamic-field.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "파티션 키",
+            "id": "use-partition-key.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "JSON 필드",
+            "id": "use-json-fields.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "배열 필드",
+            "id": "array_data_type.md",
             "order": 3,
             "children": []
           },
@@ -413,877 +475,239 @@
             "children": []
           },
           {
-            "label": "문자열 필드",
-            "id": "string.md",
+            "label": "스칼라 필터링 규칙",
+            "id": "boolean.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "숫자 필드",
-            "id": "number.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "JSON 필드",
-            "id": "json-field",
-            "order": 7,
-            "children": [
-              {
-                "label": "JSON 필드 개요",
-                "id": "json-field-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "JSON 인덱싱",
-                "id": "json-indexing.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "JSON 파쇄",
-                "id": "json-shredding.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "배열 필드",
-            "id": "array_data_type.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "구조체 배열",
-            "id": "array-of-structs.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "지오메트리 필드",
-            "id": "geometry-field.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "다이내믹 필드",
-            "id": "enable-dynamic-field.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "무효화 가능 및 기본값",
-            "id": "nullable-and-default.md",
-            "order": 13,
-            "children": []
-          },
-          {
-            "label": "분석기",
-            "id": "analyzer",
-            "order": 14,
-            "children": [
-              {
-                "label": "분석기 개요",
-                "id": "analyzer-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "내장 분석기",
-                "id": "built-in-analyzers",
-                "order": 1,
-                "children": [
-                  {
-                    "label": "표준",
-                    "id": "standard-analyzer.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "영어",
-                    "id": "english-analyzer.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "중국어",
-                    "id": "chinese-analyzer.md",
-                    "order": 2,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "토큰화 도구",
-                "id": "tokenizers",
-                "order": 2,
-                "children": [
-                  {
-                    "label": "표준",
-                    "id": "standard-tokenizer.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "공백",
-                    "id": "whitespace-tokenizer.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "Jieba",
-                    "id": "jieba-tokenizer.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Lindera",
-                    "id": "lindera-tokenizer.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "ICU",
-                    "id": "icu-tokenizer.md",
-                    "order": 4,
-                    "children": []
-                  },
-                  {
-                    "label": "언어 식별자",
-                    "id": "language-identifier.md",
-                    "order": 5,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "필터",
-                "id": "filters",
-                "order": 3,
-                "children": [
-                  {
-                    "label": "소문자",
-                    "id": "lowercase-filter.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "ASCII 접기",
-                    "id": "ascii-folding-filter.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "알파벳 전용",
-                    "id": "alphanumonly-filter.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Cnalphanumonly",
-                    "id": "cnalphanumonly-filter.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "Cncharonly",
-                    "id": "cncharonly-filter.md",
-                    "order": 4,
-                    "children": []
-                  },
-                  {
-                    "label": "길이",
-                    "id": "length-filter.md",
-                    "order": 5,
-                    "children": []
-                  },
-                  {
-                    "label": "중지",
-                    "id": "stop-filter.md",
-                    "order": 6,
-                    "children": []
-                  },
-                  {
-                    "label": "디컴파운더",
-                    "id": "decompounder-filter.md",
-                    "order": 7,
-                    "children": []
-                  },
-                  {
-                    "label": "스템머",
-                    "id": "stemmer-filter.md",
-                    "order": 8,
-                    "children": []
-                  },
-                  {
-                    "label": "펑크 제거",
-                    "id": "removepunct-filter.md",
-                    "order": 9,
-                    "children": []
-                  },
-                  {
-                    "label": "정규식",
-                    "id": "regex-filter.md",
-                    "order": 10,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "다국어 분석기",
-                "id": "multi-language-analyzers.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "사용 사례에 적합한 분석기 선택하기",
-                "id": "choose-the-right-analyzer-for-your-use-case.md",
-                "order": 5,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "수집 필드 변경",
-            "id": "alter-collection-field.md",
-            "order": 15,
-            "children": []
-          },
-          {
-            "label": "기존 컬렉션에 필드 추가",
-            "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
-            "children": []
-          },
-          {
-            "label": "모범 사례",
-            "id": "best-practices",
-            "isMenu": true,
-            "order": 17,
-            "children": [
-              {
-                "label": "검색을 위한 데이터 모델 설계",
-                "id": "schema-hands-on.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "구조 배열을 사용한 데이터 모델 설계",
-                "id": "best-practices-for-array-of-structs.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "삽입 및 삭제",
-        "id": "insert-and-delete",
-        "order": 3,
-        "children": [
-          {
-            "label": "엔티티 삽입",
-            "id": "insert-update-delete.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "엔티티 업서트",
-            "id": "upsert-entities.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "엔티티 삭제",
-            "id": "delete-entities.md",
-            "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "색인",
-        "id": "manage_indexes",
-        "order": 4,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "색인 설명",
-            "id": "index-explained.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "플로팅 벡터 인덱스",
-            "id": "floating-vector-indexes",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "플랫",
-                "id": "flat.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "IVF_FLAT",
-                "id": "ivf-flat.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "IVF_SQ8",
-                "id": "ivf-sq8.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "IVF_PQ",
-                "id": "ivf-pq.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "IVF_RABITQ",
-                "id": "ivf-rabitq.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "HNSW",
-                "id": "hnsw.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "HNSW_SQ",
-                "id": "hnsw-sq.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "HNSW_PQ",
-                "id": "hnsw-pq.md",
-                "order": 7,
-                "children": []
-              },
-              {
-                "label": "HNSW_PRQ",
-                "id": "hnsw-prq.md",
-                "order": 8,
-                "children": []
-              },
-              {
-                "label": "디스크",
-                "id": "diskann.md",
-                "order": 9,
-                "children": []
-              },
-              {
-                "label": "SCANN",
-                "id": "scann.md",
-                "order": 10,
-                "children": []
-              },
-              {
-                "label": "AISAQ",
-                "id": "aisaq.md",
-                "order": 11,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "이진 벡터 인덱스",
-            "id": "binary-vector-indexes",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "BIN_IVF_FLAT",
-                "id": "bin-ivf-flat.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "BIN_FLAT",
-                "id": "bin-flat.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "MINHASH_LSH",
-                "id": "minhash-lsh.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "스파스 벡터 인덱스",
-            "id": "sparse-vector-indexes",
-            "order": 3,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "SPARSE_INVERTED_INDEX",
-                "id": "sparse-inverted-index.md",
-                "order": 0,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "스칼라 인덱스",
-            "id": "scalar-indexes",
-            "order": 4,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "비트맵",
-                "id": "bitmap.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "인버티드",
-                "id": "inverted.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "NGRAM",
-                "id": "ngram.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "RTREE",
-                "id": "rtree.md",
-                "order": 3,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "GPU 지원 인덱스",
-            "id": "gpu-enabled-indexes",
-            "order": 5,
-            "children": [
-              {
-                "label": "GPU 인덱스 개요",
-                "id": "gpu-index-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "GPU_CAGRA",
-                "id": "gpu-cagra.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "GPU_IVF_FLAT",
-                "id": "gpu-ivf-flat.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "GPU_IVF_PQ",
-                "id": "gpu-ivf-pq.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "GPU_BRUTE_FORCE",
-                "id": "gpu-brute-force.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "검색",
-        "id": "search-rerank",
-        "order": 5,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "기본 ANN 검색",
-            "id": "single-vector-search.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "필터링된 검색",
-            "id": "filtered-search.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "범위 검색",
-            "id": "range-search.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "그룹 검색",
-            "id": "grouping-search.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "하이브리드 검색",
-            "id": "multi-vector-search.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "쿼리",
-            "id": "get-and-scalar-query.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "필터링",
-            "id": "filtering",
-            "order": 6,
-            "children": [
-              {
-                "label": "필터링 설명",
-                "id": "boolean.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "기본 연산자",
-                "id": "basic-operators.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "필터링 템플릿",
-                "id": "filtering-templating.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "JSON 연산자",
-                "id": "json-operators.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "배열 연산자",
-                "id": "array-operators.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "무작위 샘플링",
-                "id": "random-sampling.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "지오메트리 연산자",
-                "id": "geometry-operators.md",
-                "order": 6,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "전체 텍스트 검색",
-            "id": "full-text-search.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "텍스트 일치",
-            "id": "keyword-match.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "구문 검색",
-            "id": "phrase-match.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Milvus에 대한 Elasticsearch 쿼리",
-            "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "검색 이터레이터",
-            "id": "with-iterators.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "파티션 키 사용",
-            "id": "use-partition-key.md",
-            "order": 12,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "임베딩 및 재랭크",
-        "id": "embeddings-reranking",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "임베딩 기능",
-            "id": "embedding-function",
-            "order": 0,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "임베딩 기능 개요",
-                "id": "embedding-function-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "OpenAI",
-                "id": "openai.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Azure OpenAI",
-                "id": "azure-openai.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "DashScope",
-                "id": "dashscope.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "암반",
-                "id": "bedrock.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "버텍스 AI",
-                "id": "vertex-ai.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Voyage AI",
-                "id": "voyage-ai.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "Cohere",
-                "id": "cohere.md",
-                "order": 7,
-                "children": []
-              },
-              {
-                "label": "실리콘 플로우",
-                "id": "siliconflow.md",
-                "order": 8,
-                "children": []
-              },
-              {
-                "label": "포옹하는 얼굴 TEI",
-                "id": "hugging-face-tei.md",
-                "order": 9,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "순위 재조정 기능",
-            "id": "reranking",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "가중치 랭커",
-                "id": "weighted-ranker.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "RRF 랭커",
-                "id": "rrf-ranker.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "부스트 랭커",
-                "id": "boost-ranker.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "부패 랭커",
-                "id": "decay-ranker",
-                "isMenu": true,
-                "order": 3,
-                "children": [
-                  {
-                    "label": "디케이 랭커 개요",
-                    "id": "decay-ranker-overview.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "가우시안 붕괴",
-                    "id": "gaussian-decay.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "지수 붕괴",
-                    "id": "exponential-decay.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "선형 붕괴",
-                    "id": "linear-decay.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "튜토리얼: Milvus에서 시간 기반 랭킹 구현하기",
-                    "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
-                    "order": 4,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "모델 랭커",
-                "id": "model-ranker",
-                "order": 4,
-                "isMenu": true,
-                "children": [
-                  {
-                    "label": "모델 랭커 개요",
-                    "id": "model-ranker-overview.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "vLLM 랭커",
-                    "id": "vllm-ranker.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "TEI 랭커",
-                    "id": "tei-ranker.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "코히어 랭커",
-                    "id": "cohere-ranker.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "Voyage AI 랭커",
-                    "id": "voyage-ai-ranker.md",
-                    "order": 4,
-                    "children": []
-                  },
-                  {
-                    "label": "실리콘플로우 랭커",
-                    "id": "siliconflow-ranker.md",
-                    "order": 5,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "스토리지 최적화",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "mmap 사용",
+            "label": "MMap 스토리지",
             "id": "mmap.md",
-            "order": 0,
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "리소스 그룹 관리",
+            "id": "resource_group.md",
+            "order": 7,
             "children": []
           },
           {
             "label": "클러스터링 압축",
             "id": "clustering-compaction.md",
-            "order": 1,
+            "order": 8,
             "children": []
-          },
-          {
-            "label": "계층형 스토리지",
-            "id": "tiered_storage",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "계층형 스토리지 개요",
-                "id": "tiered-storage-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "워밍업",
-                "id": "warm-up.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "퇴거",
-                "id": "eviction.md",
-                "order": 2,
-                "children": []
-              }
-            ]
           }
         ]
       }
     ]
   },
   {
-    "label": "데이터 가져오기",
-    "id": "data_import",
-    "order": 5,
+    "label": "모델",
+    "id": "models",
     "isMenu": true,
+    "order": 4,
     "children": [
       {
-        "label": "소스 데이터 준비",
-        "id": "prepare-source-data.md",
+        "label": "임베딩",
+        "id": "embeddings",
         "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "개요",
+            "id": "embeddings.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "embed-with-openai.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "문장 변환기",
+            "id": "embed-with-sentence-transform.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "BGE M3",
+            "id": "embed-with-bgm-m3.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "BM25",
+            "id": "embed-with-bm25.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SPLADE",
+            "id": "embed-with-splade.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Voyage",
+            "id": "embed-with-voyage.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "embed-with-jina.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "embed-with-cohere.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "강사",
+            "id": "embed-with-instructor.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "미스트랄 AI",
+            "id": "embed-with-mistral-ai.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Nomic",
+            "id": "embed-with-nomic.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "mGTE",
+            "id": "embed-with-mgte.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "리랭커",
+        "id": "rerankers",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "개요",
+            "id": "rerankers-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "BGE",
+            "id": "rerankers-bge.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "rerankers-cohere.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "크로스 인코더",
+            "id": "rerankers-cross-encoder.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Voyage",
+            "id": "rerankers-voyage.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "rerankers-jina.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "AI 도구",
+    "id": "aiTools",
+    "isMenu": true,
+    "order": 5,
+    "children": [
+      {
+        "label": "AI 프롬프트",
+        "id": "ai_prompts",
+        "isMenu": true,
+        "order": 0,
+        "children": [
+          {
+            "label": "개요",
+            "id": "ai_prompts_landing.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus용 AGENTS.md",
+            "id": "agents_overview.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Python SDK",
+            "id": "python_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "스키마 디자인",
+            "id": "schema_design.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "검색 패턴",
+            "id": "search_patterns.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "색인 선택",
+            "id": "index_selection.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "RAG 파이프라인",
+            "id": "rag_pipeline.md",
+            "order": 6,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus MCP 서버",
+        "id": "mcp_server_milvus",
+        "order": 1,
+        "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
         "children": []
       },
       {
-        "label": "데이터 가져오기",
-        "id": "import-data.md",
-        "order": 1,
+        "label": "클로드 코드용 MCP 서버",
+        "id": "mcp_claude_context",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/claude-context",
         "children": []
       }
     ]
@@ -1519,26 +943,6 @@
                 "children": []
               }
             ]
-          },
-          {
-            "label": "밀버스와 함께 펄서 사용",
-            "id": "pulsar_dependencies",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Pulsar v3로 업그레이드",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Pulsar v2 계속 사용",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
           }
         ]
       },
@@ -1555,21 +959,9 @@
             "children": []
           },
           {
-            "label": "독립형 확장",
-            "id": "scale-standalone.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "HPA로 확장",
-            "id": "hpa.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "스케일 종속성",
             "id": "scale-dependencies.md",
-            "order": 3,
+            "order": 1,
             "children": []
           }
         ]
@@ -1682,22 +1074,9 @@
         ]
       },
       {
-        "label": "리소스 그룹",
-        "id": "resource_groups",
-        "order": 9,
-        "children": [
-          {
-            "label": "리소스 그룹 관리",
-            "id": "resource_group.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "보안",
         "id": "security",
-        "order": 11,
+        "order": 9,
         "isMenu": true,
         "children": [
           {
@@ -1707,48 +1086,17 @@
             "children": []
           },
           {
+            "label": "사용자, 권한 및 역할",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "RBAC 사용",
-            "id": "rbac",
+            "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": [
-              {
-                "label": "RBAC 개요",
-                "id": "rbac.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "사용자, 권한 및 역할",
-                "id": "users_and_roles.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "권한 그룹",
-                "id": "privilege_group.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "권한 부여",
-                "id": "grant_privileges.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "역할 부여",
-                "id": "grant_roles.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "사용자 및 역할 삭제",
-                "id": "drop_users_roles.md",
-                "order": 5,
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "label": "전송 중 암호화",
@@ -1763,18 +1111,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": "12",
-        "children": []
-      },
-      {
-        "label": "딱따구리",
-        "id": "use-woodpecker.md",
-        "order": 13,
-        "children": []
       }
     ]
   },
@@ -1785,11 +1121,30 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu(Milvus GUI)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 0,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
+        "isMenu": true,
+        "children": [
+          {
+            "label": "개요",
+            "id": "cli_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "설치",
+            "id": "install_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "명령",
+            "id": "cli_commands.md",
+            "order": 2,
+            "children": []
+          }
+        ]
       },
       {
         "label": "Milvus 백업",
@@ -1811,63 +1166,6 @@
           {
             "label": "RESTful API",
             "id": "milvus_backup_api.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "일반적인 사례",
-            "id": "common-cases",
-            "order": 3,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "하나의 인스턴스에서 백업 및 복원",
-                "id": "single-instance-backup-and-restore.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "하나의 버킷에서 인스턴스 간 마이그레이션",
-                "id": "shared-bucket-backup-and-restore.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "버킷 간 인스턴스 마이그레이션",
-                "id": "cross-bucket-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "S3 환경 전반의 인스턴스 간 마이그레이션",
-                "id": "multi-storage-backup-and-restore.md",
-                "order": 3,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "조류 관찰자",
-        "id": "birdwatcher",
-        "order": 2,
-        "children": [
-          {
-            "label": "개요",
-            "id": "birdwatcher_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "설치 가이드",
-            "id": "birdwatcher_install_guides.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "사용 가이드",
-            "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
           }
@@ -1906,35 +1204,48 @@
         ]
       },
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu(밀버스 GUI)",
+        "id": "milvus_attu",
         "order": 4,
-        "isMenu": true,
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
+      },
+      {
+        "label": "조류 관찰자",
+        "id": "birdwatcher",
+        "order": 5,
         "children": [
           {
             "label": "개요",
-            "id": "cli_overview.md",
+            "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "설치",
-            "id": "install_cli.md",
+            "label": "설치 가이드",
+            "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "명령",
-            "id": "cli_commands.md",
+            "label": "사용 가이드",
+            "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
           }
         ]
       },
       {
+        "label": "밀버스 사이징 도구",
+        "id": "sizing",
+        "order": 6,
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
+      },
+      {
         "label": "밀버스 커넥터",
         "id": "milvus_connectors",
-        "order": 5,
+        "order": 7,
         "isMenu": true,
         "children": [
           {
@@ -1946,181 +1257,10 @@
         ]
       },
       {
-        "label": "Milvus VTS",
-        "id": "milvus_vts",
-        "order": 6,
-        "externalLink": "https://github.com/zilliztech/vts",
-        "children": []
-      },
-      {
-        "label": "밀버스 사이징 도구",
-        "id": "sizing",
-        "order": 7,
-        "externalLink": "https://milvus.io/tools/sizing/",
-        "children": []
-      },
-      {
         "label": "파워쉘 밀버스 클라이언트",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
-        "children": []
-      },
-      {
-        "label": "ExportLog",
-        "id": "export-log",
-        "order": 9,
-        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
-        "children": []
-      },
-      {
-        "label": "모델",
-        "id": "models",
-        "isMenu": true,
-        "order": 10,
-        "children": [
-          {
-            "label": "임베딩",
-            "id": "embeddings",
-            "order": 0,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "개요",
-                "id": "embeddings.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "OpenAI",
-                "id": "embed-with-openai.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "문장 변환기",
-                "id": "embed-with-sentence-transform.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "BGE M3",
-                "id": "embed-with-bgm-m3.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "SPLADE",
-                "id": "embed-with-splade.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Voyage",
-                "id": "embed-with-voyage.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "Jina AI",
-                "id": "embed-with-jina.md",
-                "order": 7,
-                "children": []
-              },
-              {
-                "label": "Cohere",
-                "id": "embed-with-cohere.md",
-                "order": 8,
-                "children": []
-              },
-              {
-                "label": "강사",
-                "id": "embed-with-instructor.md",
-                "order": 9,
-                "children": []
-              },
-              {
-                "label": "미스트랄 AI",
-                "id": "embed-with-mistral-ai.md",
-                "order": 10,
-                "children": []
-              },
-              {
-                "label": "Nomic",
-                "id": "embed-with-nomic.md",
-                "order": 11,
-                "children": []
-              },
-              {
-                "label": "mGTE",
-                "id": "embed-with-mgte.md",
-                "order": 12,
-                "children": []
-              },
-              {
-                "label": "Model2Vec",
-                "id": "embed-with-model2vec.md",
-                "order": 13,
-                "children": []
-              },
-              {
-                "label": "쌍둥이자리",
-                "id": "embed-with-gemini.md",
-                "order": 14,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "리랭커",
-            "id": "rerankers",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "개요",
-                "id": "rerankers-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "BGE",
-                "id": "rerankers-bge.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Cohere",
-                "id": "rerankers-cohere.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "크로스 인코더",
-                "id": "rerankers-cross-encoder.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Voyage",
-                "id": "rerankers-voyage.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Jina AI",
-                "id": "rerankers-jina.md",
-                "order": 5,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "SDK 코드 도우미(MCP)",
-        "id": "milvus-sdk-helper-mcp.md",
-        "order": 11,
         "children": []
       }
     ]
@@ -2136,264 +1276,6 @@
         "id": "integrations_overview.md",
         "order": 0,
         "children": []
-      },
-      {
-        "label": "오케스트레이션",
-        "id": "orchestrate-with-milvus",
-        "order": 3,
-        "children": [
-          {
-            "label": "LangChain",
-            "id": "langchain",
-            "order": 0,
-            "children": [
-              {
-                "label": "기본 사용법",
-                "id": "basic_usage_langchain.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "RAG",
-                "id": "integrate_with_langchain.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "하이브리드 검색",
-                "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "전체 텍스트 검색",
-                "id": "full_text_search_with_langchain.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "비동기 검색",
-                "id": "langchain_milvus_async.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "에이전트 RAG",
-                "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "LlamaIndex",
-            "id": "llamaindex",
-            "order": 1,
-            "children": [
-              {
-                "label": "RAG",
-                "id": "integrate_with_llamaindex.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Milvus 비동기 API",
-                "id": "llamaindex_milvus_async.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "전체 텍스트 검색",
-                "id": "llamaindex_milvus_full_text_search.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "하이브리드 검색",
-                "id": "llamaindex_milvus_hybrid_search.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "메타데이터 필터링",
-                "id": "llamaindex_milvus_metadata_filter.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "DSPy",
-            "id": "integrate_with_dspy.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "FastGPT",
-            "id": "integrate_with_fastgpt.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "HayStack",
-            "id": "haystack",
-            "order": 4,
-            "children": [
-              {
-                "label": "RAG",
-                "id": "integrate_with_haystack.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "전체 텍스트 검색",
-                "id": "full_text_search_with_milvus_and_haystack.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "코타에몬",
-            "id": "kotaemon_with_milvus.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Dify",
-            "id": "dify_with_milvus.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Langflow",
-            "id": "rag_with_langflow.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "DocsGPT",
-            "id": "use_milvus_in_docsgpt.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "PrivateGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Dynamiq",
-            "id": "milvus_rag_with_dynamiq.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "라마 스택",
-            "id": "llama_stack_with_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "n8n",
-            "id": "milvus_and_n8n.md",
-            "order": 13,
-            "children": []
-          },
-          {
-            "label": "AnythingLLM",
-            "id": "use_milvus_in_anythingllm.md",
-            "order": 14,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "상담원",
-        "id": "integrate-agents",
-        "order": 4,
-        "children": [
-          {
-            "label": "MemGPT",
-            "id": "integrate_with_memgpt.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Camel",
-            "id": "integrate_with_camel.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Mem0",
-            "id": "quickstart_mem0_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Agno",
-            "id": "integrate_with_agno.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "OpenAI",
-            "id": "openai_agents_milvus.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "MCP",
-            "id": "milvus_and_mcp.md",
-            "order": 5,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "평가 및 관찰 가능성",
-        "id": "evaluation-observability",
-        "order": 6,
-        "children": [
-          {
-            "label": "Ragas",
-            "id": "integrate_with_ragas.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "LangFuse",
-            "id": "integrate_with_langfuse.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "피프티원",
-            "id": "integrate_with_voxel51.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "아리제 피오닉스",
-            "id": "evaluation_with_phoenix.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "DeepEval",
-            "id": "evaluation_with_deepeval.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "AIMon",
-            "id": "AIMon_milvus_integration.md",
-            "order": 5,
-            "children": []
-          }
-        ]
       },
       {
         "label": "모델 임베딩",
@@ -2453,12 +1335,6 @@
             "id": "integrate_with_bentoml.md",
             "order": 5,
             "children": []
-          },
-          {
-            "label": "임베드 애니씽",
-            "id": "build_RAG_with_milvus_and_embedAnything.md",
-            "order": 15,
-            "children": []
           }
         ]
       },
@@ -2486,6 +1362,12 @@
             "children": []
           },
           {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
             "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
@@ -2508,11 +1390,129 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "오케스트레이션",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "LangChain",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "기본 사용법",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "RAG",
+                "id": "integrate_with_langchain.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "하이브리드 검색",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "DeepSeek",
-            "id": "build_RAG_with_milvus_and_deepseek.md",
-            "order": 8,
+            "label": "LlamaIndex",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_llamaindex.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "FastGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "HayStack",
+            "id": "integrate_with_haystack.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "코타에몬",
+            "id": "kotaemon_with_milvus.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Dify",
+            "id": "dify_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "상담원",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "MemGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Camel",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -2545,10 +1545,41 @@
             "id": "build_RAG_with_milvus_and_cognee.md",
             "order": 3,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "평가 및 관찰 가능성",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "Ragas",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
           },
           {
-            "label": "MindsDB",
-            "id": "integration_with_mindsdb.md",
+            "label": "LangFuse",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "피프티원",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "아리제 피오닉스",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "DeepEval",
+            "id": "evaluation_with_deepeval.md",
             "order": 4,
             "children": []
           }
@@ -2587,60 +1618,6 @@
             "label": "PII 마스커",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
-            "children": []
-          },
-          {
-            "label": "파이어크롤",
-            "id": "build_RAG_with_milvus_and_firecrawl.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Crawl4AI",
-            "id": "build_RAG_with_milvus_and_crawl4ai.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "AWS S3",
-            "id": "build_RAG_from_s3_with_milvus.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "VectorETL",
-            "id": "ETL_using_vectorETL.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "잔치",
-            "id": "build_RAG_with_milvus_and_feast.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "미스트랄 OCR",
-            "id": "mistral_ocr_with_milvus.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "도클링",
-            "id": "build_RAG_with_milvus_and_docling.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "NLWeb",
-            "id": "NLWeb_with_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "LangExtract",
-            "id": "langextract_milvus_demo.md",
-            "order": 13,
             "children": []
           }
         ]
@@ -2757,30 +1734,6 @@
         "children": []
       },
       {
-        "label": "Attu로 빠르게 시작하기",
-        "id": "quickstart_with_attu.md",
-        "order": 14,
-        "children": []
-      },
-      {
-        "label": "asyncio와 함께 AsyncMilvusClient 사용",
-        "id": "use-async-milvus-client-with-asyncio.md",
-        "order": 15,
-        "children": []
-      },
-      {
-        "label": "Milvus를 사용한 텍스트-이미지 검색",
-        "id": "text_image_search.md",
-        "order": 16,
-        "children": []
-      },
-      {
-        "label": "대규모 언어 모델을 사용하여 Milvus 쿼리 필터 표현식 생성하기",
-        "id": "generating_milvus_query_filter_expressions.md",
-        "order": 17,
-        "children": []
-      },
-      {
         "label": "자세히 알아보기",
         "id": "explore-more",
         "order": 99,
@@ -2819,6 +1772,12 @@
             "label": "텍스트 검색 엔진",
             "id": "text_search_engine.md",
             "order": 10,
+            "children": []
+          },
+          {
+            "label": "텍스트-이미지 검색 엔진",
+            "id": "text_image_search.md",
+            "order": 11,
             "children": []
           },
           {

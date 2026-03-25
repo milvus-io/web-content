@@ -86,27 +86,21 @@
                 "children": []
               },
               {
-                "label": "RPM/DEB",
-                "id": "install_standalone-binary.md",
-                "order": 1,
-                "children": []
-              },
-              {
                 "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
-                "order": 2,
+                "order": 1,
                 "children": []
               },
               {
                 "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
-                "order": 3,
+                "order": 2,
                 "children": []
               },
               {
                 "label": "Docker Desktop (Windows)",
                 "id": "install_standalone-windows.md",
-                "order": 4,
+                "order": 3,
                 "children": []
               }
             ]
@@ -195,12 +189,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Connettersi al server Milvus",
-        "id": "connect-to-milvus-server.md",
-        "order": 3,
-        "children": []
       }
     ]
   },
@@ -223,14 +211,14 @@
             "children": []
           },
           {
-            "label": "Componenti principali",
-            "id": "main_components.md",
+            "label": "Archiviazione/Computing",
+            "id": "four_layers.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Servizio di streaming",
-            "id": "streaming_service.md",
+            "label": "Componenti principali",
+            "id": "main_components.md",
             "order": 2,
             "children": []
           },
@@ -238,12 +226,6 @@
             "label": "Elaborazione dati",
             "id": "data_processing.md",
             "order": 3,
-            "children": []
-          },
-          {
-            "label": "Picchio",
-            "id": "woodpecker_architecture.md",
-            "order": 4,
             "children": []
           },
           {
@@ -261,6 +243,12 @@
         "children": []
       },
       {
+        "label": "Coerenza",
+        "id": "consistency.md",
+        "order": 2,
+        "children": []
+      },
+      {
         "label": "Multi-tenancy",
         "id": "multi_tenancy.md",
         "order": 3,
@@ -273,27 +261,65 @@
         "children": []
       },
       {
+        "label": "Metriche di somiglianza",
+        "id": "metric.md",
+        "order": 5,
+        "children": []
+      },
+      {
         "label": "Sincronizzazione temporale",
         "id": "time_sync.md",
         "order": 6,
         "children": []
       },
       {
-        "label": "Tipi metrici",
-        "id": "metric.md",
+        "label": "Indice vettoriale",
+        "id": "vector_index",
         "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Indice in memoria",
+            "id": "index.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Indice su disco",
+            "id": "disk_index.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Indice GPU",
+            "id": "gpu_index.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Indice scalare",
+        "id": "scalar_index.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "Reranking",
+        "id": "reranking.md",
+        "order": 9,
         "children": []
       },
       {
         "label": "Replica in memoria",
         "id": "replica.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "Terminologia",
         "id": "glossary.md",
-        "order": 9,
+        "order": 12,
         "children": []
       }
     ]
@@ -305,104 +331,140 @@
     "order": 3,
     "children": [
       {
-        "label": "Database",
+        "label": "Gestire i database",
         "id": "manage_databases.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Collezioni",
-        "id": "collections",
+        "label": "Gestire gli schemi",
+        "id": "schema.md",
         "order": 1,
+        "children": []
+      },
+      {
+        "label": "Gestire le collezioni",
+        "id": "manage-collections.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Gestire gli indici",
+        "id": "manage_indexes",
+        "order": 3,
+        "isMenu": true,
         "children": [
           {
-            "label": "Spiegazione della collezione",
-            "id": "manage-collections.md",
+            "label": "Campi vettoriali indice",
+            "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Crea collezione",
-            "id": "create-collection.md",
+            "label": "Campi scalari indice",
+            "id": "index-scalar-fields.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Visualizza le collezioni",
-            "id": "view-collections.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "Modificare la collezione",
-            "id": "modify-collection.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "Carico e rilascio",
-            "id": "load-and-release.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Impostare il TTL di raccolta",
-            "id": "set-collection-ttl.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Impostare il livello di coerenza",
-            "id": "tune_consistency.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "Gestire le partizioni",
-            "id": "manage-partitions.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Gestire gli alias",
-            "id": "manage-aliases.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Raccolta di gocce",
-            "id": "drop-collection.md",
-            "order": 10,
+            "label": "Indice con GPU",
+            "id": "index-with-gpu.md",
+            "order": 2,
             "children": []
           }
         ]
       },
       {
-        "label": "Schema e campi dati",
-        "id": "schema",
-        "order": 2,
+        "label": "Gestire le partizioni",
+        "id": "manage-partitions.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Inserire, inserire ed eliminare",
+        "id": "insert-update-delete.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "Importazione dei dati",
+        "id": "data_import",
+        "order": 6,
+        "isMenu": true,
         "children": [
           {
-            "label": "Schema spiegato",
-            "id": "schema.md",
+            "label": "Preparare i dati di partenza",
+            "id": "prepare-source-data.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Campo primario e AutoID",
-            "id": "primary-field.md",
+            "label": "Importazione dei dati",
+            "id": "import-data.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Cerca, interroga e ottieni",
+        "id": "search_query_get",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Ricerca a vettore singolo",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Ricerca ibrida",
+            "id": "multi-vector-search.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Vettore denso",
-            "id": "dense-vector.md",
+            "label": "Query Get e Scalar",
+            "id": "get-and-scalar-query.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Vettore binario",
-            "id": "binary-vector.md",
+            "label": "Con gli iteratori",
+            "id": "with-iterators.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Caratteristiche avanzate",
+        "id": "advanced_features",
+        "order": 8,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Campo dinamico",
+            "id": "enable-dynamic-field.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Chiave di partizione",
+            "id": "use-partition-key.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Campo JSON",
+            "id": "use-json-fields.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Campo array",
+            "id": "array_data_type.md",
             "order": 3,
             "children": []
           },
@@ -413,877 +475,239 @@
             "children": []
           },
           {
-            "label": "Campo stringa",
-            "id": "string.md",
+            "label": "Regole di filtraggio scalari",
+            "id": "boolean.md",
             "order": 5,
             "children": []
           },
           {
-            "label": "Campo numerico",
-            "id": "number.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Campo JSON",
-            "id": "json-field",
-            "order": 7,
-            "children": [
-              {
-                "label": "Panoramica dei campi JSON",
-                "id": "json-field-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Indicizzazione JSON",
-                "id": "json-indexing.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Triturazione JSON",
-                "id": "json-shredding.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Campo array",
-            "id": "array_data_type.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Array di strutture",
-            "id": "array-of-structs.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Campo geometrico",
-            "id": "geometry-field.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Campo dinamico",
-            "id": "enable-dynamic-field.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "Nullabile e predefinito",
-            "id": "nullable-and-default.md",
-            "order": 13,
-            "children": []
-          },
-          {
-            "label": "Analizzatore",
-            "id": "analyzer",
-            "order": 14,
-            "children": [
-              {
-                "label": "Panoramica dell'analizzatore",
-                "id": "analyzer-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Analizzatori integrati",
-                "id": "built-in-analyzers",
-                "order": 1,
-                "children": [
-                  {
-                    "label": "Standard",
-                    "id": "standard-analyzer.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "Inglese",
-                    "id": "english-analyzer.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "Cinese",
-                    "id": "chinese-analyzer.md",
-                    "order": 2,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "Tokenizzatori",
-                "id": "tokenizers",
-                "order": 2,
-                "children": [
-                  {
-                    "label": "Standard",
-                    "id": "standard-tokenizer.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "Spazio bianco",
-                    "id": "whitespace-tokenizer.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "Jieba",
-                    "id": "jieba-tokenizer.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Lindera",
-                    "id": "lindera-tokenizer.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "TERAPIA INTENSIVA",
-                    "id": "icu-tokenizer.md",
-                    "order": 4,
-                    "children": []
-                  },
-                  {
-                    "label": "Identificatore di lingua",
-                    "id": "language-identifier.md",
-                    "order": 5,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "Filtri",
-                "id": "filters",
-                "order": 3,
-                "children": [
-                  {
-                    "label": "Minuscolo",
-                    "id": "lowercase-filter.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "Piegatura ASCII",
-                    "id": "ascii-folding-filter.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "Solo alfanumerico",
-                    "id": "alphanumonly-filter.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Solo Cnalphanum",
-                    "id": "cnalphanumonly-filter.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "Cncharonly",
-                    "id": "cncharonly-filter.md",
-                    "order": 4,
-                    "children": []
-                  },
-                  {
-                    "label": "Lunghezza",
-                    "id": "length-filter.md",
-                    "order": 5,
-                    "children": []
-                  },
-                  {
-                    "label": "Fermarsi",
-                    "id": "stop-filter.md",
-                    "order": 6,
-                    "children": []
-                  },
-                  {
-                    "label": "Decompattatore",
-                    "id": "decompounder-filter.md",
-                    "order": 7,
-                    "children": []
-                  },
-                  {
-                    "label": "Stelo",
-                    "id": "stemmer-filter.md",
-                    "order": 8,
-                    "children": []
-                  },
-                  {
-                    "label": "Rimuovere il punto",
-                    "id": "removepunct-filter.md",
-                    "order": 9,
-                    "children": []
-                  },
-                  {
-                    "label": "Regex",
-                    "id": "regex-filter.md",
-                    "order": 10,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "Analizzatori multilingue",
-                "id": "multi-language-analyzers.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Scegliete l'analizzatore giusto per il vostro caso d'uso",
-                "id": "choose-the-right-analyzer-for-your-use-case.md",
-                "order": 5,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Alterare il campo di raccolta",
-            "id": "alter-collection-field.md",
-            "order": 15,
-            "children": []
-          },
-          {
-            "label": "Aggiungere campi a una raccolta esistente",
-            "id": "add-fields-to-an-existing-collection.md",
-            "order": 16,
-            "children": []
-          },
-          {
-            "label": "Migliori pratiche",
-            "id": "best-practices",
-            "isMenu": true,
-            "order": 17,
-            "children": [
-              {
-                "label": "Progettazione del modello di dati per la ricerca",
-                "id": "schema-hands-on.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Progettazione del modello di dati con un array di strutture",
-                "id": "best-practices-for-array-of-structs.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "Inserisci e cancella",
-        "id": "insert-and-delete",
-        "order": 3,
-        "children": [
-          {
-            "label": "Inserire entità",
-            "id": "insert-update-delete.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Entità Upsert",
-            "id": "upsert-entities.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Eliminare le entità",
-            "id": "delete-entities.md",
-            "order": 2,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Indici",
-        "id": "manage_indexes",
-        "order": 4,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Indice spiegato",
-            "id": "index-explained.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Indici vettoriali fluttuanti",
-            "id": "floating-vector-indexes",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "PIATTO",
-                "id": "flat.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "FIV_FLAT",
-                "id": "ivf-flat.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "IVF_SQ8",
-                "id": "ivf-sq8.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "FIV_PQ",
-                "id": "ivf-pq.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "FIV_RABITQ",
-                "id": "ivf-rabitq.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "HNSW",
-                "id": "hnsw.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "HNSW_SQ",
-                "id": "hnsw-sq.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "HNSW_PQ",
-                "id": "hnsw-pq.md",
-                "order": 7,
-                "children": []
-              },
-              {
-                "label": "HNSW_PRQ",
-                "id": "hnsw-prq.md",
-                "order": 8,
-                "children": []
-              },
-              {
-                "label": "DISKANN",
-                "id": "diskann.md",
-                "order": 9,
-                "children": []
-              },
-              {
-                "label": "SCANN",
-                "id": "scann.md",
-                "order": 10,
-                "children": []
-              },
-              {
-                "label": "AISAQ",
-                "id": "aisaq.md",
-                "order": 11,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Indici vettoriali binari",
-            "id": "binary-vector-indexes",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "BIN_IVF_FLAT",
-                "id": "bin-ivf-flat.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "BIN_FLAT",
-                "id": "bin-flat.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "MINHASH_LSH",
-                "id": "minhash-lsh.md",
-                "order": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Indici vettoriali sparsi",
-            "id": "sparse-vector-indexes",
-            "order": 3,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "INDICE_INVERTITO SPARSO",
-                "id": "sparse-inverted-index.md",
-                "order": 0,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Indici scalari",
-            "id": "scalar-indexes",
-            "order": 4,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "BITMAP",
-                "id": "bitmap.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "INVERTITO",
-                "id": "inverted.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "NGRAM",
-                "id": "ngram.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "RTREE",
-                "id": "rtree.md",
-                "order": 3,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Indici abilitati alle GPU",
-            "id": "gpu-enabled-indexes",
-            "order": 5,
-            "children": [
-              {
-                "label": "Panoramica dell'indice GPU",
-                "id": "gpu-index-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "GPU_CAGRA",
-                "id": "gpu-cagra.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "GPU_IVF_FLAT",
-                "id": "gpu-ivf-flat.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "GPU_IVF_PQ",
-                "id": "gpu-ivf-pq.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "GPU_BRUTE_FORCE",
-                "id": "gpu-brute-force.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "Ricerca",
-        "id": "search-rerank",
-        "order": 5,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Ricerca RNA di base",
-            "id": "single-vector-search.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Ricerca filtrata",
-            "id": "filtered-search.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Ricerca per gamma",
-            "id": "range-search.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Ricerca per raggruppamento",
-            "id": "grouping-search.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "Ricerca ibrida",
-            "id": "multi-vector-search.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "Interrogazione",
-            "id": "get-and-scalar-query.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Filtraggio",
-            "id": "filtering",
-            "order": 6,
-            "children": [
-              {
-                "label": "Il filtraggio spiegato",
-                "id": "boolean.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Operatori di base",
-                "id": "basic-operators.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Filtraggio Templating",
-                "id": "filtering-templating.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Operatori JSON",
-                "id": "json-operators.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Operatori di matrice",
-                "id": "array-operators.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Campionamento casuale",
-                "id": "random-sampling.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Operatori della geometria",
-                "id": "geometry-operators.md",
-                "order": 6,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Ricerca a testo completo",
-            "id": "full-text-search.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "Corrispondenza del testo",
-            "id": "keyword-match.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Abbinamento di frasi",
-            "id": "phrase-match.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Query Elasticsearch a Milvus",
-            "id": "elasticsearch-queries-to-milvus.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Iteratori di ricerca",
-            "id": "with-iterators.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Utilizzare la chiave di partizione",
-            "id": "use-partition-key.md",
-            "order": 12,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Incorporazione e riclassificazione",
-        "id": "embeddings-reranking",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Funzione di incorporazione",
-            "id": "embedding-function",
-            "order": 0,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Panoramica della funzione di incorporamento",
-                "id": "embedding-function-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "OpenAI",
-                "id": "openai.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Azure OpenAI",
-                "id": "azure-openai.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "DashScope",
-                "id": "dashscope.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Bedrock",
-                "id": "bedrock.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Vertex AI",
-                "id": "vertex-ai.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Viaggio AI",
-                "id": "voyage-ai.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "Cohere",
-                "id": "cohere.md",
-                "order": 7,
-                "children": []
-              },
-              {
-                "label": "SiliconFLow",
-                "id": "siliconflow.md",
-                "order": 8,
-                "children": []
-              },
-              {
-                "label": "Viso abbracciato TEI",
-                "id": "hugging-face-tei.md",
-                "order": 9,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Funzione di reranking",
-            "id": "reranking",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Classifica ponderata",
-                "id": "weighted-ranker.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Classificatore RRF",
-                "id": "rrf-ranker.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Classifica di aumento",
-                "id": "boost-ranker.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Classificatore del decadimento",
-                "id": "decay-ranker",
-                "isMenu": true,
-                "order": 3,
-                "children": [
-                  {
-                    "label": "Panoramica di Decay Ranker",
-                    "id": "decay-ranker-overview.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "Decadimento gaussiano",
-                    "id": "gaussian-decay.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "Decadimento esponenziale",
-                    "id": "exponential-decay.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Decadimento lineare",
-                    "id": "linear-decay.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "Tutorial: Implementare una classifica basata sul tempo in Milvus",
-                    "id": "tutorial-implement-a-time-based-ranking-in-milvus.md",
-                    "order": 4,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "Modello Ranker",
-                "id": "model-ranker",
-                "order": 4,
-                "isMenu": true,
-                "children": [
-                  {
-                    "label": "Panoramica di Model Ranker",
-                    "id": "model-ranker-overview.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "Classificatore vLLM",
-                    "id": "vllm-ranker.md",
-                    "order": 1,
-                    "children": []
-                  },
-                  {
-                    "label": "Classificatore TEI",
-                    "id": "tei-ranker.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Cohere Ranker",
-                    "id": "cohere-ranker.md",
-                    "order": 3,
-                    "children": []
-                  },
-                  {
-                    "label": "Voyage AI Ranker",
-                    "id": "voyage-ai-ranker.md",
-                    "order": 4,
-                    "children": []
-                  },
-                  {
-                    "label": "SiliconFlow Ranker",
-                    "id": "siliconflow-ranker.md",
-                    "order": 5,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "Ottimizzazione dello stoccaggio",
-        "id": "storage_optimization",
-        "order": 10,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Utilizzare mmap",
+            "label": "Memorizzazione MMap",
             "id": "mmap.md",
-            "order": 0,
+            "order": 6,
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Gestire i gruppi di risorse",
+            "id": "resource_group.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
-            "order": 1,
+            "order": 8,
             "children": []
-          },
-          {
-            "label": "Stoccaggio a più livelli",
-            "id": "tiered_storage",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Panoramica sullo storage a livelli",
-                "id": "tiered-storage-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Riscaldamento",
-                "id": "warm-up.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Sfratto",
-                "id": "eviction.md",
-                "order": 2,
-                "children": []
-              }
-            ]
           }
         ]
       }
     ]
   },
   {
-    "label": "Importazione dei dati",
-    "id": "data_import",
-    "order": 5,
+    "label": "Modelli",
+    "id": "models",
     "isMenu": true,
+    "order": 4,
     "children": [
       {
-        "label": "Preparare i dati di partenza",
-        "id": "prepare-source-data.md",
+        "label": "Incorporazioni",
+        "id": "embeddings",
         "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "embeddings.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "embed-with-openai.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Trasformatori di frasi",
+            "id": "embed-with-sentence-transform.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "BGE M3",
+            "id": "embed-with-bgm-m3.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "BM25",
+            "id": "embed-with-bm25.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SPLADE",
+            "id": "embed-with-splade.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Viaggio",
+            "id": "embed-with-voyage.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "embed-with-jina.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "embed-with-cohere.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Istruttore",
+            "id": "embed-with-instructor.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Mistral AI",
+            "id": "embed-with-mistral-ai.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Nomico",
+            "id": "embed-with-nomic.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "mGTE",
+            "id": "embed-with-mgte.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Reranker",
+        "id": "rerankers",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "rerankers-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "BGE",
+            "id": "rerankers-bge.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "rerankers-cohere.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Codificatore incrociato",
+            "id": "rerankers-cross-encoder.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Viaggio",
+            "id": "rerankers-voyage.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "rerankers-jina.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Strumenti AI",
+    "id": "aiTools",
+    "isMenu": true,
+    "order": 5,
+    "children": [
+      {
+        "label": "Prompt dell'intelligenza artificiale",
+        "id": "ai_prompts",
+        "isMenu": true,
+        "order": 0,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "ai_prompts_landing.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "AGENTI.md per Milvus",
+            "id": "agents_overview.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "SDK Python",
+            "id": "python_sdk.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Progettazione di schemi",
+            "id": "schema_design.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Modelli di ricerca",
+            "id": "search_patterns.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Selezione dell'indice",
+            "id": "index_selection.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gasdotto RAG",
+            "id": "rag_pipeline.md",
+            "order": 6,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Server MCP Milvus",
+        "id": "mcp_server_milvus",
+        "order": 1,
+        "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
         "children": []
       },
       {
-        "label": "Importazione dei dati",
-        "id": "import-data.md",
-        "order": 1,
+        "label": "Server MCP per Codice Claude",
+        "id": "mcp_claude_context",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/claude-context",
         "children": []
       }
     ]
@@ -1519,26 +943,6 @@
                 "children": []
               }
             ]
-          },
-          {
-            "label": "Utilizzare Pulsar con Milvus",
-            "id": "pulsar_dependencies",
-            "order": 2,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Aggiornamento a Pulsar v3",
-                "id": "upgrade-pulsar-v3.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Continuare a utilizzare Pulsar v2",
-                "id": "use-pulsar-v2.md",
-                "order": 1,
-                "children": []
-              }
-            ]
           }
         ]
       },
@@ -1555,21 +959,9 @@
             "children": []
           },
           {
-            "label": "Scala Standalone",
-            "id": "scale-standalone.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Scala con HPA",
-            "id": "hpa.md",
-            "order": 2,
-            "children": []
-          },
-          {
             "label": "Dipendenze di scala",
             "id": "scale-dependencies.md",
-            "order": 3,
+            "order": 1,
             "children": []
           }
         ]
@@ -1682,22 +1074,9 @@
         ]
       },
       {
-        "label": "Gruppi di risorse",
-        "id": "resource_groups",
-        "order": 9,
-        "children": [
-          {
-            "label": "Gestire i gruppi di risorse",
-            "id": "resource_group.md",
-            "order": 0,
-            "children": []
-          }
-        ]
-      },
-      {
         "label": "Sicurezza",
         "id": "security",
-        "order": 11,
+        "order": 9,
         "isMenu": true,
         "children": [
           {
@@ -1707,48 +1086,17 @@
             "children": []
           },
           {
+            "label": "Utenti, privilegi e ruoli",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Abilitare RBAC",
-            "id": "rbac",
+            "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": [
-              {
-                "label": "Panoramica di RBAC",
-                "id": "rbac.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Utenti, privilegi e ruoli",
-                "id": "users_and_roles.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Gruppo Privilegio",
-                "id": "privilege_group.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Concessione di privilegi",
-                "id": "grant_privileges.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Ruoli delle sovvenzioni",
-                "id": "grant_roles.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Eliminare utenti e ruoli",
-                "id": "drop_users_roles.md",
-                "order": 5,
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "label": "Crittografia in transito",
@@ -1763,18 +1111,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": "12",
-        "children": []
-      },
-      {
-        "label": "Picchio",
-        "id": "use-woodpecker.md",
-        "order": 13,
-        "children": []
       }
     ]
   },
@@ -1785,11 +1121,30 @@
     "order": 6,
     "children": [
       {
-        "label": "Attu (GUI Milvus)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 0,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "cli_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Installazione",
+            "id": "install_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Comandi",
+            "id": "cli_commands.md",
+            "order": 2,
+            "children": []
+          }
+        ]
       },
       {
         "label": "Backup di Milvus",
@@ -1811,63 +1166,6 @@
           {
             "label": "API RESTful",
             "id": "milvus_backup_api.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Casi comuni",
-            "id": "common-cases",
-            "order": 3,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Backup e ripristino in un'unica istanza",
-                "id": "single-instance-backup-and-restore.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Migrazione tra istanze in un unico bucket",
-                "id": "shared-bucket-backup-and-restore.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Migrazione tra istanze e bucket",
-                "id": "cross-bucket-backup-and-restore.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Migrazione tra istanze in ambienti S3",
-                "id": "multi-storage-backup-and-restore.md",
-                "order": 3,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "Birdwatcher",
-        "id": "birdwatcher",
-        "order": 2,
-        "children": [
-          {
-            "label": "Panoramica",
-            "id": "birdwatcher_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Guide all'installazione",
-            "id": "birdwatcher_install_guides.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Guide all'uso",
-            "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
           }
@@ -1906,35 +1204,48 @@
         ]
       },
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu (Milvus GUI)",
+        "id": "milvus_attu",
         "order": 4,
-        "isMenu": true,
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
+      },
+      {
+        "label": "Birdwatcher",
+        "id": "birdwatcher",
+        "order": 5,
         "children": [
           {
             "label": "Panoramica",
-            "id": "cli_overview.md",
+            "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Installazione",
-            "id": "install_cli.md",
+            "label": "Guide all'installazione",
+            "id": "birdwatcher_install_guides.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Comandi",
-            "id": "cli_commands.md",
+            "label": "Guide all'uso",
+            "id": "birdwatcher_usage_guides.md",
             "order": 2,
             "children": []
           }
         ]
       },
       {
+        "label": "Strumento di dimensionamento Milvus",
+        "id": "sizing",
+        "order": 6,
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
+      },
+      {
         "label": "Connettori Milvus",
         "id": "milvus_connectors",
-        "order": 5,
+        "order": 7,
         "isMenu": true,
         "children": [
           {
@@ -1946,181 +1257,10 @@
         ]
       },
       {
-        "label": "Milvus VTS",
-        "id": "milvus_vts",
-        "order": 6,
-        "externalLink": "https://github.com/zilliztech/vts",
-        "children": []
-      },
-      {
-        "label": "Strumento di dimensionamento Milvus",
-        "id": "sizing",
-        "order": 7,
-        "externalLink": "https://milvus.io/tools/sizing/",
-        "children": []
-      },
-      {
         "label": "Client Powershell Milvus",
         "id": "milvus_powershell",
         "order": 8,
         "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
-        "children": []
-      },
-      {
-        "label": "EsportazioneLog",
-        "id": "export-log",
-        "order": 9,
-        "externalLink": "https://github.com/milvus-io/milvus/tree/master/deployments/export-log",
-        "children": []
-      },
-      {
-        "label": "Modelli",
-        "id": "models",
-        "isMenu": true,
-        "order": 10,
-        "children": [
-          {
-            "label": "Incorporazioni",
-            "id": "embeddings",
-            "order": 0,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Panoramica",
-                "id": "embeddings.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "OpenAI",
-                "id": "embed-with-openai.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Trasformatori di frasi",
-                "id": "embed-with-sentence-transform.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "BGE M3",
-                "id": "embed-with-bgm-m3.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "SPLADE",
-                "id": "embed-with-splade.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Viaggio",
-                "id": "embed-with-voyage.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "Jina AI",
-                "id": "embed-with-jina.md",
-                "order": 7,
-                "children": []
-              },
-              {
-                "label": "Cohere",
-                "id": "embed-with-cohere.md",
-                "order": 8,
-                "children": []
-              },
-              {
-                "label": "Istruttore",
-                "id": "embed-with-instructor.md",
-                "order": 9,
-                "children": []
-              },
-              {
-                "label": "Mistral AI",
-                "id": "embed-with-mistral-ai.md",
-                "order": 10,
-                "children": []
-              },
-              {
-                "label": "Nomico",
-                "id": "embed-with-nomic.md",
-                "order": 11,
-                "children": []
-              },
-              {
-                "label": "mGTE",
-                "id": "embed-with-mgte.md",
-                "order": 12,
-                "children": []
-              },
-              {
-                "label": "Modello2Vec",
-                "id": "embed-with-model2vec.md",
-                "order": 13,
-                "children": []
-              },
-              {
-                "label": "Gemelli",
-                "id": "embed-with-gemini.md",
-                "order": 14,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Reranker",
-            "id": "rerankers",
-            "order": 1,
-            "isMenu": true,
-            "children": [
-              {
-                "label": "Panoramica",
-                "id": "rerankers-overview.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "BGE",
-                "id": "rerankers-bge.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Cohere",
-                "id": "rerankers-cohere.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Codificatore incrociato",
-                "id": "rerankers-cross-encoder.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Viaggio",
-                "id": "rerankers-voyage.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Jina AI",
-                "id": "rerankers-jina.md",
-                "order": 5,
-                "children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "label": "Aiutante di codice SDK (MCP)",
-        "id": "milvus-sdk-helper-mcp.md",
-        "order": 11,
         "children": []
       }
     ]
@@ -2136,264 +1276,6 @@
         "id": "integrations_overview.md",
         "order": 0,
         "children": []
-      },
-      {
-        "label": "Orchestrazione",
-        "id": "orchestrate-with-milvus",
-        "order": 3,
-        "children": [
-          {
-            "label": "Catena di Langhe",
-            "id": "langchain",
-            "order": 0,
-            "children": [
-              {
-                "label": "Uso di base",
-                "id": "basic_usage_langchain.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "RAG",
-                "id": "integrate_with_langchain.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Ricerca ibrida",
-                "id": "milvus_hybrid_search_retriever.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Ricerca full-text",
-                "id": "full_text_search_with_langchain.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Ricerca asincrona",
-                "id": "langchain_milvus_async.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Agente RAG",
-                "id": "agentic_rag_with_milvus_and_langgraph.md",
-                "order": 6,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "LlamaIndex",
-            "id": "llamaindex",
-            "order": 1,
-            "children": [
-              {
-                "label": "RAG",
-                "id": "integrate_with_llamaindex.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "API asincrona di Milvus",
-                "id": "llamaindex_milvus_async.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Ricerca full-text",
-                "id": "llamaindex_milvus_full_text_search.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Ricerca ibrida",
-                "id": "llamaindex_milvus_hybrid_search.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Filtraggio dei metadati",
-                "id": "llamaindex_milvus_metadata_filter.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "DSPy",
-            "id": "integrate_with_dspy.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "FastGPT",
-            "id": "integrate_with_fastgpt.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "Pila di fieno",
-            "id": "haystack",
-            "order": 4,
-            "children": [
-              {
-                "label": "RAG",
-                "id": "integrate_with_haystack.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Ricerca full-text",
-                "id": "full_text_search_with_milvus_and_haystack.md",
-                "order": 1,
-                "children": []
-              }
-            ]
-          },
-          {
-            "label": "Kotaemon",
-            "id": "kotaemon_with_milvus.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Dificare",
-            "id": "dify_with_milvus.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Langflow",
-            "id": "rag_with_langflow.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "DocsGPT",
-            "id": "use_milvus_in_docsgpt.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "PrivatoGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Dynamiq",
-            "id": "milvus_rag_with_dynamiq.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Pila di lama",
-            "id": "llama_stack_with_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "n8n",
-            "id": "milvus_and_n8n.md",
-            "order": 13,
-            "children": []
-          },
-          {
-            "label": "Qualsiasi cosaLLM",
-            "id": "use_milvus_in_anythingllm.md",
-            "order": 14,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Agenti",
-        "id": "integrate-agents",
-        "order": 4,
-        "children": [
-          {
-            "label": "MemGPT",
-            "id": "integrate_with_memgpt.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Cammello",
-            "id": "integrate_with_camel.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Mem0",
-            "id": "quickstart_mem0_with_milvus.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Agno",
-            "id": "integrate_with_agno.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "OpenAI",
-            "id": "openai_agents_milvus.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "MCP",
-            "id": "milvus_and_mcp.md",
-            "order": 5,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Valutazione e osservabilità",
-        "id": "evaluation-observability",
-        "order": 6,
-        "children": [
-          {
-            "label": "Ragas",
-            "id": "integrate_with_ragas.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "LangFuse",
-            "id": "integrate_with_langfuse.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Cinquantuno",
-            "id": "integrate_with_voxel51.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Arize Pheonix",
-            "id": "evaluation_with_phoenix.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "DeepEval",
-            "id": "evaluation_with_deepeval.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "AIMon",
-            "id": "AIMon_milvus_integration.md",
-            "order": 5,
-            "children": []
-          }
-        ]
       },
       {
         "label": "Modelli di incorporazione",
@@ -2453,12 +1335,6 @@
             "id": "integrate_with_bentoml.md",
             "order": 5,
             "children": []
-          },
-          {
-            "label": "IncorporaTutto",
-            "id": "build_RAG_with_milvus_and_embedAnything.md",
-            "order": 15,
-            "children": []
           }
         ]
       },
@@ -2486,6 +1362,12 @@
             "children": []
           },
           {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
             "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
@@ -2508,11 +1390,129 @@
             "id": "build_RAG_with_milvus_and_ollama.md",
             "order": 7,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "Orchestrazione",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "Catena di Langhe",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "Uso di base",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "RAG",
+                "id": "integrate_with_langchain.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Ricerca ibrida",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "DeepSeek",
-            "id": "build_RAG_with_milvus_and_deepseek.md",
-            "order": 8,
+            "label": "LlamaIndex",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_llamaindex.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "FastGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Pila di fieno",
+            "id": "integrate_with_haystack.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Kotaemon",
+            "id": "kotaemon_with_milvus.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Dificare",
+            "id": "dify_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "PrivatoGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Agenti",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "MemGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Cammello",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -2545,10 +1545,41 @@
             "id": "build_RAG_with_milvus_and_cognee.md",
             "order": 3,
             "children": []
+          }
+        ]
+      },
+      {
+        "label": "Valutazione e osservabilità",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "Ragas",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
           },
           {
-            "label": "MindsDB",
-            "id": "integration_with_mindsdb.md",
+            "label": "LangFuse",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Cinquantuno",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Arize Pheonix",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "DeepEval",
+            "id": "evaluation_with_deepeval.md",
             "order": 4,
             "children": []
           }
@@ -2587,60 +1618,6 @@
             "label": "Mascheratore PII",
             "id": "RAG_with_pii_and_milvus.md",
             "order": 4,
-            "children": []
-          },
-          {
-            "label": "Incendio",
-            "id": "build_RAG_with_milvus_and_firecrawl.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Crawl4AI",
-            "id": "build_RAG_with_milvus_and_crawl4ai.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "AWS S3",
-            "id": "build_RAG_from_s3_with_milvus.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "VectorETL",
-            "id": "ETL_using_vectorETL.md",
-            "order": 8,
-            "children": []
-          },
-          {
-            "label": "Festa",
-            "id": "build_RAG_with_milvus_and_feast.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Mistral OCR",
-            "id": "mistral_ocr_with_milvus.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Docling",
-            "id": "build_RAG_with_milvus_and_docling.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "NLWeb",
-            "id": "NLWeb_with_milvus.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "Estratto di lingua",
-            "id": "langextract_milvus_demo.md",
-            "order": 13,
             "children": []
           }
         ]
@@ -2757,30 +1734,6 @@
         "children": []
       },
       {
-        "label": "Avvio rapido con Attu",
-        "id": "quickstart_with_attu.md",
-        "order": 14,
-        "children": []
-      },
-      {
-        "label": "Utilizzare AsyncMilvusClient con asyncio",
-        "id": "use-async-milvus-client-with-asyncio.md",
-        "order": 15,
-        "children": []
-      },
-      {
-        "label": "Ricerca da testo a immagine con Milvus",
-        "id": "text_image_search.md",
-        "order": 16,
-        "children": []
-      },
-      {
-        "label": "Generazione di espressioni di filtro per query Milvus con modelli linguistici di grandi dimensioni",
-        "id": "generating_milvus_query_filter_expressions.md",
-        "order": 17,
-        "children": []
-      },
-      {
         "label": "Per saperne di più",
         "id": "explore-more",
         "order": 99,
@@ -2819,6 +1772,12 @@
             "label": "Motore di ricerca testuale",
             "id": "text_search_engine.md",
             "order": 10,
+            "children": []
+          },
+          {
+            "label": "Motore di ricerca da testo a immagine",
+            "id": "text_image_search.md",
+            "order": 11,
             "children": []
           },
           {

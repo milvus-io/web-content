@@ -48,7 +48,7 @@ title: 사용자 액세스 인증
 <span class="hljs-attr">common:</span>
 <span class="hljs-string">...</span>
   <span class="hljs-attr">security:</span>
-    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">authorizationEnabled:</span> <span class="hljs-literal">false</span>
 <span class="hljs-string">...</span>
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -184,7 +184,7 @@ client.update_password(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>사용자 비밀번호 업데이트에 대한 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()를</a> 참조하세요.</p>
-<p>이전 비밀번호를 잊어버린 경우, Milvus는 특정 사용자를 슈퍼 사용자로 지정할 수 있는 설정 항목을 제공합니다. 이렇게 하면 비밀번호를 재설정할 때 이전 비밀번호를 입력할 필요가 없습니다.</p>
+<p>기존 비밀번호를 잊어버린 경우, Milvus는 특정 사용자를 슈퍼 사용자로 지정할 수 있는 설정 항목을 제공합니다. 이렇게 하면 비밀번호를 재설정할 때 이전 비밀번호를 입력할 필요가 없습니다.</p>
 <p>기본적으로 Milvus 설정 파일의 <code translate="no">common.security.superUsers</code> 필드는 비어 있으므로 비밀번호를 재설정할 때 모든 사용자가 이전 비밀번호를 입력해야 합니다. 그러나 특정 사용자를 이전 비밀번호를 제공할 필요가 없는 슈퍼 사용자로 지정할 수 있습니다. 아래 스니펫에서는 <code translate="no">root</code> 및 <code translate="no">foo</code> 을 슈퍼 사용자로 지정했습니다.</p>
 <p>Milvus 인스턴스 실행을 관리하는 Milvus 구성 파일에 아래 구성 항목을 추가해야 합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">common:</span>

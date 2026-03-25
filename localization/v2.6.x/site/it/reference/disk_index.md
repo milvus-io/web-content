@@ -1,9 +1,7 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: >-
-  Meccanismo di indicizzazione del disco in Milvus per la ricerca vettoriale
-  ottimizzata su disco.
+summary: Meccanismo di indicizzazione dei dischi in Milvus.
 title: Indice su disco
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">Indice su disco<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
@@ -21,7 +19,7 @@ title: Indice su disco
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questo articolo presenta DiskANN, un algoritmo di indicizzazione su disco per ricerche vettoriali ottimizzate su disco. Basato sui grafi Vamana, DiskANN consente di effettuare ricerche vettoriali efficienti su disco all'interno di grandi insiemi di dati.</p>
+    </button></h1><p>Questo articolo presenta un algoritmo di indicizzazione su disco chiamato DiskANN. Basato sui grafi Vamana, DiskANN consente di effettuare ricerche efficienti all'interno di grandi insiemi di dati.</p>
 <p>Per migliorare le prestazioni delle query, è possibile <a href="/docs/it/index-vector-fields.md">specificare un tipo di indice</a> per ogni campo vettoriale.</p>
 <div class="alert note"> 
 Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancella automaticamente il vecchio indice quando si cambia tipo di indice.</div>
@@ -40,10 +38,14 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per usare DiskANN in Milvus, è necessario che</p>
+    </button></h2><p>Per utilizzare DiskANN, tenere presente che</p>
 <ul>
-<li>L'istanza di Milvus gira su Ubuntu 18.04.6 o su una versione successiva.</li>
-<li>Il percorso dati di Milvus deve essere montato su un'unità SSD NVMe per ottenere prestazioni ottimali:<ul>
+<li>DiskANN è disattivato per impostazione predefinita. Se si preferisce un indice in-memory a uno su disco, si consiglia di disabilitare questa funzione per ottenere prestazioni migliori.<ul>
+<li>Per disabilitarla, si può cambiare <code translate="no">queryNode.enableDisk</code> in <code translate="no">false</code> nel file di configurazione di milvus.</li>
+<li>Per abilitarla di nuovo, si può impostare <code translate="no">queryNode.enableDisk</code> su <code translate="no">true</code>.</li>
+</ul></li>
+<li>L'istanza di Milvus funziona su Ubuntu 18.04.6 o una versione successiva.</li>
+<li>Il percorso dei dati di Milvus deve essere montato su un'unità SSD NVMe per ottenere prestazioni ottimali:<ul>
 <li>Per un'istanza Milvus Standalone, il percorso dei dati deve essere <strong>/var/lib/milvus/data</strong> nel contenitore in cui viene eseguita l'istanza.</li>
 <li>Per un'istanza Milvus Cluster, il percorso dei dati dovrebbe essere <strong>/var/lib/milvus/data</strong> nei container in cui girano i QueryNode e gli IndexNode.</li>
 </ul></li>

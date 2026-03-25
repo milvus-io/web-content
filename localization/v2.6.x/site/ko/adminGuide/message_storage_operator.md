@@ -60,9 +60,8 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 </ul></li>
 <li>Milvus 시스템이 실행되는 동안에는 메시지 저장소를 변경할 수 없습니다.</li>
 <li>Kafka 2.x 또는 3.x 버전만 지원됩니다.</li>
-<li><strong>업그레이드 제한</strong>: <strong>메시지 큐 제한</strong>: Milvus v2.6.4로 업그레이드할 때는 현재 선택한 메시지 큐를 유지해야 합니다. 업그레이드 중에 다른 메시지 큐 시스템 간에 전환하는 것은 지원되지 않습니다. 메시지 큐 시스템 변경에 대한 지원은 향후 버전에서 제공될 예정입니다.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성하기<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ 구성<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,38 +81,16 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 <p>현재 Milvus Operator를 통해서만 Milvus 스탠드얼론의 메시지 저장소로 RocksMQ를 구성할 수 있습니다.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">예제</h4><p>다음 예는 RocksMQ 서비스를 구성하는 예제입니다.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">주요 구성 옵션</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: 명시적으로 RocksMQ를 메시지 큐로 설정합니다.</li>
-<li><code translate="no">persistence.enabled</code>: RocksMQ 데이터에 영구 저장소를 사용 설정합니다.</li>
-<li><code translate="no">persistence.pvcDeletion</code>: true일 경우, Milvus 인스턴스가 삭제될 때 PVC가 삭제됩니다.</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: 표준 쿠버네티스 PVC 사양</li>
-<li><code translate="no">accessModes</code>: 일반적으로 블록 스토리지의 경우 <code translate="no">ReadWriteOnce</code> </li>
-<li><code translate="no">storageClassName</code>: 클러스터의 스토리지 클래스</li>
-<li><code translate="no">storage</code>: 퍼시스턴트 볼륨의 크기</li>
-</ul>
-<h2 id="Configure-NATS" class="common-anchor-header">NATS 구성<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-NATS" class="common-anchor-header">NATS 구성하기<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,7 +163,7 @@ summary: 밀버스 오퍼레이터로 메시지 저장소를 구성하는 방법
 <div class="alert note">
 <p><strong>RocksMQ와 NATS 중 어떤 것을 선택해야 하나요?</strong></p>
 <p>RockMQ는 CGO를 사용하여 RocksDB와 상호 작용하고 자체적으로 메모리를 관리하는 반면, Milvus 설치에 내장된 순수-GO NATS는 메모리 관리를 Go의 가비지 컬렉터(GC)에 위임합니다.</p>
-<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 나은 성능을 보입니다. 반면 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
+<p>데이터 패킷이 64KB보다 작은 시나리오에서는 메모리 사용량, CPU 사용량, 응답 시간 측면에서 RocksDB가 더 우수한 성능을 보입니다. 반면에 데이터 패킷이 64KB보다 큰 경우, 충분한 메모리와 이상적인 GC 스케줄링으로 응답 시간 측면에서 NATS가 우수합니다.</p>
 <p>현재 NATS는 실험용으로만 사용하는 것이 좋습니다.</p>
 </div>
 <h2 id="Configure-Pulsar" class="common-anchor-header">Pulsar 구성<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">

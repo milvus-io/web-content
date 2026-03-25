@@ -173,7 +173,7 @@ milvus_client.load_collection(collection_name, replica_number=<span class="hljs-
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 milvus_client.load_collection(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Selain itu, Anda juga dapat memuat partisi ke dalam grup sumber daya dan membuat replikanya didistribusikan di antara beberapa grup sumber daya. Berikut ini mengasumsikan bahwa koleksi bernama <code translate="no">Books</code> sudah ada dan memiliki partisi bernama <code translate="no">Novels</code>.</p>
+<p>Selain itu, Anda juga dapat memuat partisi ke dalam grup sumber daya dan membuat replikanya terdistribusi di antara beberapa grup sumber daya. Berikut ini mengasumsikan bahwa koleksi bernama <code translate="no">Books</code> sudah ada dan memiliki partisi bernama <code translate="no">Novels</code>.</p>
 <pre><code translate="no" class="language-python">collection = <span class="hljs-string">&quot;Books&quot;</span>
 partition = <span class="hljs-string">&quot;Novels&quot;</span>
 

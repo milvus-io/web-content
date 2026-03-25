@@ -226,7 +226,7 @@ summary: Imparate a configurare mq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        l'intervallo di tempo (in secondi) in cui il dispatcher controlla se unire o meno i dati    </td>
+      <td>        l'intervallo di tempo (in secondi) in cui il dispatcher controlla se unire o meno    </td>
       <td>1</td>
     </tr>
   </tbody>

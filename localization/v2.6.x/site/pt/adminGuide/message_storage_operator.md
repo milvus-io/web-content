@@ -60,7 +60,6 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 </ul></li>
 <li>O armazenamento de mensagens não pode ser alterado enquanto o sistema Milvus estiver a funcionar.</li>
 <li>Apenas a versão 2.x ou 3.x do Kafka é suportada.</li>
-<li><strong>Limitações da atualização</strong>: <strong>Limitações da fila de mensagens</strong>: Ao fazer a atualização para o Milvus v2.6.4, é necessário manter a escolha da fila de mensagens atual. Não é possível alternar entre sistemas de filas de mensagens diferentes durante a atualização. O suporte à mudança de sistemas de filas de mensagens estará disponível em versões futuras.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar o RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -82,38 +81,16 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
 <p>Atualmente, só é possível configurar o RocksMQ como o armazenamento de mensagens para o Milvus standalone com o Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Exemplo de configuração</h4><p>O exemplo a seguir configura um serviço RocksMQ.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Principais opções de configuração:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Define explicitamente o RocksMQ como a fila de mensagens</li>
-<li><code translate="no">persistence.enabled</code>: Habilita o armazenamento persistente para os dados do RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Quando verdadeiro, o PVC será apagado quando a instância do Milvus for apagada</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Especificação padrão do PVC do Kubernetes</li>
-<li><code translate="no">accessModes</code>: Normalmente <code translate="no">ReadWriteOnce</code> para armazenamento em bloco</li>
-<li><code translate="no">storageClassName</code>: A classe de armazenamento do seu cluster</li>
-<li><code translate="no">storage</code>: Tamanho do volume persistente</li>
-</ul>
-<h2 id="Configure-NATS" class="common-anchor-header">Configurar o NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-NATS" class="common-anchor-header">Configurar NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,7 +106,7 @@ summary: Saiba como configurar o armazenamento de mensagens com o Milvus Operato
         ></path>
       </svg>
     </button></h2><p>O NATS é um armazenamento de mensagens alternativo para o NATS.</p>
-<h4 id="Example" class="common-anchor-header">Exemplo de configuração</h4><p>O exemplo a seguir configura um serviço NATS.</p>
+<h4 id="Example" class="common-anchor-header">Exemplo</h4><p>O exemplo a seguir configura um serviço NATS.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>

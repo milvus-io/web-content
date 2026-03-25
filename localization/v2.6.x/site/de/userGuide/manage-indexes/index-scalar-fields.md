@@ -2,7 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: >-
-  Dieser Leitfaden führt Sie durch die Erstellung und Konfiguration von skalaren
+  Dieser Leitfaden führt Sie durch das Erstellen und Konfigurieren von skalaren
   Indizes für Felder wie Ganzzahlen, Strings usw.
 title: Skalare Felder indizieren
 ---
@@ -39,7 +39,7 @@ title: Skalare Felder indizieren
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Automatische Indizierung</a></strong>: Milvus entscheidet automatisch über den Indextyp, basierend auf dem Datentyp des skalaren Feldes. Dies ist geeignet, wenn Sie den spezifischen Indextyp nicht kontrollieren müssen.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index oder einen <a href="/docs/de/bitmap.md">Bitmap-Index</a>. Damit haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index. Damit haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Automatische Indizierung<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,8 +193,7 @@ client.createIndex(createIndexReq);
 <p>Für die benutzerdefinierte Indizierung sind folgende Werte gültig:</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (empfohlen) Ein invertierter Index besteht aus einem Begriffswörterbuch, das alle tokenisierten Wörter in alphabetischer Reihenfolge enthält. Einzelheiten finden Sie unter <a href="/docs/de/scalar_index.md">Skalarer Index</a>.</p></li>
-<li><p><strong>BITMAP</strong>: Ein Indextyp, der eine Bitmap aller eindeutigen Werte in einem Feld speichert. Einzelheiten finden Sie unter <a href="/docs/de/bitmap.md">BITMAP</a>.</p></li>
-<li><p><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard Template Library Sortieralgorithmus. Unterstützt nur numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
+<li><p><strong>STL_SORT</strong>: Sortiert skalare Felder mit dem Standard-Sortieralgorithmus der Vorlagenbibliothek. Unterstützt nur numerische Felder (z. B. INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Eine Baumdatenstruktur für schnelle Präfix-Suchen und -Abrufe. Unterstützt VARCHAR-Felder.</p></li>
 </ul></li>
 <li><p><strong>index_name</strong><em>(Zeichenkette</em>)</p>
@@ -307,3 +306,21 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Derzeit unterstützt die skalare Indizierung die Datentypen INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR und ARRAY, aber nicht den Datentyp JSON.</li>
+</ul>

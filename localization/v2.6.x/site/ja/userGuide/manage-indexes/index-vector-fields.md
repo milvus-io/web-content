@@ -35,7 +35,7 @@ title: ベクトルフィールドのインデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusはインデックスファイルに保存されたメタデータを活用し、データを特殊な構造で整理することで、検索やクエリ時に要求された情報の迅速な取得を容易にします。</p>
+    </button></h2><p>Milvusは、インデックスファイルに格納されたメタデータを活用し、データを特殊な構造で整理することで、検索やクエリ時に要求された情報を迅速に取り出すことができます。</p>
 <p>Milvusは効率的な類似検索のために、いくつかのインデックスタイプとフィールド値をソートするメトリックを提供します。以下の表は、さまざまなベクトルフィールドタイプでサポートされているインデックスタイプとメトリクスの一覧です。現在、Milvusは浮動小数点埋め込み（しばしば浮動小数点ベクトルまたは密ベクトルとして知られています）、バイナリ埋め込み（バイナリベクトルとしても知られています）、スパース埋め込み（スパースベクトルとしても知られています）を含む様々なタイプのベクトルデータをサポートしています。詳しくは、「<a href="/docs/ja/index.md">メモリ内インデックスと</a> <a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照。</p>
 <div class="filter">
  <a href="#floating">浮動小数点埋め込み</a> <a href="#binary">バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
@@ -82,21 +82,12 @@ title: ベクトルフィールドのインデックス
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">スパース・インバーテッド・インデックス</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">sparse_inverted_index</td>
+    <td class="tg-0pky"><ul><li>スパース・インバーテッド・インデックス</li><li>スパースワンド</li></ul></td>
   </tr>
 </tbody>
 </table>
-<div class="alert note">
-<p>Milvus 2.5.4以降、<code translate="no">SPARSE_WAND</code> は非推奨となります。代わりに、互換性を維持しながら同等性を保つために<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> を使用することが推奨されます。詳細は<a href="/docs/ja/sparse_vector.md#Set-index-params-for-vector-field">スパースベクタを</a>参照してください。</p>
 </div>
-</div>
-<p>頻繁にアクセスされるベクトルフィールドとスカラーフィールドの両方にインデックスを作成することをお勧めします。</p>
+<p>頻繁にアクセスされるベクトル・フィールドとスカラー・フィールドの両方にインデックスを作成することを推奨する。</p>
 <h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

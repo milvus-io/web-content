@@ -82,19 +82,10 @@ title: 索引向量欄位
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">稀疏反演索引</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">sparse_inverted_index</td>
+    <td class="tg-0pky"><ul><li>Sparse_inverted_index</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
-<div class="alert note">
-<p>從 Milvus 2.5.4 起，<code translate="no">SPARSE_WAND</code> 已經被廢棄。取而代之，建議使用<code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> 以達到等效，同時保持相容性。如需詳細資訊，請參閱<a href="/docs/zh-hant/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>。</p>
-</div>
 </div>
 <p>建議為向量欄位和經常被存取的標量欄位建立索引。</p>
 <h2 id="Preparations" class="common-anchor-header">準備工作<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -329,7 +320,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>指定索引類型的微調參數。有關可能的關鍵和值範圍的詳細資訊，請參閱<a href="https://milvus.io/docs/index.md">In-memory Index</a>。</td>
+      <td>指定索引類型的微調參數。有關可能的關鍵和值範圍的詳細資訊，請參閱「<a href="https://milvus.io/docs/index.md">In-memory Index</a>」。</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>
@@ -410,7 +401,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   </tbody>
 </table>
 <div class="admonition note">
-<p><strong>注意事項</strong></p>
+<p><strong>備註</strong></p>
 <p>目前，您只能為集合中的每個欄位建立一個索引檔案。</p>
 </div>
 <h2 id="Check-Index-Details" class="common-anchor-header">檢查索引詳細資料<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">

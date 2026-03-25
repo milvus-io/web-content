@@ -84,21 +84,12 @@ title: Indexar campos vectoriais
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">ÍNDICE_ESPARSO_INVERTIDO</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">ÍNDICE_INVERTIDO_ESPARSO</td>
+    <td class="tg-0pky"><ul><li>ÍNDICE_ESPARSO_INVERTIDO</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
-<div class="alert note">
-<p>A partir da versão 2.5.4 do Milvus, <code translate="no">SPARSE_WAND</code> está a ser preterido. Em vez disso, recomenda-se a utilização de <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> para equivalência, mantendo a compatibilidade. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md#Set-index-params-for-vector-field">Vetor esparso</a>.</p>
 </div>
-</div>
-<p>Recomenda-se a criação de índices tanto para o campo vetorial como para os campos escalares que são frequentemente acedidos.</p>
+<p>Recomenda-se a criação de índices para o campo vetorial e para os campos escalares que são acessados com freqüência.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparações<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,7 +348,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>O nome do campo de destino a que se aplica este objeto IndexParam.</td>
+      <td>O nome do campo de destino ao qual se aplica este objeto IndexParam.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>

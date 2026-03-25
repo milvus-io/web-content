@@ -7,10 +7,10 @@ summary: >-
   الذي تم إنشاؤه.
 title: بناء RAG مع Milvus وGemini
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/build_RAG_with_milvus_and_gemini.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <h1 id="Build-RAG-with-Milvus-and-Gemini" class="common-anchor-header">بناء RAG مع Milvus وGemini<button data-href="#Build-RAG-with-Milvus-and-Gemini" class="anchor-icon" translate="no">
@@ -28,8 +28,8 @@ title: بناء RAG مع Milvus وGemini
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>تساعدك <a href="https://ai.google.dev/gemini-api/docs">واجهة برمجة تطبيقات Gemini و</a> Gemini <a href="https://ai.google.dev/gemini-api/docs">API</a> <a href="https://ai.google.dev/aistudio">وGoogle AI Studio</a> على بدء العمل مع أحدث نماذج Google وتحويل أفكارك إلى تطبيقات قابلة للتطوير. توفر Gemini إمكانية الوصول إلى نماذج لغوية قوية مثل <code translate="no">Gemini-2.0-Flash</code> و <code translate="no">Gemini-2.0-Pro</code> وإصدارات أخرى لمهام مثل توليد النصوص ومعالجة المستندات والرؤية وتحليل الصوت وغيرها. تسمح لك واجهة برمجة التطبيقات بإدخال سياق طويل بملايين الرموز، وضبط النماذج لمهام محددة، وإنشاء مخرجات منظمة مثل JSON، والاستفادة من إمكانيات مثل الاسترجاع الدلالي وتنفيذ التعليمات البرمجية.</p>
-<p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (استرجاع-جيل معزز) باستخدام Milvus و Gemini. سوف نستخدم نموذج Gemini لإنشاء استجابات بناءً على استعلام معين، معززًا بالمعلومات ذات الصلة المسترجعة من Milvus.</p>
+    </button></h1><p>تساعدك <a href="https://ai.google.dev/gemini-api/docs">واجهة برمجة تطبيقات Gemini و</a> Gemini <a href="https://ai.google.dev/gemini-api/docs">API</a> <a href="https://ai.google.dev/aistudio">وGoogle AI Studio</a> على بدء العمل مع أحدث نماذج Google وتحويل أفكارك إلى تطبيقات قابلة للتطوير. يوفر Gemini إمكانية الوصول إلى نماذج لغوية قوية مثل <code translate="no">Gemini-1.5-Flash</code> و <code translate="no">Gemini-1.5-Flash-8B</code> و <code translate="no">Gemini-1.5-Pro</code> لمهام مثل توليد النصوص ومعالجة المستندات والرؤية وتحليل الصوت والمزيد. تسمح لك واجهة برمجة التطبيقات بإدخال سياق طويل بملايين الرموز، وضبط النماذج لمهام محددة، وإنشاء مخرجات منظمة مثل JSON، والاستفادة من إمكانيات مثل الاسترجاع الدلالي وتنفيذ التعليمات البرمجية.</p>
+<p>في هذا البرنامج التعليمي، سنوضح لك في هذا البرنامج التعليمي كيفية إنشاء خط أنابيب RAG (استرجاع-جيل معزز) باستخدام Milvus و Gemini. سنستخدم نموذج Gemini لإنشاء نص بناءً على استعلام معين. سنستخدم أيضًا Milvus لتخزين واسترجاع النص الذي تم إنشاؤه.</p>
 <h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,8 +60,7 @@ title: بناء RAG مع Milvus وGemini
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>أولاً، قم بتثبيت الحزم المطلوبة:</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus milvus-lite google-genai requests tqdm</span>
+    </button></h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install --upgrade pymilvus google-generativeai requests tqdm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
@@ -117,27 +116,27 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>نستخدم <code translate="no">gemini-2.0-flash</code> كنموذج LLM، و <code translate="no">text-embedding-004</code> كنموذج تضمين.</p>
+    </button></h3><p>نستخدم <code translate="no">gemini-1.5-flash</code> كنموذج LLM، و <code translate="no">text-embedding-004</code> كنموذج تضمين.</p>
 <p>لنحاول توليد استجابة اختبارية من LLM:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> google.generativeai <span class="hljs-keyword">as</span> genai
 
-client = genai.Client(api_key=os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>])
+genai.configure(api_key=os.environ[<span class="hljs-string">&quot;GEMINI_API_KEY&quot;</span>])
 
-response = client.models.generate_content(
-    model=<span class="hljs-string">&quot;gemini-2.0-flash&quot;</span>, contents=<span class="hljs-string">&quot;who are you&quot;</span>
-)
+gemini_model = genai.GenerativeModel(<span class="hljs-string">&quot;gemini-1.5-flash&quot;</span>)
+
+response = gemini_model.generate_content(<span class="hljs-string">&quot;who are you&quot;</span>)
 <span class="hljs-built_in">print</span>(response.text)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">I am a large language model, trained by Google.
+<pre><code translate="no">I am a large language model, trained by Google.  I am an AI and don't have a personal identity or consciousness.  My purpose is to process information and respond to a wide range of prompts and questions in a helpful and informative way.
 </code></pre>
 <p>توليد تضمين اختباري وطباعة بُعده والعناصر القليلة الأولى.</p>
-<pre><code translate="no" class="language-python">test_embeddings = client.models.embed_content(
-    model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
-)
+<pre><code translate="no" class="language-python">test_embeddings = genai.embed_content(
+    model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=[<span class="hljs-string">&quot;This is a test1&quot;</span>, <span class="hljs-string">&quot;This is a test2&quot;</span>]
+)[<span class="hljs-string">&quot;embedding&quot;</span>]
 
-embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embeddings[<span class="hljs-number">0</span>].values)
+embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings[<span class="hljs-number">0</span>])
 <span class="hljs-built_in">print</span>(embedding_dim)
-<span class="hljs-built_in">print</span>(test_embeddings.embeddings[<span class="hljs-number">0</span>].values[:<span class="hljs-number">10</span>])
+<span class="hljs-built_in">print</span>(test_embeddings[<span class="hljs-number">0</span>][:<span class="hljs-number">10</span>])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">768
 [0.013588584, -0.004361838, -0.08481652, -0.039724775, 0.04723794, -0.0051557426, 0.026071774, 0.045514572, -0.016867816, 0.039378334]
@@ -172,8 +171,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embeddings.embedding
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>لنقم بتهيئة عميل ميلفوس وإعداد مجموعتنا:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
@@ -182,7 +180,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <div class="alert note">
 <p>بالنسبة للوسيطة <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>يعد تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هو الطريقة الأكثر ملاءمة، حيث أنه يستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ميلفوس لايت</a> لتخزين جميع البيانات في هذا الملف.</li>
+<li>تعيين <code translate="no">uri</code> كملف محلي، على سبيل المثال<code translate="no">./milvus.db</code> ، هي الطريقة الأكثر ملاءمة، حيث تستخدم تلقائيًا <a href="https://milvus.io/docs/milvus_lite.md">ميلفوس لايت</a> لتخزين جميع البيانات في هذا الملف.</li>
 <li>إذا كان لديك حجم كبير من البيانات، يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يُرجى استخدام الخادم uri، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كـ <code translate="no">uri</code>.</li>
 <li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
 </ul>
@@ -197,7 +195,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
+    consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -221,14 +219,16 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
 data = []
 
-doc = client.models.embed_content(model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=text_lines)
+doc_embeddings = genai.embed_content(
+    model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=text_lines
+)[<span class="hljs-string">&quot;embedding&quot;</span>]
 
 <span class="hljs-keyword">for</span> i, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(tqdm(text_lines, desc=<span class="hljs-string">&quot;Creating embeddings&quot;</span>)):
-    data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: doc.embeddings[i].values, <span class="hljs-string">&quot;text&quot;</span>: line})
+    data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: doc_embeddings[i], <span class="hljs-string">&quot;text&quot;</span>: line})
 
 milvus_client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00, 337796.30it/s]
+<pre><code translate="no">Creating embeddings: 100%|██████████| 72/72 [00:00&lt;00:00, 468201.38it/s]
 
 
 
@@ -270,11 +270,13 @@ milvus_client.insert(collection_name=collection_name, data=data)
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>ابحث عن السؤال في المجموعة واسترجع أفضل 3 مطابقات دلالية.</p>
-<pre><code translate="no" class="language-python">quest_embed = client.models.embed_content(model=<span class="hljs-string">&quot;text-embedding-004&quot;</span>, contents=question)
+<pre><code translate="no" class="language-python">question_embedding = genai.embed_content(
+    model=<span class="hljs-string">&quot;models/text-embedding-004&quot;</span>, content=question
+)[<span class="hljs-string">&quot;embedding&quot;</span>]
 
 search_res = milvus_client.search(
     collection_name=collection_name,
-    data=[quest_embed.embeddings[<span class="hljs-number">0</span>].values],
+    data=[question_embedding],
     limit=<span class="hljs-number">3</span>,  <span class="hljs-comment"># Return top 3 results</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}},  <span class="hljs-comment"># Inner product distance</span>
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
@@ -324,9 +326,7 @@ retrieved_lines_with_distances = [
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>تحديد مطالبات النظام والمستخدم لنموذج لاناج. يتم تجميع هذه المطالبة مع المستندات المسترجعة من ميلفوس.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> google.genai <span class="hljs-keyword">import</span> types
-
-SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
+<pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>
 USER_PROMPT = <span class="hljs-string">f&quot;&quot;&quot;
@@ -340,13 +340,12 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &quot;&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>استخدم الجوزاء لإنشاء استجابة بناءً على المطالبات.</p>
-<pre><code translate="no" class="language-python">response = client.models.generate_content(
-    model=<span class="hljs-string">&quot;gemini-2.0-flash&quot;</span>,
-    config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
-    contents=USER_PROMPT,
+<pre><code translate="no" class="language-python">gemini_model = genai.GenerativeModel(
+    <span class="hljs-string">&quot;gemini-1.5-flash&quot;</span>, system_instruction=SYSTEM_PROMPT
 )
+response = gemini_model.generate_content(USER_PROMPT)
 <span class="hljs-built_in">print</span>(response.text)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Milvus stores two types of data: inserted data and metadata. Inserted data, which includes vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends. Metadata is generated within Milvus, and each Milvus module has its own metadata that is stored in etcd.
+<pre><code translate="no">Milvus stores data in two ways:  Inserted data (vector data, scalar data, and collection-specific schema) is stored as an incremental log in persistent storage using object storage backends such as MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage.  Metadata, generated by each Milvus module, is stored in etcd.
 </code></pre>
 <p>عظيم! لقد نجحنا في بناء خط أنابيب RAG مع Milvus و Gemini.</p>

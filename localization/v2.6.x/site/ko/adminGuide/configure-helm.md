@@ -39,10 +39,40 @@ title: 헬름 차트로 밀버스 구성하기
         ></path>
       </svg>
     </button></h2><p>구성 파일 <code translate="no">values.yaml</code> 을 사용하여 Milvus를 구성할 수 있다.</p>
-<h3 id="Download-a-configuration-file" class="common-anchor-header">구성 파일 다운로드</h3><p><code translate="no">values.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/zilliztech/milvus-helm/master/charts/milvus/values.yaml">다운로드하세요</a>.</p>
+<h3 id="Download-a-configuration-file" class="common-anchor-header">구성 파일 다운로드<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">values.yaml</code> 을 직접<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">다운로드하거나</a> 다음 명령을 사용하여<a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml">다운로드하세요</a>.</p>
 <pre><code translate="no"><span class="hljs-variable">$ </span>wget <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/raw.githubusercontent.com/milvus</span>-io/milvus-helm/master/charts/milvus/values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Modify-the-configuration-file" class="common-anchor-header">구성 파일 수정하기</h3><p><code translate="no">values.yaml</code> 에서 해당 파라미터를 조정하여 애플리케이션 시나리오에 맞게 Milvus 인스턴스를 구성합니다.</p>
+<h3 id="Modify-the-configuration-file" class="common-anchor-header">구성 파일 수정하기<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">values.yaml</code> 에서 해당 파라미터를 조정하여 애플리케이션 시나리오에 맞게 Milvus 인스턴스를 구성합니다.</p>
 <p>구체적으로 <code translate="no">values.yaml</code> 에서 <code translate="no">extraConfigFiles</code> 을 검색한 후 다음과 같이 이 섹션에 구성을 입력합니다:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># Extra configs for milvus.yaml</span>
 <span class="hljs-comment"># If set, this config will merge into milvus.yaml</span>
@@ -196,7 +226,22 @@ title: 헬름 차트로 밀버스 구성하기
 </table>
 </div>
 <p>쿠버네티스 설치와 관련된 다른 파라미터에 대해서는 <a href="https://github.com/milvus-io/milvus-helm/tree/master/charts/milvus#configuration">밀버스 헬름 차트 구성을</a> 참고한다.</p>
-<h3 id="Start-Milvus" class="common-anchor-header">밀버스 시작</h3><p>구성 파일 수정을 마쳤으면, 이제 해당 파일로 Milvus를 시작할 수 있습니다.</p>
+<h3 id="Start-Milvus" class="common-anchor-header">밀버스 시작<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>구성 파일 수정을 마쳤으면, 이제 해당 파일로 Milvus를 시작할 수 있습니다.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus -f values.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Configure-Milvus-via-command-line" class="common-anchor-header">명령줄을 통해 Milvus 구성하기<button data-href="#Configure-Milvus-via-command-line" class="anchor-icon" translate="no">
@@ -215,10 +260,40 @@ title: 헬름 차트로 밀버스 구성하기
         ></path>
       </svg>
     </button></h2><p>또는 헬름 명령어를 사용하여 Milvus 구성을 직접 업그레이드할 수 있습니다.</p>
-<h3 id="Check-the-configurable-parameters" class="common-anchor-header">구성 가능한 파라미터 확인</h3><p>업그레이드하기 전에 헬름 차트를 통해 구성 가능한 파라미터를 확인할 수 있습니다.</p>
+<h3 id="Check-the-configurable-parameters" class="common-anchor-header">구성 가능한 파라미터 확인<button data-href="#Check-the-configurable-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>업그레이드하기 전에 헬름 차트를 통해 구성 가능한 파라미터를 확인할 수 있습니다.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_">$ </span><span class="language-bash">helm show values milvus/milvus</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Start-Milvus" class="common-anchor-header">Milvus 시작</h3><p>업그레이드 명령에 <code translate="no">--values</code> 또는 <code translate="no">--set</code> 을 추가하여 Milvus를 구성하고 시작하세요.</p>
+<h3 id="Start-Milvus" class="common-anchor-header">Milvus 시작<button data-href="#Start-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>업그레이드 명령에 <code translate="no">--values</code> 또는 <code translate="no">--set</code> 을 추가하여 Milvus를 구성하고 시작하세요.</p>
 <pre><code translate="no"><span class="hljs-meta prompt_"># </span><span class="language-bash">For instance, upgrade the Milvus cluster with compaction disabled</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">helm upgrade my-release milvus/milvus --<span class="hljs-built_in">set</span> dataCoord.enableCompaction=<span class="hljs-literal">false</span></span>
 <button class="copy-code-btn"></button></code></pre>

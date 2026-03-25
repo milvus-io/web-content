@@ -62,9 +62,8 @@ summary: >-
 </ul></li>
 <li>Der Nachrichtenspeicher kann nicht geändert werden, während das Milvus-System läuft.</li>
 <li>Es wird nur die Kafka-Version 2.x oder 3.x unterstützt.</li>
-<li><strong>Einschränkungen beim Upgrade</strong>: <strong>Beschränkungen für Nachrichtenwarteschlangen</strong>: Bei einem Upgrade auf Milvus v2.6.4 müssen Sie Ihre derzeitige Wahl der Nachrichtenwarteschlange beibehalten. Ein Wechsel zwischen verschiedenen Message-Queue-Systemen während des Upgrades wird nicht unterstützt. Unterstützung für den Wechsel von Message-Queue-Systemen wird in zukünftigen Versionen verfügbar sein.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">Konfigurieren von RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">RocksMQ konfigurieren<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -84,37 +83,15 @@ summary: >-
 <p>Derzeit können Sie RocksMQ als Nachrichtenspeicher für Milvus standalone nur mit Milvus Operator konfigurieren.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen RocksMQ-Dienst.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Die wichtigsten Konfigurationsoptionen:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Legt explizit RocksMQ als Nachrichtenwarteschlange fest</li>
-<li><code translate="no">persistence.enabled</code>: Aktiviert persistente Speicherung für RocksMQ-Daten</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Wenn true, wird die PVC gelöscht, wenn die Milvus-Instanz gelöscht wird</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Standard-Kubernetes-PVC-Spezifikation</li>
-<li><code translate="no">accessModes</code>: Typischerweise <code translate="no">ReadWriteOnce</code> für Blockspeicher</li>
-<li><code translate="no">storageClassName</code>: Die Speicherklasse Ihres Clusters</li>
-<li><code translate="no">storage</code>: Größe des persistenten Volumes</li>
-</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">NATS konfigurieren<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -131,7 +108,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>NATS ist ein alternativer Nachrichtenspeicher für NATS.</p>
-<h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Das folgende Beispiel konfiguriert einen NATS-Dienst.</p>
+<h4 id="Example" class="common-anchor-header">Beispiel</h4><p>Im folgenden Beispiel wird ein NATS-Dienst konfiguriert.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -187,7 +164,7 @@ summary: >-
 </ol>
 <div class="alert note">
 <p><strong>Zwischen RocksMQ und NATS wählen?</strong></p>
-<p>RockMQ verwendet CGO für die Interaktion mit RocksDB und verwaltet den Speicher selbst, während das in die Milvus-Installation eingebettete reine Go-NATS seine Speicherverwaltung an den Garbage Collector (GC) von Go delegiert.</p>
+<p>RockMQ verwendet CGO zur Interaktion mit RocksDB und verwaltet den Speicher selbst, während das in die Milvus-Installation eingebettete reine Go-NATS seine Speicherverwaltung an den Garbage Collector (GC) von Go delegiert.</p>
 <p>In dem Szenario, in dem das Datenpaket kleiner als 64 kb ist, schneidet RocksDB in Bezug auf Speicherverbrauch, CPU-Nutzung und Antwortzeit besser ab. Ist das Datenpaket hingegen größer als 64 kb, so ist NATS bei ausreichendem Speicher und idealer GC-Planung in Bezug auf die Antwortzeit überlegen.</p>
 <p>Derzeit wird empfohlen, NATS nur für Experimente zu verwenden.</p>
 </div>

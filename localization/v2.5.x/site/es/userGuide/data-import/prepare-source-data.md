@@ -46,7 +46,7 @@ summary: >-
 <p>Tomando como ejemplo los datos JSON del diagrama anterior, hay dos entidades en la lista de filas y cada fila tiene seis campos. El esquema de la colección incluye selectivamente cuatro: <strong>id</strong>, <strong>vector</strong>, <strong>scalar_1</strong> y <strong>scalar_2</strong>.</p>
 <p>Hay dos cosas más a considerar cuando se diseña el esquema:</p>
 <ul>
-<li><p><strong>Si se activa AutoID</strong></p>
+<li><p><strong>Si activar AutoID</strong></p>
 <p>El campo <strong>id</strong> sirve como campo primario de la colección. Para que el campo primario se incremente automáticamente, puede activar <strong>AutoID</strong> en el esquema. En este caso, debe excluir el campo <strong>id</strong> de cada fila de los datos de origen.</p></li>
 <li><p><strong>Habilitar o no campos dinámicos</strong></p>
 <p>La colección de destino también puede almacenar campos no incluidos en su esquema predefinido si el esquema habilita los campos dinámicos. El campo <strong>$meta</strong> es un campo JSON reservado para contener campos dinámicos y sus valores en pares clave-valor. En el diagrama anterior, los campos <strong>dynamic_field_1</strong> y <strong>dynamic_field_2</strong> y los valores se guardarán como pares clave-valor en el campo <strong>$meta</strong>.</p></li>
@@ -227,7 +227,22 @@ schema.verify()
 <li><strong>RemoteBulkWriter</strong>: Realiza la misma tarea que LocalBulkWriter pero, además, transfiere los archivos de datos convertidos a un bucket de almacenamiento de objetos remoto especificado.</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong> se diferencia de <strong>LocalBulkWriter</strong> en que <strong>RemoteBulkWriter</strong> transfiere los archivos de datos convertidos a un bucket de almacenamiento de objetos de destino.</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configuración de LocalBulkWriter</h3><p>Un <strong>LocalBulkWriter</strong> añade filas del conjunto de datos de origen y las consigna en un archivo local del formato especificado.</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">Configuración de LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Un <strong>LocalBulkWriter</strong> añade filas del conjunto de datos de origen y las consigna en un archivo local del formato especificado.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
@@ -274,7 +289,22 @@ writer = LocalBulkWriter(
 </ul>
 <p>Para más detalles sobre la configuración de parámetros, consulte LocalBulkWriter en la referencia SDK.</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Configuración de RemoteBulkWriter</h3><p>En lugar de enviar los datos añadidos a un archivo local, <strong>RemoteBulkWriter</strong> los envía a un bucket remoto. Por lo tanto, debe configurar un objeto <strong>ConnectParam</strong> antes de crear un <strong>RemoteBulkWriter</strong>.</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">Configuración de RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>En lugar de enviar los datos añadidos a un archivo local, <strong>RemoteBulkWriter</strong> los envía a un bucket remoto. Por lo tanto, debe configurar un objeto <strong>ConnectParam</strong> antes de crear un <strong>RemoteBulkWriter</strong>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter

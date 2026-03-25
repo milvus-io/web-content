@@ -64,7 +64,22 @@ title: GPUによるインデックス
         ></path>
       </svg>
     </button></h2><p>以下の例は、異なるタイプのGPUインデックスを構築する方法を示しています。</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">インデックスパラメータの準備</h3><p>GPU インデックスパラメータを設定する際に、<strong>index_type</strong>、<strong>metric_type</strong>、<strong>params</strong> を定義します：</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">インデックスパラメータの準備<button data-href="#Prepare-index-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>GPU インデックスパラメータを設定する際に、<strong>index_type</strong>、<strong>metric_type</strong>、<strong>params</strong> を定義します：</p>
 <ul>
 <li><p><strong>index_type</strong><em>(文字列</em>)：index_type (string): ベクトル探索を加速するために使用するインデックスのタイプ。有効なオプションは<strong>GPU_CAGRA</strong>、<strong>GPU_IVF_FLAT</strong>、<strong>GPU_IVF_PQ</strong>、<strong>GPU_BRUTE_FORCE</strong>です。</p></li>
 <li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用するメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
@@ -112,7 +127,22 @@ title: GPUによるインデックス
 <button class="copy-code-btn"></button></code></pre>
 <p>追加の<strong>params</strong>設定は必要ありません。</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">インデックスの構築</h3><p><strong>index_params</strong> でインデックスパラメータを設定した後、インデックスを構築するために <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a>メソッドを呼び出してインデックスを構築します。</p>
+<h3 id="Build-index" class="common-anchor-header">インデックスの構築<button data-href="#Build-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>index_params</strong> でインデックスパラメータを設定した後、インデックスを構築するために <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a>メソッドを呼び出してインデックスを構築します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -137,7 +167,22 @@ collection.create_index(
         ></path>
       </svg>
     </button></h2><p>GPUインデックスを構築したら、次は検索を行う前に検索パラメータを準備します。</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">検索パラメータの準備</h3><p>以下は、さまざまなインデックスタイプの構成例です：</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">検索パラメータの準備<button data-href="#Prepare-search-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下は、さまざまなインデックスタイプの構成例です：</p>
 <ul>
 <li><p><strong>GPU_BRUTE_FORCE</strong>インデックス</p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -173,7 +218,22 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>これら2つのインデックス・タイプの検索パラメータは、<strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>および<a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQで</a></strong>使用されるものと似ています。詳細については、<a href="https://milvus.io/docs/search.md#Prepare-search-parameters">ベクトル類似検索の実施を</a>参照してください。</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">検索の実行</h3><p>を使用します。 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a>メソッドを使用して、GPU インデックスのベクトル類似性検索を実行します。</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">検索の実行<button data-href="#Conduct-a-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>を使用します。 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a>メソッドを使用して、GPU インデックスのベクトル類似性検索を実行します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 

@@ -38,7 +38,7 @@ title: Indexer des champs vectoriels
         ></path>
       </svg>
     </button></h2><p>En exploitant les métadonnées stockées dans un fichier d'index, Milvus organise vos données dans une structure spécialisée, ce qui facilite la récupération rapide des informations demandées lors des recherches ou des requêtes.</p>
-<p>Milvus fournit plusieurs types d'index et de métriques pour trier les valeurs des champs afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
+<p>Milvus propose plusieurs types d'index et de métriques pour trier les valeurs des champs afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
 <div class="filter">
  <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -84,21 +84,12 @@ title: Indexer des champs vectoriels
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">INDEX_INVERSÉ_SPARSE</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+    <td class="tg-0pky"><ul><li>INDEX_INVERTI_SPARSE</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
-<div class="alert note">
-<p>À partir de la version 2.5.4 de Milvus, <code translate="no">SPARSE_WAND</code> est obsolète. Il est recommandé d'utiliser <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> par souci d'équivalence tout en maintenant la compatibilité. Pour plus d'informations, reportez-vous à <a href="/docs/fr/sparse_vector.md#Set-index-params-for-vector-field">Sparse Vector</a>.</p>
 </div>
-</div>
-<p>Il est recommandé de créer des index pour le champ vectoriel et les champs scalaires auxquels on accède fréquemment.</p>
+<p>Il est recommandé de créer des index pour les champs vectoriels et les champs scalaires auxquels on accède fréquemment.</p>
 <h2 id="Preparations" class="common-anchor-header">Préparations<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

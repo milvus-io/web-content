@@ -39,18 +39,108 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après avoir
         ></path>
       </svg>
     </button></h2><p>Pour faciliter la maintenance, Milvus classe ses configurations en %s sections en fonction de ses composants, de ses dépendances et de son utilisation générale.</p>
-<h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>Configuration liée à etcd, utilisée pour stocker les métadonnées de Milvus et la découverte de services.</p>
+<h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code><button data-href="#etcd" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration liée à etcd, utilisée pour stocker les métadonnées de Milvus et la découverte de services.</p>
 <p>Voir <a href="/docs/fr/v2.5.x/configure_etcd.md">Configurations liées à etcd</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_metastore.md">configurations relatives au métastore</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="tikv" class="common-anchor-header"><code translate="no">tikv</code></h3><p>Configuration connexe de tikv, utilisée pour stocker les métadonnées Milvus.</p>
+<h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code><button data-href="#metastore" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_metastore.md">configurations relatives au métastore</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="tikv" class="common-anchor-header"><code translate="no">tikv</code><button data-href="#tikv" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration connexe de tikv, utilisée pour stocker les métadonnées Milvus.</p>
 <p>Notez que lorsque TiKV est activé pour le métastore, vous devez toujours avoir etcd pour la découverte des services.</p>
 <p>TiKV est une bonne option lorsque la taille des métadonnées nécessite une meilleure évolutivité horizontale.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_tikv.md">Configurations liées à tikv</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_localstorage.md">configurations liées à localStorage</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>La configuration associée de MinIO/S3/GCS ou de tout autre service prend en charge l'API S3, qui est responsable de la persistance des données pour Milvus.</p>
+<h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code><button data-href="#localStorage" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_localstorage.md">configurations liées à localStorage</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="minio" class="common-anchor-header"><code translate="no">minio</code><button data-href="#minio" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>La configuration associée de MinIO/S3/GCS ou de tout autre service prend en charge l'API S3, qui est responsable de la persistance des données pour Milvus.</p>
 <p>Par souci de simplicité, nous désignons le service de stockage par MinIO/S3 dans la description suivante.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_minio.md">Configurations liées à Minio</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvus prend en charge quatre MQ : rocksmq (basé sur RockDB), natsmq (serveur nats intégré), Pulsar et Kafka.</p>
+<h3 id="mq" class="common-anchor-header"><code translate="no">mq</code><button data-href="#mq" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus prend en charge quatre MQ : rocksmq (basé sur RockDB), natsmq (serveur nats intégré), Pulsar et Kafka.</p>
 <p>Vous pouvez changer de MQ en définissant le champ mq.type.</p>
 <p>Si vous ne définissez pas le champ mq.type par défaut, il y a une note sur l'activation de la priorité si nous configurons plusieurs mq dans ce fichier.</p>
 <ol>
@@ -58,9 +148,39 @@ Dans la version actuelle, tous les paramètres ne prennent effet qu'après avoir
 <li><p>mode cluster :  Pulsar(default) &gt; Kafka (rocksmq et natsmq ne sont pas supportés en mode cluster)</p></li>
 </ol>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_mq.md">Configurations liées à mq</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code></h3><p>Configuration connexe de pulsar, utilisée pour gérer les journaux Milvus des opérations de mutation récentes, produire des journaux en continu et fournir des services de publication et d'abonnement de journaux.</p>
+<h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code><button data-href="#pulsar" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration connexe de pulsar, utilisée pour gérer les journaux Milvus des opérations de mutation récentes, produire des journaux en continu et fournir des services de publication et d'abonnement de journaux.</p>
 <p>Voir <a href="/docs/fr/v2.5.x/configure_pulsar.md">Configurations liées à pulsar</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>Si vous souhaitez activer kafka, vous devez commenter les configurations de pulsar</p>
+<h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code><button data-href="#rocksmq" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Si vous souhaitez activer kafka, vous devez commenter les configurations de pulsar</p>
 <p>kafka :</p>
 <p>brokerList : localhost:9092</p>
 <p>saslUsername :</p>
@@ -80,32 +200,272 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </code></pre>
 <p>readTimeout : 10</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_rocksmq.md">configurations liées à rocksmq</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>Configuration natsmq.</p>
+<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code><button data-href="#natsmq" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration natsmq.</p>
 <p>plus de détails : https://docs.nats.io/running-a-nats-service/configuration</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_natsmq.md">configurations relatives à natsmq</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Configuration connexe de rootCoord, utilisée pour traiter les requêtes en langage de définition des données (DDL) et en langage de contrôle des données (DCL).</p>
+<h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code><button data-href="#rootCoord" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration connexe de rootCoord, utilisée pour traiter les requêtes en langage de définition des données (DDL) et en langage de contrôle des données (DCL).</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_rootcoord.md">configurations relatives à rootCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Configuration connexe du proxy, utilisée pour valider les demandes des clients et réduire les résultats renvoyés.</p>
+<h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code><button data-href="#proxy" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration connexe du proxy, utilisée pour valider les demandes des clients et réduire les résultats renvoyés.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_proxy.md">configurations liées au proxy</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>Configuration connexe de queryCoord, utilisée pour gérer la topologie et l'équilibrage de la charge pour les nœuds de requête, et le transfert de segments croissants vers des segments scellés.</p>
+<h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code><button data-href="#queryCoord" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration connexe de queryCoord, utilisée pour gérer la topologie et l'équilibrage de la charge pour les nœuds de requête, et le transfert de segments croissants vers des segments scellés.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_querycoord.md">configurations liées à queryCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>Configuration connexe du nœud de requête, utilisée pour effectuer une recherche hybride entre les données vectorielles et scalaires.</p>
+<h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code><button data-href="#queryNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configuration connexe du nœud de requête, utilisée pour effectuer une recherche hybride entre les données vectorielles et scalaires.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_querynode.md">configurations liées à queryNode</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_indexcoord.md">configurations liées à indexCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_indexnode.md">configurations liées à indexNode</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>Pour une description détaillée de chaque paramètre de cette section, voir les <a href="/docs/fr/v2.5.x/configure_datacoord.md">Configurations liées à dataCoord</a>.</p>
-<h3 id="dataNode" class="common-anchor-header"><code translate="no">dataNode</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_datanode.md">configurations liées aux nœuds de données</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="msgChannel" class="common-anchor-header"><code translate="no">msgChannel</code></h3><p>Cette rubrique présente les configurations de Milvus liées au canal de messages.</p>
+<h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code><button data-href="#indexCoord" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_indexcoord.md">configurations liées à indexCoord</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code><button data-href="#indexNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_indexnode.md">configurations liées à indexNode</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code><button data-href="#dataCoord" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pour une description détaillée de chaque paramètre de cette section, voir les <a href="/docs/fr/v2.5.x/configure_datacoord.md">Configurations liées à dataCoord</a>.</p>
+<h3 id="dataNode" class="common-anchor-header"><code translate="no">dataNode</code><button data-href="#dataNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_datanode.md">configurations liées aux nœuds de données</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="msgChannel" class="common-anchor-header"><code translate="no">msgChannel</code><button data-href="#msgChannel" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Cette rubrique présente les configurations de Milvus liées au canal de messages.</p>
 <p>Voir <a href="/docs/fr/v2.5.x/configure_msgchannel.md">Configurations liées au canal de messages</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configure la sortie du journal du système.</p>
+<h3 id="log" class="common-anchor-header"><code translate="no">log</code><button data-href="#log" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configure la sortie du journal du système.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_log.md">Configurations relatives au journal</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_grpc.md">configurations liées à grpc</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configure external tls.</p>
+<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code><button data-href="#grpc" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_grpc.md">configurations liées à grpc</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code><button data-href="#tls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configure external tls.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_tls.md">configurations relatives à tls</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code></h3><p>Configure internal tls.</p>
+<h3 id="internaltls" class="common-anchor-header"><code translate="no">internaltls</code><button data-href="#internaltls" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Configure internal tls.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_internaltls.md">configurations liées à internaltls</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_common.md">configurations liées à common</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configuration des quotas et des limites de Milvus.</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code><button data-href="#common" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_common.md">configurations liées à common</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code><button data-href="#quotaAndLimits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>QuotaConfig, configuration des quotas et des limites de Milvus.</p>
 <p>Par défaut, nous activons :</p>
 <ol>
 <li><p>Protection TT ;</p></li>
@@ -121,17 +481,92 @@ tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_
 </ol>
 <p>Si nécessaire, vous pouvez également forcer manuellement le refus des requêtes RW.</p>
 <p>Voir <a href="/docs/fr/v2.5.x/configure_quotaandlimits.md">les configurations relatives aux quotas et aux limites</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="trace" class="common-anchor-header"><code translate="no">trace</code></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_trace.md">configurations relatives à la trace</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="gpu" class="common-anchor-header"><code translate="no">gpu</code></h3><p>#Lors de l'utilisation de l'indexation GPU, Milvus utilisera un pool de mémoire pour éviter l'allocation et la désallocation fréquentes de la mémoire.</p>
+<h3 id="trace" class="common-anchor-header"><code translate="no">trace</code><button data-href="#trace" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Voir les <a href="/docs/fr/v2.5.x/configure_trace.md">configurations relatives à la trace</a> pour une description détaillée de chaque paramètre de cette section.</p>
+<h3 id="gpu" class="common-anchor-header"><code translate="no">gpu</code><button data-href="#gpu" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>#Lors de l'utilisation de l'indexation GPU, Milvus utilisera un pool de mémoire pour éviter l'allocation et la désallocation fréquentes de la mémoire.</p>
 <p>#Ici, vous pouvez définir la taille de la mémoire occupée par le pool de mémoire, l'unité étant le Mo.</p>
 <p>#note that there is a possibility of Milvus crashing when the actual memory demand exceeds the value set by maxMemSize.</p>
 <p>#Si initMemSize et MaxMemSize sont tous deux à zéro,</p>
 <p>#Milvus initialisera automatiquement la moitié de la mémoire GPU disponible,</p>
 <p>#maxMemSize initialisera la totalité de la mémoire disponible sur le GPU.</p>
 <p>Voir <a href="/docs/fr/v2.5.x/configure_gpu.md">Configurations liées au GPU</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code></h3><p>Toute configuration liée au serveur de nœuds de streaming.</p>
+<h3 id="streamingNode" class="common-anchor-header"><code translate="no">streamingNode</code><button data-href="#streamingNode" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Toute configuration liée au serveur de nœuds de streaming.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_streamingnode.md">Configurations liées au nœud de streaming</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code></h3><p>Toute configuration liée au service de diffusion en continu.</p>
+<h3 id="streaming" class="common-anchor-header"><code translate="no">streaming</code><button data-href="#streaming" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Toute configuration liée au service de diffusion en continu.</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_streaming.md">Configurations liées au streaming</a> pour une description détaillée de chaque paramètre de cette section.</p>
-<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code></h3><p>Toute configuration relative au moteur de recherche vectorielle knowhere</p>
+<h3 id="knowhere" class="common-anchor-header"><code translate="no">knowhere</code><button data-href="#knowhere" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Toute configuration relative au moteur de recherche vectorielle knowhere</p>
 <p>Voir les <a href="/docs/fr/v2.5.x/configure_knowhere.md">configurations liées à knowhere</a> pour une description détaillée de chaque paramètre de cette section.</p>

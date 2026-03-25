@@ -18,8 +18,8 @@ title: 快速入門
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>向量是神經網路模型的輸出資料格式，可以有效地編碼資訊，並在知識庫、語意搜尋、Retrieval Augmented Generation (RAG) 等人工智慧應用中扮演關鍵的角色。</p>
 <p>Milvus 是一個開放原始碼的向量資料庫，適合各種規模的 AI 應用程式，從在 Jupyter notebook 中執行示範聊天機器人，到建立服務數十億使用者的網路規模搜尋。在本指南中，我們將教您如何在幾分鐘內在本機設定 Milvus，並使用 Python 用戶端函式庫來產生、儲存和搜尋向量。</p>
 <h2 id="Install-Milvus" class="common-anchor-header">安裝 Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: 快速入門
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本指南中，我們使用 Milvus Lite，它是<code translate="no">pymilvus</code> 中包含的一個 python 函式庫，可以嵌入到客戶端應用程式中。Milvus 也支援部署在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>上，以應用於生產使用個案。</p>
+    </button></h2><p>在本指南中，我們使用 Milvus Lite，它是<code translate="no">pymilvus</code> 中包含的一個 python 函式庫，可以嵌入到客戶端應用程式中。Milvus 也支援部署在<a href="/docs/zh-hant/install_standalone-docker.md">Docker</a>和<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Kubernetes</a>上，以應用於生產使用個案。</p>
 <p>在開始之前，請確認您的本機環境中有 Python 3.8+ 可用。安裝<code translate="no">pymilvus</code> ，其中包含 python 客戶端函式庫和 Milvus Lite：</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -92,8 +92,8 @@ client.create_collection(
 <p>在上面的設定中</p>
 <ul>
 <li>主鍵和向量欄位使用預設名稱（"id 「和 」vector"）。</li>
-<li>度量類型 (向量距離定義) 設定為預設值<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>)。</li>
-<li>主鍵欄位接受整數，並且不會自動遞增（即不使用<a href="https://milvus.io/docs/schema.md">自動識別功能</a>）。 或者，您可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">指令</a>正式定義集合的模式。</li>
+<li>度量類型 (向量距離定義) 設定為預設值<a href="/docs/zh-hant/metric.md#Cosine-Similarity">(COSINE</a>)。</li>
+<li>主鍵欄位接受整數，並且不會自動遞增（即不使用<a href="/docs/zh-hant/schema.md">自動識別功能</a>）。 或者，您可以按照此<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">指令</a>正式定義集合的模式。</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">準備資料<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>現在我們可以用向量來表示搜尋查詢的文字，並在 Milvus 上進行向量相似性搜尋，從而進行語意搜尋。</p>
-<h3 id="Vector-search" class="common-anchor-header">向量搜尋</h3><p>Milvus 可同時接受一個或多個向量搜尋請求。query_vectors 變數的值是一個向量清單，其中每個向量是一個浮點數的陣列。</p>
+<h3 id="Vector-search" class="common-anchor-header">向量搜尋<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus 可同時接受一個或多個向量搜尋請求。query_vectors 變數的值是一個向量清單，其中每個向量是一個浮點數的陣列。</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -299,9 +314,24 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>預設情況下，標量欄位不會被索引。如果您需要在大型資料集中執行 metadata 過濾搜尋，您可以考慮使用固定模式，同時開啟<a href="https://milvus.io/docs/scalar_index.md">索引</a>以改善搜尋效能。</p>
+<p>預設情況下，標量欄位不會被索引。如果您需要在大型資料集中執行 metadata 過濾搜尋，您可以考慮使用固定模式，同時開啟<a href="/docs/zh-hant/scalar_index.md">索引</a>以改善搜尋效能。</p>
 <p>除了向量搜尋外，您也可以執行其他類型的搜尋：</p>
-<h3 id="Query" class="common-anchor-header">查詢</h3><p>查詢()是擷取所有符合條件的實體的操作，例如<a href="https://milvus.io/docs/boolean.md">篩選表達式</a>或符合某些 id。</p>
+<h3 id="Query" class="common-anchor-header">查詢<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>查詢()是擷取所有符合條件的實體的操作，例如<a href="/docs/zh-hant/boolean.md">篩選表達式</a>或符合某些 id。</p>
 <p>例如，擷取標量欄位具有特定值的所有實體：</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -402,8 +432,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 非常適合使用本機 python 程式上手。如果您有大規模的資料，或想在生產中使用 Milvus，您可以學習在<a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a>和<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。Milvus 的所有部署模式都共用相同的 API，因此如果轉換到其他部署模式，您的用戶端程式碼不需要做太大的變更。只要指定部署在任何地方的 Milvus 伺服器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和 Token</a>即可：</p>
+    </button></h2><p>Milvus Lite 非常適合使用本機 python 程式上手。如果您有大規模的資料，或想在生產中使用 Milvus，您可以學習在<a href="/docs/zh-hant/install_standalone-docker.md">Docker</a>和<a href="/docs/zh-hant/install_cluster-milvusoperator.md">Kubernetes</a> 上部署 Milvus。Milvus 的所有部署模式都共用相同的 API，因此如果轉換到其他部署模式，您的用戶端程式碼不需要做太大的變更。只要指定部署在任何地方的 Milvus 伺服器的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI 和 Token</a>即可：</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>要從 Milvus Lite 遷移資料到部署在 Docker 或 Kubernetes 上的 Milvus，請參考<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">從 Milvus Lite 遷移資料</a>。</p>
-<p>Milvus 提供 REST 和 gRPC API，以及<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C# 和<a href="https://milvus.io/docs/install-node.md">Node.js</a> 等語言的用戶端程式庫。</p>
+<p>Milvus 提供 REST 和 gRPC API，以及<a href="/docs/zh-hant/install-pymilvus.md">Python</a>、<a href="/docs/zh-hant/install-java.md">Java</a>、<a href="/docs/zh-hant/install-go.md">Go</a>、C# 和<a href="/docs/zh-hant/install-node.md">Node.js</a> 等語言的用戶端程式庫。</p>

@@ -364,7 +364,7 @@ summary: Imparare a configurare natsmq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Età massima di un messaggio nel canale P </td>
+      <td>        Età massima di qualsiasi messaggio nel canale P </td>
       <td>4320</td>
     </tr>
   </tbody>

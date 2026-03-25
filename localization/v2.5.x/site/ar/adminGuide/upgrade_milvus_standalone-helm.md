@@ -41,7 +41,7 @@ title: ترقية Milvus Standalone مع مخطط Helm البياني
       </svg>
     </button></h2><ul>
 <li>إصدار Helm &gt;= 3.14.0</li>
-<li>إصدار Kubernetes &gt;= 1.20.0</li>
+<li>نسخة Kubernetes &gt;= 1.20.0</li>
 </ul>
 <div class="alert note">
 <p>منذ الإصدار 4.2.21 من مخطط Milvus-Helm، قدمنا مخطط pulsar-v3.x كإصدار تبعي. للتوافق مع الإصدارات السابقة، يرجى ترقية الدفة إلى الإصدار 3.14 أو إصدار أحدث، وتأكد من إضافة الخيار <code translate="no">--reset-then-reuse-values</code> كلما استخدمت <code translate="no">helm upgrade</code>.</p>

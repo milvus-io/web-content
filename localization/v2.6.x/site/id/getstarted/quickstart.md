@@ -18,8 +18,8 @@ title: Mulai cepat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Vektor, format data keluaran dari model Neural Network, dapat secara efektif mengkodekan informasi dan memiliki peran penting dalam aplikasi AI seperti basis pengetahuan, pencarian semantik, Retrieval Augmented Generation (RAG), dan banyak lagi.</p>
 <p>Milvus adalah basis data vektor sumber terbuka yang cocok untuk aplikasi AI dari berbagai ukuran, mulai dari menjalankan chatbot demo di notebook Jupyter hingga membangun pencarian berskala web yang melayani miliaran pengguna. Dalam panduan ini, kami akan memandu Anda tentang cara menyiapkan Milvus secara lokal dalam beberapa menit dan menggunakan pustaka klien Python untuk membuat, menyimpan, dan mencari vektor.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Menginstal Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: Mulai cepat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dalam panduan ini kami menggunakan Milvus Lite, sebuah pustaka python yang disertakan dalam <code translate="no">pymilvus</code> yang dapat disematkan ke dalam aplikasi klien. Milvus juga mendukung penerapan di <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> untuk kasus penggunaan produksi.</p>
+    </button></h2><p>Dalam panduan ini kami menggunakan Milvus Lite, sebuah pustaka python yang disertakan dalam <code translate="no">pymilvus</code> yang dapat disematkan ke dalam aplikasi klien. Milvus juga mendukung penerapan di <a href="/docs/id/install_standalone-docker.md">Docker</a> dan <a href="/docs/id/install_cluster-milvusoperator.md">Kubernetes</a> untuk kasus penggunaan produksi.</p>
 <p>Sebelum memulai, pastikan Anda memiliki Python 3.8+ yang tersedia di lingkungan lokal. Instal <code translate="no">pymilvus</code> yang berisi pustaka klien python dan Milvus Lite:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -92,8 +92,8 @@ client.create_collection(
 <p>Dalam pengaturan di atas,</p>
 <ul>
 <li>Kunci utama dan bidang vektor menggunakan nama defaultnya ("id" dan "vektor").</li>
-<li>Jenis metrik (definisi jarak vektor) diatur ke nilai default<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>Bidang kunci utama menerima bilangan bulat dan tidak secara otomatis bertambah (yaitu tidak menggunakan <a href="https://milvus.io/docs/schema.md">fitur auto-id</a>) Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruksi</a> ini.</li>
+<li>Jenis metrik (definisi jarak vektor) diatur ke nilai default<a href="/docs/id/metric.md#Cosine-Similarity">(COSINE</a>).</li>
+<li>Field kunci utama menerima bilangan bulat dan tidak secara otomatis bertambah (yaitu tidak menggunakan <a href="/docs/id/schema.md">fitur auto-id</a>) Sebagai alternatif, Anda dapat mendefinisikan skema koleksi secara formal dengan mengikuti <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruksi</a> ini.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Menyiapkan Data<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>Sekarang kita dapat melakukan pencarian semantik dengan merepresentasikan teks kueri penelusuran sebagai vektor, dan melakukan pencarian kemiripan vektor di Milvus.</p>
-<h3 id="Vector-search" class="common-anchor-header">Pencarian vektor</h3><p>Milvus menerima satu atau beberapa permintaan pencarian vektor secara bersamaan. Nilai dari variabel query_vectors adalah sebuah daftar vektor, di mana setiap vektor adalah sebuah array angka float.</p>
+<h3 id="Vector-search" class="common-anchor-header">Pencarian vektor<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus menerima satu atau beberapa permintaan pencarian vektor secara bersamaan. Nilai dari variabel query_vectors adalah sebuah daftar vektor, di mana setiap vektor adalah sebuah array angka float.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -299,9 +314,24 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>Secara default, bidang skalar tidak diindeks. Jika Anda perlu melakukan pencarian yang difilter metadata dalam kumpulan data yang besar, Anda dapat mempertimbangkan untuk menggunakan skema tetap dan juga mengaktifkan <a href="https://milvus.io/docs/scalar_index.md">indeks</a> untuk meningkatkan kinerja pencarian.</p>
+<p>Secara default, bidang skalar tidak diindeks. Jika Anda perlu melakukan pencarian yang difilter metadata dalam kumpulan data yang besar, Anda dapat mempertimbangkan untuk menggunakan skema tetap dan juga mengaktifkan <a href="/docs/id/scalar_index.md">indeks</a> untuk meningkatkan kinerja pencarian.</p>
 <p>Selain pencarian vektor, Anda juga dapat melakukan jenis pencarian lainnya:</p>
-<h3 id="Query" class="common-anchor-header">Kueri</h3><p>Query () adalah operasi yang mengambil semua entitas yang cocok dengan kriteria, seperti <a href="https://milvus.io/docs/boolean.md">ekspresi filter</a> atau pencocokan beberapa id.</p>
+<h3 id="Query" class="common-anchor-header">Kueri<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Query () adalah operasi yang mengambil semua entitas yang cocok dengan kriteria, seperti <a href="/docs/id/boolean.md">ekspresi filter</a> atau pencocokan beberapa id.</p>
 <p>Misalnya, mengambil semua entitas yang bidang skalarnya memiliki nilai tertentu:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -402,8 +432,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite sangat bagus untuk memulai dengan program python lokal. Jika Anda memiliki data berskala besar atau ingin menggunakan Milvus dalam produksi, Anda dapat mempelajari tentang men-deploy Milvus di <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> dan <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Semua mode deployment Milvus memiliki API yang sama, sehingga kode sisi klien Anda tidak perlu banyak berubah jika berpindah ke mode deployment lain. Cukup tentukan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI dan Token</a> server Milvus yang digunakan di mana saja:</p>
+    </button></h2><p>Milvus Lite sangat bagus untuk memulai dengan program python lokal. Jika Anda memiliki data berskala besar atau ingin menggunakan Milvus dalam produksi, Anda dapat mempelajari tentang men-deploy Milvus di <a href="/docs/id/install_standalone-docker.md">Docker</a> dan <a href="/docs/id/install_cluster-milvusoperator.md">Kubernetes</a>. Semua mode deployment Milvus memiliki API yang sama, sehingga kode sisi klien Anda tidak perlu banyak berubah jika berpindah ke mode deployment lain. Cukup tentukan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI dan Token</a> server Milvus yang digunakan di mana saja:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Untuk memigrasi data dari Milvus Lite ke Milvus yang digunakan di Docker atau Kubernetes, lihat Memigrasi <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">data dari Milvus Lite</a>.</p>
-<p>Milvus menyediakan API REST dan gRPC, dengan pustaka klien dalam bahasa seperti <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C#, dan <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Milvus menyediakan API REST dan gRPC, dengan pustaka klien dalam bahasa seperti <a href="/docs/id/install-pymilvus.md">Python</a>, <a href="/docs/id/install-java.md">Java</a>, <a href="/docs/id/install-go.md">Go</a>, C#, dan <a href="/docs/id/install-node.md">Node.js</a>.</p>

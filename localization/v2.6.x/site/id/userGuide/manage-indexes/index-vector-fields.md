@@ -84,19 +84,10 @@ title: Mengindeks Bidang Vektor
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
-  </tr>
-</tbody>
-<tbody>
-  <tr>
-    <td class="tg-0pky">BM25</td>
-    <td class="tg-0pky">SPARSE_INVERTED_INDEX</td>
+    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
-<div class="alert note">
-<p>Sejak Milvus 2.5.4 dan seterusnya, <code translate="no">SPARSE_WAND</code> sudah tidak digunakan lagi. Sebagai gantinya, disarankan untuk menggunakan <code translate="no">&quot;inverted_index_algo&quot;: &quot;DAAT_WAND&quot;</code> untuk kesetaraan sambil mempertahankan kompatibilitas. Untuk informasi lebih lanjut, lihat <a href="/docs/id/sparse_vector.md#Set-index-params-for-vector-field">Vektor</a> Jarang.</p>
-</div>
 </div>
 <p>Direkomendasikan untuk membuat indeks untuk bidang vektor dan bidang skalar yang sering diakses.</p>
 <h2 id="Preparations" class="common-anchor-header">Persiapan<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -343,7 +334,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Mengontrol bagaimana indeks dibuat terkait dengan permintaan klien. Nilai yang valid:<br><ul><li><code translate="no">True</code> (default): Klien menunggu hingga indeks selesai dibangun sebelum kembali. Ini berarti Anda tidak akan mendapatkan respons hingga proses selesai.</li><li><code translate="no">False</code>: Klien segera kembali setelah permintaan diterima dan indeks sedang dibuat di latar belakang. Untuk mengetahui apakah pembuatan indeks telah selesai, gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+      <td>Mengontrol bagaimana indeks dibuat terkait dengan permintaan klien. Nilai yang valid:<br><ul><li><code translate="no">True</code> (default): Klien menunggu hingga indeks selesai dibuat sebelum dikembalikan. Ini berarti Anda tidak akan mendapatkan respons hingga proses selesai.</li><li><code translate="no">False</code>: Klien segera kembali setelah permintaan diterima dan indeks sedang dibuat di latar belakang. Untuk mengetahui apakah pembuatan indeks telah selesai, gunakan metode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>

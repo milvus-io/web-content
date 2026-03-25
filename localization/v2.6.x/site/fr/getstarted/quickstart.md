@@ -18,8 +18,8 @@ title: Démarrage rapide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Les vecteurs, le format de données de sortie des modèles de réseaux neuronaux, peuvent encoder efficacement des informations et jouer un rôle central dans les applications d'IA telles que les bases de connaissances, la recherche sémantique, la Génération Augmentée de Récupération (RAG) et bien plus encore.</p>
 <p>Milvus est une base de données vectorielle open-source qui convient aux applications d'IA de toutes tailles, depuis l'exécution d'un chatbot de démonstration dans un bloc-notes Jupyter jusqu'à la construction d'une recherche à l'échelle du web qui sert des milliards d'utilisateurs. Dans ce guide, nous allons vous expliquer comment installer Milvus localement en quelques minutes et utiliser la bibliothèque client Python pour générer, stocker et rechercher des vecteurs.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Installer Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: Démarrage rapide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans ce guide, nous utilisons Milvus Lite, une bibliothèque Python incluse dans <code translate="no">pymilvus</code> qui peut être intégrée dans l'application client. Milvus prend également en charge le déploiement sur <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> et <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> pour les cas d'utilisation en production.</p>
+    </button></h2><p>Dans ce guide, nous utilisons Milvus Lite, une bibliothèque Python incluse dans <code translate="no">pymilvus</code> qui peut être intégrée dans l'application client. Milvus prend également en charge le déploiement sur <a href="/docs/fr/install_standalone-docker.md">Docker</a> et <a href="/docs/fr/install_cluster-milvusoperator.md">Kubernetes</a> pour les cas d'utilisation en production.</p>
 <p>Avant de commencer, assurez-vous que vous disposez de Python 3.8+ dans l'environnement local. Installez <code translate="no">pymilvus</code> qui contient à la fois la bibliothèque client python et Milvus Lite :</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -92,8 +92,8 @@ client.create_collection(
 <p>Dans la configuration ci-dessus,</p>
 <ul>
 <li>La clé primaire et les champs vectoriels utilisent leurs noms par défaut ("id" et "vector").</li>
-<li>Le type de métrique (définition de la distance vectorielle) est défini sur sa valeur par défaut<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>Le champ de clé primaire accepte les entiers et ne s'incrémente pas automatiquement (c'est-à-dire qu'il n'utilise pas la <a href="https://milvus.io/docs/schema.md">fonction auto-id</a>). Vous pouvez également définir formellement le schéma de la collection en suivant cette <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruction</a>.</li>
+<li>Le type de métrique (définition de la distance vectorielle) est défini sur sa valeur par défaut<a href="/docs/fr/metric.md#Cosine-Similarity">(COSINE</a>).</li>
+<li>Le champ de clé primaire accepte les entiers et ne s'incrémente pas automatiquement (c'est-à-dire qu'il n'utilise pas la <a href="/docs/fr/schema.md">fonction auto-id</a>). Vous pouvez également définir formellement le schéma de la collection en suivant cette <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">instruction</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">Préparer les données<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>Nous pouvons maintenant effectuer des recherches sémantiques en représentant le texte de la requête sous forme de vecteur et effectuer une recherche de similarité vectorielle sur Milvus.</p>
-<h3 id="Vector-search" class="common-anchor-header">Recherche vectorielle</h3><p>Milvus accepte une ou plusieurs demandes de recherche vectorielle en même temps. La valeur de la variable query_vectors est une liste de vecteurs, où chaque vecteur est un tableau de nombres flottants.</p>
+<h3 id="Vector-search" class="common-anchor-header">Recherche vectorielle<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus accepte une ou plusieurs demandes de recherche vectorielle en même temps. La valeur de la variable query_vectors est une liste de vecteurs, où chaque vecteur est un tableau de nombres flottants.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -299,9 +314,24 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>Par défaut, les champs scalaires ne sont pas indexés. Si vous avez besoin d'effectuer une recherche filtrée de métadonnées dans un grand ensemble de données, vous pouvez envisager d'utiliser un schéma fixe et d'activer l'<a href="https://milvus.io/docs/scalar_index.md">index</a> pour améliorer les performances de la recherche.</p>
+<p>Par défaut, les champs scalaires ne sont pas indexés. Si vous avez besoin d'effectuer une recherche filtrée de métadonnées dans un grand ensemble de données, vous pouvez envisager d'utiliser un schéma fixe et d'activer l'<a href="/docs/fr/scalar_index.md">index</a> pour améliorer les performances de la recherche.</p>
 <p>Outre la recherche vectorielle, vous pouvez également effectuer d'autres types de recherche :</p>
-<h3 id="Query" class="common-anchor-header">Requête</h3><p>Une requête() est une opération qui permet de récupérer toutes les entités correspondant à un critère, tel qu'une <a href="https://milvus.io/docs/boolean.md">expression de filtre</a> ou certains identifiants.</p>
+<h3 id="Query" class="common-anchor-header">Requête<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Une requête() est une opération qui permet de récupérer toutes les entités correspondant à un critère, tel qu'une <a href="/docs/fr/boolean.md">expression de filtre</a> ou la correspondance avec certains identifiants.</p>
 <p>Par exemple, récupérer toutes les entités dont le champ scalaire a une valeur particulière :</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -402,8 +432,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite est idéal pour démarrer avec un programme python local. Si vous avez des données à grande échelle ou si vous souhaitez utiliser Milvus en production, vous pouvez en savoir plus sur le déploiement de Milvus sur <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> et <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Tous les modes de déploiement de Milvus partagent la même API, de sorte que votre code côté client n'a pas besoin de changer beaucoup si vous passez à un autre mode de déploiement. Il suffit de spécifier l'<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI et le token</a> d'un serveur Milvus déployé n'importe où :</p>
+    </button></h2><p>Milvus Lite est idéal pour démarrer avec un programme python local. Si vous avez des données à grande échelle ou si vous souhaitez utiliser Milvus en production, vous pouvez en savoir plus sur le déploiement de Milvus sur <a href="/docs/fr/install_standalone-docker.md">Docker</a> et <a href="/docs/fr/install_cluster-milvusoperator.md">Kubernetes</a>. Tous les modes de déploiement de Milvus partagent la même API, de sorte que votre code côté client n'a pas besoin de changer beaucoup si vous passez à un autre mode de déploiement. Il suffit de spécifier l'<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI et le token</a> d'un serveur Milvus déployé n'importe où :</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Pour migrer les données de Milvus Lite vers Milvus déployé sur Docker ou Kubernetes, reportez-vous à la section <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migration des données de Milvus Lite</a>.</p>
-<p>Milvus fournit des API REST et gRPC, avec des bibliothèques client dans des langages tels que <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# et <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
+<p>Milvus fournit des API REST et gRPC, avec des bibliothèques client dans des langages tels que <a href="/docs/fr/install-pymilvus.md">Python</a>, <a href="/docs/fr/install-java.md">Java</a>, <a href="/docs/fr/install-go.md">Go</a>, C# et <a href="/docs/fr/install-node.md">Node.js</a>.</p>

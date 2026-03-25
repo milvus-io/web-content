@@ -60,7 +60,6 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
 </ul></li>
 <li>Penyimpanan pesan tidak dapat diubah ketika sistem Milvus sedang berjalan.</li>
 <li>Hanya versi Kafka 2.x atau 3.x yang didukung.</li>
-<li><strong>Batasan peningkatan</strong>: <strong>Keterbatasan Antrian Pesan</strong>: Ketika mengupgrade ke Milvus v2.6.4, anda harus mempertahankan pilihan antrian pesan anda saat ini. Peralihan antara sistem antrian pesan yang berbeda selama upgrade tidak didukung. Dukungan untuk mengubah sistem antrian pesan akan tersedia di versi mendatang.</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">Mengkonfigurasi RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -77,42 +76,20 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RocksMQ adalah penyimpanan pesan default di Milvus standalone.</p>
+    </button></h2><p>RocksMQ adalah penyimpanan pesan default pada Milvus mandiri.</p>
 <div class="alert note">
-<p>Saat ini, anda hanya dapat mengkonfigurasi RocksMQ sebagai penyimpanan pesan untuk Milvus standalone dengan Milvus Operator.</p>
+<p>Saat ini, Anda hanya dapat mengonfigurasi RocksMQ sebagai penyimpanan pesan untuk Milvus standalone dengan Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Contoh</h4><p>Contoh berikut ini mengonfigurasi layanan RocksMQ.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Opsi konfigurasi utama:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Secara eksplisit menetapkan RocksMQ sebagai antrean pesan</li>
-<li><code translate="no">persistence.enabled</code>: Mengaktifkan penyimpanan persisten untuk data RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Jika benar, PVC akan dihapus ketika instans Milvus dihapus</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Spesifikasi PVC Kubernetes standar</li>
-<li><code translate="no">accessModes</code>: Biasanya <code translate="no">ReadWriteOnce</code> untuk penyimpanan blok</li>
-<li><code translate="no">storageClassName</code>: Kelas penyimpanan cluster Anda</li>
-<li><code translate="no">storage</code>: Ukuran volume persisten</li>
-</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Mengkonfigurasi NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,7 +182,7 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
         ></path>
       </svg>
     </button></h2><p>Pulsar mengelola log perubahan terbaru, mengeluarkan log aliran, dan menyediakan langganan log. Mengkonfigurasi Pulsar untuk penyimpanan pesan didukung pada Milvus mandiri dan Milvus cluster. Namun, dengan Milvus Operator, Anda hanya dapat mengonfigurasi Pulsar sebagai penyimpanan pesan untuk Milvus cluster. Tambahkan bidang yang diperlukan di bawah <code translate="no">spec.dependencies.pulsar</code> untuk mengkonfigurasi Pulsar.</p>
-<p><code translate="no">pulsar</code> Milvus mendukung <code translate="no">external</code> dan <code translate="no">inCluster</code>.</p>
+<p><code translate="no">pulsar</code> Milvus Operator mendukung <code translate="no">external</code> dan <code translate="no">inCluster</code>.</p>
 <h3 id="External-Pulsar" class="common-anchor-header">Pulsar eksternal<button data-href="#External-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -427,5 +404,5 @@ summary: Pelajari cara mengonfigurasi penyimpanan pesan dengan Milvus Operator.
     </button></h2><p>Pelajari cara mengonfigurasi dependensi Milvus lainnya dengan Milvus Operator:</p>
 <ul>
 <li><a href="/docs/id/object_storage_operator.md">Mengonfigurasi Penyimpanan Objek dengan Milvus Operator</a></li>
-<li><a href="/docs/id/meta_storage_operator.md">Mengonfigurasi Meta Storage dengan Milvus Operator</a></li>
+<li><a href="/docs/id/meta_storage_operator.md">Mengkonfigurasi Meta Storage dengan Milvus Operator</a></li>
 </ul>

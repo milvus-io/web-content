@@ -46,7 +46,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <button class="copy-code-btn"></button></code></pre>
 <p>Depois de ter atualizado o seu Milvus Operator para a versão mais recente, tem as seguintes opções:</p>
 <ul>
-<li>Para atualizar o Milvus da versão v2.2.3 ou de versões posteriores para a versão 2.5.13, pode <a href="#Conduct-a-rolling-upgrade">efetuar uma atualização contínua</a>.</li>
+<li>Para atualizar o Milvus da versão v2.2.3 ou versões posteriores para a versão 2.5.13, pode <a href="#Conduct-a-rolling-upgrade">efetuar uma atualização contínua</a>.</li>
 <li>Para atualizar o Milvus de uma versão secundária anterior à v2.2.3 para a 2.5.13, é aconselhável <a href="#Upgrade-Milvus-by-changing-its-image">atualizar o Milvus alterando a sua versão de imagem</a>.</li>
 <li>Para atualizar o Milvus da v2.1.x para a 2.5.13, é necessário <a href="#Migrate-the-metadata">migrar os metadados</a> antes da atualização efectiva.</li>
 </ul>

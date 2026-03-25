@@ -26,9 +26,9 @@ title: Atualizar o Milvus Standalone com o Docker Compose
     </button></h1><p>Este tópico descreve como atualizar seu Milvus usando o Docker Compose.</p>
 <p>Em casos normais, você pode <a href="#Upgrade-Milvus-by-changing-its-image">atualizar o Milvus alterando sua imagem</a>. No entanto, é necessário <a href="#Migrate-the-metadata">migrar os metadados</a> antes de qualquer atualização da v2.1.x para a v2.5.13.</p>
 <div class="alter note">
-<p>Devido a preocupações de segurança, o Milvus actualiza o seu MinIO para RELEASE.2023-03-20T20-16-18Z com o lançamento da v2.2.5. Antes de qualquer atualização de versões anteriores do Milvus Standalone instaladas usando o Docker Compose, você deve criar uma implantação MinIO de nó único e unidade única e migrar as configurações e o conteúdo existentes do MinIO para a nova implantação. Para obter detalhes, consulte <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">este guia</a>.</p>
+<p>Devido a preocupações de segurança, o Milvus actualiza o seu MinIO para RELEASE.2023-03-20T20-16-18Z com o lançamento da v2.2.5. Antes de qualquer atualização de versões anteriores do Milvus Standalone instaladas usando o Docker Compose, você deve criar uma implantação do MinIO de nó único e unidade única e migrar as configurações e o conteúdo existentes do MinIO para a nova implantação. Para obter detalhes, consulte <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">este guia</a>.</p>
 </div>
-<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Atualizar o Milvus alterando a sua imagem<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
+<h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Atualizar o Milvus alterando sua imagem<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

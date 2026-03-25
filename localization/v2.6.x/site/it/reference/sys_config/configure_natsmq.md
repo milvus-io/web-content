@@ -74,7 +74,7 @@ summary: Imparare a configurare natsmq per Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Directory da utilizzare per l'archiviazione JetStream dei nats    </td>
+      <td>        Directory da utilizzare per la memorizzazione dei nats da parte di JetStream      </td>
       <td>/var/lib/milvus/nats</td>
     </tr>
   </tbody>

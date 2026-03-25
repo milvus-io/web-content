@@ -20,35 +20,6 @@ title: Milvus_CLI 指令參考
       </svg>
     </button></h1><p>Milvus Command-Line Interface (CLI) 是一個命令列工具，支援資料庫連線、資料操作及資料匯入匯出。</p>
 <p>本主題介紹所有支援的命令及相對應的選項。也包括一些範例供您參考。</p>
-<h2 id="Command-Groups" class="common-anchor-header">命令群組<button data-href="#Command-Groups" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Milvus CLI 命令分為以下幾組：</p>
-<ul>
-<li><code translate="no">create</code>:建立資料集、資料庫、分割區、使用者、角色或索引</li>
-<li><code translate="no">delete</code>:刪除資料集、資料庫、分割區、別名、使用者、角色或索引</li>
-<li><code translate="no">list</code>:列出資料集、資料庫、分割、使用者、角色、授權或索引</li>
-<li><code translate="no">show</code>:顯示連線、資料庫、集合、載入進度或索引進度</li>
-<li><code translate="no">grant</code>:授予角色或權限</li>
-<li><code translate="no">revoke</code>:撤銷角色或權限</li>
-<li><code translate="no">load</code>:載入收集或分割</li>
-<li><code translate="no">release</code>:釋放集合或分割區</li>
-<li><code translate="no">use</code>:使用資料庫</li>
-<li><code translate="no">rename</code>:重新命名集合</li>
-<li><code translate="no">insert</code>:插入實體（檔案或行）</li>
-</ul>
 <h2 id="clear" class="common-anchor-header">清除<button data-href="#clear" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,7 +35,7 @@ title: Milvus_CLI 指令參考
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>清除畫面。</p>
+    </button></h2><p>清除螢幕。</p>
 <p><h3 id="clear">語法</h3></p>
 <pre><code translate="no" class="language-shell">clear
 <button class="copy-code-btn"></button></code></pre>
@@ -95,7 +66,6 @@ title: Milvus_CLI 指令參考
     </button></h2><p>連接至 Milvus。</p>
 <p><h3 id="connect">語法</h3></p>
 <pre><code translate="no" class="language-shell">connect [-uri (text)] [-t (text)]
-connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="connect">選項</h3></p>
 <table>
@@ -104,10 +74,8 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 </thead>
 <tbody>
 <tr><td style="text-align:left">-資料來源</td><td style="text-align:left">-uri</td><td style="text-align:left">(可選）uri 名稱。預設為 "http://127.0.0.1:19530"。</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(可選） zilliz 雲端 apikey 或<code translate="no">username:password</code> 。預設為無。</td></tr>
-<tr><td style="text-align:left">-tls</td><td style="text-align:left">-tlsmode</td><td style="text-align:left">(可選）設定 TLS 模式：0 (無加密)、1 (單向加密)、2 (尚未支援雙向加密)。預設為 0</td></tr>
-<tr><td style="text-align:left">-cert</td><td style="text-align:left">-cert</td><td style="text-align:left">(可選）用戶端證書檔的路徑。使用單向加密</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(可選）zilliz 雲端 apikey 或<code translate="no">username:password</code> 。預設為無。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">無</td><td style="text-align:left">顯示命令使用說明。</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">範例</h3></p>
@@ -132,16 +100,46 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="create-database">語法</h3></p>
 <pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-db_name</td><td style="text-align:left">[Required] milvus 中的資料庫名稱。</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-資料庫</td><td style="text-align:left">[Required] milvus 中的資料庫名稱。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例在 milvus 中建立資料庫<code translate="no">testdb</code> 。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例在 milvus 中建立資料庫<code translate="no">testdb</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="use-Database" class="common-anchor-header">使用資料庫<button data-href="#use-Database" class="anchor-icon" translate="no">
@@ -163,16 +161,46 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="use-database">語法</h3></p>
 <pre><code translate="no" class="language-shell">use database -db (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-db_name</td><td style="text-align:left">[Required] milvus 中的資料庫名稱。</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-資料庫</td><td style="text-align:left">[Required] milvus 中的資料庫名稱。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例使用 milvus 中的資料庫<code translate="no">testdb</code> 。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例使用 milvus 中的資料庫<code translate="no">testdb</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-Databases" class="common-anchor-header">列出資料庫<button data-href="#list-Databases" class="anchor-icon" translate="no">
@@ -194,7 +222,22 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="list-database">語法</h3></p>
 <pre><code translate="no" class="language-shell">list databases
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Examples" class="common-anchor-header">範例</h3><h4 id="Example-1" class="common-anchor-header">範例 1</h4><p>以下範例列出 Milvus 中的資料庫。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">範例 1</h4><p>以下範例列出 Milvus 中的資料庫。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-Database" class="common-anchor-header">刪除資料庫<button data-href="#delete-Database" class="anchor-icon" translate="no">
@@ -216,20 +259,47 @@ connect [-uri (text)] [-t (text)] [-tls (0|1)] [-cert (text)]
 <p><h3 id="delete-database">語法</h3></p>
 <pre><code translate="no" class="language-shell">delete database -db (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-db_name</td><td style="text-align:left">[Required] milvus 中的資料庫名稱。</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-資料庫</td><td style="text-align:left">[Required] milvus 中的資料庫名稱。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例刪除 milvus 中的資料庫<code translate="no">testdb</code> 。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例刪除 milvus 中的資料庫<code translate="no">testdb</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete database -db testdb
-
-Warning! You are trying to delete the database. This action cannot be undone!
-Do you want to continue? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-user" class="common-anchor-header">建立使用者<button data-href="#create-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -250,7 +320,22 @@ Do you want to continue? [y/N]: y
 <p><h3 id="create-user">語法</h3></p>
 <pre><code translate="no" class="language-shell">create user -u (text) -p (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
@@ -260,7 +345,22 @@ Do you want to continue? [y/N]: y
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例在 milvus 中建立使用者<code translate="no">zilliz</code> 及密碼<code translate="no">zilliz</code> 。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例在 milvus 中建立使用者<code translate="no">zilliz</code> 及密碼<code translate="no">zilliz</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-role" class="common-anchor-header">建立角色<button data-href="#create-role" class="anchor-icon" translate="no">
@@ -282,7 +382,22 @@ Do you want to continue? [y/N]: y
 <p><h3 id="create-role">語法</h3></p>
 <pre><code translate="no" class="language-shell">create role -r (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
@@ -291,7 +406,22 @@ Do you want to continue? [y/N]: y
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例在 milvus 中建立角色<code translate="no">role1</code> 。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><h4 id="Example-1" class="common-anchor-header">範例一</h4><p>以下範例在 milvus 中建立角色<code translate="no">role1</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">建立別名<button data-href="#create-alias" class="anchor-icon" translate="no">
@@ -353,35 +483,29 @@ Do you want to continue? [y/N]: y
       </svg>
     </button></h2><p>建立一個集合。</p>
 <p><h3 id="create-collection">語法</h3></p>
-<pre><code translate="no" class="language-shell">create collection
+<pre><code translate="no" class="language-shell">create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="create-collection">互動範例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; create collection
+<p><h3 id="create-collection">選項</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">集合的名稱。</td></tr>
+<tr><td style="text-align:left">-f</td><td style="text-align:left">-字段模式</td><td style="text-align:left">(多重)<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的欄位模式。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-schema-主鍵欄位</td><td style="text-align:left">主鍵欄位的名稱。</td></tr>
+<tr><td style="text-align:left">-a</td><td style="text-align:left">-schema-auto-id。</td><td style="text-align:left">(可選）自動產生 ID 的旗標。</td></tr>
+<tr><td style="text-align:left">-desc</td><td style="text-align:left">-結構描述</td><td style="text-align:left">(可選）集合的描述。</td></tr>
+<tr><td style="text-align:left">-等級</td><td style="text-align:left">-一致性等級</td><td style="text-align:left">(可選）一致性等級：Bounded,Session,Strong, Eventual .</td></tr>
+<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否動態</td><td style="text-align:left">(可選）集合模式是否支援動態欄位。</td></tr>
+<tr><td style="text-align:left">-s</td><td style="text-align:left">-shards-num</td><td style="text-align:left">(可選擇) 碎片數量</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
+</tbody>
+</table>
+<p><h3 id="create-collection">範例</h3></p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment"># For array field: --schema-field support &lt;fieldName&gt;:&lt;dataType&gt;:&lt;maxCapacity&gt;:&lt;elementDataType&gt;(:&lt;maxLength&gt;if Varchar)</span></span>
 
-Please input collection name: car
-Please input auto id [False]: False
-Please input description []: car collection
-Is support dynamic field [False]: False
-Please input consistency level(Strong(0),Bounded(1), Session(2), and Eventually(3)) [1]: 1
-Please input shards number [1]: 1
-
-Field name: id
-Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): INT64
-Field description []: primary key
-Is id the primary key? [y/N]: y
-
-Field name: vector
-Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): FLOAT_VECTOR
-Field description []: vector field
-Dimension: 128
-
-Field name: color
-Field type (INT64, VARCHAR, FLOAT_VECTOR, etc.): INT64
-Field description []: color field
-Nullable [False]: False
-Default value (type: INT64) [Not set]: 0
-
-Do you want to add embedding function? [y/N]: n
+milvus_cli &gt; create collection -c car -f id:INT64:primary_field -f vector:FLOAT_VECTOR:128 -f color:INT64:color -f brand:ARRAY:64:VARCHAR:128 -p id -A -d &#x27;car_collection&#x27;
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-partition" class="common-anchor-header">建立分割區<button data-href="#create-partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -437,15 +561,31 @@ Do you want to add embedding function? [y/N]: n
 <p><h3 id="creat-index">語法</h3></p>
 <pre><code translate="no" class="language-shell">create index
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="creat-index">互動範例</h3></p>
+<p><h3 id="creat-index">選項</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+</tbody>
+</table>
+<p><h3 id="creat-index">範例</h3></p>
+<p>為欄位建立索引，並提示所需輸入的內容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create index
 
 Collection name (car, car2): car2
+
 The name of the field to create an index for (vector): vector
+
 Index name: vectorIndex
-Index type (FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SCANN, STL_SORT, Trie, INVERTED): IVF_FLAT
-Vector Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE): L2
-Index params nlist: 2
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Default is <span class="hljs-string">&#x27;&#x27;</span></span>
+Index type FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+<span class="hljs-meta prompt_">
+# </span><span class="language-bash">Default is <span class="hljs-string">&#x27;&#x27;</span></span>
+Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
+
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-user" class="common-anchor-header">刪除使用者<button data-href="#delete-user" class="anchor-icon" translate="no">
@@ -464,9 +604,39 @@ Timeout []:
         ></path>
       </svg>
     </button></h2><p>刪除使用者</p>
-<h3 id="Syntax" class="common-anchor-header">語法</h3><pre><code translate="no" class="language-shell">delete user -u (text)
+<h3 id="Syntax" class="common-anchor-header">語法<button data-href="#Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">delete user -u (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
@@ -475,10 +645,22 @@ Timeout []:
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Example" class="common-anchor-header">範例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; delete user -u zilliz
-
-Warning! You are trying to delete the user in milvus. This action cannot be undone!
-Do you want to continue? [y/N]: y
+<h3 id="Example" class="common-anchor-header">範例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">milvus_cli &gt; delete user -u zilliz
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-role" class="common-anchor-header">刪除角色<button data-href="#delete-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -499,7 +681,22 @@ Do you want to continue? [y/N]: y
 <p><h3 id="delete-role">語法</h3></p>
 <pre><code translate="no" class="language-shell">delete role -r (text)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
@@ -508,7 +705,22 @@ Do you want to continue? [y/N]: y
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><p>以下範例刪除 milvus 中的角色<code translate="no">role1</code> 。</p>
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>以下範例刪除 milvus 中的角色<code translate="no">role1</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-alias" class="common-anchor-header">刪除別名<button data-href="#delete-alias" class="anchor-icon" translate="no">
@@ -538,6 +750,7 @@ Do you want to continue? [y/N]: y
 <tbody>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-別名</td><td style="text-align:left">別名。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
+<tr><td style="text-align:left"></td></tr>
 </tbody>
 </table>
 <h2 id="delete-collection" class="common-anchor-header">刪除集合<button data-href="#delete-collection" class="anchor-icon" translate="no">
@@ -571,9 +784,6 @@ Do you want to continue? [y/N]: y
 </table>
 <p><h3 id="delete-collection">範例</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete collection -c car
-
-Warning! You are trying to delete the collection. This action cannot be undone!
-Do you want to continue? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-entities" class="common-anchor-header">刪除實體<button data-href="#delete-entities" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -610,7 +820,8 @@ Do you want to continue? [y/N]: y
 
 The expression <span class="hljs-keyword">to</span> specify entities <span class="hljs-keyword">to</span> be deleted, such <span class="hljs-keyword">as</span> <span class="hljs-string">&quot;film_id in [ 0, 1 ]&quot;</span>: film_id <span class="hljs-keyword">in</span> [ <span class="hljs-number">0</span>, <span class="hljs-number">1</span> ]
 
-Warning! You are trying <span class="hljs-keyword">to</span> delete the entities <span class="hljs-keyword">of</span> collection. This action cannot be undone!
+You are trying <span class="hljs-keyword">to</span> delete the entities <span class="hljs-keyword">of</span> collection. This action cannot be undone!
+
 <span class="hljs-keyword">Do</span> you want <span class="hljs-keyword">to</span> <span class="hljs-keyword">continue</span>? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-partition" class="common-anchor-header">刪除分割區<button data-href="#delete-partition" class="anchor-icon" translate="no">
@@ -638,7 +849,7 @@ Warning! You are trying <span class="hljs-keyword">to</span> delete the entities
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">要刪除的分割區所屬的集合名稱。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">要刪除的分割區所屬集合的名稱。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分區</td><td style="text-align:left">要刪除的分割區的名稱。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用命令的說明。</td></tr>
 </tbody>
@@ -661,7 +872,7 @@ Warning! You are trying <span class="hljs-keyword">to</span> delete the entities
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>刪除索引和相對應的索引檔案。</p>
+    </button></h2><p>刪除索引及相對應的索引檔案。</p>
 <div class="alert note">目前，一個資料集最多支援一個索引。</div>
 <p><h3 id="delete-index">語法</h3></p>
 <pre><code translate="no" class="language-shell">delete index -c (text) -in (text)
@@ -679,9 +890,6 @@ Warning! You are trying <span class="hljs-keyword">to</span> delete the entities
 </table>
 <p><h3 >範例</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; delete index -c car -in indexName
-
-Warning! You are trying to delete the index of collection. This action cannot be undone!
-Do you want to continue? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="grant-role" class="common-anchor-header">授予角色<button data-href="#grant-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -700,8 +908,6 @@ Do you want to continue? [y/N]: y
       </svg>
     </button></h2><p>授予使用者角色</p>
 <p><h3 id="grant-user">語法</h3></p>
-<pre><code translate="no" class="language-shell">grant role -r (text) -u (text)
-<button class="copy-code-btn"></button></code></pre>
 <p><h3 >選項</h3></p>
 <table>
 <thead>
@@ -714,7 +920,7 @@ Do you want to continue? [y/N]: y
 </tbody>
 </table>
 <p><h3 >範例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; grant role -r role1 -u user1
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="grant-privilege" class="common-anchor-header">授予特權<button data-href="#grant-privilege" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -733,16 +939,17 @@ Do you want to continue? [y/N]: y
       </svg>
     </button></h2><p>為角色指定權限。</p>
 <p><h3 id="assign-privilege">語法</h3></p>
+<p><h3 >選項</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+</tbody>
+</table>
+<p><h3 >範例</h3></p>
 <pre><code translate="no" class="language-shell">grant privilege
-<button class="copy-code-btn"></button></code></pre>
-<p><h3 id="assign-privilege">互動範例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; grant privilege
-
-Role name: role1
-The type of object for which the privilege is to be assigned. (Global, Collection, User): Collection
-The name of the object to control access for: object1
-The name of the privilege to assign. (CreateCollection, DropCollection, etc.): CreateCollection
-The name of the database to which the object belongs. [default]: default
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="revoke-role" class="common-anchor-header">撤銷角色<button data-href="#revoke-role" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -761,8 +968,6 @@ The name of the database to which the object belongs. [default]: default
       </svg>
     </button></h2><p>撤銷指定給使用者的角色。</p>
 <p><h3 id="grant-user">語法</h3></p>
-<pre><code translate="no" class="language-shell">revoke role -r (text) -u (text)
-<button class="copy-code-btn"></button></code></pre>
 <p><h3 >選項</h3></p>
 <table>
 <thead>
@@ -775,7 +980,7 @@ The name of the database to which the object belongs. [default]: default
 </tbody>
 </table>
 <p><h3 >範例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; revoke role -r role1 -u user1
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="revoke-privilege" class="common-anchor-header">撤銷權限<button data-href="#revoke-privilege" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -794,16 +999,17 @@ The name of the database to which the object belongs. [default]: default
       </svg>
     </button></h2><p>撤銷已指定給角色的特權。</p>
 <p><h3 id="revoke-privilege">語法</h3></p>
+<p><h3 >選項</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+</tbody>
+</table>
+<p><h3 >範例</h3></p>
 <pre><code translate="no" class="language-shell">revoke privilege
-<button class="copy-code-btn"></button></code></pre>
-<p><h3 id="revoke-privilege">互動範例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; revoke privilege
-
-Role name: role1
-The type of object for which the privilege is to be assigned. (Global, Collection, User): Collection
-The name of the object to control access for: object1
-The name of the privilege to assign. (CreateCollection, DropCollection, etc.): CreateCollection
-The name of the database to which the object belongs. [default]: default
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="show-collection" class="common-anchor-header">顯示集合<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -976,7 +1182,7 @@ The name of the database to which the object belongs. [default]: default
 <tr><td style="text-align:left">版本</td><td style="text-align:left">顯示 Milvus_CLI 的版本。</td></tr>
 </tbody>
 </table>
-<h2 id="insert" class="common-anchor-header">插入<button data-href="#insert" class="anchor-icon" translate="no">
+<h2 id="import" class="common-anchor-header">匯入<button data-href="#import" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -991,25 +1197,24 @@ The name of the database to which the object belongs. [default]: default
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>將本機或遠端資料匯入一個分割區。</p>
-<p><h3 id="insert">語法</h3></p>
-<pre><code translate="no" class="language-shell">insert file -c (text) [-p (text)] [-t (text)] &lt;file_path&gt;
+    </button></h2><p>匯入本機或遠端資料到分割區。</p>
+<p><h3 id="import">語法</h3></p>
+<pre><code translate="no" class="language-shell">import -c (text)[-p (text)] &lt;file_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="insert">選項</h3></p>
+<p><h3 id="import">選項</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名稱</td><td style="text-align:left">插入資料的集合名稱。</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-分區</td><td style="text-align:left">(可選）資料要插入的分割區名稱。未傳送此分割區選項表示選擇「_預設」分割區。</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-超時</td><td style="text-align:left">(可選) RPC 的時間長度，以秒為單位。如果未設定 timeout，用戶端會一直等待，直到伺服器回應或發生錯誤為止。</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-分區</td><td style="text-align:left">(可選）資料要插入的分割區名稱。不傳送此分割區選項表示選擇「_default」分割區。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
 </tbody>
 </table>
-<p><h3 id="insert">範例一</h3>
-以下範例匯入本機 CSV 檔案。</p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; insert file -c car &#x27;examples/import_csv/vectors.csv&#x27;
+<p><h3 id="import">範例一</h3>
+以下範例匯入一個本機 CSV 檔案。</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car &#x27;examples/import_csv/vectors.csv&#x27;
 
 Reading csv file...  [####################################]  100%
 
@@ -1026,9 +1231,9 @@ Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="insert">範例 2</h3>
+<p><h3 id="import">範例 2</h3>
 以下範例匯入遠端 CSV 檔案。</p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; insert file -c car &#x27;https://raw.githubusercontent.com/milvus-
+<pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car &#x27;https://raw.githubusercontent.com/milvus-
 io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;
 
 Reading file from remote URL.
@@ -1049,37 +1254,6 @@ Total collection entities:              150000
 Milvus timestamp:           428849214449254403
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="insert-row" class="common-anchor-header">插入行<button data-href="#insert-row" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>插入一列資料到集合中。</p>
-<p><h3 id="insert-row">語法</h3></p>
-<pre><code translate="no" class="language-shell">insert row
-<button class="copy-code-btn"></button></code></pre>
-<p><h3 id="insert-row">互動範例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; insert row
-
-Collection name: car
-Partition name [_default]: _default
-Enter value for id (INT64): 1
-Enter value for vector (FLOAT_VECTOR): [1.0, 2.0, 3.0]
-Enter value for color (INT64): 100
-Enter value for brand (VARCHAR): Toyota
-
-Inserted successfully.
-<button class="copy-code-btn"></button></code></pre>
 <h2 id="list-users" class="common-anchor-header">列出使用者<button data-href="#list-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1096,9 +1270,39 @@ Inserted successfully.
         ></path>
       </svg>
     </button></h2><p>列出所有使用者。</p>
-<h3 id="Syntax" class="common-anchor-header">語法</h3><pre><code translate="no" class="language-shell">list users
+<h3 id="Syntax" class="common-anchor-header">語法<button data-href="#Syntax" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">list users
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><p>| Option | Full name | Description | | --help | n/a | 顯示使用命令的說明。|</p>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>| 選項 | 全名 | 說明 | | --help | 不適用 | 顯示使用命令的說明。|</p>
 <h2 id="List-roles" class="common-anchor-header">列出角色<button data-href="#List-roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1118,7 +1322,22 @@ Inserted successfully.
 <p><h3 id="list-role">語法</h3></p>
 <pre><code translate="no" class="language-shell">list roles
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
@@ -1126,7 +1345,22 @@ Inserted successfully.
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="List-grants" class="common-anchor-header">列出撥款<button data-href="#List-grants" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1144,7 +1378,22 @@ Inserted successfully.
         ></path>
       </svg>
     </button></h2><p>列出 Milvus 中的授權</p>
-<h3 id="Options" class="common-anchor-header">選項</h3><table>
+<h3 id="Options" class="common-anchor-header">選項<button data-href="#Options" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><table>
 <thead>
 <tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
 </thead>
@@ -1155,7 +1404,22 @@ Inserted successfully.
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">範例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
+<h3 id="Examples" class="common-anchor-header">範例<button data-href="#Examples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-collections" class="common-anchor-header">列出收藏集<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1261,7 +1525,7 @@ Inserted successfully.
       </svg>
     </button></h2><p>將資料集或磁碟分割從硬碟空間載入 RAM。</p>
 <p><h3 id="load">語法</h3></p>
-<pre><code translate="no" class="language-shell">load collection -c (text) [-p (text)]
+<pre><code translate="no" class="language-shell">load -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="load">選項</h3></p>
 <table>
@@ -1293,21 +1557,52 @@ Inserted successfully.
 <p><h3 id="query">語法</h3></p>
 <pre><code translate="no" class="language-shell">query
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="query">互動範例</h3></p>
+<p><h3 id="query">選項</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示命令使用說明。</td></tr>
+</tbody>
+</table>
+<p><h3 id="query">範例</h3>
+<h4 id="query">範例一</h4></p>
+<p>執行查詢，並提示所需輸入的內容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; query
 
 Collection name: car
 
-The query expression: id in [ 428960801420883491, 428960801420883492, 428960801420883493 ]
+The query expression: id in [ 428960801420883491, 428960801420883492,
+428960801420883493 ]
 
-Name of partitions that contain entities(split by &quot;,&quot; if multiple) []: default
+Name of partitions that contain entities(split by &quot;,&quot; if multiple) []:
+default
 
 A list of fields to return(split by &quot;,&quot; if multiple) []: color, brand
 
 timeout []:
 
 Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
+Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
+<button class="copy-code-btn"></button></code></pre>
+<p><h4 id="query">範例 2</h4></p>
+<p>執行查詢，並提示您輸入所需的內容：</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; query
 
+Collection name: car
+
+The query expression: id &gt; 428960801420883491
+
+Name of partitions that contain entities(split by &quot;,&quot; if multiple) []:
+default
+
+A list of fields to return(split by &quot;,&quot; if multiple) []: id, color,
+brand
+
+timeout []:
+
+Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date. [0]:
 Graceful time. Only used in bounded consistency level. If graceful_time is set, PyMilvus will use current timestamp minus the graceful_time as the guarantee_timestamp. This option is 5s by default if not set. [5]:
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="release" class="common-anchor-header">釋放<button data-href="#release" class="anchor-icon" translate="no">
@@ -1327,7 +1622,7 @@ Graceful time. Only used in bounded consistency level. If graceful_time is set, 
       </svg>
     </button></h2><p>從 RAM 釋放資料集或分割區。</p>
 <p><h3 id="release">語法</h3></p>
-<pre><code translate="no" class="language-shell">release collection -c (text) [-p (text)]
+<pre><code translate="no" class="language-shell">release -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="release">選項</h3></p>
 <table>
@@ -1359,12 +1654,24 @@ Graceful time. Only used in bounded consistency level. If graceful_time is set, 
 <p><h3 id="search">語法</h3></p>
 <pre><code translate="no" class="language-shell">search
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="search">互動範例</h3></p>
+<p><h3 id="search">選項</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">選項</th><th style="text-align:left">全名</th><th style="text-align:left">說明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不適用</td><td style="text-align:left">顯示使用指令的說明。</td></tr>
+</tbody>
+</table>
+<p><h3 id="search">範例</h3>
+<h4 id="search">範例一</h4></p>
+<p>在 csv 檔案上執行搜尋，並提示所需的輸入：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
 Collection name (car, test_collection): car
 
-The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field&#x27;s of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file
+out headers): examples/import_csv/search_vectors.csv
 
 The vector field used to search of collection (vector): vector
 
@@ -1379,6 +1686,56 @@ The names of partitions to search (split by &quot;,&quot; if multiple) [&#x27;_d
 timeout []:
 
 Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
+
+<button class="copy-code-btn"></button></code></pre>
+<p><h4 id="search">範例 2</h4></p>
+<p>在已編入索引的資料集中執行搜尋，並提示所需輸入的資料：</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; search
+
+Collection name (car, test_collection): car
+
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers):
+    [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
+
+The vector field used to search of collection (vector): vector
+
+Search parameter nprobe&#x27;s value: 10
+
+The specified number of decimal places of returned distance [-1]: 5
+
+The max number of returned record, also known as topk: 2
+
+The boolean expression used to filter attribute []: id &gt; 0
+
+The names of partitions to search (split by &quot;,&quot; if multiple) [&#x27;_default&#x27;] []: _default
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
+
+<button class="copy-code-btn"></button></code></pre>
+<p><h4 id="search">範例 3</h4></p>
+<p>在非索引的資料集中執行搜尋，並提示所需的輸入：</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; search
+
+Collection name (car, car2): car
+
+The vectors of search data(the length of data is number of query (nq), the dim of every vector in data must be equal to vector field’s of collection. You can also import a csv file without headers): examples/import_csv/search_vectors.csv
+
+The vector field used to search of collection (vector): vector
+
+The specified number of decimal places of returned distance [-1]: 5
+
+The max number of returned record, also known as topk: 2
+
+The boolean expression used to filter attribute []:
+
+The names of partitions to search (split by &quot;,&quot; if multiple) [&#x27;_default&#x27;] []:
+
+timeout []:
+
+Guarantee Timestamp(It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp is provided, then Milvus will search all operations performed to date) [0]:
+
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="list-connection" class="common-anchor-header">列出連線<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"

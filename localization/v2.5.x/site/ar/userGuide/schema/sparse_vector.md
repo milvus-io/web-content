@@ -7,7 +7,6 @@ summary: >-
   الفهم الدلالي، فإن المتجهات المتفرقة غالبًا ما توفر نتائج مطابقة أكثر قابلية
   للتنبؤ، خاصة عند البحث عن مصطلحات خاصة أو معرّفات نصية.
 ---
-
 <h1 id="Sparse-Vector" class="common-anchor-header">المتجهات المتفرقة<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +71,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في الأقسام التالية، نوضح في الأقسام التالية كيفية تخزين المتجهات من نماذج التضمين المتناثرة المستفادة مثل SPLADE. إذا كنت تبحث عن شيء مكمّل للبحث الدلالي المستند إلى المتجهات الكثيفة، فإننا نوصي <a href="/docs/ar/v2.5.x/full-text-search.md">بالبحث عن النص الكامل</a> مع BM25 على SPLADE من أجل البساطة. إذا كنت قد أجريت تقييمًا للجودة وخصصت لاستخدام SPLADE، يمكنك الرجوع إلى <a href="/docs/ar/v2.5.x/embeddings.md#Embedding-Overview">Embeddings</a> حول كيفية توليد متجهات متفرقة باستخدام SPLADE.</p>
+    </button></h2><p>في الأقسام التالية، نوضح في الأقسام التالية كيفية تخزين المتجهات من نماذج التضمين المتناثرة المستفادة مثل SPLADE. إذا كنت تبحث عن شيء مكمّل للبحث الدلالي القائم على المتجهات الكثيفة، فإننا نوصي <a href="/docs/ar/v2.5.x/full-text-search.md">بالبحث عن النص الكامل</a> مع BM25 على SPLADE من أجل البساطة. إذا كنت قد أجريت تقييمًا للجودة وخصصت استخدام SPLADE، يمكنك الرجوع إلى <a href="/docs/ar/v2.5.x/embeddings.md#Embedding-Overview">Embeddings</a> حول كيفية توليد متجهات متفرقة باستخدام SPLADE.</p>
 <p>يدعم ميلفوس مدخلات المتجهات المتفرقة بالتنسيقات التالية:</p>
 <ul>
 <li><p><strong>قائمة القواميس (بتنسيق <code translate="no">{dimension_index: value, ...}</code>)</strong></p>
@@ -86,9 +85,8 @@ sparse_vectors = [{<span class="hljs-number">27</span>: <span class="hljs-number
 <span class="hljs-comment"># Second vector: indices [3, 100] with values [0.8, 0.1]</span>
 indices = [[<span class="hljs-number">27</span>, <span class="hljs-number">100</span>, <span class="hljs-number">5369</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">100</span>]]
 values = [[<span class="hljs-number">0.5</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.6</span>], [<span class="hljs-number">0.8</span>, <span class="hljs-number">0.1</span>]]
-sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]\*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
+sparse_vectors = [csr_matrix((values, ([<span class="hljs-number">0</span>]*<span class="hljs-built_in">len</span>(idx), idx)), shape=(<span class="hljs-number">1</span>, <span class="hljs-number">5369</span>+<span class="hljs-number">1</span>)) <span class="hljs-keyword">for</span> idx, vals <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(indices, values)]
 <button class="copy-code-btn"></button></code></pre></li>
-
 <li><p><strong>قائمة المتجهات المتفرقة (على سبيل المثال <code translate="no">[(dimension_index, value)]</code>)</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent each sparse vector using a list of iterables (e.g. tuples)</span>
 sparse_vector = [
@@ -113,7 +111,22 @@ sparse_vector = [
         ></path>
       </svg>
     </button></h2><p>قبل إنشاء مجموعة، تحتاج إلى تحديد مخطط المجموعة، الذي يحدد الحقول واختياريًا دالة لتحويل حقل نصي إلى تمثيل متجه متناثر مطابق.</p>
-<h3 id="Add-fields" class="common-anchor-header">إضافة حقول</h3><p>لاستخدام المتجهات المتفرقة في ميلفوس، تحتاج إلى إنشاء مجموعة بمخطط يتضمن الحقول التالية:</p>
+<h3 id="Add-fields" class="common-anchor-header">إضافة حقول<button data-href="#Add-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>لاستخدام المتجهات المتفرقة في ميلفوس، تحتاج إلى إنشاء مجموعة بمخطط يتضمن الحقول التالية:</p>
 <ul>
 <li><p>حقل <code translate="no">SPARSE_FLOAT_VECTOR</code> مخصص لتخزين المتجهات المتناثرة، إما أن يتم إنشاؤه تلقائيًا من حقل <code translate="no">VARCHAR</code> أو يتم توفيره مباشرة في بيانات الإدخال.</p></li>
 <li><p>عادة، يتم أيضًا تخزين النص الخام الذي يمثله المتجه المتناثر في المجموعة. يمكنك استخدام حقل <code translate="no">VARCHAR</code> لتخزين النص الخام.</p></li>
@@ -125,15 +138,14 @@ sparse_vector = [
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 
 schema = client.create_schema(
-auto_id=<span class="hljs-literal">True</span>,
-enable_dynamic_fields=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">True</span>,
+    enable_dynamic_fields=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;pk&quot;</span>, datatype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">65535</span>, enable_analyzer=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 
@@ -293,15 +305,14 @@ schema.WithField(entity.NewField().
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
-index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
+    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+    index_name=<span class="hljs-string">&quot;sparse_inverted_index&quot;</span>,
+    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    params={<span class="hljs-string">&quot;inverted_index_algo&quot;</span>: <span class="hljs-string">&quot;DAAT_MAXSCORE&quot;</span>}, <span class="hljs-comment"># or &quot;DAAT_WAND&quot; or &quot;TAAT_NAIVE&quot;</span>
 )
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 <span class="hljs-keyword">import</span> java.util.*;
 
@@ -384,16 +395,15 @@ client.createCollection(requestCreate);
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">MilvusClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>;
 
 <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({
-<span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
+    <span class="hljs-attr">address</span>: <span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>
 });
 
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
-<span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-<span class="hljs-attr">schema</span>: schema,
-<span class="hljs-attr">index_params</span>: indexParams
+    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;my_collection&#x27;</span>,
+    <span class="hljs-attr">schema</span>: schema,
+    <span class="hljs-attr">index_params</span>: indexParams
 });
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-go">err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption(<span class="hljs-string">&quot;my_collection&quot;</span>, schema).
         WithIndexOptions(indexOption))
@@ -427,7 +437,7 @@ client.createCollection(requestCreate);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يجب عليك توفير البيانات لجميع الحقول المحددة أثناء إنشاء المجموعة، باستثناء الحقول التي يتم إنشاؤها تلقائيًا (مثل المفتاح الأساسي مع تمكين <code translate="no">auto_id</code> ). إذا كنت تستخدم دالة BM25 المدمجة لتوليد المتجهات المتفرقة تلقائيًا، فيجب عليك أيضًا حذف حقل المتجه المتناثر عند إدراج البيانات.</p>
+    </button></h2><p>يجب عليك توفير البيانات لجميع الحقول المحددة أثناء إنشاء المجموعة، باستثناء الحقول التي يتم إنشاؤها تلقائيًا (مثل المفتاح الأساسي مع تمكين <code translate="no">auto_id</code> ). إذا كنت تستخدم دالة BM25 المدمجة لإنشاء متجهات متناثرة تلقائيًا، فيجب عليك أيضًا حذف حقل المتجه المتناثر عند إدراج البيانات.</p>
 <div class="multipleCode">
    <a href="#python">بايثون</a> <a href="#java">جافا جافا</a> <a href="#javascript">NodeJS</a> <a href="#go">Go</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [
@@ -441,11 +451,10 @@ client.createCollection(requestCreate);
 ]
 
 client.insert(
-collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
-data=data
+    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,
+    data=data
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
 <span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
@@ -571,7 +580,6 @@ search_params = {
 <span class="hljs-comment"># Query with sparse vector</span>
 query_data = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.EmbeddedText;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.SparseFloatVec;
 
@@ -621,7 +629,6 @@ queryData, _ := entity.NewSliceSparseEmbedding([]<span class="hljs-type">uint32<
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: &#x27;453718927992172266&#x27;, &#x27;distance&#x27;: 0.6299999952316284, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172266&#x27;}}, {&#x27;id&#x27;: &#x27;453718927992172265&#x27;, &#x27;distance&#x27;: 0.10000000149011612, &#x27;entity&#x27;: {&#x27;pk&#x27;: &#x27;453718927992172265&#x27;}}]&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.SearchReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.SearchResp;
 

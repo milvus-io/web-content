@@ -23,7 +23,7 @@ title: Milvus Cluster mit Milvus Operator aufrüsten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Diese Anleitung beschreibt, wie Sie Ihren Milvus-Cluster mit Milvus Operator aktualisieren.</p>
+    </button></h1><p>Dieser Leitfaden beschreibt, wie Sie Ihren Milvus-Cluster mit Milvus Operator aktualisieren.</p>
 <h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">Aktualisieren Sie Ihren Milvus Operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>Seit Milvus 2.2.3 können Sie Milvus-Koordinatoren so konfigurieren, dass sie im Aktiv-Standby-Modus arbeiten, und die Funktion "Rolling Upgrade" für sie aktivieren, so dass Milvus auf eingehende Anfragen während der Koordinator-Upgrades reagieren kann. In früheren Versionen müssen die Koordinatoren während eines Upgrades entfernt und neu erstellt werden, was zu einer gewissen Ausfallzeit des Dienstes führen kann.</p>
-<p>Auf der Grundlage der von Kubernetes bereitgestellten rollierenden Aktualisierungsfunktionen erzwingt der Milvus-Operator eine geordnete Aktualisierung der Bereitstellungen entsprechend ihrer Abhängigkeiten. Darüber hinaus implementiert Milvus einen Mechanismus, der sicherstellt, dass seine Komponenten während des Upgrades mit den von ihnen abhängigen Komponenten kompatibel bleiben, wodurch potenzielle Ausfallzeiten des Dienstes erheblich reduziert werden.</p>
+<p>Auf der Grundlage der von Kubernetes bereitgestellten rollierenden Aktualisierungsfunktionen erzwingt der Milvus-Operator eine geordnete Aktualisierung der Bereitstellungen entsprechend ihren Abhängigkeiten. Darüber hinaus implementiert Milvus einen Mechanismus, der sicherstellt, dass seine Komponenten während des Upgrades mit den von ihnen abhängigen Komponenten kompatibel bleiben, wodurch potenzielle Ausfallzeiten des Dienstes erheblich reduziert werden.</p>
 <p>Die Funktion "Rolling Upgrade" ist standardmäßig deaktiviert. Sie müssen sie explizit über eine Konfigurationsdatei aktivieren.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

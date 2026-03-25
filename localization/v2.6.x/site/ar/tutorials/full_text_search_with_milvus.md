@@ -1,22 +1,21 @@
 ---
 id: full_text_search_with_milvus.md
 summary: >-
-  البحث في النص الكامل هو طريقة تقليدية لاسترجاع المستندات عن طريق مطابقة كلمات
-  أو عبارات محددة في النص. ويقوم بترتيب النتائج بناءً على درجات الملاءمة
-  المحسوبة من عوامل مثل تكرار المصطلحات. في حين أن البحث الدلالي أفضل في فهم
-  المعنى والسياق، فإن البحث في النص الكامل يتفوق في مطابقة الكلمات المفتاحية
-  بدقة، مما يجعله مكملاً مفيدًا للبحث الدلالي. يتضمن النهج الشائع لإنشاء خط
-  أنابيب الاسترجاع المعزز (RAG) استرجاع المستندات من خلال كل من البحث الدلالي
-  والبحث في النص الكامل، تليها عملية إعادة ترتيب النتائج لتنقيح النتائج.
-title: البحث في النص الكامل مع ميلفوس
+  مع إصدار الإصدار Milvus 2.5، يتيح البحث عن النص الكامل للمستخدمين البحث بكفاءة
+  عن النص استنادًا إلى الكلمات الرئيسية أو العبارات، مما يوفر إمكانات قوية
+  لاسترجاع النص. تعمل هذه الميزة على تحسين دقة البحث ويمكن دمجها بسلاسة مع
+  الاسترجاع القائم على التضمين للبحث المختلط، مما يسمح بالحصول على نتائج دلالية
+  وكلمات مفتاحية في استعلام واحد. في هذا الدفتر، سنعرض الاستخدام الأساسي للبحث
+  عن النص الكامل في ميلفوس.
+title: البحث عن النص الكامل مع ميلفوس
 ---
-<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
+<p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_parent">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/full_text_search_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">البحث في النص الكامل مع ميلفوس<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Full-Text-Search-with-Milvus" class="common-anchor-header">البحث عن النص الكامل مع ميلفوس<button data-href="#Full-Text-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -31,20 +30,7 @@ title: البحث في النص الكامل مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">البحث في النص الكامل</a> هو طريقة تقليدية لاسترجاع المستندات عن طريق مطابقة كلمات أو عبارات محددة في النص. ويقوم بترتيب النتائج بناءً على درجات الملاءمة المحسوبة من عوامل مثل تكرار المصطلحات. في حين أن البحث الدلالي أفضل في فهم المعنى والسياق، فإن البحث في النص الكامل يتفوق في مطابقة الكلمات المفتاحية بدقة، مما يجعله مكملاً مفيدًا للبحث الدلالي. يتضمن النهج الشائع لإنشاء خط أنابيب الاسترجاع المعزز (RAG) استرجاع المستندات من خلال كل من البحث الدلالي والبحث في النص الكامل، تليها عملية إعادة ترتيب لتنقيح النتائج.</p>
-<p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.6.x/assets/advanced_rag/hybrid_and_rerank.png" alt="" class="doc-image" id="" />
-    <span></span>
-  </span>
-</p>
-<p>يقوم هذا النهج بتحويل النص إلى متجهات متناثرة لتسجيل BM25. لاستيعاب المستندات، يمكن للمستخدمين ببساطة إدخال نص خام دون حساب المتجهات المتفرقة يدويًا. سيقوم برنامج Milvus تلقائيًا بإنشاء المتجهات المتفرقة وتخزينها. للبحث في المستندات، يحتاج المستخدمون فقط إلى تحديد استعلام البحث النصي. سيقوم ميلفوس بحساب درجات BM25 داخليًا وإرجاع النتائج المرتبة.</p>
-<p>يدعم Milvus أيضًا الاسترجاع الهجين من خلال الجمع بين البحث في النص الكامل والبحث الدلالي القائم على المتجهات الكثيفة. وعادةً ما يحسن جودة البحث ويقدم نتائج أفضل للمستخدمين من خلال الموازنة بين مطابقة الكلمات الرئيسية والفهم الدلالي.</p>
-<div class="alert note">
-<ul>
-<li>يتوفر البحث في النص الكامل حاليًا في Milvus Standalone وMilvus Distributed وZilliz Cloud، على الرغم من عدم دعم هذه الميزة بعد في Milvus Lite (والتي من المقرر تطبيق هذه الميزة في المستقبل). تواصل مع support@zilliz.com لمزيد من المعلومات.</li>
-</ul>
-</div>
+    </button></h1><p>مع إصدار الإصدار Milvus 2.5، يتيح البحث بالنص الكامل للمستخدمين البحث بكفاءة عن النص استنادًا إلى الكلمات الرئيسية أو العبارات، مما يوفر إمكانات قوية لاسترجاع النص. تعمل هذه الميزة على تحسين دقة البحث ويمكن دمجها بسلاسة مع الاسترجاع القائم على التضمين للبحث المختلط، مما يسمح بالحصول على نتائج دلالية وكلمات مفتاحية في استعلام واحد. سنعرض في هذا الدفتر الاستخدام الأساسي للبحث عن النص الكامل في ميلفوس.</p>
 <h2 id="Preparation" class="common-anchor-header">التحضير<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,17 +46,7 @@ title: البحث في النص الكامل مع ميلفوس
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-PyMilvus" class="common-anchor-header">تثبيت PyMilvus</h3><pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">pip install pymilvus -U</span>
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>إذا كنت تستخدم Google Colab، لتمكين التبعيات المثبتة للتو، قد تحتاج إلى <strong>إعادة تشغيل وقت التشغيل</strong> (انقر على قائمة "وقت التشغيل" في أعلى الشاشة، وحدد "إعادة تشغيل الجلسة" من القائمة المنسدلة).</p>
-</div>
-<h3 id="Set-OpenAI-API-Key" class="common-anchor-header">تعيين مفتاح OpenAI API</h3><p>سنستخدم النماذج من OpenAI لإنشاء التضمينات المتجهة وتوليد الاستجابة. يجب عليك إعداد <a href="https://platform.openai.com/docs/quickstart">مفتاح API</a> <code translate="no">OPENAI_API_KEY</code> كمتغير بيئة.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
-
-os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Setup-and-Configuration" class="common-anchor-header">الإعداد والتهيئة<button data-href="#Setup-and-Configuration" class="anchor-icon" translate="no">
+    </button></h2><h3 id="Download-the-dataset" class="common-anchor-header">تنزيل مجموعة البيانات<button data-href="#Download-the-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,9 +61,60 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>استيراد المكتبات اللازمة</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
-<span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
+    </button></h3><p>سيقوم الأمر التالي بتحميل مثال البيانات المستخدمة في <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">العرض التوضيحي</a> الأصلي أنثروبيك.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Install-Milvus-25" class="common-anchor-header">تثبيت ميلفوس 2.5<button data-href="#Install-Milvus-25" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>راجع <a href="https://milvus.io/docs/install_standalone-docker-compose.md">دليل التثبيت الرسمي</a> لمزيد من التفاصيل.</p>
+<h3 id="Install-PyMilvus" class="common-anchor-header">تثبيت PyMilvus<button data-href="#Install-PyMilvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>قم بتشغيل الأمر التالي لتثبيت PyMilvus:</p>
+<pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span> -U 
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Define-the-Retriever" class="common-anchor-header">تعريف المسترد<button data-href="#Define-the-Retriever" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
     MilvusClient,
@@ -97,171 +124,213 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
     AnnSearchRequest,
     RRFRanker,
 )
-<button class="copy-code-btn"></button></code></pre>
-<p>سنستخدم MilvusClient لإنشاء اتصال بخادم Milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
-uri = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
-collection_name = <span class="hljs-string">&quot;full_text_demo&quot;</span>
-client = MilvusClient(uri=uri)
-<button class="copy-code-btn"></button></code></pre>
-<div class="alert note">
-<p>من أجل الاتصال_args:</p>
-<ul>
-<li>يمكنك إعداد خادم Milvus أكثر أداءً على <a href="https://milvus.io/docs/quickstart.md">docker أو kubernetes</a>. في هذا الإعداد، يرجى استخدام عنوان الخادم، على سبيل المثال<code translate="no">http://localhost:19530</code> ، كعنوان <code translate="no">uri</code>.</li>
-<li>إذا كنت ترغب في استخدام <a href="https://zilliz.com/cloud">Zilliz Cloud،</a> الخدمة السحابية المدارة بالكامل لـ Milvus، اضبط <code translate="no">uri</code> و <code translate="no">token</code> ، والتي تتوافق مع <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">نقطة النهاية العامة ومفتاح Api</a> في Zilliz Cloud.</li>
-</ul>
-</div>
-<h2 id="Collection-Setup-for-Full-Text-Search" class="common-anchor-header">إعداد مجموعة للبحث عن النص الكامل<button data-href="#Collection-Setup-for-Full-Text-Search" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>يتطلب إعداد مجموعة للبحث في النص الكامل عدة خطوات تكوين. لنستعرضها واحدة تلو الأخرى.</p>
-<h3 id="Text-Analysis-Configuration" class="common-anchor-header">تكوين تحليل النص</h3><p>للبحث عن النص الكامل، نحدد كيفية معالجة النص. المحللات ضرورية في البحث عن النص الكامل من خلال تقسيم الجمل إلى رموز وإجراء تحليل معجمي مثل الجذع وإزالة كلمات التوقف. نقوم هنا ببساطة بتعريف المحلل.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define tokenizer parameters for text analysis</span>
-analyzer_params = {<span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]}
-<button class="copy-code-btn"></button></code></pre>
-<p>لمزيد من تفاصيل المفهوم حول المحلل، يرجى الرجوع إلى <a href="https://milvus.io/docs/analyzer-overview.md">وثائق المحلل</a>.</p>
-<h3 id="Collection-Schema-and-BM25-Function" class="common-anchor-header">مخطط المجموعة ووظيفة BM25</h3><p>نحدد الآن المخطط مع حقول للمفتاح الأساسي، ومحتوى النص، والمتجهات المتفرقة (للبحث في النص الكامل)، والمتجهات الكثيفة (للبحث الدلالي)، والبيانات الوصفية. نقوم أيضًا بتكوين دالة BM25 للبحث في النص الكامل.</p>
-<p>تقوم دالة BM25 تلقائيًا بتحويل محتوى النص تلقائيًا إلى متجهات متناثرة، مما يسمح لـ Milvus بالتعامل مع تعقيد البحث في النص الكامل دون الحاجة إلى إنشاء تضمين يدوي متناثر.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create schema</span>
-schema = MilvusClient.create_schema()
-schema.add_field(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    datatype=DataType.VARCHAR,
-    is_primary=<span class="hljs-literal">True</span>,
-    auto_id=<span class="hljs-literal">True</span>,
-    max_length=<span class="hljs-number">100</span>,
-)
-schema.add_field(
-    field_name=<span class="hljs-string">&quot;content&quot;</span>,
-    datatype=DataType.VARCHAR,
-    max_length=<span class="hljs-number">65535</span>,
-    analyzer_params=analyzer_params,
-    enable_match=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable text matching</span>
-    enable_analyzer=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># Enable text analysis</span>
-)
-schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR)
-schema.add_field(
-    field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    datatype=DataType.FLOAT_VECTOR,
-    dim=<span class="hljs-number">1536</span>,  <span class="hljs-comment"># Dimension for text-embedding-3-small</span>
-)
-schema.add_field(field_name=<span class="hljs-string">&quot;metadata&quot;</span>, datatype=DataType.JSON)
 
-<span class="hljs-comment"># Define BM25 function to generate sparse vectors from text</span>
-bm25_function = Function(
-    name=<span class="hljs-string">&quot;bm25&quot;</span>,
-    function_type=FunctionType.BM25,
-    input_field_names=[<span class="hljs-string">&quot;content&quot;</span>],
-    output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-)
-
-<span class="hljs-comment"># Add the function to schema</span>
-schema.add_function(bm25_function)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">{'auto_id': False, 'description': '', 'fields': [{'name': 'id', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 100}, 'is_primary': True, 'auto_id': True}, {'name': 'content', 'description': '', 'type': &lt;DataType.VARCHAR: 21&gt;, 'params': {'max_length': 65535, 'enable_match': True, 'enable_analyzer': True, 'analyzer_params': {'tokenizer': 'standard', 'filter': ['lowercase']}}}, {'name': 'sparse_vector', 'description': '', 'type': &lt;DataType.SPARSE_FLOAT_VECTOR: 104&gt;, 'is_function_output': True}, {'name': 'dense_vector', 'description': '', 'type': &lt;DataType.FLOAT_VECTOR: 101&gt;, 'params': {'dim': 1536}}, {'name': 'metadata', 'description': '', 'type': &lt;DataType.JSON: 23&gt;}], 'enable_dynamic_field': False, 'functions': [{'name': 'bm25', 'description': '', 'type': &lt;FunctionType.BM25: 1&gt;, 'input_field_names': ['content'], 'output_field_names': ['sparse_vector'], 'params': {}}]}
-</code></pre>
-<h3 id="Indexing-and-Collection-Creation" class="common-anchor-header">الفهرسة وإنشاء المجموعات</h3><p>لتحسين أداء البحث، نقوم بإنشاء فهارس لحقول المتجهات المتفرقة والكثيفة على حد سواء، ثم ننشئ المجموعة في Milvus.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Define indexes</span>
-index_params = MilvusClient.prepare_index_params()
-index_params.add_index(
-    field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
-)
-index_params.add_index(field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>)
-
-<span class="hljs-comment"># Drop collection if exist</span>
-<span class="hljs-keyword">if</span> client.has_collection(collection_name):
-    client.drop_collection(collection_name)
-<span class="hljs-comment"># Create the collection</span>
-client.create_collection(
-    collection_name=collection_name,
-    schema=schema,
-    index_params=index_params,
-)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Collection &#x27;<span class="hljs-subst">{collection_name}</span>&#x27; created successfully&quot;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Collection 'full_text_demo' created successfully
-</code></pre>
-<h2 id="Insert-Data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-Data" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>بعد إعداد المجموعة، نقوم بإدراج البيانات من خلال إعداد كيانات ذات محتوى نصي وتمثيلات متجهاتها. دعونا نحدد دالة تضمين ثم ندرج البيانات في المجموعة.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up OpenAI for embeddings</span>
-openai_client = OpenAI(api_key=os.environ.get(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>))
-model_name = <span class="hljs-string">&quot;text-embedding-3-small&quot;</span>
+<span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 
-<span class="hljs-comment"># Define embedding generation function for reuse</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">get_embeddings</span>(<span class="hljs-params">texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">float</span>]]:
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> texts:
-        <span class="hljs-keyword">return</span> []
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">HybridRetriever</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, uri, collection_name=<span class="hljs-string">&quot;hybrid&quot;</span>, dense_embedding_function=<span class="hljs-literal">None</span></span>):
+        <span class="hljs-variable language_">self</span>.uri = uri
+        <span class="hljs-variable language_">self</span>.collection_name = collection_name
+        <span class="hljs-variable language_">self</span>.embedding_function = dense_embedding_function
+        <span class="hljs-variable language_">self</span>.use_reranker = <span class="hljs-literal">True</span>
+        <span class="hljs-variable language_">self</span>.use_sparse = <span class="hljs-literal">True</span>
+        <span class="hljs-variable language_">self</span>.client = MilvusClient(uri=uri)
 
-    response = openai_client.embeddings.create(<span class="hljs-built_in">input</span>=texts, model=model_name)
-    <span class="hljs-keyword">return</span> [embedding.embedding <span class="hljs-keyword">for</span> embedding <span class="hljs-keyword">in</span> response.data]
-<button class="copy-code-btn"></button></code></pre>
-<p>إدراج أمثلة على المستندات في المجموعة.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example documents to insert</span>
-documents = [
-    {
-        <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;Milvus is a vector database built for embedding similarity search and AI applications.&quot;</span>,
-        <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;documentation&quot;</span>, <span class="hljs-string">&quot;topic&quot;</span>: <span class="hljs-string">&quot;introduction&quot;</span>},
-    },
-    {
-        <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;Full-text search in Milvus allows you to search using keywords and phrases.&quot;</span>,
-        <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tutorial&quot;</span>, <span class="hljs-string">&quot;topic&quot;</span>: <span class="hljs-string">&quot;full-text search&quot;</span>},
-    },
-    {
-        <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;Hybrid search combines the power of sparse BM25 retrieval with dense vector search.&quot;</span>,
-        <span class="hljs-string">&quot;metadata&quot;</span>: {<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;blog&quot;</span>, <span class="hljs-string">&quot;topic&quot;</span>: <span class="hljs-string">&quot;hybrid search&quot;</span>},
-    },
-]
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">build_collection</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(<span class="hljs-variable language_">self</span>.embedding_function.dim, <span class="hljs-built_in">dict</span>):
+            dense_dim = <span class="hljs-variable language_">self</span>.embedding_function.dim[<span class="hljs-string">&quot;dense&quot;</span>]
+        <span class="hljs-keyword">else</span>:
+            dense_dim = <span class="hljs-variable language_">self</span>.embedding_function.dim
 
-<span class="hljs-comment"># Prepare entities for insertion</span>
-entities = []
-texts = [doc[<span class="hljs-string">&quot;content&quot;</span>] <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> documents]
-embeddings = get_embeddings(texts)
-
-<span class="hljs-keyword">for</span> i, doc <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(documents):
-    entities.append(
-        {
-            <span class="hljs-string">&quot;content&quot;</span>: doc[<span class="hljs-string">&quot;content&quot;</span>],
-            <span class="hljs-string">&quot;dense_vector&quot;</span>: embeddings[i],
-            <span class="hljs-string">&quot;metadata&quot;</span>: doc.get(<span class="hljs-string">&quot;metadata&quot;</span>, {}),
+        tokenizer_params = {
+            <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,
+            <span class="hljs-string">&quot;filter&quot;</span>: [
+                <span class="hljs-string">&quot;lowercase&quot;</span>,
+                {
+                    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;length&quot;</span>,
+                    <span class="hljs-string">&quot;max&quot;</span>: <span class="hljs-number">200</span>,
+                },
+                {<span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stemmer&quot;</span>, <span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>},
+                {
+                    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;stop&quot;</span>,
+                    <span class="hljs-string">&quot;stop_words&quot;</span>: [
+                        <span class="hljs-string">&quot;a&quot;</span>,
+                        <span class="hljs-string">&quot;an&quot;</span>,
+                        <span class="hljs-string">&quot;and&quot;</span>,
+                        <span class="hljs-string">&quot;are&quot;</span>,
+                        <span class="hljs-string">&quot;as&quot;</span>,
+                        <span class="hljs-string">&quot;at&quot;</span>,
+                        <span class="hljs-string">&quot;be&quot;</span>,
+                        <span class="hljs-string">&quot;but&quot;</span>,
+                        <span class="hljs-string">&quot;by&quot;</span>,
+                        <span class="hljs-string">&quot;for&quot;</span>,
+                        <span class="hljs-string">&quot;if&quot;</span>,
+                        <span class="hljs-string">&quot;in&quot;</span>,
+                        <span class="hljs-string">&quot;into&quot;</span>,
+                        <span class="hljs-string">&quot;is&quot;</span>,
+                        <span class="hljs-string">&quot;it&quot;</span>,
+                        <span class="hljs-string">&quot;no&quot;</span>,
+                        <span class="hljs-string">&quot;not&quot;</span>,
+                        <span class="hljs-string">&quot;of&quot;</span>,
+                        <span class="hljs-string">&quot;on&quot;</span>,
+                        <span class="hljs-string">&quot;or&quot;</span>,
+                        <span class="hljs-string">&quot;such&quot;</span>,
+                        <span class="hljs-string">&quot;that&quot;</span>,
+                        <span class="hljs-string">&quot;the&quot;</span>,
+                        <span class="hljs-string">&quot;their&quot;</span>,
+                        <span class="hljs-string">&quot;then&quot;</span>,
+                        <span class="hljs-string">&quot;there&quot;</span>,
+                        <span class="hljs-string">&quot;these&quot;</span>,
+                        <span class="hljs-string">&quot;they&quot;</span>,
+                        <span class="hljs-string">&quot;this&quot;</span>,
+                        <span class="hljs-string">&quot;to&quot;</span>,
+                        <span class="hljs-string">&quot;was&quot;</span>,
+                        <span class="hljs-string">&quot;will&quot;</span>,
+                        <span class="hljs-string">&quot;with&quot;</span>,
+                    ],
+                },
+            ],
         }
-    )
 
-<span class="hljs-comment"># Insert data</span>
-client.insert(collection_name, entities)
-<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Inserted <span class="hljs-subst">{<span class="hljs-built_in">len</span>(entities)}</span> documents&quot;</span>)
+        schema = MilvusClient.create_schema()
+        schema.add_field(
+            field_name=<span class="hljs-string">&quot;pk&quot;</span>,
+            datatype=DataType.VARCHAR,
+            is_primary=<span class="hljs-literal">True</span>,
+            auto_id=<span class="hljs-literal">True</span>,
+            max_length=<span class="hljs-number">100</span>,
+        )
+        schema.add_field(
+            field_name=<span class="hljs-string">&quot;content&quot;</span>,
+            datatype=DataType.VARCHAR,
+            max_length=<span class="hljs-number">65535</span>,
+            analyzer_params=tokenizer_params,
+            enable_match=<span class="hljs-literal">True</span>,
+            enable_analyzer=<span class="hljs-literal">True</span>,
+        )
+        schema.add_field(
+            field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR
+        )
+        schema.add_field(
+            field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=dense_dim
+        )
+        schema.add_field(
+            field_name=<span class="hljs-string">&quot;original_uuid&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">128</span>
+        )
+        schema.add_field(field_name=<span class="hljs-string">&quot;doc_id&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">64</span>)
+        schema.add_field(
+            field_name=<span class="hljs-string">&quot;chunk_id&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">64</span>
+        ),
+        schema.add_field(field_name=<span class="hljs-string">&quot;original_index&quot;</span>, datatype=DataType.INT32)
+
+        functions = Function(
+            name=<span class="hljs-string">&quot;bm25&quot;</span>,
+            function_type=FunctionType.BM25,
+            input_field_names=[<span class="hljs-string">&quot;content&quot;</span>],
+            output_field_names=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+        )
+
+        schema.add_function(functions)
+
+        index_params = MilvusClient.prepare_index_params()
+        index_params.add_index(
+            field_name=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+            index_type=<span class="hljs-string">&quot;SPARSE_INVERTED_INDEX&quot;</span>,
+            metric_type=<span class="hljs-string">&quot;BM25&quot;</span>,
+        )
+        index_params.add_index(
+            field_name=<span class="hljs-string">&quot;dense_vector&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+        )
+
+        <span class="hljs-variable language_">self</span>.client.create_collection(
+            collection_name=<span class="hljs-variable language_">self</span>.collection_name,
+            schema=schema,
+            index_params=index_params,
+        )
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">insert_data</span>(<span class="hljs-params">self, chunk, metadata</span>):
+        embedding = <span class="hljs-variable language_">self</span>.embedding_function([chunk])
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(embedding, <span class="hljs-built_in">dict</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;dense&quot;</span> <span class="hljs-keyword">in</span> embedding:
+            dense_vec = embedding[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>]
+        <span class="hljs-keyword">else</span>:
+            dense_vec = embedding[<span class="hljs-number">0</span>]
+        <span class="hljs-variable language_">self</span>.client.insert(
+            <span class="hljs-variable language_">self</span>.collection_name, {<span class="hljs-string">&quot;dense_vector&quot;</span>: dense_vec, **metadata}
+        )
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">self, query: <span class="hljs-built_in">str</span>, k: <span class="hljs-built_in">int</span> = <span class="hljs-number">20</span>, mode=<span class="hljs-string">&quot;hybrid&quot;</span></span>):
+
+        output_fields = [
+            <span class="hljs-string">&quot;content&quot;</span>,
+            <span class="hljs-string">&quot;original_uuid&quot;</span>,
+            <span class="hljs-string">&quot;doc_id&quot;</span>,
+            <span class="hljs-string">&quot;chunk_id&quot;</span>,
+            <span class="hljs-string">&quot;original_index&quot;</span>,
+        ]
+        <span class="hljs-keyword">if</span> mode <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;dense&quot;</span>, <span class="hljs-string">&quot;hybrid&quot;</span>]:
+            embedding = <span class="hljs-variable language_">self</span>.embedding_function([query])
+            <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(embedding, <span class="hljs-built_in">dict</span>) <span class="hljs-keyword">and</span> <span class="hljs-string">&quot;dense&quot;</span> <span class="hljs-keyword">in</span> embedding:
+                dense_vec = embedding[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>]
+            <span class="hljs-keyword">else</span>:
+                dense_vec = embedding[<span class="hljs-number">0</span>]
+
+        <span class="hljs-keyword">if</span> mode == <span class="hljs-string">&quot;sparse&quot;</span>:
+            results = <span class="hljs-variable language_">self</span>.client.search(
+                collection_name=<span class="hljs-variable language_">self</span>.collection_name,
+                data=[query],
+                anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+                limit=k,
+                output_fields=output_fields,
+            )
+        <span class="hljs-keyword">elif</span> mode == <span class="hljs-string">&quot;dense&quot;</span>:
+            results = <span class="hljs-variable language_">self</span>.client.search(
+                collection_name=<span class="hljs-variable language_">self</span>.collection_name,
+                data=[dense_vec],
+                anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+                limit=k,
+                output_fields=output_fields,
+            )
+        <span class="hljs-keyword">elif</span> mode == <span class="hljs-string">&quot;hybrid&quot;</span>:
+            full_text_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>}
+            full_text_search_req = AnnSearchRequest(
+                [query], <span class="hljs-string">&quot;sparse_vector&quot;</span>, full_text_search_params, limit=k
+            )
+
+            dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
+            dense_req = AnnSearchRequest(
+                [dense_vec], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=k
+            )
+
+            results = <span class="hljs-variable language_">self</span>.client.hybrid_search(
+                <span class="hljs-variable language_">self</span>.collection_name,
+                [full_text_search_req, dense_req],
+                ranker=RRFRanker(),
+                limit=k,
+                output_fields=output_fields,
+            )
+        <span class="hljs-keyword">else</span>:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Invalid mode&quot;</span>)
+        <span class="hljs-keyword">return</span> [
+            {
+                <span class="hljs-string">&quot;doc_id&quot;</span>: doc[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;doc_id&quot;</span>],
+                <span class="hljs-string">&quot;chunk_id&quot;</span>: doc[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;chunk_id&quot;</span>],
+                <span class="hljs-string">&quot;content&quot;</span>: doc[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>],
+                <span class="hljs-string">&quot;score&quot;</span>: doc[<span class="hljs-string">&quot;distance&quot;</span>],
+            }
+            <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> results[<span class="hljs-number">0</span>]
+        ]
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Inserted 3 documents
+<pre><code translate="no" class="language-python">dense_ef = BGEM3EmbeddingFunction()
+standard_retriever = HybridRetriever(
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    collection_name=<span class="hljs-string">&quot;milvus_hybrid&quot;</span>,
+    dense_embedding_function=dense_ef,
+)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 108848.72it/s]
 </code></pre>
-<h2 id="Perform-Retrieval" class="common-anchor-header">إجراء الاسترجاع<button data-href="#Perform-Retrieval" class="anchor-icon" translate="no">
+<h3 id="Insert-the-data" class="common-anchor-header">أدخل البيانات<button data-href="#Insert-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -276,105 +345,27 @@ client.insert(collection_name, entities)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يمكنك استخدام طريقتَي <code translate="no">search()</code> أو <code translate="no">hybrid_search()</code> بمرونة لتنفيذ البحث عن النص الكامل (المتناثر) والبحث الدلالي (الكثيف) والبحث المختلط للوصول إلى نتائج بحث أكثر قوة ودقة.</p>
-<h3 id="Full-Text-Search" class="common-anchor-header">البحث في النص الكامل</h3><p>يستفيد البحث المتفرّق من خوارزمية BM25 للعثور على المستندات التي تحتوي على كلمات أو عبارات محددة. تتفوق طريقة البحث التقليدية هذه في مطابقة المصطلحات بدقة وتكون فعالة بشكل خاص عندما يعرف المستخدمون ما يبحثون عنه بالضبط.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for keyword search</span>
-query = <span class="hljs-string">&quot;full-text search keywords&quot;</span>
+    </button></h3><pre><code translate="no" class="language-python">path = <span class="hljs-string">&quot;codebase_chunks.json&quot;</span>
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:
+    dataset = json.load(f)
 
-<span class="hljs-comment"># BM25 sparse vectors</span>
-results = client.search(
-    collection_name=collection_name,
-    data=[query],
-    anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>],
-)
-sparse_results = results[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Print results</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nSparse Search (Full-text search):&quot;</span>)
-<span class="hljs-keyword">for</span> i, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(sparse_results):
-    <span class="hljs-built_in">print</span>(
-        <span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>, Content: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;content&#x27;</span>]}</span>&quot;</span>
-    )
+is_insert = <span class="hljs-literal">True</span>
+<span class="hljs-keyword">if</span> is_insert:
+    standard_retriever.build_collection()
+    <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> dataset:
+        doc_content = doc[<span class="hljs-string">&quot;content&quot;</span>]
+        <span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> doc[<span class="hljs-string">&quot;chunks&quot;</span>]:
+            metadata = {
+                <span class="hljs-string">&quot;doc_id&quot;</span>: doc[<span class="hljs-string">&quot;doc_id&quot;</span>],
+                <span class="hljs-string">&quot;original_uuid&quot;</span>: doc[<span class="hljs-string">&quot;original_uuid&quot;</span>],
+                <span class="hljs-string">&quot;chunk_id&quot;</span>: chunk[<span class="hljs-string">&quot;chunk_id&quot;</span>],
+                <span class="hljs-string">&quot;original_index&quot;</span>: chunk[<span class="hljs-string">&quot;original_index&quot;</span>],
+                <span class="hljs-string">&quot;content&quot;</span>: chunk[<span class="hljs-string">&quot;content&quot;</span>],
+            }
+            chunk_content = chunk[<span class="hljs-string">&quot;content&quot;</span>]
+            standard_retriever.insert_data(chunk_content, metadata)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Sparse Search (Full-text search):
-1. Score: 3.1261, Content: Full-text search in Milvus allows you to search using keywords and phrases.
-2. Score: 0.1836, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
-3. Score: 0.1335, Content: Milvus is a vector database built for embedding similarity search and AI applications.
-</code></pre>
-<h3 id="Semantic-Search" class="common-anchor-header">البحث الدلالي</h3><p>يستخدم البحث الكثيف التضمينات المتجهة للعثور على المستندات ذات المعنى المتشابه، حتى لو لم تتشارك نفس الكلمات المفتاحية بالضبط. يساعد هذا النهج في فهم السياق والدلالات، مما يجعله مثاليًا لمزيد من الاستعلامات اللغوية الطبيعية.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for semantic search</span>
-query = <span class="hljs-string">&quot;How does Milvus help with similarity search?&quot;</span>
-
-<span class="hljs-comment"># Generate embedding for query</span>
-query_embedding = get_embeddings([query])[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Semantic search using dense vectors</span>
-results = client.search(
-    collection_name=collection_name,
-    data=[query_embedding],
-    anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>],
-)
-dense_results = results[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Print results</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nDense Search (Semantic):&quot;</span>)
-<span class="hljs-keyword">for</span> i, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(dense_results):
-    <span class="hljs-built_in">print</span>(
-        <span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>, Content: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;content&#x27;</span>]}</span>&quot;</span>
-    )
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Dense Search (Semantic):
-1. Score: 0.6959, Content: Milvus is a vector database built for embedding similarity search and AI applications.
-2. Score: 0.6501, Content: Full-text search in Milvus allows you to search using keywords and phrases.
-3. Score: 0.4371, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
-</code></pre>
-<h3 id="Hybrid-Search" class="common-anchor-header">البحث الهجين</h3><p>يجمع البحث الهجين بين البحث في النص الكامل والاسترجاع الدلالي الكثيف. يعمل هذا النهج المتوازن على تحسين دقة البحث وقوته من خلال الاستفادة من نقاط القوة في كلتا الطريقتين.</p>
-<p>يعد البحث الهجين ذا قيمة خاصة في تطبيقات توليد الاسترجاع المعزز (RAG)، حيث يساهم كل من الفهم الدلالي والمطابقة الدقيقة للكلمات الرئيسية في تحسين نتائج الاسترجاع.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Example query for hybrid search</span>
-query = <span class="hljs-string">&quot;what is hybrid search&quot;</span>
-
-<span class="hljs-comment"># Get query embedding</span>
-query_embedding = get_embeddings([query])[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Set up BM25 search request</span>
-sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;BM25&quot;</span>}
-sparse_request = AnnSearchRequest(
-    [query], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=<span class="hljs-number">5</span>
-)
-
-<span class="hljs-comment"># Set up dense vector search request</span>
-dense_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>}
-dense_request = AnnSearchRequest(
-    [query_embedding], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=<span class="hljs-number">5</span>
-)
-
-<span class="hljs-comment"># Perform hybrid search with reciprocal rank fusion</span>
-results = client.hybrid_search(
-    collection_name,
-    [sparse_request, dense_request],
-    ranker=RRFRanker(),  <span class="hljs-comment"># Reciprocal Rank Fusion for combining results</span>
-    limit=<span class="hljs-number">5</span>,
-    output_fields=[<span class="hljs-string">&quot;content&quot;</span>, <span class="hljs-string">&quot;metadata&quot;</span>],
-)
-hybrid_results = results[<span class="hljs-number">0</span>]
-
-<span class="hljs-comment"># Print results</span>
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nHybrid Search (Combined):&quot;</span>)
-<span class="hljs-keyword">for</span> i, result <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(hybrid_results):
-    <span class="hljs-built_in">print</span>(
-        <span class="hljs-string">f&quot;<span class="hljs-subst">{i+<span class="hljs-number">1</span>}</span>. Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]:<span class="hljs-number">.4</span>f}</span>, Content: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;content&#x27;</span>]}</span>&quot;</span>
-    )
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Hybrid Search (Combined):
-1. Score: 0.0328, Content: Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
-2. Score: 0.0320, Content: Milvus is a vector database built for embedding similarity search and AI applications.
-3. Score: 0.0320, Content: Full-text search in Milvus allows you to search using keywords and phrases.
-</code></pre>
-<h2 id="Answer-Generation" class="common-anchor-header">توليد الإجابات<button data-href="#Answer-Generation" class="anchor-icon" translate="no">
+<h3 id="Test-Sparse-Search" class="common-anchor-header">اختبار البحث المتناثر<button data-href="#Test-Sparse-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -389,35 +380,82 @@ hybrid_results = results[<span class="hljs-number">0</span>]
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>بعد استرجاع المستندات ذات الصلة باستخدام البحث المختلط، يمكننا استخدام LLM لتوليد إجابة شاملة بناءً على المعلومات المسترجعة. هذه هي الخطوة الأخيرة في خط أنابيب RAG (التوليد المعزز للاسترجاع).</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Format retrieved documents into context</span>
-context = <span class="hljs-string">&quot;\n\n&quot;</span>.join([doc[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>] <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> hybrid_results])
-
-<span class="hljs-comment"># Create prompt</span>
-prompt = <span class="hljs-string">f&quot;&quot;&quot;Answer the following question based on the provided context. 
-If the context doesn&#x27;t contain relevant information, just say &quot;I don&#x27;t have enough information to answer this question.&quot;
-
-Context:
-<span class="hljs-subst">{context}</span>
-
-Question: <span class="hljs-subst">{query}</span>
-
-Answer:&quot;&quot;&quot;</span>
-
-<span class="hljs-comment"># Call OpenAI API</span>
-response = openai_client.chat.completions.create(
-    model=<span class="hljs-string">&quot;gpt-4o-mini&quot;</span>,
-    messages=[
-        {
-            <span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;system&quot;</span>,
-            <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;You are a helpful assistant that answers questions based on the provided context.&quot;</span>,
-        },
-        {<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: prompt},
-    ],
-)
-
-<span class="hljs-built_in">print</span>(response.choices[<span class="hljs-number">0</span>].message.content)
+    </button></h3><pre><code translate="no" class="language-python">results = standard_retriever.search(<span class="hljs-string">&quot;create a logger?&quot;</span>, mode=<span class="hljs-string">&quot;sparse&quot;</span>, k=<span class="hljs-number">3</span>)
+<span class="hljs-built_in">print</span>(results)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">Hybrid search combines the power of sparse BM25 retrieval with dense vector search.
+<pre><code translate="no">[{'doc_id': 'doc_10', 'chunk_id': 'doc_10_chunk_0', 'content': 'use {\n    crate::args::LogArgs,\n    anyhow::{anyhow, Result},\n    simplelog::{Config, LevelFilter, WriteLogger},\n    std::fs::File,\n};\n\npub struct Logger;\n\nimpl Logger {\n    pub fn init(args: &amp;impl LogArgs) -&gt; Result&lt;()&gt; {\n        let filter: LevelFilter = args.log_level().into();\n        if filter != LevelFilter::Off {\n            let logfile = File::create(args.log_file())\n                .map_err(|e| anyhow!(&quot;Failed to open log file: {e:}&quot;))?;\n            WriteLogger::init(filter, Config::default(), logfile)\n                .map_err(|e| anyhow!(&quot;Failed to initalize logger: {e:}&quot;))?;\n        }\n        Ok(())\n    }\n}\n', 'score': 9.12518310546875}, {'doc_id': 'doc_87', 'chunk_id': 'doc_87_chunk_3', 'content': '\t\tLoggerPtr INF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF&quot;));\n\t\tINF-&gt;setLevel(Level::getInfo());\n\n\t\tLoggerPtr INF_ERR = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF.ERR&quot;));\n\t\tINF_ERR-&gt;setLevel(Level::getError());\n\n\t\tLoggerPtr DEB = Logger::getLogger(LOG4CXX_TEST_STR(&quot;DEB&quot;));\n\t\tDEB-&gt;setLevel(Level::getDebug());\n\n\t\t// Note: categories with undefined level\n\t\tLoggerPtr INF_UNDEF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF.UNDEF&quot;));\n\t\tLoggerPtr INF_ERR_UNDEF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;INF.ERR.UNDEF&quot;));\n\t\tLoggerPtr UNDEF = Logger::getLogger(LOG4CXX_TEST_STR(&quot;UNDEF&quot;));\n\n', 'score': 7.0077056884765625}, {'doc_id': 'doc_89', 'chunk_id': 'doc_89_chunk_3', 'content': 'using namespace log4cxx;\nusing namespace log4cxx::helpers;\n\nLOGUNIT_CLASS(FMTTestCase)\n{\n\tLOGUNIT_TEST_SUITE(FMTTestCase);\n\tLOGUNIT_TEST(test1);\n\tLOGUNIT_TEST(test1_expanded);\n\tLOGUNIT_TEST(test10);\n//\tLOGUNIT_TEST(test_date);\n\tLOGUNIT_TEST_SUITE_END();\n\n\tLoggerPtr root;\n\tLoggerPtr logger;\n\npublic:\n\tvoid setUp()\n\t{\n\t\troot = Logger::getRootLogger();\n\t\tMDC::clear();\n\t\tlogger = Logger::getLogger(LOG4CXX_TEST_STR(&quot;java.org.apache.log4j.PatternLayoutTest&quot;));\n\t}\n\n', 'score': 6.750633716583252}]
 </code></pre>
-<p>هذا كل شيء! لقد قمت الآن للتو ببناء RAG مع الاسترجاع الهجين الذي يجمع بين قوة البحث بالنص الكامل المستند إلى BM25 والبحث الدلالي القائم على المتجهات الكثيفة.</p>
+<h2 id="Evaluation" class="common-anchor-header">التقييم<button data-href="#Evaluation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>الآن بعد أن أدخلنا مجموعة البيانات في ميلفوس، يمكننا استخدام البحث الكثيف أو المتناثر أو الهجين لاسترداد أفضل 5 نتائج. يمكنك تغيير <code translate="no">mode</code> وتقييم كل منها. نقدم مقياس النجاح@5، والذي يتضمن استرجاع أفضل 5 نتائج لكل استعلام وحساب التذكر.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_jsonl</span>(<span class="hljs-params">file_path: <span class="hljs-built_in">str</span></span>):
+    <span class="hljs-string">&quot;&quot;&quot;Load JSONL file and return a list of dictionaries.&quot;&quot;&quot;</span>
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:
+        <span class="hljs-keyword">return</span> [json.loads(line) <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> file]
+
+
+dataset = load_jsonl(<span class="hljs-string">&quot;evaluation_set.jsonl&quot;</span>)
+k = <span class="hljs-number">5</span>
+
+<span class="hljs-comment"># mode can be &quot;dense&quot;, &quot;sparse&quot; or &quot;hybrid&quot;.</span>
+mode = <span class="hljs-string">&quot;hybrid&quot;</span>
+
+total_query_score = <span class="hljs-number">0</span>
+num_queries = <span class="hljs-number">0</span>
+
+<span class="hljs-keyword">for</span> query_item <span class="hljs-keyword">in</span> dataset:
+
+    query = query_item[<span class="hljs-string">&quot;query&quot;</span>]
+
+    golden_chunk_uuids = query_item[<span class="hljs-string">&quot;golden_chunk_uuids&quot;</span>]
+
+    chunks_found = <span class="hljs-number">0</span>
+    golden_contents = []
+    <span class="hljs-keyword">for</span> doc_uuid, chunk_index <span class="hljs-keyword">in</span> golden_chunk_uuids:
+        golden_doc = <span class="hljs-built_in">next</span>(
+            (doc <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> query_item[<span class="hljs-string">&quot;golden_documents&quot;</span>] <span class="hljs-keyword">if</span> doc[<span class="hljs-string">&quot;uuid&quot;</span>] == doc_uuid),
+            <span class="hljs-literal">None</span>,
+        )
+        <span class="hljs-keyword">if</span> golden_doc:
+            golden_chunk = <span class="hljs-built_in">next</span>(
+                (
+                    chunk
+                    <span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> golden_doc[<span class="hljs-string">&quot;chunks&quot;</span>]
+                    <span class="hljs-keyword">if</span> chunk[<span class="hljs-string">&quot;index&quot;</span>] == chunk_index
+                ),
+                <span class="hljs-literal">None</span>,
+            )
+            <span class="hljs-keyword">if</span> golden_chunk:
+                golden_contents.append(golden_chunk[<span class="hljs-string">&quot;content&quot;</span>].strip())
+
+    results = standard_retriever.search(query, mode=mode, k=<span class="hljs-number">5</span>)
+
+    <span class="hljs-keyword">for</span> golden_content <span class="hljs-keyword">in</span> golden_contents:
+        <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> results[:k]:
+            retrieved_content = doc[<span class="hljs-string">&quot;content&quot;</span>].strip()
+            <span class="hljs-keyword">if</span> retrieved_content == golden_content:
+                chunks_found += <span class="hljs-number">1</span>
+                <span class="hljs-keyword">break</span>
+
+    query_score = chunks_found / <span class="hljs-built_in">len</span>(golden_contents)
+
+    total_query_score += query_score
+    num_queries += <span class="hljs-number">1</span>
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Pass@5: &quot;</span>, total_query_score / num_queries)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no">Pass@5:  0.7911386328725037
+</code></pre>

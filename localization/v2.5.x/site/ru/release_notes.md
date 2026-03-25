@@ -339,7 +339,7 @@ title: Информация о выпуске
 <li>Исправлена проблема, при которой создание индекса JSON-статистики могло завершиться неудачей, если данные содержали пустую карту<a href="https://github.com/milvus-io/milvus/pull/41506">(#41506</a>).</li>
 <li>Исправлен API <code translate="no">AlterCollection</code> для корректного сохранения временной метки модификации<a href="https://github.com/milvus-io/milvus/pull/41469">(#41469</a>).</li>
 <li>Исправлена периодическая ошибка фильтрации в JSON-статистике под <code translate="no">ConjunctExpr</code> и улучшена логика расчета слотов задач для ускорения создания JSON-статистики<a href="https://github.com/milvus-io/milvus/pull/41458">(#41458</a>).</li>
-<li>Исправлена утечка IDF-оракула при расчете статистики BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
+<li>Исправлена утечка оракула IDF при расчете статистики BM25<a href="https://github.com/milvus-io/milvus/pull/41426">(#41426</a>).</li>
 <li>Обеспечена проверка предварительно созданных тем в первую очередь при проверке номера шарда<a href="https://github.com/milvus-io/milvus/pull/41421">(#41421</a>).</li>
 <li>Исправлено ошибочное сообщение о тупике, возникающее в модульных тестах<a href="https://github.com/milvus-io/milvus/pull/41377">(#41377</a>).</li>
 </ul>
@@ -884,7 +884,7 @@ title: Информация о выпуске
 <li>[2.5] Исправлена паника querycoord в угловом случае<a href="https://github.com/milvus-io/milvus/pull/40058">(#40058</a>)</li>
 <li>[2.5] Улучшена функция isbalanced для корректного подсчета пар кавычек<a href="https://github.com/milvus-io/milvus/pull/40002">(#40002</a>)</li>
 <li>[2.5] Исправлено отрицательное -1 при выполнении задач уплотнения<a href="https://github.com/milvus-io/milvus/pull/39955">(#39955</a>)</li>
-<li>[2.5] Исправлена ошибка, из-за которой сегмент мог никогда не переходить из состояния sealed в состояние flushing<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
+<li>[2.5] Исправлена ошибка, при которой сегмент никогда не переходил из состояния sealed в состояние flushing<a href="https://github.com/milvus-io/milvus/pull/39996">(#39996</a>)</li>
 <li>Пропущено создание индекса первичного ключа при загрузке индекса pk<a href="https://github.com/milvus-io/milvus/pull/39922">(#39922</a>)</li>
 <li>[2.5] Пропускалось создание текстового индекса, когда сегмент был нулевым после сортировки<a href="https://github.com/milvus-io/milvus/pull/39969">(#39969</a>)</li>
 <li>[2.5] Исправлена ошибка поиска по самой ранней позиции<a href="https://github.com/milvus-io/milvus/pull/39966">(#39966</a>)</li>

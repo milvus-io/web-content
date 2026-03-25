@@ -53,16 +53,15 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
 </table>
 <p>Il existe également d'autres limitations pour la spécification du stockage des messages :</p>
 <ul>
-<li>Un seul stockage de messages pour une instance Milvus est pris en charge. Cependant, il existe toujours une compatibilité ascendante avec les stockages de messages multiples définis pour une instance. La priorité est la suivante<ul>
+<li>Un seul stockage de messages pour une instance Milvus est pris en charge. Toutefois, il existe toujours une compatibilité ascendante avec les stockages de messages multiples définis pour une instance. La priorité est la suivante<ul>
 <li>mode autonome :  RocksMQ (par défaut) &gt; Pulsar &gt; Kafka</li>
 <li>mode cluster : Pulsar (par défaut) &gt; Kafka</li>
 <li>Les nats introduits dans la version 2.3 ne participent pas à ces règles de priorité pour des raisons de compatibilité ascendante.</li>
 </ul></li>
 <li>Le stockage des messages ne peut pas être modifié lorsque le système Milvus est en cours d'exécution.</li>
 <li>Seule la version 2.x ou 3.x de Kafka est prise en charge.</li>
-<li><strong>Limitations de la mise à niveau</strong>: <strong>Limitations de la file d'attente des messages</strong>: Lors de la mise à niveau vers Milvus v2.6.4, vous devez conserver votre choix actuel de file d'attente de messages. Le passage d'un système de file d'attente de messages à un autre pendant la mise à niveau n'est pas pris en charge. La prise en charge du changement de système de file d'attente de messages sera disponible dans les prochaines versions.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">Configurer RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">Configuration de RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,41 +78,19 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
       </svg>
     </button></h2><p>RocksMQ est le stockage de messages par défaut dans Milvus standalone.</p>
 <div class="alert note">
-<p>Actuellement, il n'est possible de configurer RocksMQ comme stockage de messages pour Milvus standalone qu'avec Milvus Operator.</p>
+<p>Actuellement, vous ne pouvez configurer RocksMQ comme stockage de messages pour Milvus standalone qu'avec Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Exemple de configuration</h4><p>L'exemple suivant configure un service RocksMQ.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Principales options de configuration :</h5><ul>
-<li><code translate="no">msgStreamType</code>rocksmq : Définit explicitement RocksMQ comme file d'attente de messages.</li>
-<li><code translate="no">persistence.enabled</code>: Active le stockage persistant pour les données RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Si l'option est vraie, le PVC sera supprimé lorsque l'instance Milvus sera supprimée.</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Spécification standard du PVC Kubernetes</li>
-<li><code translate="no">accessModes</code>: Généralement <code translate="no">ReadWriteOnce</code> pour le stockage en bloc</li>
-<li><code translate="no">storageClassName</code>: La classe de stockage de votre cluster</li>
-<li><code translate="no">storage</code>: Taille du volume persistant</li>
-</ul>
-<h2 id="Configure-NATS" class="common-anchor-header">Configurer le NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
+<h2 id="Configure-NATS" class="common-anchor-header">Configuration de NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,8 +105,8 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS est une alternative de stockage de messages pour NATS.</p>
-<h4 id="Example" class="common-anchor-header">Exemple de configuration</h4><p>L'exemple suivant configure un service NATS.</p>
+    </button></h2><p>NATS est un stockage de messages alternatif pour NATS.</p>
+<h4 id="Example" class="common-anchor-header">Exemple</h4><p>L'exemple suivant configure un service NATS.</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -424,7 +401,7 @@ summary: Découvrez comment configurer le stockage des messages avec Milvus Oper
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Découvrez comment configurer d'autres dépendances Milvus avec Milvus Operator :</p>
+    </button></h2><p>Apprenez à configurer d'autres dépendances Milvus avec Milvus Operator :</p>
 <ul>
 <li><a href="/docs/fr/object_storage_operator.md">Configurer le stockage d'objets avec Milvus Operator</a></li>
 <li><a href="/docs/fr/meta_storage_operator.md">Configurer le méta stockage avec Milvus Operator</a></li>

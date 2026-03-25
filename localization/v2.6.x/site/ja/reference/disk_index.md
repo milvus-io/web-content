@@ -1,10 +1,10 @@
 ---
 id: disk_index.md
 related_key: disk_index
-summary: Milvusにおけるディスク最適化ベクトル探索のためのディスクインデックス機構。
-title: オンディスク インデックス
+summary: Milvusのディスクインデックス機構。
+title: ディスク上のインデックス
 ---
-<h1 id="On-disk-Index" class="common-anchor-header">オンディスク インデックス<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
+<h1 id="On-disk-Index" class="common-anchor-header">ディスク上のインデックス<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: オンディスク インデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>この記事では、ディスクに最適化されたベクトル検索用のオンディスク インデキシング アルゴリズムである DiskANN を紹介する。Vamana グラフに基づく DiskANN は、大規模データセット内の効率的なディスク上ベクトル検索を可能にします。</p>
-<p>クエリー性能を向上させるために、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
+    </button></h1><p>この記事では、DiskANN と名付けられたディスク上のインデックス作成アルゴリズムを紹介する。Vamana グラフに基づき、DiskANN は大規模データセット内の効率的な検索を可能にします。</p>
+<p>クエリー性能を向上させるため、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note"> 
 現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると、古いインデックスを自動的に削除します。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -38,11 +38,15 @@ title: オンディスク インデックス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusでDiskANNを使用するには、以下の点に注意してください。</p>
+    </button></h2><p>DiskANNを使用するには、以下の点に注意してください。</p>
 <ul>
-<li>MilvusインスタンスがUbuntu 18.04.6またはそれ以降のリリースで動作していること。</li>
-<li>MilvusのデータパスはNVMe SSDにマウントされている必要があります：<ul>
-<li>Milvusスタンドアロンインスタンスの場合、データパスはインスタンスが動作するコンテナ内の<strong>/var/lib/milvus/dataと</strong>する。</li>
+<li>DiskANNはデフォルトで無効になっています。オンディスクインデックスよりもインメモリインデックスを好む場合、より良いパフォーマンスのためにこの機能を無効にすることをお勧めします。<ul>
+<li>無効にするには、milvus設定ファイルの<code translate="no">queryNode.enableDisk</code> を<code translate="no">false</code> に変更してください。</li>
+<li>再び有効にするには、<code translate="no">queryNode.enableDisk</code> を<code translate="no">true</code> に設定します。</li>
+</ul></li>
+<li>milvusインスタンスはUbuntu 18.04.6またはそれ以降のリリースで動作します。</li>
+<li>MilvusデータパスはNVMe SSDにマウントしてください：<ul>
+<li>Milvusスタンドアロンインスタンスの場合、データパスはインスタンスが動作するコンテナ内の<strong>/var/lib/milvus/dataに</strong>する必要があります。</li>
 <li>Milvusクラスタインスタンスの場合、データパスはQueryNodesおよびIndexNodesが実行されるコンテナ内の<strong>/var/lib/milvus/data</strong>である必要があります。</li>
 </ul></li>
 </ul>
@@ -150,6 +154,6 @@ title: オンディスク インデックス
     </button></h2><ul>
 <li><p><code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> エラーの対処法は？</p>
 <p>Linuxカーネルは非同期ノンブロッキングI/O（Asynchronous non-blocking I/O: AIO）機能を提供しており、プロセスが複数のI/O操作を同時に開始しても、そのいずれかが完了するのを待つ必要はありません。これは、処理とI/Oが重複するアプリケーションのパフォーマンスを向上させるのに役立ちます。</p>
-<p>この性能は、procファイルシステム内の<code translate="no">/proc/sys/fs/aio-max-nr</code> 仮想ファイルを使用して調整できる。<code translate="no">aio-max-nr</code> パラメーターは、許容される同時リクエストの最大数を決定する。</p>
+<p>この性能は、proc ファイルシステム内の<code translate="no">/proc/sys/fs/aio-max-nr</code> 仮想ファイルを使用して調整できる。<code translate="no">aio-max-nr</code> パラメーターは、許容される同時リクエストの最大数を決定する。</p>
 <p><code translate="no">aio-max-nr</code> のデフォルトは<code translate="no">65535</code> であるが、<code translate="no">10485760</code> に設定することもできる。</p></li>
 </ul>

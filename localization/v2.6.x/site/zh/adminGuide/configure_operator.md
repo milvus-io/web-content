@@ -65,12 +65,27 @@ title: 使用 Milvus Operator 配置 Milvus
 <ul>
 <li><code translate="no">image</code>:使用的 Milvus docker 映像。</li>
 <li><code translate="no">resources</code>:分配给每个组件的计算资源。</li>
-<li><code translate="no">tolerations</code> 和 ：K8s 集群中每个 Milvus 组件的调度规则。更多信息，请参阅<code translate="no">nodeSelector</code><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">容忍度</a>和<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">节点选择器</a>。</li>
+<li><code translate="no">tolerations</code> 和<code translate="no">nodeSelector</code> ：K8s 集群中每个 Milvus 组件的调度规则。更多信息，请参阅<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">容忍度</a>和<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">节点选择器</a>。</li>
 <li><code translate="no">env</code>:环境变量。</li>
 </ul>
 <p>如需配置更多字段，请参阅<a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">此处的</a>文档。</p>
 <p>要配置 Milvus 集群的全局资源，请创建<code translate="no">milvuscluster_resource.yaml</code> 文件。</p>
-<h3 id="Example" class="common-anchor-header">示例</h3><p>下面的示例为 Milvus 群集配置了全局资源。</p>
+<h3 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例为 Milvus 群集配置了全局资源。</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -95,7 +110,7 @@ title: 使用 Milvus Operator 配置 Milvus
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster_resource.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-如果 K8s 集群中有名为<code translate="no">my-release</code> 的 Milvus 集群，则将根据配置文件更新集群资源。否则，将创建一个新的 Milvus 群集。</div>
+如果 K8s 集群中有名为<code translate="no">my-release</code> 的 Milvus 集群，则会根据配置文件更新集群资源。否则，将创建一个新的 Milvus 群集。</div>
 <h2 id="Configure-private-resources" class="common-anchor-header">配置私有资源<button data-href="#Configure-private-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,7 +126,7 @@ title: 使用 Milvus Operator 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>最初在 Milvus 2.0 中，一个 Milvus 群集包括七个组件：代理、Root coord、数据 coord、Query coord、索引节点、数据节点和查询节点。不过，随着 Milvus 2.1.0 一起发布的还有一个新的组件--混合协调器。混合协调器包括所有协调器组件。因此，启动混合协调器意味着不需要安装和启动其他协调器，包括 Root 协调器、数据协调器和 Query 协调器。</p>
+    </button></h2><p>最初在 Milvus 2.0 中，一个 Milvus 群集包括七个组件：代理、Root coord、数据 coord、Query coord、索引节点、数据节点和查询节点。不过，随着 Milvus 2.1.0 一起发布的还有一个新的组件--混合协调器。混合协调器包括所有协调器组件。因此，启动混合协调器意味着不需要安装和启动其他协调器，包括 Root 协调器、Data 协调器和 Query 协调器。</p>
 <p>用于配置各组件的常用字段包括</p>
 <ul>
 <li><code translate="no">replica</code>:每个组件的副本数量。</li>
@@ -264,7 +279,22 @@ title: 使用 Milvus Operator 配置 Milvus
 </tbody>
 </table>
 </div>
-<h3 id="Example" class="common-anchor-header">示例</h3><p>下面的示例在<code translate="no">milvuscluster.yaml</code> 文件中配置了代理和数据节点的副本和计算资源。</p>
+<h3 id="Example" class="common-anchor-header">示例<button data-href="#Example" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>下面的示例在<code translate="no">milvuscluster.yaml</code> 文件中配置了代理和数据节点的副本和计算资源。</p>
 <pre><code translate="no"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -308,7 +338,7 @@ title: 使用 Milvus Operator 配置 Milvus
   <span class="hljs-attr">dependencies:</span> {}
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-该示例不仅配置了全局资源，还配置了 Root coord 和代理的私有计算资源。使用此配置文件启动 Milvus 群集时，私有资源配置将应用于根协调器和代理，而其余组件将遵循全局资源配置。</div>
+该示例不仅配置了全局资源，还配置了 Root coord 和代理的私有计算资源。使用此配置文件启动 Milvus 群集时，私有资源配置将应用于 Root coord 和代理，而其余组件将遵循全局资源配置。</div>
 <p>运行以下命令应用新配置：</p>
 <pre><code translate="no"><span class="hljs-attribute">kubectl</span> apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>

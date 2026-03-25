@@ -151,7 +151,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <div class="alert note">
 <ol>
 <li>Das Skript kodiert die Upgrade-Reihenfolge der Einsätze fest und kann nicht geändert werden.</li>
-<li>Das Skript verwendet <code translate="no">kubectl patch</code>, um die Einsätze zu aktualisieren, und <code translate="no">kubectl rollout status</code>, um ihren Status zu überwachen.</li>
+<li>Das Skript verwendet <code translate="no">kubectl patch</code>, um die Einsätze zu aktualisieren, und <code translate="no">kubectl rollout status</code>, um deren Status zu überwachen.</li>
 <li>Das Skript verwendet <code translate="no">kubectl patch</code>, um die Bezeichnung <code translate="no">app.kubernetes.io/version</code> der Einsätze auf die Bezeichnung zu aktualisieren, die hinter dem Flag <code translate="no">-t</code> im Befehl angegeben ist.</li>
 </ol>
 </div>

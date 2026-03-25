@@ -40,7 +40,7 @@ title: تثبيت Milvus Python SDK
     </button></h2><ul>
 <li>مطلوب بايثون 3.7 أو أحدث.</li>
 <li>تثبيت بروتوبوف جوجل. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install protobuf==3.20.0</code>.</li>
-<li>تم تثبيت grpcio-tools. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install grpcio-tools</code>.</li>
+<li>أدوات grpcio-tools مثبتة. يمكنك تثبيته باستخدام الأمر <code translate="no">pip3 install grpcio-tools</code>.</li>
 </ul>
 <h2 id="Install-PyMilvus-via-pip" class="common-anchor-header">قم بتثبيت PyMilvus عبر النقطة<button data-href="#Install-PyMilvus-via-pip" class="anchor-icon" translate="no">
       <svg translate="no"

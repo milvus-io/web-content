@@ -152,7 +152,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <ol>
 <li>Skrip ini <strong>tidak berlaku</strong> pada instans Milvus yang terinstalasi dengan <strong>RocksMQ</strong>.</li>
 <li>Skrip ini mengkodekan urutan peningkatan penyebaran dan tidak dapat diubah.</li>
-<li>Skrip ini menggunakan <code translate="no">kubectl patch</code> untuk memperbarui penyebaran dan <code translate="no">kubectl rollout status</code> untuk melihat statusnya.</li>
+<li>Skrip ini menggunakan <code translate="no">kubectl patch</code> untuk memperbarui deployment dan <code translate="no">kubectl rollout status</code> untuk melihat statusnya.</li>
 <li>Skrip menggunakan <code translate="no">kubectl patch</code> untuk memperbarui label <code translate="no">app.kubernetes.io/version</code> pada deployment ke label yang ditentukan setelah bendera <code translate="no">-t</code> pada perintah.</li>
 </ol>
 </div>

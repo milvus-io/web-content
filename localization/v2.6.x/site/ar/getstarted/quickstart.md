@@ -18,8 +18,8 @@ title: البداية سريعة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>يمكن للمتجهات، وهي تنسيق بيانات المخرجات لنماذج الشبكات العصبية، ترميز المعلومات بفعالية وتؤدي دورًا محوريًا في تطبيقات الذكاء الاصطناعي مثل قاعدة المعرفة والبحث الدلالي والتوليد المعزز للاسترجاع (RAG) وغيرها.</p>
 <p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من كل الأحجام بدءًا من تشغيل روبوت دردشة تجريبي في دفتر ملاحظات Jupyter إلى بناء بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك في هذا الدليل إلى كيفية إعداد Milvus محليًا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">تثبيت ميلفوس<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -37,7 +37,7 @@ title: البداية سريعة
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في هذا الدليل نستخدم Milvus Lite، وهي مكتبة بايثون مضمنة في <code translate="no">pymilvus</code> والتي يمكن تضمينها في تطبيق العميل. يدعم Milvus أيضًا النشر على <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> و <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> لحالات استخدام الإنتاج.</p>
+    </button></h2><p>في هذا الدليل نستخدم Milvus Lite، وهي مكتبة بايثون مضمنة في <code translate="no">pymilvus</code> والتي يمكن تضمينها في تطبيق العميل. يدعم Milvus أيضًا النشر على <a href="/docs/ar/install_standalone-docker.md">Docker</a> و <a href="/docs/ar/install_cluster-milvusoperator.md">Kubernetes</a> لحالات استخدام الإنتاج.</p>
 <p>قبل البدء، تأكد من توفر Python 3.8+ في البيئة المحلية. قم بتثبيت <code translate="no">pymilvus</code> الذي يحتوي على مكتبة عميل بايثون وميلفوس لايت:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
@@ -92,8 +92,8 @@ client.create_collection(
 <p>في الإعداد أعلاه,</p>
 <ul>
 <li>يستخدم حقلا المفتاح الأساسي والمتجه اسميهما الافتراضيين ("معرف" و"متجه").</li>
-<li>يتم تعيين نوع القياس (تعريف مسافة المتجه) إلى قيمته الافتراضية<a href="https://milvus.io/docs/metric.md#Cosine-Similarity">(COSINE</a>).</li>
-<li>يقبل حقل المفتاح الأساسي الأعداد الصحيحة ولا يزيد تلقائيًا (أي لا يستخدم <a href="https://milvus.io/docs/schema.md">ميزة المعرف التلقائي</a>) بدلاً من ذلك، يمكنك تحديد مخطط المجموعة رسميًا باتباع هذه <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">التعليمات</a>.</li>
+<li>يتم تعيين نوع القياس (تعريف مسافة المتجه) إلى قيمته الافتراضية<a href="/docs/ar/metric.md#Cosine-Similarity">(COSINE</a>).</li>
+<li>يقبل حقل المفتاح الأساسي الأعداد الصحيحة ولا يزيد تلقائيًا (أي لا يستخدم <a href="/docs/ar/schema.md">ميزة المعرف التلقائي</a>) بدلاً من ذلك، يمكنك تحديد مخطط المجموعة رسميًا باتباع هذه <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">التعليمات</a>.</li>
 </ul>
 <h2 id="Prepare-Data" class="common-anchor-header">إعداد البيانات<button data-href="#Prepare-Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,7 +239,22 @@ Vector dim: <span class="hljs-number">768</span>
         ></path>
       </svg>
     </button></h2><p>يمكننا الآن إجراء عمليات بحث دلالية من خلال تمثيل نص استعلام البحث كمتجه، وإجراء بحث تشابه المتجهات على ميلفوس.</p>
-<h3 id="Vector-search" class="common-anchor-header">البحث المتجه</h3><p>يقبل Milvus طلب بحث متجه واحد أو عدة طلبات بحث متجه في نفس الوقت. قيمة المتغير query_vectors هي قائمة من المتجهات، حيث يكون كل متجه عبارة عن مصفوفة من الأرقام العائمة.</p>
+<h3 id="Vector-search" class="common-anchor-header">البحث المتجه<button data-href="#Vector-search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>يقبل Milvus طلب بحث متجه واحد أو عدة طلبات بحث متجه في نفس الوقت. قيمة المتغير query_vectors هي قائمة من المتجهات، حيث يكون كل متجه عبارة عن مصفوفة من الأرقام العائمة.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -299,9 +314,24 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-keyword">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 4, &#x27;distance&#x27;: 0.27030569314956665, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Computational synthesis with AI algorithms predicts molecular properties.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}, {&#x27;id&#x27;: 3, &#x27;distance&#x27;: 0.16425910592079163, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Machine learning has been used for drug design.&#x27;, &#x27;subject&#x27;: &#x27;biology&#x27;}}]&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>بشكل افتراضي، لا تتم فهرسة الحقول العددية. إذا كنت بحاجة إلى إجراء بحث مفهرس للبيانات الوصفية في مجموعة بيانات كبيرة، يمكنك التفكير في استخدام مخطط ثابت وتشغيل <a href="https://milvus.io/docs/scalar_index.md">الفهرس</a> أيضًا لتحسين أداء البحث.</p>
+<p>بشكل افتراضي، لا تتم فهرسة الحقول العددية. إذا كنت بحاجة إلى إجراء بحث مفهرس للبيانات الوصفية في مجموعة بيانات كبيرة، يمكنك التفكير في استخدام مخطط ثابت وتشغيل <a href="/docs/ar/scalar_index.md">الفهرس</a> أيضًا لتحسين أداء البحث.</p>
 <p>بالإضافة إلى البحث المتجه، يمكنك أيضًا إجراء أنواع أخرى من عمليات البحث:</p>
-<h3 id="Query" class="common-anchor-header">الاستعلام</h3><p>الاستعلام() هو عملية تسترجع جميع الكيانات المطابقة لمعيار ما، مثل <a href="https://milvus.io/docs/boolean.md">تعبير مرشح</a> أو مطابقة بعض المعرفات.</p>
+<h3 id="Query" class="common-anchor-header">الاستعلام<button data-href="#Query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>الاستعلام() هو عملية تسترجع جميع الكيانات المطابقة لمعيار ما، مثل <a href="/docs/ar/boolean.md">تعبير مرشح</a> أو مطابقة بعض المعرفات.</p>
 <p>على سبيل المثال، استرداد جميع الكيانات التي يحتوي حقلها القياسي على قيمة معينة:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -363,7 +393,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>نظرًا لأن جميع بيانات Milvus Lite يتم تخزينها في ملف محلي، يمكنك تحميل جميع البيانات في الذاكرة حتى بعد انتهاء البرنامج، وذلك عن طريق إنشاء <code translate="no">MilvusClient</code> بالملف الموجود. على سبيل المثال، سيؤدي ذلك إلى استرداد المجموعات من ملف "milvus_demo.db" ومتابعة كتابة البيانات فيه.</p>
+    </button></h2><p>نظرًا لأن جميع بيانات Milvus Lite يتم تخزينها في ملف محلي، يمكنك تحميل جميع البيانات في الذاكرة حتى بعد إنهاء البرنامج، وذلك عن طريق إنشاء <code translate="no">MilvusClient</code> بالملف الموجود. على سبيل المثال، سيؤدي ذلك إلى استرداد المجموعات من ملف "milvus_demo.db" ومتابعة كتابة البيانات فيه.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -402,8 +432,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>يعتبر Milvus Lite رائعًا لبدء استخدام برنامج بايثون محلي. إذا كانت لديك بيانات على نطاق واسع أو ترغب في استخدام Milvus في الإنتاج، يمكنك التعرف على نشر Milvus على <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> و <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. تشترك جميع أنماط النشر في ميلفوس في نفس واجهة برمجة التطبيقات، لذلك لا تحتاج شيفرة جانب العميل إلى تغيير الكثير في حال الانتقال إلى وضع نشر آخر. ما عليك سوى تحديد <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI والرمز المميز</a> لخادم Milvus المنشور في أي مكان:</p>
+    </button></h2><p>يعتبر Milvus Lite رائعًا لبدء استخدام برنامج بايثون محلي. إذا كانت لديك بيانات على نطاق واسع أو ترغب في استخدام Milvus في الإنتاج، يمكنك التعرف على نشر Milvus على <a href="/docs/ar/install_standalone-docker.md">Docker</a> و <a href="/docs/ar/install_cluster-milvusoperator.md">Kubernetes</a>. تشترك جميع أنماط النشر في ميلفوس في نفس واجهة برمجة التطبيقات، لذلك لا تحتاج شيفرة جانب العميل إلى تغيير الكثير في حال الانتقال إلى وضع نشر آخر. ما عليك سوى تحديد <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI والرمز المميز</a> لخادم Milvus المنشور في أي مكان:</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>لترحيل البيانات من Milvus Lite إلى Milvus المنشور على Docker أو Kubernetes، راجع <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">ترحيل البيانات من Milvus Lite</a>.</p>
-<p>يوفر Milvus واجهة برمجة تطبيقات REST و gRPC، مع مكتبات العميل بلغات مثل <a href="https://milvus.io/docs/install-pymilvus.md">Python</a> و <a href="https://milvus.io/docs/install-java.md">Java</a> و <a href="https://milvus.io/docs/install-go.md">Go</a> و C# و <a href="https://milvus.io/docs/install-node.md">Node.js.</a></p>
+<p>يوفر Milvus واجهة برمجة تطبيقات REST و gRPC، مع مكتبات العميل بلغات مثل <a href="/docs/ar/install-pymilvus.md">Python</a> و <a href="/docs/ar/install-java.md">Java</a> و <a href="/docs/ar/install-go.md">Go</a> و C# و <a href="/docs/ar/install-node.md">Node.js.</a></p>

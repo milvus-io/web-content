@@ -74,7 +74,7 @@ summary: 'Erfahren Sie, wie Sie natsmq für Milvus konfigurieren.'
   </thead>
   <tbody>
     <tr>
-      <td>        Verzeichnis, das für die JetStream-Speicherung von nats verwendet wird    </td>
+      <td>        Zu verwendendes Verzeichnis für die JetStream-Speicherung von nats    </td>
       <td>/var/lib/milvus/nats</td>
     </tr>
   </tbody>

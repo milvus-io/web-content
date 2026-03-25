@@ -39,7 +39,7 @@ title: Index des champs scalaires
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Indexation automatique</a></strong>: Milvus décide automatiquement du type d'index en fonction du type de données du champ scalaire. Cette option convient lorsque vous n'avez pas besoin de contrôler le type d'index spécifique.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexation personnalisée</a></strong>: Vous spécifiez le type d'index exact, tel qu'un index inversé ou un <a href="/docs/fr/bitmap.md">index bitmap</a>. Cette option permet de mieux contrôler la sélection du type d'index.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Indexation personnalisée</a></strong>: Vous spécifiez le type d'index exact, tel qu'un index inversé. Cette option permet de mieux contrôler la sélection du type d'index.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Indexation automatique<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -193,7 +193,6 @@ client.createIndex(createIndexReq);
 <p>Pour l'indexation personnalisée, les valeurs valides sont</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</p></li>
-<li><p><strong>BITMAP</strong>: Un type d'index qui stocke un tableau binaire de toutes les valeurs uniques d'un champ. Pour plus de détails, voir <a href="/docs/fr/bitmap.md">BITMAP</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Trie les champs scalaires à l'aide de l'algorithme de tri de la bibliothèque standard. Ne prend en charge que les champs numériques (par exemple, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>
 <li><p><strong>Trie</strong>: Une structure de données arborescente pour des recherches et des extractions rapides de préfixes. Prend en charge les champs VARCHAR.</p></li>
 </ul></li>
@@ -264,7 +263,7 @@ client.createIndex(createIndexReq);
 <p>Utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> pour vérifier la création d'index scalaires :</p>
 </div>
 <div class="language-java">
-<p>Utilisez la méthode <code translate="no">listIndexes()</code> pour vérifier la création des index scalaires :</p>
+<p>Utilisez la méthode <code translate="no">listIndexes()</code> pour vérifier la création d'index scalaires :</p>
 </div>
 <div class="language-javascript">
 <p>Utilisez la méthode <code translate="no">listIndexes()</code> pour vérifier la création d'index scalaires :</p>
@@ -307,3 +306,21 @@ System.out.println(indexNames);
 <span class="hljs-comment">//     &quot;inverted_index&quot;</span>
 <span class="hljs-comment">// ]   </span>
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Actuellement, l'indexation scalaire prend en charge les types de données INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR et ARRAY, mais pas le type de données JSON.</li>
+</ul>

@@ -56,11 +56,10 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <li>一個 Milvus 實例只支援一個訊息儲存空間。然而，我們仍然向後相容為一個實例設定多個訊息儲存空間。優先順序如下：<ul>
 <li>獨立模式：  RocksMQ (預設) &gt; Pulsar &gt; Kafka</li>
 <li>群集模式：Pulsar (預設) &gt; Kafka</li>
-<li>為了向下相容性，2.3 引入的 Nats 不參與這些優先順序規則。</li>
+<li>為了向下相容性，2.3 中引入的 Nats 不參與這些優先順序規則。</li>
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>僅支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.4時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,40 +78,18 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
       </svg>
     </button></h2><p>RocksMQ 是 Milvus 單機版的預設訊息儲存空間。</p>
 <div class="alert note">
-<p>目前，你只能使用 Milvus Operator 來設定 RocksMQ 為 Milvus standalone 的訊息儲存空間。</p>
+<p>目前，你只能透過 Milvus Operator 設定 RocksMQ 為 Milvus standalone 的訊息儲存空間。</p>
 </div>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>下面的例子配置了一個 RocksMQ 服務。</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">主要配置選項：</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: 明確設定 RocksMQ 為訊息佇列。</li>
-<li><code translate="no">persistence.enabled</code>:啟用 RocksMQ 資料的持久化儲存。</li>
-<li><code translate="no">persistence.pvcDeletion</code>:當設定為 true 時，PVC 會在 Milvus 刪除時被刪除。</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>:標準 Kubernetes PVC 規格</li>
-<li><code translate="no">accessModes</code>:通常<code translate="no">ReadWriteOnce</code> 用於區塊儲存</li>
-<li><code translate="no">storageClassName</code>:您集群的儲存類別</li>
-<li><code translate="no">storage</code>:持久卷的大小</li>
-</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">配置 NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -128,7 +105,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>NATS 是 NATS 的另一種訊息儲存方式。</p>
+    </button></h2><p>NATS 是 NATS 的另一個訊息儲存空間。</p>
 <h4 id="Example" class="common-anchor-header">範例</h4><p>下面的示例配置了一个 NATS 服务。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
@@ -171,7 +148,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<p>要將 RocksMQ 的訊息儲存空間遷移至 NATS，步驟如下：</p>
+<p>要把消息存储从 RocksMQ 迁移到 NATS，请执行以下操作：</p>
 <ol>
 <li><p>停止所有 DDL 操作。</p></li>
 <li><p>调用 FlushAll API，然后在 API 调用执行完毕后停止 Milvus。</p></li>

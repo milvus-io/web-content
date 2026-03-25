@@ -63,7 +63,7 @@ title: リソースグループの管理
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><strong>requests</strong>属性は、リソースグループが満たすべき条件を指定する。</li>
-<li><strong>limits</strong>属性は、リソースグループが満たすべき条件を指定します。</li>
+<li><strong>limits</strong>属性はリソースグループが満たすべき条件を指定します。</li>
 <li><strong>transfer_from</strong>属性と<strong>transfer_to</strong>属性は、それぞれリソースグループがどのリソースグループからリソースを取得するのが望ましいか、どのリソースグループにリソースを転送するのが望ましいかを記述します。</li>
 </ul>
 <p>リソースグループのコンフィギュレーションが変更されると、milvusは新しいコンフィギュレーションに従って現在のQuery Nodeのリソースを可能な限り調整し、最終的に全てのリソースグループが以下の条件を満たすようにします：</p>
@@ -71,7 +71,7 @@ title: リソースグループの管理
 <p>ただし、以下の場合を除く：</p>
 <ul>
 <li>Milvusクラスタ内のQueryNode数が不足している場合（<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ）、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
-<li>MilvusクラスタのQueryNode数が過剰な場合、すなわち<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
+<li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">宣言型apiを使用してリソースグループを管理する<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">

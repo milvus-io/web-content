@@ -60,9 +60,8 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
 </ul></li>
 <li>El almacenamiento de mensajes no puede cambiarse mientras el sistema Milvus está en funcionamiento.</li>
 <li>Sólo se admite la versión 2.x o 3.x de Kafka.</li>
-<li><strong>Limitaciones de actualización</strong>: <strong>Limitaciones de la cola de mensajes</strong>: Al actualizar a Milvus v2.6.4, debe mantener su elección actual de cola de mensajes. No es posible cambiar entre diferentes sistemas de colas de mensajes durante la actualización. El soporte para el cambio de sistemas de colas de mensajes estará disponible en futuras versiones.</li>
 </ul>
-<h2 id="Configure-RocksMQ" class="common-anchor-header">Configuración de RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
+<h2 id="Configure-RocksMQ" class="common-anchor-header">Configurar RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -82,37 +81,15 @@ summary: Aprenda a configurar el almacenamiento de mensajes con Milvus Operator.
 <p>Actualmente, sólo puede configurar RocksMQ como almacenamiento de mensajes para Milvus standalone con Milvus Operator.</p>
 </div>
 <h4 id="Example" class="common-anchor-header">Ejemplo</h4><p>El siguiente ejemplo configura un servicio RocksMQ.</p>
-<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1beta1</span>
+<pre><code translate="no" class="language-YAML"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
   <span class="hljs-attr">name:</span> <span class="hljs-string">milvus</span>
 <span class="hljs-attr">spec:</span>
-  <span class="hljs-attr">mode:</span> <span class="hljs-string">standalone</span>
-  <span class="hljs-attr">dependencies:</span>
-    <span class="hljs-attr">msgStreamType:</span> <span class="hljs-string">rocksmq</span>
-    <span class="hljs-attr">rocksmq:</span>
-      <span class="hljs-attr">persistence:</span>
-        <span class="hljs-attr">enabled:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">pvcDeletion:</span> <span class="hljs-literal">true</span>
-        <span class="hljs-attr">persistentVolumeClaim:</span>
-          <span class="hljs-attr">spec:</span>
-            <span class="hljs-attr">accessModes:</span> [<span class="hljs-string">&quot;ReadWriteOnce&quot;</span>]
-            <span class="hljs-attr">storageClassName:</span> <span class="hljs-string">&quot;local-path&quot;</span>  <span class="hljs-comment"># Specify your storage class</span>
-            <span class="hljs-attr">resources:</span>
-              <span class="hljs-attr">requests:</span>
-                <span class="hljs-attr">storage:</span> <span class="hljs-string">10Gi</span>  <span class="hljs-comment"># Specify your desired storage size</span>
+  <span class="hljs-attr">dependencies:</span> {}
   <span class="hljs-attr">components:</span> {}
   <span class="hljs-attr">config:</span> {}
 <button class="copy-code-btn"></button></code></pre>
-<h5 id="Key-configuration-options" class="common-anchor-header">Opciones clave de configuración:</h5><ul>
-<li><code translate="no">msgStreamType</code>: rocksmq: Establece explícitamente RocksMQ como la cola de mensajes.</li>
-<li><code translate="no">persistence.enabled</code>: Habilita el almacenamiento persistente para los datos de RocksMQ</li>
-<li><code translate="no">persistence.pvcDeletion</code>: Cuando es true, el PVC se borrará cuando se borre la instancia de Milvus</li>
-<li><code translate="no">persistentVolumeClaim.spec</code>: Especificación estándar de PVC de Kubernetes</li>
-<li><code translate="no">accessModes</code>: Típicamente <code translate="no">ReadWriteOnce</code> para almacenamiento en bloque</li>
-<li><code translate="no">storageClassName</code>: Clase de almacenamiento de su clúster</li>
-<li><code translate="no">storage</code>: Tamaño del volumen persistente</li>
-</ul>
 <h2 id="Configure-NATS" class="common-anchor-header">Configurar NATS<button data-href="#Configure-NATS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

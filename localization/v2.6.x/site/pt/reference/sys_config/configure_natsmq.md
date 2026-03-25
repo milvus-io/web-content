@@ -74,7 +74,7 @@ summary: Saiba como configurar o natsmq para o Milvus.
   </thead>
   <tbody>
     <tr>
-      <td>        Diretório a utilizar para o armazenamento de nats do JetStream      </td>
+      <td>        Diretório a utilizar para o armazenamento de nats no JetStream      </td>
       <td>/var/lib/milvus/nats</td>
     </tr>
   </tbody>

@@ -47,7 +47,7 @@ summary: 本頁討論您在開始大量插入資料到您的資料集中之前�
 <li><p><strong>是否啟用 AutoID</strong></p>
 <p><strong>id 欄位</strong>是集合的主要欄位。要使主欄位自動遞增，您可以在模式中啟用<strong>AutoID</strong>。在這種情況下，您應該從來源資料的每一行中排除<strong>id 欄位</strong>。</p></li>
 <li><p><strong>是否啟用動態欄位</strong></p>
-<p>如果模式啟用動態欄位，目標集合也可以儲存未包含在其預先定義的模式中的欄位。<strong>$meta</strong>欄位是保留的 JSON 欄位，用來保存動態欄位及其鍵值對中的值。在上圖中，欄位<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值將以鍵值對的方式儲存於<strong>$meta</strong>欄位中。</p></li>
+<p>如果模式啟用動態欄位，目標集合也可以儲存未包含在其預先定義的模式中的欄位。<strong>$meta</strong>欄位是保留的 JSON 欄位，用來保存動態欄位及其鍵值對中的值。在上圖中，欄位<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值將以鍵值對的形式儲存於<strong>$meta</strong>欄位中。</p></li>
 </ul>
 <p>以下程式碼顯示如何為上圖所示的集合設定模式。</p>
 <div class="language-python">
@@ -225,7 +225,22 @@ schema.verify()
 <li><strong>RemoteBulkWriter</strong>：執行與 LocalBulkWriter 相同的任務，但會額外將轉換後的資料檔案傳輸至指定的遠端物件儲存桶。</li>
 </ul>
 <p><strong>RemoteBulkWriter</strong>與<strong>LocalBulkWriter</strong>的不同之處在於<strong>RemoteBulkWriter</strong>會將轉換後的資料檔案傳輸至目標物件儲存空間。</p>
-<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">設定 LocalBulkWriter</h3><p><strong>LocalBulkWriter</strong>會追加來源資料集的資料列，並將它們提交到指定格式的本機檔案中。</p>
+<h3 id="Set-up-LocalBulkWriter" class="common-anchor-header">設定 LocalBulkWriter<button data-href="#Set-up-LocalBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>LocalBulkWriter</strong>會追加來源資料集的資料列，並將它們提交到指定格式的本機檔案中。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> LocalBulkWriter, BulkFileType
@@ -272,7 +287,22 @@ writer = LocalBulkWriter(
 </ul>
 <p>有關參數設定的詳細資訊，請參閱 SDK 參考資料中的 LocalBulkWriter。</p>
 </div>
-<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">設定 RemoteBulkWriter</h3><p><strong>RemoteBulkWriter</strong>不會將附加的資料提交到本機檔案，而是提交到遠端資料桶。因此，您應該在建立<strong>RemoteBulkWriter</strong> 之前設定<strong>ConnectParam</strong>物件。</p>
+<h3 id="Set-up-RemoteBulkWriter" class="common-anchor-header">設定 RemoteBulkWriter<button data-href="#Set-up-RemoteBulkWriter" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><strong>RemoteBulkWriter</strong>不會將附加的資料提交到本機檔案，而是提交到遠端資料桶。因此，您應該在建立<strong>RemoteBulkWriter</strong> 之前設定<strong>ConnectParam</strong>物件。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> RemoteBulkWriter

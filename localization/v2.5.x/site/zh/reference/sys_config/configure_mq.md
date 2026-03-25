@@ -133,7 +133,7 @@ summary: 了解如何为 Milvus 配置 mq。
     </button></h2><table id="mq.pursuitBufferSize">
   <thead>
     <tr>
-      <th class="width80">说明</th>
+      <th class="width80">描述</th>
       <th class="width20">默认值</th> 
     </tr>
   </thead>
