@@ -19,23 +19,23 @@ Curated prompts that help AI coding assistants write correct Milvus code. Each p
 <div class="card-wrapper">
 
 <div class="start_card_container">
-  <a href="agents_overview.md">
-    <p class="link-btn">🤖 AGENTS.md for Milvus</p>
-    <p>Top-level rules for any AI coding agent. Start here if you only want one file.</p>
+  <a href="agents_overview.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">AGENTS.md</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Top-level rules for any AI coding agent. Start here if you only want one file.</p>
   </a>
 </div>
 
 <div class="start_card_container">
-  <a href="python_sdk.md">
-    <p class="link-btn">🐍 Milvus Python SDK</p>
-    <p>Correct connection patterns, MilvusClient usage, and ORM API prohibition.</p>
+  <a href="python_sdk.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Python SDK</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Correct connection patterns, MilvusClient usage, and ORM API prohibition.</p>
   </a>
 </div>
 
 <div class="start_card_container">
-  <a href="schema_design.md">
-    <p class="link-btn">📐 Schema Design</p>
-    <p>Field types, primary keys, schema immutability, and BM25 configuration.</p>
+  <a href="schema_design.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Schema Design</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Field types, primary keys, schema immutability, and BM25 configuration.</p>
   </a>
 </div>
 
@@ -44,23 +44,23 @@ Curated prompts that help AI coding assistants write correct Milvus code. Each p
 <div class="card-wrapper">
 
 <div class="start_card_container">
-  <a href="search_patterns.md">
-    <p class="link-btn">🔍 Search Patterns</p>
-    <p>ANN, hybrid, and full-text search with critical constraint rules.</p>
+  <a href="search_patterns.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Search Patterns</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">ANN, hybrid, and full-text search with critical constraint rules.</p>
   </a>
 </div>
 
 <div class="start_card_container">
-  <a href="index_selection.md">
-    <p class="link-btn">🗂️ Index Selection</p>
-    <p>Decision tree for AUTOINDEX, HNSW, DiskANN, and IVF_FLAT.</p>
+  <a href="index_selection.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Index Selection</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Decision tree for AUTOINDEX, HNSW, DiskANN, and IVF_FLAT.</p>
   </a>
 </div>
 
 <div class="start_card_container">
-  <a href="rag_pipeline.md">
-    <p class="link-btn">🔗 RAG Pipeline</p>
-    <p>End-to-end retrieval-augmented generation flow with Milvus.</p>
+  <a href="rag_pipeline.md" style="text-decoration: none; color: inherit;">
+    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">RAG Pipeline</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">End-to-end retrieval-augmented generation flow with Milvus.</p>
   </a>
 </div>
 
