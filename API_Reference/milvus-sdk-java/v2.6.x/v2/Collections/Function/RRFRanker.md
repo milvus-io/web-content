@@ -41,7 +41,7 @@ RRFRanker.builder()
 
 **RETURNS:**
 
- A RRF ranker instance.
+A RRF ranker instance.
 
 ## Examples:
 

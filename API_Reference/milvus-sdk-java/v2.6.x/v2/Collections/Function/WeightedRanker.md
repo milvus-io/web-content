@@ -42,7 +42,7 @@ WeightedRanker.builder()
 
 **RETURNS:**
 
- A weighted ranker instance.
+A weighted ranker instance.
 
 ## Examples:
 

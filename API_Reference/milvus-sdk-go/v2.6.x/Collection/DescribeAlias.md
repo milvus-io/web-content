@@ -16,7 +16,7 @@ result, err := client.DescribeAlias(ctx, option)
 
 **PARAMETERS:**
 
-- **alias** (*string*)
+- **[alias](Alias.md)** (*string*)
 
     The alias name to assign.
 

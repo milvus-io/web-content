@@ -20,7 +20,7 @@ err := client.AddCollectionField(ctx, option)
 
     The name of the target collection.
 
-- **field** (**[entity.Field](Field.md)*)
+- **[field](Field.md)** (**[entity.Field](Field.md)*)
 
     The field.
 
