@@ -7,7 +7,7 @@ summary: Rules and patterns for AI coding agents that generate, review, or debug
 ## How to use this prompt
 
 1. **Copy** the full prompt from the [Full prompt](#full-prompt) section below.
-2. **Save** it to the location your AI tool expects — see the [environment table](ai_prompts_landing.md) for placement details.
+2. **Save** it to the location your AI tool expects — see the [environment table](milvus_for_agents.md) for placement details.
 3. Your AI assistant will automatically apply these rules when generating or reviewing Milvus code.
 
 For **Cursor** users: copy the prompt from the [Full prompt](#full-prompt) section and save it under `.cursor/rules/` in your project.
@@ -15,7 +15,7 @@ For **Cursor** users: copy the prompt from the [Full prompt](#full-prompt) secti
 
 # AGENTS.md — Milvus
 
-Milvus is an open-source vector database for similarity search, hybrid search, and RAG. You interact with it through the PyMilvus SDK's `MilvusClient` interface. Copy the full prompt below into your AI tool to apply these rules automatically. For detailed task-specific prompts, see [AI Prompts](ai_prompts_landing.md).
+Milvus is an open-source vector database for similarity search, hybrid search, and RAG. You interact with it through the PyMilvus SDK's `MilvusClient` interface. Copy the full prompt below into your AI tool to apply these rules automatically. For detailed task-specific prompts, see [AI Prompts](milvus_for_agents.md).
 
 ## Full prompt
 

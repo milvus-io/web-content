@@ -298,3 +298,5 @@ client = MilvusClient(uri="http://localhost:19530", token="root:Milvus")
 ```
 
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](install-pymilvus.md), [Java](install-java.md), [Go](install-go.md), C# and [Node.js](install-node.md).
+
+If you are using AI coding assistants or building AI agent applications, check out [Milvus for AI Agents](milvus_for_agents.md) to explore agent skills, MCP servers, and curated prompts that help your AI tools write correct Milvus code.

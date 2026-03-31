@@ -647,66 +647,73 @@
     "order": 5,
     "children": [
       {
+        "label": "Milvus for AI Agents",
+        "id": "milvus_for_agents.md",
+        "order": 0,
+        "children": []
+      },
+      {
         "label": "AI Prompts",
         "id": "ai_prompts",
         "isMenu": true,
-        "order": 0,
+        "order": 1,
         "children": [
-          {
-            "label": "Overview",
-            "id": "ai_prompts_landing.md",
-            "order": 0,
-            "children": []
-          },
           {
             "label": "AGENTS.md for Milvus",
             "id": "agents_overview.md",
-            "order": 1,
+            "order": 0,
             "children": []
           },
           {
             "label": "Python SDK",
             "id": "python_sdk.md",
-            "order": 2,
+            "order": 1,
             "children": []
           },
           {
             "label": "Schema Design",
             "id": "schema_design.md",
-            "order": 3,
+            "order": 2,
             "children": []
           },
           {
             "label": "Search Patterns",
             "id": "search_patterns.md",
-            "order": 4,
+            "order": 3,
             "children": []
           },
           {
             "label": "Index Selection",
             "id": "index_selection.md",
-            "order": 5,
+            "order": 4,
             "children": []
           },
           {
             "label": "RAG Pipeline",
             "id": "rag_pipeline.md",
-            "order": 6,
+            "order": 5,
             "children": []
           }
         ]
       },
       {
+        "label": "Milvus Skill",
+        "id": "milvus_skill",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/milvus-skill",
+        "children": []
+      },
+      {
         "label": "Milvus MCP Server",
         "id": "mcp_server_milvus",
-        "order": 1,
+        "order": 3,
         "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
         "children": []
       },
       {
         "label": "MCP Server for Claude Code",
         "id": "mcp_claude_context",
-        "order": 2,
+        "order": 4,
         "externalLink": "https://github.com/zilliztech/claude-context",
         "children": []
       }
