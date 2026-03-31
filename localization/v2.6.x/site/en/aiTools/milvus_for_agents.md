@@ -55,12 +55,6 @@ summary: >-
     <p style="font-size: 0.875rem; font-weight: 400; color: #555;">MCP server designed for Claude Code, providing context-aware Milvus documentation access.</p>
   </a>
 </div>
-<div class="start_card_container">
-  <a href="/docs/integrations_overview.md" style="text-decoration: none; color: inherit;">
-    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Agent Frameworks</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Integrations with LangChain, LlamaIndex, OpenAI Agents, and other agent orchestration frameworks.</p>
-  </a>
-</div>
 </div>
 <h2 id="AI-prompts" class="common-anchor-header">AI prompts<button data-href="#AI-prompts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -198,22 +192,3 @@ summary: >-
 <div class="alert note">
 <p>For agent workloads, <strong>Zilliz Cloud</strong> is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.</p>
 </div>
-<h2 id="Next-steps" class="common-anchor-header">Next steps<button data-href="#Next-steps" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><a href="/docs/quickstart.md">Quick Start</a> — Run your first Milvus search in minutes.</li>
-<li><a href="/docs/integrations_overview.md">Agent Framework Integrations</a> — Connect Milvus with LangChain, LlamaIndex, OpenAI Agents, and more.</li>
-</ul>

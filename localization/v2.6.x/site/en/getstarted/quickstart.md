@@ -452,11 +452,5 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><div class="card-wrapper">
-<div class="start_card_container">
-  <a href="/docs/milvus_for_agents.md" style="text-decoration: none; color: inherit;">
-    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Milvus for AI Agents</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Using AI coding assistants or building agent applications? Explore agent skills, MCP servers, and curated prompts that help your AI tools write correct Milvus code.</p>
-  </a>
-</div>
-</div>
+    </button></h2><p>If you are using AI coding assistants like Claude Code or Cursor, you can install <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> to help your AI tools write correct Milvus code.</p>
+<p>For more agent tools including MCP servers and curated prompts, see <a href="/docs/milvus_for_agents.md">Milvus for AI Agents</a>.</p>
