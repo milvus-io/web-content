@@ -4,6 +4,10 @@ title: "Prompt: Milvus Schema Design"
 summary: Rules for AI coding assistants to design correct Milvus collection schemas.
 ---
 
+# Schema Design
+
+Rules and decision guides for designing correct Milvus collection schemas, including field types, primary keys, BM25 configuration, and schema immutability constraints. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
+
 ## How to use this prompt
 
 1. **Copy** the full prompt from the [Full prompt](#full-prompt) section below.
@@ -12,8 +16,6 @@ summary: Rules for AI coding assistants to design correct Milvus collection sche
 
 For **Cursor** users: copy the prompt from the [Full prompt](#full-prompt) section and save it under `.cursor/rules/` in your project.
 
-
-Rules and decision guides for designing correct Milvus collection schemas, including field types, primary keys, BM25 configuration, and schema immutability constraints. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
 
 ## Full prompt
 

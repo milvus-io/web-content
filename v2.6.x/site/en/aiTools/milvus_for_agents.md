@@ -33,13 +33,6 @@ Milvus provides agent-friendly interfaces that allow AI coding agents and autono
   </a>
 </div>
 
-<div class="start_card_container">
-  <a href="integrations_overview.md" style="text-decoration: none; color: inherit;">
-    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Agent Frameworks</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Integrations with LangChain, LlamaIndex, OpenAI Agents, and other agent orchestration frameworks.</p>
-  </a>
-</div>
-
 </div>
 
 ## AI prompts
@@ -132,8 +125,3 @@ Choosing the right Milvus deployment depends on your development stage.
 For agent workloads, **Zilliz Cloud** is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.
 
 </div>
-
-## Next steps
-
-- [Quick Start](quickstart.md) — Run your first Milvus search in minutes.
-- [Agent Framework Integrations](integrations_overview.md) — Connect Milvus with LangChain, LlamaIndex, OpenAI Agents, and more.

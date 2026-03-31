@@ -4,6 +4,10 @@ title: "Prompt: Milvus Search Patterns"
 summary: Rules for AI coding assistants to implement search, hybrid search, and full-text search in Milvus.
 ---
 
+# Search Patterns
+
+Rules for implementing similarity search, hybrid search, filtered search, and full-text search in Milvus, including AnnSearchRequest constraints and ranker usage. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
+
 ## How to use this prompt
 
 1. **Copy** the full prompt from the [Full prompt](#full-prompt) section below.
@@ -12,8 +16,6 @@ summary: Rules for AI coding assistants to implement search, hybrid search, and 
 
 For **Cursor** users: copy the prompt from the [Full prompt](#full-prompt) section and save it under `.cursor/rules/` in your project.
 
-
-Rules for implementing similarity search, hybrid search, filtered search, and full-text search in Milvus, including AnnSearchRequest constraints and ranker usage. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see [AI Prompts](milvus_for_agents.md).
 
 ## Full prompt
 

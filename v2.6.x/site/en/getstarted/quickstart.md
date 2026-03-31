@@ -301,13 +301,6 @@ Milvus provides REST and gRPC API, with client libraries in languages such as [P
 
 ## Milvus for AI Agents
 
-<div class="card-wrapper">
+If you are using AI coding assistants like Claude Code or Cursor, you can install [Milvus Skill](https://github.com/zilliztech/milvus-skill) to help your AI tools write correct Milvus code.
 
-<div class="start_card_container">
-  <a href="milvus_for_agents.md" style="text-decoration: none; color: inherit;">
-    <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Milvus for AI Agents</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Using AI coding assistants or building agent applications? Explore agent skills, MCP servers, and curated prompts that help your AI tools write correct Milvus code.</p>
-  </a>
-</div>
-
-</div>
+For more agent tools including MCP servers and curated prompts, see [Milvus for AI Agents](milvus_for_agents.md).
