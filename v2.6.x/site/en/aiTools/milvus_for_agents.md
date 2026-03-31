@@ -33,10 +33,6 @@ Milvus provides agent-friendly interfaces that allow AI coding agents and autono
   </a>
 </div>
 
-</div>
-
-<div class="card-wrapper">
-
 <div class="start_card_container">
   <a href="integrations_overview.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Agent Frameworks</p>
@@ -136,26 +132,6 @@ Choosing the right Milvus deployment depends on your development stage.
 For agent workloads, **Zilliz Cloud** is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.
 
 </div>
-
-## Quick connection examples
-
-Connect to Milvus from your agent code:
-
-```python
-from pymilvus import MilvusClient
-
-# Milvus Lite (local, zero-config)
-client = MilvusClient(uri="./milvus_agent.db")
-
-# Milvus Standalone
-client = MilvusClient(uri="http://localhost:19530")
-
-# Zilliz Cloud
-client = MilvusClient(
-    uri="YOUR_ZILLIZ_CLOUD_URI",
-    token="YOUR_ZILLIZ_CLOUD_TOKEN"
-)
-```
 
 ## Next steps
 

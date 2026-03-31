@@ -56,14 +56,6 @@ id: home.md
   </p>
 </div>
 
-<div class="start_card_container">
-  <a href="milvus_for_agents.md">
-    <img src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
-    <p class="link-btn">Milvus for AI Agents</p>
-  </a>
-  <p>Teach your AI agents to use Milvus with skills, prompts, and MCP servers.</p>
-</div>
-
 </div>
 
 ## Recommended articles
@@ -77,7 +69,7 @@ id: home.md
 - [Insert, Upsert, and Delete](insert-update-delete.md)
 - [Index Vector Fields](index-vector-fields.md)
 - [Single-Vector Search](single-vector-search.md)
-- [Get & Scalar Query](get-and-scalar-query.md)
+- [Milvus for AI Agents](milvus_for_agents.md)
 </div>
 
 <div class="recomment-item">
