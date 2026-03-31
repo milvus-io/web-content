@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Copie</strong> el mensaje completo de la sección <a href="#full-prompt">Mensaje completo</a>.</li>
-<li><strong>Guárdelo</strong> en la ubicación que su herramienta de IA espera - vea la <a href="/docs/es/ai_prompts_landing.md">tabla de entorno</a> para detalles de ubicación.</li>
+<li><strong>Guárdelo</strong> en la ubicación que su herramienta de IA espera - vea la <a href="/docs/es/milvus_for_agents.md">tabla de entorno</a> para detalles de ubicación.</li>
 <li>Su asistente de IA aplicará automáticamente estas reglas cuando genere o revise el código Milvus.</li>
 </ol>
 <p>Para los usuarios <strong>de Cursor</strong>: copie la instrucción de la sección Instrucción <a href="#full-prompt">completa</a> y guárdela en <code translate="no">.cursor/rules/</code> en su proyecto.</p>
-<p>Reglas para escribir código Milvus Python correcto utilizando la interfaz MilvusClient, incluyendo migración ORM, patrones de conexión y operaciones comunes. Copie el prompt completo en su herramienta AI para aplicar estas reglas automáticamente. Para una visión general de todos los avisos, vea <a href="/docs/es/ai_prompts_landing.md">Avisos AI</a>.</p>
+<p>Reglas para escribir código Milvus Python correcto utilizando la interfaz MilvusClient, incluyendo migración ORM, patrones de conexión y operaciones comunes. Copie el prompt completo en su herramienta AI para aplicar estas reglas automáticamente. Para una visión general de todos los avisos, vea <a href="/docs/es/milvus_for_agents.md">Avisos AI</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Mensaje completo<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

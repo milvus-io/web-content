@@ -20,11 +20,11 @@ summary: AIコーディングアシスタントがMilvusコレクションスキ
       </svg>
     </button></h2><ol>
 <li>以下の<a href="#full-prompt">プロンプトの</a>完全版のセクションからプロンプトの完全版を<strong>コピー</strong>する。</li>
-<li>それをAIツールが期待する場所に<strong>保存して</strong>ください。</li>
+<li>AIツールが期待する場所に<strong>保存して</strong>ください。</li>
 <li>AIアシスタントはMilvusコードを生成またはレビューする際に、これらのルールを自動的に適用します。</li>
 </ol>
 <p><strong>Cursorを</strong>お使いの場合: プロンプトを<a href="#full-prompt">Full prompt</a>セクションからコピーし、プロジェクトの<code translate="no">.cursor/rules/</code> 。</p>
-<p>フィールドタイプ、プライマリキー、BM25設定、スキーマ不変性制約を含む、正しいMilvusコレクションスキーマを設計するためのルールと決定ガイド。これらのルールを自動的に適用するには、以下のプロンプトをAIツールにコピーしてください。すべてのプロンプトの概要については、<a href="/docs/ja/ai_prompts_landing.md">AIプロンプトを</a>参照してください。</p>
+<p>フィールドタイプ、プライマリキー、BM25設定、スキーマ不変性制約を含む、正しいMilvusコレクションスキーマを設計するためのルールと決定ガイド。これらのルールを自動的に適用するには、以下のプロンプトをAIツールにコピーしてください。すべてのプロンプトの概要については、<a href="/docs/ja/milvus_for_agents.md">AIプロンプトを</a>参照してください。</p>
 <h2 id="Full-prompt" class="common-anchor-header">完全なプロンプト<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

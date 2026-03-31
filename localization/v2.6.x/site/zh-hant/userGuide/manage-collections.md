@@ -52,7 +52,7 @@ title: 管理收藏集
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，您可以將向量嵌入儲存在集合中。集合中的所有向量內嵌都有相同的維度和距離度量相似性。</p>
+    </button></h2><p>在 Milvus 中，您可以將向量嵌入儲存在集合中。集合內的所有向量內嵌都有相同的維度和距離度量相似性。</p>
 <p>Milvus 集合支援動態欄位（即模式中未預先定義的欄位）和主鍵的自動遞增。</p>
 <p>為了適應不同的偏好，Milvus 提供了兩種建立集合的方法。其中一種提供快速設定，另一種則允許詳細自訂集合模式和索引參數。</p>
 <p>此外，您還可以在必要時檢視、載入、釋放和刪除集合。</p>
@@ -93,7 +93,7 @@ title: 管理收藏集
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在人工智能產業大躍進的背景下，大多數開發人員只需要一個簡單但充滿活力的資料集就可以開始使用。Milvus 只需三個參數就能快速設定這樣的集合：</p>
+    </button></h3><p>在 AI 產業大躍進的背景下，大多數開發人員只需要一個簡單但充滿活力的資料集就可以開始使用。Milvus 只需三個參數就能快速設定這樣的集合：</p>
 <ul>
 <li><p>要建立的集合名稱、</p></li>
 <li><p>要插入的向量嵌入的維度，以及</p></li>
@@ -285,7 +285,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 <li><p><code translate="no">enable_dynamic_field</code></p>
 <p>啟用時，要插入的資料中除<code translate="no">id</code> 和<code translate="no">vector</code> 以外的所有欄位都會視為動態欄位。這些額外的欄位會以鍵值對的方式儲存於一個名為<code translate="no">$meta</code> 的特殊欄位中。此功能允許在插入資料時包含額外欄位。</p></li>
 </ul>
-<p>從所提供的程式碼中自動索引和載入的集合已準備好立即插入資料。</p>
+<p>從提供的程式碼中自動索引和載入的集合可立即插入資料。</p>
 <h3 id="Customized-setup" class="common-anchor-header">客製化設定<button data-href="#Customized-setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -692,7 +692,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>額外索引參數。如需詳細資訊，請參閱「<a href="https://milvus.io/docs/index.md">In-memory Index</a>」和<a href="https://milvus.io/docs/disk_index.md">「On-disk Index</a>」。</td>
+      <td>額外索引參數。如需詳細資訊，請參閱「<a href="https://milvus.io/docs/index.md">記憶體索引</a>」和<a href="https://milvus.io/docs/disk_index.md">「磁碟上索引</a>」。</td>
     </tr>
   </tbody>
 </table>
@@ -1148,7 +1148,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>模式負責組織目標資料集中的資料。有效的模式應該有多個欄位，其中必須包括一個主索引鍵、一個向量欄位和幾個標量欄位。</td>
+<td>模式負責組織目標資料集中的資料。有效的模式應該有多個欄位，其中必須包括一個主索引鍵、一個向量欄位和數個標量欄位。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>

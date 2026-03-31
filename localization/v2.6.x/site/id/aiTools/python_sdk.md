@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Salin</strong> prompt lengkap dari bagian Prompt <a href="#full-prompt">lengkap</a> di bawah ini.</li>
-<li><strong>Simpan</strong> di lokasi yang diharapkan oleh alat AI Anda - lihat <a href="/docs/id/ai_prompts_landing.md">tabel lingkungan</a> untuk detail penempatan.</li>
+<li><strong>Simpan</strong> di lokasi yang diharapkan oleh alat AI Anda - lihat <a href="/docs/id/milvus_for_agents.md">tabel lingkungan</a> untuk detail penempatan.</li>
 <li>Asisten AI Anda akan secara otomatis menerapkan aturan ini saat membuat atau meninjau kode Milvus.</li>
 </ol>
 <p>Untuk pengguna <strong>kursor</strong>: salin perintah dari bagian Perintah <a href="#full-prompt">lengkap</a> dan simpan di bawah <code translate="no">.cursor/rules/</code> dalam proyek Anda.</p>
-<p>Aturan untuk menulis kode Python Milvus yang benar menggunakan antarmuka MilvusClient, termasuk migrasi ORM, pola koneksi, dan operasi umum. Salin perintah lengkap di bawah ini ke dalam alat AI Anda untuk menerapkan aturan-aturan ini secara otomatis. Untuk gambaran umum dari semua perintah, lihat Perintah <a href="/docs/id/ai_prompts_landing.md">AI</a>.</p>
+<p>Aturan untuk menulis kode Python Milvus yang benar menggunakan antarmuka MilvusClient, termasuk migrasi ORM, pola koneksi, dan operasi umum. Salin perintah lengkap di bawah ini ke dalam alat AI Anda untuk menerapkan aturan-aturan ini secara otomatis. Untuk gambaran umum dari semua perintah, lihat Perintah <a href="/docs/id/milvus_for_agents.md">AI</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Perintah lengkap<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

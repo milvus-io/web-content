@@ -182,7 +182,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>グローバル</td><td>オーナーシップの作成</td><td>CreateUser CreateRole</td></tr>
 <tr><td>グローバル</td><td>所有権の削除</td><td>削除クレデンシャル DropRole</td></tr>
 <tr><td>グローバル</td><td>オーナーシップ選択</td><td>セレクトロール/セレクトグラント</td></tr>
-<tr><td>グローバル</td><td>オーナーシップの管理</td><td>OperateUserRole操作権限</td></tr>
+<tr><td>グローバル</td><td>オーナーシップの管理</td><td>OperateUserRole（ユーザー役割の操作） OperatePrivilege（権限の操作</td></tr>
 <tr><td>グローバル</td><td>リソースグループの作成</td><td>リソースグループの作成</td></tr>
 <tr><td>グローバル</td><td>リソースグループの削除</td><td>DropResourceグループ</td></tr>
 <tr><td>グローバル</td><td>DescribeResourceGroup</td><td>リソースグループ</td></tr>

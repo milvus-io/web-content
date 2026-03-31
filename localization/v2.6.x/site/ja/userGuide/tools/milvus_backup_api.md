@@ -1,6 +1,6 @@
 ---
 id: milvus_backup_api.md
-summary: APIを利用したMilvus Backupの利用方法をご紹介します。
+summary: APIを使ったMilvus Backupの使い方
 title: APIを利用したデータのバックアップとリストア
 ---
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">APIを利用したデータのバックアップとリストア<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
@@ -35,7 +35,7 @@ title: APIを利用したデータのバックアップとリストア
         ></path>
       </svg>
     </button></h2><p>コンパイル済みのバイナリをダウンロードするか、ソースからビルドすることができます。</p>
-<p>コンパイル済みのバイナリをダウンロードするには、<a href="https://github.com/zilliztech/milvus-backup/releases">リリース</a>ページにアクセスしてください。常に<strong>最新版と</strong>マークされたリリースのバイナリを使用することを忘れないでください。</p>
+<p>コンパイル済みのバイナリをダウンロードするには、<a href="https://github.com/zilliztech/milvus-backup/releases">リリース</a>ページにアクセスしてください。常に<strong>最新版と</strong>表示されているリリースのバイナリを使用することを忘れないでください。</p>
 <p>ソースからコンパイルするには、以下のようにします：</p>
 <pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
 go get

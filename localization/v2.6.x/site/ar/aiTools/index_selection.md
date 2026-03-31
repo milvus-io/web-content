@@ -1,6 +1,6 @@
 ---
 id: index_selection.md
-title: 'موجه: اختيار مؤشر ميلفوس'
+title: 'الموجه: اختيار مؤشر ميلفوس'
 summary: قواعد لمساعدي ترميز الذكاء الاصطناعي لاختيار فهارس Milvus وتكوينها.
 ---
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">كيفية استخدام هذه المطالبة<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
@@ -20,11 +20,11 @@ summary: قواعد لمساعدي ترميز الذكاء الاصطناعي ل
       </svg>
     </button></h2><ol>
 <li><strong>انسخ</strong> المطالبة الكاملة من قسم <a href="#full-prompt">المطالبة الكاملة</a> أدناه.</li>
-<li><strong>احفظه</strong> في الموقع الذي تتوقعه أداة الذكاء الاصطناعي الخاصة بك - راجع <a href="/docs/ar/ai_prompts_landing.md">جدول البيئة</a> للحصول على تفاصيل الموضع.</li>
+<li><strong>احفظه</strong> في الموقع الذي تتوقعه أداة الذكاء الاصطناعي الخاصة بك - راجع <a href="/docs/ar/milvus_for_agents.md">جدول البيئة</a> للحصول على تفاصيل الموضع.</li>
 <li>سيطبق مساعد الذكاء الاصطناعي الخاص بك هذه القواعد تلقائيًا عند إنشاء أو مراجعة كود Milvus.</li>
 </ol>
 <p>بالنسبة لمستخدمي <strong>Cursor</strong>: انسخ المطالبة من قسم المطالبة <a href="#full-prompt">الكاملة</a> واحفظها تحت <code translate="no">.cursor/rules/</code> في مشروعك.</p>
-<p>أدلة القرار وقواعد التكوين لاختيار وضبط فهارس ميلفوس وضبطها، بما في ذلك الفهارس التلقائية وHNSW وDiskANN وIVF والفهارس المتفرقة. انسخ المطالبة الكاملة أدناه إلى أداة الذكاء الاصطناعي لتطبيق هذه القواعد تلقائيًا. للحصول على نظرة عامة على جميع المطالبات، راجع <a href="/docs/ar/ai_prompts_landing.md">موجهات الذكاء الاصطناعي</a>.</p>
+<p>أدلة القرار وقواعد التكوين لاختيار وضبط فهارس ميلفوس وضبطها، بما في ذلك الفهارس التلقائية وHNSW وDiskANN وIVF والفهارس المتفرقة. انسخ المطالبة الكاملة أدناه إلى أداة الذكاء الاصطناعي لتطبيق هذه القواعد تلقائيًا. للحصول على نظرة عامة على جميع المطالبات، راجع <a href="/docs/ar/milvus_for_agents.md">موجهات الذكاء الاصطناعي</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">المطالبة الكاملة<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

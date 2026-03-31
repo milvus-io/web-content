@@ -35,7 +35,7 @@ title: 使用命令備份和還原資料
         ></path>
       </svg>
     </button></h2><p>您可以下載已編譯的二進位檔或從原始碼建立。</p>
-<p>若要下載編譯後的二進位檔，請前往<a href="https://github.com/zilliztech/milvus-backup/releases">發佈</a>頁面，在那裡您可以找到所有正式的發佈版本。請記住，請務必使用標示為<strong>最新版本的</strong>二進位檔。</p>
+<p>要下載編譯後的二進位檔，請前往<a href="https://github.com/zilliztech/milvus-backup/releases">發行版頁</a>面，在那裡您可以找到所有官方發行版。請記住，請務必使用標示為<strong>最新版本的</strong>二進位檔。</p>
 <p>從原始碼編譯的步驟如下：</p>
 <pre><code translate="no" class="language-shell">git clone git@github.com:zilliztech/milvus-backup.git
 go get
@@ -146,8 +146,8 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <p>您可以使用<code translate="no">-s</code> 標誌執行<code translate="no">restore</code> 指令，從備份中還原資料來建立新的集合：</p>
 <pre><code translate="no" class="language-shell">./milvus-backup restore -n my_backup -s _recover
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">-s</code> 標誌允許您為要建立的新集合設定後綴。上述命令將在您的<strong>Milvus</strong>實例中建立一個新的資料集，名稱為<strong>hello_milvus_recover</strong>。</p>
-<p>如果您希望還原已備份的資料集而不更改其名稱，請在從備份還原資料集之前刪除該資料集。現在您可以執行以下指令，清理在<a href="#Prepare-data">準備資料</a>中產生的資料。</p>
+<p><code translate="no">-s</code> 標誌允許您為要建立的新集合設定後綴。上述命令將在您的<strong>Milvus</strong>實例中建立一個新的資料集，名為<strong>hello_milvus_recover</strong>。</p>
+<p>如果您希望還原備份的資料集而不更改其名稱，請在從備份還原資料集之前丟棄該資料集。現在您可以執行以下指令，清理在<a href="#Prepare-data">準備資料</a>中產生的資料。</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>然後執行以下命令從備份還原資料。</p>

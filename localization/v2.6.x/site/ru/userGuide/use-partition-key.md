@@ -272,7 +272,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Когда коллекция готова, начните вставлять данные следующим образом:</p>
-<h3 id="Prepare-data" class="common-anchor-header">Подготовьте данные<button data-href="#Prepare-data" class="anchor-icon" translate="no">
+<h3 id="Prepare-data" class="common-anchor-header">Подготовить данные<button data-href="#Prepare-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

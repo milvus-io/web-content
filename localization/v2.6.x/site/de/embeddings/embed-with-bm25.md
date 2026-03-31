@@ -2,9 +2,8 @@
 id: embed-with-bm25.md
 order: 5
 summary: >-
-  BM25 ist eine Rangordnungsfunktion, die im Information Retrieval verwendet
-  wird, um die Relevanz von Dokumenten für eine bestimmte Suchanfrage
-  einzuschätzen.
+  BM25 ist eine Ranking-Funktion, die im Information Retrieval verwendet wird,
+  um die Relevanz von Dokumenten für eine gegebene Suchanfrage einzuschätzen.
 title: BM25
 ---
 <h1 id="BM25" class="common-anchor-header">BM25<button data-href="#BM25" class="anchor-icon" translate="no">
@@ -109,5 +108,5 @@ query_embeddings = bm25_ef.encode_queries(queries)
   (<span class="hljs-number">1</span>, <span class="hljs-number">14</span>)        <span class="hljs-number">0.5108256237659907</span>
 Sparse dim: <span class="hljs-number">21</span> (<span class="hljs-number">1</span>, <span class="hljs-number">21</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Hinweise:</strong></p>
+<p><strong>Anmerkungen:</strong></p>
 <p>Bei der Verwendung von <strong>BM25EmbeddingFunction</strong> ist zu beachten, dass die Operationen <strong>encoding_queries()</strong> und <strong>encoding_documents()</strong> mathematisch nicht vertauscht werden können. Daher gibt es kein implementiertes <strong>bm25_ef(texts)</strong>.</p>

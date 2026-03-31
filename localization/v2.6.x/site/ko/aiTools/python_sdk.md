@@ -20,11 +20,11 @@ summary: AI 코딩 어시스턴트가 MilvusClient를 사용하여 올바른 Mil
       </svg>
     </button></h2><ol>
 <li>아래의 <a href="#full-prompt">전체</a> 프롬프트 섹션에서 전체 프롬프트를<strong>복사합니다</strong>.</li>
-<li>AI 도구가 예상하는 위치에<strong>저장합니다</strong> (배치에 대한 자세한 내용은 <a href="/docs/ko/ai_prompts_landing.md">환경 표를</a> 참조하세요).</li>
+<li>AI 도구가 예상하는 위치에<strong>저장합니다</strong> (배치에 대한 자세한 내용은 <a href="/docs/ko/milvus_for_agents.md">환경 표를</a> 참조하세요).</li>
 <li>AI 어시스턴트는 Milvus 코드를 생성하거나 검토할 때 이러한 규칙을 자동으로 적용합니다.</li>
 </ol>
 <p><strong>커서</strong> 사용자의 경우: <a href="#full-prompt">전체 프롬프트</a> 섹션에서 프롬프트를 복사하여 프로젝트의 <code translate="no">.cursor/rules/</code> 아래에 저장하세요.</p>
-<p>ORM 마이그레이션, 연결 패턴 및 일반적인 작업을 포함하여 MilvusClient 인터페이스를 사용하여 올바른 Milvus Python 코드를 작성하기 위한 규칙입니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/ai_prompts_landing.md">AI 프롬프트를</a> 참조하세요.</p>
+<p>ORM 마이그레이션, 연결 패턴 및 일반적인 작업을 포함하여 MilvusClient 인터페이스를 사용하여 올바른 Milvus Python 코드를 작성하기 위한 규칙입니다. 아래의 전체 프롬프트를 AI 도구에 복사하여 이러한 규칙을 자동으로 적용하세요. 모든 프롬프트에 대한 개요는 <a href="/docs/ko/milvus_for_agents.md">AI 프롬프트를</a> 참조하세요.</p>
 <h2 id="Full-prompt" class="common-anchor-header">전체 프롬프트<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

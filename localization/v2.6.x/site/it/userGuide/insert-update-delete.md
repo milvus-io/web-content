@@ -57,7 +57,7 @@ title: 'Inserimento, upsert e cancellazione'
         ></path>
       </svg>
     </button></h2><p>Un'entità, nel contesto delle raccolte Milvus, è un'istanza singola e identificabile all'interno di una raccolta. Rappresenta un membro distinto di una particolare classe, sia essa un libro in una biblioteca, un gene in un genoma o qualsiasi altra entità identificabile.</p>
-<p>Le entità all'interno di una collezione condividono un insieme comune di attributi, chiamato schema, che delinea la struttura a cui ogni entità deve aderire, compresi i nomi dei campi, i tipi di dati e qualsiasi altro vincolo.</p>
+<p>Le entità all'interno di una collezione condividono un insieme comune di attributi, chiamato schema, che delinea la struttura che ogni entità deve rispettare, compresi i nomi dei campi, i tipi di dati e qualsiasi altro vincolo.</p>
 <p>L'inserimento di entità in una collezione richiede che i dati forniti contengano tutti i campi definiti dallo schema della collezione di destinazione. Inoltre, è possibile includere campi non definiti dallo schema solo se si è abilitato il campo dinamico. Per i dettagli, consultare <a href="/docs/it/enable-dynamic-field.md">Abilita campo dinamico</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparazione<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -425,7 +425,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </ul>
 </div>
 <div class="language-python">
-<p>Per l'upsert delle entità, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> per l'upsert delle entità.</p>
+<p>Per l'upsert delle entità, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> metodo.</p>
 </div>
 <div class="language-java">
 <p>Per l'upsert di entità, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">upsert()</code></a> metodo.</p>
@@ -738,9 +738,9 @@ System.out.println(deleteResp.getDeleteCnt());
 <span class="hljs-comment">// 2</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Per i dettagli sull'uso delle espressioni di filtro, consultare <a href="/docs/it/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
+<p>Per i dettagli su come usare le espressioni di filtro, consultare <a href="/docs/it/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p></li>
 <li><p><strong>Eliminare entità per nome di partizione</strong>.</p>
-<p>Se si desidera eliminare le entità da una partizione specifica, è possibile specificare il nome della partizione con il parametro <code translate="no">partition_name</code> nel metodo <code translate="no">delete()</code>. L'esempio seguente elimina le entità da <code translate="no">partitionA</code> che hanno un colore che inizia con <code translate="no">blue</code>.</p>
+<p>Se si desidera eliminare entità da una partizione specifica, è possibile specificare il nome della partizione con il parametro <code translate="no">partition_name</code> nel metodo <code translate="no">delete()</code>. L'esempio seguente elimina le entità da <code translate="no">partitionA</code> che hanno un colore che inizia con <code translate="no">blue</code>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.delete(

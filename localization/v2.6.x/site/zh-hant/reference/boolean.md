@@ -91,7 +91,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>CONST</td><td>整數或浮點數。</td></tr>
 <tr><td>IDENTIFIER</td><td>識別碼。在 Milvus 中，IDENTIFIER 代表欄位名稱。</td></tr>
 <tr><td>邏輯運算</td><td>LogicalOp 是一個邏輯運算符號，支援在一次比較中結合多個關係運算。LogicalOp 的回傳值是 TRUE (1) 或 FALSE (0)。邏輯操作有兩種類型，包括二元邏輯操作 (BinaryLogicalOps) 和單元邏輯操作 (UnaryLogicalOps)。</td></tr>
-<tr><td>單元邏輯操作</td><td>UnaryLogicalOp 指單元邏輯運算符號 "not"。</td></tr>
+<tr><td>單值邏輯操作</td><td>UnaryLogicalOp 指單元邏輯運算符號 "not"。</td></tr>
 <tr><td>二進制邏輯運算符號</td><td>對兩個操作數執行動作的二進制邏輯運算符。在具有兩個或更多操作數的複雜表達式中，評估的順序取決於優先順序規則。</td></tr>
 <tr><td>算術運算</td><td>ArithmeticOp 即算术运算符，对操作数执行加法和减法等数学运算。</td></tr>
 <tr><td>單值運算符號</td><td>UnaryArithOp 是一種算術運算元，可在單一操作數上執行運算。負數 UnaryArithOp 會將正數表達式變為負數表達式，反之亦然。</td></tr>
@@ -146,7 +146,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><th>符號</th><th>運算符號</th><th>範例</th><th>說明</th></tr>
 </thead>
 <tbody>
-<tr><td>'and' &amp;&amp;</td><td>與</td><td>expr1 &amp;&amp; expr2</td><td>如果 expr1 和 expr2 都為真，則為真。</td></tr>
+<tr><td>'and' &amp;&amp;</td><td>和</td><td>expr1 &amp;&amp; expr2</td><td>如果 expr1 和 expr2 都為真，則為真。</td></tr>
 <tr><td>'or' ||</td><td>或</td><td>expr1 || expr2</td><td>如果 expr1 或 expr2 均為真，則為 True。</td></tr>
 </tbody>
 </table>

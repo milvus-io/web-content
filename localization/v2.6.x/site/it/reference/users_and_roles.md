@@ -101,7 +101,7 @@ client.grantPrivilege(grantPrivilegeReq);
  })
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Per ulteriori informazioni sulle API relative ai privilegi, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/grant_privilege.md">grant_privilege</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/revoke_privileges.md">revoke_privilege</a>.</p>
+<p>Per ottenere ulteriori informazioni sulle API relative ai privilegi, fare riferimento a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/grant_privilege.md">grant_privilege</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/revoke_privileges.md">revoke_privilege</a>.</p>
 </div>
 <div class="language-java">
 <p>Per ottenere maggiori informazioni sulle API legate ai privilegi, fare riferimento a <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/grantPrivilege.md">grantPrivilege</a> e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/revokePrivilege.md">revokePrivilege</a>.</p>
@@ -154,7 +154,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tbody>
 <tr><td>Raccolta</td><td>CreaIndex</td><td>CreaIndex</td></tr>
 <tr><td>Raccolta</td><td>Indice di caduta</td><td>Indice di caduta</td></tr>
-<tr><td>Raccolta</td><td>IndiceDettaglio</td><td>DescribeIndex/GetIndexState/GetIndexBuildProgress</td></tr>
+<tr><td>Raccolta</td><td>IndiceDettaglio</td><td>DescrivereIndex/GetIndexState/GetIndexBuildProgress</td></tr>
 <tr><td>Raccolta</td><td>Carico</td><td>LoadCollection/GetLoadingProgress/GetLoadState</td></tr>
 <tr><td>Raccolta</td><td>OttenereCaricamentoProgresso</td><td>Ottenere l'avanzamento del caricamento</td></tr>
 <tr><td>Raccolta</td><td>Stato di caricamento</td><td>Ottieni stato di carico</td></tr>

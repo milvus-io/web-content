@@ -172,7 +172,7 @@ title: 相似度量
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>杰卡德相似系数</span> </span></p>
-<p>雅卡距离测量数据集之间的不相似性，将雅卡相似系数减去 1 即可得出。对于二元变量，雅卡距离等同于谷本系数。</p>
+<p>雅卡距离测量数据集之间的不相似性，通过从 1 减去雅卡相似系数得出。对于二元变量，雅卡距离等同于塔尼莫托系数。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />

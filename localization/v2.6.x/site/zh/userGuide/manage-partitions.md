@@ -988,6 +988,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>如何区分分区和分区 Key？</strong></p>
 <p>分区是物理存储单元，而分区密钥是逻辑概念，可根据指定列自动将数据分配到特定分区。</p>
 <p>例如，在 Milvus 中，如果你的 Collections 的分区键定义为<code translate="no">color</code> 字段，系统会根据每个实体的<code translate="no">color</code> 字段的散列值自动将数据分配到分区。这一自动化流程免除了用户在插入或搜索数据时手动指定分区的责任。</p>
-<p>另一方面，在手动创建分区时，需要根据分区 Key 的标准为每个分区分配数据。如果你有一个带有<code translate="no">color</code> 字段的 Collections，你会手动将<code translate="no">color</code> 值为<code translate="no">red</code> 的实体分配到<code translate="no">partition A</code> ，将<code translate="no">color</code> 值为<code translate="no">blue</code> 的实体分配到<code translate="no">partition B</code> 。这种手动管理需要更多的精力。</p>
+<p>另一方面，在手动创建分区时，需要根据分区 Key 的标准为每个分区分配数据。如果您有一个带有<code translate="no">color</code> 字段的 Collections，您会手动将<code translate="no">color</code> 值为<code translate="no">red</code> 的实体分配到<code translate="no">partition A</code> ，将<code translate="no">color</code> 值为<code translate="no">blue</code> 的实体分配到<code translate="no">partition B</code> 。这种手动管理需要花费更多精力。</p>
 <p>总之，分区和分区 Key 都是用来优化数据计算和提高查询效率的。必须认识到，启用分区键意味着放弃对分区数据插入和加载的人工管理控制，因为这些过程是完全自动化的，由 Milvus 处理。</p></li>
 </ul>

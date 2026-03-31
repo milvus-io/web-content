@@ -18,7 +18,7 @@ title: MMap対応データストレージ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、メモリマップドファイルにより、ファイルの内容を直接メモリにマッピングすることができます。この機能により、特に利用可能なメモリが乏しく、完全なデータロードが不可能な状況において、メモリ効率が向上します。この最適化メカニズムにより、ある限度まではパフォーマンスを確保しながらデータ容量を増やすことができますが、データ量がメモリを超過しすぎた場合、検索やクエリのパフォーマンスが著しく低下する可能性がありますので、適宜この機能のON/OFFを選択してください。</p>
+    </button></h1><p>Milvusでは、メモリマップドファイルにより、ファイルの内容を直接メモリにマッピングすることができます。この機能により、特に利用可能なメモリが乏しく、完全なデータロードが不可能な状況において、メモリ効率が向上します。この最適化メカニズムにより、ある限度まではパフォーマンスを確保しながらデータ容量を増やすことができますが、データ量がメモリを超過しすぎると、検索やクエリのパフォーマンスが著しく低下する可能性がありますので、適宜この機能のON/OFFを選択してください。</p>
 <h2 id="Configure-memory-mapping" class="common-anchor-header">メモリマッピングの設定<button data-href="#Configure-memory-mapping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,7 +79,7 @@ title: MMap対応データストレージ
     <span class="hljs-attr">scalarIndex:</span> <span class="hljs-literal">false</span> <span class="hljs-comment"># Enable mmap for loading scalar index</span>
 <span class="hljs-string">....</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、ベクター・インデックスとベクター・データのmmapのみ、コレクションに対して個別にオン/オフを切り替えることができますが、他のコレクションに対してはできません。</p>
+<p>さらに、ベクターインデックスとベクターデータのmmapのみ、コレクションに対して個別にオン/オフすることができますが、他のコレクションに対してはできません。</p>
 <p>互換性：元の構成<code translate="no">queryNode.mmap.mmapEnabled</code> が<code translate="no">true</code> に設定されている場合、新しく追加された構成はこの時点で<code translate="no">true</code> に設定される。<code translate="no">queryNode.mmap.mmapEnabled</code> が<code translate="no">false</code> に設定されている場合、新しい構成が<code translate="no">true</code> に設定されると、最終値は<code translate="no">true</code> になります。</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">クラスタ動作中：動的構成<button data-href="#During-cluster-operation-dynamic-configuration" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -208,7 +208,7 @@ spec:
 <li><p><strong>コレクションレベル構成とインデックスレベル構成の関係は?</strong></p>
 <p>コレクション・レベルとインデックス・レベルは包括的な関係ではなく、コレクション・レベルは元のデータがmmap有効かどうかを制御し、インデックス・レベルはベクトル・インデックスのみを制御します。</p></li>
 <li><p><strong>メモリマッピングに推奨されるインデックスタイプはありますか？</strong></p>
-<p>はい、HNSWを推奨します。以前、HNSW、IVF_FLAT、IVF_PQ/SQ シリーズのインデックスをテストしたことがありますが、IVF シリーズのインデックスの性能は著しく低下しました。</p></li>
+<p>はい、HNSWを推奨します。以前、HNSW、IVF_FLAT、IVF_PQ/SQシリーズのインデックスをテストしたことがありますが、IVFシリーズのインデックスのパフォーマンスは著しく低下しました。</p></li>
 <li><p><strong>メモリマッピングにはどのようなローカルストレージが必要ですか？</strong></p>
 <p>NVMeドライブが望ましい。</p></li>
 <li><p><strong>スカラーデータはメモリマッピングできますか？</strong></p>

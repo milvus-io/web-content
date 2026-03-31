@@ -1,9 +1,9 @@
 ---
 id: boolean.md
 summary: Milvusのブーリアン式ルールについて学びます。
-title: スカラーフィルターのルール
+title: スカラー・フィルタリング・ルール
 ---
-<h1 id="Scalar-Filtering-Rules" class="common-anchor-header">スカラーフィルターのルール<button data-href="#Scalar-Filtering-Rules" class="anchor-icon" translate="no">
+<h1 id="Scalar-Filtering-Rules" class="common-anchor-header">スカラー・フィルタリング・ルール<button data-href="#Scalar-Filtering-Rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +34,7 @@ title: スカラーフィルターのルール
         ></path>
       </svg>
     </button></h2><p>述語式はブール値を出力します。Milvusは述語で検索することによりスカラーフィルタリングを行います。述語式は評価されるとTRUEかFALSEのどちらかを返します。述語式の使い方については<a href="/api-reference/pymilvus/v2.4.x/About.md">Python SDK API Referenceを</a>参照してください。</p>
-<p><a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a>文法規則はブール表現の規則を記述します：</p>
+<p><a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a>文法規則はブール式の規則を記述します：</p>
 <pre><code translate="no">Expr = LogicalExpr | NIL
 LogicalExpr = LogicalExpr BinaryLogicalOp LogicalExpr 
               | UnaryLogicalOp LogicalExpr

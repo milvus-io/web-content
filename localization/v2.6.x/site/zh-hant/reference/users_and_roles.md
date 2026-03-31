@@ -154,7 +154,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>收藏集</td><td>下拉索引</td><td>下拉索引</td></tr>
 <tr><td>收藏集</td><td>索引詳細資料</td><td>DescribeIndex/GetIndexState/GetIndexBuildProgress</td></tr>
 <tr><td>彙集</td><td>載入</td><td>LoadCollection/GetLoadingProgress/GetLoadState</td></tr>
-<tr><td>收集</td><td>獲取載入進度</td><td>取得載入進度</td></tr>
+<tr><td>收藏集</td><td>獲取載入進度</td><td>取得載入進度</td></tr>
 <tr><td>集合</td><td>取得載入狀態</td><td>取得載入狀態</td></tr>
 <tr><td>收集</td><td>釋放</td><td>釋放集合</td></tr>
 <tr><td>收藏集</td><td>插入</td><td>插入</td></tr>

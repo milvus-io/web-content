@@ -46,7 +46,7 @@ title: '사용자, 권한 및 역할'
 <ul>
 <li><code translate="no">Global</code>: 시스템 전체 개체로, 사용자가 모든 컬렉션, 사용자 또는 시스템 전체 설정에 영향을 주는 작업을 수행할 수 있습니다.</li>
 <li><code translate="no">Collection</code>: 컬렉션별 개체 - 사용자가 특정 컬렉션 내에서 인덱스 만들기, 데이터 로드, 데이터 삽입 또는 삭제, 데이터 쿼리 등의 작업을 수행할 수 있도록 허용하는 개체입니다.</li>
-<li><code translate="no">User</code>: 사용자 관리와 관련된 개체로, 사용자가 사용자 자격 증명 업데이트 또는 사용자 세부 정보 보기와 같은 데이터베이스 사용자의 자격 증명 및 역할을 관리할 수 있습니다.</li>
+<li><code translate="no">User</code>: 사용자 관리와 관련된 개체로, 사용자가 사용자 자격 증명 업데이트 또는 사용자 세부 정보 보기와 같이 데이터베이스 사용자의 자격 증명 및 역할을 관리할 수 있습니다.</li>
 </ul></li>
 <li><p><strong>개체 이름</strong>: 액세스를 제어할 개체의 특정 이름입니다. 예를 들어</p>
 <ul>
@@ -123,7 +123,7 @@ client.grantPrivilege(grantPrivilegeReq);
         ></path>
       </svg>
     </button></h2><p>Milvus는 기본 비밀번호 <code translate="no">Milvus</code> 를 사용하여 <code translate="no">root</code> 사용자를 기본적으로 생성합니다. <code translate="no">root</code> 사용자에게는 <code translate="no">admin</code> 권한이 부여되며, 이는 이 <code translate="no">root</code> 사용자가 모든 리소스에 액세스하고 모든 작업을 수행할 수 있음을 의미합니다.</p>
-<p><code translate="no">public</code> 역할에 연결된 사용자에게는 다음과 같은 권한이 부여됩니다:</p>
+<p><code translate="no">public</code> 역할과 연결된 사용자에게는 다음과 같은 권한이 부여됩니다:</p>
 <ul>
 <li><code translate="no">DescribeCollection</code></li>
 <li><code translate="no">ShowCollections</code></li>
@@ -170,7 +170,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>Collection</td><td>LoadBalance</td><td>LoadBalance</td></tr>
 <tr><td>Collection</td><td>CreatePartition</td><td>CreatePartition</td></tr>
 <tr><td>컬렉션</td><td>DropPartition</td><td>드롭 파티션</td></tr>
-<tr><td>컬렉션</td><td>파티션 표시</td><td>ShowPartitions</td></tr>
+<tr><td>컬렉션</td><td>파티션 표시</td><td>파티션 표시</td></tr>
 <tr><td>컬렉션</td><td>HasPartition</td><td>HasPartition</td></tr>
 <tr><td>Global</td><td>All</td><td>이 표의 모든 API 작업 권한</td></tr>
 <tr><td>Global</td><td>CreateCollection</td><td>CreateCollection</td></tr>

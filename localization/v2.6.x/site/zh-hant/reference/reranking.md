@@ -18,7 +18,7 @@ title: 重排
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a>API 實現了混合搜尋功能，結合了精密的重排策略來精煉來自多個<code translate="no">AnnSearchRequest</code> 實例的搜尋結果。本主題涵蓋重排過程，解釋其重要性以及 Milvus 中不同重排策略的實作。</p>
+    </button></h1><p>Milvus 使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a>API 實現了混合搜尋功能，結合了精密的重排策略來優化來自多個<code translate="no">AnnSearchRequest</code> 實例的搜尋結果。本主題涵蓋重排過程，解釋其重要性以及 Milvus 中不同重排策略的實作。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,7 +79,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <ul>
 <li><p>每個權重值的範圍從 0 (最不重要) 到 1 (最重要)，影響最後的彙總分數。</p></li>
 <li><p><code translate="no">WeightedRanker</code> 中提供的權重值總數應該等於您之前建立的<code translate="no">AnnSearchRequest</code> 實體數量。</p></li>
-<li><p>值得注意的是，由於不同度量類型的測量方式不同，我們會將召回結果的距離規範化，使其位於區間 [0,1]，其中 0 代表不同，1 代表相似。最終的分數將是權重值與距離的總和。</p></li>
+<li><p>值得注意的是，由於不同度量類型的測量方式不同，我們會將召回結果的距離規範化，使其位於區間 [0,1]，其中 0 代表不同，1 代表相似。最終的分數將是權重值和距離的總和。</p></li>
 </ul>
 <h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">對等排名融合 (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"

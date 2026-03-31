@@ -63,7 +63,7 @@ title: パーティションの管理
 <p>準備の場合 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-javascript">
-<p>準備のために <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>コレクションをクイックセットアップで作成します。</p>
+<p>準備のために <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -115,7 +115,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 <button class="copy-code-btn"></button></code></pre>
 <div class="admonition note">
 <p><b>備考</b></p>
-<p>上記のコードスニペットでは、コレクションのインデックスがコレクションと一緒に作成されており、作成時にコレクションがロードされることを示しています。</p>
+<p>上記のコードスニペットでは、コレクションのインデックスがコレクションと一緒に作成されており、コレクションが作成時にロードされることを示しています。</p>
 </div>
 <h2 id="List-Partitions" class="common-anchor-header">パーティションのリスト<button data-href="#List-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -859,7 +859,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一度に複数のパーティションを解放するには、以下のようにします：</p>
+<p>一度に複数のパーティションを解放するには、次のようにします：</p>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]

@@ -33,7 +33,7 @@ title: 使用陣列欄位
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>確保您具備下列條件：</p>
+    </button></h2><p>確保您有以下設備：</p>
 <ul>
 <li>安裝並執行 Milvus。有關如何安裝 Milvus 的資訊，請參閱<a href="/docs/zh-hant/install-overview.md">安裝 Milvus</a>。</li>
 <li>在您的環境中安裝其中一個 Milvus SDK。如需詳細資訊，請參閱<a href="/docs/zh-hant/install-pymilvus.md">安裝 SDK</a>。</li>
@@ -492,7 +492,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>在標量欄位上建立索引可以改善在該欄位上查詢的擷取效能，這是可選的，但建議用於大型資料集。</p>
-<p>在本範例中，我們將在<code translate="no">color_coord</code> 陣列欄位上建立反向索引。這將允許我們加速基於這個欄位的篩選。倒排索引展現了優異的整體效能，在資料不常被擷取的情況下，其效能明顯優於使用原始資料進行的暴力篩選，而在頻繁進行擷取作業的情況下，也能維持相若的效能。有關倒置索引的詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md#Inverted-indexing">Scalar Index</a>。</p>
+<p>在本範例中，我們將在<code translate="no">color_coord</code> 陣列欄位上建立反向索引。這將允許我們加速基於此欄位的篩選。倒排索引展現了優異的整體效能，在資料不常被擷取的情況下，其效能明顯優於使用原始資料進行的暴力篩選，而在頻繁進行擷取作業的情況下，也能維持相若的效能。有關倒置索引的詳細資訊，請參閱<a href="/docs/zh-hant/scalar_index.md#Inverted-indexing">Scalar Index</a>。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -647,7 +647,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>有關參數的詳細資訊，請參閱 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>SDK 參考資料。</p>
 </div>
 <div class="language-java">
-<p>有關參數的更多資訊，請參閱 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a>參照 SDK 參考資料。</p>
+<p>有關參數的更多資訊，請參閱 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a>參閱 SDK 參考資料。</p>
 </div>
 <div class="language-javascript">
 <p>有關參數的更多資訊，請參考 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a>的 SDK 參考資料。</p>
@@ -1160,7 +1160,7 @@ System.out.println(queryResp.getQueryResults());
 <tr><td>和 (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td>如果<code translate="no">var_array[0]</code> 的值以<code translate="no">“prefix”</code> 為前綴，且<code translate="no">int_array[0]</code> 的值小於或等於 100，則此表達式的值為真。</td></tr>
 <tr><td>或 (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] <= 100’</code></td><td>如果<code translate="no">var_array[0]</code> 的值以<code translate="no">“prefix”</code> 為前綴，或者<code translate="no">int_array[0]</code> 的值小於或等於 100，則此表達式的值為真。</td></tr>
 <tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>如果<code translate="no">int_array</code> 包含元素<code translate="no">100</code> ，此表达式的值为 true。</td></tr>
-<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>如果<code translate="no">int_array</code> 包含所有元素<code translate="no">1</code>,<code translate="no">2</code>, 和<code translate="no">3</code> ，則此表達式的值為真。</td></tr>
+<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>如果<code translate="no">int_array</code> 包含所有元素<code translate="no">1</code>,<code translate="no">2</code>, 和<code translate="no">3</code> ，此表達式的值為真。</td></tr>
 <tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, ["a", "b", “c”])'</code></td><td>如果<code translate="no">var_array</code> 包含<code translate="no">“a”</code>,<code translate="no">“b”</code>, 和<code translate="no">“c”</code> 中的任何元素，此表达式的值为 true。</td></tr>
 <tr><td>array_length</td><td><code translate="no">‘array_length(int_array) == 10’</code></td><td>如果<code translate="no">int_array</code> 恰好包含 10 个元素，则此表达式的值为 true。</td></tr>
 </tbody>

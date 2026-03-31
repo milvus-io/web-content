@@ -53,7 +53,7 @@ title: Gerir colecções
         ></path>
       </svg>
     </button></h2><p>No Milvus, armazena os seus embeddings vectoriais em colecções. Todos os embeddings vectoriais dentro de uma coleção partilham a mesma dimensionalidade e a mesma métrica de distância para medir a semelhança.</p>
-<p>As colecções do Milvus suportam campos dinâmicos (ou seja, campos não pré-definidos no esquema) e incrementação automática de chaves primárias.</p>
+<p>As colecções Milvus suportam campos dinâmicos (ou seja, campos não pré-definidos no esquema) e incrementação automática de chaves primárias.</p>
 <p>Para acomodar diferentes preferências, Milvus oferece dois métodos para criar uma coleção. Um permite uma configuração rápida, enquanto o outro permite uma personalização detalhada do esquema da coleção e dos parâmetros do índice.</p>
 <p>Adicionalmente, pode visualizar, carregar, libertar e largar uma coleção quando necessário.</p>
 <h2 id="Create-Collection" class="common-anchor-header">Criar coleção<button data-href="#Create-Collection" class="anchor-icon" translate="no">
@@ -556,7 +556,7 @@ schema.WithField(
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Passo 2: Configurar parâmetros de índice</h4><p>Os parâmetros de indexação ditam a forma como o Milvus organiza os seus dados dentro de uma coleção. Pode personalizar o processo de indexação para campos específicos, ajustando os seus <code translate="no">metric_type</code> e <code translate="no">index_type</code>. Para o campo vetorial, tem a flexibilidade de selecionar <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, ou <code translate="no">JACCARD</code> como <code translate="no">metric_type</code>, dependendo do tipo de vectores com que está a trabalhar. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Métricas de similaridade</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Passo 2: Configurar parâmetros de índice</h4><p>Os parâmetros de indexação ditam a forma como o Milvus organiza os seus dados dentro de uma coleção. Pode personalizar o processo de indexação para campos específicos, ajustando os seus <code translate="no">metric_type</code> e <code translate="no">index_type</code>. Para o campo vetorial, tem a flexibilidade de selecionar <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, ou <code translate="no">JACCARD</code> como <code translate="no">metric_type</code>, dependendo do tipo de vectores com que está a trabalhar. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Métrica de similaridade</a>.</p>
 <div class="language-python">
 <p>Para configurar os parâmetros de índice, utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> para preparar os parâmetros do índice e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> para adicionar o índice.</p>
 </div>
@@ -736,7 +736,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>O algoritmo que é utilizado para medir a semelhança entre vectores. Os valores possíveis são <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Esta opção só está disponível quando o campo especificado é um campo vetorial. Para mais informações, consulte <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Índices suportados em Milvus</a>.</td>
+      <td>O algoritmo que é utilizado para medir a semelhança entre vectores. Os valores possíveis são <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Esta opção só está disponível quando o campo especificado é um campo vetorial. Para mais informações, consulte <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Índices suportados no Milvus</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">nlist</code></td>
@@ -778,7 +778,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
   </tbody>
 </table>
-<p>O fragmento de código acima demonstra como configurar os parâmetros de índice para o campo vetorial e um campo escalar, respetivamente. Para o campo vetorial, defina o tipo de métrica e o tipo de índice. Para um campo escalar, defina apenas o tipo de índice. Recomenda-se a criação de um índice para o campo vetorial e quaisquer campos escalares que sejam frequentemente utilizados para filtragem.</p>
+<p>O trecho de código acima demonstra como configurar os parâmetros de índice para o campo vetorial e um campo escalar, respetivamente. Para o campo vetorial, defina o tipo de métrica e o tipo de índice. Para um campo escalar, defina apenas o tipo de índice. Recomenda-se a criação de um índice para o campo vetorial e quaisquer campos escalares que sejam frequentemente utilizados para filtragem.</p>
 <h4 id="Step-3-Create-the-collection" class="common-anchor-header">Passo 3: Criar a coleção</h4><p>Tem a opção de criar uma coleção e um ficheiro de índice separadamente ou de criar uma coleção com o índice carregado simultaneamente na criação.</p>
 <div class="language-python">
 <p>Utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> para criar uma coleção com o esquema e os parâmetros de índice especificados e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> para verificar o estado de carregamento da coleção.</p>
@@ -1064,7 +1064,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>Os parâmetros para construir o índice no campo vetorial desta coleção. Para configurar uma coleção com um esquema personalizado e carregar automaticamente a coleção para a memória, é necessário criar um objeto IndexParams e referenciá-lo aqui.<br/>Deve pelo menos adicionar um índice para o campo vetorial nesta coleção. Também pode ignorar este parâmetro se preferir configurar os parâmetros do índice mais tarde.</td>
+<td>Os parâmetros para construir o índice no campo vetorial desta coleção. Para configurar uma coleção com um esquema personalizado e carregar automaticamente a coleção para a memória, é necessário criar um objeto IndexParams e referenciá-lo aqui.<br/>Deve pelo menos adicionar um índice para o campo vetorial nesta coleção. Também pode ignorar este parâmetro se preferir configurar os parâmetros de índice mais tarde.</td>
 </tr>
 </tbody>
 </table></p>
@@ -1788,7 +1788,7 @@ collections, err := client.ListCollections(ctx)
         ></path>
       </svg>
     </button></h3><div class="language-python">
-<p>Para carregar uma coleção, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> especificando o nome da coleção. Também pode definir <code translate="no">replica_number</code> para determinar quantas réplicas na memória de segmentos de dados devem ser criadas nos nós de consulta quando a coleção é carregada.</p>
+<p>Para carregar uma coleção, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> especificando o nome da coleção. Também pode definir <code translate="no">replica_number</code> para determinar quantas réplicas de segmentos de dados na memória devem ser criadas nos nós de consulta quando a coleção é carregada.</p>
 <ul>
 <li>Milvus Standalone: O valor máximo permitido para <code translate="no">replica_number</code> é 1.</li>
 <li>Milvus Cluster: O valor máximo não deve exceder o <code translate="no">queryNode.replicas</code> definido nas configurações do Milvus. Para obter mais detalhes, consulte <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Configurações relacionadas ao nó de consulta</a>.</li>

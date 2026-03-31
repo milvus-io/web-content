@@ -106,7 +106,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>Espressioni logiche</td><td>Una LogicalExpr può essere una BinaryLogicalOp su due LogicalExpr, o una UnaryLogicalOp su una singola LogicalExpr, o una LogicalExpr raggruppata tra parentesi, o una SingleExpr. La LogicalExpr è definita in modo ricorsivo.</td></tr>
 <tr><td>Expr</td><td>Expr, un'abbreviazione che significa espressione, può essere LogicalExpr o NIL.</td></tr>
 <tr><td>MatchOp</td><td>Un MatchOp, ossia un operatore di corrispondenza, confronta una stringa con una costante di stringa o una costante di prefisso, infisso o suffisso di stringa.</td></tr>
-<tr><td>JsonArrayOp</td><td>Un JsonOp, cioè un operatore JSON, verifica se l'identificatore specificato contiene gli elementi specificati.</td></tr>
+<tr><td>JsonArrayOp</td><td>Un JsonOp, ossia un operatore JSON, verifica se l'identificatore specificato contiene gli elementi specificati.</td></tr>
 <tr><td>ArrayOp</td><td>Un ArrayOp, cioè un operatore di array, verifica se l'identificatore specificato contiene gli elementi specificati.</td></tr>
 </tbody>
 </table>
@@ -251,7 +251,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <p>Le espressioni vengono normalmente valutate da sinistra a destra. Le espressioni complesse vengono valutate una alla volta. L'ordine di valutazione delle espressioni è determinato dalla precedenza degli operatori utilizzati.</p>
 <p>Se un'espressione contiene due o più operatori con la stessa precedenza, l'operatore più a sinistra viene valutato per primo.</p>
 <div class="alert note">
-<p>Ad esempio, 10 / 2 * 5 verrà valutato come (10 / 2) e il risultato moltiplicato per 5.</p>
+<p>Ad esempio, 10 / 2 * 5 sarà valutato come (10 / 2) e il risultato sarà moltiplicato per 5.</p>
 </div>
 <p>Quando un'operazione con precedenza inferiore deve essere elaborata per prima, deve essere racchiusa tra parentesi.</p>
 <div class="alert note">

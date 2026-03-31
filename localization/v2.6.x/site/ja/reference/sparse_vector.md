@@ -153,7 +153,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse_vector&quot;<
 client.create_collection(collection_name=<span class="hljs-string">&quot;test_sparse_vector&quot;</span>, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
 <p>一般的なコレクション・パラメータの詳細は、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> を参照してください。</p>
-<h2 id="Insert-entities-with-sparse-vector-embeddings" class="common-anchor-header">疎なベクトル埋め込みを持つエンティティの挿入<button data-href="#Insert-entities-with-sparse-vector-embeddings" class="anchor-icon" translate="no">
+<h2 id="Insert-entities-with-sparse-vector-embeddings" class="common-anchor-header">疎ベクトル埋め込みを持つエンティティの挿入<button data-href="#Insert-entities-with-sparse-vector-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -206,7 +206,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <button class="copy-code-btn"></button></code></pre>
 <p>疎なベクトルに対するインデックス作成では、以下の点に注意してください：</p>
 <ul>
-<li><p><code translate="no">index_type</code>:作成するインデックスの型。構築するインデックスの型：</p>
+<li><p><code translate="no">index_type</code>:構築するインデックスの型。構築するインデックスの型：</p>
 <ul>
 <li><p><code translate="no">SPARSE_INVERTED_INDEX</code>:各次元を非ゼロ・ベクトルに対応付け、検索時に関連データへの直接アクセスを容易にする転置インデックス。疎であるが高次元のデータを持つデータセットに最適。</p></li>
 <li><p><code translate="no">SPARSE_WAND</code>:Weak-AND（WAND）アルゴリズムを利用して、可能性の低い候補を素早く回避し、より高いランキングの可能性がある候補に評価を集中させる。次元を用語として、ベクトルを文書として扱い、大規模で疎なデータセットの検索を高速化。</p></li>

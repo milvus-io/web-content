@@ -57,7 +57,7 @@ go build
         ></path>
       </svg>
     </button></h2><p>Descarregue o <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">ficheiro de configuração de exemplo</a> e adapte-o às suas necessidades.</p>
-<p>Em seguida, crie uma pasta juntamente com o binário Milvus Backup descarregado ou compilado, dê o nome à pasta <code translate="no">configs</code> e coloque o ficheiro de configuração dentro da pasta <code translate="no">configs</code>.</p>
+<p>Em seguida, crie uma pasta juntamente com o binário Milvus Backup descarregado ou compilado, dê-lhe o nome de <code translate="no">configs</code> e coloque o ficheiro de configuração dentro da pasta <code translate="no">configs</code>.</p>
 <p>A sua estrutura de pastas deve ser semelhante à seguinte:</p>
 <pre>
 workspace ├── milvus-backup └── configs └── backup.yaml</pre>
@@ -92,7 +92,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
     </button></h2><p>De seguida, pode iniciar o servidor API da seguinte forma:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server
 <button class="copy-code-btn"></button></code></pre>
-<p>O servidor API escuta na porta 8080 por defeito. Pode alterá-la executando-o com a bandeira <code translate="no">-p</code>. Para iniciar o servidor da API que escuta na porta 443, faça o seguinte:</p>
+<p>O servidor API escuta na porta 8080 por defeito. Pode alterá-la, executando-a com a bandeira <code translate="no">-p</code>. Para iniciar o servidor da API que escuta na porta 443, faça o seguinte:</p>
 <pre><code translate="no" class="language-shell">./milvus-backup server -p 443
 <button class="copy-code-btn"></button></code></pre>
 <p>Você pode acessar a interface do usuário do Swagger usando http://localhost:<port>/api/v1/docs/index.html.</p>
@@ -218,7 +218,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Após a conclusão da restauração, é possível verificar os dados restaurados indexando a coleção restaurada da seguinte forma:</p>
+    </button></h2><p>Quando a restauração for concluída, você poderá verificar os dados restaurados indexando a coleção restaurada da seguinte forma:</p>
 <pre><code translate="no" class="language-shell">python example/verify_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>Observe que o script acima assume que você executou o comando <code translate="no">restore</code> com o sinalizador <code translate="no">-s</code> e que o sufixo está definido como <code translate="no">-recover</code>. Sinta-se à vontade para fazer as alterações necessárias no script para atender às suas necessidades.</p>

@@ -74,7 +74,7 @@ title: Gestionar colecciones
     </button></h2><p>Puede crear una colección de cualquiera de las siguientes maneras:</p>
 <ul>
 <li><p><strong>Configuración rápida</strong></p>
-<p>De esta manera, puede crear una colección simplemente dándole un nombre y especificando el número de dimensiones de las incrustaciones vectoriales que se almacenarán en esta colección. Para más información, consulte <a href="/docs/es/manage-collections.md">Configuración rápida</a>.</p></li>
+<p>De esta manera, puede crear una colección simplemente dándole un nombre y especificando el número de dimensiones de las incrustaciones vectoriales que se almacenarán en esta colección. Para más detalles, consulte <a href="/docs/es/manage-collections.md">Configuración rápida</a>.</p></li>
 <li><p><strong>Configuración personalizada</strong></p>
 <p>En lugar de dejar que In Milvus decida casi todo para su colección, puede determinar el <strong>esquema</strong> y los <strong>parámetros de índice</strong> de la colección por su cuenta. Para obtener más información, consulte <a href="/docs/es/manage-collections.md">Configuración personalizada</a>.</p></li>
 </ul>
@@ -446,7 +446,7 @@ schema.WithField(
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>El nombre del campo.</td>
+      <td>Nombre del campo.</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
@@ -492,7 +492,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>La dimensionalidad del campo de la colección que contiene las incrustaciones vectoriales.<br/>El valor debe ser un número entero mayor que 1 y suele estar determinado por el modelo que se utiliza para generar incrustaciones vectoriales.</td>
+      <td>Dimensionalidad del campo de la colección que contiene las incrustaciones vectoriales.<br/>El valor debe ser un número entero mayor que 1 y suele estar determinado por el modelo que se utiliza para generar incrustaciones vectoriales.</td>
     </tr>
   </tbody>
 </table>
@@ -666,7 +666,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Los parámetros de ajuste para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
+      <td>Los parámetros de ajuste fino para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -718,7 +718,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Los parámetros de ajuste para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
+      <td>Los parámetros de ajuste fino para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
     </tr>
   </tbody>
 </table>

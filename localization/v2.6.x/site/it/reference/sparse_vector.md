@@ -18,9 +18,9 @@ title: Vettore sparso
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>I vettori sparsi rappresentano parole o frasi utilizzando embedding vettoriali in cui la maggior parte degli elementi è pari a zero, con un solo elemento non nullo che indica la presenza di una parola specifica. I modelli vettoriali sparsi, come <a href="https://arxiv.org/abs/2109.10086">SPLADEv2</a>, superano i modelli densi nella ricerca di conoscenza fuori dal dominio, nella consapevolezza delle parole chiave e nell'interpretabilità. Sono particolarmente utili nel recupero delle informazioni, nell'elaborazione del linguaggio naturale e nei sistemi di raccomandazione, dove la combinazione di vettori sparsi per il richiamo con un modello denso per il ranking può migliorare significativamente i risultati del recupero.</p>
+    </button></h1><p>I vettori sparsi rappresentano parole o frasi utilizzando embedding vettoriali in cui la maggior parte degli elementi è pari a zero, con un solo elemento non nullo che indica la presenza di una parola specifica. I modelli vettoriali sparsi, come <a href="https://arxiv.org/abs/2109.10086">SPLADEv2</a>, superano i modelli densi nella ricerca di conoscenza fuori dal dominio, nella consapevolezza delle parole chiave e nell'interpretabilità. Sono particolarmente utili nel reperimento di informazioni, nell'elaborazione del linguaggio naturale e nei sistemi di raccomandazione, dove la combinazione di vettori sparsi per il richiamo con un modello denso per il ranking può migliorare significativamente i risultati del reperimento.</p>
 <p>In Milvus, l'uso di vettori sparsi segue un flusso di lavoro simile a quello dei vettori densi. Si tratta di creare una collezione con una colonna di vettori sparsi, inserire i dati, creare un indice ed eseguire ricerche di similarità e query scalari.</p>
-<p>In questa esercitazione si apprende come:</p>
+<p>In questa esercitazione si apprenderà come:</p>
 <ul>
 <li>Preparare le incorporazioni di vettori sparsi;</li>
 <li>Creare una collezione con un campo vettoriale sparse;</li>
@@ -133,7 +133,7 @@ entities = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per creare un insieme con un campo vettoriale rado, impostate il <strong>tipo di dati</strong> del campo vettoriale rado su <strong>DataType.SPARSE_FLOAT_VECTOR</strong>. A differenza dei vettori densi, non è necessario specificare una dimensione per i vettori radi.</p>
+    </button></h2><p>Per creare un insieme con un campo vettoriale rado, impostate il <strong>tipo di dati</strong> del campo vettoriale rado su <strong>DataType.SPARSE_FLOAT_VECTOR</strong>. A differenza dei vettori densi, non è necessario specificare una dimensione per i vettori sparsi.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># Create a MilvusClient instance</span>

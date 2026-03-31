@@ -233,14 +233,14 @@ client = MilvusClient(uri=SERVER_ADDR)
 </div>
 <div class="language-java">
 <ol>
-<li><code translate="no">dataType</code>: 설정은 <code translate="no">DataType.Array</code> 으로 설정합니다.</li>
+<li><code translate="no">dataType</code>: 를 <code translate="no">DataType.Array</code> 으로 설정합니다.</li>
 <li><code translate="no">elementType</code>: 배열의 요소에 대한 데이터 유형을 선택합니다. 배열 필드의 요소는 모두 동일한 데이터 유형을 가져야 합니다. 이 예에서는 <code translate="no">elementType</code> 을 <code translate="no">DataType.Int64</code> 으로 설정합니다.</li>
 <li><code translate="no">maxCapacity</code>: 이 매개변수를 설정하여 배열 필드에 포함할 수 있는 최대 요소 수를 지정합니다.</li>
 </ol>
 </div>
 <div class="language-javascript">
 <ol>
-<li><code translate="no">data_type</code>: 설정은 <code translate="no">DataType.Array</code> 으로 설정합니다.</li>
+<li><code translate="no">data_type</code>: 를 <code translate="no">DataType.Array</code> 으로 설정합니다.</li>
 <li><code translate="no">element_type</code>: 배열의 요소에 대한 데이터 유형을 선택합니다. 배열 필드의 요소는 모두 동일한 데이터 유형을 가져야 합니다. 이 예에서는 <code translate="no">element_type</code> 을 <code translate="no">DataType.Int64</code> 으로 설정합니다.</li>
 <li><code translate="no">max_capacity</code>: 배열 필드에 포함할 수 있는 최대 요소 수를 지정하려면 이 매개변수를 설정합니다.</li>
 </ol>
@@ -1160,7 +1160,7 @@ System.out.println(queryResp.getQueryResults());
 <tr><td>및 (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td><code translate="no">var_array[0]</code> 값 앞에 <code translate="no">“prefix”</code> 이 붙고 <code translate="no">int_array[0]</code> 값이 100보다 작거나 같으면 이 표현식은 참으로 평가됩니다.</td></tr>
 <tr><td>또는 (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] <= 100’</code></td><td><code translate="no">var_array[0]</code> 값 앞에 <code translate="no">“prefix”</code> 이 붙거나 <code translate="no">int_array[0]</code> 값이 100보다 작거나 같으면 이 표현식은 참으로 평가됩니다.</td></tr>
 <tr><td>array_contains (배열 포함)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td><code translate="no">int_array</code> 에 <code translate="no">100</code> 요소가 포함되어 있으면 이 표현식은 참으로 평가됩니다.</td></tr>
-<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td><code translate="no">int_array</code> 에 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 요소가 모두 포함된 경우 이 표현식은 true로 평가됩니다.</td></tr>
+<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td><code translate="no">int_array</code> 에 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 요소가 모두 포함되어 있으면 이 표현식은 true로 평가됩니다.</td></tr>
 <tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, ["a", "b", “c”])'</code></td><td><code translate="no">var_array</code> 에 <code translate="no">“a”</code>, <code translate="no">“b”</code>, <code translate="no">“c”</code> 의 요소가 하나라도 포함되어 있으면 이 표현식은 참으로 평가됩니다.</td></tr>
 <tr><td>array_length</td><td><code translate="no">‘array_length(int_array) == 10’</code></td><td><code translate="no">int_array</code> 에 정확히 10 개의 요소가 포함되어 있으면 이 표현식은 참으로 평가됩니다.</td></tr>
 </tbody>

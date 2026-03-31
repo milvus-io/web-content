@@ -76,7 +76,7 @@ title: Gestire le raccolte
 <li><p><strong>Impostazione rapida</strong></p>
 <p>In questo modo, è possibile creare una collezione semplicemente dandole un nome e specificando il numero di dimensioni delle incorporazioni vettoriali da memorizzare in questa collezione. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione rapida</a>.</p></li>
 <li><p><strong>Configurazione personalizzata</strong></p>
-<p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per i dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione personalizzata</a>.</p></li>
+<p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per i dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Configurazione personalizzata</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">Configurazione rapida<button data-href="#Quick-setup" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1184,7 +1184,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </tr>
 </tbody>
 </table></p>
-<p>L'insieme creato in precedenza non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori dettagli, consultare <a href="/docs/it/manage-collections.md">Carica e rilascia la collezione</a>.</p>
+<p>L'insieme creato sopra non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori dettagli, consultare <a href="/docs/it/manage-collections.md">Carica e rilascia la collezione</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#go">Go</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
@@ -1452,7 +1452,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Per verificare i dettagli di una raccolta esistente, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
+<p>Per controllare i dettagli di una raccolta esistente, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
 </div>
 <div class="language-java">
 <p>Per verificare i dettagli di una raccolta esistente, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>

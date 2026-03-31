@@ -48,7 +48,7 @@ title: 稀疏向量
       </svg>
     </button></h2><p>要在 Milvus 中使用稀疏向量，请准备支持格式之一的向量嵌入：</p>
 <ul>
-<li><p><strong>稀疏矩阵</strong>利用<a href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse">scipy.sparse</a>类族表示稀疏嵌入。这种方法在处理大规模、高维数据时非常有效。</p></li>
+<li><p><strong>稀疏矩阵</strong>利用<a href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse">scipy.sparse</a>类族表示稀疏嵌入。这种方法对于处理大规模、高维数据非常有效。</p></li>
 <li><p><strong>字典列表</strong>：将每个稀疏嵌入表示为字典，结构为<code translate="no">{dimension_index: value, ...}</code> ，其中每个键值对表示维度索引及其对应的值。</p>
 <p>例如</p>
 <pre><code translate="no" class="language-python">{<span class="hljs-number">2</span>: <span class="hljs-number">0.33</span>, <span class="hljs-number">98</span>: <span class="hljs-number">0.72</span>, ...}
@@ -359,5 +359,5 @@ pk_query_res = client.query(
 <li><p><strong>是否可以在一个 Collections 中同时包含稀疏向量和密集向量？</strong></p>
 <p>是的，在支持多向量类型的情况下，您可以创建既有稀疏向量列又有密集向量列的 Collections，并对它们执行混合搜索。</p></li>
 <li><p><strong>插入或搜索稀疏嵌入有哪些要求？</strong></p>
-<p>稀疏嵌入必须至少有一个非零值，向量索引必须为非负。</p></li>
+<p>稀疏嵌入必须至少有一个非零值，向量索引必须是非负的。</p></li>
 </ul>

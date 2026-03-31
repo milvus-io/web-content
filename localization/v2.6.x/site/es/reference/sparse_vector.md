@@ -359,5 +359,5 @@ pk_query_res = client.query(
 <li><p><strong>¿Es posible tener vectores dispersos y densos en una misma colección?</strong></p>
 <p>Sí, con el soporte de tipos de vectores múltiples, puede crear colecciones con columnas de vectores tanto dispersos como densos y realizar búsquedas híbridas en ellas.</p></li>
 <li><p><strong>¿Cuáles son los requisitos para insertar o buscar incrustaciones dispersas?</strong></p>
-<p>Las incrustaciones dispersas deben tener al menos un valor distinto de cero y los índices de los vectores deben ser no negativos.</p></li>
+<p>Las incrustaciones dispersas deben tener al menos un valor distinto de cero, y los índices de los vectores deben ser no negativos.</p></li>
 </ul>

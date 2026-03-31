@@ -510,7 +510,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">WithDataType()</code></td>
-      <td>Der Datentyp des Feldes.</td>
+      <td>Der Datentyp des Felds.</td>
     </tr>
     <tr>
       <td><code translate="no">WithIsPrimaryKey()</code></td>
@@ -1060,11 +1060,11 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>Das Schema dieser Sammlung.<br/>Die Einstellung " <strong>None"</strong> bedeutet, dass diese Sammlung mit den Standardeinstellungen erstellt wird.<br/>Um eine Sammlung mit einem benutzerdefinierten Schema einzurichten, müssen Sie ein <strong>CollectionSchema-Objekt</strong> erstellen und es hier referenzieren. In diesem Fall ignoriert Milvus alle anderen schema-bezogenen Einstellungen, die in der Anfrage enthalten sind.</td>
+<td>Das Schema dieser Sammlung.<br/>Die Einstellung <strong>None</strong> bedeutet, dass diese Sammlung mit den Standardeinstellungen erstellt wird.<br/>Um eine Sammlung mit einem benutzerdefinierten Schema einzurichten, müssen Sie ein <strong>CollectionSchema-Objekt</strong> erstellen und es hier referenzieren. In diesem Fall ignoriert Milvus alle anderen schema-bezogenen Einstellungen, die in der Anfrage enthalten sind.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>Die Parameter für die Erstellung des Indexes für das Vektorfeld in dieser Sammlung. Um eine Sammlung mit einem benutzerdefinierten Schema einzurichten und die Sammlung automatisch in den Speicher zu laden, müssen Sie ein IndexParams-Objekt erstellen und es hier referenzieren.<br/>Sie sollten zumindest einen Index für das Vektorfeld in dieser Sammlung hinzufügen. Sie können diesen Parameter auch weglassen, wenn Sie die Indexparameter später einrichten möchten.</td>
+<td>Die Parameter für die Erstellung des Indexes für das Vektorfeld in dieser Sammlung. Um eine Sammlung mit einem angepassten Schema einzurichten und die Sammlung automatisch in den Speicher zu laden, müssen Sie ein IndexParams-Objekt erstellen und es hier referenzieren.<br/>Sie sollten zumindest einen Index für das Vektorfeld in dieser Sammlung hinzufügen. Sie können diesen Parameter auch weglassen, wenn Sie die Indexparameter später einrichten möchten.</td>
 </tr>
 </tbody>
 </table></p>

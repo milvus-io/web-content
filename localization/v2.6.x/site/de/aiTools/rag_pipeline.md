@@ -20,11 +20,11 @@ summary: Regeln für KI-Codierassistenten zum Aufbau von RAG-Pipelines mit Milvu
       </svg>
     </button></h2><ol>
 <li><strong>Kopieren Sie</strong> die vollständige Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> unten.</li>
-<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - siehe die <a href="/docs/de/ai_prompts_landing.md">Umgebungstabelle</a> für Details zur Platzierung.</li>
+<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - siehe die <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a> für Details zur Platzierung.</li>
 <li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code erzeugt oder überprüft.</li>
 </ol>
 <p>Für <strong>Cursor-Benutzer</strong>: Kopieren Sie die Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> und speichern Sie sie unter <code translate="no">.cursor/rules/</code> in Ihrem Projekt.</p>
-<p>End-to-End-Regeln für den Aufbau von RAG-Pipelines mit Milvus, einschließlich Ingestion, Chunking, Embedding, Hybrid Retrieval mit BM25 und Dokumenten-Updates mit Upsert. Kopieren Sie die vollständige Aufforderung unten in Ihr AI-Tool, um diese Regeln automatisch anzuwenden. Einen Überblick über alle Prompts finden Sie unter <a href="/docs/de/ai_prompts_landing.md">AI Prompts</a>.</p>
+<p>End-to-End-Regeln für den Aufbau von RAG-Pipelines mit Milvus, einschließlich Ingestion, Chunking, Embedding, Hybrid Retrieval mit BM25 und Dokumenten-Updates mit Upsert. Kopieren Sie die vollständige Aufforderung unten in Ihr AI-Tool, um diese Regeln automatisch anzuwenden. Einen Überblick über alle Prompts finden Sie unter <a href="/docs/de/milvus_for_agents.md">AI Prompts</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Vollständige Aufforderung<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Copie</strong> a linha de comandos completa da secção Linha de <a href="#full-prompt">comandos completa</a> abaixo.</li>
-<li><strong>Guarde-o</strong> na localização que a sua ferramenta de IA espera - consulte a <a href="/docs/pt/ai_prompts_landing.md">tabela de ambiente</a> para obter detalhes de colocação.</li>
+<li><strong>Guarde-o</strong> na localização que a sua ferramenta de IA espera - consulte a <a href="/docs/pt/milvus_for_agents.md">tabela de ambiente</a> para obter detalhes de colocação.</li>
 <li>O seu assistente de IA aplicará automaticamente estas regras ao gerar ou rever o código Milvus.</li>
 </ol>
 <p>Para os utilizadores <strong>do Cursor</strong>: copie a mensagem da secção de <a href="#full-prompt">mensagens completas</a> e guarde-a em <code translate="no">.cursor/rules/</code> no seu projeto.</p>
-<p>Regras para implementar a pesquisa por semelhança, a pesquisa híbrida, a pesquisa filtrada e a pesquisa de texto integral no Milvus, incluindo as restrições AnnSearchRequest e a utilização do classificador. Copie o prompt completo abaixo na sua ferramenta de IA para aplicar estas regras automaticamente. Para obter uma visão geral de todos os prompts, consulte <a href="/docs/pt/ai_prompts_landing.md">Prompts de IA</a>.</p>
+<p>Regras para implementar a pesquisa por semelhança, a pesquisa híbrida, a pesquisa filtrada e a pesquisa de texto integral no Milvus, incluindo as restrições AnnSearchRequest e a utilização do classificador. Copie o prompt completo abaixo na sua ferramenta de IA para aplicar estas regras automaticamente. Para obter uma visão geral de todos os prompts, consulte <a href="/docs/pt/milvus_for_agents.md">Prompts de IA</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Solicitação completa<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

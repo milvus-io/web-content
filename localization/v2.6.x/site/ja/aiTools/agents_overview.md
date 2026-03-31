@@ -20,7 +20,7 @@ summary: PyMilvusを使用してMilvusベクトルデータベースコードを
       </svg>
     </button></h2><ol>
 <li>以下の<a href="#full-prompt">プロンプトの</a>完全版のセクションからプロンプトの完全版を<strong>コピー</strong>する。</li>
-<li>それをAIツールが期待する場所に<strong>保存して</strong>ください。</li>
+<li>AIツールが期待する場所に<strong>保存して</strong>ください。</li>
 <li>AIアシスタントはMilvusコードを生成またはレビューする際に、これらのルールを自動的に適用します。</li>
 </ol>
 <p><strong>Cursorを</strong>お使いの場合: プロンプトを<a href="#full-prompt">Full prompt</a>セクションからコピーし、プロジェクトの<code translate="no">.cursor/rules/</code> 。</p>
@@ -39,7 +39,7 @@ summary: PyMilvusを使用してMilvusベクトルデータベースコードを
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusは類似検索、ハイブリッド検索、RAGのためのオープンソースのベクトルデータベースです。PyMilvus SDKの<code translate="no">MilvusClient</code> インタフェースを通して操作します。以下のプロンプトをAIツールにコピーすると、これらのルールが自動的に適用されます。タスク固有のプロンプトの詳細については、<a href="/docs/ja/ai_prompts_landing.md">AIプロンプトを</a>参照してください。</p>
+    </button></h1><p>Milvusは類似検索、ハイブリッド検索、RAGのためのオープンソースのベクトルデータベースです。PyMilvus SDKの<code translate="no">MilvusClient</code> インタフェースを通して操作します。以下のプロンプトをAIツールにコピーすると、これらのルールが自動的に適用されます。タスク固有のプロンプトの詳細については、<a href="/docs/ja/milvus_for_agents.md">AIプロンプトを</a>参照してください。</p>
 <h2 id="Full-prompt" class="common-anchor-header">完全なプロンプト<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

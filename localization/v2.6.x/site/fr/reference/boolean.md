@@ -33,7 +33,7 @@ title: Règles de filtrage scalaire
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une expression de prédicat produit une valeur booléenne. Milvus effectue un filtrage scalaire en effectuant des recherches à l'aide de prédicats. Une expression de prédicat, lorsqu'elle est évaluée, renvoie soit VRAI, soit FAUX. Voir la <a href="/api-reference/pymilvus/v2.4.x/About.md">référence API du SDK Python</a> pour obtenir des instructions sur l'utilisation des expressions de prédicat.</p>
+    </button></h2><p>Une expression de prédicat produit une valeur booléenne. Milvus effectue un filtrage scalaire en effectuant des recherches à l'aide de prédicats. Une expression de prédicat, lorsqu'elle est évaluée, renvoie soit VRAI, soit FAUX. Consultez la <a href="/api-reference/pymilvus/v2.4.x/About.md">référence API du SDK Python</a> pour obtenir des instructions sur l'utilisation des expressions de prédicat.</p>
 <p>Les règles de grammaire<a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a> décrivent les règles des expressions booléennes :</p>
 <pre><code translate="no">Expr = LogicalExpr | NIL
 LogicalExpr = LogicalExpr BinaryLogicalOp LogicalExpr 
@@ -105,7 +105,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>SingleExpr</td><td>SingleExpr, c'est-à-dire une seule expression, peut être soit un TermExpr, soit un CompareExpr.</td></tr>
 <tr><td>LogicalExpr</td><td>Une LogicalExpr peut être une BinaryLogicalOp sur deux LogicalExprs, ou une UnaryLogicalOp sur une seule LogicalExpr, ou une LogicalExpr groupée entre parenthèses, ou une SingleExpr. Le LogicalExpr est défini de manière récursive.</td></tr>
 <tr><td>Expr</td><td>Expr, une abréviation signifiant expression, peut être LogicalExpr ou NIL.</td></tr>
-<tr><td>MatchOp</td><td>Un MatchOp, à savoir un opérateur de correspondance, compare une chaîne à une constante de chaîne ou à une constante de préfixe, d'infixe ou de suffixe de chaîne.</td></tr>
+<tr><td>MatchOp</td><td>Un MatchOp, à savoir un opérateur de correspondance, compare une chaîne de caractères à une constante de chaîne de caractères ou à une constante de préfixe, d'infixe ou de suffixe de chaîne de caractères.</td></tr>
 <tr><td>JsonArrayOp</td><td>Un JsonOp, c'est-à-dire un opérateur JSON, vérifie si l'identifiant spécifié contient les éléments spécifiés.</td></tr>
 <tr><td>ArrayOp</td><td>Un ArrayOp, c'est-à-dire un opérateur de tableau, vérifie si l'identifiant spécifié contient les éléments spécifiés.</td></tr>
 </tbody>

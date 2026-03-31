@@ -51,7 +51,7 @@ title: 支持 MMap 的数据存储
         ></path>
       </svg>
     </button></h3><p>在部署群集之前，<strong>群集级</strong>设置会在整个群集中应用内存映射。这将确保所有新对象自动遵循这些配置。需要注意的是，修改这些设置需要重新启动群集才能生效。</p>
-<p>要调整群集的内存映射设置，请编辑<code translate="no">configs/milvus.yaml</code> 文件。在该文件中，你可以指定是否默认启用内存映射，并确定存储内存映射文件的目录路径。如果未指定路径（<code translate="no">mmapDirPath</code> ），系统默认将内存映射文件存储在<code translate="no">{localStorage.path}/mmap</code> 中。更多信息，请参阅<a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">本地存储相关配置</a>。</p>
+<p>要调整群集的内存映射设置，请编辑<code translate="no">configs/milvus.yaml</code> 文件。在该文件中，你可以指定是否默认启用内存映射，并确定存储内存映射文件的目录路径。如果未指定路径（<code translate="no">mmapDirPath</code> ），系统默认将内存映射文件存储在<code translate="no">{localStorage.path}/mmap</code> 中。有关详细信息，请参阅<a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">本地存储相关配置</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
 <span class="hljs-string">...</span>
 <span class="hljs-attr">queryNode:</span>
@@ -62,7 +62,7 @@ title: 支持 MMap 的数据存储
     <span class="hljs-attr">mmapDirPath:</span> <span class="hljs-string">any/valid/path</span> 
 <span class="hljs-string">....</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>在<code translate="no">2.4.10</code> 之后，配置<code translate="no">queryNode.mmap.mmapEnabled</code> 分成以下四个独立字段，所有默认值均为<code translate="no">false</code> ：</p>
+<p><code translate="no">2.4.10</code> 之后，配置<code translate="no">queryNode.mmap.mmapEnabled</code> 分成以下四个独立字段，所有默认值均为<code translate="no">false</code> ：</p>
 <ul>
 <li><code translate="no">queryNode.mmap.vectorField</code>, 控制向量数据是否为 mmap；</li>
 <li><code translate="no">queryNode.mmap.vectorIndex</code>控制向量索引是否为 mmap；</li>
@@ -200,13 +200,13 @@ spec:
       </svg>
     </button></h2><ul>
 <li><p><strong>建议在哪些情况下启用内存映射？启用此功能后有哪些权衡？</strong></p>
-<p>内存有限或性能要求适中时，建议使用内存映射。启用此功能可提高数据加载能力。例如，在 2 个 CPU 和 8 GB 内存的配置下，启用内存映射比不启用内存映射加载的数据多 4 倍。对性能的影响各不相同：</p>
+<p>内存有限或性能要求适中时，建议使用内存映射。启用此功能可提高数据加载能力。例如，在配置 2 个 CPU 和 8 GB 内存的情况下，启用内存映射可使加载的数据量比不启用内存映射多 4 倍。对性能的影响各不相同：</p>
 <ul>
 <li><p>在内存充足的情况下，预期性能与只使用内存的情况类似。</p></li>
 <li><p>如果内存不足，预期性能可能会下降。</p></li>
 </ul></li>
 <li><p><strong>Collection-level 和 Index-level 配置之间的关系是什么？</strong></p>
-<p>Collection-level 和 index-level 并不是包含关系，Collection-level 控制原始数据是否启用 mmap，而 index-level 仅适用于向量索引。</p></li>
+<p>Collection-level 和 index-level 不是包含关系，Collection-level 控制原始数据是否启用了 mmap，而 index-level 仅适用于向量索引。</p></li>
 <li><p><strong>有没有推荐用于内存映射的索引类型？</strong></p>
 <p>有，建议使用 HNSW 启用毫米映射。我们曾测试过 HNSW、IVF_FLAT、IVF_PQ/SQ 系列索引，IVF 系列索引的性能下降严重，而 HNSW 索引启用毫米映射后的性能下降仍在预期之内。</p></li>
 <li><p><strong>内存映射需要什么样的本地存储？</strong></p>

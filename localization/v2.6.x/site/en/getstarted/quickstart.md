@@ -437,3 +437,4 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus provides REST and gRPC API, with client libraries in languages such as <a href="/docs/install-pymilvus.md">Python</a>, <a href="/docs/install-java.md">Java</a>, <a href="/docs/install-go.md">Go</a>, C# and <a href="/docs/install-node.md">Node.js</a>.</p>
+<p>If you are using AI coding assistants or building AI agent applications, check out <a href="/docs/milvus_for_agents.md">Milvus for AI Agents</a> to explore agent skills, MCP servers, and curated prompts that help your AI tools write correct Milvus code.</p>

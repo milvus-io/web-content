@@ -255,7 +255,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>بمجرد استخدام حقل من مجموعة كمفتاح قسم، ينشئ ميلفوس العدد المحدد من الأقسام ويديرها نيابة عنك. لذلك، لا يمكنك معالجة الأقسام في هذه المجموعة بعد الآن.</p>
-<p>يوضح المقتطف التالي أن 64 قسمًا في مجموعة بمجرد استخدام أحد حقولها كمفتاح تقسيم.</p>
+<p>يوضح المقتطف التالي أن 64 قسماً في مجموعة بمجرد استخدام أحد حقولها كمفتاح تقسيم.</p>
 <h2 id="Insert-data" class="common-anchor-header">إدراج البيانات<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

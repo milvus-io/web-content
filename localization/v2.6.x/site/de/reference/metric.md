@@ -255,7 +255,7 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
 <summary><font color="#4fc4f9">Warum ist das Top1-Ergebnis einer Vektorsuche nicht der Suchvektor selbst, wenn der Metrik-Typ das innere Produkt ist?</font></summary>Dies geschieht, wenn Sie die Vektoren nicht normalisiert haben, wenn Sie das innere Produkt als Abstandsmetrik verwenden.</details>
 <details>
 <summary><font color="#4fc4f9">Was ist Normalisierung? Warum ist eine Normalisierung erforderlich?</font></summary></p>
-<p>Normalisierung bezieht sich auf den Prozess der Konvertierung einer Einbettung (eines Vektors), so dass seine Norm gleich 1 ist. Wenn Sie das innere Produkt zur Berechnung der Ähnlichkeit von Einbettungen verwenden, müssen Sie Ihre Einbettungen normalisieren. Nach der Normalisierung ist das innere Produkt gleich der Kosinusähnlichkeit.</p>
+<p>Normalisierung bezieht sich auf den Prozess der Umwandlung einer Einbettung (eines Vektors), so dass seine Norm gleich 1 ist. Wenn Sie das innere Produkt zur Berechnung der Ähnlichkeit von Einbettungen verwenden, müssen Sie Ihre Einbettungen normalisieren. Nach der Normalisierung ist das innere Produkt gleich der Kosinusähnlichkeit.</p>
 <p>
 Siehe <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> für weitere Informationen.</p>
 </details>

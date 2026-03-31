@@ -57,7 +57,7 @@ title: 'Inserção, inserção ascendente e eliminação'
         ></path>
       </svg>
     </button></h2><p>Uma entidade, no contexto das colecções Milvus, é uma instância singular e identificável dentro de uma coleção. Representa um membro distinto de uma determinada classe, quer se trate de um livro numa biblioteca, de um gene num genoma ou de qualquer outra entidade identificável.</p>
-<p>As entidades de uma coleção partilham um conjunto comum de atributos, denominado esquema, que define a estrutura a que cada entidade deve aderir, incluindo nomes de campos, tipos de dados e quaisquer outras restrições.</p>
+<p>As entidades de uma coleção partilham um conjunto comum de atributos, denominado esquema, que define a estrutura a que cada entidade deve obedecer, incluindo nomes de campos, tipos de dados e quaisquer outras restrições.</p>
 <p>A inserção bem sucedida de entidades numa coleção requer que os dados fornecidos contenham todos os campos definidos pelo esquema da coleção de destino. Além disso, também é possível incluir campos não definidos pelo esquema apenas se tiver ativado o campo dinâmico. Para obter detalhes, consulte <a href="/docs/pt/enable-dynamic-field.md">Ativar campo dinâmico</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparações<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,7 +79,7 @@ title: 'Inserção, inserção ascendente e eliminação'
 <p>Para os preparativos, utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> para criar uma coleção em modo de configuração rápida.</p>
 </div>
 <div class="language-java">
-<p>Para os preparativos, utilizar <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para criar uma coleção em modo de instalação rápida.</p>
+<p>Para os preparativos, utilize <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para criar uma coleção em modo de instalação rápida.</p>
 </div>
 <div class="language-javascript">
 <p>Para os preparativos, utilizar <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para criar uma coleção em modo de instalação rápida.</p>

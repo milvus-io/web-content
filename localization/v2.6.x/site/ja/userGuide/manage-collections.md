@@ -317,7 +317,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 <p>スキーマを設定するには、<code translate="no">entity.NewSchema()</code> を使用してスキーマ・オブジェクトを作成し、<code translate="no">schema.WithField()</code> を使用してスキーマにフィールドを追加します。</p>
 </div>
 <div class="language-shell">
-<p>スキーマを設定するには、APIエンドポイントのリファレンス・ページに表示されているスキーマ・フォーマットに従ったJSONオブジェクトを定義する必要があります。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API エンドポイントのリファレンス・ページに表示されているスキーマ・フォーマットに従った JSON オブジェクトを定義する必要がある。</p>
+<p>スキーマを設定するには、APIエンドポイントのリファレンス・ページに表示されているスキーマ・フォーマットに従ったJSONオブジェクトを定義する必要があります。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>APIエンドポイントのリファレンス・ページに表示されているスキーマ・フォーマットに従ったJSONオブジェクトを定義する必要がある。</p>
 </div>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>

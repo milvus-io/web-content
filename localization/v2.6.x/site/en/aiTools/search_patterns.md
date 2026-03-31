@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Copy</strong> the full prompt from the <a href="#full-prompt">Full prompt</a> section below.</li>
-<li><strong>Save</strong> it to the location your AI tool expects — see the <a href="/docs/ai_prompts_landing.md">environment table</a> for placement details.</li>
+<li><strong>Save</strong> it to the location your AI tool expects — see the <a href="/docs/milvus_for_agents.md">environment table</a> for placement details.</li>
 <li>Your AI assistant will automatically apply these rules when generating or reviewing Milvus code.</li>
 </ol>
 <p>For <strong>Cursor</strong> users: copy the prompt from the <a href="#full-prompt">Full prompt</a> section and save it under <code translate="no">.cursor/rules/</code> in your project.</p>
-<p>Rules for implementing similarity search, hybrid search, filtered search, and full-text search in Milvus, including AnnSearchRequest constraints and ranker usage. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see <a href="/docs/ai_prompts_landing.md">AI Prompts</a>.</p>
+<p>Rules for implementing similarity search, hybrid search, filtered search, and full-text search in Milvus, including AnnSearchRequest constraints and ranker usage. Copy the full prompt below into your AI tool to apply these rules automatically. For an overview of all prompts, see <a href="/docs/milvus_for_agents.md">AI Prompts</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Full prompt<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -17,7 +17,7 @@ title: Utilizzare i campi array
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questa guida spiega come utilizzare i campi array, ad esempio inserendo valori di array, creando indici su campi vettoriali e array, nonché eseguendo ricerche e query nei campi array con operatori di base e avanzati.</p>
+    </button></h1><p>Questa guida spiega come utilizzare i campi array, ad esempio inserendo valori di array, creando indici su campi vettoriali e array, nonché eseguendo ricerche e interrogazioni nei campi array con operatori di base e avanzati.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1148,16 +1148,16 @@ System.out.println(queryResp.getQueryResults());
 </thead>
 <tbody>
 <tr><td>&lt;</td><td><code translate="no">‘int_array[0] < 3’</code></td><td>Questa espressione dà esito positivo se il valore di <code translate="no">int_array[0]</code> è inferiore a 3.</td></tr>
-<tr><td>&gt;</td><td><code translate="no">‘int_array[0] > 5’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">int_array[0]</code> è maggiore di 5.</td></tr>
+<tr><td>&gt;</td><td><code translate="no">‘int_array[0] > 5’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">int_array[0]</code> è superiore a 5.</td></tr>
 <tr><td>==</td><td><code translate="no">‘int_array[0] == 0’</code></td><td>Questa espressione è vera se il valore di <code translate="no">int_array[0]</code> è uguale a 0.</td></tr>
 <tr><td>!=</td><td><code translate="no">‘var_array[0] != "a"’</code></td><td>Questa espressione è vera se il valore di <code translate="no">var_array[0]</code> non è uguale a <code translate="no">“a”</code>.</td></tr>
 <tr><td>&lt;=</td><td><code translate="no">‘int_array[0] <= 3’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">int_array[0]</code> è minore o uguale a 3.</td></tr>
 <tr><td>&gt;=</td><td><code translate="no">‘int_array[0] >= 10’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">int_array[0]</code> è maggiore o uguale a 10.</td></tr>
 <tr><td>in</td><td><code translate="no">'var_array[0] in ["str1", “str2”]'</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">var_array[0]</code> è <code translate="no">“str1”</code> o <code translate="no">“str2”</code>.</td></tr>
 <tr><td>non in</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>Questa espressione dà esito positivo se il valore di <code translate="no">int_array[0]</code> non è 1, 2 o 3.</td></tr>
-<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 > 200’</code></td><td>Questa espressione dà come risultato vero che il valore di <code translate="no">int_array[0] + 100</code> è maggiore di 200.</td></tr>
+<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 > 200’</code></td><td>Questa espressione dà esito positivo se il valore di <code translate="no">int_array[0] + 100</code> è superiore a 200.</td></tr>
 <tr><td>come (LIKE)</td><td><code translate="no">‘var_array[0] like "prefix%"’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">var_array[0]</code> è preceduto da <code translate="no">“prefix”</code>.</td></tr>
-<tr><td>e (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">var_array[0]</code> ha come prefisso <code translate="no">“prefix”</code> e il valore di <code translate="no">int_array[0]</code> è minore o uguale a 100.</td></tr>
+<tr><td>e (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">var_array[0]</code> è preceduto da <code translate="no">“prefix”</code> e il valore di <code translate="no">int_array[0]</code> è minore o uguale a 100.</td></tr>
 <tr><td>o (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] <= 100’</code></td><td>Questa espressione ha valore vero se il valore di <code translate="no">var_array[0]</code> è preceduto da <code translate="no">“prefix”</code>, o se il valore di <code translate="no">int_array[0]</code> è minore o uguale a 100.</td></tr>
 <tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>Questa espressione dà esito positivo se <code translate="no">int_array</code> contiene l'elemento <code translate="no">100</code>.</td></tr>
 <tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>Questa espressione dà come risultato vero che <code translate="no">int_array</code> contiene tutti gli elementi <code translate="no">1</code>, <code translate="no">2</code> e <code translate="no">3</code>.</td></tr>

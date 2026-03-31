@@ -22,7 +22,7 @@ title: BM25
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> è una funzione di classificazione utilizzata nell'information retrieval per stimare la rilevanza dei documenti rispetto a una determinata query di ricerca. Migliora l'approccio di base alla frequenza dei termini incorporando la normalizzazione della lunghezza dei documenti e la saturazione della frequenza dei termini. BM25 è in grado di generare embedding sparsi rappresentando i documenti come vettori di punteggi di importanza dei termini, consentendo un efficiente recupero e classificazione in spazi vettoriali sparsi.</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> è una funzione di classificazione utilizzata nell'information retrieval per stimare la rilevanza dei documenti rispetto a una determinata query di ricerca. Migliora l'approccio di base alla frequenza dei termini incorporando la normalizzazione della lunghezza dei documenti e la saturazione della frequenza dei termini. BM25 è in grado di generare embedding sparsi rappresentando i documenti come vettori di punteggi di importanza dei termini, consentendo un efficiente reperimento e classificazione in spazi vettoriali sparsi.</p>
 <p>Milvus si integra con il modello BM25 utilizzando la classe <strong>BM25EmbeddingFunction</strong>. Questa classe gestisce il calcolo delle incorporazioni e le restituisce in un formato compatibile con Milvus per l'indicizzazione e la ricerca. Essenziale per questo processo è la costruzione di un analizzatore per la tokenizzazione.</p>
 <p>Per utilizzare questa funzione, installare le dipendenze necessarie:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
@@ -89,7 +89,7 @@ docs_embeddings = bm25_ef.encode_documents(docs)
   (<span class="hljs-number">4</span>, <span class="hljs-number">20</span>)        <span class="hljs-number">0.9606986899563318</span>
 Sparse dim: <span class="hljs-number">21</span> (<span class="hljs-number">1</span>, <span class="hljs-number">21</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Per creare le incorporazioni per le query, utilizzare il metodo <strong>encode_queries()</strong>:</p>
+<p>Per creare embeddings per le query, utilizzare il metodo <strong>encode_queries()</strong>:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 

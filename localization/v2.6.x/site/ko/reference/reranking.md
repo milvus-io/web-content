@@ -77,7 +77,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <button class="copy-code-btn"></button></code></pre>
 <p>참고하세요:</p>
 <ul>
-<li><p>각 가중치 값의 범위는 0(가장 중요하지 않음)에서 1(가장 중요함)까지이며 최종 집계 점수에 영향을 미칩니다.</p></li>
+<li><p>각 가중치 값의 범위는 0(가장 중요하지 않음)에서 1(가장 중요함)까지이며, 최종 집계 점수에 영향을 미칩니다.</p></li>
 <li><p><code translate="no">WeightedRanker</code> 에 제공된 가중치 값의 총 개수는 앞서 생성한 <code translate="no">AnnSearchRequest</code> 인스턴스 수와 같아야 합니다.</p></li>
 <li><p>서로 다른 메트릭 유형의 측정값이 다르기 때문에 리콜 결과의 거리가 [0,1] 간격에 위치하도록 정규화하며, 여기서 0은 다르다는 의미이고 1은 비슷하다는 의미입니다. 최종 점수는 가중치 값과 거리의 합이 됩니다.</p></li>
 </ul>
@@ -100,7 +100,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <p>RRF의 기본 프로세스는 다음과 같습니다:</p>
 <ul>
 <li><p><strong>검색 중에 순위를 수집합니다</strong>: 여러 벡터 필드에 걸친 검색기가 결과를 검색하고 정렬합니다.</p></li>
-<li><p><strong>순위 융합</strong>: RRF 알고리즘은 각 리트리버의 순위를 가중치를 매기고 결합합니다. 공식은 다음과 같습니다:</p>
+<li><p><strong>순위 융합</strong>: RRF 알고리즘은 각 리트리버의 순위를 가중치를 부여하고 결합합니다. 공식은 다음과 같습니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />

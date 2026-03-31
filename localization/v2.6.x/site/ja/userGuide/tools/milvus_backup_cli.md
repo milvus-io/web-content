@@ -115,7 +115,7 @@ go build
 <pre><code translate="no" class="language-shell">./milvus-backup create -n &lt;backup_name&gt;
 <button class="copy-code-btn"></button></code></pre>
 <p>コマンドを実行すると、Minioの設定で指定したバケット内のバックアップファイルを確認することができます。具体的には、<strong>Minioコンソール</strong>または<strong>mc</strong>クライアントを使用してダウンロードできます。</p>
-<p><a href="https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html">Minioコンソールから</a>ダウンロードするには、Minioコンソールにログインし、<code translate="no">minio.address</code> で指定したバケットを探し、バケット内のファイルを選択し、[<strong>ダウンロード]</strong>をクリックしてダウンロードします。</p>
+<p><a href="https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html">Minioコンソールから</a>ダウンロードするには、Minioコンソールにログインし、<code translate="no">minio.address</code> で指定したバケットを探し、バケット内のファイルを選択して、<strong>ダウンロードを</strong>クリックします。</p>
 <p><a href="https://min.io/docs/minio/linux/reference/minio-mc.html#mc-install">mcクライアントを</a>使用する場合は、次の手順を実行します：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">configure a Minio host</span>
 mc alias set my_minio https://&lt;minio_endpoint&gt; &lt;accessKey&gt; &lt;secretKey&gt;
@@ -126,7 +126,7 @@ mc ls my_minio
 # </span><span class="language-bash">Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>バックアップファイルを安全な場所に保存し、将来復元できるようにするか、<a href="https://cloud.zilliz.com">Zillizクラウドに</a>アップロードして、データの管理されたベクターデータベースを作成します。詳細は<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
+<p>バックアップファイルを安全な場所に保存し、将来復元できるようにするか、<a href="https://cloud.zilliz.com">Zillizクラウドに</a>アップロードして、データの管理されたベクターデータベースを作成します。詳しくは、<a href="https://zilliz.com/doc/migrate_from_milvus-2x">MilvusからZilliz Cloudへの移行を</a>ご参照ください。</p>
 <h2 id="Restore-data" class="common-anchor-header">データのリストア<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

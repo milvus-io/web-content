@@ -156,7 +156,7 @@ title: Konsistensi
 <p>GuaranteeTs berfungsi untuk memberi tahu node kueri bahwa pencarian atau permintaan kueri tidak akan dilakukan hingga semua data sebelum GuaranteeTs dapat dilihat oleh node kueri. Ketika Anda menentukan tingkat konsistensi, tingkat konsistensi akan dipetakan ke nilai GuaranteeTs tertentu. Nilai GuaranteeTs yang berbeda sesuai dengan tingkat konsistensi yang berbeda:</p>
 <ul>
 <li><p><strong>Kuat</strong>: GuaranteeTs ditetapkan identik dengan stempel waktu sistem terbaru, dan simpul kueri menunggu hingga semua data sebelum stempel waktu sistem terbaru dapat dilihat, sebelum memproses permintaan pencarian atau kueri.</p></li>
-<li><p><strong>Keusangan</strong> yang<strong>dibatasi</strong>: GuaranteeTs diatur relatif lebih kecil dari stempel waktu sistem terbaru, dan simpul kueri mencari pada tampilan data yang masih dapat ditoleransi dan kurang diperbarui.</p></li>
+<li><p><strong>Keusangan</strong> yang<strong>dibatasi</strong>: GuaranteeTs diatur relatif lebih kecil dari stempel waktu sistem terbaru, dan simpul kueri mencari pada tampilan data yang tidak terlalu diperbarui.</p></li>
 <li><p><strong>Sesi</strong>: Klien menggunakan stempel waktu dari operasi penulisan terbaru sebagai GuaranteeTs, sehingga setiap klien setidaknya dapat mengambil data yang dimasukkan oleh klien yang sama.</p></li>
 <li><p><strong>Akhirnya</strong>: GuaranteeTs diatur ke nilai yang sangat kecil untuk melewatkan pemeriksaan konsistensi. Node kueri langsung mencari pada tampilan data yang ada.</p></li>
 </ul>

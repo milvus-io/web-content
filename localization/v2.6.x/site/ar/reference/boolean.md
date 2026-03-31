@@ -73,7 +73,7 @@ ArrayDefs = <span class="hljs-string">&quot;array_contains&quot;</span> | <span 
 ArrayExpr =  Constant | ConstantArray | STRING | BOOLEAN;
 Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="hljs-string">&quot;,&quot;</span> ArrayExpr } <span class="hljs-string">&quot;]&quot;</span>;
 <button class="copy-code-btn"></button></code></pre>
-<p>يسرد الجدول التالي وصف كل رمز مذكور في قواعد التعبير المنطقي أعلاه.</p>
+<p>يسرد الجدول التالي وصف كل رمز مذكور في قواعد التعبيرات المنطقية أعلاه.</p>
 <table>
 <thead>
 <tr><th>الرمز</th><th>الوصف</th></tr>
@@ -234,12 +234,12 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>3</td><td>**</td><td>ثنائي أرثوب</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>4</td><td>* / %</td><td>BinaryArithOp</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>5</td><td>+ -</td><td>BinaryArithOp</td><td>من اليسار إلى اليمين</td></tr>
-<tr><td>6</td><td>&lt; <= > &gt;=</td><td>CmpOp</td><td>من اليسار إلى اليمين</td></tr>
+<tr><td>6</td><td>&lt; <= > &gt;&gt;=</td><td>CmpOp</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>7</td><td>== !=</td><td>CmpOp</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>8</td><td>مثل LIKE</td><td>ماتشوبوب</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>9</td><td>json_contains JSON_CONTAINS</td><td>JsonArrayOp</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>9</td><td>مصفوفة_تحتوي على ARRAY_CONTAINS</td><td>مصفوفة</td><td>من اليسار إلى اليمين</td></tr>
-<tr><td>10</td><td>json_concontains_all JSON_CONTAINS_ALL</td><td>JsonArrayOp</td><td>من اليسار إلى اليمين</td></tr>
+<tr><td>10</td><td>json_contains_all JSON_CONTAINS_ALL</td><td>JsonArrayOp</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>10</td><td>صفيف_يحتوي_الجميع ARRAY_CONTAINS_ALL</td><td>مصفوفة</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>11</td><td>json_concontains_any JSON_CONTAINS_ANY</td><td>JsonArrayOp</td><td>من اليسار إلى اليمين</td></tr>
 <tr><td>11</td><td>مصفوفة_تحتوي_على_أي ARRAY_CONTAINS_ANY</td><td>مصفوفة</td><td>من اليسار إلى اليمين</td></tr>

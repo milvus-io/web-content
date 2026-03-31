@@ -255,7 +255,7 @@ Milvus sólo cacula el valor antes de aplicar la raíz cuadrada cuando se elige 
 <summary><font color="#4fc4f9">¿Por qué el resultado top1 de una búsqueda vectorial no es el propio vector buscado, si el tipo de</font></summary>métrica es producto interior? Esto ocurre si no se han normalizado los vectores al utilizar producto interior como métrica de distancia.</details>
 <details>
 <summary><font color="#4fc4f9">¿Qué es la normalización? ¿Por qué es necesaria la normalización?</font></summary></p>
-<p>La normalización se refiere al proceso de convertir una incrustación (vector) para que su norma sea igual a 1. Si utiliza el producto interno para calcular las similitudes entre incrustaciones, debe normalizar sus incrustaciones. Después de la normalización, el producto interior es igual a la similitud coseno.</p>
+<p>La normalización se refiere al proceso de convertir una incrustación (vector) para que su norma sea igual a 1. Si utiliza el producto interno para calcular las similitudes de las incrustaciones, debe normalizar sus incrustaciones. Después de la normalización, el producto interior es igual a la similitud coseno.</p>
 <p>
 Para más información, consulte <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a>.</p>
 </details>

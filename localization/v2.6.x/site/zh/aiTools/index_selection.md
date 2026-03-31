@@ -20,11 +20,11 @@ summary: 人工智能编码助手选择和配置 Milvus 索引的规则。
       </svg>
     </button></h2><ol>
 <li>从下面的完整提示部分<strong>复制</strong> <a href="#full-prompt">完整提示</a>。</li>
-<li>将其<strong>保存</strong>到人工智能工具所需的位置--有关位置的详细信息，请参阅<a href="/docs/zh/ai_prompts_landing.md">环境表</a>。</li>
+<li>将其<strong>保存</strong>到人工智能工具所需的位置--有关位置的详细信息，请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
 <li>在生成或审核 Milvus 代码时，您的人工智能助手将自动应用这些规则。</li>
 </ol>
 <p>对于<strong>Cursor</strong>用户：复制<a href="#full-prompt">完整</a>提示部分的提示，并将其保存在项目中的<code translate="no">.cursor/rules/</code> 下。</p>
-<p>用于选择和调整 Milvus 索引的决策指南和配置规则，包括 AUTOINDEX、HNSW、DiskANN、IVF 和稀疏索引。将下面的完整提示复制到人工智能工具中，即可自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/ai_prompts_landing.md">AI 提示</a>。</p>
+<p>用于选择和调整 Milvus 索引的决策指南和配置规则，包括 AUTOINDEX、HNSW、DiskANN、IVF 和稀疏索引。将下面的完整提示复制到人工智能工具中，即可自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/milvus_for_agents.md">AI 提示</a>。</p>
 <h2 id="Full-prompt" class="common-anchor-header">完整提示<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

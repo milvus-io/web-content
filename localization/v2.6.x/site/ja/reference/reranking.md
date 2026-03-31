@@ -77,9 +77,9 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <button class="copy-code-btn"></button></code></pre>
 <p>以下の点に注意：</p>
 <ul>
-<li><p>各重み値は0（最も重要でない）から1（最も重要）まであり、最終的な集計スコアに影響する。</p></li>
+<li><p>各重み値の範囲は 0（最も重要でない）から 1（最も重要）までで、最終的な集計スコアに影響する。</p></li>
 <li><p><code translate="no">WeightedRanker</code> で指定する重み値の総数は、先に作成した<code translate="no">AnnSearchRequest</code> インスタンスの数と同じでなければならない。</p></li>
-<li><p>異なるメトリックタイプの異なる測定値のため、我々は想起結果の距離を正規化し、区間[0,1]に入るようにする。最終的なスコアは重み値と距離の合計となる。</p></li>
+<li><p>異なるメトリックタイプの異なる測定値のため、我々は想起結果の距離が区間[0,1]になるように正規化する。最終的なスコアは重み値と距離の合計となる。</p></li>
 </ul>
 <h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">レシプロランク・フュージョン（RRFRanker）<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -105,7 +105,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
    </span> <span class="img-wrapper"> <span>RRF-RANKER</span> </span></p>
-<p>ここで、↪Lu_1 は異なる検索ルートの数を表し、rank𝑖(↪Ll_1D451) は𝑖番目の検索者による文書𝑑のランク位置、↪Ll_1D458 は平滑化パラメータで、通常は60に設定される。</p></li>
+<p>ここで、↪Lu_1 は異なる検索ルートの数を表し、rank𝑖(↪Ll_1D451) は𝑖番目の検索エンジンによって検索されたドキュメント𝑑のランク位置、↪Ll_1D458 は平滑化パラメータで、通常は60に設定される。</p></li>
 <li><p><strong>総合ランキング</strong>：最終的な結果を生成するために、検索された結果を総合スコアに基づいて再ランク付けする。</p></li>
 </ul>
 <p>この戦略を使用するには、<code translate="no">RRFRanker</code> インスタンスを適用する。</p>

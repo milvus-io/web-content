@@ -34,7 +34,7 @@ title: Partitionsschlüssel verwenden
         ></path>
       </svg>
     </button></h2><p>Sie können ein bestimmtes Feld in einer Sammlung als Partitionsschlüssel festlegen, so dass Milvus eingehende Entitäten in verschiedene Partitionen entsprechend ihrer jeweiligen Partitionswerte in diesem Feld verteilt. Dadurch können Entitäten mit demselben Schlüsselwert in einer Partition gruppiert werden, was die Suchleistung beschleunigt, da beim Filtern nach dem Schlüsselfeld keine irrelevanten Partitionen durchsucht werden müssen. Im Vergleich zu herkömmlichen Filtermethoden kann der Partitionsschlüssel die Abfrageleistung erheblich verbessern.</p>
-<p>Sie können den Partitionsschlüssel verwenden, um eine Mehrmandantenfähigkeit zu implementieren. Für weitere Details zur Mehrmandantenfähigkeit lesen Sie <a href="https://milvus.io/docs/multi_tenancy.md">Mehrmandantenfähigkeit</a> für mehr.</p>
+<p>Sie können den Partitionsschlüssel verwenden, um eine Mehrmandantenfähigkeit zu implementieren. Für weitere Details zur Mehrmandantenfähigkeit lesen Sie bitte <a href="https://milvus.io/docs/multi_tenancy.md">Mehrmandantenfähigkeit</a>.</p>
 <h2 id="Enable-partition-key" class="common-anchor-header">Aktivieren des Partitionsschlüssels<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

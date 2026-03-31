@@ -198,7 +198,7 @@ go build
     &quot;backup_name&quot;:&quot;my_backup&quot;
 }&#x27;
 <button class="copy-code-btn"></button></code></pre>
-<p>還原過程可能很花時間，這取決於要還原的資料大小。因此，所有還原任務都是以非同步方式執行。您可以透過執行來檢查還原任務的狀態：</p>
+<p>還原過程可能很費時，這取決於要還原的資料大小。因此，所有還原任務都是以非同步方式執行。您可以透過執行來檢查還原任務的狀態：</p>
 <pre><code translate="no" class="language-shell">curl --location --request GET &#x27;http://localhost:8080/api/v1/get_restore?id=&lt;test_restore_id&gt;&#x27; \
 --header &#x27;Content-Type: application/json&#x27;
 <button class="copy-code-btn"></button></code></pre>

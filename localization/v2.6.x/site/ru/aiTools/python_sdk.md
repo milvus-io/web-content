@@ -2,8 +2,8 @@
 id: python_sdk.md
 title: 'Prompt: Milvus Python SDK'
 summary: >-
-  Правила написания правильного кода Milvus на Python с помощью MilvusClient для
-  помощников по кодированию ИИ.
+  Правила написания корректного кода Milvus на Python с помощью MilvusClient для
+  помощников ИИ по кодированию.
 ---
 <h2 id="How-to-use-this-prompt" class="common-anchor-header">Как использовать эту подсказку<button data-href="#How-to-use-this-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Скопируйте</strong> полную подсказку из раздела <a href="#full-prompt">Полная подсказка</a> ниже.</li>
-<li><strong>Сохраните</strong> его в том месте, которое ожидает ваш инструмент ИИ - подробности размещения см. в <a href="/docs/ru/ai_prompts_landing.md">таблице окружения</a>.</li>
+<li><strong>Сохраните</strong> его в том месте, которое ожидает ваш инструмент ИИ - подробности размещения см. в <a href="/docs/ru/milvus_for_agents.md">таблице окружения</a>.</li>
 <li>Ваш помощник по искусственному интеллекту будет автоматически применять эти правила при генерации или проверке кода Milvus.</li>
 </ol>
 <p>Для пользователей <strong>Cursor</strong>: скопируйте подсказку из раздела " <a href="#full-prompt">Полная подсказка"</a> и сохраните ее в разделе <code translate="no">.cursor/rules/</code> в своем проекте.</p>
-<p>Правила написания корректного кода Milvus на Python с использованием интерфейса MilvusClient, включая миграцию ORM, шаблоны соединений и общие операции. Скопируйте приведенный ниже полный текст подсказки в свой инструмент искусственного интеллекта, чтобы применять эти правила автоматически. Обзор всех подсказок см. в разделе <a href="/docs/ru/ai_prompts_landing.md">Подсказки AI</a>.</p>
+<p>Правила написания корректного кода Milvus на Python с использованием интерфейса MilvusClient, включая миграцию ORM, шаблоны соединений и общие операции. Скопируйте приведенный ниже полный текст подсказки в свой инструмент искусственного интеллекта, чтобы применять эти правила автоматически. Обзор всех подсказок см. в разделе <a href="/docs/ru/milvus_for_agents.md">Подсказки AI</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Полная подсказка<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -94,7 +94,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>单元逻辑操作</td><td>UnaryLogicalOp 指的是一元逻辑操作符 "not"。</td></tr>
 <tr><td>二元逻辑运算符</td><td>对两个操作符执行操作的二元逻辑操作符。在有两个或多个操作数的复杂表达式中，运算顺序取决于优先级规则。</td></tr>
 <tr><td>算术运算符</td><td>ArithmeticOp 即算术操作符，对操作数执行加法和减法等数学操作。</td></tr>
-<tr><td>单值运算符</td><td>UnaryArithOp 是一种算术运算符，可对单个操作数执行操作。负的 UnaryArithOp 可以将正表达式变为负表达式，或者反过来。</td></tr>
+<tr><td>单值运算符</td><td>UnaryArithOp 即算术运算符，对单一操作数执行操作。负的 UnaryArithOp 可以将正表达式变为负表达式，也可以反过来。</td></tr>
 <tr><td>二进制算术运算</td><td>BinaryArithOp 即二进制操作符，对两个操作数进行操作。在包含两个或多个操作数的复杂表达式中，运算顺序取决于优先级规则。</td></tr>
 <tr><td>CmpOp</td><td>CmpOp 是对两个操作数进行操作的关系运算符。</td></tr>
 <tr><td>CmpOpRestricted</td><td>CmpOpRestricted 仅限于 "小于 "和 "等于"。</td></tr>

@@ -1376,7 +1376,7 @@ searchResults = searchResp.getSearchResults();
       </svg>
     </button></h2><p>عند العمل مع حقول JSON، يمكنك إما استخدام حقول JSON كمرشحات أو بعض مفاتيحها المحددة.</p>
 <div class="admonition note">
-<p><b>الملاحظات</b></p>
+<p><b>ملاحظات</b></p>
 <ul>
 <li>يقوم Milvus بتخزين قيم السلسلة في حقل JSON كما هي دون إجراء الهروب الدلالي أو التحويل. </li>
 </ul>
@@ -1411,7 +1411,7 @@ searchResults = searchResp.getSearchResults();
 <tr><td><strong>&lt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt; 3'</code></td><td>يتم تقييم هذا التعبير إلى صواب إذا كانت قيمة <code translate="no">json_field[&quot;A&quot;]</code> أقل من <code translate="no">3</code>.</td></tr>
 <tr><td><strong>&gt;</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1'</code></td><td>يتم تقييم هذا التعبير إلى صواب إذا كانت قيمة <code translate="no">json_field[&quot;A&quot;]</code> أكبر من <code translate="no">1</code>.</td></tr>
 <tr><td><strong>==</strong></td><td><code translate="no">'json_field[&quot;A&quot;] == 1'</code></td><td>يتم تقييم هذا التعبير إلى صواب إذا كانت قيمة <code translate="no">json_field[&quot;A&quot;]</code> تساوي <code translate="no">1</code>.</td></tr>
-<tr><td><strong>!=</strong></td><td><code translate="no">'json_field[&quot;A&quot;][0]' != &quot;abc&quot;'</code></td><td>يتم تقييم هذا التعبير على أنه صواب إذا كان<br/> - <code translate="no">json_field</code> لا يحتوي على مفتاح اسمه <code translate="no">A</code>.<br/> - <code translate="no">json_field</code> لديه مفتاح اسمه <code translate="no">A</code> ولكن <code translate="no">json_field[&quot;A&quot;]</code> ليس مصفوفة.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> عبارة عن مصفوفة فارغة.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> مصفوفة لكن العنصر الأول ليس <code translate="no">abc</code>.<br/></td></tr>
+<tr><td><strong>!=</strong></td><td><code translate="no">'json_field[&quot;A&quot;][0]' != &quot;abc&quot;'</code></td><td>يتم تقييم هذا التعبير على أنه صواب إذا كان<br/> - <code translate="no">json_field</code> لا يحتوي على مفتاح اسمه <code translate="no">A</code>.<br/> - <code translate="no">json_field</code> لديه مفتاح اسمه <code translate="no">A</code> ولكن <code translate="no">json_field[&quot;A&quot;]</code> ليس مصفوفة.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> عبارة عن مصفوفة فارغة.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> مصفوفة ولكن العنصر الأول ليس <code translate="no">abc</code>.<br/></td></tr>
 <tr><td><strong>&lt;=</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &lt;= 5'</code></td><td>يتم تقييم هذا التعبير على أنه صحيح إذا كانت قيمة <code translate="no">json_field[&quot;A&quot;]</code> أقل من أو تساوي <code translate="no">5</code>.</td></tr>
 <tr><td><strong>&gt;=</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt;= 1'</code></td><td>يتم تقييم هذا التعبير إلى صواب إذا كانت قيمة <code translate="no">json_field[&quot;A&quot;]</code> أكبر من أو تساوي <code translate="no">1</code>.</td></tr>
 <tr><td><strong>لا</strong></td><td><code translate="no">'not json_field[&quot;A&quot;] == 1'</code></td><td>يتم تقييم هذا التعبير على أنه صواب إذا لم يكن<br/> - <code translate="no">json_field</code> لا يحتوي على مفتاح اسمه <code translate="no">A</code>.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> لا يساوي <code translate="no">1</code>.<br/></td></tr>

@@ -772,7 +772,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     skip_load_dynamic_field=<span class="hljs-literal">True</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Observe que apenas os campos listados em <code translate="no">load_fields</code> podem ser usados como condições de filtragem e campos de saída em pesquisas e consultas. Deve incluir sempre a chave primária na lista. Os nomes de campo excluídos do carregamento não estarão disponíveis para filtragem ou saída.</p>
+<p>Observe que apenas os campos listados em <code translate="no">load_fields</code> podem ser usados como condições de filtragem e campos de saída em pesquisas e consultas. Você deve sempre incluir a chave primária na lista. Os nomes de campo excluídos do carregamento não estarão disponíveis para filtragem ou saída.</p>
 <p>Pode utilizar <code translate="no">skip_load_dynamic_field=True</code> para saltar o carregamento do campo dinâmico. O Milvus trata o campo dinâmico como um único campo, portanto todas as chaves no campo dinâmico serão incluídas ou excluídas juntas.</p>
 <h3 id="Release-Partitions" class="common-anchor-header">Liberar partições<button data-href="#Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"

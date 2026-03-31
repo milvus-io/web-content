@@ -51,7 +51,7 @@ tokens = analyzer(corpus[<span class="hljs-number">0</span>])
 <p>期待される出力は以下のようなものである：</p>
 <pre><code translate="no" class="language-python">tokens: [<span class="hljs-string">&#x27;artifici&#x27;</span>, <span class="hljs-string">&#x27;intellig&#x27;</span>, <span class="hljs-string">&#x27;found&#x27;</span>, <span class="hljs-string">&#x27;academ&#x27;</span>, <span class="hljs-string">&#x27;disciplin&#x27;</span>, <span class="hljs-string">&#x27;1956&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>BM25アルゴリズムは、<strong>「artifici」、「</strong> <strong>intellig」、</strong>「<strong>academ」の</strong>ような英語のトークンで示したように、組み込みのアナライザを使用して、まずテキストをトークンに分割して処理します。次に、これらのトークンの統計を収集し、その頻度と文書全体の分布を評価する。BM25のコアは、各トークンの重要度に基づいて関連性スコアを計算し、より稀なトークンはより高いスコアを得る。この簡潔な処理により、クエリとの関連性によって文書を効果的にランク付けすることができる。</p>
+<p>BM25アルゴリズムは、<strong>「artifici」、「</strong> <strong>intellig」、</strong>「<strong>academ」の</strong>ような英語のトークンで示したように、組み込みのアナライザを使用して、まずテキストをトークンに分割して処理します。次に、これらのトークンの統計を収集し、その頻度と文書全体の分布を評価する。BM25のコアは各トークンの重要度に基づいて関連性スコアを計算し、より稀なトークンはより高いスコアを得る。この簡潔な処理により、クエリとの関連性によって文書を効果的にランク付けすることができる。</p>
 <p>コーパスの統計情報を収集するには、<strong>fit()</strong>メソッドを使用する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the analyzer to instantiate the BM25EmbeddingFunction</span>
 bm25_ef = BM25EmbeddingFunction(analyzer)
@@ -76,7 +76,7 @@ docs_embeddings = bm25_ef.encode_documents(docs)
 <span class="hljs-comment"># Since the output embeddings are in a 2D csr_array format, we convert them to a list for easier manipulation.</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, bm25_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>期待される出力は以下のようなものです：</p>
+<p>期待される出力は次のようなものです：</p>
 <pre><code translate="no" class="language-python">Embeddings:   (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)        <span class="hljs-number">1.0208816705336425</span>
   (<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)        <span class="hljs-number">1.0208816705336425</span>
   (<span class="hljs-number">0</span>, <span class="hljs-number">3</span>)        <span class="hljs-number">1.0208816705336425</span>

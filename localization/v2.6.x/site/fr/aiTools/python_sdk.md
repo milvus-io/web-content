@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Copiez</strong> l'invite complète à partir de la section <a href="#full-prompt">Invite complète</a> ci-dessous.</li>
-<li><strong>Enregistrez-la</strong> à l'emplacement prévu par votre outil d'IA - voir le <a href="/docs/fr/ai_prompts_landing.md">tableau d'environnement</a> pour plus de détails sur l'emplacement.</li>
+<li><strong>Enregistrez-la</strong> à l'emplacement prévu par votre outil d'IA - voir le <a href="/docs/fr/milvus_for_agents.md">tableau d'environnement</a> pour les détails de placement.</li>
 <li>Votre assistant IA appliquera automatiquement ces règles lors de la génération ou de la révision du code Milvus.</li>
 </ol>
 <p>Pour les utilisateurs de <strong>Cursor</strong>: copiez l'invite de la section Invite <a href="#full-prompt">complète</a> et enregistrez-la sous <code translate="no">.cursor/rules/</code> dans votre projet.</p>
-<p>Règles d'écriture d'un code Milvus Python correct à l'aide de l'interface MilvusClient, y compris la migration ORM, les modèles de connexion et les opérations courantes. Copiez l'invite complète ci-dessous dans votre outil d'IA pour appliquer ces règles automatiquement. Pour une vue d'ensemble de toutes les invites, voir <a href="/docs/fr/ai_prompts_landing.md">Invites AI</a>.</p>
+<p>Règles d'écriture d'un code Milvus Python correct à l'aide de l'interface MilvusClient, y compris la migration ORM, les modèles de connexion et les opérations courantes. Copiez l'invite complète ci-dessous dans votre outil d'IA pour appliquer ces règles automatiquement. Pour une vue d'ensemble de toutes les invites, voir <a href="/docs/fr/milvus_for_agents.md">Invites AI</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Invite complète<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

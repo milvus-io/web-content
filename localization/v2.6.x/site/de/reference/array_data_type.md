@@ -1125,7 +1125,7 @@ System.out.println(queryResp.getQueryResults());
 <li><p>Die Elemente in einem ARRAY-Feld sollten denselben Datentyp haben, der unter <code translate="no">element_type</code> angegeben ist. Jeder gültige Datentyp, der für skalare Felder in Milvus verfügbar ist, kann als <code translate="no">element_type</code> verwendet werden. Eine Liste der unterstützten Datentypen finden Sie unter <a href="https://milvus.io/docs/schema.md#Supported-data-types">Unterstützte Datentypen</a>.</p></li>
 <li><p>Die Anzahl der Elemente in einem ARRAY-Feld sollte kleiner oder gleich der maximalen Kapazität des Array-Feldes sein, die unter <code translate="no">max_capacity</code> angegeben ist.</p></li>
 </ul>
-<h2 id="Reference-on-array-filters" class="common-anchor-header">Hinweis auf Array-Filter<button data-href="#Reference-on-array-filters" class="anchor-icon" translate="no">
+<h2 id="Reference-on-array-filters" class="common-anchor-header">Referenz zu Array-Filtern<button data-href="#Reference-on-array-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

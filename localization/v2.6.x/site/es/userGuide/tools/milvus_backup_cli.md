@@ -114,7 +114,7 @@ workspace ├── milvus-backup └── configs └── backup.yaml</pre>
 <p>Ejecute el siguiente comando para crear una copia de seguridad.</p>
 <pre><code translate="no" class="language-shell">./milvus-backup create -n &lt;backup_name&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Una vez ejecutado el comando, puede comprobar los archivos de copia de seguridad en el cubo especificado en la configuración de Minio. Concretamente, puede descargarlos mediante la <strong>consola</strong> de <strong>Minio</strong> o el cliente <strong>mc</strong>.</p>
+<p>Una vez ejecutado el comando, puede comprobar los archivos de copia de seguridad en el cubo especificado en la configuración de Minio. En concreto, puede descargarlos mediante la <strong>consola</strong> de <strong>Minio</strong> o el cliente <strong>mc</strong>.</p>
 <p>Para descargarlos desde <a href="https://min.io/docs/minio/kubernetes/upstream/administration/minio-console.html">la</a> Consola de Minio, inicie sesión en la Consola de Minio, localice el cubo especificado en <code translate="no">minio.address</code>, seleccione los archivos del cubo y haga clic en <strong>Descargar</strong> para descargarlos.</p>
 <p>Si prefiere <a href="https://min.io/docs/minio/linux/reference/minio-mc.html#mc-install">el cliente mc</a>, haga lo siguiente:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">configure a Minio host</span>
@@ -147,7 +147,7 @@ mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <pre><code translate="no" class="language-shell">./milvus-backup restore -n my_backup -s _recover
 <button class="copy-code-btn"></button></code></pre>
 <p>La bandera <code translate="no">-s</code> permite establecer un sufijo para la nueva colección que se va a crear. El comando anterior creará una nueva colección llamada <strong>hello_milvus_recover</strong> en su instancia de Milvus.</p>
-<p>Si prefiere restaurar la colección respaldada sin cambiar su nombre, elimine la colección antes de restaurarla desde la copia de seguridad. Ahora puede limpiar los datos generados en <a href="#Prepare-data">Prepare data</a> ejecutando el siguiente comando.</p>
+<p>Si prefiere restaurar la colección respaldada sin cambiar su nombre, elimine la colección antes de restaurarla a partir de la copia de seguridad. Ahora puede limpiar los datos generados en <a href="#Prepare-data">Prepare data</a> ejecutando el siguiente comando.</p>
 <pre><code translate="no" class="language-shell">python example/clean_data.py
 <button class="copy-code-btn"></button></code></pre>
 <p>A continuación, ejecute el siguiente comando para restaurar los datos desde la copia de seguridad.</p>

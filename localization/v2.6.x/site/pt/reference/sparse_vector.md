@@ -19,7 +19,7 @@ title: Vetor esparso
         ></path>
       </svg>
     </button></h1><p>Os vectores esparsos representam palavras ou frases utilizando a incorporação de vectores em que a maioria dos elementos é zero, sendo que apenas um elemento diferente de zero indica a presença de uma palavra específica. Os modelos de vectores esparsos, como o <a href="https://arxiv.org/abs/2109.10086">SPLADEv2</a>, superam os modelos densos na pesquisa de conhecimentos fora do domínio, na consciência das palavras-chave e na interpretabilidade. São particularmente úteis na recuperação de informação, no processamento de linguagem natural e nos sistemas de recomendação, em que a combinação de vectores esparsos para a recuperação com um modelo grande para a classificação pode melhorar significativamente os resultados da recuperação.</p>
-<p>No Milvus, a utilização de vectores esparsos segue um fluxo de trabalho semelhante ao dos vectores densos. Envolve a criação de uma coleção com uma coluna de vectores esparsos, a inserção de dados, a criação de um índice e a realização de pesquisas de semelhança e consultas escalares.</p>
+<p>No Milvus, a utilização de vectores esparsos segue um fluxo de trabalho semelhante ao dos vectores densos. Envolve a criação de uma coleção com uma coluna de vetor esparso, a inserção de dados, a criação de um índice e a realização de pesquisas de semelhança e consultas escalares.</p>
 <p>Neste tutorial, você aprenderá a:</p>
 <ul>
 <li>Preparar embeddings de vetores esparsos;</li>
@@ -215,7 +215,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">params.drop_ratio_build</code>: O parâmetro de índice utilizado especificamente para vectores esparsos. Controla a proporção de valores de vectores pequenos que são excluídos durante o processo de indexação. Este parâmetro permite o ajuste fino da relação entre eficiência e precisão ao ignorar pequenos valores durante a construção do índice. Por exemplo, se <code translate="no">drop_ratio_build = 0.3</code>, durante a construção do índice, todos os valores de todos os vectores esparsos são reunidos e ordenados. Os 30% mais pequenos destes valores não são incluídos no índice, reduzindo assim a carga de trabalho computacional durante a pesquisa.</p></li>
 </ul>
 <p>Para obter mais informações, consulte <a href="/docs/pt/index.md">Índice na memória</a>.</p>
-<h2 id="Perform-ANN-search" class="common-anchor-header">Executar pesquisa ANN<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
+<h2 id="Perform-ANN-search" class="common-anchor-header">Executar a pesquisa ANN<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

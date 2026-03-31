@@ -60,8 +60,8 @@ title: Milvus-Sicherung
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Aufbau von Milvus Backup</span> </span></p>
-<p>Milvus Backup ermöglicht die Sicherung und Wiederherstellung von Metadaten, Segmenten und Daten über Milvus-Instanzen hinweg. Es bietet Northbound-Schnittstellen, wie CLI, API und gRPC-basiertes Go-Modul, für eine flexible Manipulation der Sicherungs- und Wiederherstellungsprozesse.</p>
-<p>Milvus Backup liest Sammlungsmetadaten und -segmente aus der Milvus-Quellinstanz, um ein Backup zu erstellen. Anschließend kopiert es Sammlungsdaten aus dem Stammverzeichnis der Milvus-Quellinstanz und speichert die kopierten Daten im Stammverzeichnis der Sicherung.</p>
+<p>Milvus Backup ermöglicht die Sicherung und Wiederherstellung von Metadaten, Segmenten und Daten über Milvus-Instanzen hinweg. Es bietet Northbound-Schnittstellen, wie CLI, API und gRPC-basiertes Go-Modul, für die flexible Manipulation der Sicherungs- und Wiederherstellungsprozesse.</p>
+<p>Milvus Backup liest Sammlungsmetadaten und -segmente aus der Milvus-Quellinstanz, um ein Backup zu erstellen. Dann kopiert es Sammlungsdaten aus dem Stammverzeichnis der Milvus-Quellinstanz und speichert die kopierten Daten im Stammverzeichnis der Sicherung.</p>
 <p>Um von einem Backup wiederherzustellen, erstellt Milvus Backup eine neue Sammlung in der Ziel-Milvus-Instanz, basierend auf den Metadaten und Segmentinformationen der Sammlung im Backup. Anschließend kopiert es die Sicherungsdaten aus dem Stammverzeichnis der Sicherung in das Stammverzeichnis der Zielinstanz.</p>
 <h2 id="Latest-release" class="common-anchor-header">Neueste Version<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"

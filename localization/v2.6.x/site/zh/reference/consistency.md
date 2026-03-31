@@ -73,7 +73,7 @@ title: 一致性
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>强一致性</span> </span></p>
-<p>根据 PACELC 定理，如果将一致性级别设置为强，延迟会增加。因此，我们建议在功能测试时选择强一致性，以确保测试结果的准确性。强一致性也最适合那些以牺牲搜索速度为代价、对数据一致性有严格要求的应用。处理订单付款和账单的在线财务系统就是一个例子。</p>
+<p>根据 PACELC 定理，如果将一致性级别设置为强，延迟会增加。因此，我们建议在功能测试时选择强一致性，以确保测试结果的准确性。强一致性也最适合那些以牺牲搜索速度为代价、对数据一致性有严格要求的应用。例如，处理订单付款和账单的在线财务系统。</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">有界滞后<button data-href="#Bounded-staleness" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +94,7 @@ title: 一致性
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>有界滞后一致性</span> </span></p>
-<p>有界滞后性适用于需要控制搜索延迟并能接受零星数据不可见的情况。例如，在视频推荐引擎等推荐系统中，数据不可见有时对整体召回率影响较小，但却能显著提升推荐系统的性能。</p>
+<p>有界滞后性适用于需要控制搜索延迟并能接受零星数据不可见的情况。例如，在视频推荐引擎等推荐系统中，数据不可见有时对总体召回率影响较小，但却能显著提升推荐系统的性能。</p>
 <h3 id="Session" class="common-anchor-header">会话<button data-href="#Session" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

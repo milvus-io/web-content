@@ -109,7 +109,7 @@ title: Gérer les collections
 <p>Pour une mise en place rapide, utilisez la méthode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> de la classe <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> pour créer une collection avec le nom et la dimension spécifiés.</p>
 </div>
 <div class="language-go">
-<p>Pour une installation rapide, utilisez la méthode <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/CreateCollection.md"><code translate="no">CreateCollection()</code></a> sur une instance de l'interface <code translate="no">Client</code> en utilisant la méthode <a href="https://milvus.io/api-reference/go/v2.4.x/Connections/NewClient.md"><code translate="no">NewClient()</code></a> pour créer une collection avec le nom et la dimension spécifiés.</p>
+<p>Pour une mise en place rapide, utilisez la méthode <a href="https://milvus.io/api-reference/go/v2.4.x/Collection/CreateCollection.md"><code translate="no">CreateCollection()</code></a> sur une instance de l'interface <code translate="no">Client</code> en utilisant la méthode <a href="https://milvus.io/api-reference/go/v2.4.x/Connections/NewClient.md"><code translate="no">NewClient()</code></a> pour créer une collection avec le nom et la dimension spécifiés.</p>
 </div>
 <div class="language-shell">
 <p>Pour une configuration rapide, utilisez le point de terminaison <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> pour créer une collection avec le nom et la dimension spécifiés.</p>
@@ -416,7 +416,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>Détermine si Milvus enregistre les valeurs des champs non définis dans un champ dynamique si les données insérées dans la collection cible comprennent des champs qui ne sont pas définis dans le schéma de la collection.<br/>Si ce paramètre a la valeur <strong>True</strong>, Milvus crée un champ appelé <strong>$meta</strong> pour stocker tous les champs non définis et leurs valeurs à partir des données insérées.</td>
+      <td>Détermine si Milvus enregistre les valeurs des champs non définis dans un champ dynamique si les données insérées dans la collection cible comprennent des champs qui ne sont pas définis dans le schéma de la collection.<br/>Lorsque cette valeur est définie sur <strong>True</strong>, Milvus crée un champ appelé <strong>$meta</strong> pour stocker tous les champs non définis et leurs valeurs à partir des données insérées.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
@@ -710,7 +710,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>Nom de l'algorithme utilisé pour organiser les données dans le champ spécifique. Pour les algorithmes applicables, voir <a href="https://milvus.io/docs/index.md">Index en mémoire</a> et <a href="https://milvus.io/docs/disk_index.md">Index sur disque</a>.</td>
+      <td>Le nom de l'algorithme utilisé pour organiser les données dans le champ spécifique. Pour les algorithmes applicables, voir <a href="https://milvus.io/docs/index.md">Index en mémoire</a> et <a href="https://milvus.io/docs/disk_index.md">Index sur disque</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>

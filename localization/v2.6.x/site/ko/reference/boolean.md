@@ -33,7 +33,7 @@ title: 스칼라 필터링 규칙
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>술어 표현식은 부울 값을 출력합니다. Milvus는 술어로 검색하여 스칼라 필터링을 수행합니다. 술어 표현식은 평가될 때 TRUE 또는 FALSE를 반환합니다. 술어 표현식 사용에 대한 지침은 <a href="/api-reference/pymilvus/v2.4.x/About.md">Python SDK API 참조를 참조</a> 하세요.</p>
+    </button></h2><p>술어 표현식은 부울 값을 출력합니다. Milvus는 술어로 검색하여 스칼라 필터링을 수행합니다. 술어 표현식이 평가되면 TRUE 또는 FALSE를 반환합니다. 술어 표현식 사용에 대한 지침은 <a href="/api-reference/pymilvus/v2.4.x/About.md">Python SDK API 참조를 참조</a> 하세요.</p>
 <p><a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a> 문법 규칙은 부울 표현식 규칙을 설명합니다:</p>
 <pre><code translate="no">Expr = LogicalExpr | NIL
 LogicalExpr = LogicalExpr BinaryLogicalOp LogicalExpr 
@@ -103,7 +103,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>TermExpr</td><td>TermExpr은 식별자 값이 ConstantArray에 나타나는지 여부를 확인하는 데 사용됩니다. TermExpr은 "in"으로 표시됩니다.</td></tr>
 <tr><td>CompareExpr</td><td>비교 표현식, 즉 비교 표현식은 두 개의 식별자에 대한 관계 연산, 하나의 식별자와 하나의 ConstantExpr에 대한 관계 연산, 또는 두 개의 ConstantExpr과 하나의 식별자에 대한 삼항 연산이 될 수 있습니다.</td></tr>
 <tr><td>SingleExpr</td><td>단일 표현식, 즉 단일 표현식은 TermExpr 또는 CompareExpr일 수 있습니다.</td></tr>
-<tr><td>LogicalExpr</td><td>LogicalExpr은 두 개의 LogicalExpr에 대한 BinaryLogicalOp이거나, 단일 LogicalExpr에 대한 UnaryLogicalOp이거나, 괄호 안에 그룹화된 LogicalExpr 또는 SingleExpr일 수 있습니다. LogicalExpr은 재귀적으로 정의됩니다.</td></tr>
+<tr><td>LogicalExpr</td><td>LogicalExpr은 두 개의 LogicalExpr에 대한 BinaryLogicalOp이거나 단일 LogicalExpr에 대한 UnaryLogicalOp이거나 괄호 안에 그룹화된 LogicalExpr 또는 SingleExpr일 수 있습니다. LogicalExpr은 재귀적으로 정의됩니다.</td></tr>
 <tr><td>Expr</td><td>식을 의미하는 약어인 Expr은 LogicalExpr 또는 NIL일 수 있습니다.</td></tr>
 <tr><td>MatchOp</td><td>MatchOp, 즉 일치 연산자는 문자열을 문자열 상수 또는 문자열 접두사, 접미사 또는 접미사 상수와 비교합니다.</td></tr>
 <tr><td>JsonArrayOp</td><td>JsonOp, 즉 JSON 연산자는 지정된 식별자에 지정된 요소가 포함되어 있는지 확인합니다.</td></tr>

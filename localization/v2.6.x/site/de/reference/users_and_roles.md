@@ -57,7 +57,7 @@ title: 'Benutzer, Privilegien und Rollen'
 <li>Wenn der Objekttyp <code translate="no">User</code> ist, ist der Objektname der Name eines Datenbankbenutzers.</li>
 </ul></li>
 <li><p><strong>Benutzer</strong>: eine Person oder eine Anwendung, die mit Milvus interagiert, bestehend aus einem Benutzernamen und einem entsprechenden Passwort.</p></li>
-<li><p><strong>Privileg</strong>: definiert die Aktionen, die durchgeführt werden können und die Ressourcen, auf die zugegriffen werden kann. Privilegien werden nicht direkt an Benutzer vergeben, sondern sind Rollen zugewiesen.</p></li>
+<li><p><strong>Privileg</strong>: definiert die Aktionen, die durchgeführt werden können und die Ressourcen, auf die zugegriffen werden kann. Privilegien werden nicht direkt an Benutzer vergeben, sondern sind Rollen zugeordnet.</p></li>
 <li><p><strong>Rolle</strong>: Definiert die Berechtigungen, die ein Benutzer für bestimmte Objekte hat. Sobald eine Rolle an einen Benutzer gebunden ist, erbt der Benutzer alle Rechte, die dieser Rolle gewährt werden.</p></li>
 </ul>
 <h2 id="Example-Granting-privileges" class="common-anchor-header">Beispiel: Erteilen von Privilegien<button data-href="#Example-Granting-privileges" class="anchor-icon" translate="no">

@@ -35,7 +35,7 @@ title: 一致性
         ></path>
       </svg>
     </button></h2><p>分佈式資料庫的一致性特指確保每個節點或副本在特定時間寫入或讀取資料時擁有相同資料視圖的屬性。</p>
-<p>Milvus 支援四個一致性層級：強、有界線僵化、會話和最終。Milvus 的預設一致性等級是有界的僵化。  您可以在進行<a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a>、<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋或</a> <a href="/docs/zh-hant/get-and-scalar-query.md">查詢</a>時，輕鬆調整一致性層級，使其最適合您的應用程式。</p>
+<p>Milvus 支援四個一致性層級：強、有界線僵化、會話和最終。Milvus 的預設一致性等級是有界的僵化。  在進行<a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a>、<a href="/docs/zh-hant/multi-vector-search.md">混合搜尋或</a> <a href="/docs/zh-hant/get-and-scalar-query.md">查詢</a>時，您可以輕鬆調整一致性層級，使其最適合您的應用程式。</p>
 <h2 id="Consistency-levels" class="common-anchor-header">一致性等級<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,7 +68,7 @@ title: 一致性
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>強是最高和最嚴格的一致性等級。它確保使用者可以讀取最新版本的資料。</p>
+    </button></h3><p>強是最高和最嚴格的一致性等級。它確保使用者能讀取最新版本的資料。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />

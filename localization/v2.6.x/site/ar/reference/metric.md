@@ -179,7 +179,7 @@ title: مقاييس التشابه
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>مسافة جاكارد</span> </span></p>
-<h3 id="Hamming-distance" class="common-anchor-header">مسافة هامينغ<button data-href="#Hamming-distance" class="anchor-icon" translate="no">
+<h3 id="Hamming-distance" class="common-anchor-header">مسافة هامينج<button data-href="#Hamming-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

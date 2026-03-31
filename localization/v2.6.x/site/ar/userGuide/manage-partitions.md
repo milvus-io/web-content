@@ -422,7 +422,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><div class="language-python">
-<p>للتحقق من حالة تحميل مجموعة وأقسامها، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a>.</p>
+<p>للتحقق من حالة التحميل لمجموعة وأقسامها، استخدم <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>للتحقق من حالة تحميل مجموعة وأقسامها، استخدم . <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a>.</p>

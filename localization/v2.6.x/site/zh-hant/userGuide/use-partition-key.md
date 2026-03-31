@@ -254,7 +254,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦集合的欄位被用作分區鍵，Milvus 會建立指定數量的分區，並代您管理它們。因此，您無法再操作此集合中的分區。</p>
+    </button></h2><p>一旦使用集合的欄位作為分區鍵，Milvus 會建立指定數量的分區，並代您管理它們。因此，您無法再操作此集合中的分區。</p>
 <p>下面的片段演示了當一個集合的一個欄位被用作分區鍵後該集合中的 64 個分區。</p>
 <h2 id="Insert-data" class="common-anchor-header">插入資料<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -375,7 +375,7 @@ System.out.println(data.get(<span class="hljs-number">0</span>));
         ></path>
       </svg>
     </button></h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法將資料插入集合中。</p>
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法將資料插入集合。</p>
 </div>
 <div class="language-java">
 <p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>方法將資料插入集合。</p>

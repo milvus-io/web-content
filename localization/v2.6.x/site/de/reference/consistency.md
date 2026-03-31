@@ -73,7 +73,7 @@ title: Konsistenz
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Strong.png" alt="Strong consistency" class="doc-image" id="strong-consistency" />
    </span> <span class="img-wrapper"> <span>Starke Konsistenz</span> </span></p>
-<p>Das PACELC-Theorem besagt, dass sich die Latenzzeit erhöht, wenn die Konsistenzstufe auf Strong eingestellt wird. Daher empfehlen wir, bei Funktionstests starke Konsistenz zu wählen, um die Genauigkeit der Testergebnisse zu gewährleisten. Starke Konsistenz eignet sich auch am besten für Anwendungen, die strenge Anforderungen an die Datenkonsistenz auf Kosten der Suchgeschwindigkeit stellen. Ein Beispiel hierfür ist ein Online-Finanzsystem, das sich mit der Bezahlung von Bestellungen und der Rechnungsstellung befasst.</p>
+<p>Das PACELC-Theorem besagt, dass sich die Latenzzeit erhöht, wenn die Konsistenzstufe auf Strong gesetzt wird. Daher empfehlen wir, bei Funktionstests starke Konsistenz zu wählen, um die Genauigkeit der Testergebnisse zu gewährleisten. Starke Konsistenz eignet sich auch am besten für Anwendungen, die strenge Anforderungen an die Datenkonsistenz auf Kosten der Suchgeschwindigkeit stellen. Ein Beispiel hierfür ist ein Online-Finanzsystem, das sich mit der Bezahlung von Bestellungen und der Rechnungsstellung befasst.</p>
 <h3 id="Bounded-staleness" class="common-anchor-header">Begrenzte Unbeständigkeit<button data-href="#Bounded-staleness" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,7 +94,7 @@ title: Konsistenz
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/Consistency_Bounded.png" alt="Bounded staleness consistency" class="doc-image" id="bounded-staleness-consistency" />
    </span> <span class="img-wrapper"> <span>Konsistenz von Bounded Staleness</span> </span></p>
-<p>Bounded Staleness eignet sich für Szenarien, in denen die Suchlatenz kontrolliert werden muss und sporadische Unsichtbarkeit der Daten akzeptiert werden kann. In Empfehlungssystemen wie Video-Empfehlungsmaschinen hat die Unsichtbarkeit von Daten manchmal nur geringe Auswirkungen auf die Gesamtauffindungsrate, kann aber die Leistung des Empfehlungssystems erheblich steigern.</p>
+<p>Bounded Staleness eignet sich für Szenarien, in denen die Suchlatenz kontrolliert werden muss und sporadische Unsichtbarkeit der Daten akzeptiert werden kann. In Empfehlungssystemen wie Videoempfehlungsmaschinen hat die Unsichtbarkeit von Daten manchmal nur geringe Auswirkungen auf die Gesamtauffindungsrate, kann aber die Leistung des Empfehlungssystems erheblich steigern.</p>
 <h3 id="Session" class="common-anchor-header">Sitzung<button data-href="#Session" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

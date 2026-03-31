@@ -147,7 +147,7 @@ summary: >-
 <tr><th>عنصر التكوين</th><th>الوصف</th><th>القيمة الافتراضية</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>تحديد ما إذا كان سيتم استخدام مفتاح التقسيم في المجموعات كمفتاح تجميع.<br>يشير تعيين هذا إلى <code translate="no">true</code> إلى استخدام مفتاح التقسيم كمفتاح تجميع.<br>يمكنك دائماً تجاوز هذا الإعداد في مجموعة من خلال تعيين مفتاح التجميع بشكل صريح.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>تحديد ما إذا كان سيتم استخدام مفتاح القسم في المجموعات كمفتاح تجميع.<br>يشير تعيين هذا إلى <code translate="no">true</code> إلى استخدام مفتاح التقسيم كمفتاح تجميع.<br>يمكنك دائماً تجاوز هذا الإعداد في مجموعة من خلال تعيين مفتاح التجميع بشكل صريح.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>

@@ -24,7 +24,7 @@ summary: MilvusでRAGパイプラインを構築するためのAIコーディン
 <li>AIアシスタントはMilvusコードを生成またはレビューする際に、これらのルールを自動的に適用します。</li>
 </ol>
 <p><strong>Cursorを</strong>お使いの場合: プロンプトを<a href="#full-prompt">Full prompt</a>セクションからコピーし、プロジェクトの<code translate="no">.cursor/rules/</code> 。</p>
-<p>インジェスト、チャンキング、エンベッディング、BM25によるハイブリッド検索、upsertによるドキュメント更新を含む、MilvusによるRAGパイプライン構築のためのエンドツーエンドのルール。以下のプロンプトをAIツールにコピーすると、これらのルールが自動的に適用されます。すべてのプロンプトの概要については、<a href="/docs/ja/ai_prompts_landing.md">AIプロンプトを</a>ご覧ください。</p>
+<p>インジェスト、チャンキング、エンベッディング、BM25によるハイブリッド検索、upsertによるドキュメント更新を含む、MilvusによるRAGパイプライン構築のためのエンドツーエンドのルール。以下のプロンプトをAIツールにコピーすると、これらのルールが自動的に適用されます。すべてのプロンプトの概要については、<a href="/docs/ja/milvus_for_agents.md">AIプロンプトを</a>ご覧ください。</p>
 <h2 id="Full-prompt" class="common-anchor-header">完全なプロンプト<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

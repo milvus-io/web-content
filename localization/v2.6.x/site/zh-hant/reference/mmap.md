@@ -1,6 +1,6 @@
 ---
 id: mmap.md
-summary: MMap 可在單一節點中提供更多資料。
+summary: MMap 可以在單一節點中提供更多資料。
 title: 支援 MMap 的資料儲存
 ---
 <h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">支援 MMap 的資料儲存<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
@@ -65,7 +65,7 @@ title: 支援 MMap 的資料儲存
 <p>在<code translate="no">2.4.10</code> 之後，配置<code translate="no">queryNode.mmap.mmapEnabled</code> 分成下面四個獨立的欄位，所有預設值都是<code translate="no">false</code> ：</p>
 <ul>
 <li><code translate="no">queryNode.mmap.vectorField</code>, 控制向量資料是否為 mmap；</li>
-<li><code translate="no">queryNode.mmap.vectorIndex</code>控制向量索引是否為 mmap；</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, 控制向量索引是否為 mmap；</li>
 <li><code translate="no">queryNode.mmap.scalarField</code>控制標量資料是否為 mmap；</li>
 <li><code translate="no">queryNode.mmap.scalarIndex</code>控制標量索引是否為 mmap；</li>
 </ul>
@@ -208,7 +208,7 @@ spec:
 <li><p><strong>集合層級和索引層級配置之間的關係是什麼？</strong></p>
 <p>集合層級和索引層級不是包含的關係，集合層級控制原始資料是否啟用 mmap，而索引層級只適用於向量索引。</p></li>
 <li><p><strong>有沒有任何適用於記憶體映射的推薦索引類型？</strong></p>
-<p>有，建議使用 HNSW 來啟用 mmap。我們之前測試過 HNSW、IVF_FLAT、IVF_PQ/SQ 系列的索引，IVF 系列索引的效能下降很嚴重，而 HNSW 索引開啟 mmap 後效能下降仍在預期之內。</p></li>
+<p>有，建議使用 HNSW 來啟用 mmap。我們之前測試過 HNSW、IVF_FLAT、IVF_PQ/SQ 系列索引，IVF 系列索引的效能下降很嚴重，而 HNSW 索引開啟 mmap 後效能下降仍在預期範圍內。</p></li>
 <li><p><strong>記憶體映射需要什麼樣的本機儲存空間？</strong></p>
 <p>高品質的磁碟可提升效能，NVMe 硬碟是首選。</p></li>
 <li><p><strong>標量資料可以進行記憶體映射嗎？</strong></p>
@@ -216,5 +216,5 @@ spec:
 <li><p><strong>不同層級的記憶體映射配置的優先順序如何決定？</strong></p>
 <p>在 Milvus 中，當記憶體映射配置在多個層級中明確定義時，索引層級和集合層級配置共享最高優先級，然後是群集層級配置。</p></li>
 <li><p><strong>如果我從 Milvus 2.3 升級，並配置了記憶體映射目錄路徑，會發生什麼？</strong></p>
-<p>如果您從 Milvus 2.3 升級，並已配置記憶體映射目錄路徑 (<code translate="no">mmapDirPath</code>)，您的配置將被保留，啟用記憶體映射的預設值 (<code translate="no">mmapEnabled</code>) 將為<code translate="no">true</code> 。遷移元資料以同步您現有記憶體映射檔案的設定是很重要的。如需詳細資訊，請參閱<a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">遷移元資料</a>。</p></li>
+<p>如果您從 Milvus 2.3 升級，並已配置記憶體映射目錄路徑 (<code translate="no">mmapDirPath</code>)，您的配置將被保留，而啟用記憶體映射的預設值 (<code translate="no">mmapEnabled</code>) 將為<code translate="no">true</code> 。遷移元資料以同步您現有記憶體映射檔案的設定是很重要的。如需詳細資訊，請參閱<a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">遷移元資料</a>。</p></li>
 </ul>

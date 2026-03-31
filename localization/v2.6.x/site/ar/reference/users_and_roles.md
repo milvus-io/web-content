@@ -193,7 +193,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>عالمي</td><td>TransferReplica</td><td>TransferReplica</td></tr>
 <tr><td>عالمي</td><td>إنشاء قاعدة بيانات</td><td>إنشاء قاعدة بيانات</td></tr>
 <tr><td>عالمي</td><td>إسقاط قاعدة البيانات</td><td>قاعدة بيانات منسدلة</td></tr>
-<tr><td>عالمي</td><td>قائمة قواعد البيانات</td><td>قواعد بيانات القوائم</td></tr>
+<tr><td>عالمي</td><td>قائمة قواعد البيانات</td><td>ListDatabases ListDatabases</td></tr>
 <tr><td>عالمي</td><td>إنشاء تعريفا</td><td>CreateAlias</td></tr>
 <tr><td>عالمي</td><td>إسقاط التعريفي</td><td>DropAlias</td></tr>
 <tr><td>عالمي</td><td>وصف التعريفي</td><td>وصف التعريفي</td></tr>

@@ -57,7 +57,7 @@ go build
         ></path>
       </svg>
     </button></h2><p>Laden Sie die <a href="https://raw.githubusercontent.com/zilliztech/milvus-backup/master/configs/backup.yaml">Beispielkonfigurationsdatei</a> herunter und passen Sie sie an Ihre Bedürfnisse an.</p>
-<p>Erstellen Sie dann einen Ordner neben der heruntergeladenen oder erstellten Milvus Backup-Binärdatei, benennen Sie den Ordner <code translate="no">configs</code> und legen Sie die Konfigurationsdatei in den Ordner <code translate="no">configs</code>.</p>
+<p>Erstellen Sie dann einen Ordner neben der heruntergeladenen oder erstellten Milvus Backup-Binärdatei, nennen Sie den Ordner <code translate="no">configs</code> und legen Sie die Konfigurationsdatei im Ordner <code translate="no">configs</code> ab.</p>
 <p>Ihre Ordnerstruktur sollte in etwa wie folgt aussehen:</p>
 <pre>
 workspace ├── milvus-backup └── configs └── backup.yaml</pre>

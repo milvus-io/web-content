@@ -20,7 +20,7 @@ title: BM25
         ></path>
       </svg>
     </button></h1><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25는</a> 정보 검색에서 주어진 검색어에 대한 문서의 관련성을 추정하는 데 사용되는 순위 기능입니다. 이 기능은 문서 길이 정규화와 용어 빈도 포화도를 통합하여 기본 용어 빈도 접근 방식을 개선합니다. BM25는 문서를 용어 중요도 점수의 벡터로 표현하여 희소 임베딩을 생성할 수 있으므로 희소 벡터 공간에서 효율적으로 검색하고 순위를 매길 수 있습니다.</p>
-<p>Milvus는 <strong>BM25EmbeddingFunction</strong> 클래스를 사용해 BM25 모델과 통합합니다. 이 클래스는 임베딩 계산을 처리하고 색인 및 검색을 위해 Milvus와 호환되는 형식으로 임베딩을 반환합니다. 이 프로세스의 핵심은 토큰화를 위한 분석기를 구축하는 것입니다.</p>
+<p>Milvus는 <strong>BM25EmbeddingFunction</strong> 클래스를 사용해 BM25 모델과 통합합니다. 이 클래스는 임베딩 계산을 처리하고 인덱싱 및 검색을 위해 Milvus와 호환되는 형식으로 반환합니다. 이 프로세스의 핵심은 토큰화를 위한 분석기를 구축하는 것입니다.</p>
 <p>이 기능을 사용하려면 필요한 종속성을 설치하세요:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

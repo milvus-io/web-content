@@ -763,7 +763,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSONフィールドにあるように、Milvusは配列に対する高度なフィルタリング演算子、すなわち、<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> も提供しています。演算子の詳細については、<a href="#reference-on-array-filters">配列フィルタのリファレンスを</a>参照してください。</p>
+    </button></h2><p>JSONフィールドと同様に、Milvusは配列に対する高度なフィルタリング演算子、すなわち、<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> も提供しています。演算子の詳細については、<a href="#reference-on-array-filters">配列フィルタのリファレンスを</a>参照してください。</p>
 <ul>
 <li><p><code translate="no">color_coord</code> 値に<code translate="no">10</code> を持つすべてのエンティティをフィルタリングします。</p>
 <p><div class="multipleCode">
@@ -1140,7 +1140,7 @@ System.out.println(queryResp.getQueryResults());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>配列フィールドを扱う場合、文字列値をダブルクォーテーション（""）またはシングルクォーテーション（''）で囲むことができます。ここで重要なことは、Milvusはセマンティックエスケープや変換を行わず、文字列値をそのまま配列フィールドに格納するということです。例えば、<strong>'a'b'、</strong> <strong>'a'b'、</strong> <strong>'a'b'、'a "b "</strong>はそのまま保存され、<strong>'a'b'</strong>、<strong>'a "b'</strong>は無効な値として扱われます。</p>
+    </button></h2><p>配列フィールドを扱う場合、文字列値をダブルクォーテーション（""）またはシングルクォーテーション（''）で囲むことができます。ここで重要なことは、Milvusはセマンティックエスケープや変換を行わず、文字列値をそのまま配列フィールドに格納するということです。例えば、<strong>'a "b'、</strong> <strong>'a'b'、</strong> <strong>'a'b'、'a "b'</strong>はそのまま保存され、<strong>'a'b'</strong>、<strong>'a "b'</strong>は無効な値として扱われます。</p>
 <p>2つの配列フィールド<code translate="no">int_array</code> と<code translate="no">var_array</code> が定義されているとする。以下の表は、<code translate="no">expr</code> で配列フィールドを検索する際に使用できる、サポートされているブーリアン式について説明したものです。</p>
 <table>
 <thead>

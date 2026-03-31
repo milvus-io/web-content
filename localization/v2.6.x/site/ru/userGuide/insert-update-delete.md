@@ -425,7 +425,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </ul>
 </div>
 <div class="language-python">
-<p>Чтобы вставить сущности, используйте <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> метод.</p>
+<p>Для апсерта сущностей используйте <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> метод.</p>
 </div>
 <div class="language-java">
 <p>Чтобы вставить сущности, используйте <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">upsert()</code></a> метод.</p>

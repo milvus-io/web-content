@@ -161,7 +161,7 @@ System.out.println(data.get(<span class="hljs-number">0</span>));
 <li><p>确保列表或数组中的所有值都是相同的数据类型。</p></li>
 <li><p>JSON 字段值中的任何嵌套字典都将被视为字符串。</p></li>
 <li><p>仅使用字母数字字符和下划线来命名 JSON 键，因为其他字符可能会导致过滤或搜索出现问题。</p></li>
-<li>目前，还不能为 JSON 字段编制索引，这可能会导致过滤耗时。不过，这一限制将在即将发布的版本中得到解决。</li>
+<li>目前还不能为 JSON 字段编制索引，这可能会导致过滤耗时。不过，这一限制将在即将发布的版本中得到解决。</li>
 </ul>
 </div>
 <h2 id="Define-JSON-field" class="common-anchor-header">定义 JSON 字段<button data-href="#Define-JSON-field" class="anchor-icon" translate="no">
@@ -187,7 +187,7 @@ System.out.println(data.get(<span class="hljs-number">0</span>));
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a>在 SDK 参考资料中。</p>
 </div>
 <div class="language-javascript">
-<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>SDK 参考资料中的参数。</p>
+<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1402,7 +1402,7 @@ searchResults = searchResp.getSearchResults();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下表假定名为<code translate="no">json_key</code> 的 JSON 字段的值有一个名为<code translate="no">A</code> 的键。在使用 JSON 字段键构建布尔表达式时，请将其用作参考。</p>
+    </button></h3><p>下表假定名为<code translate="no">json_key</code> 的 JSON 字段的值有一个名为<code translate="no">A</code> 的键。在使用 JSON 字段键构建布尔表达式时，请将其作为参考。</p>
 <table>
 <thead>
 <tr><th><strong>操作符</strong></th><th><strong>示例</strong></th><th><strong>备注</strong></th></tr>

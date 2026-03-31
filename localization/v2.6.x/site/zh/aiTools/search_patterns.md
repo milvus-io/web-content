@@ -20,11 +20,11 @@ summary: 人工智能编码助手在 Milvus 中实现搜索、混合搜索和全
       </svg>
     </button></h2><ol>
 <li>从下面的完整提示部分<strong>复制</strong> <a href="#full-prompt">完整提示</a>。</li>
-<li>将其<strong>保存</strong>到人工智能工具所需的位置--有关位置的详细信息，请参阅<a href="/docs/zh/ai_prompts_landing.md">环境表</a>。</li>
+<li>将其<strong>保存</strong>到人工智能工具所需的位置--有关位置的详细信息，请参阅<a href="/docs/zh/milvus_for_agents.md">环境表</a>。</li>
 <li>在生成或审核 Milvus 代码时，您的人工智能助手将自动应用这些规则。</li>
 </ol>
 <p><strong>Cursor</strong>用户：复制<a href="#full-prompt">完整</a>提示部分的提示，并将其保存在项目中的<code translate="no">.cursor/rules/</code> 下。</p>
-<p>在 Milvus 中实现相似性搜索、混合搜索、过滤搜索和全文搜索的规则，包括 AnnSearchRequest 约束和排名器的使用。将下面的完整提示复制到您的人工智能工具中，以自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/ai_prompts_landing.md">人工智能提示</a>。</p>
+<p>在 Milvus 中实现相似性搜索、混合搜索、过滤搜索和全文搜索的规则，包括 AnnSearchRequest 约束和排名器的使用。将下面的完整提示复制到您的人工智能工具中，以自动应用这些规则。有关所有提示的概述，请参阅<a href="/docs/zh/milvus_for_agents.md">人工智能提示</a>。</p>
 <h2 id="Full-prompt" class="common-anchor-header">完整提示<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

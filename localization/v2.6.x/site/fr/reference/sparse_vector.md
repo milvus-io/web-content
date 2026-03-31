@@ -208,7 +208,7 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <ul>
 <li><p><code translate="no">index_type</code>: Le type d'index à construire. Options possibles pour les vecteurs épars :</p>
 <ul>
-<li><p><code translate="no">SPARSE_INVERTED_INDEX</code>: Un index inversé qui associe chaque dimension à ses vecteurs non nuls, ce qui facilite l'accès direct aux données pertinentes lors des recherches. Idéal pour les ensembles de données éparses mais à haute dimension.</p></li>
+<li><p><code translate="no">SPARSE_INVERTED_INDEX</code>: Un index inversé qui associe chaque dimension à ses vecteurs non nuls, ce qui facilite l'accès direct aux données pertinentes lors des recherches. Idéal pour les ensembles de données contenant des données éparses mais à haute dimension.</p></li>
 <li><p><code translate="no">SPARSE_WAND</code>: Utilise l'algorithme Weak-AND (WAND) pour contourner rapidement les candidats improbables, en concentrant l'évaluation sur ceux qui ont un potentiel de classement plus élevé. Traite les dimensions comme des termes et les vecteurs comme des documents, ce qui accélère les recherches dans les grands ensembles de données éparses.</p></li>
 </ul></li>
 <li><p><code translate="no">metric_type</code>: Seule la métrique de distance <code translate="no">IP</code> (produit intérieur) est prise en charge pour les vecteurs peu denses.</p></li>

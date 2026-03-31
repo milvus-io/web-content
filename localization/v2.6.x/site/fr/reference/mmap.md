@@ -65,7 +65,7 @@ title: Stockage de données avec mappage en mémoire
 <p>Après <code translate="no">2.4.10</code>, la configuration <code translate="no">queryNode.mmap.mmapEnabled</code> se divise en quatre champs distincts, et toutes les valeurs par défaut sont <code translate="no">false</code>:</p>
 <ul>
 <li><code translate="no">queryNode.mmap.vectorField</code>, contrôle si les données vectorielles sont mmap ;</li>
-<li><code translate="no">queryNode.mmap.vectorIndex</code>contrôle si l'index du vecteur est mmap ; , contrôle si les données scalaires sont mmap ; , contrôle si les données scalaires sont mmap ;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, contrôle si l'index du vecteur est mmap ;</li>
 <li><code translate="no">queryNode.mmap.scalarField</code>, contrôle si les données scalaires sont mmap ;</li>
 <li><code translate="no">queryNode.mmap.scalarIndex</code>, contrôle si l'index scalaire est mmap ;</li>
 </ul>
@@ -98,7 +98,7 @@ title: Stockage de données avec mappage en mémoire
       </svg>
     </button></h3><p>Pendant l'exécution du cluster, vous pouvez ajuster dynamiquement les paramètres de mappage de la mémoire au niveau de la collection ou de l'index.</p>
 <p>Au niveau de la <strong>collection</strong>, le mappage de la mémoire est appliqué à toutes les données brutes non indexées d'une collection, à l'exclusion des clés primaires, des horodatages et des identifiants de ligne. Cette approche est particulièrement adaptée à la gestion complète de grands ensembles de données.</p>
-<p>Pour procéder à des ajustements dynamiques des paramètres de mappage de la mémoire au sein d'une collection, utilisez la méthode <code translate="no">set_properties()</code>. Ici, vous pouvez faire basculer <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> et <code translate="no">False</code> selon vos besoins.</p>
+<p>Pour des ajustements dynamiques des paramètres de mappage de la mémoire au sein d'une collection, utilisez la méthode <code translate="no">set_properties()</code>. Ici, vous pouvez faire basculer <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> et <code translate="no">False</code> selon vos besoins.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
 

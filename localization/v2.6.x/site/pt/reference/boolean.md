@@ -33,7 +33,7 @@ title: Regras de filtragem escalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma expressão de predicado produz um valor booleano. Milvus realiza filtragem escalar pesquisando com predicados. Uma expressão de predicado, quando avaliada, devolve TRUE (verdadeiro) ou FALSE (falso). Consulte a <a href="/api-reference/pymilvus/v2.4.x/About.md">Referência da API do Python SDK</a> para obter instruções sobre a utilização de expressões de predicado.</p>
+    </button></h2><p>Uma expressão de predicado produz um valor booleano. Milvus conduz a filtragem escalar pesquisando com predicados. Uma expressão de predicado, quando avaliada, devolve TRUE (verdadeiro) ou FALSE (falso). Consulte a <a href="/api-reference/pymilvus/v2.4.x/About.md">Referência da API do Python SDK</a> para obter instruções sobre a utilização de expressões de predicado.</p>
 <p>As regras da gramática<a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a> descrevem as regras das expressões booleanas:</p>
 <pre><code translate="no">Expr = LogicalExpr | NIL
 LogicalExpr = LogicalExpr BinaryLogicalOp LogicalExpr 
@@ -88,7 +88,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
 <tr><td>NIL</td><td>Vazio. A expressão pode ser uma cadeia vazia.</td></tr>
 <tr><td>INTEGER</td><td>Números inteiros como 1, 2, 3.</td></tr>
 <tr><td>FLOAT</td><td>Números flutuantes, como 1,0, 2,0.</td></tr>
-<tr><td>CONST</td><td>Números inteiros ou flutuantes.</td></tr>
+<tr><td>CONST</td><td>Números inteiros ou números flutuantes.</td></tr>
 <tr><td>IDENTIFICADOR</td><td>Identificador. Em Milvus, o IDENTIFIER representa o nome do campo.</td></tr>
 <tr><td>LogicalOp</td><td>Um LogicalOp é um operador lógico que permite combinar mais do que uma operação relacional numa única comparação. O valor devolvido de uma LogicalOp é VERDADEIRO (1) ou FALSO (0). Existem dois tipos de LogicalOps, incluindo BinaryLogicalOps e UnaryLogicalOps.</td></tr>
 <tr><td>UnaryLogicalOp</td><td>UnaryLogicalOp refere-se ao operador lógico unário "not".</td></tr>
@@ -223,7 +223,7 @@ Array = <span class="hljs-string">&quot;[&quot;</span> ArrayExpr { <span class="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A tabela seguinte lista a precedência e a associatividade dos operadores. Os operadores são listados de cima para baixo, em precedência decrescente.</p>
+    </button></h2><p>A tabela seguinte indica a precedência e a associatividade dos operadores. Os operadores são listados de cima para baixo, em precedência decrescente.</p>
 <table>
 <thead>
 <tr><th>Precedência</th><th>Operador</th><th>Descrição</th><th>Associatividade</th></tr>

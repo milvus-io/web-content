@@ -209,9 +209,9 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">index_type</code>: Der Typ des zu erstellenden Index. Mögliche Optionen für spärliche Vektoren:</p>
 <ul>
 <li><p><code translate="no">SPARSE_INVERTED_INDEX</code>: Ein invertierter Index, der jede Dimension auf ihre Nicht-Null-Vektoren abbildet und so den direkten Zugriff auf relevante Daten bei der Suche erleichtert. Ideal für Datensätze mit spärlichen, aber hochdimensionalen Daten.</p></li>
-<li><p><code translate="no">SPARSE_WAND</code>: Verwendet den Weak-AND-Algorithmus (WAND), um unwahrscheinliche Kandidaten schnell zu umgehen und die Bewertung auf diejenigen mit höherem Rangpotenzial zu konzentrieren. Behandelt Dimensionen als Begriffe und Vektoren als Dokumente, um die Suche in großen, spärlichen Datensätzen zu beschleunigen.</p></li>
+<li><p><code translate="no">SPARSE_WAND</code>: Verwendet den Weak-AND-Algorithmus (WAND), um unwahrscheinliche Kandidaten schnell zu umgehen und die Auswertung auf diejenigen mit höherem Rangpotenzial zu konzentrieren. Behandelt Dimensionen als Begriffe und Vektoren als Dokumente, um die Suche in großen, spärlichen Datensätzen zu beschleunigen.</p></li>
 </ul></li>
-<li><p><code translate="no">metric_type</code>: Nur <code translate="no">IP</code> (Inner Product) Distanzmetrik wird für spärliche Vektoren unterstützt.</p></li>
+<li><p><code translate="no">metric_type</code>: Nur die <code translate="no">IP</code> (Inner Product) Distanzmetrik wird für spärliche Vektoren unterstützt.</p></li>
 <li><p><code translate="no">params.drop_ratio_build</code>: Der Index-Parameter, der speziell für spärliche Vektoren verwendet wird. Er steuert den Anteil der kleinen Vektorwerte, die während des Indizierungsprozesses ausgeschlossen werden. Dieser Parameter ermöglicht eine Feinabstimmung des Kompromisses zwischen Effizienz und Genauigkeit, indem kleine Werte bei der Indexerstellung außer Acht gelassen werden. Wenn beispielsweise <code translate="no">drop_ratio_build = 0.3</code> gewählt wird, werden während der Indexerstellung alle Werte aus allen spärlichen Vektoren gesammelt und sortiert. Die kleinsten 30 % dieser Werte werden nicht in den Index aufgenommen, wodurch die Rechenlast bei der Suche verringert wird.</p></li>
 </ul>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/index.md">In-Memory-Index</a>.</p>
@@ -347,7 +347,7 @@ pk_query_res = client.query(
 <li><p><strong>Welche Abstandsmetrik wird für spärliche Vektoren unterstützt?</strong></p>
 <p>Sparse Vektoren unterstützen nur die Distanzmetrik Inneres Produkt (IP) aufgrund der hohen Dimensionalität von Sparse Vektoren, die L2-Distanz und Kosinusdistanz unpraktisch macht.</p></li>
 <li><p><strong>Können Sie den Unterschied zwischen SPARSE_INVERTED_INDEX und SPARSE_WAND erklären, und wie wähle ich zwischen ihnen?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> ist ein herkömmlicher invertierter Index, während <strong>SPARSE_WAND</strong> den <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND-Algorithmus</a> verwendet, um die Anzahl der vollständigen IP-Abstandsauswertungen während der Suche zu reduzieren. <strong>SPARSE_WAND</strong> ist in der Regel schneller, aber seine Leistung kann mit zunehmender Vektordichte abnehmen. Um zwischen den beiden Algorithmen zu wählen, führen Sie Experimente und Benchmarks durch, die auf Ihrem spezifischen Datensatz und Anwendungsfall basieren.</p></li>
+<p><strong>SPARSE_INVERTED_INDEX</strong> ist ein traditioneller invertierter Index, während <strong>SPARSE_WAND</strong> den <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND-Algorithmus</a> verwendet, um die Anzahl der vollständigen IP-Abstandsauswertungen während der Suche zu reduzieren. <strong>SPARSE_WAND</strong> ist in der Regel schneller, aber seine Leistung kann mit zunehmender Vektordichte abnehmen. Um zwischen den beiden Algorithmen zu wählen, führen Sie Experimente und Benchmarks durch, die auf Ihrem spezifischen Datensatz und Anwendungsfall basieren.</p></li>
 <li><p><strong>Wie sollte ich die Parameter drop_ratio_build und drop_ratio_search wählen?</strong></p>
 <p>Die Wahl von <strong>drop_ratio_build</strong> und <strong>drop_ratio_search</strong> hängt von den Eigenschaften Ihrer Daten und Ihren Anforderungen an Suchlatenz/Durchsatz und Genauigkeit ab.</p></li>
 <li><p><strong>Welche Datentypen werden für Sparse Embeddings unterstützt?</strong></p>
@@ -359,5 +359,5 @@ pk_query_res = client.query(
 <li><p><strong>Ist es möglich, sowohl spärliche als auch dichte Vektoren in einer einzigen Sammlung zu haben?</strong></p>
 <p>Ja, mit der Unterstützung mehrerer Vektortypen können Sie Sammlungen mit sowohl spärlichen als auch dichten Vektorspalten erstellen und eine hybride Suche durchführen.</p></li>
 <li><p><strong>Welche Voraussetzungen müssen erfüllt sein, damit Sparse Embeddings eingefügt oder durchsucht werden können?</strong></p>
-<p>Sparse Embeddings müssen mindestens einen Wert ungleich Null haben, und Vektorindizes müssen nicht negativ sein.</p></li>
+<p>Dünn besetzte Einbettungen müssen mindestens einen Wert ungleich Null haben, und Vektorindizes müssen nicht-negativ sein.</p></li>
 </ul>

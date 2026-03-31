@@ -396,7 +396,7 @@ client.createCollection(customizedSetupReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Los índices mejoran el rendimiento de las operaciones de búsqueda y consulta. En Milvus, puede crear índices tanto en campos vectoriales como en campos escalares. En este ejemplo, crearemos un índice <code translate="no">IVF_FLAT</code> en el campo vectorial <code translate="no">vector</code> y un índice <code translate="no">INVERTED</code> en el campo escalar <code translate="no">color_coord</code>. Para obtener más información sobre los índices, consulta <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Indexar campos vectoriales</a> e <a href="https://milvus.io/docs/index-scalar-fields.md">Indexar campos escalares</a>.</p>
+    </button></h2><p>Los índices mejoran el rendimiento de las operaciones de búsqueda y consulta. En Milvus, puede crear índices tanto en campos vectoriales como en campos escalares. En este ejemplo, crearemos un índice <code translate="no">IVF_FLAT</code> en el campo vectorial <code translate="no">vector</code> y un índice <code translate="no">INVERTED</code> en el campo escalar <code translate="no">color_coord</code>. Para más información sobre índices, consulta <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Indexar campos vectoriales</a> e <a href="https://milvus.io/docs/index-scalar-fields.md">Indexar campos escalares</a>.</p>
 <h3 id="Index-vector-field" class="common-anchor-header">Campo vectorial indexado<button data-href="#Index-vector-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -474,7 +474,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Para obtener más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Para obtener más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> y <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> y <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
 </div>
 <h3 id="Index-array-field" class="common-anchor-header">Campo escalar de índice<button data-href="#Index-array-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -492,7 +492,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h3><p>La creación de un índice en un campo escalar puede mejorar el rendimiento de recuperación de las consultas en ese campo, lo cual es opcional pero recomendable para grandes conjuntos de datos.</p>
-<p>En este ejemplo, crearemos un índice invertido en el campo de matriz <code translate="no">color_coord</code>. Esto nos permitirá acelerar el filtrado basado en este campo. El índice invertido muestra un rendimiento general excelente, superando significativamente al filtrado de fuerza bruta que utiliza datos sin procesar cuando los datos no se recuperan con frecuencia, y manteniendo un rendimiento comparable con operaciones de recuperación frecuentes. Para obtener más información sobre los índices invertidos, consulte <a href="/docs/es/scalar_index.md#Inverted-indexing">Índice escalar</a>.</p>
+<p>En este ejemplo, crearemos un índice invertido en el campo de matriz <code translate="no">color_coord</code>. Esto nos permitirá acelerar el filtrado basado en este campo. El índice invertido muestra un rendimiento general excelente, superando significativamente al filtrado por fuerza bruta que utiliza datos sin procesar cuando los datos no se recuperan con frecuencia, y manteniendo un rendimiento comparable con operaciones de recuperación frecuentes. Para obtener más información sobre los índices invertidos, consulte <a href="/docs/es/scalar_index.md#Inverted-indexing">Índice escalar</a>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
@@ -543,7 +543,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Para obtener más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
 </div>
 <div class="language-java">
-<p>Para obtener más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
 </div>
 <div class="language-javascript">
 <p>Para más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> y <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
@@ -1155,10 +1155,10 @@ System.out.println(queryResp.getQueryResults());
 <tr><td>&gt;=</td><td><code translate="no">‘int_array[0] >= 10’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> es mayor o igual que 10.</td></tr>
 <tr><td>en</td><td><code translate="no">'var_array[0] in ["str1", “str2”]'</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> es <code translate="no">“str1”</code> o <code translate="no">“str2”</code>.</td></tr>
 <tr><td>no en</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> no es 1, 2 ó 3.</td></tr>
-<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 > 200’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0] + 100</code> es superior a 200.</td></tr>
+<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 > 200’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0] + 100</code> es mayor que 200.</td></tr>
 <tr><td>como (LIKE)</td><td><code translate="no">‘var_array[0] like "prefix%"’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code>.</td></tr>
 <tr><td>y (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code> y el valor de <code translate="no">int_array[0]</code> es menor o igual que 100.</td></tr>
-<tr><td>o (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] <= 100’</code></td><td>Esta expresión se evalúa como verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code>, o el valor de <code translate="no">int_array[0]</code> es menor o igual que 100.</td></tr>
+<tr><td>o (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] <= 100’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code>, o si el valor de <code translate="no">int_array[0]</code> es menor o igual que 100.</td></tr>
 <tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>Esta expresión se evalúa como verdadero si <code translate="no">int_array</code> contiene el elemento <code translate="no">100</code>.</td></tr>
 <tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>Esta expresión es verdadera si <code translate="no">int_array</code> contiene todos los elementos <code translate="no">1</code>, <code translate="no">2</code>, y <code translate="no">3</code>.</td></tr>
 <tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, ["a", "b", “c”])'</code></td><td>Esta expresión se evalúa como verdadera si <code translate="no">var_array</code> contiene cualquier elemento de <code translate="no">“a”</code>, <code translate="no">“b”</code>, y <code translate="no">“c”</code>.</td></tr>

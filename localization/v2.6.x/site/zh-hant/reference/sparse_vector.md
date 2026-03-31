@@ -48,7 +48,7 @@ title: 稀疏向量
       </svg>
     </button></h2><p>要在 Milvus 中使用稀疏向量，請準備其中一種支援格式的向量嵌入：</p>
 <ul>
-<li><p><strong>稀疏矩陣</strong>：利用<a href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse">scipy.sparse</a>類族來表示您的稀疏嵌入。此方法對於處理大規模、高維數據非常有效。</p></li>
+<li><p><strong>稀疏矩陣</strong>：利用<a href="https://docs.scipy.org/doc/scipy/reference/sparse.html#module-scipy.sparse">scipy.sparse</a>類族來表示您的稀疏嵌入。這種方法對於處理大規模、高維數據非常有效。</p></li>
 <li><p><strong>辭典清單</strong>：將每個稀疏嵌入表示為字典，結構為<code translate="no">{dimension_index: value, ...}</code> ，其中每個 key-value 對表示維度索引及其對應值。</p>
 <p>範例：</p>
 <pre><code translate="no" class="language-python">{<span class="hljs-number">2</span>: <span class="hljs-number">0.33</span>, <span class="hljs-number">98</span>: <span class="hljs-number">0.72</span>, ...}
@@ -209,10 +209,10 @@ client.create_index(collection_name=<span class="hljs-string">&quot;test_sparse_
 <li><p><code translate="no">index_type</code>:要建立的索引類型。稀疏向量的可能選項：</p>
 <ul>
 <li><p><code translate="no">SPARSE_INVERTED_INDEX</code>:倒轉索引，將每個維度映射到其非零向量，方便在搜尋時直接存取相關資料。適用於稀疏但高維數據的資料集。</p></li>
-<li><p><code translate="no">SPARSE_WAND</code>:利用 Weak-AND (WAND) 演算法快速繞過不可能的候選項目，將評估的重點放在具有較高排名潛力的候選項目上。將維度視為詞彙，將向量視為文件，加快大型稀疏資料集的搜尋速度。</p></li>
+<li><p><code translate="no">SPARSE_WAND</code>:利用 Weak-AND (WAND) 演算法快速繞過不可能的候選項目，並將評估重點放在具有較高排名潛力的候選項目上。將維度視為詞彙，將向量視為文件，加快大型稀疏資料集的搜尋速度。</p></li>
 </ul></li>
 <li><p><code translate="no">metric_type</code>:稀疏向量只支援<code translate="no">IP</code> (Inner Product) 距離公制。</p></li>
-<li><p><code translate="no">params.drop_ratio_build</code>:專門用於稀疏向量的索引參數。它控制在索引過程中排除小向量值的比例。此參數可透過在建立索引時忽略小值來微調效率與精確度之間的權衡。舉例來說，如果<code translate="no">drop_ratio_build = 0.3</code> ，在索引建構期間，所有稀疏向量的所有值都會被收集和排序。這些值中最小的 30% 不會包含在索引中，因此可以減少搜尋時的計算工作量。</p></li>
+<li><p><code translate="no">params.drop_ratio_build</code>:專門用於稀疏向量的索引參數。它控制在索引過程中排除小向量值的比例。此參數可透過在建立索引時忽略小值來微調效率與精確度之間的權衡。舉例來說，如果<code translate="no">drop_ratio_build = 0.3</code> ，在索引建構過程中，所有稀疏向量的所有值都會被收集和排序。這些值中最小的 30% 不會包含在索引中，因此可以減少搜尋時的計算工作量。</p></li>
 </ul>
 <p>如需詳細資訊，請參閱「<a href="/docs/zh-hant/index.md">記憶體內索引</a>」。</p>
 <h2 id="Perform-ANN-search" class="common-anchor-header">執行 ANN 搜尋<button data-href="#Perform-ANN-search" class="anchor-icon" translate="no">
@@ -263,7 +263,7 @@ search_res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>配置搜尋參數時，請注意下列事項：</p>
 <ul>
-<li><code translate="no">params.drop_ratio_search</code>:專門用於稀疏向量的搜尋參數。此選項允許透過指定查詢向量中最小值的忽略比率來微調搜尋過程。它有助於平衡搜尋精確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越小。透過忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</li>
+<li><code translate="no">params.drop_ratio_search</code>:專門用於稀疏向量的搜尋參數。此選項允許透過指定查詢向量中最小值的忽略比例來微調搜尋過程。它有助於平衡搜尋精確度與效能。<code translate="no">drop_ratio_search</code> 設定的值越小，這些小值對最終得分的貢獻就越少。透過忽略一些小值，可以在對精確度影響最小的情況下提高搜尋效能。</li>
 </ul>
 <h2 id="Perform-scalar-queries" class="common-anchor-header">執行標量查詢<button data-href="#Perform-scalar-queries" class="anchor-icon" translate="no">
       <svg translate="no"

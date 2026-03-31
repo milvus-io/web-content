@@ -60,7 +60,7 @@ title: Milvus 備份
    </span> <span class="img-wrapper"> <span>Milvus 備份架構</span> </span></p>
 <p>Milvus Backup 有助於跨 Milvus 實體備份和還原 metadata、segment 和資料。它提供北向介面，例如 CLI、API 和基於 gRPC 的 Go 模組，以便彈性操作備份和還原流程。</p>
 <p>Milvus Backup 從源 Milvus 實例讀取集合元資料和片段來建立備份。然後，它會從源 Milvus 實例的根目錄中複製收集資料，並將複製的資料儲存到備份根目錄中。</p>
-<p>要從備份還原，Milvus Backup 會根據備份中的集合元資料和段資訊，在目標 Milvus 實例中建立新的集合。然後將備份資料從備份根目錄中複製到目標實例的根目錄中。</p>
+<p>要從備份還原，Milvus Backup 會基於備份中的集合元資料和段資訊，在目標 Milvus 實例中建立新的集合。然後將備份資料從備份根目錄中複製到目標實例的根目錄中。</p>
 <h2 id="Latest-release" class="common-anchor-header">最新版本<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

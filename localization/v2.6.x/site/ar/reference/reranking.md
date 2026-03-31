@@ -81,9 +81,9 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <ul>
 <li><p>تتراوح كل قيمة ترجيحية من 0 (الأقل أهمية) إلى 1 (الأكثر أهمية)، مما يؤثر على النتيجة المجمعة النهائية.</p></li>
 <li><p>يجب أن يكون العدد الإجمالي لقيم الترجيح المقدمة في <code translate="no">WeightedRanker</code> مساويًا لعدد مثيلات <code translate="no">AnnSearchRequest</code> التي قمت بإنشائها سابقًا.</p></li>
-<li><p>تجدر الإشارة إلى أنه نظرًا لاختلاف قياسات أنواع المقاييس المختلفة، فإننا نقوم بتطبيع مسافات نتائج الاستدعاء بحيث تقع في الفترة [0،1]، حيث يعني 0 اختلافًا و1 تشابهًا. ستكون النتيجة النهائية هي مجموع قيم الترجيح والمسافات.</p></li>
+<li><p>تجدر الإشارة إلى أنه نظرًا لاختلاف قياسات أنواع المقاييس المختلفة، فإننا نقوم بتطبيع مسافات نتائج الاستدعاء بحيث تقع في الفترة [0،1]، حيث يعني الرقم 0 اختلافًا و1 تشابهًا. ستكون النتيجة النهائية هي مجموع قيم الترجيح والمسافات.</p></li>
 </ul>
-<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">دمج الرتب المتبادل (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
+<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">دمج الرتب المتبادلة (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

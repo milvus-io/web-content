@@ -39,7 +39,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus speichert eingehende Entitäten in Segmenten innerhalb einer Sammlung und versiegelt ein Segment, wenn es voll ist. Wenn dies der Fall ist, wird ein neues Segment erstellt, um zusätzliche Entitäten unterzubringen. Infolgedessen sind die Entitäten willkürlich über die Segmente verteilt. Diese Verteilung erfordert, dass Milvus mehrere Segmente durchsucht, um die nächstgelegenen Nachbarn für einen bestimmten Abfragevektor zu finden.</p>
+    </button></h2><p>Milvus speichert eingehende Entitäten in Segmenten innerhalb einer Sammlung und versiegelt ein Segment, wenn es voll ist. Wenn dies der Fall ist, wird ein neues Segment erstellt, um zusätzliche Entitäten unterzubringen. Infolgedessen sind die Entitäten willkürlich über die Segmente verteilt. Diese Verteilung erfordert, dass Milvus mehrere Segmente durchsucht, um die nächsten Nachbarn für einen bestimmten Abfragevektor zu finden.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
@@ -66,7 +66,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Clustering Compaction Funktion in Milvus ist in hohem Maße konfigurierbar. Sie können sie manuell auslösen oder sie so einstellen, dass sie automatisch in bestimmten Abständen von Milvus ausgelöst wird. Um die Clustering Compaction zu aktivieren, gehen Sie wie folgt vor:</p>
+    </button></h2><p>Die Clustering Compaction-Funktion in Milvus ist in hohem Maße konfigurierbar. Sie können sie manuell auslösen oder sie so einstellen, dass sie automatisch in bestimmten Abständen von Milvus ausgelöst wird. Um die Clustering Compaction zu aktivieren, gehen Sie wie folgt vor:</p>
 <h3 id="Global-Configuration" class="common-anchor-header">Globale Konfiguration<button data-href="#Global-Configuration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -293,7 +293,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
     </tr>
   </tbody>
 </table>
-<p>Je enger der Suchbereich in den Suchfiltern ist, desto höher ist die Prune-Rate. Das bedeutet, dass mehr Entitäten während des Suchvorgangs übersprungen werden. Ein Vergleich der Statistiken in der ersten und letzten Zeile zeigt, dass bei einer Suche ohne Clustering-Verdichtung die gesamte Sammlung durchsucht werden muss. Andererseits kann eine Suche mit Clustering-Verdichtung unter Verwendung eines bestimmten Schlüssels eine bis zu 25-fache Verbesserung erzielen.</p>
+<p>Je enger der Suchbereich in den Suchfiltern ist, desto höher ist die Prune-Ratio. Das bedeutet, dass mehr Entitäten während des Suchvorgangs übersprungen werden. Ein Vergleich der Statistiken in der ersten und letzten Zeile zeigt, dass bei einer Suche ohne Clustering-Verdichtung die gesamte Sammlung durchsucht werden muss. Andererseits kann eine Suche mit Clustering-Verdichtung unter Verwendung eines bestimmten Schlüssels eine bis zu 25-fache Verbesserung erzielen.</p>
 <h2 id="Best-practices" class="common-anchor-header">Bewährte Verfahren<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

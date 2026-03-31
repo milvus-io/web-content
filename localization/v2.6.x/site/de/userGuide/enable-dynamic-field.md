@@ -35,7 +35,7 @@ title: Dynamisches Feld aktivieren
       </svg>
     </button></h2><p>Milvus ermöglicht es Ihnen, das Schema einer Sammlung zu definieren, indem Sie den Namen und den Datentyp jedes spezifischen Feldes festlegen, so dass Sie Indizes in diesen Feldern für eine verbesserte Suchleistung erstellen können.</p>
 <p>Sobald ein Feld definiert ist, müssen Sie dieses Feld einbeziehen, wenn Sie Daten einfügen. Was aber, wenn einige Felder nicht immer in allen Ihren Dateneinträgen vorhanden sind? An dieser Stelle kommt das dynamische Feld ins Spiel.</p>
-<p>Das dynamische Feld in einer Sammlung ist ein reserviertes JSON-Feld namens $meta. Es kann nicht schema-definierte Felder und ihre Werte als Schlüssel-Wert-Paare enthalten. Mit dem dynamischen Feld können Sie sowohl schema-definierte Felder als auch nicht-schema-definierte Felder suchen und abfragen, die sie möglicherweise enthalten.</p>
+<p>Das dynamische Feld in einer Sammlung ist ein reserviertes JSON-Feld namens $meta. Es kann nicht schema-definierte Felder und ihre Werte als Schlüssel-Wert-Paare enthalten. Mithilfe des dynamischen Feldes können Sie sowohl schema-definierte Felder als auch nicht-schema-definierte Felder suchen und abfragen.</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">Dynamisches Feld aktivieren<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

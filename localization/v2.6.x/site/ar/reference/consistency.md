@@ -35,7 +35,7 @@ title: الاتساق
         ></path>
       </svg>
     </button></h2><p>يشير الاتساق في قاعدة البيانات الموزعة على وجه التحديد إلى الخاصية التي تضمن أن كل عقدة أو نسخة متماثلة لديها نفس طريقة عرض البيانات عند كتابة أو قراءة البيانات في وقت معين.</p>
-<p>يدعم ميلفوس أربعة مستويات من الاتساق: الاتساق القوي، والركود المحدود، والجلسة، وفي النهاية. مستوى الاتساق الافتراضي في ميلفوس هو مستوى الاتساق المحدود.  يمكنك بسهولة ضبط مستوى الاتساق عند إجراء <a href="/docs/ar/single-vector-search.md">بحث أحادي المتجه</a> أو <a href="/docs/ar/multi-vector-search.md">بحث مختلط</a> أو <a href="/docs/ar/get-and-scalar-query.md">استعلام</a> لجعله يناسب تطبيقك على أفضل وجه.</p>
+<p>يدعم ميلفوس أربعة مستويات من الاتساق: الاتساق القوي، والثبات المحدود، والجلسة، وفي النهاية. مستوى الاتساق الافتراضي في ميلفوس هو مستوى الاتساق المحدود.  يمكنك بسهولة ضبط مستوى الاتساق عند إجراء <a href="/docs/ar/single-vector-search.md">بحث أحادي المتجه</a> أو <a href="/docs/ar/multi-vector-search.md">بحث مختلط</a> أو <a href="/docs/ar/get-and-scalar-query.md">استعلام</a> لجعله يناسب تطبيقك على أفضل وجه.</p>
 <h2 id="Consistency-levels" class="common-anchor-header">مستويات الاتساق<button data-href="#Consistency-levels" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

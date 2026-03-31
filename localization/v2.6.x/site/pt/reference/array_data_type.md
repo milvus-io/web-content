@@ -53,7 +53,7 @@ title: Utilizar campos de matriz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus suporta arrays como um dos tipos de dados de campo. Uma matriz numa coleção do Milvus deve ter sempre elementos do mesmo tipo de dados, e o tipo de dados para os elementos da matriz pode ser qualquer um dos tipos de dados suportados no Milvus. Para obter uma lista dos tipos de dados suportados, consulte <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipos de dados suportados</a>.</p>
+    </button></h2><p>O Milvus suporta arrays como um dos tipos de dados de campo. Uma matriz numa coleção Milvus deve ter sempre elementos do mesmo tipo de dados, e o tipo de dados para os elementos da matriz pode ser qualquer um dos tipos de dados suportados em Milvus. Para obter uma lista dos tipos de dados suportados, consulte <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipos de dados suportados</a>.</p>
 <p>O seguinte trecho de código gera um conjunto de dados aleatório contendo um campo de matriz chamado <code translate="no">color_coord</code>, com todos os elementos do tipo de dados interger.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -242,7 +242,7 @@ client = MilvusClient(uri=SERVER_ADDR)
 <ol>
 <li>Definir o <code translate="no">data_type</code>: Configure-o como <code translate="no">DataType.Array</code>.</li>
 <li>Especificar o <code translate="no">element_type</code>: Escolha o tipo de dados para os elementos da matriz. Os elementos de um campo de matriz devem ter todos o mesmo tipo de dados. Neste exemplo, o <code translate="no">element_type</code> é definido como <code translate="no">DataType.Int64</code>.</li>
-<li>Defina o <code translate="no">max_capacity</code>: Defina este parâmetro para especificar o número máximo de elementos que o campo de matriz pode conter.</li>
+<li>Definir o <code translate="no">max_capacity</code>: Defina este parâmetro para especificar o número máximo de elementos que o campo de matriz pode conter.</li>
 </ol>
 </div>
 <p>O código de exemplo abaixo define o esquema de coleção com um campo de matriz <code translate="no">color_coord</code>, com um máximo de 5 elementos e cada elemento do tipo de dados integer.</p>
@@ -650,7 +650,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Para obter mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-javascript">
-<p>Para obter mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
+<p>Para mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1157,7 +1157,7 @@ System.out.println(queryResp.getQueryResults());
 <tr><td>not in</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">int_array[0]</code> não for 1, 2 ou 3.</td></tr>
 <tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 > 200’</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">int_array[0] + 100</code> for superior a 200.</td></tr>
 <tr><td>like (LIKE)</td><td><code translate="no">‘var_array[0] like "prefix%"’</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">var_array[0]</code> for prefixado com <code translate="no">“prefix”</code>.</td></tr>
-<tr><td>and (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">var_array[0]</code> for prefixado com <code translate="no">“prefix”</code>, e o valor de <code translate="no">int_array[0]</code> for menor ou igual a 100.</td></tr>
+<tr><td>and (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” && int_array[0] <= 100’</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">var_array[0]</code> for prefixado com <code translate="no">“prefix”</code> e o valor de <code translate="no">int_array[0]</code> for menor ou igual a 100.</td></tr>
 <tr><td>or (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] <= 100’</code></td><td>Esta expressão é avaliada como verdadeira se o valor de <code translate="no">var_array[0]</code> for prefixado com <code translate="no">“prefix”</code>, ou se o valor de <code translate="no">int_array[0]</code> for menor ou igual a 100.</td></tr>
 <tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>Esta expressão é avaliada como verdadeira se <code translate="no">int_array</code> contiver o elemento <code translate="no">100</code>.</td></tr>
 <tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>Esta expressão é avaliada como verdadeira se <code translate="no">int_array</code> contiver todos os elementos <code translate="no">1</code>, <code translate="no">2</code>, e <code translate="no">3</code>.</td></tr>

@@ -24,7 +24,7 @@ title: BM25
       </svg>
     </button></h1><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">A BM25</a> é uma função de classificação utilizada na recuperação de informação para estimar a relevância dos documentos para uma determinada consulta de pesquisa. Melhora a abordagem básica de frequência de termos, incorporando a normalização do comprimento do documento e a saturação da frequência de termos. O BM25 pode gerar embeddings esparsos ao representar documentos como vectores de pontuações de importância de termos, permitindo uma recuperação e classificação eficientes em espaços vectoriais esparsos.</p>
 <p>Milvus integra-se com o modelo BM25 usando a classe <strong>BM25EmbeddingFunction</strong>. Esta classe trata do cálculo dos embeddings e devolve-os num formato compatível com o Milvus para indexação e pesquisa. Essencial para este processo é a construção de um analisador para tokenização.</p>
-<p>Para usar esta funcionalidade, instale as dependências necessárias:</p>
+<p>Para utilizar esta funcionalidade, instale as dependências necessárias:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>

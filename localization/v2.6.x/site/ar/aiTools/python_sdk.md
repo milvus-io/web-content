@@ -22,11 +22,11 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>انسخ</strong> المطالبة الكاملة من قسم <a href="#full-prompt">المطالبة الكاملة</a> أدناه.</li>
-<li><strong>احفظه</strong> في الموقع الذي تتوقعه أداة الذكاء الاصطناعي الخاصة بك - راجع <a href="/docs/ar/ai_prompts_landing.md">جدول البيئة</a> للحصول على تفاصيل الموضع.</li>
+<li><strong>احفظه</strong> في الموقع الذي تتوقعه أداة الذكاء الاصطناعي لديك - راجع <a href="/docs/ar/milvus_for_agents.md">جدول البيئة</a> للحصول على تفاصيل الموضع.</li>
 <li>سيطبق مساعد الذكاء الاصطناعي الخاص بك هذه القواعد تلقائيًا عند إنشاء أو مراجعة كود Milvus.</li>
 </ol>
 <p>بالنسبة لمستخدمي <strong>Cursor</strong>: انسخ المطالبة من قسم المطالبة <a href="#full-prompt">الكاملة</a> واحفظها تحت <code translate="no">.cursor/rules/</code> في مشروعك.</p>
-<p>قواعد لكتابة كود Milvus Python الصحيح باستخدام واجهة MilvusClient، بما في ذلك ترحيل ORM وأنماط الاتصال والعمليات الشائعة. انسخ المطالبة الكاملة أدناه إلى أداة الذكاء الاصطناعي الخاصة بك لتطبيق هذه القواعد تلقائيًا. للحصول على نظرة عامة على جميع المطالبات، انظر <a href="/docs/ar/ai_prompts_landing.md">موجهات الذكاء الاصطناعي</a>.</p>
+<p>قواعد لكتابة كود Milvus Python الصحيح باستخدام واجهة MilvusClient، بما في ذلك ترحيل ORM وأنماط الاتصال والعمليات الشائعة. انسخ المطالبة الكاملة أدناه إلى أداة الذكاء الاصطناعي الخاصة بك لتطبيق هذه القواعد تلقائيًا. للحصول على نظرة عامة على جميع المطالبات، انظر <a href="/docs/ar/milvus_for_agents.md">موجهات الذكاء الاصطناعي</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">المطالبة الكاملة<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

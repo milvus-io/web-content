@@ -22,8 +22,8 @@ summary: >-
       </svg>
     </button></h2><ol>
 <li><strong>Kopieren Sie</strong> die vollständige Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> unten.</li>
-<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - siehe die <a href="/docs/de/ai_prompts_landing.md">Umgebungstabelle</a> für Details zur Platzierung.</li>
-<li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code generiert oder überprüft.</li>
+<li><strong>Speichern Sie</strong> sie an dem Ort, den Ihr KI-Tool erwartet - siehe die <a href="/docs/de/milvus_for_agents.md">Umgebungstabelle</a> für Details zur Platzierung.</li>
+<li>Ihr KI-Assistent wird diese Regeln automatisch anwenden, wenn er Milvus-Code erzeugt oder überprüft.</li>
 </ol>
 <p>Für <strong>Cursor-Benutzer</strong>: Kopieren Sie die Eingabeaufforderung aus dem Abschnitt <a href="#full-prompt">Vollständige Eingabeaufforderung</a> und speichern Sie sie unter <code translate="no">.cursor/rules/</code> in Ihrem Projekt.</p>
 <h1 id="AGENTSmd--Milvus" class="common-anchor-header">AGENTS.md - Milvus<button data-href="#AGENTSmd--Milvus" class="anchor-icon" translate="no">
@@ -41,7 +41,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ist eine Open-Source-Vektordatenbank für Ähnlichkeitssuche, hybride Suche und RAG. Sie interagieren mit ihr über die Schnittstelle <code translate="no">MilvusClient</code> des PyMilvus SDK. Kopieren Sie die vollständige Aufforderung unten in Ihr KI-Tool, um diese Regeln automatisch anzuwenden. Detaillierte aufgabenspezifische Eingabeaufforderungen finden Sie unter <a href="/docs/de/ai_prompts_landing.md">KI-Eingabeaufforderungen</a>.</p>
+    </button></h1><p>Milvus ist eine Open-Source-Vektordatenbank für Ähnlichkeitssuche, hybride Suche und RAG. Sie interagieren mit ihr über die Schnittstelle <code translate="no">MilvusClient</code> des PyMilvus SDK. Kopieren Sie die vollständige Aufforderung unten in Ihr KI-Tool, um diese Regeln automatisch anzuwenden. Detaillierte aufgabenspezifische Eingabeaufforderungen finden Sie unter <a href="/docs/de/milvus_for_agents.md">KI-Eingabeaufforderungen</a>.</p>
 <h2 id="Full-prompt" class="common-anchor-header">Vollständige Eingabeaufforderung<button data-href="#Full-prompt" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

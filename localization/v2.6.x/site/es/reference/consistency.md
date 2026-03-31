@@ -153,12 +153,12 @@ title: Consistencia
         ></path>
       </svg>
     </button></h2><p>Milvus realiza diferentes niveles de consistencia introduciendo el <a href="https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md">sello de tiempo</a> de garantía (GuaranteeTs).</p>
-<p>Un GuaranteeTs sirve para informar a los nodos de consulta que una búsqueda o solicitud de consulta no se realizará hasta que todos los datos anteriores al GuaranteeTs puedan ser vistos por los nodos de consulta. Cuando se especifica el nivel de consistencia, el nivel de consistencia se asignará a un valor específico de GuaranteeTs. Diferentes valores de GuaranteeTs corresponden a diferentes niveles de consistencia:</p>
+<p>Un GuaranteeTs sirve para informar a los nodos de consulta que una búsqueda o petición de consulta no se realizará hasta que todos los datos anteriores al GuaranteeTs puedan ser vistos por los nodos de consulta. Cuando se especifica el nivel de consistencia, el nivel de consistencia se asignará a un valor específico de GuaranteeTs. Diferentes valores de GuaranteeTs corresponden a diferentes niveles de consistencia:</p>
 <ul>
 <li><p><strong>Fuerte</strong>: GuaranteeTs se establece como idéntico a la marca de tiempo más reciente del sistema, y los nodos de consulta esperan hasta que todos los datos anteriores a la marca de tiempo más reciente del sistema puedan ser vistos, antes de procesar la petición de búsqueda o consulta.</p></li>
 <li><p><strong>Caducidad limitada</strong>: GuaranteeTs se establece relativamente más pequeño que la marca de tiempo más reciente del sistema, y los nodos de consulta buscan en una vista de datos tolerable y menos actualizada.</p></li>
 <li><p><strong>Sesión</strong>: El cliente utiliza la marca de tiempo de la última operación de escritura como GuaranteeTs, de modo que cada cliente pueda al menos recuperar los datos insertados por el mismo cliente.</p></li>
-<li><p><strong>Eventualmente</strong>: GuaranteeTs se establece en un valor muy pequeño para omitir la comprobación de consistencia. Los nodos de consulta buscan inmediatamente en la vista de datos existente.</p></li>
+<li><p><strong>Eventualmente</strong>: GuaranteeTs se establece en un valor muy pequeño para omitir la comprobación de coherencia. Los nodos de consulta buscan inmediatamente en la vista de datos existente.</p></li>
 </ul>
 <p>Consulte <a href="https://github.com/milvus-io/milvus/blob/f3f46d3bb2dcae2de0bdb7bc0f7b20a72efceaab/docs/developer_guides/how-guarantee-ts-works.md">Cómo funciona GuaranteeTs</a> para obtener más información sobre el mecanismo que garantiza diferentes niveles de consistencia en Milvus.</p>
 <h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">

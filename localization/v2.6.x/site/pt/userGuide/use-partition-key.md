@@ -463,7 +463,7 @@ System.out.println(insertResp.getInsertCnt());
 </div>
 <div class="admonition note">
 <p><b>notas</b></p>
-<p>Para efetuar uma pesquisa de similaridade utilizando a chave de partição, deve incluir um dos seguintes itens na expressão booleana do pedido de pesquisa:</p>
+<p>Para efetuar uma pesquisa por semelhança utilizando a chave de partição, deve incluir uma das seguintes opções na expressão booleana do pedido de pesquisa:</p>
 <ul>
 <li><p><code translate="no">expr='&lt;partition_key&gt;=="xxxx"'</code></p></li>
 <li><p><code translate="no">expr='&lt;partition_key&gt; in ["xxx", "xxx"]'</code></p></li>

@@ -457,7 +457,7 @@ Thread.sleep(<span class="hljs-number">5000</span>);
 <p>Para obter mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-javascript">
-<p>Para mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
+<p>Para obter mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>

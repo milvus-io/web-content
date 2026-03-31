@@ -47,7 +47,7 @@ title: 'Utilizadores, privilégios e funções'
 <li><p><strong>Tipo de objeto</strong>: a categoria do objeto ao qual está a ser atribuído um privilégio. O tipo de objeto pode ser:</p>
 <ul>
 <li><code translate="no">Global</code>: Objectos de todo o sistema, permitindo ao utilizador executar acções que afectam todas as colecções, utilizadores ou definições de todo o sistema.</li>
-<li><code translate="no">Collection</code>: Objectos específicos da coleção, que permitem ao utilizador executar acções como criar índices, carregar dados, inserir ou eliminar dados e consultar dados dentro de uma coleção específica.</li>
+<li><code translate="no">Collection</code>: Objectos específicos da coleção, que permitem ao utilizador executar acções como a criação de índices, o carregamento de dados, a inserção ou eliminação de dados e a consulta de dados dentro de uma coleção específica.</li>
 <li><code translate="no">User</code>: Objectos relacionados com a gestão de utilizadores, que permitem ao utilizador gerir credenciais e funções para utilizadores da base de dados, tais como atualizar credenciais de utilizador ou visualizar detalhes do utilizador.</li>
 </ul></li>
 <li><p><strong>Nome do objeto</strong>: o nome específico do objeto para o qual se pretende controlar o acesso. Por exemplo:</p>
@@ -169,7 +169,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>Coleção</td><td>ObterEstatísticas</td><td>Obter estatísticas da coleção</td></tr>
 <tr><td>Coleção</td><td>Compactação</td><td>Compactar</td></tr>
 <tr><td>Coleção</td><td>Importar</td><td>Inserção/Importação em massa</td></tr>
-<tr><td>Coleção</td><td>Balanceamento de carga</td><td>Balanceamento de carga</td></tr>
+<tr><td>Coleção</td><td>Balanceamento de carga</td><td>LoadBalance</td></tr>
 <tr><td>Coleção</td><td>CriarPartição</td><td>CriarPartição</td></tr>
 <tr><td>Coleção</td><td>DropPartition</td><td>DropPartition</td></tr>
 <tr><td>Coleção</td><td>MostrarPartições</td><td>ShowPartitions</td></tr>

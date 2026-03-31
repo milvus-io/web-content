@@ -34,7 +34,7 @@ title: ダイナミック・フィールドの有効化
         ></path>
       </svg>
     </button></h2><p>Milvusでは、特定のフィールドの名前とデータタイプを設定することで、コレクションのスキーマを定義することができます。</p>
-<p>フィールドが定義されると、データを挿入する際にこのフィールドを含める必要があります。あるフィールドが常にすべてのデータエントリーに存在するとは限りません。ここでダイナミック・フィールドの登場です。</p>
+<p>フィールドが定義されると、データを挿入する際にこのフィールドを含める必要があります。あるフィールドが常にすべてのデータエントリーに存在するとは限りません。そこでダイナミック・フィールドの登場です。</p>
 <p>コレクション内のダイナミック・フィールドは、$metaという名前の予約されたJSONフィールドです。これは、スキーマで定義されていないフィールドとその値をキーと値のペアとして保持します。動的フィールドを使うと、スキーマで定義されたフィールドとスキーマで定義されていないフィールドの両方を検索して問い合わせることができます。</p>
 <h2 id="Enable-dynamic-field" class="common-anchor-header">ダイナミック・フィールドの有効化<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,7 +51,7 @@ title: ダイナミック・フィールドの有効化
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションにスキーマを定義するとき、<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定して、予約済みダイナミック・フィールドを有効にすることができます。これは、スキーマで定義されていないフィールドと後から挿入されたその値が、予約済みダイナミック・フィールドにキー・バリュー・ペアとして保存されることを示します。</p>
+    </button></h2><p>コレクションにスキーマを定義するとき、<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定して、予約済みダイナミック・フィールドを有効にすることができます。これは、スキーマで定義されていないフィールドと後から挿入されたその値が、予約済みダイナミック・フィールドにキーと値のペアとして保存されることを示します。</p>
 <p>以下のスニペットは、idとvectorという2つのスキーマ定義フィールドを持つコレクションを作成し、ダイナミックフィールドを有効にします。</p>
 <div class="language-python">
 <p>パラメータの詳細については、SDKリファレンスの <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を参照してください。</p>
@@ -569,7 +569,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p><strong>color</strong>、<strong>tag</strong>、<strong>color_tag</strong>は、コレクション・スキーマを定義するときには存在しませんが、検索やクエリを実行するときにスキーマ定義フィールドとして使用できることに注意してください。</p>
-<p>非スキーマ定義フィールドの名前に、プラス記号（+）、アスタリスク（*）、ドル記号（）などの数字、文字、アンダースコア以外の文字が含まれている場合、ブーリアン式で使用するときや出力フィールドに含めるときは、次のコードスニペットに示すように、<span class="katex-error" title="ParseError: KaTeX parse error: Expected group after &#x27;_&#x27; at position 39: …the key within _̲_" style="color:#cc0000">__meta</span>[]__<span class="katex-error" title="ParseError: KaTeX parse error: Expected group after &#x27;_&#x27; at position 39: …the key within _̲_" style="color:#cc0000">内にキーを含める必要があります</span>。</p>
+<p>非スキーマ定義フィールドの名前に、プラス記号（+）、アスタリスク（*）、ドル記号（）などの数字、文字、アンダースコア以外の文字が含まれている場合、ブーリアン式で使用するときや出力フィールドに含めるときは、次のコード・スニペットに示すように、<span class="katex-error" title="ParseError: KaTeX parse error: Expected group after &#x27;_&#x27; at position 39: …the key within _̲_" style="color:#cc0000">__meta</span>[]__<span class="katex-error" title="ParseError: KaTeX parse error: Expected group after &#x27;_&#x27; at position 39: …the key within _̲_" style="color:#cc0000">内にキーを含める必要があります</span>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-meta">... </span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;$meta[&quot;$key&quot;] in [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]&#x27;</span>, 
 output_fields=<span class="hljs-string">&#x27;$meta[&quot;$key&quot;]&#x27;</span>  

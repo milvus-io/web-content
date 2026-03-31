@@ -317,7 +317,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 <p>لإعداد مخطط، استخدم <code translate="no">entity.NewSchema()</code> لإنشاء كائن مخطط و <code translate="no">schema.WithField()</code> لإضافة حقول إلى المخطط.</p>
 </div>
 <div class="language-shell">
-<p>لإعداد مخطط، تحتاج إلى تعريف كائن JSON يتبع تنسيق المخطط كما هو معروض في الصفحة المرجعية ل <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> صفحة مرجع نقطة نهاية واجهة برمجة التطبيقات.</p>
+<p>لإعداد مخطط، تحتاج إلى تحديد كائن JSON يتبع تنسيق المخطط كما هو معروض في الصفحة المرجعية ل <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> صفحة مرجع نقطة نهاية واجهة برمجة التطبيقات.</p>
 </div>
 <div class="multipleCode">
  <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#shell">cURL</a></div>
@@ -412,7 +412,7 @@ schema.WithField(
   <tbody>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>تحدد ما إذا كان الحقل الأساسي يتم زيادته تلقائياً.<br/>تعيين هذا إلى <strong>صواب</strong> يجعل الحقل الأساسي يزداد تلقائياً. في هذه الحالة، يجب عدم تضمين الحقل الأساسي في البيانات المراد إدراجها لتجنب الأخطاء. المعرفات التي يتم إنشاؤها تلقائياً لها طول ثابت ولا يمكن تغييرها.</td>
+      <td>تحديد ما إذا كان الحقل الأساسي يتم زيادته تلقائياً.<br/>تعيين هذا إلى <strong>صواب</strong> يجعل الحقل الأساسي يزداد تلقائياً. في هذه الحالة، يجب عدم تضمين الحقل الأساسي في البيانات المراد إدراجها لتجنب الأخطاء. المعرفات التي يتم إنشاؤها تلقائياً لها طول ثابت ولا يمكن تغييرها.</td>
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
@@ -462,7 +462,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>البعد الخاص بتضمين المتجهات.<br/>هذا إلزامي لحقل من نوع <strong>DataType.FloatVector</strong> أو <strong>DataType.BinaryVector</strong> أو <strong>DataType.Float16Vector</strong> أو <strong>DataType.BFloat16Vector</strong>.</td>
+      <td>بُعد التضمين المتجه.<br/>هذا إلزامي لحقل من نوع <strong>DataType.FloatVector</strong> أو <strong>DataType.BinaryVector</strong> أو <strong>DataType.Float16Vector</strong> أو <strong>DataType.BFloat16Vector</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -684,7 +684,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>اسم الخوارزمية المستخدمة لترتيب البيانات في الحقل المحدد. لمعرفة الخوارزميات المطبقة، راجع <a href="https://milvus.io/docs/index.md">الفهرس داخل الذاكرة</a> <a href="https://milvus.io/docs/disk_index.md">والفهرس على القرص</a>.</td>
+      <td>اسم الخوارزمية المستخدمة لترتيب البيانات في الحقل المحدد. لمعرفة الخوارزميات القابلة للتطبيق، راجع <a href="https://milvus.io/docs/index.md">الفهرس داخل الذاكرة</a> <a href="https://milvus.io/docs/disk_index.md">والفهرس على القرص</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
@@ -1060,7 +1060,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>مخطط هذه المجموعة.<br/>يشير تعيين هذا إلى <strong>بلا</strong> إلى أن هذه المجموعة سيتم إنشاؤها بالإعدادات الافتراضية.<br/>لإعداد مجموعة بمخطط مخصص، تحتاج إلى إنشاء كائن <strong>CollectionSchema</strong> والرجوع إليه هنا. في هذه الحالة، يتجاهل Milvus جميع الإعدادات الأخرى المتعلقة بالمخطط التي يحملها الطلب.</td>
+<td>مخطط هذه المجموعة.<br/>تعيين هذا إلى <strong>لا شيء</strong> يشير إلى أنه سيتم إنشاء هذه المجموعة بالإعدادات الافتراضية.<br/>لإعداد مجموعة بمخطط مخصص، تحتاج إلى إنشاء كائن <strong>CollectionSchema</strong> والرجوع إليه هنا. في هذه الحالة، يتجاهل Milvus جميع الإعدادات الأخرى المتعلقة بالمخطط التي يحملها الطلب.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
@@ -2516,7 +2516,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>لإعادة تعيين الأسماء المستعارة إلى مجموعات أخرى، استخدم الأسلوب <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> مع تحديد اسم المجموعة والاسم المستعار.</p>
 </div>
 <div class="language-javascript">
-<p>لإعادة تعيين الأسماء المستعارة إلى مجموعات أخرى، استخدم الأسلوب <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> الأسلوب، مع تحديد اسم المجموعة والاسم المستعار.</p>
+<p>لإعادة تعيين أسماء مستعارة إلى مجموعات أخرى، استخدم الأسلوب <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> الأسلوب، مع تحديد اسم المجموعة والاسم المستعار.</p>
 </div>
 <div class="language-shell">
 <p>لإعادة تعيين الأسماء المستعارة إلى مجموعات أخرى، يمكنك استخدام نقطة نهاية <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> نقطة نهاية واجهة برمجة التطبيقات.</p>
@@ -2695,7 +2695,7 @@ $ </span><span class="language-bash">curl -X POST <span class="hljs-string">&quo
 <p>لإسقاط الأسماء المستعارة، استخدم الأسلوب <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> الأسلوب، مع تحديد الاسم المستعار.</p>
 </div>
 <div class="language-shell">
-<p>لإسقاط الأسماء المستعارة لمجموعة ما، يمكنك استخدام نقطة نهاية <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> نقطة نهاية واجهة برمجة التطبيقات.</p>
+<p>لإسقاط أسماء مستعارة لمجموعة ما، يمكنك استخدام نقطة نهاية <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> نقطة نهاية واجهة برمجة التطبيقات.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">بايثون </a> <a href="#java">جافا جافا</a> <a href="#javascript">Node.js</a></div>

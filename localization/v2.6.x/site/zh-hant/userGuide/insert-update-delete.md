@@ -1,9 +1,9 @@
 ---
 id: insert-update-delete.md
 summary: 本指南將引導您了解集合內的資料處理作業，包括插入、上移和刪除。
-title: 插入、上插和刪除
+title: 插入、上置和刪除
 ---
-<h1 id="Insert-Upsert--Delete" class="common-anchor-header">插入、上插和刪除<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
+<h1 id="Insert-Upsert--Delete" class="common-anchor-header">插入、上置和刪除<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ title: 插入、上插和刪除
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>您已安裝您所選擇的 SDK。若要安裝 SDK，請參閱<a href="https://milvus.io/docs/install-pymilvus.md">安裝 SDK</a>。</p></li>
+<li><p>您已安裝所選擇的 SDK。若要安裝 SDK，請參閱<a href="https://milvus.io/docs/install-pymilvus.md">安裝 SDK</a>。</p></li>
 <li><p>您已建立一個資料夾。若要建立資料夾，請參閱<a href="/docs/zh-hant/manage-collections.md">管理資料夾</a>。</p></li>
 <li><p>若要插入大量資料，建議您使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">資料匯入</a>。</p></li>
 </ul>
@@ -56,7 +56,7 @@ title: 插入、上插和刪除
       </svg>
     </button></h2><p>在 Milvus 集合的上下文中，實體是集合中一個單一的、可識別的實例。它代表一個特定類別的獨特成員，無論是圖書館中的一本书、基因組中的一個基因或任何其他可識別的實體。</p>
 <p>資料集中的實體共享一組共同的屬性，稱為模式，概述每個實體必須遵守的結構，包括欄位名稱、資料類型和任何其他限制。</p>
-<p>要將實體成功插入集合，所提供的資料必須包含目標集合的所有模式定義的欄位。此外，只有啟用動態欄位，才能包含非模式定義的欄位。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">啟用動態欄位</a>。</p>
+<p>要成功地將實體插入集合，所提供的資料必須包含目標集合的所有模式定義的欄位。此外，只有啟用動態欄位，才能包含非模式定義的欄位。如需詳細資訊，請參閱<a href="/docs/zh-hant/enable-dynamic-field.md">啟用動態欄位</a>。</p>
 <h2 id="Preparations" class="common-anchor-header">準備工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

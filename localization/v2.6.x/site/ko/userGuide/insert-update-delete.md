@@ -77,7 +77,7 @@ title: '삽입, 위로 올리기 및 삭제'
 <p>준비를 위해 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 를 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> 를 사용하여 빠른 설정 모드로 컬렉션을 생성합니다.</p>
 </div>
 <div class="language-java">
-<p>준비하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 을 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 사용하여 빠른 설정 모드에서 컬렉션을 생성합니다.</p>
+<p>준비하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 을 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 사용하여 빠른 설정 모드에서 컬렉션을 만듭니다.</p>
 </div>
 <div class="language-javascript">
 <p>준비하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 을 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 사용하여 빠른 설정 모드에서 컬렉션을 생성합니다.</p>

@@ -93,7 +93,7 @@ title: 管理收藏集
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>在人工智能行业大跃进的背景下，大多数开发人员只需要一个简单而又充满活力的 Collections 作为起点。Milvus 只需三个参数就能快速设置这样的 Collections：</p>
+    </button></h3><p>在人工智能行业大跃进的背景下，大多数开发人员只需要一个简单而又充满活力的 Collections 就可以开始使用了。Milvus 只需三个参数就能快速设置这样的 Collections：</p>
 <ul>
 <li><p>要创建的 Collections 名称、</p></li>
 <li><p>要插入的向量 Embeddings 的维度，以及</p></li>
@@ -416,7 +416,7 @@ schema.WithField(
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>决定如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为 "<strong>true</strong>"时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
+      <td>如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，则决定 Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为 "<strong>true</strong>"时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
@@ -736,7 +736,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">nlist</code></td>
@@ -762,7 +762,7 @@ idxVector, err := entity.NewIndexIvfFlat(entity.IP, <span class="hljs-number">10
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -1045,7 +1045,7 @@ $ </span><span class="language-bash"><span class="hljs-string">curl -X POST &quo
 <span class="hljs-meta prompt_"># </span><span class="language-bash">    }</span>
 <span class="hljs-meta prompt_"># </span><span class="language-bash">}</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
+<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详情，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -2519,7 +2519,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>要将别名重新分配给其他 Collections，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-shell">
-<p>要将别名重新指定给其他 Collections，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a>API 端点。</p>
+<p>要将别名重新指定给其他 Collections，可使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
