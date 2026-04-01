@@ -28,9 +28,38 @@ Configuration varies with the way you install the Milvus instance.
 ```yaml
 rootCoord:
     maxGeneralCapacity: 65536
+
+quotaAndLimits:
+    limits:
+        maxCollectionNum: 65536
+        maxCollectionNumPerDB: 65536
 ```
 
-The `maxGeneralCapacity` parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is `65536`.
+To change the collection limit, you need to modify all three parameters together:
+
+| Parameter | Description | Default Value |
+|-----------|-------------|---------------|
+| `rootCoord.maxGeneralCapacity` | Maximum number of collection units (shards × partitions) that the current instance can hold. | `65536` |
+| `quotaAndLimits.limits.maxCollectionNum` | Maximum number of collections allowed across all databases in the current instance. | `65536` |
+| `quotaAndLimits.limits.maxCollectionNumPerDB` | Maximum number of collections allowed in a single database. | `65536` |
+
+For example, to increase the limit to 200,000 collections:
+
+```yaml
+rootCoord:
+    maxGeneralCapacity: 200000
+
+quotaAndLimits:
+    limits:
+        maxCollectionNum: 200000
+        maxCollectionNumPerDB: 200000
+```
+
+<div class="alert note">
+
+Setting only `maxGeneralCapacity` without also adjusting `maxCollectionNum` and `maxCollectionNumPerDB` will not take effect. All three parameters must be set to the same value or higher to increase the collection limit.
+
+</div>
 
 ## Calculating the number of collections
 
@@ -48,4 +77,4 @@ In this example, the calculated total of 960 collection units represents the cur
 failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 ```
 
-To avoid this error, you can either reduce the number of shards or partitions in existing or new collections, delete some collections, or increase the `maxGeneralCapacity` value.
+To avoid this error, you can either reduce the number of shards or partitions in existing or new collections, delete some collections, or increase the collection limit by modifying `maxGeneralCapacity`, `maxCollectionNum`, and `maxCollectionNumPerDB` together.
