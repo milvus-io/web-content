@@ -69,6 +69,7 @@ id: home.md
 - [Single-Vector Search](single-vector-search.md)
 - [Hybrid Search](multi-vector-search.md)
 - [Get & Scalar Query](get-and-scalar-query.md)
+- [Milvus for AI Agents](milvus_for_agents.md)
 </div>
 
 <div class="recomment-item">
@@ -97,12 +98,12 @@ id: home.md
 
 ## What's new in docs
 
-_June 2025 - Milvus 2.6.0 release_
+_March 2026 - Milvus 2.6.x updates_
 
-- Added guidance on how to [use embedding function](embedding-function-overview.md).
-- Added guidance on how to [use decay ranker](decay-ranker-overview.md).
-- Added guidance on how to [add fields to an existing collection](add-fields-to-an-existing-collection.md).
-- Added guidance on how to [perform phrase match](phrase-match.md).
-- Added descriptions of [IVF_RABITQ index](ivf-rabitq.md).
+- Added [Milvus for AI Agents](milvus_for_agents.md) section with prompt guides.
+- Added guidance on how to use [Gemini embedding function](google-gemini.md).
+- Added guidance on how to [search by primary keys](primary-key-search.md).
+- Added guidance on how to use [text highlighter](text-highlighter.md) in search results.
+- Added descriptions of [geometry field](geometry-field.md), [timestamptz field](timestamptz-field.md), [tiered storage](tiered-storage-overview.md), and [array of structs](array-of-structs.md).
 
 </div>

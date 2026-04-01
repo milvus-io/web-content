@@ -302,3 +302,9 @@ To migrate data from Milvus Lite to Milvus deployed on Docker or Kubernetes, ref
 Milvus provides REST and gRPC API, with client libraries in languages such as [Python](https://milvus.io/docs/install-pymilvus.md), [Java](https://milvus.io/docs/install-java.md), [Go](https://milvus.io/docs/install-go.md), C# and [Node.js](https://milvus.io/docs/install-node.md).
 
 For schema design, Milvus supports flexible schema design, where you can define the fields and their data types, including vector fields. You can also define the index type and parameters for each field. For more information, see [Data Model Design for Search](https://milvus.io/docs/schema-hands-on.md).
+
+## Milvus for AI Agents
+
+If you are using AI coding assistants like Claude Code or Cursor, you can install [Milvus Skill](https://github.com/zilliztech/milvus-skill) to help your AI tools write correct Milvus code.
+
+For more agent tools including MCP servers and curated prompts, see [Milvus for AI Agents](milvus_for_agents.md).
