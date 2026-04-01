@@ -45,8 +45,35 @@ title: Set Limits on Collection Number
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">65536</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">maxGeneralCapacity</code> parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is <code translate="no">65536</code>.</p>
+<p>To change the collection limit, you need to modify all three parameters together:</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>Maximum number of collection units (shards × partitions) that the current instance can hold.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>Maximum number of collections allowed across all databases in the current instance.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>Maximum number of collections allowed in a single database.</td><td><code translate="no">65536</code></td></tr>
+</tbody>
+</table>
+<p>For example, to increase the limit to 200,000 collections:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+    <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">200000</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">200000</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Setting only <code translate="no">maxGeneralCapacity</code> without also adjusting <code translate="no">maxCollectionNum</code> and <code translate="no">maxCollectionNumPerDB</code> will not take effect. All three parameters must be set to the same value or higher to increase the collection limit.</p>
+</div>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calculating the number of collections<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,4 +96,4 @@ title: Set Limits on Collection Number
 <p>In this example, the calculated total of 960 collection units represents the current usage. The <code translate="no">maxGeneralCapacity</code> defines the maximum number of collection units an instance can support, which is set to <code translate="no">65536</code> by default. This means the instance can accommodate up to 65,536 collection units. If the total number exceeds this limit, the system will display the following error message:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>To avoid this error, you can either reduce the number of shards or partitions in existing or new collections, delete some collections, or increase the <code translate="no">maxGeneralCapacity</code> value.</p>
+<p>To avoid this error, you can either reduce the number of shards or partitions in existing or new collections, delete some collections, or increase the collection limit by modifying <code translate="no">maxGeneralCapacity</code>, <code translate="no">maxCollectionNum</code>, and <code translate="no">maxCollectionNumPerDB</code> together.</p>
