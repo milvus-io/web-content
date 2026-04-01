@@ -438,3 +438,20 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <p>Untuk memigrasi data dari Milvus Lite ke Milvus yang digunakan di Docker atau Kubernetes, lihat Memigrasi <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">data dari Milvus Lite</a>.</p>
 <p>Milvus menyediakan API REST dan gRPC, dengan pustaka klien dalam bahasa seperti <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C#, dan <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
 <p>Untuk desain skema, Milvus mendukung desain skema yang fleksibel, di mana Anda dapat mendefinisikan field dan tipe datanya, termasuk field vektor. Anda juga dapat menentukan tipe indeks dan parameter untuk setiap field. Untuk informasi lebih lanjut, lihat <a href="https://milvus.io/docs/schema-hands-on.md">Desain Model Data untuk Pencarian</a>.</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus untuk Agen AI<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Jika Anda menggunakan asisten pengkodean AI seperti Claude Code atau Cursor, Anda dapat menginstal <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> untuk membantu alat AI Anda menulis kode Milvus yang benar.</p>
+<p>Untuk lebih banyak alat agen termasuk server MCP dan petunjuk yang dikurasi, lihat <a href="/docs/id/milvus_for_agents.md">Milvus untuk Agen AI</a>.</p>

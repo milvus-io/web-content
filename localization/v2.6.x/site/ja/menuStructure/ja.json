@@ -279,7 +279,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 8,
         "children": []
@@ -646,7 +646,7 @@
             ]
           },
           {
-            "label": "コレクション・フィールドの変更",
+            "label": "コレクションフィールドの変更",
             "id": "alter-collection-field.md",
             "order": 15,
             "children": []
@@ -1041,7 +1041,7 @@
             "children": []
           },
           {
-            "label": "Elasticsearchクエリからmilvusへ",
+            "label": "Elasticsearchからmilvusへのクエリ",
             "id": "elasticsearch-queries-to-milvus.md",
             "order": 13,
             "children": []
@@ -1061,7 +1061,7 @@
         ]
       },
       {
-        "label": "エンベッディングと再ランキング",
+        "label": "エンベッディングとリランキング",
         "id": "embeddings-reranking",
         "order": 6,
         "isMenu": true,
@@ -1314,6 +1314,85 @@
         "label": "インポートデータ",
         "id": "import-data.md",
         "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "AIツール",
+    "id": "aiTools",
+    "order": 4,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "AIエージェントのためのMilvus",
+        "id": "milvus_for_agents.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "AIプロンプト",
+        "id": "ai_prompts",
+        "isMenu": true,
+        "order": 1,
+        "children": [
+          {
+            "label": "milvusのAGENTS.md",
+            "id": "agents_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Python SDK",
+            "id": "python_sdk.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "スキーマ設計",
+            "id": "schema_design.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "検索パターン",
+            "id": "search_patterns.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "インデックスの選択",
+            "id": "index_selection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "RAGパイプライン",
+            "id": "rag_pipeline.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus スキル",
+        "id": "milvus_skill",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/milvus-skill",
+        "children": []
+      },
+      {
+        "label": "Milvus MCPサーバー",
+        "id": "mcp_server_milvus",
+        "order": 3,
+        "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
+        "children": []
+      },
+      {
+        "label": "クロード・コード用MCPサーバー",
+        "id": "mcp_claude_context",
+        "order": 4,
+        "externalLink": "https://github.com/zilliztech/claude-context",
         "children": []
       }
     ]
@@ -2822,7 +2901,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

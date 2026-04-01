@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Добро пожаловать в Milvus Docs!</h1></p>
@@ -11,7 +10,7 @@ id: home.md
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Попробуйте управляемый Milvus бесплатно!</h2>
-    <p class="promotion-desc">Zilliz Cloud - это отсутствие лишних хлопот, работа с Milvus и 10-кратная скорость.</p>
+    <p class="promotion-desc">Zilliz Cloud не требует особых усилий, работает на базе Milvus и в 10 раз быстрее.</p>
   </div>
   <div class="cta-wrapper">
    <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">Zilliz Cloud</a></div>
@@ -73,6 +72,7 @@ id: home.md
 <li><a href="/docs/ru/single-vector-search.md">Одновекторный поиск</a></li>
 <li><a href="/docs/ru/multi-vector-search.md">Гибридный поиск</a></li>
 <li><a href="/docs/ru/get-and-scalar-query.md">Получение и скалярный запрос</a></li>
+<li><a href="/docs/ru/milvus_for_agents.md">Milvus для агентов искусственного интеллекта</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -112,12 +112,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Июнь 2025 года - выпуск Milvus 2.6.0</em></p>
+    </button></h2><p><em>Март 2026 - Обновления Milvus 2.6.x</em></p>
 <ul>
-<li>Добавлено руководство по <a href="/docs/ru/embedding-function-overview.md">использованию функции встраивания</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/decay-ranker-overview.md">использованию ранжировщика распада</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/add-fields-to-an-existing-collection.md">добавлению полей в существующую коллекцию</a>.</li>
-<li>Добавлено руководство по <a href="/docs/ru/phrase-match.md">выполнению фразового соответствия</a>.</li>
-<li>Добавлено описание <a href="/docs/ru/ivf-rabitq.md">индекса IVF_RABITQ</a>.</li>
+<li>Добавлен раздел <a href="/docs/ru/milvus_for_agents.md">Milvus for AI Agents</a> с руководствами по использованию.</li>
+<li>Добавлено руководство по использованию <a href="/docs/ru/google-gemini.md">функции встраивания Gemini</a>.</li>
+<li>Добавлено руководство по <a href="/docs/ru/primary-key-search.md">поиску по первичным ключам</a>.</li>
+<li>Добавлено руководство по использованию <a href="/docs/ru/text-highlighter.md">подсветки текста</a> в результатах поиска.</li>
+<li>Добавлены описания <a href="/docs/ru/geometry-field.md">поля geometry</a>, <a href="/docs/ru/timestamptz-field.md">поля timestamptz</a>, <a href="/docs/ru/tiered-storage-overview.md">многоуровневого хранилища</a> и <a href="/docs/ru/array-of-structs.md">массива структур</a>.</li>
 </ul>
 </div>

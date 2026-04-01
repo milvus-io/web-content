@@ -21,7 +21,7 @@ title: البداية سريعة
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>يمكن للمتجهات، وهي تنسيق بيانات المخرجات لنماذج الشبكات العصبية، ترميز المعلومات بفعالية وتؤدي دورًا محوريًا في تطبيقات الذكاء الاصطناعي مثل قاعدة المعرفة والبحث الدلالي والتوليد المعزز للاسترجاع (RAG) وغيرها.</p>
-<p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من كل الأحجام بدءًا من تشغيل روبوت دردشة تجريبي في دفتر ملاحظات Jupyter إلى بناء بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك في هذا الدليل إلى كيفية إعداد Milvus محليًا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
+<p>Milvus هي قاعدة بيانات متجهة مفتوحة المصدر تناسب تطبيقات الذكاء الاصطناعي من كل الأحجام، بدءًا من تشغيل روبوت دردشة تجريبي في دفتر ملاحظات Jupyter إلى بناء بحث على نطاق الويب يخدم مليارات المستخدمين. في هذا الدليل، سنرشدك في هذا الدليل إلى كيفية إعداد Milvus محليًا في غضون دقائق واستخدام مكتبة عميل Python لإنشاء المتجهات وتخزينها والبحث فيها.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">تثبيت ميلفوس<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -254,7 +254,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>يقبل Milvus طلب بحث متجه واحد أو عدة طلبات بحث متجه في نفس الوقت. قيمة المتغير query_vectors هي قائمة من المتجهات، حيث يكون كل متجه عبارة عن مصفوفة من الأرقام العائمة.</p>
+    </button></h3><p>يقبل Milvus طلب بحث متجه واحد أو عدة طلبات بحث متجه في نفس الوقت. قيمة متغير query_vectors هي قائمة من المتجهات، حيث يكون كل متجه عبارة عن مصفوفة من الأرقام العائمة.</p>
 <pre><code translate="no" class="language-python">query_vectors = embedding_fn.encode_queries([<span class="hljs-string">&quot;Who is Alan Turing?&quot;</span>])
 <span class="hljs-comment"># If you don&#x27;t have the embedding function you can use a fake vector to finish the demo:</span>
 <span class="hljs-comment"># query_vectors = [ [ random.uniform(-1, 1) for _ in range(768) ] ]</span>
@@ -332,7 +332,7 @@ res = client.search(
         ></path>
       </svg>
     </button></h3><p>الاستعلام() هو عملية تسترجع جميع الكيانات المطابقة لمعيار ما، مثل <a href="https://milvus.io/docs/boolean.md">تعبير مرشح</a> أو مطابقة بعض المعرفات.</p>
-<p>على سبيل المثال، استرجاع جميع الكيانات التي يحتوي حقلها القياسي على قيمة معينة:</p>
+<p>على سبيل المثال، استرداد جميع الكيانات التي يحتوي حقلها القياسي على قيمة معينة:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
@@ -393,7 +393,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>نظرًا لأن جميع بيانات Milvus Lite يتم تخزينها في ملف محلي، يمكنك تحميل جميع البيانات في الذاكرة حتى بعد إنهاء البرنامج، وذلك عن طريق إنشاء <code translate="no">MilvusClient</code> بالملف الموجود. على سبيل المثال، سيؤدي ذلك إلى استرداد المجموعات من ملف "milvus_demo.db" ومتابعة كتابة البيانات فيه.</p>
+    </button></h2><p>نظرًا لأن جميع بيانات Milvus Lite يتم تخزينها في ملف محلي، يمكنك تحميل جميع البيانات في الذاكرة حتى بعد انتهاء البرنامج، وذلك عن طريق إنشاء <code translate="no">MilvusClient</code> بالملف الموجود. على سبيل المثال، سيؤدي ذلك إلى استرداد المجموعات من ملف "milvus_demo.db" ومتابعة كتابة البيانات فيه.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -438,3 +438,20 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <p>لترحيل البيانات من Milvus Lite إلى Milvus المنشور على Docker أو Kubernetes، راجع <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">ترحيل البيانات من Milvus Lite</a>.</p>
 <p>يوفر Milvus واجهة برمجة تطبيقات REST و gRPC، مع مكتبات العميل بلغات مثل <a href="https://milvus.io/docs/install-pymilvus.md">Python</a> و <a href="https://milvus.io/docs/install-java.md">Java</a> و <a href="https://milvus.io/docs/install-go.md">Go</a> و C# و <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
 <p>بالنسبة لتصميم المخطط، يدعم Milvus تصميم مخطط مرن، حيث يمكنك تحديد الحقول وأنواع بياناتها، بما في ذلك الحقول المتجهة. يمكنك أيضًا تحديد نوع الفهرس والمعلمات لكل حقل. لمزيد من المعلومات، راجع <a href="https://milvus.io/docs/schema-hands-on.md">تصميم نموذج البيانات للبحث</a>.</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">ميلفوس لوكلاء الذكاء الاصطناعي<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>إذا كنت تستخدم مساعدي ترميز الذكاء الاصطناعي مثل Claude Code أو Cursor، يمكنك تثبيت Milvus <a href="https://github.com/zilliztech/milvus-skill">Skill</a> لمساعدة أدوات الذكاء الاصطناعي الخاصة بك على كتابة كود Milvus الصحيح.</p>
+<p>للحصول على المزيد من أدوات الوكلاء بما في ذلك خوادم MCP والمطالبات المنسقة، راجع <a href="/docs/ar/milvus_for_agents.md">Milvus لوكلاء الذكاء الاصطناعي</a>.</p>

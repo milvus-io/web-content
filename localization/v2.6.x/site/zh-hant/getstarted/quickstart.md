@@ -438,3 +438,20 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <p>要從 Milvus Lite 遷移資料到部署在 Docker 或 Kubernetes 上的 Milvus，請參考<a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">從 Milvus Lite 遷移資料</a>。</p>
 <p>Milvus 提供 REST 和 gRPC API，以及<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、C# 和<a href="https://milvus.io/docs/install-node.md">Node.js</a> 等語言的用戶端程式庫。</p>
 <p>在模式設計方面，Milvus 支援彈性的模式設計，您可以定義欄位及其資料類型，包括向量欄位。您也可以為每個欄位定義索引類型和參數。如需詳細資訊，請參閱<a href="https://milvus.io/docs/schema-hands-on.md">搜尋的資料模式設計</a>。</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">適用於 AI 代理的 Milvus<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>如果您使用 Claude Code 或 Cursor 等 AI 編碼輔助工具，您可以安裝<a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a>來協助您的 AI 工具寫出正確的 Milvus 程式碼。</p>
+<p>如需更多代理工具，包括 MCP 伺服器和策劃提示，請參閱<a href="/docs/zh-hant/milvus_for_agents.md">Milvus for AI Agents</a>。</p>

@@ -144,7 +144,7 @@
                 "children": []
               },
               {
-                "label": "Рулевая диаграмма",
+                "label": "Рулевая карта",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -600,7 +600,7 @@
                     "children": []
                   },
                   {
-                    "label": "Остановить",
+                    "label": "Остановите",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1319,6 +1319,85 @@
     ]
   },
   {
+    "label": "Инструменты искусственного интеллекта",
+    "id": "aiTools",
+    "order": 4,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "Milvus для агентов искусственного интеллекта",
+        "id": "milvus_for_agents.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Подсказки искусственного интеллекта",
+        "id": "ai_prompts",
+        "isMenu": true,
+        "order": 1,
+        "children": [
+          {
+            "label": "AGENTS.md для Milvus",
+            "id": "agents_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Python SDK",
+            "id": "python_sdk.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Разработка схемы",
+            "id": "schema_design.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Поиск узоров",
+            "id": "search_patterns.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Выбор индекса",
+            "id": "index_selection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Трубопровод RAG",
+            "id": "rag_pipeline.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Милвус Скилл",
+        "id": "milvus_skill",
+        "order": 2,
+        "externalLink": "https://github.com/zilliztech/milvus-skill",
+        "children": []
+      },
+      {
+        "label": "Сервер Milvus MCP",
+        "id": "mcp_server_milvus",
+        "order": 3,
+        "externalLink": "https://github.com/zilliztech/mcp-server-milvus",
+        "children": []
+      },
+      {
+        "label": "MCP Server для Claude Code",
+        "id": "mcp_claude_context",
+        "order": 4,
+        "externalLink": "https://github.com/zilliztech/claude-context",
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Руководство по администрированию",
     "id": "admin_guide",
     "isMenu": true,
@@ -1343,7 +1422,7 @@
                 "children": []
               },
               {
-                "label": "С рулем",
+                "label": "С рулевым",
                 "id": "configure-helm.md",
                 "order": 1,
                 "children": []

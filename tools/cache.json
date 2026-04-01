@@ -701,7 +701,7 @@
     "v2.6.x/site/en/getstarted/install_SDKs/install-node.md": "2025-06-12T06:05:55.040Z",
     "v2.6.x/site/en/getstarted/install_SDKs/install-pymilvus.md": "2026-03-23T08:05:12.726Z",
     "v2.6.x/site/en/getstarted/milvus_lite.md": "2025-10-20T08:35:20.024Z",
-    "v2.6.x/site/en/getstarted/quickstart.md": "2026-01-04T12:12:19.010Z",
+    "v2.6.x/site/en/getstarted/quickstart.md": "2026-04-01T08:08:00.778Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-docker-compose.md": "2026-03-23T08:05:35.446Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-docker.md": "2026-03-23T08:05:45.594Z",
     "v2.6.x/site/en/getstarted/run-milvus-docker/install_standalone-windows.md": "2026-03-23T08:06:05.638Z",
@@ -713,7 +713,7 @@
     "v2.6.x/site/en/getstarted/run-milvus-k8s/install_cluster-milvusoperator.md": "2026-03-23T08:07:05.567Z",
     "v2.6.x/site/en/getstarted/run-milvus-k8s/prerequisite-helm.md": "2025-08-19T02:04:58.794Z",
     "v2.6.x/site/en/getstarted/schema-hands-on.md": "2025-09-19T13:15:22.528Z",
-    "v2.6.x/site/en/home/home.md": "2025-06-23T08:39:54.394Z",
+    "v2.6.x/site/en/home/home.md": "2026-04-01T08:08:05.947Z",
     "v2.6.x/site/en/integrations/AIMon_milvus_integration.md": "2025-11-03T08:37:00.352Z",
     "v2.6.x/site/en/integrations/ETL_using_vectorETL.md": "2025-06-12T06:06:27.695Z",
     "v2.6.x/site/en/integrations/NLWeb_with_milvus.md": "2025-06-12T10:44:58.399Z",
@@ -1002,7 +1002,7 @@
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/manage-cdc-tasks.md": "2025-06-12T06:15:04.254Z",
     "v2.6.x/site/en/userGuide/tools/milvus-cdc/milvus-cdc-overview.md": "2025-06-12T06:15:05.639Z",
     "v2.6.x/site/en/userGuide/tools/milvus-webui.md": "2025-06-12T06:15:07.664Z",
-    "v2.6.x/site/en/menuStructure/en.json": "2026-03-23T08:29:36.843Z",
+    "v2.6.x/site/en/menuStructure/en.json": "2026-04-01T08:23:50.616Z",
     "v2.6.x/site/en/reference/architecture/streaming_service.md": "2025-06-23T08:40:52.156Z",
     "v2.6.x/site/en/adminGuide/scale-standalone.md": "2025-07-02T07:32:10.597Z",
     "v2.6.x/site/en/integrations/langchain/langchain_milvus_async.md": "2025-07-14T08:50:28.212Z",
@@ -1045,6 +1045,13 @@
     "v2.6.x/site/en/adminGuide/switch_milvus_standalone_mq_type-operator.md": "2026-03-02T08:56:06.847Z",
     "v2.6.x/site/en/integrations/langchain/langchain_milvus_dido.md": "2026-03-03T02:08:35.668Z",
     "v2.6.x/site/en/integrations/build_RAG_with_milvus_and_exa.md": "2026-03-16T10:27:07.208Z",
-    "v2.6.x/site/en/userGuide/embeddings-reranking/embedding-function/google-gemini.md": "2026-03-23T08:08:17.938Z"
+    "v2.6.x/site/en/userGuide/embeddings-reranking/embedding-function/google-gemini.md": "2026-03-23T08:08:17.938Z",
+    "v2.6.x/site/en/aiTools/agents_overview.md": "2026-04-01T08:07:00.966Z",
+    "v2.6.x/site/en/aiTools/index_selection.md": "2026-04-01T08:07:07.166Z",
+    "v2.6.x/site/en/aiTools/milvus_for_agents.md": "2026-04-01T08:07:16.537Z",
+    "v2.6.x/site/en/aiTools/python_sdk.md": "2026-04-01T08:07:23.005Z",
+    "v2.6.x/site/en/aiTools/rag_pipeline.md": "2026-04-01T08:07:29.979Z",
+    "v2.6.x/site/en/aiTools/schema_design.md": "2026-04-01T08:07:37.157Z",
+    "v2.6.x/site/en/aiTools/search_patterns.md": "2026-04-01T08:07:43.803Z"
   }
 }

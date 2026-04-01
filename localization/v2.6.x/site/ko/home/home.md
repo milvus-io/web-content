@@ -1,17 +1,16 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <p><h2 class="sub-title">
-여기에서는 Milvus가 무엇인지, 비즈니스 요구 사항에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아볼 수 있습니다.</h2></p>
+여기에서는 Milvus가 무엇인지, 비즈니스 요구에 따라 애플리케이션을 구축하기 위해 Milvus를 설치, 사용 및 배포하는 방법에 대해 알아보세요.</h2></p>
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">관리형 Milvus를 무료로 체험해 보세요!</h2>
-    <p class="promotion-desc">번거로움이 없고, Milvus로 구동되며, 10배 더 빠른 Zilliz Cloud를 만나보세요.</p>
+    <p class="promotion-desc">번거로움이 없고, Milvus를 기반으로 하며, 10배 더 빠른 Zilliz Cloud를 만나보세요.</p>
   </div>
   <div class="cta-wrapper">
    <a class="cta-global" href="https://cloud.zilliz.com/signup?utm_source=partner&utm_medium=referral&utm_campaign=2025-02-24_doc_home_milvus.io">질리즈 클라우드</a></div>
@@ -73,6 +72,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
 <li><a href="/docs/ko/get-and-scalar-query.md">가져오기 및 스칼라 쿼리</a></li>
+<li><a href="/docs/ko/milvus_for_agents.md">AI 에이전트용 Milvus</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -112,12 +112,12 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2025년 6월 - Milvus 2.6.0 릴리스</em></p>
+    </button></h2><p><em>2026년 3월 - Milvus 2.6.x 업데이트</em></p>
 <ul>
-<li><a href="/docs/ko/embedding-function-overview.md">임베딩 기능 사용</a> 방법에 대한 안내가 추가되었습니다.</li>
-<li><a href="/docs/ko/decay-ranker-overview.md">감쇠 순위 사용</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/add-fields-to-an-existing-collection.md">기존 컬렉션에 필드를 추가하는</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/phrase-match.md">구문 일</a>치를 <a href="/docs/ko/phrase-match.md">수행하는</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/ivf-rabitq.md">IVF_RABITQ 인덱스에</a> 대한 설명이 추가되었습니다.</li>
+<li><a href="/docs/ko/milvus_for_agents.md">AI 에이전트용 Milvus</a> 섹션에 프롬프트 가이드가 추가되었습니다.</li>
+<li><a href="/docs/ko/google-gemini.md">Gemini 임베딩 기능</a> 사용 방법에 대한 안내가 추가되었습니다.</li>
+<li><a href="/docs/ko/primary-key-search.md">기본 키로 검색하는</a> 방법에 대한 안내를 추가했습니다.</li>
+<li>검색 결과에서 <a href="/docs/ko/text-highlighter.md">텍스트 형광펜을</a> 사용하는 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/geometry-field.md">지오메트리 필드</a>, <a href="/docs/ko/timestamptz-field.md">타임스탬츠 필드</a>, <a href="/docs/ko/tiered-storage-overview.md">계층형 스토리지</a> 및 <a href="/docs/ko/array-of-structs.md">구조 배열에</a> 대한 설명을 추가했습니다.</li>
 </ul>
 </div>

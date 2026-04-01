@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 歡迎來到 Milvus Docs！</h1></p>
@@ -73,6 +72,7 @@ id: home.md
 <li><a href="/docs/zh-hant/single-vector-search.md">單向量搜尋</a></li>
 <li><a href="/docs/zh-hant/multi-vector-search.md">混合搜尋</a></li>
 <li><a href="/docs/zh-hant/get-and-scalar-query.md">獲取與標量查詢</a></li>
+<li><a href="/docs/zh-hant/milvus_for_agents.md">適用於 AI 代理的 Milvus</a></li>
 </ul>
 </div>
 <div class="recomment-item">
@@ -80,7 +80,7 @@ id: home.md
 <ul>
 <li><a href="/docs/zh-hant/configure-docker.md">配置 Milvus</a></li>
 <li><a href="/docs/zh-hant/deploy_s3.md">管理相依性</a></li>
-<li><a href="/docs/zh-hant/eks.md">在雲上部署</a></li>
+<li><a href="/docs/zh-hant/eks.md">在雲端部署</a></li>
 <li><a href="/docs/zh-hant/scaleout.md">擴充 Milvus 集群</a></li>
 <li><a href="/docs/zh-hant/monitor_overview.md">監控和警報</a></li>
 </ul>
@@ -112,12 +112,12 @@ id: home.md
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>2025 年 6 月 - Milvus 2.6.0 發佈</em></p>
+    </button></h2><p><em>2026 年 3 月 - Milvus 2.6.x 更新</em></p>
 <ul>
-<li>新增如何<a href="/docs/zh-hant/embedding-function-overview.md">使用 embedding 功能</a>的指引。</li>
-<li>新增如何<a href="/docs/zh-hant/decay-ranker-overview.md">使用 decay ranker 的</a>指引。</li>
-<li>新增如何<a href="/docs/zh-hant/add-fields-to-an-existing-collection.md">在現有集合中加入欄位的</a>說明。</li>
-<li>新增如何<a href="/docs/zh-hant/phrase-match.md">執行短語匹配的</a>指引。</li>
-<li>新增<a href="/docs/zh-hant/ivf-rabitq.md">IVF_RABITQ 索引</a>的說明。</li>
+<li>新增<a href="/docs/zh-hant/milvus_for_agents.md">Milvus for AI Agents</a>章節與提示指南。</li>
+<li>新增如何使用<a href="/docs/zh-hant/google-gemini.md">Gemini 嵌入功能的</a>指南。</li>
+<li>新增如何<a href="/docs/zh-hant/primary-key-search.md">使用主鍵搜尋的</a>指引。</li>
+<li>新增如何在搜尋結果中使用<a href="/docs/zh-hant/text-highlighter.md">文字螢光筆的</a>指引。</li>
+<li>新增<a href="/docs/zh-hant/geometry-field.md">幾何欄位</a>、<a href="/docs/zh-hant/timestamptz-field.md">timestamptz 欄位</a>、<a href="/docs/zh-hant/tiered-storage-overview.md">分層儲存</a>與<a href="/docs/zh-hant/array-of-structs.md">結構陣列的</a>說明。</li>
 </ul>
 </div>

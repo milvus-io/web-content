@@ -43,7 +43,7 @@ title: Início rápido
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <blockquote>
-<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências que acabou de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong>. (Clique no menu "Runtime" (Tempo de execução) na parte superior do ecrã e selecione "Restart session" (Reiniciar sessão) no menu pendente).</p>
 </blockquote>
 </div>
 <h2 id="Set-Up-Vector-Database" class="common-anchor-header">Configurar a base de dados vetorial<button data-href="#Set-Up-Vector-Database" class="anchor-icon" translate="no">
@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar os vectores e os metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar as especificações do vetor, como a dimensionalidade, os tipos de índice e as métricas distantes. Existem também conceitos complexos para otimizar o índice para o desempenho da pesquisa vetorial. Por enquanto, vamos nos concentrar apenas no básico e usar o padrão para tudo o que for possível. No mínimo, só é necessário definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
+    </button></h2><p>No Milvus, precisamos de uma coleção para armazenar os vectores e os metadados associados. Pode pensar nela como uma tabela nas bases de dados SQL tradicionais. Ao criar uma coleção, pode definir parâmetros de esquema e de índice para configurar as especificações do vetor, como a dimensionalidade, os tipos de índice e as métricas distantes. Existem também conceitos complexos para otimizar o índice para o desempenho da pesquisa vetorial. Por enquanto, vamos nos concentrar apenas no básico e usar o padrão para tudo o que for possível. No mínimo, você só precisa definir o nome da coleção e a dimensão do campo vetorial da coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -238,7 +238,7 @@ Vector dim: <span class="hljs-number">768</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Agora podemos fazer pesquisas semânticas representando o texto da consulta de pesquisa como um vetor e realizar pesquisas de semelhança de vectores no Milvus.</p>
+    </button></h2><p>Agora podemos fazer pesquisas semânticas representando o texto da consulta de pesquisa como um vetor e efetuar uma pesquisa de semelhança de vectores no Milvus.</p>
 <h3 id="Vector-search" class="common-anchor-header">Pesquisa vetorial<button data-href="#Vector-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -437,4 +437,21 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <button class="copy-code-btn"></button></code></pre>
 <p>Para migrar dados do Milvus Lite para o Milvus implantado no Docker ou Kubernetes, consulte <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migrando dados do Milvus Lite</a>.</p>
 <p>O Milvus fornece API REST e gRPC, com bibliotecas de clientes em linguagens como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# e <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
-<p>Para a conceção de esquemas, Milvus suporta a conceção de esquemas flexíveis, onde pode definir os campos e os seus tipos de dados, incluindo campos vectoriais. Também é possível definir o tipo de índice e os parâmetros para cada campo. Para obter mais informações, consulte <a href="https://milvus.io/docs/schema-hands-on.md">Design do modelo de dados para pesquisa</a>.</p>
+<p>Para a conceção de esquemas, Milvus suporta a conceção de esquemas flexíveis, onde pode definir os campos e os seus tipos de dados, incluindo campos vectoriais. Também é possível definir o tipo de índice e os parâmetros para cada campo. Para mais informações, consulte <a href="https://milvus.io/docs/schema-hands-on.md">Conceção do modelo de dados para pesquisa</a>.</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus para agentes de IA<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Se você estiver usando assistentes de codificação de IA, como Claude Code ou Cursor, poderá instalar <a href="https://github.com/zilliztech/milvus-skill">o Milvus Skill</a> para ajudar suas ferramentas de IA a escrever o código correto do Milvus.</p>
+<p>Para obter mais ferramentas de agente, incluindo servidores MCP e prompts selecionados, consulte <a href="/docs/pt/milvus_for_agents.md">Milvus para agentes de IA</a>.</p>

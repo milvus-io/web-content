@@ -1,7 +1,6 @@
 ---
 id: home.md
 ---
-
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 Selamat datang di Milvus Docs!</h1></p>
@@ -73,12 +72,13 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
 <li><a href="/docs/id/single-vector-search.md">Pencarian Vektor Tunggal</a></li>
 <li><a href="/docs/id/multi-vector-search.md">Pencarian Hibrida</a></li>
 <li><a href="/docs/id/get-and-scalar-query.md">Dapatkan &amp; Kueri Skalar</a></li>
+<li><a href="/docs/id/milvus_for_agents.md">Milvus untuk Agen AI</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Menyebarkan</p>
 <ul>
-<li><a href="/docs/id/configure-docker.md">Mengonfigurasi Milvus</a></li>
+<li><a href="/docs/id/configure-docker.md">Konfigurasi Milvus</a></li>
 <li><a href="/docs/id/deploy_s3.md">Kelola Ketergantungan</a></li>
 <li><a href="/docs/id/eks.md">Menerapkan di Awan</a></li>
 <li><a href="/docs/id/scaleout.md">Menetapkan Skala Cluster Milvus</a></li>
@@ -112,12 +112,12 @@ Di sini Anda akan mempelajari tentang apa itu Milvus, dan bagaimana cara mengins
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><em>Juni 2025 - Rilis Milvus 2.6.0</em></p>
+    </button></h2><p><em>Maret 2026 - Pembaruan Milvus 2.6.x</em></p>
 <ul>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/embedding-function-overview.md">menggunakan fungsi penyematan</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/decay-ranker-overview.md">menggunakan pemeringkat peluruhan</a>.</li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/add-fields-to-an-existing-collection.md">menambahkan bidang ke koleksi yang sudah ada.</a></li>
-<li>Menambahkan panduan tentang cara <a href="/docs/id/phrase-match.md">melakukan pencocokan frasa</a>.</li>
-<li>Menambahkan deskripsi <a href="/docs/id/ivf-rabitq.md">indeks IVF_RABITQ</a>.</li>
+<li>Menambahkan bagian <a href="/docs/id/milvus_for_agents.md">Milvus untuk Agen AI</a> dengan panduan cepat.</li>
+<li>Menambahkan panduan tentang cara menggunakan <a href="/docs/id/google-gemini.md">fungsi penyematan Gemini</a>.</li>
+<li>Menambahkan panduan tentang cara <a href="/docs/id/primary-key-search.md">mencari dengan kunci utama</a>.</li>
+<li>Menambahkan panduan tentang cara menggunakan <a href="/docs/id/text-highlighter.md">penyorot teks</a> dalam hasil pencarian.</li>
+<li>Menambahkan deskripsi <a href="/docs/id/geometry-field.md">bidang geometri</a>, <a href="/docs/id/timestamptz-field.md">bidang timestamptz</a>, <a href="/docs/id/tiered-storage-overview.md">penyimpanan berjenjang</a>, dan <a href="/docs/id/array-of-structs.md">array struktur.</a></li>
 </ul>
 </div>

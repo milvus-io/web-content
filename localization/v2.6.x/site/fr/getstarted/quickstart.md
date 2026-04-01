@@ -81,7 +81,7 @@ client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, nous avons besoin d'une collection pour stocker les vecteurs et leurs métadonnées associées. Vous pouvez l'assimiler à une table dans les bases de données SQL traditionnelles. Lors de la création d'une collection, vous pouvez définir des paramètres de schéma et d'index pour configurer les spécifications des vecteurs telles que la dimensionnalité, les types d'index et les métriques distantes. Il existe également des concepts complexes permettant d'optimiser l'index pour les performances de la recherche vectorielle. Pour l'instant, concentrons-nous sur les principes de base et utilisons les paramètres par défaut dans la mesure du possible. Au minimum, il suffit de définir le nom de la collection et la dimension du champ vectoriel de la collection.</p>
+    </button></h2><p>Dans Milvus, nous avons besoin d'une collection pour stocker les vecteurs et leurs métadonnées associées. On peut l'assimiler à une table dans les bases de données SQL traditionnelles. Lors de la création d'une collection, vous pouvez définir des paramètres de schéma et d'index pour configurer les spécifications des vecteurs telles que la dimensionnalité, les types d'index et les métriques distantes. Il existe également des concepts complexes permettant d'optimiser l'index pour les performances de la recherche vectorielle. Pour l'instant, concentrons-nous sur les principes de base et utilisons les paramètres par défaut dans la mesure du possible. Au minimum, il suffit de définir le nom de la collection et la dimension du champ vectoriel de la collection.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>):
     client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>)
 client.create_collection(
@@ -438,3 +438,20 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
 <p>Pour migrer les données de Milvus Lite vers Milvus déployé sur Docker ou Kubernetes, reportez-vous à la section <a href="https://github.com/milvus-io/milvus-lite?tab=readme-ov-file#migrating-data-from-milvus-lite">Migration des données de Milvus Lite</a>.</p>
 <p>Milvus fournit des API REST et gRPC, avec des bibliothèques client dans des langages tels que <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# et <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
 <p>Pour la conception des schémas, Milvus prend en charge la conception flexible des schémas, où vous pouvez définir les champs et leurs types de données, y compris les champs vectoriels. Vous pouvez également définir le type d'index et les paramètres de chaque champ. Pour plus d'informations, voir <a href="https://milvus.io/docs/schema-hands-on.md">Conception du modèle de données pour la recherche</a>.</p>
+<h2 id="Milvus-for-AI-Agents" class="common-anchor-header">Milvus pour les agents d'IA<button data-href="#Milvus-for-AI-Agents" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Si vous utilisez des assistants de codage d'IA comme Claude Code ou Cursor, vous pouvez installer <a href="https://github.com/zilliztech/milvus-skill">Milvus Skill</a> pour aider vos outils d'IA à écrire un code Milvus correct.</p>
+<p>Pour plus d'outils d'agent, y compris les serveurs MCP et les invites curatées, voir <a href="/docs/fr/milvus_for_agents.md">Milvus pour les agents d'IA</a>.</p>
