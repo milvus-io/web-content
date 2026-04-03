@@ -190,5 +190,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>For agent workloads, <strong>Zilliz Cloud</strong> is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.</p>
+<p>For agent workloads, <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.</p>
 </div>
