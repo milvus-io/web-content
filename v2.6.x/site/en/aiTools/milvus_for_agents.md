@@ -122,6 +122,6 @@ Choosing the right Milvus deployment depends on your development stage.
 
 <div class="alert note">
 
-For agent workloads, **Zilliz Cloud** is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.
+For agent workloads, **[Zilliz Cloud](https://zilliz.com/cloud)** is recommended for production use. Agents typically do not manage infrastructure, so a serverless deployment eliminates operational overhead and provides automatic scaling.
 
 </div>
