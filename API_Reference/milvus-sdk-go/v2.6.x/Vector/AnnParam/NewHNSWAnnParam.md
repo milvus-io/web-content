@@ -14,7 +14,7 @@ func NewHNSWAnnParam(ef int) hsnwAnnParam
 
 **RETURNS:**
 
-*AnnParam*
+*[AnnParam](AnnParam.md)*
 
 An ANN search parameter instance. Pass this to a search option via `WithAnnParam()`.
 
