@@ -190,5 +190,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Para cargas de trabajo de agentes, se recomienda <strong>Zilliz Cloud</strong> para uso en producción. Los agentes no suelen gestionar la infraestructura, por lo que un despliegue sin servidor elimina la sobrecarga operativa y proporciona escalado automático.</p>
+<p>Para cargas de trabajo de agentes, se recomienda <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> para uso en producción. Los agentes no suelen gestionar la infraestructura, por lo que un despliegue sin servidor elimina la sobrecarga operativa y proporciona escalado automático.</p>
 </div>

@@ -18,7 +18,7 @@ title: 設定收集數量限制
         ></path>
       </svg>
     </button></h1><p>一個 Milvus 實例最多允許 65,536 個集合。但是，過多的收藏集可能會導致性能問題。因此，建議限制在 Milvus 實例中建立的收藏集數量。</p>
-<p>本指南說明如何設定 Milvus 範例中的收藏集數量限制。</p>
+<p>本指南提供如何設定 Milvus 實例中收藏集數量限制的說明。</p>
 <p>設定會因您安裝 Milvus 實例的方式而異。</p>
 <ul>
 <li><p>對於使用 Helm Charts 安裝的 Milvus 實例</p>
@@ -45,8 +45,35 @@ title: 設定收集數量限制
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">65536</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">maxGeneralCapacity</code> 參數設定目前 Milvus 實體可持有的最大集合數量。預設值為<code translate="no">65536</code> 。</p>
+<p>若要變更收集限制，您需要一併修改所有三個參數：</p>
+<table>
+<thead>
+<tr><th>參數</th><th>說明</th><th>預設值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>目前實例所能容納的最大集合單位 (分片 × 區塊) 數量。</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>目前實例中所有資料庫允許的最大集合數。</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>單一資料庫中允許的最大集合數量。</td><td><code translate="no">65536</code></td></tr>
+</tbody>
+</table>
+<p>例如，將限制增加到 200,000 個集合：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+    <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">200000</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">200000</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>只設定<code translate="no">maxGeneralCapacity</code> 而不同時調整<code translate="no">maxCollectionNum</code> 和<code translate="no">maxCollectionNumPerDB</code> 將不會生效。必須將三個參數都設定為相同值或更高，才能增加收藏集限制。</p>
+</div>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">計算收藏集數量<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,10 +90,10 @@ title: 設定收集數量限制
         ></path>
       </svg>
     </button></h2><p>在一個集合中，您可以設定多個分片和分區。分片是用於在多個資料節點之間分配資料寫入作業的邏輯單位。分區是邏輯單位，用於透過僅載入集合資料的子集來提高資料擷取效率。計算當前 Milvus 實例中的集合數量時，您還需要計算分片和分區。</p>
-<p>例如，假設您已經建立了<strong>100 個</strong>集合，其中<strong>60 個</strong>集合有<strong>2</strong>個分塊和<strong>4 個</strong>分割，其餘<strong>40 個</strong>集合有<strong>1</strong>個分塊和<strong>12 個</strong>分割。集合單元的總數（計算方式為<code translate="no">shards × partitions</code> ）可如下確定：</p>
+<p>例如，假設您已經建立了<strong>100 個</strong>集合，其中<strong>60 個</strong>集合有<strong>2</strong>個分塊和<strong>4 個</strong>分區，其餘<strong>40 個</strong>集合有<strong>1</strong>個分塊和<strong>12 個</strong>分區。集合單元的總數（計算方式為<code translate="no">shards × partitions</code> ）可如下確定：</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
 <p>在此範例中，計算出的 960 個集合單位總數代表目前的使用量。<code translate="no">maxGeneralCapacity</code> 定義了實體可支援的最大集合單位數量，預設值為<code translate="no">65536</code> 。這表示該實體最多可容納 65,536 個收集單元。如果總數超過此限制，系統會顯示以下錯誤訊息：</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>若要避免此錯誤訊息，您可以減少現有或新集合中的分片或分割數量、刪除某些集合，或增加<code translate="no">maxGeneralCapacity</code> 值。</p>
+<p>若要避免此錯誤訊息，您可以減少現有或新集合中的分片或分割數量、刪除某些集合，或透過同時修改<code translate="no">maxGeneralCapacity</code> 、<code translate="no">maxCollectionNum</code> 和<code translate="no">maxCollectionNumPerDB</code> 來增加集合限制。</p>

@@ -98,7 +98,7 @@ summary: >-
 <div class="start_card_container">
   <a href="/docs/it/agents_overview.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">AGENTI.md</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Regole di primo livello per qualsiasi agente di codifica AI. Iniziare da qui se si vuole un solo file.</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">Regole di primo livello per qualsiasi agente di codifica AI. Iniziare da qui se si desidera un solo file.</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -191,5 +191,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Per i carichi di lavoro degli agenti, <strong>Zilliz Cloud</strong> è consigliato per l'uso in produzione. Gli agenti in genere non gestiscono l'infrastruttura, quindi un'implementazione serverless elimina l'overhead operativo e fornisce una scalabilità automatica.</p>
+<p>Per i carichi di lavoro degli agenti, <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> è consigliato per l'uso in produzione. Gli agenti in genere non gestiscono l'infrastruttura, quindi un'implementazione serverless elimina i costi operativi e fornisce una scalabilità automatica.</p>
 </div>

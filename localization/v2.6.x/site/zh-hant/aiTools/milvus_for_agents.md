@@ -101,7 +101,7 @@ summary: 瞭解 AI 代理如何使用 Milvus 作為向量資料庫，以進行 R
 <div class="start_card_container">
   <a href="/docs/zh-hant/python_sdk.md" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">Python SDK</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">正確的連線模式、MilvusClient 使用以及 ORM API 禁止。</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">正確的連接模式、MilvusClient 使用方式以及 ORM API 禁止。</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -188,5 +188,5 @@ summary: 瞭解 AI 代理如何使用 Milvus 作為向量資料庫，以進行 R
 </tbody>
 </table>
 <div class="alert note">
-<p>對於代理工作負載，建議在生產中使用<strong>Zilliz Cloud</strong>。代理通常不會管理基礎架構，因此無伺服器部署可消除作業開銷，並提供自動擴充功能。</p>
+<p>對於代理工作負載，建議在生產中使用<strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong>。代理通常不會管理基礎架構，因此無伺服器部署可消除作業開銷，並提供自動擴充功能。</p>
 </div>

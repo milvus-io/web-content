@@ -155,9 +155,9 @@ summary: >-
 <tbody>
 <tr><td>Cursor</td><td><code translate="no">.cursor/rules/*.md</code></td><td><a href="https://docs.cursor.com/en/context/rules">Configurar regras de projeto</a></td></tr>
 <tr><td>Copiloto do GitHub</td><td><code translate="no">.github/copilot-instructions.md</code></td><td><a href="https://code.visualstudio.com/docs/copilot/copilot-customization#_custom-instructions">Instruções personalizadas</a></td></tr>
-<tr><td>Código Claude</td><td><code translate="no">CLAUDE.md</code></td><td><a href="https://docs.anthropic.com/en/docs/claude-code/overview">Documentos do Claude Code</a></td></tr>
+<tr><td>Código do Claude</td><td><code translate="no">CLAUDE.md</code></td><td><a href="https://docs.anthropic.com/en/docs/claude-code/overview">Documentos do Claude Code</a></td></tr>
 <tr><td>IDEs da JetBrains</td><td><code translate="no">guidelines.md</code></td><td><a href="https://www.jetbrains.com/help/junie/customize-guidelines.html">Personalizar diretrizes</a></td></tr>
-<tr><td>Gemini CLI</td><td><code translate="no">GEMINI.md</code></td><td><a href="https://codelabs.developers.google.com/gemini-cli-hands-on">Codelab da CLI do Gemini</a></td></tr>
+<tr><td>Gemini CLI</td><td><code translate="no">GEMINI.md</code></td><td><a href="https://codelabs.developers.google.com/gemini-cli-hands-on">Codelab do Gemini CLI</a></td></tr>
 <tr><td>Código VS</td><td><code translate="no">.instructions.md</code></td><td><a href="https://code.visualstudio.com/docs/copilot/copilot-customization">Configurar .instructions.md</a></td></tr>
 <tr><td>Windsurf</td><td><code translate="no">guidelines.md</code></td><td><a href="https://docs.windsurf.com/windsurf/customize">Configurar guidelines.md</a></td></tr>
 </tbody>
@@ -190,5 +190,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Para cargas de trabalho de agentes, <strong>o Zilliz Cloud</strong> é recomendado para uso em produção. Normalmente, os agentes não gerem a infraestrutura, pelo que uma implementação sem servidor elimina a sobrecarga operacional e fornece escalonamento automático.</p>
+<p>Para cargas de trabalho de agentes, <strong><a href="https://zilliz.com/cloud">o Zilliz Cloud</a></strong> é recomendado para uso em produção. Normalmente, os agentes não gerem a infraestrutura, pelo que uma implementação sem servidor elimina a sobrecarga operacional e fornece escalonamento automático.</p>
 </div>

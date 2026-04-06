@@ -28,7 +28,7 @@ title: コレクション数に制限を設ける
 <li><p>Operatorを使用してインストールしたMilvusインスタンスの場合</p>
 <p><code translate="no">Milvus</code> カスタムリソースの<code translate="no">spec.components</code> セクションに設定を追加します。詳細については、「<a href="/docs/ja/configure_operator.md">Operatorを使用したMilvusの設定</a>」を参照してください。</p></li>
 </ul>
-<h2 id="Configuration-options" class="common-anchor-header">構成オプション<button data-href="#Configuration-options" class="anchor-icon" translate="no">
+<h2 id="Configuration-options" class="common-anchor-header">設定オプション<button data-href="#Configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -45,8 +45,35 @@ title: コレクション数に制限を設ける
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">65536</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">maxGeneralCapacity</code> パラメータは、現在のMilvusインスタンスが保持できるコレクションの最大数を設定します。デフォルト値は<code translate="no">65536</code> です。</p>
+<p>収集の上限を変更するには、3つのパラメータを一緒に変更する必要があります：</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>パラメータ 説明</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>現在のインスタンスが保持できるコレクション・ユニット（シャード×パーティション）の最大数。</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>現在のインスタンスのすべてのデータベースで許可されるコレクションの最大数。</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>単一のデータベースで許可されるコレクションの最大数。</td><td><code translate="no">65536</code></td></tr>
+</tbody>
+</table>
+<p>例えば、上限を200,000コレクションに増やす場合：</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+    <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">200000</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">200000</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p><code translate="no">maxCollectionNum</code> と<code translate="no">maxCollectionNumPerDB</code> も調整せずに<code translate="no">maxGeneralCapacity</code> だけを設定しても、効果はありません。コレクションの上限を増やすには、3つのパラメータをすべて同じ値以上に設定する必要があります。</p>
+</div>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">コレクション数の計算<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,11 +89,11 @@ title: コレクション数に制限を設ける
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションでは、複数のシャードとパーティションを設定できます。シャードは、データの書き込み操作を複数のデータノードに分散するために使用される論理単位です。パーティションは、コレクションデータのサブセットのみをロードすることで、データ 検索の効率を向上させるために使用される論理単位です。現在のMilvusインスタンスのコレクション数を計算する場合、シャードとパーティションも数える必要があります。</p>
+    </button></h2><p>コレクションでは、複数のシャードとパーティションを設定できます。シャードは、データの書き込み操作を複数のデータ・ノードに分散するために使用される論理単位です。パーティションは、コレクションデータのサブセットのみをロードすることで、データ検索の効率を向上させるために使用される論理単位です。現在のMilvusインスタンスのコレクション数を計算する場合、シャードとパーティションも数える必要があります。</p>
 <p>例えば、すでに<strong>100</strong>コレクションを作成し、そのうちの<strong>60</strong>コレクションに<strong>2</strong>シャードと<strong>4</strong>パーティションがあり、残りの<strong>40</strong>コレクションに<strong>1</strong>シャードと<strong>12</strong>パーティションがあるとします。コレクションユニットの総数（<code translate="no">shards × partitions</code> として計算）は、次のように決定できます：</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
 <p>この例では、計算された合計960コレクションユニットが現在の使用量を表します。<code translate="no">maxGeneralCapacity</code> は、インスタンスがサポートできるコレクションユニットの最大数を定義します。これは、デフォルトで<code translate="no">65536</code> に設定されています。これは、インスタンスが最大65,536コレクション・ユニットに対応できることを意味します。合計数がこの制限を超えると、システムは以下のエラー・メッセージを表示します：</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>このエラーを回避するには、既存または新規コレクションのシャードまたはパーティションの数を減らすか、一部のコレクションを削除するか、<code translate="no">maxGeneralCapacity</code> の値を増やします。</p>
+<p>このエラーを回避するには、既存または新規コレクションのシャード数またはパーティション数を減らすか、一部のコレクションを削除するか、<code translate="no">maxGeneralCapacity</code> 、<code translate="no">maxCollectionNum</code> 、<code translate="no">maxCollectionNumPerDB</code> を一緒に修正してコレクションの上限を増やします。</p>

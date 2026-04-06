@@ -45,8 +45,35 @@ title: Begrenzung der Erfassungsanzahl festlegen
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">65536</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Parameter <code translate="no">maxGeneralCapacity</code> legt die maximale Anzahl von Sammlungen fest, die die aktuelle Milvus-Instanz enthalten kann. Der Standardwert ist <code translate="no">65536</code>.</p>
+<p>Um die Sammelgrenze zu ändern, müssen Sie alle drei Parameter zusammen ändern:</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>Maximale Anzahl von Sammeleinheiten (Shards × Partitionen), die die aktuelle Instanz enthalten kann.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>Maximale Anzahl von Sammlungen, die für alle Datenbanken der aktuellen Instanz zulässig sind.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>Maximal zulässige Anzahl von Sammlungen in einer einzelnen Datenbank.</td><td><code translate="no">65536</code></td></tr>
+</tbody>
+</table>
+<p>Beispiel: Anhebung des Limits auf 200.000 Sammlungen:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+    <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">200000</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">200000</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>Wenn Sie nur <code translate="no">maxGeneralCapacity</code> einstellen, ohne auch <code translate="no">maxCollectionNum</code> und <code translate="no">maxCollectionNumPerDB</code> zu ändern, wird dies nicht wirksam. Alle drei Parameter müssen auf denselben oder einen höheren Wert eingestellt werden, um die Sammlungsgrenze zu erhöhen.</p>
+</div>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Berechnen der Anzahl der Sammlungen<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,11 +89,11 @@ title: Begrenzung der Erfassungsanzahl festlegen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In einer Sammlung können Sie mehrere Shards und Partitionen einrichten. Shards sind logische Einheiten, die verwendet werden, um Datenschreiboperationen auf mehrere Datenknoten zu verteilen. Partitionen sind logische Einheiten, die dazu dienen, die Effizienz der Datenabfrage zu verbessern, indem nur eine Teilmenge der Sammlungsdaten geladen wird. Wenn Sie die Anzahl der Sammlungen in der aktuellen Milvus-Instanz berechnen, müssen Sie auch die Shards und Partitionen zählen.</p>
+    </button></h2><p>In einer Sammlung können Sie mehrere Shards und Partitionen einrichten. Shards sind logische Einheiten, die dazu dienen, Datenschreiboperationen auf mehrere Datenknoten zu verteilen. Partitionen sind logische Einheiten, die dazu dienen, die Effizienz der Datenabfrage zu verbessern, indem nur eine Teilmenge der Sammlungsdaten geladen wird. Wenn Sie die Anzahl der Sammlungen in der aktuellen Milvus-Instanz berechnen, müssen Sie auch die Shards und Partitionen zählen.</p>
 <p>Nehmen wir zum Beispiel an, dass Sie bereits <strong>100</strong> Sammlungen erstellt haben, von denen <strong>60</strong> <strong>2</strong> Shards und <strong>4</strong> Partitionen und die restlichen <strong>40</strong> Sammlungen <strong>1</strong> Shard und <strong>12</strong> Partitionen enthalten. Die Gesamtzahl der Sammeleinheiten (berechnet als <code translate="no">shards × partitions</code>) kann wie folgt ermittelt werden:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel entspricht die berechnete Gesamtzahl von 960 Sammeleinheiten der aktuellen Nutzung. Die <code translate="no">maxGeneralCapacity</code> definiert die maximale Anzahl von Sammeleinheiten, die eine Instanz unterstützen kann, die standardmäßig auf <code translate="no">65536</code> eingestellt ist. Das bedeutet, dass die Instanz bis zu 65.536 Sammeleinheiten aufnehmen kann. Wenn die Gesamtzahl diese Grenze überschreitet, zeigt das System die folgende Fehlermeldung an:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>Um diesen Fehler zu vermeiden, können Sie entweder die Anzahl der Shards oder Partitionen in bestehenden oder neuen Sammlungen reduzieren, einige Sammlungen löschen oder den Wert <code translate="no">maxGeneralCapacity</code> erhöhen.</p>
+<p>Um diesen Fehler zu vermeiden, können Sie entweder die Anzahl der Shards oder Partitionen in bestehenden oder neuen Sammlungen reduzieren, einige Sammlungen löschen oder die Sammlungsgrenze erhöhen, indem Sie <code translate="no">maxGeneralCapacity</code>, <code translate="no">maxCollectionNum</code> und <code translate="no">maxCollectionNumPerDB</code> zusammen ändern.</p>

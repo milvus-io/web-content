@@ -190,5 +190,5 @@ summary: >-
 </tbody>
 </table>
 <div class="alert note">
-<p>Untuk beban kerja agen, <strong>Zilliz Cloud</strong> direkomendasikan untuk penggunaan produksi. Agen biasanya tidak mengelola infrastruktur, sehingga penerapan tanpa server menghilangkan biaya operasional dan menyediakan penskalaan otomatis.</p>
+<p>Untuk beban kerja agen, <strong><a href="https://zilliz.com/cloud">Zilliz Cloud</a></strong> direkomendasikan untuk penggunaan produksi. Agen biasanya tidak mengelola infrastruktur, sehingga penerapan tanpa server menghilangkan biaya operasional dan menyediakan penskalaan otomatis.</p>
 </div>

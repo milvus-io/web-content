@@ -45,8 +45,35 @@ title: وضع حدود على عدد التحصيل
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
     <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">65536</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">65536</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">65536</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>تقوم المعلمة <code translate="no">maxGeneralCapacity</code> بتعيين الحد الأقصى لعدد المجموعات التي يمكن لمثيل Milvus الحالي الاحتفاظ بها. القيمة الافتراضية هي <code translate="no">65536</code>.</p>
+<p>لتغيير حد التجميع، تحتاج إلى تعديل المعلمات الثلاثة معًا:</p>
+<table>
+<thead>
+<tr><th>المعلمة</th><th>الوصف</th><th>القيمة الافتراضية</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">rootCoord.maxGeneralCapacity</code></td><td>الحد الأقصى لعدد وحدات التجميع (أجزاء × أقسام) التي يمكن للمثيل الحالي الاحتفاظ بها.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNum</code></td><td>الحد الأقصى لعدد المجموعات المسموح بها في كافة قواعد البيانات في المثيل الحالي.</td><td><code translate="no">65536</code></td></tr>
+<tr><td><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></td><td>الحد الأقصى لعدد المجموعات المسموح به في قاعدة بيانات واحدة.</td><td><code translate="no">65536</code></td></tr>
+</tbody>
+</table>
+<p>على سبيل المثال، لزيادة الحد إلى 200,000 مجموعة:</p>
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">rootCoord:</span>
+    <span class="hljs-attr">maxGeneralCapacity:</span> <span class="hljs-number">200000</span>
+
+<span class="hljs-attr">quotaAndLimits:</span>
+    <span class="hljs-attr">limits:</span>
+        <span class="hljs-attr">maxCollectionNum:</span> <span class="hljs-number">200000</span>
+        <span class="hljs-attr">maxCollectionNumPerDB:</span> <span class="hljs-number">200000</span>
+<button class="copy-code-btn"></button></code></pre>
+<div class="alert note">
+<p>لن يسري مفعول الإعداد <code translate="no">maxGeneralCapacity</code> فقط دون ضبط <code translate="no">maxCollectionNum</code> و <code translate="no">maxCollectionNumPerDB</code>. يجب ضبط جميع المعلمات الثلاث على نفس القيمة أو أعلى لزيادة حد المجموعات.</p>
+</div>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">حساب عدد المجموعات<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,11 +89,11 @@ title: وضع حدود على عدد التحصيل
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>في المجموعة، يمكنك إعداد أجزاء وأقسام متعددة. الأجزاء هي وحدات منطقية تستخدم لتوزيع عمليات كتابة البيانات بين عقد بيانات متعددة. أما الأقسام فهي وحدات منطقية تستخدم لتحسين كفاءة استرجاع البيانات عن طريق تحميل مجموعة فرعية فقط من بيانات المجموعة. عند حساب عدد المجموعات في مثيل Milvus الحالي، تحتاج أيضًا إلى حساب الأجزاء والأقسام.</p>
+    </button></h2><p>في المجموعة، يمكنك إعداد أجزاء وأقسام متعددة. الأجزاء هي وحدات منطقية تُستخدم لتوزيع عمليات كتابة البيانات بين عقد بيانات متعددة. أما الأقسام فهي وحدات منطقية تستخدم لتحسين كفاءة استرجاع البيانات عن طريق تحميل مجموعة فرعية فقط من بيانات المجموعة. عند حساب عدد المجموعات في مثيل Milvus الحالي، تحتاج أيضًا إلى حساب الأجزاء والأقسام.</p>
 <p>على سبيل المثال، لنفترض أنك قمت بالفعل بإنشاء <strong>100</strong> مجموعة، مع وجود <strong>جزأين</strong> <strong>و4</strong> أقسام في <strong>60</strong> منها وجزء <strong>واحد</strong> <strong>و12</strong> قسمًا في <strong>الـ40</strong> مجموعة المتبقية. يمكن تحديد العدد الإجمالي لوحدات التجميع (محسوبًا على <code translate="no">shards × partitions</code>) على النحو التالي:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
 <p>في هذا المثال، يمثل المجموع المحسوب البالغ 960 وحدة تجميع يمثل الاستخدام الحالي. يحدد <code translate="no">maxGeneralCapacity</code> الحد الأقصى لعدد وحدات التجميع التي يمكن أن يدعمها المثيل، والذي يتم تعيينه على <code translate="no">65536</code> افتراضيًا. وهذا يعني أن المثيل يمكنه استيعاب ما يصل إلى 65,536 وحدة تجميع. إذا تجاوز العدد الإجمالي هذا الحد، سيعرض النظام رسالة الخطأ التالية:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>لتجنب هذا الخطأ، يمكنك إما تقليل عدد الأجزاء أو الأقسام في المجموعات الحالية أو الجديدة أو حذف بعض المجموعات أو زيادة القيمة <code translate="no">maxGeneralCapacity</code>.</p>
+<p>لتجنب هذا الخطأ، يمكنك إما تقليل عدد الأجزاء أو الأقسام في المجموعات الحالية أو الجديدة، أو حذف بعض المجموعات، أو زيادة حد المجموعة عن طريق تعديل <code translate="no">maxGeneralCapacity</code> و <code translate="no">maxCollectionNum</code> و <code translate="no">maxCollectionNumPerDB</code> معًا.</p>

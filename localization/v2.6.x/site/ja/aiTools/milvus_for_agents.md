@@ -44,7 +44,7 @@ summary: AIエージェントがMilvusをRAG、意味検索、長期記憶のた
 <div class="start_card_container">
   <a href="https://github.com/zilliztech/mcp-server-milvus" style="text-decoration: none; color: inherit;">
     <p class="link-btn" style="font-size: 1rem; white-space: nowrap;">MCPサーバ</p>
-    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">MCP対応エージェントがMilvusと直接対話するためのModel Context Protocolサーバ。</p>
+    <p style="font-size: 0.875rem; font-weight: 400; color: #555;">MCP対応エージェントがMilvusと直接対話できるようにするモデルコンテキストプロトコルサーバー。</p>
   </a>
 </div>
 <div class="start_card_container">
@@ -188,5 +188,5 @@ summary: AIエージェントがMilvusをRAG、意味検索、長期記憶のた
 </tbody>
 </table>
 <div class="alert note">
-<p>エージェントのワークロードについては、<strong>Zilliz Cloudを</strong>本番環境で使用することを推奨します。エージェントは通常インフラを管理しないため、サーバーレス・デプロイメントにより運用のオーバーヘッドがなくなり、自動スケーリングが可能になります。</p>
+<p>エージェントのワークロードについては、<strong><a href="https://zilliz.com/cloud">Zilliz Cloudを</a></strong>本番環境で使用することを推奨します。エージェントは通常インフラを管理しないため、サーバーレス・デプロイメントにより運用のオーバーヘッドがなくなり、自動スケーリングが可能になります。</p>
 </div>
