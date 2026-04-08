@@ -77,7 +77,7 @@ BoostRanker.builder()
 
 **RETURNS:**
 
- A boost ranker instance.
+A boost ranker instance.
 
 ## Examples:
 
