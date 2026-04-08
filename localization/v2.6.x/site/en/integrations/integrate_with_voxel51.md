@@ -367,7 +367,7 @@ milvus_index = fob.compute_similarity(
 <li><p><strong>metric</strong> (<em>“dotproduct”</em>): the embedding distance metric to use when creating a new index. The supported values are (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>“Session”</em>): the consistency level to use. Supported values are (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>For detailed information on these parameters, see the <a href="/docs/authenticate.md">Milvus authentication documentation</a> and <a href="/docs/consistency.md">Milvus consistency levels documentation</a>.</p>
+<p>For detailed information on these parameters, see the <a href="/docs/authenticate.md">Milvus authentication documentation</a> and <a href="/docs/tune_consistency.md">Milvus consistency levels documentation</a>.</p>
 <p>You can specify these parameters via any of the strategies described in the previous section. Here’s an example of a <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a> that includes all of the available parameters:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;similarity_backends&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -386,7 +386,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Manage brain runs<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

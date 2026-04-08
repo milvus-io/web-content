@@ -339,5 +339,5 @@ title: Milvus Architecture Overview
     </button></h2><ul>
 <li>Explore the <a href="/docs/main_components.md">Main Components</a> for detailed implementation specifics</li>
 <li>Learn about <a href="/docs/data_processing.md">Data Processing</a> workflows and optimization strategies</li>
-<li>Understand the <a href="/docs/consistency.md">Consistency Model</a> and transaction guarantees in Milvus</li>
+<li>Understand the <a href="/docs/tune_consistency.md">Consistency Model</a> and transaction guarantees in Milvus</li>
 </ul>
