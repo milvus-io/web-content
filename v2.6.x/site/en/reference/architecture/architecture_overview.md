@@ -109,4 +109,4 @@ Milvus APIs are categorized by their function and follow specific paths through 
 
 - Explore the [Main Components](main_components.md) for detailed implementation specifics
 - Learn about [Data Processing](data_processing.md) workflows and optimization strategies
-- Understand the [Consistency Model](consistency.md) and transaction guarantees in Milvus
+- Understand the [Consistency Model](tune_consistency.md) and transaction guarantees in Milvus

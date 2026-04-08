@@ -227,7 +227,7 @@ The Milvus backend supports a variety of query parameters that can be used to cu
 
 - **consistency_level** (*"Session"*): the consistency level to use. Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`)
 
-For detailed information on these parameters, see the [Milvus authentication documentation](authenticate.md) and [Milvus consistency levels documentation](consistency.md).
+For detailed information on these parameters, see the [Milvus authentication documentation](authenticate.md) and [Milvus consistency levels documentation](tune_consistency.md).
 
 You can specify these parameters via any of the strategies described in the previous section. Here’s an example of a [brain config](https://docs.voxel51.com/user_guide/brain.html#brain-config) that includes all of the available parameters:
 
@@ -252,7 +252,7 @@ milvus_index = fob.compute_similarity(
     brain_key="milvus_index",
     collection_name="your_collection",
     metric="dotproduct",
-    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.
+    consistency_level="Bounded",  # Supported values are (`"Strong"`, `"Session"`, `"Bounded"`, `"Eventually"`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.
 )
 ```
 

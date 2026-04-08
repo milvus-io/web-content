@@ -131,7 +131,7 @@ Yes. You can deploy Milvus cluster with multiple nodes via Helm Chart on Kuberne
 
 #### What are growing segment and sealed segment?
 
-When a search request comes, Milvus searches both incremental data and historical data. Incremental data are recent updates, they are stored in the growing segments, which are buffered in memory before they reach the threshold to be persisted in object storage and a more efficient index is built for them, while historical data are updates a while ago. They are in the sealed segments which have been persisted in the object storage. Incremental data and historical data together constitute the whole dataset for search. This design makes any data ingested to Milvus instantly searchable. For Milvus Distributed, there are more complex factors that decide when a record just ingested can show up in search result. Learn more nuance about that at [consistency levels](https://milvus.io/docs/consistency.md).
+When a search request comes, Milvus searches both incremental data and historical data. Incremental data are recent updates, they are stored in the growing segments, which are buffered in memory before they reach the threshold to be persisted in object storage and a more efficient index is built for them, while historical data are updates a while ago. They are in the sealed segments which have been persisted in the object storage. Incremental data and historical data together constitute the whole dataset for search. This design makes any data ingested to Milvus instantly searchable. For Milvus Distributed, there are more complex factors that decide when a record just ingested can show up in search result. Learn more nuance about that at [consistency levels](https://milvus.io/docs/tune_consistency.md).
 
 #### Is Milvus available for concurrent search?
 
@@ -176,7 +176,7 @@ No, storage space will not be immediately released when you delete data in Milvu
 
 Yes, in Milvus, data visibility is not directly tied to flush operations due to its storage-compute disaggregation architecture. You can manage data readability using consistency levels.
 
-When selecting a consistency level, consider the trade-offs between consistency and performance. For operations requiring immediate visibility, use a "Strong" consistency level. For faster writes, prioritize weaker consistency (data might not be immediately visible). For more information, refer to [Consistency](consistency.md).
+When selecting a consistency level, consider the trade-offs between consistency and performance. For operations requiring immediate visibility, use a "Strong" consistency level. For faster writes, prioritize weaker consistency (data might not be immediately visible). For more information, refer to [Consistency](tune_consistency.md).
 
 #### After enabling the partition key feature, what is the default value of `num_partitions` in Milvus, and why?
 

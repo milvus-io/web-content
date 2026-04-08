@@ -54,7 +54,7 @@ You can set different consistency levels when you create a collection as well as
 
 ### Set Consistency Level upon Creating Collection
 
-When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to **Strong**.
+When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to **Bounded**.
 
 <div class="multipleCode">
     <a href="#python">Python</a>
@@ -77,7 +77,7 @@ CreateCollectionReq createCollectionReq = CreateCollectionReq.builder()
         .collectionName("my_collection")
         .collectionSchema(schema)
         // highlight-next-line
-        .consistencyLevel(ConsistencyLevel.STRONG)
+        .consistencyLevel(ConsistencyLevel.BOUNDED)
         .build();
 client.createCollection(createCollectionReq);
 ```
@@ -85,7 +85,7 @@ client.createCollection(createCollectionReq);
 ```go
 err = client.CreateCollection(ctx,
     milvusclient.NewCreateCollectionOption("my_collection", schema).
-        WithConsistencyLevel(entity.ClStrong))
+        WithConsistencyLevel(entity.ClBounded))
 if err != nil {
     fmt.Println(err.Error())
     // handle error
@@ -121,7 +121,7 @@ export schema='{
     }'
 
 export params='{
-    "consistencyLevel": "Strong"
+    "consistencyLevel": "Bounded"
 }'
 
 curl --request POST \
