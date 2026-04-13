@@ -28,7 +28,7 @@ title: Construir RAG com Milvus e Crawl4AI
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_crawl4ai.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://crawl4ai.com/mkdocs/">O Crawl4AI</a> proporciona um rastreio da Web extremamente rápido e preparado para IA para LLMs. De código aberto e optimizado para RAG, simplifica o scraping com extração avançada e desempenho em tempo real.</p>
+<p><a href="https://crawl4ai.com/mkdocs/">O Crawl4AI</a> oferece rastreamento da Web extremamente rápido e pronto para IA para LLMs. De código aberto e optimizado para RAG, simplifica o scraping com extração avançada e desempenho em tempo real.</p>
 <p>Neste tutorial, mostraremos como construir um pipeline Retrieval-Augmented Generation (RAG) usando Milvus e Crawl4AI. O pipeline integra o Crawl4AI para rastreio de dados da Web, o Milvus para armazenamento de vectores e o OpenAI para gerar respostas perspicazes e sensíveis ao contexto.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -285,7 +285,7 @@ INFO:numexpr.utils:NumExpr defaulting to 8 threads.
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserir dados<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -372,7 +372,7 @@ Processing sections: 100%|██████████| 18/18 [00:09&lt;00:00,
     </button></h3><p>Vamos especificar uma pergunta de consulta sobre o site que acabámos de rastrear.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What are the main components of autonomous agents?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Pesquise a pergunta na coleção e recupere as três principais correspondências semânticas.</p>
+<p>Pesquise a pergunta na coleção e recupere as 3 principais correspondências semânticas.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[emb_text(question)],

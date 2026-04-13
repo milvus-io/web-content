@@ -1,7 +1,7 @@
 ---
 id: build_rag_on_arm.md
 summary: >-
-  In questa esercitazione si apprende come costruire un'applicazione di
+  In questa esercitazione imparerete a costruire un'applicazione di
   Retrieval-Augmented Generation (RAG) su infrastrutture basate su Arm. Per
   l'archiviazione vettoriale, utilizziamo Zilliz Cloud, il database vettoriale
   Milvus completamente gestito. Zilliz Cloud è disponibile sui principali cloud
@@ -71,7 +71,22 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Creare la raccolta</h3><p>Utilizziamo <a href="https://zilliz.com/cloud">Zilliz Cloud</a> distribuito su AWS con macchine basate su Arm per memorizzare e recuperare i dati vettoriali. Per iniziare rapidamente, è sufficiente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">registrare</a> gratuitamente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">un account</a> su Zilliz Cloud.</p>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Creare la raccolta<button data-href="#Create-the-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Utilizziamo <a href="https://zilliz.com/cloud">Zilliz Cloud</a> distribuito su AWS con macchine basate su Arm per memorizzare e recuperare i dati vettoriali. Per iniziare rapidamente, è sufficiente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">registrare</a> gratuitamente <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">un account</a> su Zilliz Cloud.</p>
 <div class="alert note">
 <p>Oltre a Zilliz Cloud, anche Milvus self-hosted è un'opzione (più complicata da configurare). Possiamo anche distribuire <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> e <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> su macchine basate su ARM. Per ulteriori informazioni sull'installazione di Milvus, consultare la <a href="https://milvus.io/docs/install-overview.md">documentazione di installazione</a>.</p>
 </div>
@@ -95,11 +110,26 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Il tipo di metrica predefinito è la distanza del prodotto interno. Per ulteriori informazioni sui tipi di distanza, si può consultare la <a href="https://milvus.io/docs/metric.md?tab=floating">pagina Metriche di somiglianza</a>.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati</h3><p>Per il nostro RAG utilizziamo le pagine FAQ della <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentazione Milvus 2.4.x</a> come conoscenza privata, che è una buona fonte di dati per una semplice pipeline RAG.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Preparare i dati<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per il nostro RAG utilizziamo le pagine FAQ della <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentazione Milvus 2.4.x</a> come conoscenza privata, che è una buona fonte di dati per una semplice pipeline RAG.</p>
 <p>Scaricare il file zip ed estrarre i documenti nella cartella <code translate="no">milvus_docs</code>.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip</span>
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs</span>
@@ -115,7 +145,22 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Inserire i dati</h3><p>Prepariamo un modello di embedding semplice ma efficiente <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">, all-MiniLM-L6-v2</a>, in grado di convertire il testo in vettori di embedding.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Prepariamo un modello di embedding semplice ma efficiente <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">, all-MiniLM-L6-v2</a>, in grado di convertire il testo in vettori di embedding.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> HuggingFaceEmbeddings
 
 embedding_model = HuggingFaceEmbeddings(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
@@ -153,9 +198,39 @@ milvus_client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>In questa sezione, costruiremo e lanceremo il servizio <code translate="no">llama.cpp</code> sulla CPU basata su Arm.</p>
-<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Modello Llama 3.1 e llama.cpp</h3><p>Il <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">modello Llama-3.1-8B</a> di Meta appartiene alla famiglia dei modelli Llama 3.1 ed è libero di essere utilizzato per scopi di ricerca e commerciali. Prima di utilizzare il modello, visitare il <a href="https://llama.meta.com/llama-downloads/">sito web</a> di Llama e compilare il modulo per richiedere l'accesso.</p>
+<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Modello Llama 3.1 e llama.cpp<button data-href="#Llama-31-model--llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">modello Llama-3.1-8B</a> di Meta appartiene alla famiglia dei modelli Llama 3.1 ed è libero di essere utilizzato per scopi di ricerca e commerciali. Prima di utilizzare il modello, visitare il <a href="https://llama.meta.com/llama-downloads/">sito web</a> di Llama e compilare il modulo per richiedere l'accesso.</p>
 <p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> è un progetto open source in C/C++ che consente un'inferenza LLM efficiente su una varietà di hardware, sia a livello locale che nel cloud. È possibile ospitare comodamente un modello Llama 3.1 utilizzando <code translate="no">llama.cpp</code>.</p>
-<h3 id="Download-and-build-llamacpp" class="common-anchor-header">Scaricare e compilare llama.cpp</h3><p>Eseguite i seguenti comandi per installare make, cmake, gcc, g++ e altri strumenti essenziali necessari per costruire llama.cpp dai sorgenti:</p>
+<h3 id="Download-and-build-llamacpp" class="common-anchor-header">Scaricare e compilare llama.cpp<button data-href="#Download-and-build-llamacpp" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Eseguite i seguenti comandi per installare make, cmake, gcc, g++ e altri strumenti essenziali necessari per costruire llama.cpp dai sorgenti:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
 $ <span class="hljs-built_in">sudo</span> apt install build-essential -y
@@ -183,14 +258,44 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 <button class="copy-code-btn"></button></code></pre>
 <p>Il formato del modello GGUF, introdotto dal team di llama.cpp, utilizza la compressione e la quantizzazione per ridurre la precisione dei pesi a interi a 4 bit, riducendo in modo significativo i requisiti di calcolo e di memoria e rendendo le CPU Arm efficaci per l'inferenza LLM.</p>
-<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">Riquantizzare i pesi del modello</h3><p>Per riquantizzare, eseguire</p>
+<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">Riquantizzare i pesi del modello<button data-href="#Re-quantize-the-model-weights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Per riquantizzare, eseguire</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>
 <p>Si otterrà un nuovo file, <code translate="no">dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf</code>, che contiene i pesi riconfigurati che consentono a <code translate="no">llama-cli</code> di utilizzare SVE 256 e il supporto MATMUL_INT8.</p>
 <div class="alert note">
 <p>Questa riquantizzazione è ottimale specificamente per Graviton3. Per Graviton2, la riquantizzazione ottimale dovrebbe essere eseguita nel formato <code translate="no">Q4_0_4_4</code> e per Graviton4, il formato <code translate="no">Q4_0_4_8</code> è il più adatto per la riquantizzazione.</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">Avviare il servizio LLM</h3><p>È possibile utilizzare il programma server llama.cpp e inviare richieste tramite un'API compatibile con OpenAI. Ciò consente di sviluppare applicazioni che interagiscono con l'LLM più volte senza doverlo avviare e arrestare ripetutamente. Inoltre, è possibile accedere al server da un'altra macchina in cui l'LLM è ospitato in rete.</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">Avviare il servizio LLM<button data-href="#Start-the-LLM-Service" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile utilizzare il programma server llama.cpp e inviare richieste tramite un'API compatibile con OpenAI. Ciò consente di sviluppare applicazioni che interagiscono con l'LLM più volte senza doverlo avviare e arrestare ripetutamente. Inoltre, è possibile accedere al server da un'altra macchina in cui l'LLM è ospitato in rete.</p>
 <p>Avviando il server dalla riga di comando, esso si mette in ascolto sulla porta 8080:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -214,7 +319,22 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">Client LLM e modello di incorporazione</h3><p>Inizializziamo il client LLM e prepariamo il modello di embedding.</p>
+    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">Client LLM e modello di incorporazione<button data-href="#LLM-Client-and-Embedding-Model" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Inizializziamo il client LLM e prepariamo il modello di embedding.</p>
 <p>Per il LLM, utilizziamo l'OpenAI SDK per richiedere il servizio Llama lanciato in precedenza. Non è necessario utilizzare alcuna chiave API perché si tratta del nostro servizio locale llama.cpp.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 
@@ -229,7 +349,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">384
 [0.03061249852180481, 0.013831384479999542, -0.02084377221763134, 0.016327863559126854, -0.010231520049273968, -0.0479842908680439, -0.017313342541456223, 0.03728749603033066, 0.04588735103607178, 0.034405000507831573]
 </code></pre>
-<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Recuperare i dati per una query</h3><p>Specifichiamo una domanda frequente su Milvus.</p>
+<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Recuperare i dati per una query<button data-href="#Retrieve-data-for-a-query" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Specifichiamo una domanda frequente su Milvus.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Cerchiamo la domanda nell'insieme e recuperiamo le prime tre corrispondenze semantiche.</p>
@@ -266,7 +401,22 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Utilizzare LLM per ottenere una risposta RAG</h3><p>Convertire i documenti recuperati in un formato stringa.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Utilizzare LLM per ottenere una risposta RAG<button data-href="#Use-LLM-to-get-a-RAG-response" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Convertire i documenti recuperati in un formato stringa.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.join(
     [line_with_distance[<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )

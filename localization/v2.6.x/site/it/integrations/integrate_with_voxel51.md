@@ -98,7 +98,22 @@ title: Condurre ricerche di visione con Milvus e FiftyOne
         ></path>
       </svg>
     </button></h2><p>L'esempio seguente illustra il flusso di lavoro sopra descritto.</p>
-<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1. Caricare un set di dati in FiftyOne e calcolare le incorporazioni per i campioni.</h3><p>Il codice seguente utilizza il set di immagini campione fornito da FiftyOne per dimostrare l'integrazione. È possibile preparare il proprio set di immagini facendo riferimento a <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">questo articolo</a>.</p>
+<h3 id="1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="common-anchor-header">1. Caricare un set di dati in FiftyOne e calcolare le incorporazioni per i campioni.<button data-href="#1-Load-a-dataset-into-FiftyOne-and-compute-embeddings-for-the-samples" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il codice seguente utilizza il set di immagini campione fornito da FiftyOne per dimostrare l'integrazione. È possibile preparare il proprio set di immagini facendo riferimento a <a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">questo articolo</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone <span class="hljs-keyword">as</span> fo
 <span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 <span class="hljs-keyword">import</span> fiftyone.zoo <span class="hljs-keyword">as</span> foz
@@ -113,7 +128,22 @@ milvus_index = fob.compute_similarity(
     backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Eseguire ricerche di similarità della visione</h3><p>È ora possibile utilizzare l'indice di similarità Milvus per effettuare ricerche di similarità visiva sul set di dati.</p>
+<h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2. Eseguire ricerche di similarità della visione<button data-href="#2-Conduct-vision-similarity-searches" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È ora possibile utilizzare l'indice di similarità Milvus per effettuare ricerche di similarità visiva sul set di dati.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
 view = dataset.sort_by_similarity(
@@ -130,11 +160,26 @@ milvus_index.cleanup()
 <span class="hljs-comment"># Delete run record from FiftyOne</span>
 dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Delete-the-index" class="common-anchor-header">3. Cancellare l'indice</h3><p>Se non si ha più bisogno dell'indice di similarità Milvus, è possibile eliminarlo utilizzando il codice seguente:</p>
+<h3 id="3-Delete-the-index" class="common-anchor-header">3. Cancellare l'indice<button data-href="#3-Delete-the-index" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Se non si ha più bisogno dell'indice di similarità Milvus, è possibile eliminarlo utilizzando il codice seguente:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-the-Milvus-backend" class="common-anchor-header">Utilizzare il backend di Milvus<button data-href="#Use-the-Milvus-backend" class="anchor-icon" translate="no">
+<h2 id="Use-the-Milvus-backend" class="common-anchor-header">Utilizzare il backend Milvus<button data-href="#Use-the-Milvus-backend" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -179,7 +224,22 @@ fob.compute_similarity(..., backend=<span class="hljs-string">&quot;milvus&quot;
         ></path>
       </svg>
     </button></h2><p>Se si utilizza un server Milvus personalizzato, è possibile fornire le proprie credenziali in vari modi.</p>
-<h3 id="Environment-variables-recommended" class="common-anchor-header">Variabili d'ambiente (consigliate)</h3><p>Il modo consigliato per configurare le credenziali di Milvus è quello di memorizzarle nelle variabili d'ambiente mostrate di seguito, alle quali FiftyOne accede automaticamente ogni volta che viene effettuata una connessione a Milvus.</p>
+<h3 id="Environment-variables-recommended" class="common-anchor-header">Variabili d'ambiente (consigliate)<button data-href="#Environment-variables-recommended" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il modo consigliato per configurare le credenziali di Milvus è quello di memorizzarle nelle variabili d'ambiente mostrate di seguito, alle quali FiftyOne accede automaticamente ogni volta che viene effettuata una connessione a Milvus.</p>
 <pre><code translate="no" class="language-python">export FIFTYONE_BRAIN_SIMILARITY_MILVUS_URI=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_USER=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_PASSWORD=XXXXXX
@@ -194,7 +254,22 @@ export FIFTYONE_BRAIN_SIMILARITY_MILVUS_CA_PEM_PATH=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
 export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="FiftyOne-Brain-config" class="common-anchor-header">Configurazione del cervello di FiftyOne</h3><p>È anche possibile memorizzare le credenziali nella <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configurazione del cervello</a> all'indirizzo <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
+<h3 id="FiftyOne-Brain-config" class="common-anchor-header">Configurazione del cervello di FiftyOne<button data-href="#FiftyOne-Brain-config" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È anche possibile memorizzare le credenziali nella <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configurazione del cervello</a> all'indirizzo <code translate="no">~/.fiftyone/brain_config.json</code>:</p>
 <pre><code translate="no" class="language-python">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
         <span class="hljs-string">&quot;milvus&quot;</span>: {
@@ -216,7 +291,22 @@ export FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 }
 <button class="copy-code-btn"></button></code></pre>
 <p>Si noti che questo file non esiste finché non lo si crea.</p>
-<h3 id="Keyword-arguments" class="common-anchor-header">Argomenti delle parole chiave</h3><p>È possibile fornire manualmente le proprie credenziali Milvus come argomenti di parole chiave ogni volta che si chiamano metodi come <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> che richiedono connessioni a Milvus:</p>
+<h3 id="Keyword-arguments" class="common-anchor-header">Argomenti delle parole chiave<button data-href="#Keyword-arguments" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>È possibile fornire manualmente le proprie credenziali Milvus come argomenti di parole chiave ogni volta che si chiamano metodi come <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a> che richiedono connessioni a Milvus:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 milvus_index = fob.compute_similarity(
@@ -256,13 +346,28 @@ milvus_index = fob.compute_similarity(
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Milvus-config-parameters" class="common-anchor-header">Parametri di configurazione di Milvus</h3><p>Il backend Milvus supporta una serie di parametri di query che possono essere utilizzati per personalizzare le query di similarità. Questi parametri includono:</p>
+<h3 id="Milvus-config-parameters" class="common-anchor-header">Parametri di configurazione di Milvus<button data-href="#Milvus-config-parameters" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Il backend Milvus supporta una serie di parametri di query che possono essere utilizzati per personalizzare le query di similarità. Questi parametri includono:</p>
 <ul>
 <li><p><strong>nome_raccolta</strong><em>(Nessuno</em>): il nome della raccolta Milvus da utilizzare o creare. Se non viene fornito nulla, verrà creata una nuova collezione.</p></li>
 <li><p><strong>metrica</strong> (<em>"dotproduct")</em>: la metrica della distanza di incorporazione da usare quando si crea un nuovo indice. I valori supportati sono (<code translate="no">&quot;dotproduct&quot;</code>, <code translate="no">&quot;euclidean&quot;</code>)</p></li>
 <li><p><strong>consistency_level</strong> (<em>"Session")</em>: il livello di coerenza da utilizzare. I valori supportati sono (<code translate="no">&quot;Strong&quot;</code>, <code translate="no">&quot;Session&quot;</code>, <code translate="no">&quot;Bounded&quot;</code>, <code translate="no">&quot;Eventually&quot;</code>)</p></li>
 </ul>
-<p>Per informazioni dettagliate su questi parametri, consultare la <a href="/docs/it/authenticate.md">documentazione</a> sull'<a href="/docs/it/authenticate.md">autenticazione Milvus</a> e la <a href="/docs/it/consistency.md">documentazione sui livelli di coerenza Milvus</a>.</p>
+<p>Per informazioni dettagliate su questi parametri, consultare la <a href="/docs/it/authenticate.md">documentazione</a> sull'<a href="/docs/it/authenticate.md">autenticazione Milvus</a> e la <a href="/docs/it/tune_consistency.md">documentazione sui livelli di coerenza Milvus</a>.</p>
 <p>È possibile specificare questi parametri tramite una qualsiasi delle strategie descritte nella sezione precedente. Ecco un esempio di <a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">configurazione del cervello</a> che include tutti i parametri disponibili:</p>
 <pre><code translate="no" class="language-json"><span class="hljs-punctuation">{</span>
     <span class="hljs-attr">&quot;similarity_backends&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
@@ -281,7 +386,7 @@ milvus_index = fob.compute_similarity(
     brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
     collection_name=<span class="hljs-string">&quot;your_collection&quot;</span>,
     metric=<span class="hljs-string">&quot;dotproduct&quot;</span>,
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Manage-brain-runs" class="common-anchor-header">Gestire le esecuzioni del cervello<button data-href="#Manage-brain-runs" class="anchor-icon" translate="no">

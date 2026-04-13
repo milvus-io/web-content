@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste klicken und <strong>Als Administrator ausführen</strong> wählen.</p></li>
 <li><p>Führen Sie die folgenden Befehle in PowerShell oder der Windows-Eingabeaufforderung aus, um die Docker Compose-Konfigurationsdatei für Milvus Standalone herunterzuladen und Milvus zu starten.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.13/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Laden Sie die Milvus-Konfigurationsdatei herunter.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.13/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Starten Sie Milvus.</p>
@@ -359,7 +359,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Fehlermeldung "Read config failed" beim Starten von Milvus</span> </span></p>
-<p>Um die Fehlermeldung "Read config failed" beim Starten von Milvus zu beheben, müssen Sie überprüfen, ob das in den Milvus-Container eingebundene Volume korrekt ist. Wenn das Volume korrekt in den Container eingebunden ist, können Sie den Befehl <code translate="no">docker exec</code> verwenden, um in den Container zu gelangen und den Ordner <strong>/milvus/configs</strong> wie folgt aufzulisten.</p>
+<p>Um die Fehlermeldung beim Starten von Milvus "Read config failed" zu beheben, müssen Sie überprüfen, ob das in den Milvus-Container eingebundene Volume korrekt ist. Wenn das Volume korrekt in den Container eingebunden ist, können Sie den Befehl <code translate="no">docker exec</code> verwenden, um in den Container zu gelangen und den Ordner <strong>/milvus/configs</strong> wie folgt aufzulisten.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />

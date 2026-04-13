@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>一旦运行了 Milvus Operator pod，就可以按如下方式部署 Milvus 群集。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面的命令部署的是以<strong>Woodpecker</strong>作为消息队列（推荐用于 v2.6.13）和包括流节点在内的所有新架构组件的 Milvus 群集。</p>
+<p>上面的命令部署的是以<strong>Woodpecker</strong>作为消息队列（推荐用于 v2.6.14）和包括流节点在内的所有新架构组件的 Milvus 群集。</p>
 <p><strong>此部署中的架构要点：</strong></p>
 <ul>
 <li><strong>消息队列</strong>：<a href="/docs/zh/use-woodpecker.md">使用 Woodpecker</a>（减少基础设施维护）</li>
@@ -272,7 +272,7 @@ my-release-minio-3                               1/1     Running   0          2m
 =&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;
 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果显示，Milvus 实例在默认端口<strong>19530</strong> 上提供服务。</p>
+<p>输出结果显示，Milvus 实例的默认服务端口为<strong>19530</strong>。</p>
 <div class="alert note">
 <p>如果以独立模式部署了 Milvus，请将 pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
 </div>

@@ -30,7 +30,7 @@ title: Costruire RAG con Milvus e Firecrawl
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
 <p><a href="https://www.firecrawl.dev/">Firecrawl</a> consente agli sviluppatori di creare applicazioni di intelligenza artificiale con dati puliti provenienti da qualsiasi sito web. Grazie a funzionalità avanzate di scraping, crawling ed estrazione dei dati, Firecrawl semplifica il processo di conversione dei contenuti dei siti web in markdown o dati strutturati puliti per i flussi di lavoro AI a valle.</p>
-<p>In questa esercitazione vi mostreremo come costruire una pipeline Retrieval-Augmented Generation (RAG) utilizzando Milvus e Firecrawl. La pipeline integra Firecrawl per lo scraping dei dati web, Milvus per l'archiviazione vettoriale e OpenAI per la generazione di risposte perspicaci e consapevoli del contesto.</p>
+<p>In questa esercitazione vi mostreremo come costruire una pipeline Retrieval-Augmented Generation (RAG) utilizzando Milvus e Firecrawl. La pipeline integra Firecrawl per lo scraping dei dati web, Milvus per l'archiviazione vettoriale e OpenAI per la generazione di risposte perspicue e consapevoli del contesto.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -291,7 +291,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Inserire i dati<button data-href="#Insert-data" class="anchor-icon" translate="no">

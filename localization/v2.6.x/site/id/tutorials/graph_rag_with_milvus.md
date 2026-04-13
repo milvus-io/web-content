@@ -103,7 +103,22 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Persiapan Data</h3><p>Kami akan menggunakan dataset nano yang memperkenalkan hubungan antara keluarga Bernoulli dan Euler untuk mendemonstrasikan sebagai contoh. Dataset nano berisi 4 bagian dan satu set triplet yang sesuai, di mana setiap triplet berisi subjek, predikat, dan objek. Dalam praktiknya, Anda dapat menggunakan pendekatan apa pun untuk mengekstrak triplet dari korpus kustom Anda sendiri.</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Persiapan Data<button data-href="#Data-Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami akan menggunakan dataset nano yang memperkenalkan hubungan antara keluarga Bernoulli dan Euler untuk mendemonstrasikan sebagai contoh. Dataset nano berisi 4 bagian dan satu set triplet yang sesuai, di mana setiap triplet berisi subjek, predikat, dan objek. Dalam praktiknya, Anda dapat menggunakan pendekatan apa pun untuk mengekstrak triplet dari korpus kustom Anda sendiri.</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -170,7 +185,7 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
 <li>Entitas adalah subjek atau objek dalam kembar tiga, jadi kita langsung mengekstraknya dari kembar tiga.</li>
 <li>Di sini kita membangun konsep relasi dengan menggabungkan subjek, predikat, dan objek secara langsung dengan spasi di antaranya.</li>
 </ul>
-<p>Kita juga menyiapkan sebuah dict untuk memetakan id entitas ke id relasi, dan sebuah dict lainnya untuk memetakan id relasi ke id bagian untuk digunakan di kemudian hari.</p>
+<p>Kita juga menyiapkan sebuah dict untuk memetakan id entitas ke id relasi, dan sebuah dict lain untuk memetakan id relasi ke id bagian untuk digunakan di kemudian hari.</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(<span class="hljs-built_in">list</span>)
 relationid_2_passageids = defaultdict(<span class="hljs-built_in">list</span>)
 
@@ -196,7 +211,22 @@ passages = []
             )
         relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Insertion" class="common-anchor-header">Penyisipan Data</h3><p>Buatlah koleksi Milvus untuk entitas, relasi, dan bagian. Koleksi entitas dan koleksi relasi digunakan sebagai koleksi utama untuk konstruksi graf dalam metode kami, sedangkan koleksi bagian digunakan sebagai perbandingan pengambilan RAG naif atau tujuan tambahan.</p>
+<h3 id="Data-Insertion" class="common-anchor-header">Penyisipan Data<button data-href="#Data-Insertion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Buatlah koleksi Milvus untuk entitas, relasi, dan bagian. Koleksi entitas dan koleksi relasi digunakan sebagai koleksi utama untuk konstruksi graf dalam metode kami, sedangkan koleksi bagian digunakan sebagai perbandingan pengambilan RAG naif atau tujuan tambahan.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
 
 
@@ -206,7 +236,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -217,7 +247,7 @@ create_milvus_collection(entity_col_name)
 create_milvus_collection(relation_col_name)
 create_milvus_collection(passage_col_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Masukkan data dengan informasi metadatanya ke dalam koleksi Milvus, termasuk koleksi entitas, relasi, dan bagian. Informasi metadata mencakup id bagian dan entitas kedekatan atau id relasi.</p>
+<p>Masukkan data dengan informasi metadatanya ke dalam koleksi Milvus, termasuk koleksi entitas, relasi, dan bagian. Informasi metadata termasuk id bagian dan entitas kedekatan atau id relasi.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">milvus_insert</span>(<span class="hljs-params">
     collection_name: <span class="hljs-built_in">str</span>,
     text_list: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>],
@@ -276,7 +306,22 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Pengambilan Kemiripan</h3><p>Kami mengambil entitas dan relasi yang paling mirip berdasarkan kueri masukan dari Milvus.</p>
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Pengambilan Kemiripan<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami mengambil entitas dan relasi yang paling mirip berdasarkan kueri masukan dari Milvus.</p>
 <p>Ketika melakukan pengambilan entitas, pertama-tama kita harus mengekstrak entitas kueri dari teks kueri menggunakan beberapa metode tertentu seperti NER (Named-entity recognition). Untuk mempermudah, kami menyiapkan hasil NER di sini. Jika Anda ingin mengubah kueri sebagai pertanyaan khusus Anda, Anda harus mengubah daftar NER kueri yang sesuai. Dalam praktiknya, Anda dapat menggunakan model atau pendekatan lain untuk mengekstrak entitas dari kueri.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
@@ -305,7 +350,22 @@ relation_search_res = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expand-Subgraph" class="common-anchor-header">Memperluas Subgraf</h3><p>Kita menggunakan entitas dan relasi yang diambil untuk memperluas subgraf dan mendapatkan relasi kandidat, lalu menggabungkannya dari dua cara. Berikut adalah diagram alir dari proses perluasan subgraf:  <span class="img-wrapper">
+<h3 id="Expand-Subgraph" class="common-anchor-header">Memperluas Subgraf<button data-href="#Expand-Subgraph" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita menggunakan entitas dan relasi yang diambil untuk memperluas subgraf dan mendapatkan relasi kandidat, lalu menggabungkannya dari dua cara. Berikut adalah diagram alir dari proses perluasan subgraf:  <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
@@ -376,7 +436,22 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>Kita telah mendapatkan relasi-relasi kandidat dengan memperluas subgraf, yang akan diperingkat ulang oleh LLM pada langkah berikutnya.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">Pemeringkatan ulang LLM</h3><p>Pada tahap ini, kami menggunakan mekanisme self-attention yang kuat dari LLM untuk menyaring dan menyempurnakan lebih lanjut himpunan kandidat relasi. Kami menggunakan perintah sekali tembak, memasukkan kueri dan kumpulan kandidat hubungan ke dalam perintah, dan menginstruksikan LLM untuk memilih hubungan potensial yang dapat membantu menjawab kueri. Mengingat bahwa beberapa pertanyaan mungkin rumit, kami mengadopsi pendekatan Chain-of-Thought, yang memungkinkan LLM untuk mengartikulasikan proses berpikirnya dalam menjawab pertanyaan tersebut. Kami menetapkan bahwa respons LLM dalam format json untuk memudahkan penguraian.</p>
+<h3 id="LLM-reranking" class="common-anchor-header">Pemeringkatan ulang LLM<button data-href="#LLM-reranking" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Pada tahap ini, kami menggunakan mekanisme self-attention yang kuat dari LLM untuk menyaring dan menyempurnakan lebih lanjut himpunan kandidat relasi. Kami menggunakan perintah sekali tembak, memasukkan kueri dan kumpulan kandidat hubungan ke dalam perintah, dan menginstruksikan LLM untuk memilih hubungan potensial yang dapat membantu menjawab kueri. Mengingat bahwa beberapa pertanyaan mungkin rumit, kami mengadopsi pendekatan Chain-of-Thought, yang memungkinkan LLM untuk mengartikulasikan proses berpikirnya dalam menjawab pertanyaan tersebut. Kami menetapkan bahwa respons LLM dalam format json untuk memudahkan penguraian.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -447,7 +522,22 @@ rerank_relation_ids = rerank_relations(
     relation_candidate_ids=relation_candidate_ids,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Get-Final-Results" class="common-anchor-header">Dapatkan Hasil Akhir</h3><p>Kita bisa mendapatkan hasil akhir yang diambil dari relasi yang diurutkan ulang.</p>
+<h3 id="Get-Final-Results" class="common-anchor-header">Dapatkan Hasil Akhir<button data-href="#Get-Final-Results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kita bisa mendapatkan hasil akhir yang diambil dari relasi yang diurutkan ulang.</p>
 <pre><code translate="no" class="language-python">final_top_k = <span class="hljs-number">2</span>
 
 final_passages = []

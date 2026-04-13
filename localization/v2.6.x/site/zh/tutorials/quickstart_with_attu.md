@@ -53,7 +53,22 @@ title: 快速入门使用 Attu - Milvus 的网络用户界面
         ></path>
       </svg>
     </button></h2><p>访问 Attu<a href="https://github.com/zilliztech/attu/releases">GitHub Releases 页面</a>下载桌面版 Attu。选择适合您操作系统的版本，然后按照安装步骤进行操作。</p>
-<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">注意 macOS（M 系列芯片）：</h3><p>如果遇到错误：</p>
+<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">注意 macOS（M 系列芯片）：<button data-href="#Note-for-macOS-M-series-chip" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>如果遇到错误：</p>
 <pre><code translate="no">attu.app <span class="hljs-keyword">is</span> damaged <span class="hljs-keyword">and</span> cannot be opened.
 <button class="copy-code-btn"></button></code></pre>
 <p>在终端中运行以下命令以绕过此问题：</p>
@@ -110,7 +125,22 @@ title: 快速入门使用 Attu - Milvus 的网络用户界面
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 准备数据</h3><p>我们使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 文档 2.4.x</a>中的常见问题页面作为本示例的数据集。</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 准备数据<button data-href="#41-Prepare-the-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>我们使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 文档 2.4.x</a>中的常见问题页面作为本示例的数据集。</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">下载并提取数据：</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -123,7 +153,22 @@ text_lines = []
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 生成嵌入模型</h3><p>定义一个嵌入模型，使用<code translate="no">milvus_model</code> 生成文本嵌入。我们以<code translate="no">DefaultEmbeddingFunction</code> 模型为例，它是一个经过预训练的轻量级嵌入模型。</p>
+<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 生成嵌入模型<button data-href="#42-Generate-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>定义一个嵌入模型，使用<code translate="no">milvus_model</code> 生成文本嵌入。我们以<code translate="no">DefaultEmbeddingFunction</code> 模型为例，它是一个经过预训练的轻量级嵌入模型。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
@@ -139,7 +184,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
  -0.03041712 -0.02269499 -0.02317863 -0.00426028]
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="43-Create-Collection" class="common-anchor-header">4.3 创建 Collections</h3><p>连接到 Milvus 并创建一个 Collection：</p>
+<h3 id="43-Create-Collection" class="common-anchor-header">4.3 创建 Collections<button data-href="#43-Create-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>连接到 Milvus 并创建一个 Collection：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to Milvus Standalone</span>
@@ -156,11 +216,26 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="44-Insert-Data" class="common-anchor-header">4.4 插入数据</h3><p>遍历文本行，创建嵌入，并将数据插入 Milvus：</p>
+<h3 id="44-Insert-Data" class="common-anchor-header">4.4 插入数据<button data-href="#44-Insert-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>遍历文本行，创建嵌入，并将数据插入 Milvus：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -172,7 +247,22 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 可视化数据和 Schema</h3><p>现在，我们可以使用 Attu 的界面可视化数据 Schema 和插入的实体。Schema 显示已定义的字段，包括<code translate="no">id</code> 类型的字段<code translate="no">Int64</code> 和<code translate="no">vector</code> 类型的字段<code translate="no">FloatVector(768)</code> 以及<code translate="no">Inner Product (IP)</code> 度量。Collections 中加载了<strong>72 个实体</strong>。</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 可视化数据和 Schema<button data-href="#45-Visualize-Data-and-Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>现在，我们可以使用 Attu 的界面可视化数据 Schema 和插入的实体。Schema 显示已定义的字段，包括<code translate="no">id</code> 类型的字段<code translate="no">Int64</code> 和<code translate="no">vector</code> 类型的字段<code translate="no">FloatVector(768)</code> 以及<code translate="no">Inner Product (IP)</code> 度量。Collections 中加载了<strong>72 个实体</strong>。</p>
 <p>此外，我们还可以查看插入的数据，包括 ID、向量 Embeddings 和存储文本内容等元数据的 Dynamic Field。界面支持根据指定条件或动态字段进行过滤和查询。</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -194,7 +284,22 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>Attu 提供了可视化和探索数据关系的强大界面。要检查插入的数据点及其相似性关系，请按照以下步骤操作：</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1<strong>执行搜索</strong></h3><p>导航至 Attu 中的 "<strong>向量搜索</strong>"选项卡。</p>
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1<strong>执行搜索</strong><button data-href="#51-Perform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>导航至 Attu 中的 "<strong>向量搜索</strong>"选项卡。</p>
 <ol>
 <li>单击 "<strong>生成随机数据</strong>"按钮创建测试查询。</li>
 <li>单击 "<strong>搜索"</strong>，根据生成的数据检索结果。</li>
@@ -204,7 +309,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
 <hr>
-<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2<strong>探索数据关系</strong></h3><p>单击结果面板中的 "<strong>探索 "</strong>按钮，可将查询向量与搜索结果之间的关系可视化为<strong>类似知识图谱的结构</strong>。</p>
+<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2<strong>探索数据关系</strong><button data-href="#52-Explore-Data-Relationships" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>单击结果面板中的 "<strong>探索 "</strong>按钮，可将查询向量与搜索结果之间的关系可视化为<strong>类似知识图谱的结构</strong>。</p>
 <ul>
 <li><strong>中心节点</strong>代表搜索向量。</li>
 <li><strong>连接的节点</strong>代表搜索结果，点击它们将显示相应节点的详细信息。</li>
@@ -213,7 +333,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 <hr>
-<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3<strong>展开图</strong></h3><p>双击任何结果节点可展开其连接。此操作可显示所选节点与 Collections 中其他数据点之间的其他关系，从而创建一个<strong>更大的、相互连接的知识图谱</strong>。</p>
+<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3<strong>展开图</strong><button data-href="#53-Expand-the-Graph" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>双击任何结果节点可展开其连接。此操作可显示所选节点与 Collections 中其他数据点之间的其他关系，从而创建一个<strong>更大的、相互连接的知识图谱</strong>。</p>
 <p>通过这种扩展视图，可以根据向量相似性更深入地探索数据点之间的关系。</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">

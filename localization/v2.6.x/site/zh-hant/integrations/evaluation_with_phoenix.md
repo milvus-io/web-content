@@ -121,7 +121,7 @@ title: 使用 Arize Pheonix 進行評估
             collection_name=<span class="hljs-variable language_">self</span>.collection_name,
             dimension=embedding_dim,
             metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+            consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
         )
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">load</span>(<span class="hljs-params">self, texts: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>):
@@ -478,7 +478,7 @@ results_df.head()
       <td>[Code coverage\n\nBefore submitting your pull ...</td>
       <td>[Code coverage\n/nBefore submitting your pull ...</td>
       <td>事實</td>
-      <td>參考文獻規定，在執行程式碼覆蓋之前，您應該...</td>
+      <td>參考文獻中規定，在 runni...</td>
       <td>正確</td>
       <td>要確定答案是否正確，我們需要...</td>
     </tr>

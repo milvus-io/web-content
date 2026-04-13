@@ -26,7 +26,7 @@ title: RAG mit Milvus und SiliconFlow aufbauen
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_siliconflow.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://siliconflow.cn/">SiliconFlow</a> hat es sich zur Aufgabe gemacht, eine skalierbare, standardisierte und hochleistungsfähige KI-Infra-Plattform aufzubauen. SiliconCloud ist eines der Flaggschiffe von SiliconFlow und wird als Model-as-a-Service (MaaS)-Plattform bezeichnet. Sie bietet eine umfassende Umgebung für den Einsatz verschiedener KI-Modelle, einschließlich großer Sprachmodelle (LLMs) und Einbettungsmodelle. SiliconCloud fasst zahlreiche Open-Source-Modelle zusammen und ermöglicht es den Nutzern, auf diese Ressourcen einfach zuzugreifen und sie zu nutzen, ohne eine umfangreiche Infrastruktur einrichten zu müssen.</p>
+<p><a href="https://siliconflow.cn/">SiliconFlow</a> hat es sich zur Aufgabe gemacht, eine skalierbare, standardisierte und hochleistungsfähige KI-Infra-Plattform aufzubauen. SiliconCloud ist eines der Flaggschiffe von SiliconFlow und wird als Model-as-a-Service-Plattform (MaaS) bezeichnet. Sie bietet eine umfassende Umgebung für den Einsatz verschiedener KI-Modelle, einschließlich großer Sprachmodelle (LLMs) und Einbettungsmodelle. SiliconCloud fasst zahlreiche Open-Source-Modelle zusammen und ermöglicht es den Nutzern, auf diese Ressourcen einfach zuzugreifen und sie zu nutzen, ohne eine umfangreiche Infrastruktur einrichten zu müssen.</p>
 <p>In diesem Tutorial zeigen wir Ihnen, wie Sie eine RAG-Pipeline (Retrieval-Augmented Generation) mit Milvus und SiliconFlow erstellen.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,7 +192,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Daten einfügen<button data-href="#Insert-data" class="anchor-icon" translate="no">

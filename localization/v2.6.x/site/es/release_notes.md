@@ -19,6 +19,98 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2614" class="common-anchor-header">v2.6.14<button data-href="#v2614" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: April 7, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.14</td><td>2.6.11</td><td>2.6.13</td><td>2.6.17</td><td>2.6.1</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.14! This release focuses on stability and performance, delivering faster MixCoord recovery, optimized search and query filter performance, and over 20 bug fixes addressing crashes, OOM issues, and data correctness problems.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Reduced MixCoord recovery time by parallelizing startup phases including sub-meta loading, index reload, and batch etcd operations (<a href="https://github.com/milvus-io/milvus/pull/47849">47849</a>)</li>
+<li>Replaced proto.Clone with shallow copy for query request fanout to reduce memory allocations and improve query performance (<a href="https://github.com/milvus-io/milvus/pull/48083">48083</a>)</li>
+<li>Upgraded Go to 1.25.8 to address CVE-2025-68121 (CRITICAL), CVE-2026-27142 (HIGH), and CVE-2026-25679 (HIGH) (<a href="https://github.com/milvus-io/milvus/pull/48287">48287</a>)</li>
+<li>Switched import retry strategy from allowlist to denylist, improving resilience against transient errors during data import (<a href="https://github.com/milvus-io/milvus/pull/48319">48319</a>)</li>
+<li>Made thread pool max threads size configurable via <code translate="no">common.threadCoreCoefficient.maxThreadsSize</code> with dynamic update support (<a href="https://github.com/milvus-io/milvus/pull/48385">48385</a>)</li>
+<li>Refactored import workflow to align with DDL/DCL pattern by routing through DataCoord RPC instead of cross-service broadcast (<a href="https://github.com/milvus-io/milvus/pull/48438">48438</a>)</li>
+<li>Added force promote support for primary-secondary disaster recovery failover via <code translate="no">UpdateReplicateConfiguration</code> API (<a href="https://github.com/milvus-io/milvus/pull/48452">48452</a>)</li>
+<li>Added data salvage capability for force failover to recover unpersisted data from failed streaming nodes (<a href="https://github.com/milvus-io/milvus/pull/48527">48527</a>)</li>
+<li>Improved query filter performance with type-aware bidirectional rewriting between <code translate="no">in</code> and <code translate="no">==</code> expressions (<a href="https://github.com/milvus-io/milvus/pull/48545">48545</a>)</li>
+<li>Optimized bool IN/NOT IN expressions with proper nullable field handling (<a href="https://github.com/milvus-io/milvus/pull/48621">48621</a>)</li>
+<li>Aligned error mapping across all cloud storage providers (Azure, GCP, MinIO) for consistent retry and error handling behavior (<a href="https://github.com/milvus-io/milvus/pull/48693">48693</a>)</li>
+<li>Optimized unfiltered search on sealed segments with MVCC fast path, hardware popcnt, and redundant bitset operation elimination (<a href="https://github.com/milvus-io/milvus/pull/48699">48699</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed an issue where the task scheduler could only assign one task per node per scheduling cycle, potentially slowing down index building and compaction (<a href="https://github.com/milvus-io/milvus/pull/48262">48262</a>)</li>
+<li>Fixed potential server crash during JSON index cleanup caused by a race condition between background threads and file deletion (<a href="https://github.com/milvus-io/milvus/pull/48369">48369</a>, <a href="https://github.com/milvus-io/milvus/pull/48409">48409</a>)</li>
+<li>Fixed server panic caused by concurrent map access in HTTP proxy when processing requests with timeout middleware enabled (<a href="https://github.com/milvus-io/milvus/pull/48394">48394</a>)</li>
+<li>Fixed OOM on QueryNodes when loading large segments with variable-size fields (ARRAY, JSON, large VARCHAR) by switching to memory-aware batch splitting (<a href="https://github.com/milvus-io/milvus/pull/48404">48404</a>, <a href="https://github.com/milvus-io/milvus/pull/48435">48435</a>)</li>
+<li>Fixed incorrect version string reported by Milvus when both root and Go submodule git tags exist on the same commit (<a href="https://github.com/milvus-io/milvus/pull/48421">48421</a>)</li>
+<li>Fixed an issue where transient storage errors during data flush and binlog import were not retried, causing unnecessary operation failures (<a href="https://github.com/milvus-io/milvus/pull/48436">48436</a>)</li>
+<li>Fixed a crash when using unsupported field types (JSON, Bool, Array, etc.) as clustering keys via the AddCollectionField API (<a href="https://github.com/milvus-io/milvus/pull/48437">48437</a>)</li>
+<li>Fixed potential crashes during index building when encountering IO errors in the Tantivy text index engine (<a href="https://github.com/milvus-io/milvus/pull/48454">48454</a>)</li>
+<li>Fixed an issue where QueryNodes failed to load indexes during rolling upgrades due to target vector index version exceeding the node’s supported maximum (<a href="https://github.com/milvus-io/milvus/pull/48478">48478</a>)</li>
+<li>Fixed a potential crash caused by dangling pointers in index loading during async warmup or cache re-population (<a href="https://github.com/milvus-io/milvus/pull/48496">48496</a>)</li>
+<li>Fixed streaming node listing to correctly include frozen nodes in REST API while excluding them from scheduling decisions (<a href="https://github.com/milvus-io/milvus/pull/48514">48514</a>)</li>
+<li>Fixed an issue where data import failed or produced incorrect results when collections contained function output fields (<a href="https://github.com/milvus-io/milvus/pull/48516">48516</a>)</li>
+<li>Fixed loading failure for segments with default-valued GEOMETRY fields (<a href="https://github.com/milvus-io/milvus/pull/48556">48556</a>, <a href="https://github.com/milvus-io/milvus/pull/48575">48575</a>)</li>
+<li>Fixed an issue where all segments appeared unindexed after dropping and recreating indexes, causing stale pre-compaction segments to be loaded (<a href="https://github.com/milvus-io/milvus/pull/48559">48559</a>)</li>
+<li>Fixed streaming balancer hanging indefinitely due to stale session entries persisting after etcd watch reconnection (<a href="https://github.com/milvus-io/milvus/pull/48568">48568</a>)</li>
+<li>Fixed compaction unexpectedly producing v2 format segments when compaction parameters were missing from the request (<a href="https://github.com/milvus-io/milvus/pull/48571">48571</a>, <a href="https://github.com/milvus-io/milvus/pull/48596">48596</a>)</li>
+<li>Fixed GROUP BY queries returning more results than the specified <code translate="no">group_size</code> when used with nullable fields (<a href="https://github.com/milvus-io/milvus/pull/48585">48585</a>)</li>
+<li>Fixed an issue where range queries on INVERTED indexes returned incorrect results when values involved negative zero (-0.0) (<a href="https://github.com/milvus-io/milvus/pull/48625">48625</a>)</li>
+<li>Fixed potential heap corruption caused by dual jemalloc instances from Arrow’s built-in allocator conflicting with the system allocator (<a href="https://github.com/milvus-io/milvus/pull/48657">48657</a>)</li>
+<li>Fixed an issue where LoadBalance could produce misleading errors when streaming node IDs collided with the specified query node IDs (<a href="https://github.com/milvus-io/milvus/pull/48664">48664</a>, <a href="https://github.com/milvus-io/milvus/pull/48679">48679</a>)</li>
+<li>Fixed an issue where search could still fail due to unavailable segments when <code translate="no">partialResultRequiredDataRatio</code> was set to 0.0 (<a href="https://github.com/milvus-io/milvus/pull/48702">48702</a>)</li>
+</ul>
 <h2 id="v2613" class="common-anchor-header">v2.6.13<button data-href="#v2613" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

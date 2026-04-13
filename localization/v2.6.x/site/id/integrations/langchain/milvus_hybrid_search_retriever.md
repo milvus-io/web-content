@@ -27,7 +27,7 @@ title: Anjing Pelacak Pencarian Hibrida Milvus
     <span></span>
   </span>
 </p>
-<p>Diagram ini mengilustrasikan skenario pencarian hibrida yang paling umum, yaitu pencarian hibrida padat + jarang. Dalam kasus ini, kandidat diambil menggunakan kesamaan vektor semantik dan pencocokan kata kunci yang tepat. Hasil dari metode-metode ini digabungkan, diurutkan ulang, dan diteruskan ke LLM untuk menghasilkan jawaban akhir. Pendekatan ini menyeimbangkan ketepatan dan pemahaman semantik, sehingga sangat efektif untuk skenario kueri yang beragam.</p>
+<p>Diagram ini mengilustrasikan skenario pencarian hibrida yang paling umum, yaitu pencarian hibrida padat + jarang. Dalam hal ini, kandidat diambil menggunakan kesamaan vektor semantik dan pencocokan kata kunci yang tepat. Hasil dari metode-metode ini digabungkan, diurutkan ulang, dan diteruskan ke LLM untuk menghasilkan jawaban akhir. Pendekatan ini menyeimbangkan ketepatan dan pemahaman semantik, sehingga sangat efektif untuk skenario kueri yang beragam.</p>
 <p>Selain pencarian hibrida padat + jarang, strategi hibrida juga dapat menggabungkan beberapa model vektor padat. Misalnya, satu model vektor padat mungkin mengkhususkan diri dalam menangkap nuansa semantik, sementara yang lain berfokus pada penyematan kontekstual atau representasi spesifik domain. Dengan menggabungkan hasil dari model-model ini dan memberi peringkat ulang, jenis pencarian hibrida ini memastikan proses pencarian yang lebih bernuansa dan sadar konteks.</p>
 <p>Integrasi LangChain Milvus menyediakan cara yang fleksibel untuk mengimplementasikan pencarian hibrida, mendukung sejumlah bidang vektor, dan model penyematan padat atau jarang, yang memungkinkan LangChain Milvus secara fleksibel beradaptasi dengan berbagai skenario penggunaan pencarian hibrida, dan pada saat yang sama kompatibel dengan kemampuan LangChain lainnya.</p>
 <p>Dalam tutorial ini, kita akan mulai dengan kasus padat + jarang yang paling umum, dan kemudian memperkenalkan sejumlah pendekatan penggunaan pencarian hibrida secara umum.</p>
@@ -125,7 +125,22 @@ docs = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opsi 1 (Direkomendasikan): penyematan padat + fungsi bawaan Milvus BM25</h3><p>Gunakan penyematan padat + fungsi bawaan Milvus BM25 untuk menyusun instance penyimpanan vektor pengambilan hibrida.</p>
+    </button></h2><h3 id="Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="common-anchor-header">Opsi 1 (Direkomendasikan): penyematan padat + fungsi bawaan Milvus BM25<button data-href="#Option-1Recommended-dense-embedding-+-Milvus-BM25-built-in-function" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Gunakan penyematan padat + fungsi bawaan Milvus BM25 untuk menyusun instance penyimpanan vektor pengambilan hibrida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_milvus <span class="hljs-keyword">import</span> Milvus, BM25BuiltInFunction
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
 
@@ -138,7 +153,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -150,7 +165,22 @@ vectorstore = Milvus.from_documents(
 <p>Pada kode di atas, kita mendefinisikan sebuah instance dari <code translate="no">BM25BuiltInFunction</code> dan mengopernya ke objek <code translate="no">Milvus</code>. <code translate="no">BM25BuiltInFunction</code> adalah kelas pembungkus yang ringan untuk <a href="https://milvus.io/docs/manage-collections.md#Function"><code translate="no">Function</code></a> ringan di Milvus. Kita dapat menggunakannya dengan <code translate="no">OpenAIEmbeddings</code> untuk menginisialisasi instance penyimpanan vektor Milvus pencarian hibrida padat + jarang.</p>
 <p><code translate="no">BM25BuiltInFunction</code> tidak mengharuskan klien untuk memberikan korpus atau pelatihan, semua secara otomatis diproses di server Milvus, sehingga pengguna tidak perlu peduli dengan kosakata dan korpus apa pun. Selain itu, pengguna juga dapat menyesuaikan <a href="https://milvus.io/docs/analyzer-overview.md#Analyzer-Overview">penganalisis</a> untuk mengimplementasikan pemrosesan teks khusus di BM25.</p>
 <p>Untuk informasi lebih lanjut tentang <code translate="no">BM25BuiltInFunction</code>, silakan lihat <a href="https://milvus.io/docs/full-text-search.md#Full-Text-Search">Pencarian Teks Lengkap</a> dan <a href="https://milvus.io/docs/full_text_search_with_langchain.md">Menggunakan Pencarian Teks Lengkap dengan LangChain dan Milvus</a>.</p>
-<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opsi 2: Gunakan penyematan jarang LangChain yang padat dan disesuaikan</h3><p>Anda dapat mewarisi kelas <code translate="no">BaseSparseEmbedding</code> dari <code translate="no">langchain_milvus.utils.sparse</code>, dan mengimplementasikan metode <code translate="no">embed_query</code> dan <code translate="no">embed_documents</code> untuk menyesuaikan proses sematan jarang. Hal ini memungkinkan Anda untuk menyesuaikan metode penyematan jarang apa pun baik berdasarkan statistik frekuensi term (misalnya <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) atau jaringan saraf (misalnya <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
+<h3 id="Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="common-anchor-header">Opsi 2: Gunakan penyematan jarang LangChain yang padat dan disesuaikan<button data-href="#Option-2-Use-dense-and-customized-LangChain-sparse-embedding" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Anda dapat mewarisi kelas <code translate="no">BaseSparseEmbedding</code> dari <code translate="no">langchain_milvus.utils.sparse</code>, dan mengimplementasikan metode <code translate="no">embed_query</code> dan <code translate="no">embed_documents</code> untuk menyesuaikan proses sematan jarang. Hal ini memungkinkan Anda untuk menyesuaikan metode penyematan jarang apa pun baik berdasarkan statistik frekuensi term (misalnya <a href="https://milvus.io/docs/embed-with-bm25.md#BM25">BM25</a>) atau jaringan saraf (misalnya <a href="https://milvus.io/docs/embed-with-splade.md#SPLADE">SPADE</a>).</p>
 <p>Berikut ini adalah sebuah contoh:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> langchain_milvus.utils.sparse <span class="hljs-keyword">import</span> BaseSparseEmbedding
@@ -197,7 +227,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
@@ -234,7 +264,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -243,7 +273,22 @@ vectorstore.vector_fields
 <pre><code translate="no">['dense1', 'dense2', 'sparse']
 </code></pre>
 <p>Dalam contoh ini, kita memiliki tiga bidang vektor. Diantaranya, <code translate="no">sparse</code> digunakan sebagai bidang keluaran untuk <code translate="no">BM25BuiltInFunction</code>, sedangkan dua lainnya, <code translate="no">dense1</code> dan <code translate="no">dense2</code>, secara otomatis ditetapkan sebagai bidang keluaran untuk dua model <code translate="no">OpenAIEmbeddings</code> (berdasarkan urutan).</p>
-<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Menentukan parameter indeks untuk bidang multi-vektor</h3><p>Secara default, jenis indeks setiap bidang vektor akan secara otomatis ditentukan oleh jenis penyematan atau fungsi bawaan. Namun, Anda juga dapat menentukan jenis indeks untuk setiap bidang vektor untuk mengoptimalkan kinerja pencarian.</p>
+<h3 id="Specify-the-index-params-for-multi-vector-fields" class="common-anchor-header">Menentukan parameter indeks untuk bidang multi-vektor<button data-href="#Specify-the-index-params-for-multi-vector-fields" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Secara default, jenis indeks setiap bidang vektor akan secara otomatis ditentukan oleh jenis penyematan atau fungsi bawaan. Namun, Anda juga dapat menentukan jenis indeks untuk setiap bidang vektor untuk mengoptimalkan kinerja pencarian.</p>
 <pre><code translate="no" class="language-python">dense_index_param_1 = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>,
     <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;HNSW&quot;</span>,
@@ -266,7 +311,7 @@ vectorstore = Milvus.from_documents(
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -277,7 +322,22 @@ vectorstore.vector_fields
 <div class="alert note">
 <p>Harap jaga agar urutan daftar parameter indeks tetap konsisten dengan urutan <code translate="no">vectorstore.vector_fields</code> untuk menghindari kebingungan.</p>
 </div>
-<h3 id="Rerank-the-candidates" class="common-anchor-header">Beri peringkat ulang kandidat</h3><p>Setelah tahap pertama pencarian, kita perlu memberi peringkat ulang pada kandidat untuk mendapatkan hasil yang lebih baik. Anda dapat memilih <a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> atau <a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> tergantung pada kebutuhan Anda. Anda dapat merujuk ke <a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Perangkingan Ulang</a> untuk informasi lebih lanjut.</p>
+<h3 id="Rerank-the-candidates" class="common-anchor-header">Beri peringkat ulang kandidat<button data-href="#Rerank-the-candidates" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Setelah tahap pertama pencarian, kita perlu memberi peringkat ulang pada kandidat untuk mendapatkan hasil yang lebih baik. Anda dapat memilih <a href="https://milvus.io/docs/weighted-ranker.md#Weighted-Scoring-WeightedRanker">WeightedRanker</a> atau <a href="https://milvus.io/docs/weighted-ranker.md#Reciprocal-Rank-Fusion-RRFRanker">RRFRanker</a> tergantung pada kebutuhan Anda. Anda dapat merujuk ke <a href="https://milvus.io/docs/weighted-ranker.md#Reranking">Perangkingan Ulang</a> untuk informasi lebih lanjut.</p>
 <p>Berikut adalah contoh untuk perangkingan ulang tertimbang:</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
@@ -287,7 +347,7 @@ vectorstore.vector_fields
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 
@@ -321,7 +381,22 @@ vectorstore.similarity_search(
         ></path>
       </svg>
     </button></h2><p>Dalam skenario RAG, pendekatan yang paling umum untuk pencarian hibrida adalah pencarian padat + jarang, diikuti dengan perankingan ulang. Contoh berikut ini menunjukkan kode ujung-ke-ujung yang mudah.</p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Siapkan data</h3><p>Kami menggunakan Langchain WebBaseLoader untuk memuat dokumen dari sumber web dan membaginya menjadi beberapa bagian menggunakan RecursiveCharacterTextSplitter.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">Siapkan data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami menggunakan Langchain WebBaseLoader untuk memuat dokumen dari sumber web dan membaginya menjadi beberapa bagian menggunakan RecursiveCharacterTextSplitter.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> bs4
 <span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> WebBaseLoader
 <span class="hljs-keyword">from</span> langchain_text_splitters <span class="hljs-keyword">import</span> RecursiveCharacterTextSplitter
@@ -351,7 +426,22 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'}, page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#')
 </code></pre>
-<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Memuat dokumen ke dalam penyimpanan vektor Milvus</h3><p>Seperti pengantar di atas, kita menginisialisasi dan memuat dokumen yang telah disiapkan ke dalam penyimpanan vektor Milvus, yang berisi dua bidang vektor: <code translate="no">dense</code> untuk penyematan OpenAI dan <code translate="no">sparse</code> untuk fungsi BM25.</p>
+<h3 id="Load-the-document-into-Milvus-vector-store" class="common-anchor-header">Memuat dokumen ke dalam penyimpanan vektor Milvus<button data-href="#Load-the-document-into-Milvus-vector-store" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Seperti pengantar di atas, kita menginisialisasi dan memuat dokumen yang telah disiapkan ke dalam penyimpanan vektor Milvus, yang berisi dua bidang vektor: <code translate="no">dense</code> untuk penyematan OpenAI dan <code translate="no">sparse</code> untuk fungsi BM25.</p>
 <pre><code translate="no" class="language-python">vectorstore = Milvus.from_documents(
     documents=docs,
     embedding=OpenAIEmbeddings(),
@@ -360,11 +450,26 @@ docs[<span class="hljs-number">1</span>]
     connection_args={
         <span class="hljs-string">&quot;uri&quot;</span>: URI,
     },
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     drop_old=<span class="hljs-literal">False</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Build-RAG-chain" class="common-anchor-header">Membangun rantai RAG</h3><p>Kami menyiapkan instance dan prompt LLM, lalu menggabungkannya ke dalam pipeline RAG menggunakan Bahasa Ekspresi LangChain.</p>
+<h3 id="Build-RAG-chain" class="common-anchor-header">Membangun rantai RAG<button data-href="#Build-RAG-chain" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Kami menyiapkan instance dan prompt LLM, lalu menggabungkannya ke dalam pipeline RAG menggunakan Bahasa Ekspresi LangChain.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough
 <span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate
 <span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser

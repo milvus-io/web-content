@@ -63,7 +63,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 standard (default)    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Überprüfen Sie vor der Installation <a href="/docs/de/prerequisite-helm.md">die Hardware- und Softwareanforderungen</a>.</p></li>
-<li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardwareanforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
+<li><p>Es wird empfohlen, vor der Installation von Milvus das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Hardware-Anforderungen auf der Grundlage Ihrer Datengröße abzuschätzen. Dies hilft, eine optimale Leistung und Ressourcenzuweisung für Ihre Milvus-Installation zu gewährleisten.</p></li>
 </ul>
 <div class="alert note">
 <p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, wenden Sie sich bitte an <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen die notwendige Unterstützung bieten können.</p>
@@ -83,7 +83,7 @@ standard (default)    k8s.io/minikube-hostpath     Delete           Immediate   
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Operator definiert die benutzerdefinierten Ressourcen eines Milvus-Clusters zusätzlich zu den <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">benutzerdefinierten Kubernetes-Ressourcen</a>. Wenn benutzerdefinierte Ressourcen definiert sind, können Sie K8s-APIs auf deklarative Weise verwenden und den Milvus-Deployment-Stack verwalten, um seine Skalierbarkeit und Hochverfügbarkeit sicherzustellen.</p>
+    </button></h2><p>Milvus Operator definiert die benutzerdefinierten Ressourcen eines Milvus-Clusters zusätzlich zu den <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">benutzerdefinierten Ressourcen von Kubernetes</a>. Wenn benutzerdefinierte Ressourcen definiert sind, können Sie K8s-APIs auf deklarative Weise verwenden und den Milvus-Deployment-Stack verwalten, um seine Skalierbarkeit und Hochverfügbarkeit sicherzustellen.</p>
 <div class="filter">
  <a href="#helm">Helm</a> <a href="#kubectl">Kubectl</a></div>
 <div class="filter-helm">
@@ -175,7 +175,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Sobald der Milvus Operator-Pod läuft, können Sie einen Milvus-Cluster wie folgt einrichten.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.13) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
+<p>Mit dem obigen Befehl wird ein Milvus-Cluster mit <strong>Woodpecker</strong> als Nachrichtenwarteschlange (empfohlen für v2.6.14) und allen neuen Architekturkomponenten einschließlich des Streaming Node bereitgestellt.</p>
 <p><strong>Highlights der Architektur in diesem Einsatz:</strong></p>
 <ul>
 <li><strong>Nachrichten-Warteschlange</strong>: <a href="/docs/de/use-woodpecker.md">Verwendung von Woodpecker</a> (reduziert die Wartung der Infrastruktur)</li>
@@ -207,7 +207,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Führen Sie den folgenden Befehl aus, um den Status des Milvus-Clusters zu überprüfen</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl get milvus my-release -o yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, befindet sich Ihr Milvus-Cluster noch in der Erstellung.</p>
+<p>Sobald Ihr Milvus-Cluster bereit ist, sollte die Ausgabe des obigen Befehls ähnlich wie die folgende aussehen. Wenn das Feld <code translate="no">status.status</code> <code translate="no">Unhealthy</code> bleibt, ist Ihr Milvus-Cluster noch in der Erstellung.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -287,7 +287,7 @@ Forwarding from 127.0.0.1:27017 -&gt; 19530
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl port-forward --address 0.0.0.0 service/my-release-milvus 27017:19530</span>
 Forwarding from 0.0.0.0:27017 -&gt; 19530
 <button class="copy-code-btn"></button></code></pre>
-<p>Nun können Sie sich mit Milvus über den weitergeleiteten Port verbinden.</p>
+<p>Jetzt können Sie sich mit Milvus über den weitergeleiteten Port verbinden.</p>
 <h2 id="Optional-Update-Milvus-configurations" class="common-anchor-header">(Optional) Milvus-Konfigurationen aktualisieren<button data-href="#Optional-Update-Milvus-configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

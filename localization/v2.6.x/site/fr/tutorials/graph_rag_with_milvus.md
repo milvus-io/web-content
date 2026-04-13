@@ -24,9 +24,9 @@ title: Graphique RAG avec Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>L'application généralisée de grands modèles de langage souligne l'importance d'améliorer la précision et la pertinence de leurs réponses. La génération améliorée par récupération (RAG) améliore les modèles avec des bases de connaissances externes, fournissant plus d'informations contextuelles et atténuant les problèmes tels que l'hallucination et les connaissances insuffisantes. Toutefois, le fait de s'appuyer uniquement sur des paradigmes RAG simples a ses limites, en particulier lorsqu'il s'agit de relations complexes entre entités et de questions à sauts multiples, pour lesquelles le modèle a souvent du mal à fournir des réponses exactes.</p>
+<p>L'application généralisée de grands modèles de langage souligne l'importance d'améliorer la précision et la pertinence de leurs réponses. La génération améliorée par récupération (RAG) améliore les modèles avec des bases de connaissances externes, fournissant plus d'informations contextuelles et atténuant les problèmes tels que l'hallucination et les connaissances insuffisantes. Toutefois, le fait de s'appuyer uniquement sur des paradigmes RAG simples a ses limites, en particulier lorsqu'il s'agit de relations complexes entre entités et de questions à sauts multiples, pour lesquelles le modèle a souvent du mal à fournir des réponses précises.</p>
 <p>L'introduction de graphes de connaissances (KG) dans le système RAG offre une nouvelle solution. Les KG présentent les entités et leurs relations de manière structurée, en fournissant des informations de recherche plus précises et en aidant le RAG à mieux gérer les tâches complexes de réponse aux questions. KG-RAG en est encore à ses débuts, et il n'y a pas de consensus sur la manière d'extraire efficacement des entités et des relations à partir de KG ou sur la manière d'intégrer la recherche de similarité vectorielle avec des structures de graphe.</p>
-<p>Dans ce carnet, nous présentons une approche simple mais puissante pour améliorer considérablement les performances de ce scénario. Il s'agit d'un paradigme RAG simple avec récupération multi-voies puis reclassement, mais il met en œuvre le Graph RAG de manière logique et permet d'obtenir des performances de pointe dans le traitement des questions multi-sauts. Voyons comment il est mis en œuvre.</p>
+<p>Dans ce carnet, nous présentons une approche simple mais puissante pour améliorer considérablement les performances de ce scénario. Il s'agit d'un paradigme RAG simple avec récupération multi-voies puis reranking, mais il met en œuvre le Graph RAG de manière logique et atteint des performances de pointe dans le traitement des questions multi-sauts. Voyons comment il est mis en œuvre.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_1.png" alt="" class="doc-image" id="" />
@@ -54,7 +54,7 @@ title: Graphique RAG avec Milvus
 <blockquote>
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
 </blockquote>
-<p>Nous utiliserons les modèles d'OpenAI. Vous devez préparer la <a href="https://platform.openai.com/docs/quickstart">clé api</a> <code translate="no">OPENAI_API_KEY</code> en tant que variable d'environnement.</p>
+<p>Nous utiliserons les modèles d'OpenAI. Vous devez préparer la <a href="https://platform.openai.com/docs/quickstart">clé api</a> <code translate="no">OPENAI_API_KEY</code> comme variable d'environnement.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
@@ -103,7 +103,22 @@ embedding_model = OpenAIEmbeddings(model=<span class="hljs-string">&quot;text-em
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Préparation des données</h3><p>Nous utiliserons un ensemble de données nano qui présente la relation entre la famille de Bernoulli et Euler à titre d'exemple. Le nano jeu de données contient 4 passages et un ensemble de triplets correspondants, où chaque triplet contient un sujet, un prédicat et un objet. En pratique, vous pouvez utiliser n'importe quelle approche pour extraire les triplets de votre propre corpus personnalisé.</p>
+    </button></h2><h3 id="Data-Preparation" class="common-anchor-header">Préparation des données<button data-href="#Data-Preparation" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous utiliserons un ensemble de données nano qui présente la relation entre la famille de Bernoulli et Euler à titre d'exemple. Le nano jeu de données contient 4 passages et un ensemble de triplets correspondants, où chaque triplet contient un sujet, un prédicat et un objet. En pratique, vous pouvez utiliser n'importe quelle approche pour extraire les triplets de votre propre corpus personnalisé.</p>
 <pre><code translate="no" class="language-python">nano_dataset = [
     {
         <span class="hljs-string">&quot;passage&quot;</span>: <span class="hljs-string">&quot;Jakob Bernoulli (1654–1705): Jakob was one of the earliest members of the Bernoulli family to gain prominence in mathematics. He made significant contributions to calculus, particularly in the development of the theory of probability. He is known for the Bernoulli numbers and the Bernoulli theorem, a precursor to the law of large numbers. He was the older brother of Johann Bernoulli, another influential mathematician, and the two had a complex relationship that involved both collaboration and rivalry.&quot;</span>,
@@ -196,7 +211,22 @@ passages = []
             )
         relationid_2_passageids[relations.index(relation)].append(passage_id)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Data-Insertion" class="common-anchor-header">Insertion des données</h3><p>Créer des collections Milvus pour l'entité, la relation et le passage. Les collections d'entités et de relations sont utilisées comme collections principales pour la construction de graphes dans notre méthode, tandis que la collection de passages est utilisée comme comparaison de recherche RAG naïve ou à des fins auxiliaires.</p>
+<h3 id="Data-Insertion" class="common-anchor-header">Insertion des données<button data-href="#Data-Insertion" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Créer des collections Milvus pour l'entité, la relation et le passage. Les collections d'entités et de relations sont utilisées comme collections principales pour la construction de graphes dans notre méthode, tandis que la collection de passages est utilisée comme comparaison de recherche RAG naïve ou à des fins auxiliaires.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-built_in">len</span>(embedding_model.embed_query(<span class="hljs-string">&quot;foo&quot;</span>))
 
 
@@ -206,7 +236,7 @@ passages = []
     milvus_client.create_collection(
         collection_name=collection_name,
         dimension=embedding_dim,
-        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+        consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
     )
 
 
@@ -276,7 +306,22 @@ Inserting: 100%|█████████████████████�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Récupération des similitudes</h3><p>Nous récupérons les topK entités et relations similaires basées sur la requête d'entrée de Milvus.</p>
+    </button></h2><h3 id="Similarity-Retrieval" class="common-anchor-header">Récupération des similitudes<button data-href="#Similarity-Retrieval" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous récupérons les topK entités et relations similaires basées sur la requête d'entrée de Milvus.</p>
 <p>Lors de l'extraction des entités, nous devons d'abord extraire les entités de la requête à partir du texte de la requête à l'aide d'une méthode spécifique telle que la reconnaissance des entités nommées (NER). Par souci de simplicité, nous préparons ici les résultats de la NER. Si vous souhaitez modifier la requête en fonction de votre question personnalisée, vous devez modifier la liste NER correspondante. En pratique, vous pouvez utiliser n'importe quel autre modèle ou approche pour extraire les entités de la requête.</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What contribution did the son of Euler&#x27;s teacher make?&quot;</span>
 
@@ -305,7 +350,22 @@ relation_search_res = milvus_client.search(
     output_fields=[<span class="hljs-string">&quot;id&quot;</span>],
 )[<span class="hljs-number">0</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Expand-Subgraph" class="common-anchor-header">Développer le sous-graphe</h3><p>Nous utilisons les entités et les relations extraites pour développer le sous-graphe et obtenir les relations candidates, puis nous les fusionnons de deux manières. Voici un organigramme du processus d'expansion du sous-graphe : <span class="img-wrapper">
+<h3 id="Expand-Subgraph" class="common-anchor-header">Développer le sous-graphe<button data-href="#Expand-Subgraph" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous utilisons les entités et les relations extraites pour développer le sous-graphe et obtenir les relations candidates, puis nous les fusionnons de deux manières. Voici un organigramme du processus d'expansion du sous-graphe : <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/graph_rag_with_milvus_2.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
@@ -376,7 +436,22 @@ relation_candidate_texts = [
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>Nous avons obtenu les relations candidates en développant le sous-graphe, qui seront reclassées par LLM dans l'étape suivante.</p>
-<h3 id="LLM-reranking" class="common-anchor-header">LLM reranking</h3><p>Dans cette étape, nous déployons le puissant mécanisme d'auto-attention de LLM pour filtrer et affiner l'ensemble des relations candidates. Nous utilisons une invite unique, incorporant la requête et l'ensemble de relations candidates dans l'invite, et demandons au LLM de sélectionner les relations potentielles qui pourraient aider à répondre à la requête. Etant donné que certaines requêtes peuvent être complexes, nous adoptons l'approche de la chaîne de pensée, permettant au LLM d'articuler son processus de réflexion dans sa réponse. Nous stipulons que la réponse de LLM est au format json pour faciliter l'analyse.</p>
+<h3 id="LLM-reranking" class="common-anchor-header">LLM reranking<button data-href="#LLM-reranking" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Dans cette étape, nous déployons le puissant mécanisme d'auto-attention de LLM pour filtrer et affiner l'ensemble des relations candidates. Nous utilisons une invite unique, incorporant la requête et l'ensemble de relations candidates dans l'invite, et demandons au LLM de sélectionner les relations potentielles qui pourraient aider à répondre à la requête. Etant donné que certaines requêtes peuvent être complexes, nous adoptons l'approche de la chaîne de pensée, permettant au LLM d'articuler son processus de réflexion dans sa réponse. Nous stipulons que la réponse de LLM est au format json pour faciliter l'analyse.</p>
 <pre><code translate="no" class="language-python">query_prompt_one_shot_input = <span class="hljs-string">&quot;&quot;&quot;I will provide you with a list of relationship descriptions. Your task is to select 3 relationships that may be useful to answer the given question. Please return a JSON object containing your thought process and a list of the selected relationships in order of their relevance.
 
 Question:
@@ -447,7 +522,22 @@ rerank_relation_ids = rerank_relations(
     relation_candidate_ids=relation_candidate_ids,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Get-Final-Results" class="common-anchor-header">Obtenir les résultats finaux</h3><p>Nous pouvons obtenir les passages récupérés finaux des relations reclassées.</p>
+<h3 id="Get-Final-Results" class="common-anchor-header">Obtenir les résultats finaux<button data-href="#Get-Final-Results" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Nous pouvons obtenir les passages récupérés finaux des relations reclassées.</p>
 <pre><code translate="no" class="language-python">final_top_k = <span class="hljs-number">2</span>
 
 final_passages = []

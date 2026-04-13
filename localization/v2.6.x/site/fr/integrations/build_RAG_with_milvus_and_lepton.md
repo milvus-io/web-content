@@ -27,7 +27,7 @@ title: Construire RAG avec Milvus et Lepton AIAbout to Deprecate
 <a href="https://github.com/milvus-io/bootcamp/blob/master/integration/build_RAG_with_milvus_and_lepton.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://www.lepton.ai/">Lepton</a> AI permet aux développeurs et aux entreprises d'exécuter efficacement des applications d'IA en quelques minutes, et à une échelle prête pour la production. Lepton AI vous permet de construire des modèles d'une manière native Python, de déboguer et de tester des modèles localement, de les déployer dans le nuage avec une seule commande, et de consommer des modèles dans n'importe quelle application avec une API simple et flexible. Il fournit un environnement complet pour le déploiement de divers modèles d'IA, y compris les modèles de langage de grande taille (LLM) et les modèles de diffusion, sans qu'il soit nécessaire de mettre en place une infrastructure étendue.</p>
+<p><a href="https://www.lepton.ai/">Lepton</a> AI permet aux développeurs et aux entreprises d'exécuter efficacement des applications d'IA en quelques minutes, et à une échelle prête pour la production. Lepton AI vous permet de construire des modèles d'une manière native Python, de déboguer et de tester des modèles localement, de les déployer dans le nuage avec une seule commande, et de consommer des modèles dans n'importe quelle application avec une API simple et flexible. Il fournit un environnement complet pour le déploiement de divers modèles d'IA, y compris les grands modèles de langage (LLM) et les modèles de diffusion, sans qu'il soit nécessaire de mettre en place une infrastructure étendue.</p>
 <p>Dans ce tutoriel, nous allons vous montrer comment construire un pipeline RAG (Retrieval-Augmented Generation) avec Milvus et Lepton AI.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -192,7 +192,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Insérer des données<button data-href="#Insert-data" class="anchor-icon" translate="no">
@@ -346,4 +346,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Inserted data in Milvus, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental logs. Milvus supports multiple object storage backends such as MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS). Metadata are generated within Milvus and stored in etcd.
 </code></pre>
-<p>C'est super ! Nous avons réussi à construire un pipeline RAG avec Milvus et Lepton AI.</p>
+<p>Génial ! Nous avons réussi à construire un pipeline RAG avec Milvus et Lepton AI.</p>

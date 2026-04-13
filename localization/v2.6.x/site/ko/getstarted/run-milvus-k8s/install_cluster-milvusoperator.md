@@ -173,7 +173,7 @@ milvus-operator-5fd77b87dc-msrk4   1/1     Running   0          46s
     </button></h3><p>Milvus Operator 파드가 실행 중이면 다음과 같이 Milvus 클러스터를 배포할 수 있습니다.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">kubectl apply -f https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_woodpecker.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.13에 권장됨)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
+<p>위의 명령은 메시지 큐로 <strong>Woodpecker</strong> (v2.6.14에 권장)와 스트리밍 노드를 포함한 모든 새로운 아키텍처 구성 요소를 사용하여 Milvus 클러스터를 배포합니다.</p>
 <p><strong>이 배포의 아키텍처 주요 내용은 다음과 같습니다:</strong></p>
 <ul>
 <li><strong>메시지 큐</strong>: <a href="/docs/ko/use-woodpecker.md">Woodpecker 사용</a> (인프라 유지 관리 감소)</li>
@@ -423,5 +423,5 @@ Forwarding from 0.0.0.0:27018 -&gt; 9091
 <li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://github.com/zilliztech/attu">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

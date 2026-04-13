@@ -54,7 +54,22 @@ title: Attu로 빠르게 시작하기 - Milvus의 웹 UI
         ></path>
       </svg>
     </button></h2><p><a href="https://github.com/zilliztech/attu/releases">Attu GitHub 릴리즈 페이지를</a> 방문하여 데스크톱 버전의 Attu를 다운로드하세요. 사용 중인 운영 체제에 적합한 버전을 선택하고 설치 단계를 따르세요.</p>
-<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">macOS(M 시리즈 칩)의 경우 참고:</h3><p>오류가 발생하는 경우</p>
+<h3 id="Note-for-macOS-M-series-chip" class="common-anchor-header">macOS(M 시리즈 칩)의 경우 참고:<button data-href="#Note-for-macOS-M-series-chip" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>오류가 발생하는 경우</p>
 <pre><code translate="no">attu.app <span class="hljs-keyword">is</span> damaged <span class="hljs-keyword">and</span> cannot be opened.
 <button class="copy-code-btn"></button></code></pre>
 <p>터미널에서 다음 명령을 실행하여 이 문제를 우회하세요:</p>
@@ -111,7 +126,22 @@ title: Attu로 빠르게 시작하기 - Milvus의 웹 UI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 데이터 준비</h3><p>이 예제에서는 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 데이터셋으로 사용합니다.</p>
+    </button></h2><h3 id="41-Prepare-the-Data" class="common-anchor-header">4.1 데이터 준비<button data-href="#41-Prepare-the-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이 예제에서는 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 데이터셋으로 사용합니다.</p>
 <h4 id="Download-and-Extract-Data" class="common-anchor-header">데이터를 다운로드하고 추출합니다:</h4><pre><code translate="no" class="language-bash">wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
@@ -124,7 +154,22 @@ text_lines = []
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 임베딩 생성하기</h3><p><code translate="no">milvus_model</code> 을 사용하여 텍스트 임베딩을 생성할 임베딩 모델을 정의합니다. 여기서는 사전 학습된 경량 임베딩 모델인 <code translate="no">DefaultEmbeddingFunction</code> 모델을 예로 사용합니다.</p>
+<h3 id="42-Generate-Embeddings" class="common-anchor-header">4.2 임베딩 생성하기<button data-href="#42-Generate-Embeddings" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p><code translate="no">milvus_model</code> 을 사용하여 텍스트 임베딩을 생성할 임베딩 모델을 정의합니다. 여기서는 사전 학습된 경량 임베딩 모델인 <code translate="no">DefaultEmbeddingFunction</code> 모델을 예로 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model <span class="hljs-keyword">as</span> milvus_model
 
 embedding_model = milvus_model.DefaultEmbeddingFunction()
@@ -140,7 +185,22 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
  -0.03041712 -0.02269499 -0.02317863 -0.00426028]
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="43-Create-Collection" class="common-anchor-header">4.3 컬렉션 만들기</h3><p>Milvus에 연결하여 컬렉션을 생성합니다:</p>
+<h3 id="43-Create-Collection" class="common-anchor-header">4.3 컬렉션 만들기<button data-href="#43-Create-Collection" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Milvus에 연결하여 컬렉션을 생성합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Connect to Milvus Standalone</span>
@@ -157,11 +217,26 @@ client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
     metric_type=<span class="hljs-string">&quot;IP&quot;</span>,  <span class="hljs-comment"># Inner product distance</span>
-    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/consistency.md#Consistency-Level for more details.</span>
+    consistency_level=<span class="hljs-string">&quot;Bounded&quot;</span>,  <span class="hljs-comment"># Supported values are (`&quot;Strong&quot;`, `&quot;Session&quot;`, `&quot;Bounded&quot;`, `&quot;Eventually&quot;`). See https://milvus.io/docs/tune_consistency.md#Consistency-Level for more details.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="44-Insert-Data" class="common-anchor-header">4.4 데이터 삽입</h3><p>텍스트 줄을 반복하고 임베딩을 생성한 다음 데이터를 Milvus에 삽입합니다:</p>
+<h3 id="44-Insert-Data" class="common-anchor-header">4.4 데이터 삽입<button data-href="#44-Insert-Data" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>텍스트 줄을 반복하고 임베딩을 생성한 다음 데이터를 Milvus에 삽입합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -173,7 +248,22 @@ doc_embeddings = embedding_model.encode_documents(text_lines)
 client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <hr>
-<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 데이터 및 스키마 시각화</h3><p>이제 Attu의 인터페이스를 사용하여 데이터 스키마와 삽입된 엔티티를 시각화할 수 있습니다. 스키마에는 <code translate="no">Int64</code> 유형의 <code translate="no">id</code> 필드와 <code translate="no">vector</code> 유형의 <code translate="no">FloatVector(768)</code> 필드( <code translate="no">Inner Product (IP)</code> 메트릭 포함) 등 정의된 필드가 표시됩니다. 컬렉션에는 <strong>72개의 엔티티가</strong> 로드되어 있습니다.</p>
+<h3 id="45-Visualize-Data-and-Schema" class="common-anchor-header">4.5 데이터 및 스키마 시각화<button data-href="#45-Visualize-Data-and-Schema" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>이제 Attu의 인터페이스를 사용하여 데이터 스키마와 삽입된 엔티티를 시각화할 수 있습니다. 스키마에는 <code translate="no">Int64</code> 유형의 <code translate="no">id</code> 필드와 <code translate="no">vector</code> 유형의 <code translate="no">FloatVector(768)</code> 필드( <code translate="no">Inner Product (IP)</code> 메트릭 포함) 등 정의된 필드가 표시됩니다. 컬렉션에는 <strong>72개의 엔티티가</strong> 로드되어 있습니다.</p>
 <p>또한 ID, 벡터 임베딩 및 텍스트 콘텐츠와 같은 메타데이터를 저장하는 동적 필드를 포함하여 삽입된 데이터를 볼 수 있습니다. 이 인터페이스는 지정된 조건 또는 동적 필드를 기반으로 필터링 및 쿼리를 지원합니다.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_after_data_insertion_1.png" alt="Schema View" width="45%" />
@@ -195,7 +285,22 @@ client.insert(collection_name=collection_name, data=data)
         ></path>
       </svg>
     </button></h2><p>Attu는 데이터 관계를 시각화하고 탐색할 수 있는 강력한 인터페이스를 제공합니다. 삽입된 데이터 포인트와 그 유사성 관계를 조사하려면 다음 단계를 따르세요:</p>
-<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>검색 수행</strong></h3><p>Attu의 <strong>벡터 검색</strong> 탭으로 이동합니다.</p>
+<h3 id="51-Perform-a-Search" class="common-anchor-header">5.1 <strong>검색 수행</strong><button data-href="#51-Perform-a-Search" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>Attu의 <strong>벡터 검색</strong> 탭으로 이동합니다.</p>
 <ol>
 <li><strong>무작위 데이터 생성</strong> 버튼을 클릭하여 테스트 쿼리를 생성합니다.</li>
 <li><strong>검색을</strong> 클릭하여 생성된 데이터를 기반으로 결과를 검색합니다.</li>
@@ -205,7 +310,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_table.png" alt="Search Results Table" width="80%">
 </p>
 <hr>
-<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2 <strong>데이터 관계 탐색</strong></h3><p>결과 패널에서 <strong>탐색</strong> 버튼을 클릭하면 쿼리 벡터와 검색 결과 사이의 관계를 <strong>지식 그래프와 같은 구조로</strong> 시각화할 수 있습니다.</p>
+<h3 id="52-Explore-Data-Relationships" class="common-anchor-header">5.2 <strong>데이터 관계 탐색</strong><button data-href="#52-Explore-Data-Relationships" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>결과 패널에서 <strong>탐색</strong> 버튼을 클릭하면 쿼리 벡터와 검색 결과 사이의 관계를 <strong>지식 그래프와 같은 구조로</strong> 시각화할 수 있습니다.</p>
 <ul>
 <li><strong>중앙 노드는</strong> 검색 벡터를 나타냅니다.</li>
 <li><strong>연결된 노드는</strong> 검색 결과를 나타내며, 해당 노드를 클릭하면 해당 노드의 상세 정보가 표시됩니다.</li>
@@ -214,7 +334,22 @@ client.insert(collection_name=collection_name, data=data)
   <img translate="no" src="/docs/v2.6.x/assets/attu_searched_graph.png" alt="Knowledge Graph Visualization" width="80%">
 </p>
 <hr>
-<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>그래프 펼치기</strong></h3><p>결과 노드를 더블클릭하여 연결을 확장합니다. 이 작업은 선택한 노드와 컬렉션의 다른 데이터 포인트 사이의 추가 관계를 표시하여 <strong>더 크고 상호 연결된 지식 그래프를</strong> 만듭니다.</p>
+<h3 id="53-Expand-the-Graph" class="common-anchor-header">5.3 <strong>그래프 펼치기</strong><button data-href="#53-Expand-the-Graph" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><p>결과 노드를 더블클릭하여 연결을 확장합니다. 이 작업은 선택한 노드와 컬렉션의 다른 데이터 포인트 사이의 추가 관계를 표시하여 <strong>더 크고 상호 연결된 지식 그래프를</strong> 만듭니다.</p>
 <p>이 확장된 보기를 사용하면 벡터 유사성을 기반으로 데이터 포인트가 어떻게 연관되어 있는지 더 깊이 탐색할 수 있습니다.</p>
 <p align="center">
   <img translate="no" src="/docs/v2.6.x/assets/attu_expanded_searched_graph.png" alt="Expanded Knowledge Graph" width="80%">

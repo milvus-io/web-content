@@ -90,7 +90,7 @@ title: Управление группами ресурсов
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.6.10. Перед их выполнением обновите свою установку PyMilvus.</p>
+<p>Все примеры кода на этой странице приведены в версии PyMilvus 2.6.11. Перед их выполнением обновите свою установку PyMilvus.</p>
 </div>
 <ol>
 <li><p>Создайте группу ресурсов.</p>
@@ -136,7 +136,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#   &lt;nodes:[]&gt;              // node detail info</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Передача узлов между группами ресурсов.</p>
-<p>Вы можете заметить, что в описанной группе ресурсов еще нет ни одного узла запроса. Переместите несколько узлов из стандартной группы ресурсов в создаваемую следующим образом: предположим, что в настоящее время в <strong>__default_resource_group</strong> кластера находится 1 узел запросов, и мы хотим перенести один узел в созданную <strong>rg</strong>.<code translate="no">update_resource_groups</code> обеспечивает атомарность при многократном изменении конфигурации, поэтому никакие промежуточные состояния не будут видны Milvus.</p>
+<p>Вы можете заметить, что в описанной группе ресурсов еще нет ни одного узла запроса. Переместите несколько узлов из стандартной группы ресурсов в созданную следующим образом: предположим, что в настоящее время в <strong>__default_resource_group</strong> кластера есть 1 узел запросов, и мы хотим перенести один узел в созданную <strong>rg</strong>.<code translate="no">update_resource_groups</code> обеспечивает атомарность при многократном изменении конфигурации, поэтому никакие промежуточные состояния не будут видны Milvus.</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -198,7 +198,7 @@ num_replicas = <span class="hljs-number">1</span>
 <span class="hljs-comment"># Succeeded in moving 1 replica(s) of c from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Сбросить группу ресурсов.</p>
-<p>Вы можете в любой момент отказаться от группы ресурсов, в которой нет узла запроса (<code translate="no">limits.node_num = 0</code>). В этом руководстве группа ресурсов <code translate="no">rg</code> теперь имеет один узел запроса. Сначала необходимо изменить конфигурацию <code translate="no">limits.node_num</code> группы ресурсов на нулевую.</p>
+<p>Вы можете отказаться от группы ресурсов, в которой нет узла запроса (<code translate="no">limits.node_num = 0</code>), в любое время. В этом руководстве группа ресурсов <code translate="no">rg</code> теперь имеет один узел запроса. Сначала необходимо изменить конфигурацию <code translate="no">limits.node_num</code> группы ресурсов на нулевую.</p>
 <pre><code translate="no" class="language-python">resource_group = <span class="hljs-string">&quot;rg
 try:
     milvus_client.update_resource_groups({
