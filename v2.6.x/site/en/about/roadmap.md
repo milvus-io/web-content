@@ -53,7 +53,7 @@ Focus: **Upgrading the data model**, **refactoring the streaming architecture**,
 
 - Provide multimodal data visualization and a Spark ETL demo, establishing the foundational data lake architecture.
 
-## 🌠 Milvus v3.0 (Targeted for Late 2026)
+## 🌠 Milvus v3.0 (Targeted for Early 2026)
 
 **Timeline: Late 2025 – Early 2026**  
 
