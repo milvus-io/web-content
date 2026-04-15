@@ -90,7 +90,7 @@ summary: >-
 <li><p>Integrate with <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> via FFI, enabling offline schema evolution and KNN queries.</p></li>
 <li><p>Provide multimodal data visualization and a Spark ETL demo, establishing the foundational data lake architecture.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (Targeted for Late 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (Targeted for Early 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
