@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const fs = require('fs')
 const path = require('path');
 const inquirer = require('inquirer');
-const Jimp = require("jimp");
+const { Jimp } = require("jimp");
 
 class MilvusDocsGen extends larkDocWriter {
     constructor(base, sourceType, menuStructure, imageDir, alt_texts) {
@@ -344,7 +344,7 @@ class MilvusDocsGen extends larkDocWriter {
                 try {
                     const image = await Jimp.read(file_path);
                     this.__crop_image_border(image)
-                    image.write(file_path);
+                    await image.write(file_path);
                 } catch (error) {
                     console.log(error)
                     console.log("-------------- A retry is needed -----------------");

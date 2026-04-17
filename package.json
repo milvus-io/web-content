@@ -20,7 +20,7 @@
     "highlight.js": "^11.10.0",
     "jsdom": "^25.0.0",
     "katex": "^0.16.21",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -32,7 +32,6 @@
   "dependencies": {
     "axios": "^1.6.0",
     "fs": "^0.0.1-security",
-    "html-word-count": "^2.0.0",
     "node-html-parser": "^5.2.0",
     "path": "^0.12.7"
   }
