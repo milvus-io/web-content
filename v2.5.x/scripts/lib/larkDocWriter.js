@@ -7,7 +7,7 @@ const fetch = require('node-fetch')
 const node_path = require('node:path')
 const cheerio = require('cheerio')
 const showdown = require('showdown')
-const Jimp = require("jimp");
+const { Jimp } = require("jimp");
 const _ = require('lodash')
 
 class larkDocWriter {
@@ -1092,7 +1092,7 @@ class larkDocWriter {
             try {
                 const image = await Jimp.read(`${this.downloader.target_path}/${board["token"]}.png`);
                 this.__crop_image_border(image)
-                image.write(`${this.downloader.target_path}/${board["token"]}.png`);
+                await image.write(`${this.downloader.target_path}/${board["token"]}.png`);
             } catch (error) {
                 console.log(error)
                 console.log("-------------- A retry is needed -----------------");
@@ -1142,7 +1142,7 @@ class larkDocWriter {
 
         for (let i=0; i<height; i++) {
             if (reverse[i] !== height - 1 - i) {
-                image.crop(0, 0, width, reverse[i-1])
+                image.crop({ x: 0, y: 0, w: width, h: reverse[i-1] })
                 break;
             }
         }

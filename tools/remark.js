@@ -111,6 +111,8 @@ export const remarkToHtml = async (
 
   const mdxSource = await serialize(content, {
     scope: exports,
+    blockJS: false,
+    blockDangerousJS: false,
     mdxOptions: {
       remarkPlugins: [getRemarkCodeBlocksPlugin(codeList)],
       rehypePlugins: [
