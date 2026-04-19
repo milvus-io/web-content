@@ -30,6 +30,9 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
         ></path>
       </svg>
     </button></h1><p>Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a “MaxSim” operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.</p>
+<div class="alert warning">
+<p>This page has been deprecated. For the latest example of the use of CoPali with Milvus, refer to <a href="/docs/search-with-embedding-lists.md">Sesarch with Embedding Lists</a>.</p>
+</div>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
