@@ -91,7 +91,7 @@ summary: >-
 <li><p>Integrarse con <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> a través de FFI, permitiendo la evolución de esquemas offline y consultas KNN.</p></li>
 <li><p>Proporcionar visualización de datos multimodal y una demo de Spark ETL, estableciendo la arquitectura fundacional del lago de datos.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (Prevista para finales de 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (Prevista para principios de 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

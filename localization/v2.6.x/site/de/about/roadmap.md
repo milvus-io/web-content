@@ -38,7 +38,7 @@ summary: >-
       </svg>
     </button></h2><p><strong>Milvus Produkt-Roadmap</strong></p>
 <p>Willkommen bei der Milvus-Roadmap!</p>
-<p>Wir leiten mit Milvus eine neue Ära ein - die nächste Generation der multimodalen Datenbank - von <strong>strukturierten bis zu unstrukturierten Daten</strong>, von <strong>Echtzeitabfragen bis zu Offline-Analysen</strong> und von <strong>Single-Cluster-Leistung bis zu einer globalen Data Lake-Architektur</strong>.</p>
+<p>Wir leiten mit Milvus eine neue Ära ein - die nächste Generation multimodaler Datenbanken - von <strong>strukturierten bis zu unstrukturierten Daten</strong>, von <strong>Echtzeitabfragen bis zu Offline-Analysen</strong>, von <strong>Single-Cluster-Performance bis zu einer globalen Data Lake-Architektur</strong>.</p>
 <p>Diese Roadmap umreißt die Kernziele für <strong>Milvus v2.6 (in Arbeit)</strong>, <strong>Milvus v3.0 (geplant für Ende 2026)</strong> und <strong>Milvus v3.1 (langfristige Entwicklung)</strong>, zusammen mit dem Evolutionsplan für <strong>Vector Lake (Data Lake / Loon)</strong>.</p>
 <h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (in Arbeit)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ summary: >-
 <li><p>Unterstützung für den Datentyp <strong>Zeitstempel mit Zeitzone</strong>.</p></li>
 </ul>
 <h4 id="🔹-StreamNode-Architecture-Refactor" class="common-anchor-header">🔹 <strong>StreamNode Architektur Refactor</strong></h4><ul>
-<li><p>Umschreiben der Streaming-Ingestion-Pipeline zur Optimierung inkrementeller Schreibvorgänge und Echtzeitberechnungen.</p></li>
+<li><p>Neuformulierung der Streaming-Ingestion-Pipeline zur Optimierung inkrementeller Schreibvorgänge und Echtzeitberechnungen.</p></li>
 <li><p>Erhebliche Verbesserung der Gleichzeitigkeitsleistung und -stabilität als Grundlage für eine vereinheitlichte Echtzeit- und Offline-Verarbeitung.</p></li>
 <li><p>Einführung einer neuen Nachrichtenwarteschlangen-Engine: <strong>Woodpecker</strong>.</p></li>
 </ul>
@@ -90,7 +90,7 @@ summary: >-
 <li><p>Integration mit <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> über FFI, was Offline-Schemaentwicklung und KNN-Abfragen ermöglicht.</p></li>
 <li><p>Bereitstellung einer multimodalen Datenvisualisierung und einer Spark ETL-Demo, die die grundlegende Data Lake-Architektur etabliert.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (geplant für Ende 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (geplant für Anfang 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -144,7 +144,7 @@ summary: >-
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Enterprise-Grade-Funktionen</strong></h4><ul>
 <li><p>Unterstützung von <strong>Snapshot-basierter Sicherung und Wiederherstellung</strong>.</p></li>
 <li><p>Bietet <strong>End-to-End-Tracing</strong> und <strong>Audit-Protokollierung</strong>.</p></li>
-<li><p>Implementierung von <strong>Active-Standby-Hochverfügbarkeit (HA)</strong> in Multicluster-Bereitstellungen.</p></li>
+<li><p>Implementierung von <strong>Active-Standby-Hochverfügbarkeit (HA)</strong> in Multi-Cluster-Bereitstellungen.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-v02" class="common-anchor-header">🔹 <strong>Vector Lake (v0.2)</strong></h4><ul>
 <li><p>Unterstützung von <strong>TEXT-/BLOB-Speicher</strong> und <strong>Snapshot-Management für mehrere Versionen</strong>.</p></li>

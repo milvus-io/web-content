@@ -91,7 +91,7 @@ summary: >-
 <li><p>Интеграция со <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> через FFI, позволяющая осуществлять эволюцию схемы в автономном режиме и выполнять KNN-запросы.</p></li>
 <li><p>Обеспечивает мультимодальную визуализацию данных и демонстрацию Spark ETL, создавая фундаментальную архитектуру озера данных.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (запланирован на конец 2026 года)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (запланирован на начало 2026 года)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -134,12 +134,12 @@ summary: >-
 <li><p>Улучшение стратегий изоляции и планирования ресурсов для поддержки миллионов таблиц в одном кластере.</p></li>
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header"><strong>🔹 Усовершенствования схем и первичных ключей</strong></h4><ul>
-<li><p>Реализовано <strong>глобальное дедублирование первичных ключей (Global PK Dedup)</strong>, гарантирующее согласованность и уникальность данных.</p></li>
+<li><p>Реализация <strong>глобального дедублирования первичных ключей (Global PK Dedup)</strong> для обеспечения согласованности и уникальности данных.</p></li>
 <li><p>Поддержка <strong>гибкого управления схемой</strong> (добавление/удаление столбцов, резервное заполнение).</p></li>
 <li><p>Разрешить <strong>значения NULL</strong> в векторных полях.</p></li>
 </ul>
 <h4 id="🔹-Expanded-Unstructured-Data-Types-BLOB--Text" class="common-anchor-header">🔹 <strong>Расширенные типы неструктурированных данных (BLOB / Text)</strong></h4><ul>
-<li><p>Представлен <strong>тип BLOB</strong>, который обеспечивает хранение и ссылки на бинарные данные, такие как файлы, изображения и видео.</p></li>
+<li><p>Введен <strong>тип BLOB</strong>, который обеспечивает хранение и ссылки на бинарные данные, такие как файлы, изображения и видео.</p></li>
 <li><p>Представлен <strong>тип TEXT</strong>, который обеспечивает расширенные возможности полнотекстового и контентного поиска.</p></li>
 </ul>
 <h4 id="🔹-Enterprise-Grade-Capabilities" class="common-anchor-header">🔹 <strong>Возможности корпоративного уровня</strong></h4><ul>
@@ -208,7 +208,7 @@ summary: >-
 <li><p>Улучшение <strong>построения глобального индекса</strong> и обеспечение <strong>производительности распределенного поиска</strong>.</p></li>
 </ul>
 <h4 id="🔹-Vector-Lake-V10" class="common-anchor-header">🔹 <strong>Vector Lake V1.0</strong></h4><ul>
-<li><p>Глубокая интеграция с <strong>Ray / Daft / PyTorch</strong> для поддержки распределенных UDF и контекстного инжиниринга.</p></li>
+<li><p>Глубокая интеграция с <strong>Ray / Daft / PyTorch</strong> для поддержки распределенных UDF и использования контекстного инжиниринга.</p></li>
 <li><p><strong>Демонстрация RAG (Retrieval-Augmented Generation)</strong> <strong>и импорт из таблиц Iceberg</strong>.</p></li>
 </ul>
 <h2 id="🤝-Co-Building-the-Future-of-Milvus" class="common-anchor-header">🤝 Совместное построение будущего Milvus<button data-href="#🤝-Co-Building-the-Future-of-Milvus" class="anchor-icon" translate="no">

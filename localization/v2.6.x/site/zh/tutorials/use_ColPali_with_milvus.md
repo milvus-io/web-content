@@ -1,7 +1,7 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  在本笔记本中，为了通用起见，我们将这种多向量表示法称为 "ColBERT embeddings"。不过，实际使用的模型是 ColPali
+  在本笔记本中，我们将这种多向量表示法称为 "ColBERT embeddings"，以求通俗易懂。不过，实际使用的模型是 ColPali
   模型。我们将演示如何使用 Milvus 进行多向量检索。在此基础上，我们将介绍如何使用 ColPali 根据给定查询检索网页。
 title: 使用 ColPali 与 Milvus 一起进行多模式检索
 ---
@@ -27,13 +27,16 @@ title: 使用 ColPali 与 Milvus 一起进行多模式检索
         ></path>
       </svg>
     </button></h1><p>现代检索模型通常使用单一嵌入来表示文本或图像。而 ColBERT 是一种神经模型，它利用每个数据实例的嵌入列表，并采用 "MaxSim "操作来计算两个文本之间的相似度。除文本数据外，图、表和图表也包含丰富的信息，而这些信息在基于文本的信息检索中往往被忽略。</p>
+<div class="alert warning">
+<p>本页面已废弃。有关将 CoPali 与 Milvus 结合使用的最新示例，请参阅<a href="/docs/zh/search-with-embedding-lists.md">Sesarch with Embedding Lists</a>。</p>
+</div>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>MaxSim 函数通过查看查询和文档（你要搜索的内容）的标记嵌入来比较它们。对于查询中的每个单词，它都会从文档中挑选出最相似的单词（使用余弦相似度或平方 L2 距离），并将查询中所有单词的最大相似度相加。</p>
+<p>MaxSim 函数通过查看标记嵌入（token embeddings）来比较查询和文档（你正在搜索的内容）。对于查询中的每个单词，它都会从文档中挑选出最相似的单词（使用余弦相似度或平方 L2 距离），并将查询中所有单词的最大相似度相加。</p>
 <p>ColPali 是一种将 ColBERT 的多向量表示法与 PaliGemma（多模态大语言模型）相结合的方法，可充分利用其强大的理解能力。这种方法可以使用统一的多向量嵌入来表示同时包含文本和图像的页面。这种多向量表示法中的嵌入可以捕捉详细信息，提高多模态数据的检索增强生成（RAG）性能。</p>
 <p>在本笔记本中，我们将这种多向量表示法称为 "ColBERT embeddings"，以示通用。不过，实际使用的模型是<strong>ColPali 模型</strong>。我们将演示如何使用 Milvus 进行多向量检索。在此基础上，我们将介绍如何使用 ColPali 根据给定查询检索网页。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">

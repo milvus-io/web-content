@@ -2,10 +2,10 @@
 id: use_ColPali_with_milvus.md
 summary: >-
   Dans ce carnet, nous appelons ce type de représentation multi-vectorielle
-  "ColBERT embeddings" par souci de généralité. Cependant, le modèle réellement
-  utilisé est le modèle ColPali. Nous montrerons comment utiliser Milvus pour la
-  recherche multi-vectorielle. Sur cette base, nous présenterons l'utilisation
-  de ColPali pour la recherche de pages sur la base d'une requête donnée.
+  "ColBERT embeddings" par souci de généralité. Cependant, le modèle utilisé est
+  le modèle ColPali. Nous montrerons comment utiliser Milvus pour la recherche
+  multi-vectorielle. Sur cette base, nous présenterons l'utilisation de ColPali
+  pour la recherche de pages sur la base d'une requête donnée.
 title: Utiliser ColPali pour la recherche multimodale avec Milvus
 ---
 <p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
@@ -30,6 +30,9 @@ title: Utiliser ColPali pour la recherche multimodale avec Milvus
         ></path>
       </svg>
     </button></h1><p>Les modèles de recherche modernes utilisent généralement un seul ancrage pour représenter le texte ou les images. ColBERT, en revanche, est un modèle neuronal qui utilise une liste d'enchâssements pour chaque instance de données et emploie une opération "MaxSim" pour calculer la similarité entre deux textes. Au-delà des données textuelles, les figures, les tableaux et les diagrammes contiennent également des informations riches, qui sont souvent ignorées dans la recherche d'informations basée sur le texte.</p>
+<div class="alert warning">
+<p>Cette page a été supprimée. Pour le dernier exemple d'utilisation de CoPali avec Milvus, voir <a href="/docs/fr/search-with-embedding-lists.md">Sesarch with Embedding Lists</a>.</p>
+</div>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.6.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />

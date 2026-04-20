@@ -90,7 +90,7 @@ summary: >-
 <li><p>التكامل مع <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> عبر FFI، مما يتيح تطوير المخطط دون اتصال بالإنترنت واستعلامات KNN.</p></li>
 <li><p>توفير تصور متعدد الوسائط للبيانات وعرض توضيحي لـ Spark ETL، مما يؤسس بنية بحيرة البيانات التأسيسية.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (مستهدف في أواخر عام 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (مستهدف في أوائل عام 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,7 +151,7 @@ summary: >-
 <li><p>دمج Spark للفهرسة والتجميع وإلغاء التكرار ومهام تقليل الأبعاد دون اتصال بالإنترنت.</p></li>
 <li><p>تقديم <strong>الاستعلام البارد ChatPDF والعروض التوضيحية القياسية دون اتصال بالإنترنت</strong>.</p></li>
 </ul>
-<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 ميلفوس الإصدار 3.1 (رؤية طويلة المدى)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
+<h2 id="🪐-Milvus-v31-Long-Term-Vision" class="common-anchor-header">🪐 ميلفوس الإصدار 3.1 (رؤية طويلة الأجل)<button data-href="#🪐-Milvus-v31-Long-Term-Vision" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

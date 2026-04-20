@@ -91,7 +91,7 @@ summary: >-
 <li><p>Intégrer avec <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> via FFI, permettant l'évolution du schéma hors ligne et les requêtes KNN.</p></li>
 <li><p>Fournir une visualisation multimodale des données et une démo ETL Spark, établissant l'architecture fondamentale du lac de données.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (prévu pour fin 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (prévu pour début 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +130,7 @@ summary: >-
 <li><p>Introduire des capacités d'<strong>agrégation</strong> pour les requêtes.</p></li>
 </ul>
 <h4 id="🔹-Multi-Tenancy--Resource-Management" class="common-anchor-header">🔹 <strong>Multi-locataires et gestion des ressources</strong></h4><ul>
-<li><p>Permettre la suppression, les statistiques et la hiérarchisation à chaud et à froid de plusieurs utilisateurs.</p></li>
+<li><p>Permettre la suppression, les statistiques et la hiérarchisation à chaud et à froid pour les utilisateurs multiples.</p></li>
 <li><p>Améliorer l'isolation des ressources et les stratégies de planification pour prendre en charge des millions de tables dans un seul cluster.</p></li>
 </ul>
 <h4 id="🔹-Schema--Primary-Key-Enhancements" class="common-anchor-header"><strong>🔹 Amélioration des schémas et des clés primaires</strong></h4><ul>

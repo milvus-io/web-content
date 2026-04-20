@@ -40,7 +40,7 @@ summary: >-
     </button></h2><p><strong>Peta Jalan Produk Milvus</strong></p>
 <p>Selamat datang di Peta Jalan Milvus!</p>
 <p>Kami mengantarkan Milvus ke era baru - basis data multimodal generasi berikutnya - yang mencakup <strong>data terstruktur hingga data tidak terstruktur</strong>, <strong>pengambilan data secara real-time hingga analitik offline</strong>, dan <strong>kinerja cluster tunggal hingga arsitektur data lake global.</strong></p>
-<p>Peta jalan ini menguraikan tujuan utama untuk <strong>Milvus v2.6 (sedang dalam proses)</strong>, <strong>Milvus v3.0 (ditargetkan pada akhir tahun 2026)</strong>, dan <strong>Milvus v3.1 (pengembangan jangka panjang)</strong>, beserta rencana evolusi untuk <strong>Vector Lake (data lake/Loon)</strong>.</p>
+<p>Peta jalan ini menguraikan tujuan utama untuk <strong>Milvus v2.6 (sedang dalam proses)</strong>, <strong>Milvus v3.0 (ditargetkan pada akhir tahun 2026)</strong>, dan <strong>Milvus v3.1 (pengembangan jangka panjang)</strong>, beserta rencana evolusi untuk <strong>Vector Lake (data lake / Loon)</strong>.</p>
 <h2 id="🧩-Milvus-v26-In-Progress" class="common-anchor-header">🧩 Milvus v2.6 (Sedang dalam Proses)<button data-href="#🧩-Milvus-v26-In-Progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +91,7 @@ summary: >-
 <li><p>Terintegrasi dengan <strong>Spark</strong> / <strong>DuckDB</strong> / <strong>DataFusion</strong> melalui FFI, memungkinkan evolusi skema offline dan kueri KNN.</p></li>
 <li><p>Menyediakan visualisasi data multimodal dan demo Spark ETL, membangun arsitektur data lake yang mendasar.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0 (Ditargetkan pada Akhir 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0 (Ditargetkan pada Awal 2026)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,7 +231,7 @@ summary: >-
 <ul>
 <li><p><strong>💬 Memberikan umpan balik</strong>: Mengusulkan fitur-fitur baru atau ide pengoptimalan</p></li>
 <li><p>🐛 <strong>Melaporkan masalah</strong>: Mengajukan bug melalui Masalah GitHub</p></li>
-<li><p>🔧 <strong>Kontribusi kode</strong>: Kirimkan PR dan bantu membangun fitur inti</p>
+<li><p>🔧 <strong>Kontribusi kode</strong>: Mengirimkan PR dan membantu membangun fitur inti</p>
 <ul>
 <li><p><strong>Tarik permintaan</strong>: Berkontribusi langsung ke <a href="https://github.com/milvus-io/milvus/pulls">basis kode</a> kami. Baik itu memperbaiki bug, menambahkan fitur, atau meningkatkan dokumentasi, kontribusi Anda diterima.</p></li>
 <li><p><strong>Panduan pengembangan</strong>: Lihat <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Panduan Kontributor</a> kami untuk panduan kontribusi kode.</p></li>

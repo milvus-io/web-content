@@ -19,7 +19,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="common-anchor-header">차세대 멀티모달 데이터베이스 및 데이터 레이크를 향하여<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="anchor-icon" translate="no">
+    </button></h1><h2 id="🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="common-anchor-header">차세대 멀티모달 데이터베이스와 데이터 레이크를 향하여<button data-href="#🌌-Toward-the-Next-Gen-Multimodal-Database-and-Data-Lake" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
         ></path>
       </svg>
     </button></h3><h4 id="🔹-Data-Model-Upgrade" class="common-anchor-header">🔹 <strong>데이터 모델 업그레이드</strong></h4><ul>
-<li><p>다중 벡터 임베딩 구조를 지원하기 위해 통합 <strong>Tensor / StructList</strong> 데이터 유형을 도입하여 <em>ColBERT</em>, <em>CoLQwen</em>, <em>비디오</em> 및 <em>멀티모달 벡터와의</em> 호환을 가능하게 합니다.</p></li>
+<li><p>다중 벡터 임베딩 구조를 지원하기 위해 통합된 <strong>Tensor / StructList</strong> 데이터 유형을 도입하여 <em>ColBERT</em>, <em>CoLQwen</em>, <em>비디오</em> 및 <em>멀티모달 벡터와의</em> 호환을 가능하게 합니다.</p></li>
 <li><p>포인트, 지역, 공간 인덱싱( <em>라이브러리</em> 공간 기반)을 포함한 <strong>지리 데이터</strong> 지원을 추가하여 LBS 및 GIS의 사용 사례를 확장합니다.</p></li>
 <li><p><strong>타임존</strong> 데이터 유형으로 <strong>타임스탬프</strong> 지원.</p></li>
 </ul>
@@ -88,7 +88,7 @@ summary: Milvus는 AI 애플리케이션을 구동하기 위해 구축된 오픈
 <li><p>FFI를 통해 <strong>Spark/DuckDB/DataFusion과</strong> 통합하여 오프라인 스키마 진화 및 KNN 쿼리를 가능하게 합니다.</p></li>
 <li><p>멀티모달 데이터 시각화 및 Spark ETL 데모를 제공하여 데이터 레이크 아키텍처의 기초를 확립합니다.</p></li>
 </ul>
-<h2 id="🌠-Milvus-v30-Targeted-for-Late-2026" class="common-anchor-header">🌠 Milvus v3.0(2026년 말 목표)<button data-href="#🌠-Milvus-v30-Targeted-for-Late-2026" class="anchor-icon" translate="no">
+<h2 id="🌠-Milvus-v30-Targeted-for-Early-2026" class="common-anchor-header">🌠 Milvus v3.0(2026년 초 출시 목표)<button data-href="#🌠-Milvus-v30-Targeted-for-Early-2026" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
