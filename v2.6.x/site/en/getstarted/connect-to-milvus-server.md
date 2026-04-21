@@ -26,8 +26,6 @@ Use the Milvus server address (e.g. `http://localhost:19530`) to establish a con
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
-    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -73,20 +71,6 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -d '{}'
 ```
 
-<!--
-```c++
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
--->
-
 ## Connect with credentials (authentication enabled)
 
 Provide either a **token** in the form `"username:password"` or separate `user` and `password`. The default built-in admin is `root:Milvus` (change this for production).
@@ -97,8 +81,6 @@ Provide either a **token** in the form `"username:password"` or separate `user` 
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
-    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -160,20 +142,6 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -d '{}'
 ```
 
-<!--
-```c++
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param);
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
--->
-
 <div class="alert note">
 
 Token format is `"<username>:<password>"`. The docs explicitly note `root:Milvus` as the default credential, and the [Create Users & Roles](users_and_roles.md) guide covers managing users. 
@@ -190,8 +158,6 @@ Set a default timeout on the client connection:
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
-    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -249,20 +215,6 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -d '{}'
 ```
 
-<!--
-```c++
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};;
-auto status = client->Connect(connect_param.WithRpcDeadlineMs(1000));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
--->
-
 <div class="alert note">
 
 - For the SDKs listed above, this timeout is used only when establishing connections and does not serve as a default timeout for other API operations.
@@ -281,8 +233,6 @@ Choose the target database during construction with `db_name`. You can also swit
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
-    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -353,20 +303,6 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
       "dbName": "analytics"
     }'
 ```
-
-<!--
-```c++
-#include "milvus/MilvusClientV2.h"
-
-auto client = milvus::MilvusClientV2::Create();
-
-milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
-auto status = client->Connect(connect_param.WithDbName("analytics"));
-if (!status.IsOk()) {
-    std::cout << status.Message() << std::endl;
-}
-```
--->
 
 <div class="alert note">
 
