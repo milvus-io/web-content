@@ -47,3 +47,4 @@ const pkType = await client.getPkFieldType({
 });
 console.log(pkType); // e.g., "Int64"
 ```
+
