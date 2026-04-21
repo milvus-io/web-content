@@ -26,7 +26,8 @@ Use the Milvus server address (e.g. `http://localhost:19530`) to establish a con
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <a href="#c++">C++</a>
+    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
+    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -72,6 +73,7 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -d '{}'
 ```
 
+<!--
 ```c++
 #include "milvus/MilvusClientV2.h"
 
@@ -83,6 +85,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+-->
 
 ## Connect with credentials (authentication enabled)
 
@@ -94,7 +97,8 @@ Provide either a **token** in the form `"username:password"` or separate `user` 
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <a href="#c++">C++</a>
+    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
+    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -156,6 +160,7 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -d '{}'
 ```
 
+<!--
 ```c++
 #include "milvus/MilvusClientV2.h"
 
@@ -167,6 +172,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+-->
 
 <div class="alert note">
 
@@ -184,7 +190,8 @@ Set a default timeout on the client connection:
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <a href="#c++">C++</a>
+    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
+    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -242,6 +249,7 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     -d '{}'
 ```
 
+<!--
 ```c++
 #include "milvus/MilvusClientV2.h"
 
@@ -253,6 +261,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+-->
 
 <div class="alert note">
 
@@ -272,7 +281,8 @@ Choose the target database during construction with `db_name`. You can also swit
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
-    <a href="#c++">C++</a>
+    <!-- Temporarily hidden until frontend fixes multipleCode tab for #c++ (querySelector/CSS + issue). -->
+    <!-- <a href="#c++">C++</a> -->
 </div>
 
 ```python
@@ -344,6 +354,7 @@ curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
     }'
 ```
 
+<!--
 ```c++
 #include "milvus/MilvusClientV2.h"
 
@@ -355,6 +366,7 @@ if (!status.IsOk()) {
     std::cout << status.Message() << std::endl;
 }
 ```
+-->
 
 <div class="alert note">
 
