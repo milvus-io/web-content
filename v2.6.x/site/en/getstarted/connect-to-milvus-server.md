@@ -26,6 +26,7 @@ Use the Milvus server address (e.g. `http://localhost:19530`) to establish a con
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#c++">C++</a>
 </div>
 
 ```python
@@ -61,7 +62,26 @@ c, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
 ```
 
 ```bash
-# restful
+# The RESTful API is stateless, so there is no persistent connection.
+# Each request hits the server directly; the /collections/list endpoint
+# doubles as a health check when you need to verify reachability.
+export HOST="localhost:19530"
+
+curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
+    -H "Content-Type: application/json" \
+    -d '{}'
+```
+
+```c++
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 ## Connect with credentials (authentication enabled)
@@ -74,6 +94,7 @@ Provide either a **token** in the form `"username:password"` or separate `user` 
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#c++">C++</a>
 </div>
 
 ```python
@@ -126,7 +147,25 @@ c, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
 ```
 
 ```bash
-# restful
+export HOST="localhost:19530"
+export TOKEN="root:Milvus"
+
+curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d '{}'
+```
+
+```c++
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param);
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 <div class="alert note">
@@ -145,6 +184,7 @@ Set a default timeout on the client connection:
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#c++">C++</a>
 </div>
 
 ```python
@@ -188,12 +228,37 @@ c, err := milvusclient.New(ctx, &milvusclient.ClientConfig{
 ```
 
 ```bash
-# restful
+export HOST="localhost:19530"
+export TOKEN="root:Milvus"
+
+# Request-Timeout is applied per-request (unit: seconds). --max-time
+# caps the total curl wall-clock so the client gives up even if the
+# server never responds.
+curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" \
+    -H "Request-Timeout: 5" \
+    --max-time 7 \
+    -d '{}'
+```
+
+```c++
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};;
+auto status = client->Connect(connect_param.WithRpcDeadlineMs(1000));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 <div class="alert note">
 
-This timeout is used only when establishing connections. It does not serve as a default timeout for other API operations.
+- For the SDKs listed above, this timeout is used only when establishing connections and does not serve as a default timeout for other API operations.
+
+- For the RESTful API, `Request-Timeout` is a per-request deadline in seconds (unlike Java's `rpcDeadlineMs` and the Node.js `timeout`, which are in milliseconds), so include it on every call that needs a deadline.
 
 </div>
 
@@ -207,6 +272,7 @@ Choose the target database during construction with `db_name`. You can also swit
     <a href="#javascript">NodeJS</a>
     <a href="#go">Go</a>
     <a href="#bash">cURL</a>
+    <a href="#c++">C++</a>
 </div>
 
 ```python
@@ -264,7 +330,30 @@ err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption("reports"))
 ```
 
 ```bash
-# restful
+export HOST="localhost:19530"
+export TOKEN="root:Milvus"
+
+# Target a specific database by setting "dbName" in the request body.
+# The RESTful API is stateless, so include "dbName" on every request
+# that should run against a non-default database.
+curl -X POST "http://${HOST}/v2/vectordb/collections/list" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "dbName": "analytics"
+    }'
+```
+
+```c++
+#include "milvus/MilvusClientV2.h"
+
+auto client = milvus::MilvusClientV2::Create();
+
+milvus::ConnectParam connect_param{"http://localhost:19530", "root:Milvus"};
+auto status = client->Connect(connect_param.WithDbName("analytics"));
+if (!status.IsOk()) {
+    std::cout << status.Message() << std::endl;
+}
 ```
 
 <div class="alert note">
