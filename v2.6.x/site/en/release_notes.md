@@ -8,6 +8,41 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.6.15
+
+Release date: April 24, 2026
+
+| Milvus Version | Python SDK Version | Node.js SDK Version | Java SDK Version | Go SDK Version |
+| -------------- | ------------------ | ------------------- | ---------------- | -------------- |
+| 2.6.15         | 2.6.12             | 2.6.13              | 2.6.18           | 2.6.1          |
+
+We are excited to announce the release of Milvus v2.6.15! This release delivers meaningful performance and observability improvements across search, query, and storage paths, along with critical fixes for index correctness, RBAC backup/restore, and cross-version upgrade compatibility.
+
+### Improvements
+
+- Removed the unused SuffixSnapshot time-travel layer from RootCoord metadata storage, simplifying the catalog and eliminating orphaned snapshot keys ([#48638](https://github.com/milvus-io/milvus/pull/48638))
+- Improved latency metrics precision by switching from milliseconds to microseconds, preserving sub-millisecond resolution for insert, delete, query, search, and upsert paths ([#48653](https://github.com/milvus-io/milvus/pull/48653))
+- Separated metrics for internal upsert/delete requery operations from user-initiated queries, enabling more accurate monitoring of user-facing query performance ([#48708](https://github.com/milvus-io/milvus/pull/48708))
+- Upgraded go-jose/v4 to v4.1.4 and gnupg in GPU image to fix CVE-2026-34986 and CVE-2025-68973 ([#48806](https://github.com/milvus-io/milvus/pull/48806))
+- Reduced remote IO syscalls during BM25 IDF preload by buffering the storage reader in streamOneFile ([#48845](https://github.com/milvus-io/milvus/pull/48845), [#48846](https://github.com/milvus-io/milvus/pull/48846))
+- Added a querycoord configuration to force-override segment load task priority ([#48861](https://github.com/milvus-io/milvus/pull/48861))
+- Reduced unnecessary FillEntryData calls during search result refresh to lower reduce-stage overhead ([#49017](https://github.com/milvus-io/milvus/pull/49017))
+- Added common.searchRequeryPolicy parameter to control the requery stage in regular search ([#49022](https://github.com/milvus-io/milvus/pull/49022))
+- Added delegator-side segment pruning via PK predicate hints and removed expensive proto String() calls in PK filter building ([#49040](https://github.com/milvus-io/milvus/pull/49040))
+
+### Bug fixes
+
+- Fixed binlog import reliability by adding denylist-based retry to WalkWithPrefix, improving resilience against transient object storage failures ([#48673](https://github.com/milvus-io/milvus/pull/48673))
+- Fixed a severe LIKE prefix-match performance regression on Marisa trie string indexes, which had been falling back to O(n) brute-force scan instead of using efficient predictive search ([#48688](https://github.com/milvus-io/milvus/pull/48688))
+- Fixed duplicate invocation and missing retry in streaming coordinator's force promote broadcast fix path, ensuring reliable recovery of incomplete broadcasts ([#48712](https://github.com/milvus-io/milvus/pull/48712))
+- Fixed a race in QueryCoord task scheduling that could cancel in-flight LoadSegments RPCs with a misleading context-canceled error when the QueryNode reported the segment via heartbeat before the RPC returned ([#48723](https://github.com/milvus-io/milvus/pull/48723))
+- Fixed an issue where mistyped query_mode property keys and values (e.g. LARGE_TOPK, QUERY_MODE) were silently accepted instead of returning a clear error ([#48826](https://github.com/milvus-io/milvus/pull/48826))
+- Fixed offset corruption between Milvus and Knowhere that could cause incorrect query results on disk indexes ([#48837](https://github.com/milvus-io/milvus/pull/48837))
+- Fixed potential crashes when cancelling background segment loads, and corrected tieredStorage.loadingTimeoutMs default that caused tiered storage loads to fail immediately ([#48880](https://github.com/milvus-io/milvus/pull/48880))
+- Fixed insert/upsert failures on collections created in 2.5 with dynamic field enabled after upgrading to 2.6 ([#48977](https://github.com/milvus-io/milvus/pull/48977))
+- Fixed wildcard privileges being lost or rejected during RBAC backup and restore ([#49010](https://github.com/milvus-io/milvus/pull/49010))
+- Fixed inaccurate field data size estimation for ArrayOfVector fields during index building ([#49018](https://github.com/milvus-io/milvus/pull/49018))
+
 ## v2.6.14
 
 Release date: April 7, 2026
