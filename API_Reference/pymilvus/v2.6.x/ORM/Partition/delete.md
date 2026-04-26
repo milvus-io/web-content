@@ -4,7 +4,7 @@ This operation deletes entities from a partition with a boolean expression.
 
 <div class="alert note">
 
-Using the **partition_name** parameter in the **delete()** method of a **Collection** object is equivalent to using the **delete()** method of a **Partition** object.
+Using the **partition_name** parameter in the **delete()** method of a **[Collection](../Collection/Collection.md)** object is equivalent to using the **delete()** method of a **[Partition](Partition.md)** object.
 
 </div>
 

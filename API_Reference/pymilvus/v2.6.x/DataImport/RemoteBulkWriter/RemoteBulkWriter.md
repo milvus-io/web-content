@@ -63,7 +63,7 @@ writer = RemoteBulkWriter(
 
     </div>
 
-- **file_type** (*BulkFileType*) -
+- **file_type** (*[BulkFileType](../BulkFileType.md)*) -
 
     The type of the output file.
 
@@ -82,7 +82,7 @@ writer = RemoteBulkWriter(
     }
     ```
 
-    -  **sep** (*string*)
+    - **sep** (*string*)
 
         The delimiter of CSV file. The value must be a string of length 1, which defaults to `","`. The following strings are not allowed: `"\0"`, `"\n"`, `"\r"`, `"""`.
 

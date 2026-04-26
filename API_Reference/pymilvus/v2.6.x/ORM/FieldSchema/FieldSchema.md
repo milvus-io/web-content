@@ -52,7 +52,7 @@ FieldSchema(
 
         Setting this to **True** makes the current field the primary field.
 
-        As an alternative, you can set **primary_field** when creating a **CollectionSchema** object.
+        As an alternative, you can set **primary_field** when creating a **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object.
 
     - **auto_id** (*bool*)
 
@@ -74,7 +74,7 @@ FieldSchema(
         
         This is particularly useful when implementing data separation based on a specific key, such as partition-oriented multi-tenancy.
         
-        As an alternative, you can set **partition_key_field** when creating a **CollectionSchema** object.
+        As an alternative, you can set **partition_key_field** when creating a **[CollectionSchema](../../MilvusClient/CollectionSchema/CollectionSchema.md)** object.
 
         </div>
 

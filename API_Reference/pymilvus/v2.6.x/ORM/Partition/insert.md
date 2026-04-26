@@ -4,7 +4,7 @@ This operation inserts data into the current partition.
 
 <div class="alert note">
 
-Using the **partition_name** parameter in the **insert()** method of a **Collection** object is equivalent to using the **insert()** method of a **Partition** object.
+Using the **partition_name** parameter in the **insert()** method of a **[Collection](../Collection/Collection.md)** object is equivalent to using the **insert()** method of a **[Partition](Partition.md)** object.
 
 </div>
 

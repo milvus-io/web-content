@@ -27,7 +27,7 @@ grant(
 
     The type of the object to grant the privilege.
 
-    The value is case-sensitive, and possible options are **Collection**, **Global**, and **User**. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
+    The value is case-sensitive, and possible options are **[Collection](../Collection/Collection.md)**, **Global**, and **User**. For details, refer to [Users & Roles](https://milvus.io/docs/users_and_roles.md).
 
 - **object_name** (*string*)
 
@@ -47,7 +47,7 @@ grant(
 
     <div class="alert note">
     
-    - To grant all privileges to a kind of object, like **Collection**, **Global**, **User**, use `*` for privilege name.
+    - To grant all privileges to a kind of object, like **[Collection](../Collection/Collection.md)**, **Global**, **User**, use `*` for privilege name.
     
     - When `object` is set to `Global`, setting `privilege` to `\*` is not equivalent to setting it to `All`. The `All` privilege includes all permissions, including any collection and user object.
     

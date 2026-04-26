@@ -48,6 +48,10 @@ This is an enumeration that provides the following constants.
 
     Sets the datatype to **Geometry**.
 
+- TIMESTAMPTZ
+
+    Sets the datatype to **TIMESTAMPTZ**.
+
 - STRUCT
 
     Sets the data type of the elements in an Array field to **Struct**.

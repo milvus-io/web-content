@@ -1,6 +1,6 @@
 # GeminiEmbeddingFunction
 
-**Model2VecEmbeddingFunction** is a class in pymilvus that handles encoding text into embeddings using the GeminiEmbeddingFunction module to support embedding retrieval in Milvus.
+**[Model2VecEmbeddingFunction](../Model2VecEmbeddingFunction/Model2VecEmbeddingFunction.md)** is a class in pymilvus that handles encoding text into embeddings using the GeminiEmbeddingFunction module to support embedding retrieval in Milvus.
 
 ```python
 pymilvus.model.dense.GeminiEmbeddingFunction

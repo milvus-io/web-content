@@ -79,7 +79,7 @@ DecayRanker.builder()
 
 **RETURNS:**
 
- A decay ranker instance.
+A decay ranker instance.
 
 ## Examples:
 
