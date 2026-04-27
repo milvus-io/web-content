@@ -52,7 +52,7 @@ beta: Milvus 2.6.x
 <li><p>A valid Cohere API key with access to reranking models. Sign up at <a href="https://dashboard.cohere.com/">Cohere’s platform</a> to obtain your API credentials. You can either:</p>
 <ul>
 <li><p>Set the <code translate="no">COHERE_API_KEY</code> environment variable, or</p></li>
-<li><p>Specify the API key directly in the <code translate="no">credential</code> of the <a href="/docs/cohere-ranker.md#Create-a-Cohere-ranker-function">ranker configuration</a></p></li>
+<li><p>Specify the API key directly in the <code translate="no">credential</code> of the <a href="/docs/v2.6.x/cohere-ranker.md#Create-a-Cohere-ranker-function">ranker configuration</a></p></li>
 </ul></li>
 </ul>
 <h2 id="Create-a-Cohere-ranker-function" class="common-anchor-header">Create a Cohere ranker function<button data-href="#Create-a-Cohere-ranker-function" class="anchor-icon" translate="no">
@@ -196,7 +196,7 @@ CreateCollectionReq.<span class="hljs-type">Function</span> <span class="hljs-va
    </tr>
 </table>
 <div class="alert note">
-<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
+<p>For general parameters shared across all model rankers (e.g., <code translate="no">provider</code>, <code translate="no">queries</code>), refer to <a href="/docs/v2.6.x/model-ranker-overview.md#Create-a-model-ranker">Create a model ranker</a>.</p>
 </div>
 <h2 id="Apply-to-standard-vector-search" class="common-anchor-header">Apply to standard vector search<button data-href="#Apply-to-standard-vector-search" class="anchor-icon" translate="no">
       <svg translate="no"

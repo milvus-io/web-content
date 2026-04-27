@@ -70,7 +70,7 @@ summary: >-
 </table>
 <div class="alert note">
 <ul>
-<li><p>For vector fields of the <code translate="no">SPARSE\_FLOAT\_VECTOR</code> type, use the <code translate="no">BM25</code> metric type only when performing full text search. For more information, refer to <a href="/docs/full-text-search.md">Full Text Search</a>.</p></li>
+<li><p>For vector fields of the <code translate="no">SPARSE\_FLOAT\_VECTOR</code> type, use the <code translate="no">BM25</code> metric type only when performing full text search. For more information, refer to <a href="/docs/v2.6.x/full-text-search.md">Full Text Search</a>.</p></li>
 <li><p>For vector fields of the <code translate="no">BINARY_VECTOR</code> type, the dimension value (<code translate="no">dim</code>) must be a multiple of 8.</p></li>
 </ul>
 </div>
@@ -118,7 +118,7 @@ summary: >-
    </tr>
 </table>
 <div class="alert note">
-<p>To index vector fields in an <a href="/docs/array-of-structs.md">Array of Structs</a> field, you should prefix <code translate="no">MAX_SIM</code> to the set of metric types mentioned above, based on the vector embeddings stored in those fields. For example,</p>
+<p>To index vector fields in an <a href="/docs/v2.6.x/array-of-structs.md">Array of Structs</a> field, you should prefix <code translate="no">MAX_SIM</code> to the set of metric types mentioned above, based on the vector embeddings stored in those fields. For example,</p>
 <ul>
 <li><p>For a vector field that stores vector embeddings of the <code translate="no">FLOAT_VECTOR</code>, <code translate="no">FLOAT16_VECTOR</code>, <code translate="no">BFLOAT16_VECTOR</code>, or <code translate="no">INT8_VECTOR</code> type, you can use <code translate="no">MAX_SIM_COSINE</code>, <code translate="no">MAX_SIM_IP</code>, or <code translate="no">MAX_SIM_L2</code> as the metric type.</p></li>
 <li><p>For a vector field that stores vector embeddings of the <code translate="no">BINARY_VECTOR</code> type, you can use <code translate="no">MAX_SIM_JACCADR</code> or <code translate="no">MAX_SIM_HAMMING</code> as the metric type.</p></li>
@@ -278,7 +278,7 @@ summary: >-
 <li><p><strong>0</strong> means the MinHash signatures are identical (estimated Jaccard similarity = 1)</p></li>
 <li><p><strong>1</strong> means no matches at any position (estimated Jaccard similarity = 0)</p></li>
 </ul>
-<p>For information on technical details, refer to <a href="/docs/minhash-lsh.md">MINHASH_LSH</a>.</p>
+<p>For information on technical details, refer to <a href="/docs/v2.6.x/minhash-lsh.md">MINHASH_LSH</a>.</p>
 <h2 id="HAMMING-distance" class="common-anchor-header">HAMMING distance<button data-href="#HAMMING-distance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -312,7 +312,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 is a widely used text relevance measurement method, specifically designed for <a href="/docs/full-text-search.md">full text search</a>. It combines the following three key factors:</p>
+    </button></h2><p>BM25 is a widely used text relevance measurement method, specifically designed for <a href="/docs/v2.6.x/full-text-search.md">full text search</a>. It combines the following three key factors:</p>
 <ul>
 <li><p><strong>Term Frequency (TF):</strong> Measures how frequently a term appears in a document. While higher frequencies often indicate greater importance, BM25 uses the saturation parameter <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">k_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> to prevent overly frequent terms from dominating the relevance score.</p></li>
 <li><p><strong>Inverse Document Frequency (IDF):</strong> Reflects the importance of a term across the entire corpus. Terms appearing in fewer documents receive a higher IDF value, indicating greater contribution to relevance.</p></li>

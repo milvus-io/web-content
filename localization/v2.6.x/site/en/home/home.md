@@ -35,15 +35,15 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
       </svg>
     </button></h2><div class="card-wrapper">
 <div class="start_card_container">
-  <a href="/docs/install_standalone-docker.md">
-    <img translate="no" src="/docs/v2.6.x/assets/home_install.svg" alt="icon" />
+  <a href="/docs/v2.6.x/install_standalone-docker.md">
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_install.svg" alt="icon" />
     <p class="link-btn">Install Milvus</p>
   </a>
   <p>Learn how to install Milvus using either Docker Compose or on Kubernetes.</p>
 </div>
 <div class="start_card_container">
-  <a href="/docs/quickstart.md">
-    <img translate="no" src="/docs/v2.6.x/assets/home_quick_start.svg" alt="icon" />
+  <a href="/docs/v2.6.x/quickstart.md">
+    <img translate="no" src="https://milvus-docs.s3.us-west-2.amazonaws.com/assets/home_quick_start.svg" alt="icon" />
     <p class="link-btn">Quick Start</p>
   </a>
   <p>Learn how to quickly run Milvus with sample code.</p>
@@ -77,32 +77,32 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
 <div class="recomment-item">
   <p>Use</p>
 <ul>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert, and Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
-<li><a href="/docs/get-and-scalar-query.md">Get & Scalar Query</a></li>
-<li><a href="/docs/milvus_for_agents.md">Milvus for AI Agents</a></li>
+<li><a href="/docs/v2.6.x/manage-collections.md">Manage Collections</a></li>
+<li><a href="/docs/v2.6.x/insert-update-delete.md">Insert, Upsert, and Delete</a></li>
+<li><a href="/docs/v2.6.x/single-vector-search.md">Single-Vector Search</a></li>
+<li><a href="/docs/v2.6.x/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/v2.6.x/get-and-scalar-query.md">Get & Scalar Query</a></li>
+<li><a href="/docs/v2.6.x/milvus_for_agents.md">Milvus for AI Agents</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Deploy</p>
 <ul>
-<li><a href="/docs/configure-docker.md">Configure Milvus</a></li>
-<li><a href="/docs/deploy_s3.md">Manage Dependencies</a></li>
-<li><a href="/docs/eks.md">Deploy on Clouds</a></li>
-<li><a href="/docs/scaleout.md">Scale a Milvus Cluster</a></li>
-<li><a href="/docs/monitor_overview.md">Monitor and Alert</a></li>
+<li><a href="/docs/v2.6.x/configure-docker.md">Configure Milvus</a></li>
+<li><a href="/docs/v2.6.x/deploy_s3.md">Manage Dependencies</a></li>
+<li><a href="/docs/v2.6.x/eks.md">Deploy on Clouds</a></li>
+<li><a href="/docs/v2.6.x/scaleout.md">Scale a Milvus Cluster</a></li>
+<li><a href="/docs/v2.6.x/monitor_overview.md">Monitor and Alert</a></li>
 </ul>
 </div>
 <div class="recomment-item">
   <p>Learn</p>
 <ul>
-<li><a href="/docs/system_configuration.md">System Configuration</a></li>
-<li><a href="/docs/architecture_overview.md">Architecture Overview</a></li>
-<li><a href="/docs/index-explained.md">Index Explained</a></li>
-<li><a href="/docs/metric.md">Similarity Metrics</a></li>
-<li><a href="/docs/glossary.md">Glossary</a></li>
+<li><a href="/docs/v2.6.x/system_configuration.md">System Configuration</a></li>
+<li><a href="/docs/v2.6.x/architecture_overview.md">Architecture Overview</a></li>
+<li><a href="/docs/v2.6.x/index-explained.md">Index Explained</a></li>
+<li><a href="/docs/v2.6.x/metric.md">Similarity Metrics</a></li>
+<li><a href="/docs/v2.6.x/glossary.md">Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -124,10 +124,10 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
       </svg>
     </button></h2><p><em>March 2026 - Milvus 2.6.x updates</em></p>
 <ul>
-<li>Added <a href="/docs/milvus_for_agents.md">Milvus for AI Agents</a> section with prompt guides.</li>
-<li>Added guidance on how to use <a href="/docs/google-gemini.md">Gemini embedding function</a>.</li>
-<li>Added guidance on how to <a href="/docs/primary-key-search.md">search by primary keys</a>.</li>
-<li>Added guidance on how to use <a href="/docs/text-highlighter.md">text highlighter</a> in search results.</li>
-<li>Added descriptions of <a href="/docs/geometry-field.md">geometry field</a>, <a href="/docs/timestamptz-field.md">timestamptz field</a>, <a href="/docs/tiered-storage-overview.md">tiered storage</a>, and <a href="/docs/array-of-structs.md">array of structs</a>.</li>
+<li>Added <a href="/docs/v2.6.x/milvus_for_agents.md">Milvus for AI Agents</a> section with prompt guides.</li>
+<li>Added guidance on how to use <a href="/docs/v2.6.x/google-gemini.md">Gemini embedding function</a>.</li>
+<li>Added guidance on how to <a href="/docs/v2.6.x/primary-key-search.md">search by primary keys</a>.</li>
+<li>Added guidance on how to use <a href="/docs/v2.6.x/text-highlighter.md">text highlighter</a> in search results.</li>
+<li>Added descriptions of <a href="/docs/v2.6.x/geometry-field.md">geometry field</a>, <a href="/docs/v2.6.x/timestamptz-field.md">timestamptz field</a>, <a href="/docs/v2.6.x/tiered-storage-overview.md">tiered storage</a>, and <a href="/docs/v2.6.x/array-of-structs.md">array of structs</a>.</li>
 </ul>
 </div>
