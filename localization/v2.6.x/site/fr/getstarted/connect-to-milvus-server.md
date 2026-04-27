@@ -83,7 +83,14 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># The RESTful API is stateless, so there is no persistent connection.</span>
+<span class="hljs-comment"># Each request hits the server directly; the /collections/list endpoint</span>
+<span class="hljs-comment"># doubles as a health check when you need to verify reachability.</span>
+<span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">Se connecter avec des informations d'identification (authentification activée)<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,7 +151,13 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Password: <span class="hljs-string">&quot;Milvus&quot;</span>,
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Le format du jeton est <code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code>. La documentation mentionne explicitement <code translate="no">root:Milvus</code> comme identifiant par défaut, et le guide <a href="/docs/fr/users_and_roles.md">Créer des utilisateurs et des rôles</a> couvre la gestion des utilisateurs.</p>
@@ -199,10 +212,24 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Request-Timeout is applied per-request (unit: seconds). --max-time</span>
+<span class="hljs-comment"># caps the total curl wall-clock so the client gives up even if the</span>
+<span class="hljs-comment"># server never responds.</span>
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    --max-time 7 \
+    -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Ce délai n'est utilisé que lors de l'établissement des connexions. Il ne sert pas de délai par défaut pour d'autres opérations de l'API.</p>
+<ul>
+<li><p>Pour les SDK énumérés ci-dessus, ce délai est utilisé uniquement lors de l'établissement des connexions et ne sert pas de délai par défaut pour d'autres opérations de l'API.</p></li>
+<li><p>Pour l'API RESTful, <code translate="no">Request-Timeout</code> est un délai par demande en secondes (contrairement à <code translate="no">rpcDeadlineMs</code> de Java et <code translate="no">timeout</code> de Node.js, qui sont en millisecondes), donc incluez-le dans chaque appel qui nécessite un délai.</p></li>
+</ul>
 </div>
 <h2 id="Connect-to-a-specific-database" class="common-anchor-header">Se connecter à une base de données spécifique<button data-href="#Connect-to-a-specific-database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -268,10 +295,21 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <span class="hljs-comment">// (Optional) switch the active database later with:</span>
 err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-string">&quot;reports&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Target a specific database by setting &quot;dbName&quot; in the request body.</span>
+<span class="hljs-comment"># The RESTful API is stateless, so include &quot;dbName&quot; on every request</span>
+<span class="hljs-comment"># that should run against a non-default database.</span>
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -d <span class="hljs-string">&#x27;{
+      &quot;dbName&quot;: &quot;analytics&quot;
+    }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Consultez le guide <a href="/docs/fr/manage_databases.md">Base de données</a> pour créer, répertorier et décrire des bases de données, ainsi que pour des tâches plus générales de gestion de bases de données.</p>
+<p>Voir le guide <a href="/docs/fr/manage_databases.md">Base de données</a> pour la création, l'énumération et la description des bases de données, ainsi que pour les tâches plus générales de gestion des bases de données.</p>
 </div>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

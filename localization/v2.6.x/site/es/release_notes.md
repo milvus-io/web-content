@@ -19,6 +19,84 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.6.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2615" class="common-anchor-header">v2.6.15<button data-href="#v2615" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: April 24, 2026</p>
+<table>
+<thead>
+<tr><th>Milvus Version</th><th>Python SDK Version</th><th>Node.js SDK Version</th><th>Java SDK Version</th><th>Go SDK Version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.6.15</td><td>2.6.12</td><td>2.6.13</td><td>2.6.18</td><td>2.6.1</td></tr>
+</tbody>
+</table>
+<p>We are excited to announce the release of Milvus v2.6.15! This release delivers meaningful performance and observability improvements across search, query, and storage paths, along with critical fixes for index correctness, RBAC backup/restore, and cross-version upgrade compatibility.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements<button data-href="#Improvements" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Removed the unused SuffixSnapshot time-travel layer from RootCoord metadata storage, simplifying the catalog and eliminating orphaned snapshot keys (<a href="https://github.com/milvus-io/milvus/pull/48638">#48638</a>)</li>
+<li>Improved latency metrics precision by switching from milliseconds to microseconds, preserving sub-millisecond resolution for insert, delete, query, search, and upsert paths (<a href="https://github.com/milvus-io/milvus/pull/48653">#48653</a>)</li>
+<li>Separated metrics for internal upsert/delete requery operations from user-initiated queries, enabling more accurate monitoring of user-facing query performance (<a href="https://github.com/milvus-io/milvus/pull/48708">#48708</a>)</li>
+<li>Upgraded go-jose/v4 to v4.1.4 and gnupg in GPU image to fix CVE-2026-34986 and CVE-2025-68973 (<a href="https://github.com/milvus-io/milvus/pull/48806">#48806</a>)</li>
+<li>Reduced remote IO syscalls during BM25 IDF preload by buffering the storage reader in streamOneFile (<a href="https://github.com/milvus-io/milvus/pull/48845">#48845</a>, <a href="https://github.com/milvus-io/milvus/pull/48846">#48846</a>)</li>
+<li>Added a querycoord configuration to force-override segment load task priority (<a href="https://github.com/milvus-io/milvus/pull/48861">#48861</a>)</li>
+<li>Reduced unnecessary FillEntryData calls during search result refresh to lower reduce-stage overhead (<a href="https://github.com/milvus-io/milvus/pull/49017">#49017</a>)</li>
+<li>Added common.searchRequeryPolicy parameter to control the requery stage in regular search (<a href="https://github.com/milvus-io/milvus/pull/49022">#49022</a>)</li>
+<li>Added delegator-side segment pruning via PK predicate hints and removed expensive proto String() calls in PK filter building (<a href="https://github.com/milvus-io/milvus/pull/49040">#49040</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes<button data-href="#Bug-fixes" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
+<li>Fixed binlog import reliability by adding denylist-based retry to WalkWithPrefix, improving resilience against transient object storage failures (<a href="https://github.com/milvus-io/milvus/pull/48673">#48673</a>)</li>
+<li>Fixed a severe LIKE prefix-match performance regression on Marisa trie string indexes, which had been falling back to O(n) brute-force scan instead of using efficient predictive search (<a href="https://github.com/milvus-io/milvus/pull/48688">#48688</a>)</li>
+<li>Fixed duplicate invocation and missing retry in streaming coordinator’s force promote broadcast fix path, ensuring reliable recovery of incomplete broadcasts (<a href="https://github.com/milvus-io/milvus/pull/48712">#48712</a>)</li>
+<li>Fixed a race in QueryCoord task scheduling that could cancel in-flight LoadSegments RPCs with a misleading context-canceled error when the QueryNode reported the segment via heartbeat before the RPC returned (<a href="https://github.com/milvus-io/milvus/pull/48723">#48723</a>)</li>
+<li>Fixed an issue where mistyped query_mode property keys and values (e.g. LARGE_TOPK, QUERY_MODE) were silently accepted instead of returning a clear error (<a href="https://github.com/milvus-io/milvus/pull/48826">#48826</a>)</li>
+<li>Fixed offset corruption between Milvus and Knowhere that could cause incorrect query results on disk indexes (<a href="https://github.com/milvus-io/milvus/pull/48837">#48837</a>)</li>
+<li>Fixed potential crashes when cancelling background segment loads, and corrected tieredStorage.loadingTimeoutMs default that caused tiered storage loads to fail immediately (<a href="https://github.com/milvus-io/milvus/pull/48880">#48880</a>)</li>
+<li>Fixed insert/upsert failures on collections created in 2.5 with dynamic field enabled after upgrading to 2.6 (<a href="https://github.com/milvus-io/milvus/pull/48977">#48977</a>)</li>
+<li>Fixed wildcard privileges being lost or rejected during RBAC backup and restore (<a href="https://github.com/milvus-io/milvus/pull/49010">#49010</a>)</li>
+<li>Fixed inaccurate field data size estimation for ArrayOfVector fields during index building (<a href="https://github.com/milvus-io/milvus/pull/49018">#49018</a>)</li>
+</ul>
 <h2 id="v2614" class="common-anchor-header">v2.6.14<button data-href="#v2614" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

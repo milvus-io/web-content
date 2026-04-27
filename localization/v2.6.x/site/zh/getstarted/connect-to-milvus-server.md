@@ -81,7 +81,14 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-comment"># The RESTful API is stateless, so there is no persistent connection.</span>
+<span class="hljs-comment"># Each request hits the server directly; the /collections/list endpoint</span>
+<span class="hljs-comment"># doubles as a health check when you need to verify reachability.</span>
+<span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-with-credentials-authentication-enabled" class="common-anchor-header">使用凭证连接（启用身份验证）<button data-href="#Connect-with-credentials-authentication-enabled" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -142,7 +149,13 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Password: <span class="hljs-string">&quot;Milvus&quot;</span>,
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>令牌格式为<code translate="no">&quot;&lt;username&gt;:&lt;password&gt;&quot;</code> 。文档明确指出<code translate="no">root:Milvus</code> 为默认凭证，《<a href="/docs/zh/users_and_roles.md">创建用户和角色</a>》指南涵盖了用户管理。</p>
@@ -197,10 +210,24 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
     Address: <span class="hljs-string">&quot;localhost:19530&quot;</span>,
 })
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Request-Timeout is applied per-request (unit: seconds). --max-time</span>
+<span class="hljs-comment"># caps the total curl wall-clock so the client gives up even if the</span>
+<span class="hljs-comment"># server never responds.</span>
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -H <span class="hljs-string">&quot;Request-Timeout: 5&quot;</span> \
+    --max-time 7 \
+    -d <span class="hljs-string">&#x27;{}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>此超时仅在建立连接时使用。它不作为其他 API 操作的默认超时。</p>
+<ul>
+<li><p>对于上面列出的 SDK，该超时仅在建立连接时使用，并不作为其他 API 操作符的默认超时。</p></li>
+<li><p>对于 RESTful API，<code translate="no">Request-Timeout</code> 是以秒为单位的每个请求的截止时间（与 Java 的<code translate="no">rpcDeadlineMs</code> 和 Node.js<code translate="no">timeout</code> 不同，后者以毫秒为单位），因此请在每个需要截止时间的调用中包含它。</p></li>
+</ul>
 </div>
 <h2 id="Connect-to-a-specific-database" class="common-anchor-header">连接到特定数据库<button data-href="#Connect-to-a-specific-database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -266,7 +293,18 @@ c, err := milvusclient.New(ctx, &amp;milvusclient.ClientConfig{
 <span class="hljs-comment">// (Optional) switch the active database later with:</span>
 err = c.UseDatabase(ctx, milvusclient.NewUseDatabaseOption(<span class="hljs-string">&quot;reports&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-comment"># restful</span>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> HOST=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<span class="hljs-built_in">export</span> TOKEN=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+
+<span class="hljs-comment"># Target a specific database by setting &quot;dbName&quot; in the request body.</span>
+<span class="hljs-comment"># The RESTful API is stateless, so include &quot;dbName&quot; on every request</span>
+<span class="hljs-comment"># that should run against a non-default database.</span>
+curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${HOST}</span>/v2/vectordb/collections/list&quot;</span> \
+    -H <span class="hljs-string">&quot;Authorization: Bearer <span class="hljs-variable">${TOKEN}</span>&quot;</span> \
+    -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
+    -d <span class="hljs-string">&#x27;{
+      &quot;dbName&quot;: &quot;analytics&quot;
+    }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>有关创建、列出和描述数据库以及更广泛的数据库管理任务，请参阅<a href="/docs/zh/manage_databases.md">数据库</a>指南。</p>

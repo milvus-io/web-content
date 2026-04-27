@@ -191,7 +191,7 @@ Delete successfully.​
 <li><p>Ouvrez Docker Desktop en mode administrateur en cliquant avec le bouton droit de la souris et en sélectionnant <strong>Exécuter en tant qu'administrateur</strong>.</p></li>
 <li><p>Exécuter les commandes suivantes dans PowerShell ou Windows Command Prompt pour télécharger le fichier de configuration Docker Compose pour Milvus Standalone et démarrer Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -232,7 +232,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>Télécharger le fichier de configuration de Milvus.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Démarrer Milvus.</p>
@@ -291,7 +291,7 @@ The Docker for Windows Service service is starting.​
 The Docker for Windows Service service was started successfully.​
 
 </code></pre></li>
-<li><p>Vérifiez si WSL a été installé correctement.</p>
+<li><p>Vérifiez si WSL a été correctement installé.</p>
 <p>Vous pouvez exécuter la commande suivante pour installer ou mettre à jour la commande WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking for updates.​
@@ -365,7 +365,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Lister les fichiers de configuration de Milvus</span> </span></p>
 <p></p>
-<h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

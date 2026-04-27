@@ -74,8 +74,8 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动将其保存为 docker-compose.yml，或使用以下命令。</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
+    </button></h3><p>下载 <a href="https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>并手动保存为 docker-compose.yml，或使用以下命令。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>您需要对 YAML 文件中单机服务的环境变量做如下修改：</p>
 <ul>
@@ -149,7 +149,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。详情请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>你还可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <p>如果在 docker-compose.yml 中为 Milvus 分配了多个 GPU 设备，可以指定哪个 GPU 设备可见或可用。</p>
 <p>让 GPU 设备<code translate="no">0</code> 对 Milvus 可见：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">CUDA_VISIBLE_DEVICES=0 ./milvus run standalone</span>

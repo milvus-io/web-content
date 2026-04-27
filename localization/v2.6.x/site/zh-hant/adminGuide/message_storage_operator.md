@@ -59,7 +59,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 </ul></li>
 <li>當 Milvus 系統在執行時，訊息儲存是無法改變的。</li>
 <li>只支援 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.14時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
+<li><strong>升級限制</strong>：<strong>訊息佇列限制</strong>：當升級到Milvus v2.6.15時，您必須維持目前的訊息佇列選擇。不支援在升級過程中在不同的訊息佇列系統之間切換。在未來的版本中，將會支援轉換訊息佇列系統。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">設定 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -106,7 +106,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
 <h5 id="Key-configuration-options" class="common-anchor-header">主要配置選項：</h5><ul>
 <li><code translate="no">msgStreamType</code>: rocksmq: 明確設定 RocksMQ 為訊息佇列。</li>
 <li><code translate="no">persistence.enabled</code>:啟用 RocksMQ 資料的持久化儲存。</li>
-<li><code translate="no">persistence.pvcDeletion</code>:當設定為 true 時，PVC 會在 Milvus 刪除時被刪除。</li>
+<li><code translate="no">persistence.pvcDeletion</code>:當設定為 true 時，PVC 將會在 Milvus 刪除時被刪除。</li>
 <li><code translate="no">persistentVolumeClaim.spec</code>:標準 Kubernetes PVC 規格</li>
 <li><code translate="no">accessModes</code>:通常<code translate="no">ReadWriteOnce</code> 用於區塊儲存</li>
 <li><code translate="no">storageClassName</code>:您集群的儲存類別</li>
@@ -127,7 +127,7 @@ summary: 學習如何使用 Milvus Operator 設定訊息儲存。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Woodpecker 是專為物件儲存而設計的雲端原生 Write-Ahead Log (WAL)。它提供高吞吐量、低操作開銷和無縫擴充能力。如需詳細資訊，請參閱<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>。</p>
+    </button></h2><p>Woodpecker 是專為物件儲存設計的雲端原生 Write-Ahead Log (WAL)。它提供高吞吐量、低操作開銷和無縫擴充能力。如需詳細資訊，請參閱<a href="/docs/zh-hant/use-woodpecker.md">使用 Woodpecker</a>。</p>
 <h2 id="Configure-Pulsar" class="common-anchor-header">設定 Pulsar<button data-href="#Configure-Pulsar" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

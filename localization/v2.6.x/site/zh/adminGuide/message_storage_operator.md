@@ -20,7 +20,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
         ></path>
       </svg>
     </button></h1><p>Milvus 使用 RocksMQ、Pulsar 或 Kafka 管理最近更改的日志、输出流日志并提供日志订阅。本主题介绍如何在使用 Milvus Operator 安装 Milvus 时配置消息存储依赖关系。有关详细信息，请参阅 Milvus Operator 存储库中的<a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/manage-dependencies/message-storage.md">使用 Milvus Operator 配置消息存储</a>。</p>
-<p>本主题假设您已部署 Milvus Operator。</p>
+<p>本主题假定您已部署 Milvus Operator。</p>
 <div class="alert note">有关详细信息，请参阅<a href="https://milvus.io/docs/v2.2.x/install_cluster-milvusoperator.md">部署 Milvus Operator</a>。 </div>
 <p>您需要指定使用 Milvus Operator 启动 Milvus 群集的配置文件。</p>
 <pre><code translate="no" class="language-YAML"><span class="hljs-string">kubectl</span> <span class="hljs-string">apply</span> <span class="hljs-string">-f</span> <span class="hljs-string">https://raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
@@ -59,7 +59,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 </ul></li>
 <li>Milvus 系统运行时，消息存储不能更改。</li>
 <li>仅支持 Kafka 2.x 或 3.x 版本。</li>
-<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级到 Milvus v2.6.14 时，必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</li>
+<li><strong>升级限制</strong>：<strong>消息队列限制</strong>：升级到 Milvus v2.6.15 时，必须保持当前的消息队列选择。不支持在升级过程中在不同的消息队列系统之间切换。未来版本将支持更换消息队列系统。</li>
 </ul>
 <h2 id="Configure-RocksMQ" class="common-anchor-header">配置 RocksMQ<button data-href="#Configure-RocksMQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -240,7 +240,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
   <span class="hljs-attr">config:</span> {}            
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">该示例指定了 Pulsar 各组件的副本数量、Pulsar BookKeeper 的计算资源以及其他配置。</div>
-<div class="alert note">在<a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a> 中查找配置内部 Pulsar 服务的完整配置项。如上例所示，根据需要在<code translate="no">pulsar.inCluster.values</code> 下添加配置项。</div>
+<div class="alert note">请在<a href="https://artifacthub.io/packages/helm/apache/pulsar/2.7.8?modal=values">values.yaml</a> 中查找配置内部 Pulsar 服务的完整配置项。如上例所示，根据需要在<code translate="no">pulsar.inCluster.values</code> 下添加配置项。</div>
 <p>假设配置文件名为<code translate="no">milvuscluster.yaml</code> ，运行以下命令应用配置。</p>
 <pre><code translate="no" class="language-Shell">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
@@ -282,7 +282,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
 <li><code translate="no">external</code>:<code translate="no">true</code> 值表示 Milvus 使用外部 Kafka 服务。</li>
 <li><code translate="no">brokerList</code>:要向其发送消息的代理列表。</li>
 </ul>
-<h4 id="Example" class="common-anchor-header">示例</h4><p>以下示例配置了外部 Kafka 服务。</p>
+<h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了外部 Kafka 服务。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>
 <span class="hljs-attr">metadata:</span>
@@ -327,7 +327,7 @@ summary: 了解如何使用 Milvus Operator 配置信息存储。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p><code translate="no">inCluster</code> 表示当 milvus 集群启动时，集群中的 Kafka 服务会自动启动。</p>
+    </button></h3><p><code translate="no">inCluster</code> 表示当 Milvus 集群启动时，集群中的 Kafka 服务会自动启动。</p>
 <h4 id="Example" class="common-anchor-header">示例</h4><p>下面的示例配置了内部 Kafka 服务。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">milvus.io/v1alpha1</span>
 <span class="hljs-attr">kind:</span> <span class="hljs-string">Milvus</span>

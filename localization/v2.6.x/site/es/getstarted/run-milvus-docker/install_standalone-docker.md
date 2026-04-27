@@ -63,9 +63,9 @@ title: Ejecutar Milvus en Docker (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>Novedades en v2.6.14:</strong></p>
+<p><strong>Novedades en v2.6.15:</strong></p>
 <ul>
-<li><strong>Nodo Streaming</strong>: Capacidades de procesamiento de datos mejoradas</li>
+<li><strong>Streaming Node</strong>: Capacidades de procesamiento de datos mejoradas</li>
 <li><strong>Woodpecker MQ</strong>: Cola de mensajes mejorada con sobrecarga de mantenimiento reducida, consulte <a href="/docs/es/use-woodpecker.md">Usar Woodpecker</a> para más detalles</li>
 <li><strong>Arquitectura optimizada</strong>: Componentes consolidados para un mejor rendimiento</li>
 </ul>
@@ -175,7 +175,7 @@ EOF
       </svg>
     </button></h2><p>Habiendo instalado Milvus en Docker, puede:</p>
 <ul>
-<li><p>Consultar <a href="/docs/es/quickstart.md">Quickstart</a> para ver qué puede hacer Milvus.</p></li>
+<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver qué puede hacer Milvus.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>

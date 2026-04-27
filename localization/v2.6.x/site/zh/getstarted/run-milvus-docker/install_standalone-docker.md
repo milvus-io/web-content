@@ -63,7 +63,7 @@ title: 在 Docker 中运行 Milvus (Linux)
 <span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh start</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><strong>版本 2.6.14 中的新功能：</strong></p>
+<p><strong>版本 2.6.15 中的新功能：</strong></p>
 <ul>
 <li><strong>流节点</strong>增强数据处理能力</li>
 <li><strong>啄木鸟 MQ</strong>：改进了消息队列，减少了维护开销，详情请参见<a href="/docs/zh/use-woodpecker.md">使用啄木鸟</a></li>
@@ -106,7 +106,7 @@ EOF
 <p>然后按如下步骤重启服务：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bash standalone_embed.sh restart</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>有关适用的配置项，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p>
+<p>有关适用的配置项目，请参阅<a href="/docs/zh/system_configuration.md">系统配置</a>。</p>
 <h2 id="Upgrade-Milvus" class="common-anchor-header">升级 Milvus<button data-href="#Upgrade-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -72,7 +72,7 @@ title: تشغيل Milvus في Docker (لينكس)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h3><p>إذا كنت على دراية أكثر بـ PowerShell أو موجه أوامر Windows، فإن موجه الأوامر يكون على النحو التالي.</p>
+    </button></h3><p>إذا كنت أكثر دراية بـ PowerShell أو موجه أوامر Windows، فإن موجه الأوامر يكون على النحو التالي.</p>
 <ol>
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن واختيار <strong>تشغيل كمسؤول</strong>.</p></li>
 <li><p>قم بتنزيل البرنامج النصي للتثبيت واحفظه باسم <code translate="no">standalone.bat</code>.</p>
@@ -189,7 +189,7 @@ Delete successfully.​
 <li><p>افتح Docker Desktop في وضع المسؤول عن طريق النقر بزر الماوس الأيمن وتحديد <strong>تشغيل كمسؤول</strong>.</p></li>
 <li><p>قم بتشغيل الأوامر التالية في PowerShell أو موجه أوامر Windows لتنزيل ملف تكوين Docker Compose لـ Milvus Standalone وبدء تشغيل Milvus.</p>
 <pre><code translate="no" class="language-powershell"># Download the configuration file and rename it as docker-compose.yml​
-C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
+C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 # Start Milvus​
 C:\&gt;docker compose up -d​
@@ -198,7 +198,7 @@ Creating milvus-minio ... done​
 Creating milvus-standalone ... done​
 
 </code></pre>
-<p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة يمكنك مشاهدة ما يلي</p>
+<p>اعتمادًا على اتصال الشبكة لديك، قد يستغرق تنزيل الصور لتثبيت Milvus بعض الوقت. بمجرد أن تصبح الحاويات المسماة <strong>milvus-standalone</strong> و <strong>milvus-minio</strong> و <strong>milvus-etcd</strong> جاهزة، يمكنك مشاهدة ما يلي</p>
 <ul>
 <li><p>لا تعرض حاوية <strong>milvus-etcd</strong> أي منافذ للمضيف وتقوم بتعيين بياناتها إلى <strong>وحدات التخزين/etcd</strong> في المجلد الحالي.</p></li>
 <li><p>تخدم حاوية <strong>milvus-minio</strong> المنفذين <strong>9090</strong> <strong>و9091</strong> محليًا باستخدام بيانات اعتماد المصادقة الافتراضية وتعيّن بياناتها إلى <strong>وحدات التخزين/minio</strong> في المجلد الحالي.</p></li>
@@ -230,7 +230,7 @@ Starting Ubuntu...​
 
 </code></pre></li>
 <li><p>قم بتنزيل ملف تهيئة ميلفوس.</p>
-<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.14/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">wget https://github.com/milvus-io/milvus/releases/download/v2.6.15/milvus-standalone-docker-compose.yml -O docker-compose.yml​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>ابدأ تشغيل ميلفوس.</p>
@@ -282,7 +282,7 @@ Creating milvus-standalone ... done​
    </span> <span class="img-wrapper"> <span>المحاكاة الافتراضية في إدارة المهام</span> </span></p>
 <p>إذا كانت المحاكاة الافتراضية معطلة، فقد تحتاج إلى التحقق من إعدادات BIOS في البرنامج الثابت للوحة الأم. تختلف طريقة تمكين المحاكاة الافتراضية في إعدادات BIOS باختلاف بائعي اللوحة الأم. بالنسبة للوحة الأم ASUS، على سبيل المثال، يمكنك الرجوع إلى <a href="https://www.asus.com/support/faq/1043786/">هذه المقالة</a> حول تمكين المحاكاة الافتراضية.</p>
 <p>بعد ذلك، تحتاج إلى إعادة تشغيل الكمبيوتر وتمكين Hyper-V. للحصول على التفاصيل، راجع <a href="https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v#enable-the-hyper-v-role-through-settings">مقالة Microsoft</a> هذه.</p></li>
-<li><p>تحقق من بدء تشغيل خدمة Docker Desktop Service.</p>
+<li><p>تحقق مما إذا كان قد تم بدء تشغيل خدمة Docker Desktop Service.</p>
 <p>يمكنك تشغيل الأمر التالي لبدء تشغيل خدمة Docker Desktop Service.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;net start com.docker.service​
 The Docker for Windows Service service is starting.​
@@ -357,7 +357,7 @@ Switching to windows engine: Post &quot;http://ipc/engine/switch&quot;: open \\.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>فشل قراءة موجه خطأ في قراءة التكوين أثناء بدء تشغيل Milvus</span> </span></p>
-<p>للتعامل مع الخطأ الذي يُطلب منك أثناء بدء تشغيل Milvus الذي يقرأ "فشل قراءة التهيئة"، عليك التحقق مما إذا كان وحدة التخزين المثبتة في حاوية Milvus صحيحة. إذا كان وحدة التخزين مثبتة بشكل صحيح في الحاوية، يمكنك استخدام الأمر <code translate="no">docker exec</code> للدخول إلى الحاوية وإدراج مجلد <strong>/milvus/configs</strong> على النحو التالي.</p>
+<p>للتعامل مع الخطأ الذي يُطلب منك أثناء بدء تشغيل Milvus الذي يقرأ "فشل قراءة التهيئة"، عليك التحقق مما إذا كان وحدة التخزين المثبتة في حاوية Milvus صحيحة. إذا كانت وحدة التخزين مثبتة بشكل صحيح في الحاوية، يمكنك استخدام الأمر <code translate="no">docker exec</code> للدخول إلى الحاوية وإدراج مجلد <strong>/milvus/configs</strong> على النحو التالي.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.6.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />

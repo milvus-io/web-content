@@ -90,7 +90,7 @@ title: Mengelola Grup Sumber Daya
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.6.11. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
+<p>Semua contoh kode pada halaman ini terdapat pada PyMilvus 2.6.12. Upgrade instalasi PyMilvus Anda sebelum menjalankannya.</p>
 </div>
 <ol>
 <li><p>Membuat grup sumber daya.</p>
@@ -113,7 +113,7 @@ node_num = <span class="hljs-number">0</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Membuat daftar grup sumber daya.</p>
 <p>Setelah Anda membuat grup sumber daya, Anda dapat melihatnya di daftar grup sumber daya.</p>
-<p>Untuk melihat daftar grup sumber daya dalam instans Milvus, lakukan hal berikut:</p>
+<p>Untuk melihat daftar grup sumber daya dalam suatu instans Milvus, lakukan hal berikut:</p>
 <pre><code translate="no" class="language-python">rgs = milvus_client.list_resource_groups()
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Resource group list: <span class="hljs-subst">{rgs}</span>&quot;</span>)
 

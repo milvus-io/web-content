@@ -90,7 +90,7 @@ title: إدارة مجموعات الموارد
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.11. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
+<p>جميع نماذج التعليمات البرمجية في هذه الصفحة موجودة في PyMilvus 2.6.12. قم بترقية تثبيت PyMilvus قبل تشغيلها.</p>
 </div>
 <ol>
 <li><p>إنشاء مجموعة موارد.</p>
@@ -213,7 +213,7 @@ except Exception:
     print(f&quot;</span>Something went wrong <span class="hljs-keyword">while</span> dropping {resource_group}.<span class="hljs-string">&quot;)
 </span><button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>لمزيد من التفاصيل، يُرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
+<p>لمزيد من التفاصيل، يرجى الرجوع إلى <a href="https://github.com/milvus-io/pymilvus/blob/v2.4.3/examples/resource_group_declarative_api.py">الأمثلة ذات الصلة في pymilvus</a></p>
 <h2 id="A-good-practice-to-manage-cluster-scaling" class="common-anchor-header">ممارسة جيدة لإدارة توسيع نطاق المجموعة<button data-href="#A-good-practice-to-manage-cluster-scaling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -295,7 +295,7 @@ milvus_client.update_resource_groups({
 scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>توسيع نطاق الكتلة في</p>
+<li><p>توسيع نطاق المجموعة إلى الداخل</p>
 <p>وبالمثل، يمكننا إنشاء قواعد توسيع نطاق في التي تعطي الأولوية لاختيار QueryNodes من مجموعة الموارد <strong>_pending_nodes</strong>. يمكن الحصول على هذه المعلومات من خلال واجهة برمجة التطبيقات <code translate="no">describe_resource_group</code>. تحقيق هدف التوسع في مجموعة الموارد المحددة.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 milvus_client.update_resource_groups({
