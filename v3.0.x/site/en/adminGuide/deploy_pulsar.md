@@ -1,0 +1,194 @@
+---
+id: deploy_pulsar.md
+title: Configure Message Storage with Docker Compose or Helm
+related_key: Pulsar, storage
+summary: Learn how to configure message storage with Docker Compose or Helm.
+---
+
+# Configure Message Storage with Docker Compose or Helm
+
+Milvus uses Pulsar or Kafka for managing logs of recent changes, outputting stream logs, and providing log subscriptions. Pulsar is the default message storage system. This topic introduces how to configure message storage with Docker Compose or Helm.
+
+You can configure Pulsar with [Docker Compose](https://docs.docker.com/get-started/overview/) or on K8s and configure Kafka on K8s.
+
+<div class="alert note">
+
+**Message Queue limitations**: When upgrading to Milvus v2.6.15, you must maintain your current message queue choice. Switching between different message queue systems during the upgrade is not supported. Support for changing message queue systems will be available in future versions.
+
+
+</div>
+
+## Configure Pulsar with Docker Compose
+
+### 1. Configure Pulsar
+
+To configure Pulsar with Docker Compose, provide your values for the `pulsar` section in the `milvus.yaml` file on the milvus/configs path.
+
+```
+pulsar:
+  address: localhost # Address of pulsar
+  port: 6650 # Port of pulsar
+  maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+```
+
+See [Pulsar-related configurations](configure_pulsar.md) for more information.
+
+### 2. Run Milvus
+
+Run the following command to start Milvus that uses the Pulsar configurations.
+
+```
+docker compose up
+```
+
+<div class="alert note">Configurations only take effect after Milvus starts. See <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Start Milvus</a> for more information.</div>
+
+
+## Configure Pulsar with Helm
+
+For Milvus clusters on K8s, you can configure Pulsar in the same command that starts Milvus. Alternatively, you can configure Pulsar using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
+
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
+                                    |
+### Using the YAML file
+
+1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file.
+
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    pulsar:
+      address: localhost # Address of pulsar
+      port: 6650 # Port of Pulsar
+      webport: 80 # Web port of pulsar, if you connect direcly without proxy, should use 8080
+      maxMessageSize: 5242880 # 5 * 1024 * 1024 Bytes, Maximum size of each message in pulsar.
+      tenant: public
+      namespace: default    
+```
+
+2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Pulsar configurations.
+
+```shell
+helm install <your_release_name> milvus/milvus -f values.yaml
+```
+
+## Configure Woodpecker with Helm
+
+For Milvus clusters on K8s, you can configure Woodpecker in the same command that starts Milvus. Alternatively, you can configure Woodpecker using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus. 
+
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Woodpecker-related configuration items, refer to [woodpecker-related configurations](use-woodpecker.md).
+                                    |
+### Using the YAML file
+
+1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file.
+
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    woodpecker:
+      meta:
+        type: etcd # The Type of the metadata provider. currently only support etcd.
+        prefix: woodpecker # The Prefix of the metadata provider. default is woodpecker.
+      client:
+        segmentAppend:
+          queueSize: 10000 # The size of the queue for pending messages to be sent of each log.
+          maxRetries: 3 # Maximum number of retries for segment append operations.
+        segmentRollingPolicy:
+          maxSize: 256M # Maximum size of a segment.
+          maxInterval: 10m # Maximum interval between two segments, default is 10 minutes.
+          maxBlocks: 1000 # Maximum number of blocks in a segment
+        auditor:
+          maxInterval: 10s # Maximum interval between two auditing operations, default is 10 seconds.
+      logstore:
+        segmentSyncPolicy:
+          maxInterval: 200ms # Maximum interval between two sync operations, default is 200 milliseconds.
+          maxIntervalForLocalStorage: 10ms # Maximum interval between two sync operations local storage backend, default is 10 milliseconds.
+          maxBytes: 256M # Maximum size of write buffer in bytes.
+          maxEntries: 10000 # Maximum entries number of write buffer.
+          maxFlushRetries: 5 # Maximum size of write buffer in bytes.
+          retryInterval: 1000ms # Maximum interval between two retries. default is 1000 milliseconds.
+          maxFlushSize: 2M # Maximum size of a fragment in bytes to flush.
+          maxFlushThreads: 32 # Maximum number of threads to flush data
+        segmentCompactionPolicy:
+          maxSize: 2M # The maximum size of the merged files.
+          maxParallelUploads: 4 # The maximum number of parallel upload threads for compaction.
+          maxParallelReads: 8 # The maximum number of parallel read threads for compaction.
+        segmentReadPolicy:
+          maxBatchSize: 16M # Maximum size of a batch in bytes.
+          maxFetchThreads: 32 # Maximum number of threads to fetch data.
+      storage:
+        type: minio # The Type of the storage provider. Valid values: [minio, local]
+        rootPath: /var/lib/milvus/woodpecker # The root path of the storage provider.    
+```
+
+2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus which uses the Woodpecker configurations.
+
+```shell
+helm install <your_release_name> milvus/milvus -f values.yaml
+```
+
+## Configure Kafka with Helm
+
+For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
+
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
+
+### Using the YAML file
+
+1. Configure the <code>externalConfigFiles</code> section in the <code>values.yaml</code> file if you want to use Kafka as the message storage system.
+
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    kafka:
+      brokerList:
+        -  <your_kafka_address>:<your_kafka_port>
+      saslUsername:
+      saslPassword:
+      saslMechanisms: PLAIN
+      securityProtocol: SASL_SSL    
+```
+
+2. After configuring the preceding sections and saving the <code>values.yaml</code> file, run the following command to install Milvus that uses the Kafka configurations.
+
+```shell
+helm install <your_release_name> milvus/milvus -f values.yaml
+```
+
+## Configure RocksMQ with Helm
+
+Milvus standalone uses RocksMQ as the default message storage. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [RocksMQ-related configurations](configure_rocksmq.md).
+
+- If you start Milvus with RocksMQ and want to change its settings, you can run `helm upgrade -f ` with the changed settings in the following YAML file. 
+
+- If you have installed Milvus standalone using Helm with a message store other than RocksMQ and want to change it back to RocksMQ, run `helm upgrade -f ` with the following YAML file after you have flushed all collections and stopped Milvus.
+
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    rocksmq:
+      # The path where the message is stored in rocksmq
+      # please adjust in embedded Milvus: /tmp/milvus/rdb_data
+      path: /var/lib/milvus/rdb_data
+      lrucacheratio: 0.06 # rocksdb cache memory ratio
+      rocksmqPageSize: 67108864 # 64 MB, 64 * 1024 * 1024 bytes, The size of each page of messages in rocksmq
+      retentionTimeInMinutes: 4320 # 3 days, 3 * 24 * 60 minutes, The retention time of the message in rocksmq.
+      retentionSizeInMB: 8192 # 8 GB, 8 * 1024 MB, The retention size of the message in rocksmq.
+      compactionInterval: 86400 # 1 day, trigger rocksdb compaction every day to remove deleted data
+      # compaction compression type, only support use 0,7.
+      # 0 means not compress, 7 will use zstd
+      # len of types means num of rocksdb level.
+      compressionTypes: [0, 0, 7, 7, 7]    
+```
+
+<div class="alert warning">
+
+Changing the message store is not recommended. If this is you want to do this, stop all DDL operations, then call the FlushAll API to flush all collections, and finally stop Milvus in the end before you actually change the message store.
+
+</div>
+
+## What's next
+
+Learn how to configure other Milvus dependencies with Docker Compose or Helm:
+- [Configure Object Storage with Docker Compose or Helm](deploy_s3.md)
+- [Configure Meta Storage with Docker Compose or Helm](deploy_etcd.md)
