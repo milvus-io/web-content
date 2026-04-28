@@ -36,7 +36,7 @@ summary: Cet article compare Milvus à d'autres solutions de recherche vectoriel
       </svg>
     </button></h2><ul>
 <li><p><strong>Fonctionnalité</strong>: Milvus va au-delà de la recherche de similarités vectorielles de base en prenant en charge des fonctionnalités avancées telles que les <a href="https://milvus.io/docs/sparse_vector.md">vecteurs épars</a>, les <a href="https://milvus.io/docs/sparse_vector.md">vecteurs</a> <a href="https://milvus.io/docs/single-vector-search.md#Bulk-vector-search">en vrac</a>, la <a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">recherche filtrée</a> et les capacités de <a href="https://milvus.io/docs/multi-vector-search.md">recherche hybrides</a>.</p></li>
-<li><p><strong>Flexibilité</strong>: Milvus s'adapte à différents modes de déploiement et à de multiples SDK, le tout dans un écosystème robuste et intégré.</p></li>
+<li><p><strong>Flexibilité</strong>: Milvus s'adapte à différents modes de déploiement et à de multiples SDK, le tout au sein d'un écosystème robuste et intégré.</p></li>
 <li><p><strong>Performance</strong>: Milvus garantit un traitement en temps réel avec un débit élevé et une faible latence, grâce à des algorithmes d'indexation optimisés tels que <a href="https://milvus.io/docs/index.md#HNSW">HNSW</a> et <a href="https://milvus.io/docs/disk_index.md">DiskANN</a>, et à une <a href="https://milvus.io/docs/gpu_index.md">accélération GPU</a> avancée.</p></li>
 <li><p><strong>Évolutivité</strong>: Son architecture distribuée sur mesure évolue sans effort, s'adaptant aussi bien à de petits ensembles de données qu'à des collections de plus de 10 milliards de vecteurs.</p></li>
 </ul>
@@ -85,13 +85,13 @@ summary: Cet article compare Milvus à d'autres solutions de recherche vectoriel
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bien que les deux systèmes remplissent des fonctions similaires en tant que bases de données vectorielles, la terminologie spécifique au domaine entre Milvus et Pinecone présente de légères variations. Une comparaison détaillée de la terminologie est présentée ci-dessous.</p>
+    </button></h2><p>Bien que les deux systèmes remplissent des fonctions similaires en tant que bases de données vectorielles, la terminologie spécifique au domaine entre Milvus et Pinecone présente de légères différences. Une comparaison détaillée de la terminologie est présentée ci-dessous.</p>
 <table>
 <thead>
 <tr><th>Pinecone</th><th>Milvus</th><th>Remarques</th></tr>
 </thead>
 <tbody>
-<tr><td>Index</td><td><a href="https://zilliz.com/comparison">Collection</a></td><td>Dans Pinecone, un index sert d'unité organisationnelle pour le stockage et la gestion des vecteurs de taille identique, et cet index est étroitement intégré au matériel, connu sous le nom de pods. En revanche, les collections Milvus ont un objectif similaire mais permettent de gérer plusieurs collections au sein d'une même instance.</td></tr>
+<tr><td>Index</td><td><a href="https://zilliz.com/comparison">Collection</a></td><td>Dans Pinecone, un index sert d'unité d'organisation pour le stockage et la gestion des vecteurs de taille identique, et cet index est étroitement intégré au matériel, connu sous le nom de pods. En revanche, les collections Milvus ont un objectif similaire mais permettent de gérer plusieurs collections au sein d'une même instance.</td></tr>
 <tr><td>Collection</td><td><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Sauvegarde</a></td><td>Dans Pinecone, une collection est essentiellement un instantané statique d'un index, utilisé principalement à des fins de sauvegarde et qui ne peut pas être interrogé. Dans Milvus, la fonction équivalente de création de sauvegardes est plus transparente et porte un nom simple.</td></tr>
 <tr><td>Espace de noms</td><td><a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Clé de partition</a></td><td>Les espaces de noms permettent de partitionner les vecteurs d'un index en sous-ensembles. Milvus propose plusieurs méthodes telles que la partition ou la clé de partition pour garantir une isolation efficace des données au sein d'une collection.</td></tr>
 <tr><td>Métadonnées</td><td><a href="https://milvus.io/docs/boolean.md">Champ scalaire</a></td><td>La gestion des métadonnées de Pinecone repose sur des paires clé-valeur, alors que Milvus permet des champs scalaires complexes, y compris des types de données standard et des champs JSON dynamiques.</td></tr>

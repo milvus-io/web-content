@@ -66,7 +66,7 @@ summary: Questo articolo confronta Milvus con altre soluzioni di ricerca vettori
 <tr><td>Stato open-source</td><td>Chiuso</td><td>Aperto</td><td>Milvus è un popolare database vettoriale open-source.</td></tr>
 <tr><td>Scalabilità</td><td>Scala solo verso l'alto/il basso</td><td>Scala out/in e scala up/down</td><td>Milvus è dotato di un'architettura distribuita per una maggiore scalabilità.</td></tr>
 <tr><td>Disponibilità</td><td>Architettura basata su pod all'interno di zone disponibili</td><td>Failover delle zone disponibili e HA interregionale</td><td>Milvus CDC (Change Data Capture) consente modalità primarie/standby per una maggiore disponibilità.</td></tr>
-<tr><td>Costo della performance (dollari per milione di query)</td><td>A partire da 0,178 dollari per un set di dati medio, 1,222 dollari per un set di dati grande.</td><td>Zilliz Cloud parte da 0,148 dollari per un set di dati medio, 0,635 dollari per un set di dati grande; è disponibile la versione gratuita.</td><td>Consultare il <a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">rapporto Cost Ranking</a>.</td></tr>
+<tr><td>Costo della performance (dollari per milione di query)</td><td>A partire da 0,178 dollari per un set di dati medio, 1,222 dollari per un set di dati grande.</td><td>Zilliz Cloud parte da 0,148 dollari per un set di dati medio, 0,635 dollari per un set di dati grande; è disponibile la versione gratuita.</td><td>Fare riferimento al <a href="https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&amp;dataset=medium&amp;filter=none,low,high&amp;tab=2">rapporto Cost Ranking</a>.</td></tr>
 <tr><td>Accelerazione GPU</td><td>Non supportata</td><td>Supporta le GPU NVIDIA</td><td>L'accelerazione via GPU aumenta significativamente le prestazioni, spesso di ordini di grandezza.</td></tr>
 </tbody>
 </table>
@@ -120,7 +120,7 @@ summary: Questo articolo confronta Milvus con altre soluzioni di ricerca vettori
 </thead>
 <tbody>
 <tr><td>Modalità di distribuzione</td><td>Solo SaaS</td><td>Milvus Lite, On-prem Standalone &amp; Cluster, Zilliz Cloud Saas &amp; BYOC</td></tr>
-<tr><td>Funzioni di integrazione</td><td>Non disponibile</td><td>Supporto con <a href="https://github.com/milvus-io/milvus-model">pymilvus[modello]</a></td></tr>
+<tr><td>Funzioni di integrazione</td><td>Non disponibile</td><td>Supporto con <a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a></td></tr>
 <tr><td>Tipi di dati</td><td>Stringa, Numero, Bool, Elenco di stringhe</td><td>String, VarChar, Number (Int, Float, Double), Bool, Array, JSON, Float Vector, Binary Vector, BFloat16, Float16, Sparse Vector</td></tr>
 <tr><td>Tipi di metriche e indici</td><td>Cos, Dot, Euclidea<br/>Famiglia P, famiglia S</td><td>Coseno, IP (punto), L2 (euclideo), Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, indici GPU</td></tr>
 <tr><td>Progettazione dello schema</td><td>Modalità flessibile</td><td>Modalità flessibile, modalità rigorosa</td></tr>
@@ -128,10 +128,25 @@ summary: Questo articolo confronta Milvus con altre soluzioni di ricerca vettori
 <tr><td>Strumenti</td><td>Set di dati, utilità di testo, connettore Spark</td><td>Attu, Birdwatcher, Backup, CLI, CDC, connettori Spark e Kafka</td></tr>
 </tbody>
 </table>
-<h3 id="Key-insights" class="common-anchor-header">Approfondimenti chiave</h3><ul>
+<h3 id="Key-insights" class="common-anchor-header">Approfondimenti chiave<button data-href="#Key-insights" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h3><ul>
 <li><p><strong>Modalità di distribuzione</strong>: Milvus offre una varietà di opzioni di distribuzione, tra cui la distribuzione locale, Docker, Kubernetes on-premises, Cloud SaaS e Bring Your Own Cloud (BYOC) per le aziende, mentre Pinecone è limitato alla distribuzione SaaS.</p></li>
 <li><p><strong>Funzioni di embedding</strong>: Milvus supporta librerie di incorporamento aggiuntive, consentendo l'uso diretto dei modelli di incorporamento per trasformare i dati di origine in vettori.</p></li>
-<li><p><strong>Tipi di dati</strong>: Milvus supporta una gamma più ampia di tipi di dati rispetto a Pinecone, tra cui array e JSON. Pinecone supporta solo una struttura piatta di metadati con stringhe, numeri, booleani o elenchi di stringhe come valori, mentre Milvus può gestire qualsiasi oggetto JSON, comprese le strutture annidate, all'interno di un campo JSON. Pinecone limita la dimensione dei metadati a 40 KB per vettore.</p></li>
+<li><p><strong>Tipi di dati</strong>: Milvus supporta una gamma più ampia di tipi di dati rispetto a Pinecone, tra cui array e JSON. Pinecone supporta solo una struttura piatta di metadati con stringhe, numeri, booleani o elenchi di stringhe come valori, mentre Milvus può gestire qualsiasi oggetto JSON, comprese le strutture annidate, all'interno di un campo JSON. Pinecone limita la dimensione dei metadati a 40KB per vettore.</p></li>
 <li><p><strong>Tipi di metriche e indici</strong>: Milvus supporta un'ampia selezione di tipi di metriche e indici per adattarsi a vari casi d'uso, mentre Pinecone ha una selezione più limitata. Mentre in Milvus l'indice per il vettore è obbligatorio, è disponibile un'opzione AUTO_INDEX per semplificare il processo di configurazione.</p></li>
 <li><p><strong>Progettazione degli schemi</strong>: Milvus offre modalità flessibili di <code translate="no">create_collection</code> per la progettazione dello schema, tra cui una configurazione rapida con uno schema dinamico per un'esperienza senza schema simile a quella di Pinecone e una configurazione personalizzata con campi e indici dello schema predefiniti, simile a un sistema di gestione di database relazionali (RDBMS).</p></li>
 <li><p><strong>Campi vettoriali multipli</strong>: Milvus consente di memorizzare campi vettoriali multipli all'interno di una singola collezione, che può essere rada o densa e può variare in termini di dimensionalità. Pinecone non offre una funzione simile.</p></li>

@@ -121,7 +121,7 @@ summary: 本文將比較 Milvus 與其他向量搜尋解決方案。
 <tbody>
 <tr><td>部署模式</td><td>僅 SaaS</td><td>Milvus Lite、On-prem Standalone &amp; Cluster、Zilliz Cloud Saas &amp; BYOC</td></tr>
 <tr><td>嵌入功能</td><td>不可用</td><td>支援<a href="https://github.com/milvus-io/milvus-model">pymilvus[model］</a></td></tr>
-<tr><td>資料類型</td><td>字串、數字、Bool、字串清單</td><td>字串、VarChar、Number (Int、Float、Double)、Bool、陣列、JSON、浮點向量、二進制向量、BFloat16、Float16、稀疏向量</td></tr>
+<tr><td>資料類型</td><td>字串、數字、Bool、字串清單</td><td>字串、VarChar、Number (Int、Float、Double)、Bool、陣列、JSON、Float 向量、二進制向量、BFloat16、Float16、稀疏向量</td></tr>
 <tr><td>度量與索引類型</td><td>Cos, Dot, Euclidean<br/>P-family, S-family</td><td>Cosine, IP (Dot), L2 (Euclidean), Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU 索引</td></tr>
 <tr><td>模式設計</td><td>彈性模式</td><td>彈性模式、嚴格模式</td></tr>
 <tr><td>多重向量欄位</td><td>不適用</td><td>多向量與混合搜尋</td></tr>
