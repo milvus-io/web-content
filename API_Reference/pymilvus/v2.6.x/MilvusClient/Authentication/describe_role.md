@@ -50,7 +50,7 @@ A list of dictionaries containing the permissions assigned to the role. The stru
 
     The type of the resource object granted to the role. 
 
-    Possible values are **Collection**, **Global**, and **User**.
+    Possible values are **[Collection](../../ORM/Collection/Collection.md)**, **Global**, and **User**.
 
 - **object_name** (*str*) -
 

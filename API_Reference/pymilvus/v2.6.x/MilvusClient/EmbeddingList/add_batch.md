@@ -1,6 +1,6 @@
 # add_batch()
 
-This operation adds multiple vector embeddings to the current **EmbeddingList** instance.
+This operation adds multiple vector embeddings to the current **[EmbeddingList](EmbeddingList.md)** instance.
 
 ## Request syntax
 
@@ -15,15 +15,15 @@ add_batch(
 
 - **embeddings** (*List[np.ndarray], np.ndarray*) - 
 
-    The vector embeddings that are to be added to the current **EmbeddingList** instance.
+    The vector embeddings that are to be added to the current **[EmbeddingList](EmbeddingList.md)** instance.
 
 **RETURN TYPE:**
 
-*EmbeddingList*
+*[EmbeddingList](EmbeddingList.md)*
 
 **RETURNS:**
 
-The current **EmbeddingList** instance itself for method chaining
+The current **[EmbeddingList](EmbeddingList.md)** instance itself for method chaining
 
 **EXCEPTIONS:**
 

@@ -1,6 +1,6 @@
 # AzureConnectParam
 
-An **AzureConnectParam** instance sets connection parameters for a **RemoteBulkWriter** instance.
+An **AzureConnectParam** instance sets connection parameters for a **[RemoteBulkWriter](RemoteBulkWriter.md)** instance.
 
 ```python
 class pymilvus.RemoteBulkWriter.AzureConnectParam
@@ -14,7 +14,7 @@ Constructs an **AzureConnectParam** object by a set of parameters, such as **con
 
 An **AzureConnectParam** object defines the parameters necessary for Milvus to connect to an Azure blob storage bucket.
 
-You need to create this object before initializing a **RemoteBulkWriter** object.
+You need to create this object before initializing a **[RemoteBulkWriter](RemoteBulkWriter.md)** object.
 
 </div>
 

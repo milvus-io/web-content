@@ -1,6 +1,6 @@
 # clear()
 
-This operation clears the vector embeddings from the current **EmbeddingList** instance.
+This operation clears the vector embeddings from the current **[EmbeddingList](EmbeddingList.md)** instance.
 
 ## Request Syntax
 
@@ -10,11 +10,11 @@ clear()
 
 **RETURN TYPE:**
 
-*EmbeddingList*
+*[EmbeddingList](EmbeddingList.md)*
 
 **RETURNS:**
 
-An empty **EmbeddingList** instance.
+An empty **[EmbeddingList](EmbeddingList.md)** instance.
 
 ## Examples
 

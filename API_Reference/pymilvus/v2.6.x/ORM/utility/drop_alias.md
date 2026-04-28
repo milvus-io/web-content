@@ -1,6 +1,6 @@
 # drop_alias()
 
-This operation drops a specified collection alias. 
+This operation drops a specified [collection ](../Collection/Collection.md)alias. 
 
 ## Request Syntax
 

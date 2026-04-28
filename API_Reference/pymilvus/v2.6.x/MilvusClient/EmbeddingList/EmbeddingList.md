@@ -42,7 +42,7 @@ EmbeddingList(
 
     - **string**, such as `'float32'`, `'float16'`, or `'uint8'`
 
-    - **DataType**, such as `DataType.FLOAT_VECTOR`, `DataType.FLOAT16_VECTOR`, `DataType.BFLOAT16_VECTOR`, `DataType.INT8_VECTOR`, or `DataType.BINARY_VECTOR`
+    - **[DataType](../Collections/DataType.md)**, such as `DataType.FLOAT_VECTOR`, `DataType.FLOAT16_VECTOR`, `DataType.BFLOAT16_VECTOR`, `DataType.INT8_VECTOR`, or `DataType.BINARY_VECTOR`
 
 **RETURN TYPE:**
 

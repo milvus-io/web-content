@@ -30,6 +30,10 @@ compact(
 
     Whether to perform an L0 compaction, which specifically handles L0 segments by merging delete operations into existing data segments. Defaults to **False**.
 
+- **target_size** *(str)* - 
+
+    Whether to perform a force merge compaction. Defaults to **0** or omitted.
+
 - **timeout** (*Optional[float]*) -
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
@@ -73,6 +77,12 @@ job_id = client.compact(
 job_id = client.compact(
     collection_name="my_collection",
     is_l0=True
+)
+
+#Force merge compaction
+job_id = client.compact(
+    collection_name="target_collection",
+    target_size="2048 MB"  
 )
 
 # Check compaction status

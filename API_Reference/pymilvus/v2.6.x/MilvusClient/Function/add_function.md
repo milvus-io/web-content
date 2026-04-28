@@ -20,7 +20,7 @@ add_function(
 
 **RETURN TYPE:**
 
-*CollectionSchema*
+*[CollectionSchema](../CollectionSchema/CollectionSchema.md)*
 
 **RETURNS:**
 

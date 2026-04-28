@@ -1,6 +1,6 @@
 # drop()
 
-This operation drops the current partition. 
+This operation drops the current [partition](Partition.md). 
 
 ## Request Syntax
 
