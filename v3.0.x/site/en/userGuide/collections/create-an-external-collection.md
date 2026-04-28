@@ -15,11 +15,11 @@ In a typical AI data pipeline, users may already have stored their data in Parqu
 
 This bring-your-data-to-Milvus workflow creates redundant data that is hard to synchronize and adds to the engineering maintenance burden to ensure data consistency.
 
-![Yqxwwpq3vheya4b8398cwopnnyn](../../../../assets/yqxwwpq3vheya4b8398cwopnnyn.png)
+![Bring data to compute workflow](../../../../assets/external-collection-bring-data-to-compute.png)
 
 To resolve these issues, Milvus delivers external collections that let you access your externally stored data from Milvus without worrying about data synchronization and ETL pipelines.
 
-![Q6f4wtcd2h3pnkbnmxncw3urn3f](../../../../assets/q6f4wtcd2h3pnkbnmxncw3urn3f.png)
+![Bring compute to data workflow](../../../../assets/external-collection-bring-compute-to-data.png)
 
 Once created, an external collection can access your data directly and keep it in the same place where you store it. In the background, Milvus creates manifest files to record the mappings between the Milvus metadata and the rows in external data files. After the manifest files are ready, you can create indexes in the external collection as you would in any managed collection.
 

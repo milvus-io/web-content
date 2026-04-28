@@ -306,7 +306,9 @@ curl --request POST \
 #{"code":0,"cost":0,"data":[{"color":"red_7025","id":1,"vector":[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{"color":"red_4794","id":4,"vector":[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{"color":"red_9392","id":6,"vector":[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}
 ```
 
-### Sort Query Results
+<a id="Sort-Query-Results"></a>
+
+### Sort Query Results | Milvus 3.0.x
 
 By default, Query returns results in an unspecified order. Use the `order_by` parameter to sort results by one or more scalar fields. When using `order_by`, note that:
 
@@ -870,4 +872,3 @@ results = client.query(
 ```bash
 # restful
 ```
-
