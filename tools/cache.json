@@ -1528,6 +1528,16 @@
     "v3.0.x/site/en/userGuide/embeddings-reranking/embedding-function/google-gemini.md": "2026-04-28T03:15:53.378Z",
     "v3.0.x/site/en/userGuide/search-query-get/primary-key-search.md": "2026-04-28T03:15:53.378Z",
     "v3.0.x/site/en/userGuide/search-query-get/search-with-embedding-lists.md": "2026-04-28T03:15:53.378Z",
-    "v3.0.x/site/en/userGuide/search-query-get/text-highlighter.md": "2026-04-28T03:15:53.378Z"
+    "v3.0.x/site/en/userGuide/search-query-get/text-highlighter.md": "2026-04-28T03:15:53.378Z",
+    "v3.0.x/site/en/userGuide/collections/create-an-external-collection.md": "2026-04-28T02:18:47.885Z",
+    "v3.0.x/site/en/userGuide/embeddings-reranking/embedding-function/minhash-function.md": "2026-04-28T02:19:07.216Z",
+    "v3.0.x/site/en/userGuide/schema/analyzer/filter/synonym-filter.md": "2026-04-28T02:19:19.454Z",
+    "v3.0.x/site/en/userGuide/schema/analyzer/manage-file-resources.md": "2026-04-28T02:19:33.531Z",
+    "v3.0.x/site/en/userGuide/schema/default-values.md": "2026-04-28T02:19:44.680Z",
+    "v3.0.x/site/en/userGuide/search-query-get/boolean/struct-array-operators.md": "2026-04-28T02:19:56.632Z",
+    "v3.0.x/site/en/userGuide/search-query-get/force-merge.md": "2026-04-28T02:20:15.684Z",
+    "v3.0.x/site/en/userGuide/search-query-get/manage-snapshots.md": "2026-04-28T02:20:27.027Z",
+    "v3.0.x/site/en/userGuide/search-query-get/snapshot-use-cases.md": "2026-04-28T02:20:38.688Z",
+    "v3.0.x/site/en/userGuide/search-query-get/snapshots.md": "2026-04-28T02:20:51.505Z"
   }
 }
